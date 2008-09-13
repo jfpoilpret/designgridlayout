@@ -1,0 +1,27 @@
+<project name="DesignGridLayout">
+<!--
+	<skin>
+		<groupId>org.jvnet.maven-javanet-skin</groupId>
+		<artifactId>maven-javanet-skin</artifactId>
+		<version>1.2</version>
+	</skin>
+-->
+	<bannerLeft>
+		<name>DesignGridLayout</name>
+		<href>http://designgridlayout.dev.java.net/</href>
+	</bannerLeft>
+<!--
+	<poweredBy>
+		<logo name="Built by Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/build-by-maven-black.png" />
+		<logo name="Hosted on SourceForge.net" href="http://sourceforge.net" img="http://sflogo.sourceforge.net/sflogo.php?group_id=234125&amp;type=3" />
+	</poweredBy>
+-->
+	<body>
+<!--
+		<menu name="General">
+			<item name="Introduction" href="index.html" />
+		</menu>
+-->
+		<menu ref="reports" />
+	</body>
+</project>

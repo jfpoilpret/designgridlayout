@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?> 
+
+<jnlp spec="0.2 1.0"
+      codebase="https://designgridlayout.dev.java.net/source/browse/designgridlayout/www/"
+      href="examples.jnlp"
+>
+   <information> 
+      <title>DesignGridLayout Examples</title> 
+      <vendor>Jason Aaron Osgood</vendor>
+      <homepage href="https://designgridlayout.dev.java.net/"/>
+      <description>DesignGridLayout</description>
+      <description kind="short">DesignGridLayout</description>
+      <!-- icon href="images/mg.jpg"/ -->
+      <offline-allowed/> 
+   </information> 
+   <resources>
+      <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
+      <j2se version="1.5+"/>
+      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/42100/designgridlayout-0.1.1.jar" main="true" download="eager"/>
+      <jar href="https://designgridlayout.dev.java.net/files/documents/2752/25312/swing-layout-1.0.jar" main="false" download="eager"/>
+   </resources>
+   <application-desc main-class="net.java.dev.designgridlayout.Examples"/>
+</jnlp> 

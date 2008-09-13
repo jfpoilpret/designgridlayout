@@ -1,0 +1,317 @@
+<!--
+//  Copyright 2008 Jason Aaron Osgood, Jean-Francois Poilpret
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+-->
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.java.dev.designgridlayout</groupId>
+	<artifactId>designgridlayout</artifactId>
+	<packaging>jar</packaging>
+	<version>0.9-SNAPSHOT</version>
+
+	<name>DesignGridLayout</name>
+	<description>
+		DesignGridLayout is a Swing LayoutManager that helps developers build 
+		always good looking dialogs through a very easy-to-use API, without
+		any need for a graphical GUI designer.
+	</description>
+	<url>http://designgridlayout.dev.java.net/</url>
+	<inceptionYear>2005</inceptionYear>
+	
+	<properties>
+		<javaVersion>1.5</javaVersion>
+<!--
+		<javaVersion>1.6</javaVersion>
+-->
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${javaVersion}</source>
+					<target>${javaVersion}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<groups>utest,itest</groups>
+				</configuration>
+			</plugin>
+			<!-- Also generate a source jar to be installed into the repository -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Also generate a javadoc jar to be installed into the repository -->
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<quiet>true</quiet>
+					<verbose>false</verbose>
+					<links>
+						<link>http://java.sun.com/j2se/1.5.0/docs/api</link>
+						<show>public</show>
+					</links>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+ 			</plugin>
+			<!--
+				Download source and javadoc from all dependencies and make them 
+				available within eclipse.
+				Requires explicit call to: mvn eclipse:eclipse
+			 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>index</report>
+							<report>summary</report>
+							<report>dependencies</report>
+							<report>project-team</report>
+							<report>license</report>
+							<report>issue-tracking</report>
+							<report>mailing-list</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jxr-plugin</artifactId>
+			</plugin>
+			<!-- Generate javadoc only for source, not for test -->
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<quiet>true</quiet>
+					<verbose>false</verbose>
+					<links>
+						<link>http://java.sun.com/j2se/1.5.0/docs/api</link>
+						<show>public</show>
+					</links>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+ 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<configLocation>config/checkstyle/checkstyle_checks.xml</configLocation>
+					<headerLocation>config/checkstyle/java_header.txt</headerLocation>
+					<suppressionsLocation>config/checkstyle/checkstyle_suppressions.xml</suppressionsLocation>
+					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<repositories>
+		<!-- TODO: check if codehaus repo really required! -->
+		<repository>
+			<id>codehaus</id>
+			<name>CodeHaus repository.</name>
+			<url>http://repository.codehaus.org</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>fest</id>
+			<name>FEST repository</name>
+			<url>http://fest.googlecode.com/svn/trunk/fest/m2/repository</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>5.8</version>
+				<classifier>jdk15</classifier>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		<dependency>
+			<groupId>net.java.dev.swing-layout</groupId>
+			<artifactId>swing-layout</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>fest</groupId>
+			<artifactId>fest-swing-testng</artifactId>
+			<version>1.0a2</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly Open Source Software license</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>josgood</id>
+			<name>Jason Aaron Osgood</name>
+			<email>josgood@dev.java.net</email>
+			<roles>
+				<role>project owner</role>
+				<role>developer</role>
+			</roles>
+			<timezone>-8</timezone>
+		</developer>
+		<developer>
+			<id>jfpoilpret</id>
+			<name>Jean-Francois Poilpret</name>
+			<email>jfpoilpret@dev.java.net</email>
+			<url>http://jfpoilpret.blogspot.com</url>
+			<roles>
+				<role>project owner</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+7</timezone>
+		</developer>
+		<developer>
+			<id>opencage</id>
+			<name>Stefan Pfab</name>
+			<email>opencage@dev.java.net</email>
+			<roles>
+				<role>content developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>java.net Issue Tracker</system>
+		<url>http://designgridlayout.dev.java.net/servlets/ProjectIssues</url>
+	</issueManagement>
+
+	<mailingLists>
+		<mailingList>
+			<name>DesignGridLayout announces list</name>
+			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=announce</archive>
+			<subscribe>mailto:announce-subscribe@designgridlayout.dev.java.net</subscribe>
+			<unsubscribe>mailto:announce-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+		</mailingList>
+		<mailingList>
+			<name>DesignGridLayout users list</name>
+			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=users</archive>
+			<post>mailto:users@designgridlayout.dev.java.net</post>
+			<subscribe>mailto:users-subscribe@designgridlayout.dev.java.net</subscribe>
+			<unsubscribe>mailto:users-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+		</mailingList>
+		<mailingList>
+			<name>DesignGridLayout developers list</name>
+			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=dev</archive>
+			<post>mailto:dev@designgridlayout.dev.java.net</post>
+			<subscribe>mailto:dev-subscribe@designgridlayout.dev.java.net</subscribe>
+			<unsubscribe>mailto:dev-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+		</mailingList>
+		<mailingList>
+			<name>DesignGridLayout issues list</name>
+			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=issues</archive>
+			<subscribe>mailto:issues-subscribe@designgridlayout.dev.java.net</subscribe>
+			<unsubscribe>mailto:issues-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+		</mailingList>
+		<mailingList>
+			<name>DesignGridLayout Subversion commits list</name>
+			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=commits</archive>
+			<subscribe>mailto:commits-subscribe@designgridlayout.dev.java.net</subscribe>
+			<unsubscribe>mailto:commits-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<connection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout</connection>
+		<developerConnection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout</developerConnection>
+		<tag>/trunk</tag>
+		<url>https://designgridlayout.dev.java.net/source/browse/designgridlayout/</url>
+	</scm>
+</project>

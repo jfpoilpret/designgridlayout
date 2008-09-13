@@ -1,0 +1,4 @@
+#Sat Jun 14 17:32:28 ICT 2008
+filenames.properties=config/checkstyle/checkstyle.properties
+enabled=true
+filenames.config=config/checkstyle/checkstyle_checks.xml
