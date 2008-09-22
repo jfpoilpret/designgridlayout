@@ -73,7 +73,7 @@
  *  	groups of rows.</li>
  * </ul>
  * Center, Left and Right Rows have a special "fill" option that allows their 
- * extreme component(s) (rightmost compoenent for a Left Row, leftmost component 
+ * extreme component(s) (rightmost component for a Left Row, leftmost component 
  * for a Right Row, and both leftmost and rightmost components for a Center Row) 
  * fill all the extra space. This can be useful for instance when you want to 
  * visually separate groups of rows:
