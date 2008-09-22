@@ -30,7 +30,7 @@
 		always good looking dialogs through a very easy-to-use API, without
 		any need for a graphical GUI designer.
 	</description>
-	<url>http://designgridlayout.dev.java.net/</url>
+	<url>http://designgridlayout.dev.java.net</url>
 	<inceptionYear>2005</inceptionYear>
 	
 	<properties>
@@ -310,7 +310,7 @@
 
 	<scm>
 		<connection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout</connection>
-		<developerConnection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout</developerConnection>
+		<developerConnection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout/trunk</developerConnection>
 		<tag>/trunk</tag>
 		<url>https://designgridlayout.dev.java.net/source/browse/designgridlayout/</url>
 	</scm>

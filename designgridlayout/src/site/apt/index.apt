@@ -14,7 +14,7 @@ Introduction
 	{{{http://java.sun.com/docs/books/tutorial/uiswing/layout/gridbag.html}GridBagLayout}}, 
 	{{{http://www.autel.cz/dmi/tutorial.html}HIGLayout}}, 
 	{{{http://pnuts.org/snapshot/latest/modules/pnuts.awt/doc/PnutsLayout.html}PnutsLayout}}, 
-	{{{http://www.datadosen.se/riverlayout/}RiverLayout}},
+	RiverLayout,
 	{{{http://www.javaworld.com/javaworld/javatips/jw-javatip129.html}SGLayout}}, and
 	{{{http://java.sun.com/products/jfc/tsc/articles/tablelayout/}TableLayout}}).
 	DesignGridLayout works with JDK 1.5 and later.
@@ -39,11 +39,11 @@ Praise
 	
 Quick Start
 
-	Try it now using webstart: {{{examples.jnlp}DesignGridLayout Examples}}
+	Try it now using webstart: {{{examples.jnlp}####DesignGridLayout Examples}}
 
 	Try it offline: Download both 
-	{{{https://designgridlayout.dev.java.net/files/documents/4350/42100/designgridlayout-0.1.1.jar}designgridlayout-0.1.jar}}
-	and {{{https://swing-layout.dev.java.net/files/documents/2752/25312/swing-layout-1.0.jar}swing-layout-1.0.jar}}.
+	{{{https://designgridlayout.dev.java.net/files/documents/4350/42100/designgridlayout-0.1.1.jar}####designgridlayout-0.1.jar}}
+	and {{{https://swing-layout.dev.java.net/files/documents/2752/25312/swing-layout-1.0.jar}####swing-layout-1.0.jar}}.
 	Add them to your classpath. Launch the examples with 
 	<<<java net.java.dev.designgridlayout.Examples>>>.  
 
@@ -137,7 +137,7 @@ public class Example1a
 
 [images/Example1a.png] Example 1a
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1a.java?view=markup}(Example 1a source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1a.java?view=markup}(Example 1a source)}}
 
 	Example 1b reflects the design from the prior section.
 	
@@ -150,7 +150,7 @@ layout.row().add(button()).add(button()).add(button()).empty();
 
 [images/Example1b.png] Example 1b
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1b.java?view=markup}(Example 1b source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1b.java?view=markup}(Example 1b source)}}
 
 	Some cool things to note:
 
@@ -179,7 +179,7 @@ layout.row().label(new JLabel("Row 4")).add(button()).add(button()).add(button()
 
 [images/Example1c.png] Example 1c
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1c.java?view=markup}(Example 1c source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1c.java?view=markup}(Example 1c source)}}
 
 	In Example 1c above, labels do not get resized if the window is resized, only
 	components from grid columns get resized on such event.
@@ -197,7 +197,7 @@ layout.rightRow().add(new JButton("Cancel")).add(new JButton("OK"));
 
 [images/Example1d.png] Example 1d
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1d.java?view=markup}(Example 1d source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Example1d.java?view=markup}(Example 1d source)}}
 
 Interesting Examples
 
@@ -207,7 +207,7 @@ Interesting Examples
 
 [images/AddressBookDemo.png] Address Book Demo
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/AddressBookDemo.java?view=markup}(AddressBookDemo source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/AddressBookDemo.java?view=markup}(AddressBookDemo source)}}
 
 	While creating DesignGridLayout, the original author used figures 177, 178 
 	and 179 from "Designing Visual Interfaces" to help validate and work through 
@@ -218,15 +218,15 @@ Interesting Examples
 	
 [images/Figure177.png] Figure 177
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Figure177.java?view=markup}(Figure177 source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Figure177.java?view=markup}(Figure177 source)}}
 
 [images/Figure178.png] Figure 178
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Figure178.java?view=markup}(Figure178 source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Figure178.java?view=markup}(Figure178 source)}}
 
 [images/Figure179.png] Figure 179
 
-	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/src/test/java/net/java/dev/designgridlayout/Figure179.java?view=markup}(Figure179 source)}}
+	{{{href="https://designgridlayout.dev.java.net/source/browse/designgridlayout/trunk/designgridlayout/src/test/java/net/java/dev/designgridlayout/Figure179.java?view=markup}(Figure179 source)}}
 
 Acknowledgements
 
@@ -234,7 +234,7 @@ Acknowledgements
 	{{{https://swing-layout.dev.java.net/}Swing Layout project}}. The baseline 
 	work is non-trivial and an important contribution to user interface 
 	development. DesignGridLayout authors are grateful for the efforts of 
-	{{{href="http://weblogs.java.net/blog/zixle/}Scott Violet}} and all other 
+	{{{href="http://weblogs.java.net/blog/zixle/}####Scott Violet}} and all other 
 	contributors.
 	
 	Karsten Lentzsch, of {{{http://www.jgoodies.com}JGoodies}} fame, has probably 
@@ -245,14 +245,15 @@ Acknowledgements
 Building from source
 
 	You can build DesignGridLayout directly from its source code. For this you
-	must first check out current version from Subversion repository (TODO LINK####).
+	must first check out current version from 
+	{{{https://designgridlayout.dev.java.net/source/browse/designgridlayout/}Subversion repository}}.
 	
 	Then, make sure you have JDK 5 and maven (2.0.8 or more recent) installed on
 	your machine.
 	
 	Running <<<mvn install>>> from the command line will compile and test 
 	DesignGridLayout (note that tests will take hold of the mouse and keyboard 
-	so you not interfere during these).
+	so you should not interfere during these).
 	
 	You may also run <<<mvn eclipse:eclipse>>> to generate an eclipse project 
 	that you can then import into your Eclipse workspace.
