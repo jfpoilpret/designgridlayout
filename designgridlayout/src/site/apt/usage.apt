@@ -1,0 +1,215 @@
+							----------------------
+								    Usage
+							----------------------
+							    Jason Osgood
+							----------------------
+							
+First steps
+
+	Using DesignGridLayout is quite straitghtforward once you have understood
+	its basic principles.
+	
+	Moreover, thanks to its fluent API, there is no room
+	for errors at runtime, as compared to other <<<LayoutManager>>>s that require
+	to add components to the <<<Container>>> along with hard to read codes, 
+	hard-coded as Strings.
+	
+	Contrarily to almost every other <<<LayoutManager>>>, DesignGridLayout does
+	not allow you to directly add components to a container; instead, adding 
+	components can only be performed, safely, through DesignGridLayout API itself.
+	
+	For example, for a usual LayoutManager, you may do:
+	
++------------------------------------------------------------------------------+
+public class MyPanel extends JPanel {
+    public MyPanel() {
+        setLayout(new BorderLayout());
+        add(new JLabel("Hello"), BorderLayout.NORTH);
+    }
+}
++------------------------------------------------------------------------------+
+
+	But with DesignGridLayout:
+	
++------------------------------------------------------------------------------+
+public class MyPanel extends JPanel {
+    public MyPanel() {
+        DesignGridLayout layout = new DesignGridLayout(this);
+        setLayout(layout);
+        layout.row().add(new JLabel("Hello"));
+    }
+}
++------------------------------------------------------------------------------+
+	
+	In this very simple example, you can see that <<<layout>>> is the principal
+	object to be used for adding components to the container.
+	
+	For every row of components you want created in a container, you need to call 
+	<<<layout.row()>>> (or one of the alternatives to <<<row()>>>, explained
+	later). This returns an object (a "row") which provides its own API to add
+	components to this row.
+	
+	Rows are created vertically from top to bottom, in the same order as lines
+	of codes that call <<<layout.row()>>>. Inside one row, you add components 
+	from left to right in the same order calls to <<<add()>>> appear in each row.
+	
+	Hence this allows you to "visualize" the container layout just by viewing
+	the source code:
+	
++------------------------------------------------------------------------------+
+DesignGridLayout layout = new DesignGridLayout(this);
+setLayout(layout);
+layout.row().add(new JLabel("First name")).add(new JTextField());
+layout.row().add(new JLabel("Last name")).add(new JTextField());
++------------------------------------------------------------------------------+
+	
+	The snippet above creates 2 rows, each with a label and a text field.
+
+	Moreover, this allows inserting a new row without any hassle (try to imagine
+	the following snippet with GridBagLayout...):
+	
++------------------------------------------------------------------------------+
+DesignGridLayout layout = new DesignGridLayout(this);
+setLayout(layout);
+layout.row().add(new JLabel("First name")).add(new JTextField());
+layout.row().add(new JLabel("Middle initial")).add(new JTextField());
+layout.row().add(new JLabel("Last name")).add(new JTextField());
++------------------------------------------------------------------------------+
+	
+	DesignGridLayout always takes care of the correct spacing between components
+	inside the container, without requiring you to specify any value. In addition,
+	all components inside a row are automatically "baseline-aligned".
+
+DesignGridLayout API by example
+
+	After the first steps, this section gives more details and explanations on
+	DesignGridLayout API through simple examples. The source for all examples is
+	available in DesignGridLayout 
+	{{{https://designgridlayout.dev.java.net/files/documents/4350/111778/designgridlayout-0.9-SNAPSHOT-test-sources.jar}test sources archive}}.
+	
+	Although not mandatory, it is advised to first read the DesignGridLayout
+	{{{index.html}Introduction}}.
+	
+	First, we demonstrate 3 equivalent ways to add components to a row. Please 
+	note the first way is not recommended (it is shown for the sake of 
+	exhaustiveness). Using the second or third way is a matter of personal taste;
+	some developers prefer method chaining because it helps better visualizing 
+	the layout in the code, while other developers prefer to call <<<add()>>> 
+	once with all the components in the row, to save some typing.
+	
++------------------------------------------------------------------------------+
+package net.java.dev.designgridlayout;
+
+import javax.swing.*;
+
+public class Example1a 
+{
+    public static void main(String[] args) 
+    {
+        JFrame frame = new JFrame("Example 1a");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel top = new JPanel();		
+        DesignGridLayout layout = new DesignGridLayout(top);
+        top.setLayout(layout);
+
+        // You can add components one line at a time
+        IRow row = layout.row();
+        row.add(button());
+        row.add(button());
+
+        // Or using method chaining
+        layout.row().add(button()).add(button());
+
+        // Or, even better, using variable arguments
+        layout.row().add(button(), button());
+
+        frame.add(top);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static JButton button()
+    {
+        return new JButton("Button");
+    }
+}
++------------------------------------------------------------------------------+
+
+[images/Example1a.png] Example 1a
+
+	{{{xref-test/net/java/dev/designgridlayout/Example1a.html}(Example 1a source)}}
+
+	Then, we'll build a simple form based on the 4 column canonical grid shown 
+	below: 
+	
+[images/grid-example.png.png]
+
+	Example 1b reflects the design above.
+	
++------------------------------------------------------------------------------+
+layout.row().add(button()).add(button());
+layout.row().add(button()).add(button()).add(button());
+layout.row().add(button(), 2).add(button());
+layout.row().add(button()).add(button()).add(button()).empty();
++------------------------------------------------------------------------------+
+
+[images/Example1b.png] Example 1b
+
+	{{{xref-test/net/java/dev/designgridlayout/Example1b.html}(Example 1b source)}}
+
+	Some cool things to note:
+
+	*	You do not specify the number of rows and columns for the canonical grid. 
+		Nor do you specify each component's location. DesignGridLayout is order 
+		dependent. Just add rows to the grid and components to rows, in order.
+		DesignGridLayout determines the columns and their widths automatically.
+
+	*	Row 3's first component spans 2 columns. As shown, use the method 
+		<<<add(JComponent child, int span)>>> when you need to specify a span 
+		greater than 1.
+
+	*	Row 4's has no fourth component. As shown, use method <<<IGridRow.empty()>>>
+		for each empty column you need.
+
+	[]
+	
+	Most forms have labels for each row. So let's add some for Example 1c.
+
++------------------------------------------------------------------------------+
+layout.row().label(new JLabel("Row 1")).add(button().add(button());
+layout.row().label(new JLabel("Row 2")).add(button().add(button().add(button());
+layout.row().label(new JLabel("Row 3")).add(button(), 2).add( button());
+layout.row().label(new JLabel("Row 4")).add(button()).add(button()).add(button()).empty());
++------------------------------------------------------------------------------+
+
+[images/Example1c.png] Example 1c
+
+	{{{xref-test/net/java/dev/designgridlayout/Example1c.html}(Example 1c source)}}
+
+	In Example 1c above, labels do not get resized if the window is resized, only
+	components from grid columns get resized on such event.
+
+	Another common exception to the canonical grid are the "Cancel" and "OK" 
+	buttons found in dialog boxes. DesignGridLayout allows you to create rows with
+	either grid, left, right, or center alignment per row.  We'll also add a blank 
+	row with some additional height, to add space before the "Cancel" and "OK" 
+	buttons.
+
++------------------------------------------------------------------------------+
+layout.emptyRow(20);
+layout.rightRow().add(new JButton("Cancel")).add(new JButton("OK"));
++------------------------------------------------------------------------------+
+
+[images/Example1d.png] Example 1d
+
+	{{{xref-test/net/java/dev/designgridlayout/Example1d.html}(Example 1d source)}}
+
+Where to go next?
+
+	This section has covered the main features of DesignGridLayout. A few other
+	features exist but are not yet presented here. You may want to consult the 
+	{{{apidocs/index.html}API javadoc}} which contains the official reference 
+	for DesignGridLayout.
+
+	Now you are ready to use DesignGridLayout in your own programs!
+	

@@ -1,0 +1,25 @@
+							-----------------------
+							 Building from sources
+							-----------------------
+							 Jean-Francois Poilpret
+							-----------------------
+							
+Building DesignGridLayout from source
+
+	You can build DesignGridLayout directly from its source code. For this you
+	must first check out current version from 
+	{{{https://designgridlayout.dev.java.net/source/browse/designgridlayout/}Subversion repository}}.
+	
+	Then, make sure you have JDK 5 and maven (2.0.8 or more recent) installed on
+	your machine.
+	
+	Running <<<mvn install>>> from the command line will compile and test 
+	DesignGridLayout (note that tests will take hold of the mouse and keyboard 
+	so you should not interfere during these).
+	
+	You may also run <<<mvn eclipse:eclipse>>> to generate an eclipse project 
+	that you can then import into your Eclipse workspace.
+	
+	Finally, you may use ant rather than maven to build DesignGridLayout but in
+	this case the build is "minimalistic" and does not include tests.
+	
