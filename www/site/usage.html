@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>DesignGridLayout - Usage</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Jason Osgood" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="../../" id="bannerLeft">
+    
+            DesignGridLayout
+    
+            </a>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2008-09-24
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>General</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Introduction</a>
+          </li>
+              
+    <li class="none">
+              <strong>Usage</strong>
+        </li>
+              
+    <li class="none">
+                    <a href="examples.html">Examples</a>
+          </li>
+              
+    <li class="none">
+                    <a href="build-from-sources.html">Building from sources</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>First steps</h2>
+<p>Using DesignGridLayout is quite straitghtforward once you have understood its basic principles.</p>
+<p>Moreover, thanks to its fluent API, there is no room for errors at runtime, as compared to other <tt>LayoutManager</tt>
+s that require to add components to the <tt>Container</tt>
+ along with hard to read codes, hard-coded as Strings.</p>
+<p>Contrarily to almost every other <tt>LayoutManager</tt>
+, DesignGridLayout does not allow you to directly add components to a container; instead, adding components can only be performed, safely, through DesignGridLayout API itself.</p>
+<p>For example, for a usual LayoutManager, you may do:</p>
+<div class="source"><pre>public class MyPanel extends JPanel {
+    public MyPanel() {
+        setLayout(new BorderLayout());
+        add(new JLabel(&quot;Hello&quot;), BorderLayout.NORTH);
+    }
+}</pre>
+</div>
+<p>But with DesignGridLayout:</p>
+<div class="source"><pre>public class MyPanel extends JPanel {
+    public MyPanel() {
+        DesignGridLayout layout = new DesignGridLayout(this);
+        setLayout(layout);
+        layout.row().add(new JLabel(&quot;Hello&quot;));
+    }
+}</pre>
+</div>
+<p>In this very simple example, you can see that <tt>layout</tt>
+ is the principal object to be used for adding components to the container.</p>
+<p>For every row of components you want created in a container, you need to call <tt>layout.row()</tt>
+ (or one of the alternatives to <tt>row()</tt>
+, explained later). This returns an object (a &quot;row&quot;) which provides its own API to add components to this row.</p>
+<p>Rows are created vertically from top to bottom, in the same order as lines of codes that call <tt>layout.row()</tt>
+. Inside one row, you add components from left to right in the same order calls to <tt>add()</tt>
+ appear in each row.</p>
+<p>Hence this allows you to &quot;visualize&quot; the container layout just by viewing the source code:</p>
+<div class="source"><pre>DesignGridLayout layout = new DesignGridLayout(this);
+setLayout(layout);
+layout.row().add(new JLabel(&quot;First name&quot;)).add(new JTextField());
+layout.row().add(new JLabel(&quot;Last name&quot;)).add(new JTextField());</pre>
+</div>
+<p>The snippet above creates 2 rows, each with a label and a text field.</p>
+<p>Moreover, this allows inserting a new row without any hassle (try to imagine the following snippet with GridBagLayout...):</p>
+<div class="source"><pre>DesignGridLayout layout = new DesignGridLayout(this);
+setLayout(layout);
+layout.row().add(new JLabel(&quot;First name&quot;)).add(new JTextField());
+layout.row().add(new JLabel(&quot;Middle initial&quot;)).add(new JTextField());
+layout.row().add(new JLabel(&quot;Last name&quot;)).add(new JTextField());</pre>
+</div>
+<p>DesignGridLayout always takes care of the correct spacing between components inside the container, without requiring you to specify any value. In addition, all components inside a row are automatically &quot;baseline-aligned&quot;.</p>
+</div>
+<div class="section"><h2>DesignGridLayout API by example</h2>
+<p>After the first steps, this section gives more details and explanations on DesignGridLayout API through simple examples. The source for all examples is available in DesignGridLayout <a href="https://designgridlayout.dev.java.net/files/documents/4350/111778/designgridlayout-0.9-SNAPSHOT-test-sources.jar" class="externalLink">test sources archive</a>
+.</p>
+<p>Although not mandatory, it is advised to first read the DesignGridLayout <a href="index.html">Introduction</a>
+.</p>
+<p>First, we demonstrate 3 equivalent ways to add components to a row. Please note the first way is not recommended (it is shown for the sake of exhaustiveness). Using the second or third way is a matter of personal taste; some developers prefer method chaining because it helps better visualizing the layout in the code, while other developers prefer to call <tt>add()</tt>
+ once with all the components in the row, to save some typing.</p>
+<div class="source"><pre>package net.java.dev.designgridlayout;
+
+import javax.swing.*;
+
+public class Example1a 
+{
+    public static void main(String[] args) 
+    {
+        JFrame frame = new JFrame(&quot;Example 1a&quot;);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel top = new JPanel();              
+        DesignGridLayout layout = new DesignGridLayout(top);
+        top.setLayout(layout);
+
+        // You can add components one line at a time
+        IRow row = layout.row();
+        row.add(button());
+        row.add(button());
+
+        // Or using method chaining
+        layout.row().add(button()).add(button());
+
+        // Or, even better, using variable arguments
+        layout.row().add(button(), button());
+
+        frame.add(top);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static JButton button()
+    {
+        return new JButton(&quot;Button&quot;);
+    }
+}</pre>
+</div>
+<img src="images/Example1a.png" alt="Example 1a" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1a.html">(Example 1a source)</a>
+</p>
+<p>Then, we'll build a simple form based on the 4 column canonical grid shown below: </p>
+<img src="images/grid-example.png.png" /><p>Example 1b reflects the design above.</p>
+<div class="source"><pre>layout.row().add(button()).add(button());
+layout.row().add(button()).add(button()).add(button());
+layout.row().add(button(), 2).add(button());
+layout.row().add(button()).add(button()).add(button()).empty();</pre>
+</div>
+<img src="images/Example1b.png" alt="Example 1b" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1b.html">(Example 1b source)</a>
+</p>
+<p>Some cool things to note:</p>
+<ul><li>You do not specify the number of rows and columns for the canonical grid. Nor do you specify each component's location. DesignGridLayout is order dependent. Just add rows to the grid and components to rows, in order. DesignGridLayout determines the columns and their widths automatically.</li>
+<li>Row 3's first component spans 2 columns. As shown, use the method <tt>add(JComponent child, int span)</tt>
+ when you need to specify a span greater than 1.</li>
+<li>Row 4's has no fourth component. As shown, use method <tt>IGridRow.empty()</tt>
+ for each empty column you need.</li>
+</ul>
+<p>Most forms have labels for each row. So let's add some for Example 1c.</p>
+<div class="source"><pre>layout.row().label(new JLabel(&quot;Row 1&quot;)).add(button().add(button());
+layout.row().label(new JLabel(&quot;Row 2&quot;)).add(button().add(button().add(button());
+layout.row().label(new JLabel(&quot;Row 3&quot;)).add(button(), 2).add( button());
+layout.row().label(new JLabel(&quot;Row 4&quot;)).add(button()).add(button()).add(button()).empty());</pre>
+</div>
+<img src="images/Example1c.png" alt="Example 1c" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1c.html">(Example 1c source)</a>
+</p>
+<p>In Example 1c above, labels do not get resized if the window is resized, only components from grid columns get resized on such event.</p>
+<p>Another common exception to the canonical grid are the &quot;Cancel&quot; and &quot;OK&quot; buttons found in dialog boxes. DesignGridLayout allows you to create rows with either grid, left, right, or center alignment per row. We'll also add a blank row with some additional height, to add space before the &quot;Cancel&quot; and &quot;OK&quot; buttons.</p>
+<div class="source"><pre>layout.emptyRow(20);
+layout.rightRow().add(new JButton(&quot;Cancel&quot;)).add(new JButton(&quot;OK&quot;));</pre>
+</div>
+<img src="images/Example1d.png" alt="Example 1d" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1d.html">(Example 1d source)</a>
+</p>
+</div>
+<div class="section"><h2>Where to go next?</h2>
+<p>This section has covered the main features of DesignGridLayout. A few other features exist but are not yet presented here. You may want to consult the <a href="apidocs/index.html">API javadoc</a>
+ which contains the official reference for DesignGridLayout.</p>
+<p>Now you are ready to use DesignGridLayout in your own programs!</p>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2005-2008
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
