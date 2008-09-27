@@ -13,8 +13,8 @@
    <resources>
       <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se"/>
       <j2se version="1.5+"/>
-      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/111776/designgridlayout-0.9-SNAPSHOT-tests.jar" main="true" download="eager"/>
-      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/111740/designgridlayout-0.9-SNAPSHOT.jar" main="false" download="eager"/>
+      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/111776/designgridlayout-0.9-tests.jar" main="true" download="eager"/>
+      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/111740/designgridlayout-0.9.jar" main="false" download="eager"/>
       <jar href="https://designgridlayout.dev.java.net/files/documents/4350/111772/swing-layout-1.0.2.jar" main="false" download="eager"/>
 
    </resources>
