@@ -193,15 +193,6 @@
 	</reporting>
 
 	<repositories>
-		<!-- TODO: check if codehaus repo really required! -->
-		<repository>
-			<id>codehaus</id>
-			<name>CodeHaus repository.</name>
-			<url>http://repository.codehaus.org</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
 		<repository>
 			<id>fest</id>
 			<name>FEST repository</name>
@@ -262,7 +253,7 @@
 		<dependency>
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
-			<version>1.0a2</version>
+			<version>1.0b1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
