@@ -76,7 +76,6 @@ public class AddressBookDemo extends AbstractBaseExample
 
 		JPanel addressPanel = new JPanel();
 		DesignGridLayout layout = new DesignGridLayout(addressPanel);
-		addressPanel.setLayout(layout);
 		build(layout);
 
 		JPanel top = new JPanel();

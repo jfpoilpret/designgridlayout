@@ -26,7 +26,6 @@
  * public class MyPanel extends JPanel {
  *     public MyPanel() {
  *         DesignGridLayout layout = new DesignGridLayout(this);
- *         setLayout(layout);
  *         
  *         layout.row().label(labelA).add(fieldA);
  *         layout.row().label(labelB).add(fieldB);

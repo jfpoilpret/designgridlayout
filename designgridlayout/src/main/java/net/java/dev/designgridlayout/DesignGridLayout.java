@@ -42,7 +42,6 @@ import org.jdesktop.layout.LayoutStyle;
  * public class MyPanel extends JPanel {
  *     public MyPanel() {
  *         DesignGridLayout layout = new DesignGridLayout(this);
- *         setLayout(layout);
  *         //...
  *         layout.row().label(labelA).add(fieldA);
  *         layout.row().label(labelB).add(fieldB);
@@ -88,6 +87,9 @@ public class DesignGridLayout implements LayoutManager
 	 * This instance should be then used to add rows and components to the parent
 	 * container.
 	 * <p/>
+	 * Note that this constructor auomatically calls {@code parent.setLayout(this}
+	 * so you don't need to call it yourself.
+	 * <p/>
 	 * In no way should the {@link Container#add} and {@link Container#remove}
 	 * ever be used with {@code parent}.
 	 * 
@@ -101,6 +103,7 @@ public class DesignGridLayout implements LayoutManager
 			throw new NullPointerException("parent cannot be null");
 		}
 		_parent = parent;
+		_parent.setLayout(this);
 		reset();
 	}
 

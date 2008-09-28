@@ -39,7 +39,6 @@ public abstract class AbstractBaseExample
 		    : WindowConstants.DISPOSE_ON_CLOSE);
 		JPanel top = new JPanel();
 		DesignGridLayout layout = new DesignGridLayout(top);
-		top.setLayout(layout);
 		top.setName("TOP");
 
 		build(layout);

@@ -35,7 +35,6 @@ public class MyPanel extends JPanel {
 public class MyPanel extends JPanel {
     public MyPanel() {
         DesignGridLayout layout = new DesignGridLayout(this);
-        setLayout(layout);
         layout.row().add(new JLabel("Hello"));
     }
 }
@@ -58,7 +57,6 @@ public class MyPanel extends JPanel {
 	
 +------------------------------------------------------------------------------+
 DesignGridLayout layout = new DesignGridLayout(this);
-setLayout(layout);
 layout.row().add(new JLabel("First name")).add(new JTextField());
 layout.row().add(new JLabel("Last name")).add(new JTextField());
 +------------------------------------------------------------------------------+
@@ -70,7 +68,6 @@ layout.row().add(new JLabel("Last name")).add(new JTextField());
 	
 +------------------------------------------------------------------------------+
 DesignGridLayout layout = new DesignGridLayout(this);
-setLayout(layout);
 layout.row().add(new JLabel("First name")).add(new JTextField());
 layout.row().add(new JLabel("Middle initial")).add(new JTextField());
 layout.row().add(new JLabel("Last name")).add(new JTextField());
@@ -110,7 +107,6 @@ public class Example1a
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel top = new JPanel();		
         DesignGridLayout layout = new DesignGridLayout(top);
-        top.setLayout(layout);
 
         // You can add components one line at a time
         IRow row = layout.row();

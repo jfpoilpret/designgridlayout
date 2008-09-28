@@ -25,7 +25,7 @@ public class Examples extends AbstractBaseExample
 	public static void main(String[] args)
 	{
 		Examples examples = new Examples();
-		examples.go(false);
+		examples.go(false);//FIXME should be true else JWS will never quit JVM!
 	}
 
 	@Override public void build(DesignGridLayout layout)
