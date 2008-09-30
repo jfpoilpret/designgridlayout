@@ -236,5 +236,6 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 		return 0;
 	}
 
-	abstract void layoutRow(int x, int y, int hgap, int rowWidth, int labelWidth);
+	abstract void layoutRow(int x, int y, int hgap, 
+		int rowWidth, int labelWidth, int parentWidth, boolean rtl);
 }

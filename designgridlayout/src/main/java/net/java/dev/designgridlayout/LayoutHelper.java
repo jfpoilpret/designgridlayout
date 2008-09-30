@@ -26,8 +26,9 @@ final class LayoutHelper
 	{
 	}
 	
-	static void setSizeLocation(
-		JComponent component, int x, int y, int width, int maxHeight, int maxBaseline)
+	// CSOFF: ParameterAssignment
+	static void setSizeLocation(JComponent component, int x, int y, int width, 
+		int maxHeight, int maxBaseline, int parentWidth, boolean rtl)
 	{
 		Dimension d = component.getPreferredSize();
 		component.setSize(width, d.height);
@@ -42,6 +43,11 @@ final class LayoutHelper
 		{
 			yy = (maxHeight - d.height) / 2;
 		}
+		if (rtl)
+		{
+			x = parentWidth - x - width;
+		}
 		component.setLocation(x, y + yy);
 	}
+	// CSON: ParameterAssignment
 }

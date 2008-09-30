@@ -31,9 +31,4 @@ public class Example1c extends AbstractBaseExample
 		layout.row().label(label(4)).add(button()).add(button()).add(button()).empty();
 	}
 	// CSON: MagicNumber
-	
-	@Override public String name()
-	{
-		return "Example1c";
-	}
 }

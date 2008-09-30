@@ -38,9 +38,4 @@ public class Issue3 extends AbstractBaseExample
 //		layout.row().center().add(button(), button());
 	}
 	// CSON: MagicNumber
-
-	@Override public String name()
-	{
-		return "Issue3";
-	}
 }

@@ -68,9 +68,4 @@ public class Figure177 extends AbstractBaseExample
 		layout.centerRow().add(searchButton).add(clearButton);
 	}
 	// CSON: MagicNumber
-
-	@Override public String name()
-	{
-		return "Figure 177";
-	}
 }

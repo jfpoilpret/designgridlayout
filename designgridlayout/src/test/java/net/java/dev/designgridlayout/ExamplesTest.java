@@ -14,98 +14,100 @@
 
 package net.java.dev.designgridlayout;
 
-import java.io.File;
-
-import org.fest.swing.core.Robot;
-import org.fest.swing.core.RobotFixture;
-import org.fest.swing.fixture.FrameFixture;
-import org.fest.swing.image.ScreenshotTaker;
-
-import static org.fest.swing.finder.WindowFinder.findFrame;
-
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "utest")
-public class ExamplesTest
+public class ExamplesTest extends AbstractGuiTest
 {
-	static final private String SCREENSHOT_PATH = "target/site/images";
-	private Robot _robot;
-	private FrameFixture _examples;
-	private ScreenshotTaker _screenshot;
-	
-	@BeforeClass(groups = "utest")
-	public void launchGui()
+	// Note: don't use @DataProvider because all tests appear under the same name
+	// in maven surefire reports...
+	//TODO Maybe add later on some snapshots checks before/after resize
+	protected void checkExample(Class<? extends AbstractBaseExample> clazz, boolean resize)
+		throws Exception
 	{
-		Examples.main(new String[0]);
-		_robot = RobotFixture.robotWithCurrentAwtHierarchy();
-		_examples = findFrame("Examples").withTimeout(2000).using(_robot);
-		_screenshot = new ScreenshotTaker();
-		
-		// Make sure that screenshots target directory exists
-		File dir = new File(SCREENSHOT_PATH);
-		// Delete directory and contents if it exists (else snapshot will 
-		// not work)
-		if (dir.exists() && dir.isDirectory())
-		{
-			// Delete content first
-			for (File file: dir.listFiles())
-			{
-				file.delete();
-			}
-			dir.delete();
-		}
-		dir.mkdirs(); 
-		Assert.assertTrue(dir.exists() && dir.isDirectory(), 
-			"Directory \"" + SCREENSHOT_PATH + "\" must exist.");
-	}
-	
-	// Maybe add later on some snapshots checks before/after resize
-	@Test(dataProvider = "allExamples")
-	public void checkExample(String example, boolean resize)
-	{
-		_examples.button(example).click();
-		FrameFixture ex = findFrame(example).withTimeout(2000).using(_robot);
-		// Take snapshot
-		String snapshot = String.format("%s/%s.png", SCREENSHOT_PATH, example);
-		_screenshot.saveComponentAsPng(ex.panel("TOP").component(), snapshot);
+		launchGui(clazz);
+		takeSnapshot();
 		if (resize)
 		{
-			ex.resizeWidthTo(ex.target.getWidth() * 2);
-			ex.resizeWidthTo(ex.target.getWidth() / 3);
+			frame().resizeWidthTo(frame().target.getWidth() * 2);
+			frame().resizeWidthTo(frame().target.getWidth() / 3);
 		}
-		ex.close();
-	}
-
-	@AfterClass(groups = "utest")
-	public void stopGui()
-	{
-		_examples.close();
-		_examples.cleanUp();
 	}
 	
-	@DataProvider(name = "allExamples")
-	public Object[][] getLaunchableExamples()
+	@AfterMethod(groups = "utest")
+	public void cleanUp()
 	{
-		return new Object[][]
-		{
-			{"Example1a", true},
-			{"Example1b", true},
-			{"Example1c", true},
-			{"Example1d", true},
-			{"Example1e", true},
-			{"Figure177", true},
-			{"Figure178", true},
-			{"Figure179", true},
-			{"Figure179bis", false},
-			{"AddressBookDemo", false},
-			{"Issue1", false},
-			{"Issue2", false},
-			{"Issue3", false},
-			{"Issue4", false},
-		};
+		stopGui();
+	}
+	
+	@Test public void checkExample1a() throws Exception
+	{
+		checkExample(Example1a.class, true);
+	}
+
+	@Test public void checkExample1b() throws Exception
+	{
+		checkExample(Example1b.class, true);
+	}
+
+	@Test public void checkExample1c() throws Exception
+	{
+		checkExample(Example1c.class, true);
+	}
+
+	@Test public void checkExample1d() throws Exception
+	{
+		checkExample(Example1d.class, true);
+	}
+
+	@Test public void checkExample1e() throws Exception
+	{
+		checkExample(Example1e.class, true);
+	}
+
+	@Test public void checkFigure177() throws Exception
+	{
+		checkExample(Figure177.class, true);
+	}
+
+	@Test public void checkFigure178() throws Exception
+	{
+		checkExample(Figure178.class, true);
+	}
+
+	@Test public void checkFigure179() throws Exception
+	{
+		checkExample(Figure179.class, true);
+	}
+
+	@Test public void checkFigure179bis() throws Exception
+	{
+		checkExample(Figure179bis.class, false);
+	}
+
+	@Test public void checkAddressBookDemo() throws Exception
+	{
+		checkExample(AddressBookDemo.class, false);
+	}
+
+	@Test public void checkIssue1() throws Exception
+	{
+		checkExample(Issue1.class, false);
+	}
+
+	@Test public void checkIssue2() throws Exception
+	{
+		checkExample(Issue2.class, false);
+	}
+
+	@Test public void checkIssue3() throws Exception
+	{
+		checkExample(Issue3.class, false);
+	}
+
+	@Test public void checkIssue4() throws Exception
+	{
+		checkExample(Issue4.class, false);
 	}
 }

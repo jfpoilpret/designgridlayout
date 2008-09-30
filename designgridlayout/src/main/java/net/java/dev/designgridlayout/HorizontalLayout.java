@@ -15,6 +15,7 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
@@ -66,8 +67,13 @@ final class HorizontalLayout implements LayoutManager
 
 		synchronized(parent.getTreeLock())
 		{
+			// Check layout orientation
+			ComponentOrientation orientation = parent.getComponentOrientation();
+			boolean rtl = orientation.isHorizontal() && !orientation.isLeftToRight();
+
 			// Compute ratio actual size / preferred size (only if actual size smaller)
-			int availableWidth = parent.getSize().width - _gap;
+			int parentWidth = parent.getSize().width;
+			int availableWidth = parentWidth - _gap;
 			int prefWidth = _prefWidth - _gap;
 			float ratio = 1.0f;
 			if (availableWidth < prefWidth)
@@ -81,7 +87,8 @@ final class HorizontalLayout implements LayoutManager
 			{
 				// Apply reduction ratio to component width
 				int width = (int) (child.getPreferredSize().width * ratio);
-				LayoutHelper.setSizeLocation(child, x, y, width, _height, _baseline);
+				LayoutHelper.setSizeLocation(
+					child, x, y, width, _height, _baseline, parentWidth, rtl);
 				x += width + _gaps[nth];
 				nth++;
 			}

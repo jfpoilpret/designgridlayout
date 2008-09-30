@@ -25,7 +25,7 @@ public class Examples extends AbstractBaseExample
 	public static void main(String[] args)
 	{
 		Examples examples = new Examples();
-		examples.go(false);//FIXME should be true else JWS will never quit JVM!
+		examples.go(true);
 	}
 
 	@Override public void build(DesignGridLayout layout)
@@ -67,10 +67,5 @@ public class Examples extends AbstractBaseExample
 		JButton button = new JButton(action);
 		button.setName(name);
 		return button;
-	}
-
-	@Override public String name()
-	{
-		return "Examples";
 	}
 }

@@ -35,9 +35,4 @@ public class Example1a extends AbstractBaseExample
 		// Or, even better, using variable arguments
 		layout.row().add(button(), button());
 	}
-
-	@Override public String name()
-	{
-		return "Example1a";
-	}
 }

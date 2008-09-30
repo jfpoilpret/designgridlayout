@@ -35,9 +35,4 @@ public class Example1d extends AbstractBaseExample
 		layout.rightRow().add(new JButton("Cancel")).add(new JButton("OK"));
 	}
 	// CSON: MagicNumber
-
-	@Override public String name()
-	{
-		return "Example1d";
-	}
 }

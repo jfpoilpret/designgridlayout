@@ -29,9 +29,4 @@ public class Example1b extends AbstractBaseExample
 		layout.row().add(button(), 2).add(button());
 		layout.row().add(button()).add(button()).add(button()).empty();
 	}
-
-	@Override public String name()
-	{
-		return "Example1b";
-	}
 }

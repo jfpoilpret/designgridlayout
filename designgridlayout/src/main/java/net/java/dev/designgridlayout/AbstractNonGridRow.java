@@ -43,7 +43,9 @@ abstract class AbstractNonGridRow extends AbstractRow
 	}
 	
 	// CSOFF: ParameterAssignment
-	@Override void layoutRow(int x, int y, int hgap, int rowWidth, int labelWidth)
+	
+	@Override void layoutRow(int x, int y, int hgap, 
+		int rowWidth, int labelWidth, int parentWidth, boolean rtl)
 	{
 		// Calculate various needed widths & origin
 		int count = items().size();
@@ -66,13 +68,13 @@ abstract class AbstractNonGridRow extends AbstractRow
 			rightFiller = rightFiller(count, width, availableWidth);
 		}
 
-		layoutRow(x, y, hgap, width, leftFiller, rightFiller);
+		layoutRow(x, y, hgap, width, leftFiller, rightFiller, parentWidth, rtl);
 	}
 	// CSON: ParameterAssignment
 	
 	// CSOFF: ParameterAssignment
-	protected void layoutRow(
-		int x, int y, int hgap, int width, int leftFiller, int rightFiller)
+	protected void layoutRow(int x, int y, int hgap, int width, 
+		int leftFiller, int rightFiller, int parentWidth, boolean rtl)
 	{
 		int count = items().size();
 		int i = 0;
@@ -92,7 +94,8 @@ abstract class AbstractNonGridRow extends AbstractRow
 				compWidth = width;
 			}
 			JComponent component = item.component();
-			LayoutHelper.setSizeLocation(component, x, y, compWidth, height(), baseline());
+			LayoutHelper.setSizeLocation(
+				component, x, y, compWidth, height(), baseline(), parentWidth, rtl);
 			x += compWidth + hgap;
 			i++;
 		}

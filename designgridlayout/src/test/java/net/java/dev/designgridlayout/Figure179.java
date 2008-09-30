@@ -53,11 +53,6 @@ public class Figure179 extends AbstractBaseExample
 	}
 	// CSON: MagicNumber
 
-	@Override public String name()
-	{
-		return "Figure 179";
-	}
-
 	static final private String[] FACE_NAMES =
 	{
 		"Book", "Regular", "Oblique", "Bold", "Bold-Oblique", "Black", "Apple", "Banana"

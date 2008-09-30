@@ -26,15 +26,10 @@ public class Example1e extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.leftRow().fill().add(label("Group")).add(new JSeparator());
+		layout.leftRow().fill().add(label("Special Group")).add(new JSeparator());
 		layout.row().label(label(1)).add(button(), button(), button());
 		layout.leftRow().fill().add(button(), button(), button());
 		layout.centerRow().fill().add(button(), button(), button());
 		layout.rightRow().fill().add(button(), button(), button());
-	}
-
-	@Override public String name()
-	{
-		return "Example1e";
 	}
 }

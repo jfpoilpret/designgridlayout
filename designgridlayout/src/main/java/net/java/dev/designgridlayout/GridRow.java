@@ -90,7 +90,8 @@ final class GridRow extends AbstractRow
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override void layoutRow(int x, int y, int hgap, int rowWidth, int labelWidth)
+	@Override void layoutRow(int x, int y, int hgap, 
+		int rowWidth, int labelWidth, int parentWidth, boolean rtl)
 	{
 		// Account for label column
 		if (labelWidth > 0)
@@ -99,7 +100,8 @@ final class GridRow extends AbstractRow
 			if (hasLabel())
 			{
 				JComponent component = label();
-				LayoutHelper.setSizeLocation(component, x, y, width, height(), baseline());
+				LayoutHelper.setSizeLocation(
+					component, x, y, width, height(), baseline(), parentWidth, rtl);
 			}
 			x += width + hgap;
 			rowWidth -= (width + hgap);
@@ -127,7 +129,8 @@ final class GridRow extends AbstractRow
 					width += fudge;
 				}
 				JComponent component = item.component();
-				LayoutHelper.setSizeLocation(component, x, y, width, height(), baseline());
+				LayoutHelper.setSizeLocation(
+					component, x, y, width, height(), baseline(), parentWidth, rtl);
 				x += width + hgap;
 			}
 		}

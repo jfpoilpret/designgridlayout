@@ -29,9 +29,4 @@ public class Issue1 extends AbstractBaseExample
 		layout.row().label(label("First label")).add(new JTextField("First field"));
 		layout.row().label(label("Second label")).add(new JTextField("2nd field"));
 	}
-
-	@Override public String name()
-	{
-		return "Issue1";
-	}
 }

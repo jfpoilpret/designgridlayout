@@ -15,6 +15,7 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
@@ -253,14 +254,19 @@ public class DesignGridLayout implements LayoutManager
 
 		synchronized(parent.getTreeLock())
 		{
+			// Check layout orientation
+			ComponentOrientation orientation = parent.getComponentOrientation();
+			boolean rtl = orientation.isHorizontal() && !orientation.isLeftToRight();
+
 			int x = left();
 			int y = top();
-			int rowWidth = parent.getSize().width - left() - right();
+			int parentWidth = parent.getSize().width;
+			int rowWidth = parentWidth - left() - right();
 			for (AbstractRow row: _rowList)
 			{
 				if (row.items().size() > 0)
 				{
-					row.layoutRow(x, y, _hgap, rowWidth, _labelWidth);
+					row.layoutRow(x, y, _hgap, rowWidth, _labelWidth, parentWidth, rtl);
 				}
 				y += row.height() + row.vgap();
 			}

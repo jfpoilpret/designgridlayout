@@ -31,9 +31,4 @@ public class Issue4 extends AbstractBaseExample
 		layout.row().label(label("Two")).add(new JTextField("22222222"));
 		layout.centerRow().add(button()).add(button());
 	}
-
-	@Override public String name()
-	{
-		return "Issue4";
-	}
 }
