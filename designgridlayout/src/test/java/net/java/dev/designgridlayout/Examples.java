@@ -36,7 +36,8 @@ public class Examples extends AbstractBaseExample
 			.add(launch("Figure179")).add(launch("Figure179bis"));
 		layout.row().add(launch("AddressBookDemo"));
 		layout.row().add(launch("Issue1")).add(launch("Issue2"))
-			.add(launch("Issue3")).add(launch("Issue4"));
+			.add(launch("Issue3")).add(launch("Issue4")).add(launch("Issue5"));
+		//TODO add one row for 4 tests of Issue9...
 	}
 
 	public JButton launch(String name)
