@@ -22,16 +22,31 @@ import org.jdesktop.layout.Baseline;
 
 final class LayoutHelper
 {
-	private LayoutHelper()
+	LayoutHelper(HeightGrowPolicy tester, int parentWidth, boolean rtl)
 	{
+		_tester = tester;
+		_parentWidth = parentWidth;
+		_rtl = rtl;
+	}
+	
+	void setRowExtraHeight(int extraHeight)
+	{
+		_extraHeight = extraHeight;
 	}
 	
 	// CSOFF: ParameterAssignment
-	static void setSizeLocation(JComponent component, int x, int y, int width, 
-		int maxHeight, int maxBaseline, int parentWidth, boolean rtl)
+	void setSizeLocation(JComponent component, int x, int y, int width, 
+		int maxHeight, int maxBaseline)
 	{
 		Dimension d = component.getPreferredSize();
-		component.setSize(width, d.height);
+		if (_tester.canGrowHeight(component))
+		{
+			component.setSize(width, maxHeight + _extraHeight);
+		}
+		else
+		{
+			component.setSize(width, d.height);
+		}
 
 		int baseline = Baseline.getBaseline(component);
 		int yy = 0;
@@ -43,11 +58,16 @@ final class LayoutHelper
 		{
 			yy = (maxHeight - d.height) / 2;
 		}
-		if (rtl)
+		if (_rtl)
 		{
-			x = parentWidth - x - width;
+			x = _parentWidth - x - width;
 		}
 		component.setLocation(x, y + yy);
 	}
 	// CSON: ParameterAssignment
+	
+	private final HeightGrowPolicy _tester;
+	private final int _parentWidth;
+	private final boolean _rtl;
+	private int _extraHeight;
 }

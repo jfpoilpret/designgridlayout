@@ -14,27 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
+import javax.swing.JSlider;
 
-final class LeftRow extends AbstractNonGridRow
+class JSliderHeightGrowPolicy 
+	extends AbstractClassBasedHeightGrowPolicy<JSlider>
 {
-	LeftRow(Container parent, HeightGrowPolicy heightTester)
-	{
-		super(parent, heightTester);
-	}
+	public JSliderHeightGrowPolicy()
+    {
+	    super(JSlider.class);
+    }
 
-	@Override protected int xOffset(int rowWidth, int usedWidth)
-	{
-		return 0;
-	}
-
-	@Override protected int leftFiller(int count, int width, int availableWidth)
-	{
-		return width;
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
-	}
+	@Override protected boolean componentCanGrowHeight(JSlider component)
+    {
+	    return component.getOrientation() == JSlider.VERTICAL;
+    }
 }

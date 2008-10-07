@@ -14,27 +14,15 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
+import java.awt.Component;
 
-final class LeftRow extends AbstractNonGridRow
+interface HeightGrowPolicy
 {
-	LeftRow(Container parent, HeightGrowPolicy heightTester)
-	{
-		super(parent, heightTester);
-	}
-
-	@Override protected int xOffset(int rowWidth, int usedWidth)
-	{
-		return 0;
-	}
-
-	@Override protected int leftFiller(int count, int width, int availableWidth)
-	{
-		return width;
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
-	}
+	/**
+	 * Checks if a {@link Component} can grow in height. 
+	 * @param component the component to test
+	 * {@code Boolean.TRUE} if {@code component} has a variable height;
+	 * {@code Boolean.FALSE} if {@code component} has a fixed height.
+	 */
+	public boolean canGrowHeight(Component component);
 }

@@ -83,12 +83,12 @@ final class HorizontalLayout implements LayoutManager
 			int nth = 0;
 			int x = 0;
 			int y = 0;
+			LayoutHelper helper = new LayoutHelper(_tester, parentWidth, rtl);
 			for (JComponent child: _children)
 			{
 				// Apply reduction ratio to component width
 				int width = (int) (child.getPreferredSize().width * ratio);
-				LayoutHelper.setSizeLocation(
-					child, x, y, width, _height, _baseline, parentWidth, rtl);
+				helper.setSizeLocation(child, x, y, width, _height, _baseline);
 				x += width + _gaps[nth];
 				nth++;
 			}
@@ -159,4 +159,13 @@ final class HorizontalLayout implements LayoutManager
 			_inited = true;
 		}
 	}
+	
+	//FIXME probably wrong if layout contains growable component
+	static private final HeightGrowPolicy _tester = new HeightGrowPolicy()
+	{
+		public boolean canGrowHeight(Component component)
+        {
+	        return false;
+        }
+	};
 }

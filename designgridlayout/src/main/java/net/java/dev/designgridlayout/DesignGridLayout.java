@@ -63,9 +63,16 @@ public class DesignGridLayout implements LayoutManager
 	 * or right margins values.
 	 */
 	static final public int MARGIN_DEFAULT = -1;
-	
+
+	static private HeightGrowPolicy _defaultHeightTester = 
+		new HeightGrowPolicyMapper()
+			.addPolicy(new JScrollPaneHeightGrowPolicy())
+			.addPolicy(new JSliderHeightGrowPolicy());
+
 	final private Container _parent;
 
+	private HeightGrowPolicy _heightTester = _defaultHeightTester;
+	
 	private Dimension _layoutSize = null;
 
 	private int _top = 0;
@@ -75,6 +82,8 @@ public class DesignGridLayout implements LayoutManager
 
 	private int _hgap = 0;
 	private int _labelWidth = 0;
+
+	private double _totalWeight = 0.0;
 
 	private int _explicitTop = MARGIN_DEFAULT;
 	private int _explicitLeft = MARGIN_DEFAULT;
@@ -146,7 +155,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow leftRow()
 	{
-		return addRow(new LeftRow(_parent));
+		return addRow(new LeftRow(_parent, _heightTester));
 	}
 
 	/**
@@ -163,7 +172,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow rightRow()
 	{
-		return addRow(new RightRow(_parent));
+		return addRow(new RightRow(_parent, _heightTester));
 	}
 
 	/**
@@ -180,7 +189,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow centerRow()
 	{
-		return addRow(new CenterRow(_parent));
+		return addRow(new CenterRow(_parent, _heightTester));
 	}
 
 	/**
@@ -196,7 +205,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public IGridRow row()
 	{
-		return addRow(new GridRow(_parent));
+		return addRow(new GridRow(_parent, _heightTester));
 	}
 
 	/**
@@ -208,7 +217,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public void emptyRow(int height)
 	{
-		addRow(new GridRow(_parent)).height(height);
+		addRow(new GridRow(_parent, _heightTester)).height(height);
 	}
 	
 	private AbstractRow addRow(AbstractRow row)
@@ -249,26 +258,38 @@ public class DesignGridLayout implements LayoutManager
 			return;
 		}
 
-		// Always calculate the size of our contents
-		layoutSize();
-
 		synchronized(parent.getTreeLock())
 		{
+			// Always calculate the size of our contents
+			initialize();
+
+			// Calculate extra height to split between variable height rows
+			double totalExtraHeight = 0.0;
+			if (_totalWeight > 0.0)
+			{
+				totalExtraHeight = Math.max(
+					0, (parent.getHeight() - _layoutSize.height) / _totalWeight);
+			}
+			
 			// Check layout orientation
 			ComponentOrientation orientation = parent.getComponentOrientation();
 			boolean rtl = orientation.isHorizontal() && !orientation.isLeftToRight();
 
 			int x = left();
 			int y = top();
-			int parentWidth = parent.getSize().width;
+			int parentWidth = parent.getWidth();
 			int rowWidth = parentWidth - left() - right();
+			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			for (AbstractRow row: _rowList)
 			{
+				int extraHeight = (int) (row.heightGrowth() * totalExtraHeight); 
 				if (row.items().size() > 0)
 				{
-					row.layoutRow(x, y, _hgap, rowWidth, _labelWidth, parentWidth, rtl);
+					helper.setRowExtraHeight(extraHeight);
+					row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
 				}
-				y += row.height() + row.vgap();
+//				y += row.height() + row.vgap();
+				y += row.height() + extraHeight + row.vgap();
 			}
 		}
 	}
@@ -287,9 +308,9 @@ public class DesignGridLayout implements LayoutManager
 	public Dimension preferredLayoutSize(Container parent)
 	{
 		checkParent(parent);
-		_layoutSize = null;
-		return layoutSize();
-
+		reset();
+		initialize();
+		return _layoutSize;
 	}
 	
 	private void checkParent(Container parent)
@@ -383,17 +404,18 @@ public class DesignGridLayout implements LayoutManager
 		}
 	}
 
-	private Dimension layoutSize()
+	private void initialize()
 	{
 		if (_layoutSize != null)
 		{
-			return _layoutSize;
+			return;
 		}
 
 		// Make sure there's something to do
 		if (_rowList.size() < 1)
 		{
-			return new Dimension(0, 0);
+			_layoutSize = new Dimension(0, 0);
+			return;
 		}
 
 		// Prior to computation start, reset everything and
@@ -432,8 +454,14 @@ public class DesignGridLayout implements LayoutManager
 		// Total height
 		int preferredHeight = totalHeight() + top() + bottom() + 1;
 
+		// Calculate total height growth factor of all variable height rows
+		_totalWeight = 0.0;
+		for (AbstractRow row: _rowList)
+		{
+			_totalWeight += row.heightGrowth();
+		}
+
 		_layoutSize = new Dimension(preferredWidth, preferredHeight);
-		return _layoutSize;
 	}
 	
 	private int countGridColumns()
@@ -552,11 +580,13 @@ public class DesignGridLayout implements LayoutManager
 	
 	private void reset()
 	{
+		_layoutSize = null;
 		_top = 0;
 		_left = 0;
 		_bottom = 0;
 		_right = 0;
 		_hgap = 0;
 		_labelWidth = 0;
+		_totalWeight = 0.0;
 	}
 }

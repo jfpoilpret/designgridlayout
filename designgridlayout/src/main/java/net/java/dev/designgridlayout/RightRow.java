@@ -18,9 +18,9 @@ import java.awt.Container;
 
 final class RightRow extends AbstractNonGridRow
 {
-	RightRow(Container parent)
+	RightRow(Container parent, HeightGrowPolicy heightTester)
 	{
-		super(parent);
+		super(parent, heightTester);
 	}
 
 	@Override protected int xOffset(int rowWidth, int usedWidth)

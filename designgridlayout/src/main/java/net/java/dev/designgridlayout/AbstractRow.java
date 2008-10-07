@@ -31,6 +31,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	static final private int HEIGHT_DEFAULT = -1;
 
 	final protected Container _parent;
+	final protected HeightGrowPolicy _heightTester;
 	final protected List<RowItem> _items = new ArrayList<RowItem>();
 
 	private JLabel _label = null;
@@ -39,14 +40,16 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	private boolean _fill = false;
 	private int _baseline;
 	private int _height;
+	private double _heightGrowth = 0.0;
 	private int _explicitHeight = HEIGHT_DEFAULT;
 
 	private int _maxWidth;
 	private int _vgap;
 
-	protected AbstractRow(Container parent)
+	protected AbstractRow(Container parent, HeightGrowPolicy heightTester)
 	{
 		_parent = parent;
+		_heightTester = heightTester;
 	}
 
 	/* (non-Javadoc)
@@ -169,6 +172,12 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 		return _height;
 	}
 
+	double heightGrowth()
+	{
+		maximize();
+		return _heightGrowth;
+	}
+	
 	List<RowItem> items()
 	{
 		return _items;
@@ -183,6 +192,10 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	{
 		if (!_inited )
 		{
+			_heightGrowth = 0.0;
+			_maxWidth = 0;
+			_height = 0;
+			_baseline = 0;
 			for (RowItem item: _items)
 			{
 				JComponent component = item.component();
@@ -190,6 +203,10 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 				_maxWidth = Math.max(_maxWidth, d.width);
 				_height = Math.max(_height, d.height);
 				_baseline = Math.max(_baseline, Baseline.getBaseline(component));
+				if (_heightTester.canGrowHeight(component))
+				{
+					_heightGrowth = 1.0;
+				}
 			}
 			_inited = true;
 		}
@@ -236,6 +253,6 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 		return 0;
 	}
 
-	abstract void layoutRow(int x, int y, int hgap, 
-		int rowWidth, int labelWidth, int parentWidth, boolean rtl);
+	abstract void layoutRow(LayoutHelper helper, int x, int y, 
+		int hgap, int rowWidth, int labelWidth);
 }

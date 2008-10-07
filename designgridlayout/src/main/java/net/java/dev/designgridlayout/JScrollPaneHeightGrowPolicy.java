@@ -14,27 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
+import javax.swing.JScrollPane;
 
-final class LeftRow extends AbstractNonGridRow
+class JScrollPaneHeightGrowPolicy 
+	extends AbstractClassBasedHeightGrowPolicy<JScrollPane>
 {
-	LeftRow(Container parent, HeightGrowPolicy heightTester)
-	{
-		super(parent, heightTester);
-	}
+	public JScrollPaneHeightGrowPolicy()
+    {
+	    super(JScrollPane.class);
+    }
 
-	@Override protected int xOffset(int rowWidth, int usedWidth)
-	{
-		return 0;
-	}
-
-	@Override protected int leftFiller(int count, int width, int availableWidth)
-	{
-		return width;
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
-	}
+	@Override protected boolean componentCanGrowHeight(JScrollPane component)
+    {
+	    return true;
+    }
 }

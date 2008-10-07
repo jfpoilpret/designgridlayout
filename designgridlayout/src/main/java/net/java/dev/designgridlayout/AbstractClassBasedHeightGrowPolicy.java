@@ -14,27 +14,27 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
+import java.awt.Component;
 
-final class LeftRow extends AbstractNonGridRow
+abstract class AbstractClassBasedHeightGrowPolicy<T extends Component>
+	implements ClassBasedHeightGrowPolicy
 {
-	LeftRow(Container parent, HeightGrowPolicy heightTester)
+	protected AbstractClassBasedHeightGrowPolicy(Class<T> componentClass)
+    {
+		_componentClass = componentClass;
+    }
+
+	public Class<? extends Component> getComponentClass()
 	{
-		super(parent, heightTester);
+		return _componentClass;
 	}
 
-	@Override protected int xOffset(int rowWidth, int usedWidth)
+	public boolean canGrowHeight(Component component)
 	{
-		return 0;
+		return componentCanGrowHeight(_componentClass.cast(component));
 	}
+	
+	abstract protected boolean componentCanGrowHeight(T component);
 
-	@Override protected int leftFiller(int count, int width, int availableWidth)
-	{
-		return width;
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
-	}
+	private final Class<T> _componentClass;
 }

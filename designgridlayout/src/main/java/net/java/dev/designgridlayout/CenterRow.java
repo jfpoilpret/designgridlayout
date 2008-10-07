@@ -18,9 +18,9 @@ import java.awt.Container;
 
 final class CenterRow extends AbstractNonGridRow
 {
-	CenterRow(Container parent)
+	CenterRow(Container parent, HeightGrowPolicy heightTester)
 	{
-		super(parent);
+		super(parent, heightTester);
 	}
 
 	@Override protected int xOffset(int rowWidth, int usedWidth)
