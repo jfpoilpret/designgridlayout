@@ -164,8 +164,13 @@ final class HorizontalLayout implements LayoutManager
 	static private final HeightGrowPolicy _tester = new HeightGrowPolicy()
 	{
 		public boolean canGrowHeight(Component component)
-        {
-	        return false;
-        }
+		{
+			return false;
+		}
+
+		public int computeExtraHeight(Component component, int extraHeight)
+		{
+			return 0;
+		}
 	};
 }

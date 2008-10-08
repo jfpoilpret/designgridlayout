@@ -52,6 +52,24 @@ class HeightGrowPolicyMapper implements HeightGrowPolicy
 		}
 	}
 
+	public int computeExtraHeight(Component component, int extraHeight)
+	{
+		Class<? extends Component> clazz = component.getClass();
+		while (true)
+		{
+			HeightGrowPolicy policy = _policies.get(component.getClass());
+			if (policy != null)
+			{
+				return policy.computeExtraHeight(component, extraHeight);
+			}
+			if (clazz == Component.class)
+			{
+				return extraHeight;
+			}
+			clazz = clazz.getSuperclass().asSubclass(Component.class);
+		}
+	}
+
 	protected final Map<Class<? extends Component>, HeightGrowPolicy> _policies =
 		new HashMap<Class<? extends Component>, HeightGrowPolicy>();
 }

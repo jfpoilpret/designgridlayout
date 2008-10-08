@@ -20,21 +20,33 @@ abstract class AbstractClassBasedHeightGrowPolicy<T extends Component>
 	implements ClassBasedHeightGrowPolicy
 {
 	protected AbstractClassBasedHeightGrowPolicy(Class<T> componentClass)
-    {
+	{
 		_componentClass = componentClass;
-    }
+	}
 
-	public Class<? extends Component> getComponentClass()
+	final public Class<? extends Component> getComponentClass()
 	{
 		return _componentClass;
 	}
 
-	public boolean canGrowHeight(Component component)
+	final public boolean canGrowHeight(Component component)
 	{
 		return componentCanGrowHeight(_componentClass.cast(component));
 	}
 	
+	final public int computeExtraHeight(Component component, int extraHeight)
+	{
+		return componentComputeExtraHeight(
+			_componentClass.cast(component), extraHeight);
+	}
+
 	abstract protected boolean componentCanGrowHeight(T component);
+
+	// Should be overridden if T components have special requirements in height
+	protected int componentComputeExtraHeight(T component, int extraHeight)
+	{
+		return extraHeight;
+	}
 
 	private final Class<T> _componentClass;
 }

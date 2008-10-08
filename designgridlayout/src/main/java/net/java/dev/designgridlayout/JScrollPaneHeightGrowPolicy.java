@@ -14,18 +14,36 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Component;
+
 import javax.swing.JScrollPane;
+import javax.swing.Scrollable;
 
 class JScrollPaneHeightGrowPolicy 
 	extends AbstractClassBasedHeightGrowPolicy<JScrollPane>
 {
 	public JScrollPaneHeightGrowPolicy()
-    {
-	    super(JScrollPane.class);
-    }
+	{
+		super(JScrollPane.class);
+	}
 
 	@Override protected boolean componentCanGrowHeight(JScrollPane component)
-    {
-	    return true;
-    }
+	{
+		//FIXME do we need to check getUnitIncrement() > 0
+		return true;
+	}
+
+	@Override protected int componentComputeExtraHeight(JScrollPane component, int extraHeight)
+	{
+		int unit = component.getVerticalScrollBar().getUnitIncrement(+1);
+		if (unit <= 0)
+		{
+			return extraHeight;
+		}
+		else
+		{
+			// Return an integral number of units pixels
+			return (extraHeight / unit) * unit;
+		}
+	}
 }

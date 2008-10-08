@@ -68,7 +68,7 @@ public class Issue5 extends AbstractBaseExample
 	static private JScrollPane table()
 	{
 		JTable table = new JTable(content_players, columns_players);
-		setTableHeight(table, content_players.length);
+		setTableHeight(table, 4);
 		return new JScrollPane(table);
 	}
 	
