@@ -34,12 +34,34 @@ public class Issue5 extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
+		if (args.length > 0)
+		{
+			_alwaysGrowHeight = Boolean.parseBoolean(args[0]);
+		}
+		if (args.length > 1)
+		{
+			_loadPlafs = Boolean.parseBoolean(args[1]);
+		}
 		Issue5 example = new Issue5();
 		example.go(true);
 	}
 	
+	public Issue5()
+	{
+		_helper = (_loadPlafs ? new LafHelper() : null);
+		_plafs = (_loadPlafs ? new JComboBox(_helper.getPlafs()) : new JComboBox());
+	}
+	
 	@Override public void build(DesignGridLayout layout)
 	{
+		if (_alwaysGrowHeight)
+		{
+			layout.alwaysGrowRowHeight();
+		}
+		else
+		{
+			layout.neverGrowRowHeight();
+		}
 		layout.row().label(label("Look & Feel")).add(_plafs);
 		layout.row().label(label("Label2")).add(table());
 		layout.row().label(label("L3")).add(field("Field31")).empty();
@@ -170,7 +192,10 @@ public class Issue5 extends AbstractBaseExample
 		"Fender Stratocaster",
 		"Gibson Les Paul",
 	};
+	
+	static private boolean _alwaysGrowHeight = true;
+	static private boolean _loadPlafs = true;
 
-	private final LafHelper _helper = new LafHelper();
-	private final JComboBox _plafs = new JComboBox(_helper.getPlafs());
+	private final LafHelper _helper;
+	private final JComboBox _plafs;
 }

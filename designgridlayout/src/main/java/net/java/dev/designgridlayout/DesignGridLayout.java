@@ -69,10 +69,10 @@ public class DesignGridLayout implements LayoutManager
 			.addPolicy(new JScrollPaneHeightGrowPolicy())
 			.addPolicy(new JSliderHeightGrowPolicy());
 
-	final private Container _parent;
-
 	private HeightGrowPolicy _heightTester = _defaultHeightTester;
 	
+	final private Container _parent;
+
 	private Dimension _layoutSize = null;
 
 	private int _top = 0;
@@ -84,6 +84,9 @@ public class DesignGridLayout implements LayoutManager
 	private int _labelWidth = 0;
 
 	private double _totalWeight = 0.0;
+	
+	static private boolean _defaultAlwaysGrowRowHeight = false;
+	private boolean _alwaysGrowRowHeight = _defaultAlwaysGrowRowHeight;
 
 	private int _explicitTop = MARGIN_DEFAULT;
 	private int _explicitLeft = MARGIN_DEFAULT;
@@ -138,6 +141,19 @@ public class DesignGridLayout implements LayoutManager
 		_explicitLeft = left;
 		_explicitBottom = bottom;
 		_explicitRight = right;
+		return this;
+	}
+	
+	DesignGridLayout alwaysGrowRowHeight()
+	{
+		_alwaysGrowRowHeight = true;
+		return this;
+	}
+	
+	//FIXME change to better name!
+	DesignGridLayout neverGrowRowHeight()
+	{
+		_alwaysGrowRowHeight = false;
 		return this;
 	}
 	
@@ -283,13 +299,21 @@ public class DesignGridLayout implements LayoutManager
 			for (AbstractRow row: _rowList)
 			{
 				int extraHeight = (int) (row.heightGrowth() * totalExtraHeight); 
+				int actualHeight = 0;
 				if (row.items().size() > 0)
 				{
 					helper.setRowExtraHeight(extraHeight);
-					row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
+					actualHeight = 
+						row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
 				}
-//				y += row.height() + row.vgap();
-				y += row.height() + extraHeight + row.vgap();
+				if (_alwaysGrowRowHeight)
+				{
+					y += row.height() + extraHeight + row.vgap();
+				}
+				else
+				{
+					y += row.height() + actualHeight + row.vgap();
+				}
 			}
 		}
 	}

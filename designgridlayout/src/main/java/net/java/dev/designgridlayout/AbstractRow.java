@@ -253,7 +253,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 		return 0;
 	}
 
-	//TODO return actual height allocated to the row
-	abstract void layoutRow(LayoutHelper helper, int x, int y, 
+	// Returns the actual extra height allocated to the row
+	abstract int layoutRow(LayoutHelper helper, int x, int y, 
 		int hgap, int rowWidth, int labelWidth);
 }
