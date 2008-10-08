@@ -14,10 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Component;
-
 import javax.swing.JScrollPane;
-import javax.swing.Scrollable;
 
 class JScrollPaneHeightGrowPolicy 
 	extends AbstractClassBasedHeightGrowPolicy<JScrollPane>
