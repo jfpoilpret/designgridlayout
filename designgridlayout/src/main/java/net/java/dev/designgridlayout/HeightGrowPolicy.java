@@ -21,7 +21,7 @@ interface HeightGrowPolicy
 	/**
 	 * Checks if a {@link Component} can grow in height. 
 	 * @param component the component to test
-	 * {@code true} if {@code component} has a variable height;
+	 * @return {@code true} if {@code component} has a variable height;
 	 * {@code false} if {@code component} has a fixed height.
 	 */
 	public boolean canGrowHeight(Component component);
