@@ -29,9 +29,9 @@ final class LayoutHelper
 		_rtl = rtl;
 	}
 	
-	void setRowExtraHeight(int extraHeight)
+	void setRowAvailableHeight(int availableHeight)
 	{
-		_extraHeight = extraHeight;
+		_availableHeight = availableHeight;
 	}
 	
 	// Returns the actual extra height used by this component
@@ -44,8 +44,9 @@ final class LayoutHelper
 		if (_tester.canGrowHeight(component))
 		{
 			// Checks how much extra height this component can really use
-			usedExtraHeight = _tester.computeExtraHeight(component, _extraHeight);
-			component.setSize(width, maxHeight + usedExtraHeight);
+			usedExtraHeight = 
+				_tester.computeExtraHeight(component, _availableHeight - d.height);
+			component.setSize(width, d.height + usedExtraHeight);
 		}
 		else
 		{
@@ -75,5 +76,5 @@ final class LayoutHelper
 	private final HeightGrowPolicy _tester;
 	private final int _parentWidth;
 	private final boolean _rtl;
-	private int _extraHeight;
+	private int _availableHeight;
 }

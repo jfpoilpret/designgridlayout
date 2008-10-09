@@ -302,7 +302,7 @@ public class DesignGridLayout implements LayoutManager
 				int actualHeight = 0;
 				if (row.items().size() > 0)
 				{
-					helper.setRowExtraHeight(extraHeight);
+					helper.setRowAvailableHeight(extraHeight + row.height());
 					actualHeight = 
 						row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
 				}
