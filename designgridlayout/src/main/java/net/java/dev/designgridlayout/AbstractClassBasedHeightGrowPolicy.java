@@ -40,7 +40,11 @@ abstract class AbstractClassBasedHeightGrowPolicy<T extends Component>
 			_componentClass.cast(component), extraHeight);
 	}
 
-	abstract protected boolean componentCanGrowHeight(T component);
+	// Should be overridden if T components might not always be growable in height
+	protected boolean componentCanGrowHeight(T component)
+	{
+		return true;
+	}
 
 	// Should be overridden if T components have special requirements in height
 	protected int componentComputeExtraHeight(T component, int extraHeight)

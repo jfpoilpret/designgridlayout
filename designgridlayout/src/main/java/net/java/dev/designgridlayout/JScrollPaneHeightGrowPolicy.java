@@ -24,12 +24,6 @@ class JScrollPaneHeightGrowPolicy
 		super(JScrollPane.class);
 	}
 
-	@Override protected boolean componentCanGrowHeight(JScrollPane component)
-	{
-		//FIXME do we need to check getUnitIncrement() > 0
-		return true;
-	}
-
 	@Override protected int componentComputeExtraHeight(JScrollPane component, int extraHeight)
 	{
 		int unit = component.getVerticalScrollBar().getUnitIncrement(+1);
