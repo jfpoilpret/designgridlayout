@@ -114,7 +114,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	 */
 	public AbstractRow addMulti(int span, JComponent... children)
 	{
-		return add(new MultiComponent(children), span);
+		return add(new MultiComponent(_heightTester, children), span);
 	}
 
 	/*

@@ -64,10 +64,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	static final public int MARGIN_DEFAULT = -1;
 
-	static private HeightGrowPolicy _defaultHeightTester = 
-		new HeightGrowPolicyMapper()
-			.addPolicy(new JScrollPaneHeightGrowPolicy())
-			.addPolicy(new JSliderHeightGrowPolicy());
+	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
 
 	private HeightGrowPolicy _heightTester = _defaultHeightTester;
 	
@@ -85,7 +82,7 @@ public class DesignGridLayout implements LayoutManager
 
 	private double _totalWeight = 0.0;
 	
-	static private boolean _defaultAlwaysGrowRowHeight = false;
+	static private boolean _defaultAlwaysGrowRowHeight = true;
 	private boolean _alwaysGrowRowHeight = _defaultAlwaysGrowRowHeight;
 
 	private int _explicitTop = MARGIN_DEFAULT;
@@ -380,7 +377,7 @@ public class DesignGridLayout implements LayoutManager
 	 * The vertical gaps between each component of the upper row and each 
 	 * component of the lower row are compared. The heights of each component is 
 	 * factored in, which seems to work well. 
-	 * To be absolutely correct, each component's actual layout position should 
+	 * FIXME To be absolutely correct, each component's actual layout position should 
 	 * be determined by factoring component heights, component baselines, and 
 	 * each row's maximum height.
 	 */

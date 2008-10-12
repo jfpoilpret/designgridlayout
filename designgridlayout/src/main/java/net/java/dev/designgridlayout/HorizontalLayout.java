@@ -31,6 +31,7 @@ import org.jdesktop.layout.LayoutStyle;
 final class HorizontalLayout implements LayoutManager
 {
 	private final Container _parent;
+	private final HeightGrowPolicy _heightTester;
 	private final List<JComponent> _children = new ArrayList<JComponent>();
 	private boolean _inited = false;
 	private int _baseline = 0;
@@ -40,9 +41,10 @@ final class HorizontalLayout implements LayoutManager
 	private int[] _gaps = null;
 	private int _gap = 0;
 	
-	HorizontalLayout(Container parent)
+	HorizontalLayout(Container parent, HeightGrowPolicy heightTester)
 	{
 		_parent = parent;
+		_heightTester = heightTester;
 	}
 	
 	public HorizontalLayout add(JComponent... children)
@@ -55,6 +57,12 @@ final class HorizontalLayout implements LayoutManager
 		return this;
 	}
 	
+	public int getBaseline()
+	{
+		computeAll();
+		return _baseline;
+	}
+	
 	public void layoutContainer(Container parent)
 	{
 		if (parent != _parent)
@@ -63,10 +71,10 @@ final class HorizontalLayout implements LayoutManager
 				"must use HorizontalLayout instance with original parent container");
 		}
 		
-		computeAll();
-
 		synchronized(parent.getTreeLock())
 		{
+			computeAll();
+
 			// Check layout orientation
 			ComponentOrientation orientation = parent.getComponentOrientation();
 			boolean rtl = orientation.isHorizontal() && !orientation.isLeftToRight();
@@ -83,9 +91,10 @@ final class HorizontalLayout implements LayoutManager
 			int nth = 0;
 			int x = 0;
 			int y = 0;
-			LayoutHelper helper = new LayoutHelper(_tester, parentWidth, rtl);
+			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			for (JComponent child: _children)
 			{
+				helper.setRowAvailableHeight(_parent.getHeight());
 				// Apply reduction ratio to component width
 				int width = (int) (child.getPreferredSize().width * ratio);
 				helper.setSizeLocation(child, x, y, width, _height, _baseline);
@@ -97,17 +106,17 @@ final class HorizontalLayout implements LayoutManager
 
 	public Dimension minimumLayoutSize(Container parent)
 	{
-		initSizeCalculattion(parent);
+		initSizeCalculation(parent);
 		return new Dimension(_minWidth, _height);
 	}
 
 	public Dimension preferredLayoutSize(Container parent)
 	{
-		initSizeCalculattion(parent);
+		initSizeCalculation(parent);
 		return new Dimension(_prefWidth, _height);
 	}
 	
-	private void initSizeCalculattion(Container parent)
+	private void initSizeCalculation(Container parent)
 	{
 		if (parent != _parent)
 		{
@@ -159,18 +168,4 @@ final class HorizontalLayout implements LayoutManager
 			_inited = true;
 		}
 	}
-	
-	//FIXME probably wrong if layout contains growable component
-	static private final HeightGrowPolicy _tester = new HeightGrowPolicy()
-	{
-		public boolean canGrowHeight(Component component)
-		{
-			return false;
-		}
-
-		public int computeExtraHeight(Component component, int extraHeight)
-		{
-			return 0;
-		}
-	};
 }

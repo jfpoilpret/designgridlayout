@@ -14,21 +14,12 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JComponent;
-
-final class MultiComponent extends JComponent
+class DefaultGrowPolicy extends HeightGrowPolicyMapper
 {
-	MultiComponent(HeightGrowPolicy heightTester, JComponent... children)
+	public DefaultGrowPolicy()
 	{
-		_layout = new HorizontalLayout(this, heightTester);
-		setLayout(_layout);
-		_layout.add(children);
+		addPolicy(new JScrollPaneHeightGrowPolicy());
+		addPolicy(new JSliderHeightGrowPolicy());
+		addPolicy(new MultiComponentHeightGrowPolicy(this));
 	}
-
-	public int getBaseline(int width, int height)
-    {
-		return _layout.getBaseline();
-    }
-	
-	private final HorizontalLayout _layout;
 }
