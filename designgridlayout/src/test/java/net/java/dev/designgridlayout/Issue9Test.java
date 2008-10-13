@@ -16,11 +16,17 @@ package net.java.dev.designgridlayout;
 
 import java.awt.ComponentOrientation;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "utest")
 public class Issue9Test extends AbstractGuiTest
 {
+	@AfterMethod public void closeGui()
+	{
+		stopGui();
+	}
+	
 	@Test public void checkEnglish() throws Exception
 	{
 		checkIssue9("LT");
@@ -46,10 +52,9 @@ public class Issue9Test extends AbstractGuiTest
 		OrientationInitializer initializer = new OrientationInitializer(
 			ComponentOrientationHelper.getOrientation(new String[]{orientation}));
 		launchGui(Issue9.class, initializer);
-		takeSnapshot("small-" + orientation);
+		checkSnapshot("small-" + orientation);
 		frame().resizeWidthTo(frame().target.getWidth() * 2);
-		takeSnapshot("large-" + orientation);
-		stopGui();
+		checkSnapshot("large-" + orientation);
 	}
 	
 	static private class OrientationInitializer implements Initializer<Issue9>

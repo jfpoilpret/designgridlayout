@@ -46,7 +46,7 @@ public class Issue9 extends AbstractBaseExample
 		layout.rightRow().add(button("B1"), button("Button2"), button("3")).fill();
 	}
 
-	@Override protected void preDisplay()
+	@Override protected void prePack()
     {
 		frame().applyComponentOrientation(_orientation);
     }

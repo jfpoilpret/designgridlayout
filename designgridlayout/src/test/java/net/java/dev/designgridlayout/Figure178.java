@@ -52,7 +52,7 @@ public class Figure178 extends AbstractBaseExample
 		JCheckBox teamwareCheckBox = new JCheckBox("Teamware");
 		JCheckBox networkingCheckBox = new JCheckBox("Networking");
 
-		JButton applyButton = new JButton("Apply");
+		applyButton = new JButton("Apply");
 		JButton resetButton = new JButton("Reset");
 
 		layout.row().label(label("Name:")).add(nameField);
@@ -71,4 +71,11 @@ public class Figure178 extends AbstractBaseExample
 		layout.centerRow().add(applyButton).add(resetButton);
 	}
 	// CSON: MagicNumber
+
+	@Override protected void preDisplay()
+    {
+		applyButton.requestFocusInWindow();
+    }
+
+	private JButton applyButton;
 }

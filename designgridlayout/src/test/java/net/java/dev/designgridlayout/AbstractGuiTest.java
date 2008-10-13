@@ -14,11 +14,16 @@
 
 package net.java.dev.designgridlayout;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.fest.swing.core.Robot;
 import org.fest.swing.core.RobotFixture;
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.image.ScreenshotTaker;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.swing.finder.WindowFinder.findFrame;
 
 abstract class AbstractGuiTest
@@ -50,6 +55,34 @@ abstract class AbstractGuiTest
 		launchGui(clazz, null);
 	}
 
+	final protected void checkSnapshot()
+	{
+		checkSnapshot("");
+	}
+	
+	final protected void checkSnapshot(String suffix)
+	{
+		// Take snapshot of current layout
+		if (suffix.length() > 0)
+		{
+			suffix = "-" + suffix;
+		}
+		String name = _example.getClass().getSimpleName() + suffix + ".png";
+		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + name;
+		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
+		
+		// Compare with previously recorded snapshots
+		URL expected = Thread.currentThread().getContextClassLoader().getResource(name);
+		try
+		{
+			assertThat(new File(snapshot)).hasSameContentAs(new File(expected.toURI()));
+		}
+		catch (URISyntaxException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
 	final protected void takeSnapshot()
 	{
 		takeSnapshot("");

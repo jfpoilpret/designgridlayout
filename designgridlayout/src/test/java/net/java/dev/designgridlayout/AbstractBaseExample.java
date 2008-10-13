@@ -24,6 +24,7 @@ import javax.swing.WindowConstants;
 public abstract class AbstractBaseExample
 {
 	protected JFrame _frame = null;
+	protected JButton _lastCreatedButton = null;
 
 	protected JFrame frame()
 	{
@@ -45,23 +46,33 @@ public abstract class AbstractBaseExample
 		build(layout);
 
 		_frame.add(top);
-		preDisplay();
+		prePack();
 		_frame.pack();
+		preDisplay();
 		_frame.setVisible(true);
 	}
 
-	protected void preDisplay()
+	protected void prePack()
     {
     }
 
-	protected static JButton button()
+	protected void preDisplay()
+    {
+		if (_lastCreatedButton != null)
+		{
+			_lastCreatedButton.requestFocusInWindow();
+		}
+    }
+
+	protected JButton button()
 	{
-		return new JButton("Button");
+		return button("Button");
 	}
 	
-	protected static JButton button(String text)
+	protected JButton button(String text)
 	{
-		return new JButton(text);
+		_lastCreatedButton = new JButton(text);
+		return _lastCreatedButton;
 	}
 	
 	protected static JLabel label(int num)
@@ -76,7 +87,8 @@ public abstract class AbstractBaseExample
 
 	protected static JTextField field(String text)
 	{
-		return new JTextField(text);
+		JTextField field = new JTextField(text);
+		return field;
 	}
 	
 	protected abstract void build(DesignGridLayout layout);

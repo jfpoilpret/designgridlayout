@@ -14,56 +14,58 @@
 
 package net.java.dev.designgridlayout;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "utest")
 public class Issue5Test extends AbstractGuiTest
 {
+	@AfterMethod public void closeGui()
+	{
+		stopGui();
+	}
+	
 	@Test public void checkComplexLayout() throws Exception
 	{
 		launchGui(Issue5.class);
-		takeSnapshot("pref-size");
+		checkSnapshot("pref-size");
 		for (int i = 1; i <= 10; i++)
 		{
 			frame().resizeHeightTo(frame().target.getHeight() + 3);
-			takeSnapshot("extended-size-" + (i * 3));
+			checkSnapshot("extended-size-" + (i * 3));
 		}
-		stopGui();
 	}
 
 	@Test public void checkOneMultiComponentAllVarHeight() throws Exception
 	{
 		launchGui(Issue5b.class);
-		takeSnapshot("pref-size");
+		checkSnapshot("pref-size");
 		for (int i = 1; i <= 10; i++)
 		{
 			frame().resizeHeightTo(frame().target.getHeight() + 3);
-			takeSnapshot("extended-size-" + (i * 3));
+			checkSnapshot("extended-size-" + (i * 3));
 		}
-		stopGui();
 	}
 
 	@Test public void checkMultiAllVarHeightAndSingleComponent() throws Exception
 	{
 		launchGui(Issue5c.class);
-		takeSnapshot("pref-size");
+		checkSnapshot("pref-size");
 		for (int i = 1; i <= 10; i++)
 		{
 			frame().resizeHeightTo(frame().target.getHeight() + 3);
-			takeSnapshot("extended-size-" + (i * 3));
+			checkSnapshot("extended-size-" + (i * 3));
 		}
-		stopGui();
 	}
 
 	@Test public void checkMultiVarAndFixHeight() throws Exception
 	{
 		launchGui(Issue5d.class);
-		takeSnapshot("pref-size");
+		checkSnapshot("pref-size");
 		for (int i = 1; i <= 10; i++)
 		{
 			frame().resizeHeightTo(frame().target.getHeight() + 3);
-			takeSnapshot("extended-size-" + (i * 3));
+			checkSnapshot("extended-size-" + (i * 3));
 		}
-		stopGui();
 	}
 }

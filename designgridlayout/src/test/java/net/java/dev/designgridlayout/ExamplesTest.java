@@ -27,7 +27,7 @@ public class ExamplesTest extends AbstractGuiTest
 		throws Exception
 	{
 		launchGui(clazz);
-		takeSnapshot();
+		checkSnapshot();
 		if (resize)
 		{
 			frame().resizeWidthTo(frame().target.getWidth() * 2);
