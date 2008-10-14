@@ -18,8 +18,6 @@ import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO improve to make superclass matches optional
-// => will need also adaptation of ClassBasedHeightGrowPolicy and subclasses
 class HeightGrowPolicyMapper implements HeightGrowPolicy
 {
 	public HeightGrowPolicyMapper addPolicy(ClassBasedHeightGrowPolicy policy)
@@ -36,23 +34,18 @@ class HeightGrowPolicyMapper implements HeightGrowPolicy
 	
 	public boolean canGrowHeight(Component component)
 	{
-		Class<? extends Component> clazz = component.getClass();
-		while (true)
-		{
-			HeightGrowPolicy policy = _policies.get(component.getClass());
-			if (policy != null)
-			{
-				return policy.canGrowHeight(component);
-			}
-			if (clazz == Component.class)
-			{
-				return false;
-			}
-			clazz = clazz.getSuperclass().asSubclass(Component.class);
-		}
+		HeightGrowPolicy policy = findPolicy(component);
+		return (policy != null ? policy.canGrowHeight(component) : false);
 	}
 
 	public int computeExtraHeight(Component component, int extraHeight)
+	{
+		HeightGrowPolicy policy = findPolicy(component);
+		return (policy != null
+			? policy.computeExtraHeight(component, extraHeight) : extraHeight);
+	}
+	
+	protected final HeightGrowPolicy findPolicy(Component component)
 	{
 		Class<? extends Component> clazz = component.getClass();
 		while (true)
@@ -60,11 +53,11 @@ class HeightGrowPolicyMapper implements HeightGrowPolicy
 			HeightGrowPolicy policy = _policies.get(component.getClass());
 			if (policy != null)
 			{
-				return policy.computeExtraHeight(component, extraHeight);
+				return policy;
 			}
 			if (clazz == Component.class)
 			{
-				return extraHeight;
+				return null;
 			}
 			clazz = clazz.getSuperclass().asSubclass(Component.class);
 		}
