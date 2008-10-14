@@ -40,7 +40,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	private boolean _fill = false;
 	private int _baseline;
 	private int _height;
-	private double _heightGrowth = 0.0;
+	private double _heightGrowth = -1.0;
 	private int _explicitHeight = HEIGHT_DEFAULT;
 
 	private int _maxWidth;
@@ -135,6 +135,20 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 		return add(new JPanel(), span);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IGridRow#growWeight(double)
+	 */
+	public AbstractRow growWeight(double weight)
+	{
+		if (weight >= 0.0)
+		{
+			_heightGrowth = weight;
+		}
+		return this;
+	}
+
+
 	void height(int height)
 	{
 		_explicitHeight = height;
@@ -192,7 +206,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	{
 		if (!_inited )
 		{
-			_heightGrowth = 0.0;
+			double heightGrowth = 0.0;
 			_maxWidth = 0;
 			_height = 0;
 			_baseline = 0;
@@ -205,8 +219,14 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 				_baseline = Math.max(_baseline, Baseline.getBaseline(component));
 				if (_heightTester.canGrowHeight(component))
 				{
-					_heightGrowth = 1.0;
+					heightGrowth = 1.0;
 				}
+			}
+			if (heightGrowth == 0.0 || _heightGrowth == -1.0)
+			{
+				// If row cannot vary in height, override user setting
+				// Or if no explicit user setting, set height growth
+				_heightGrowth = heightGrowth;
 			}
 			_inited = true;
 		}

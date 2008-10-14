@@ -57,4 +57,10 @@ public interface INonGridRow extends IRow
 	 * row)
 	 */
 	public abstract INonGridRow fill();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IRow#growWeight(double)
+	 */
+	public abstract INonGridRow growWeight(double weight);
 }

@@ -103,4 +103,10 @@ public interface IGridRow extends IRow
 	 * row)
 	 */
 	public abstract IGridRow addMulti(int span, JComponent... children);
+	
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IRow#growWeight(double)
+	 */
+	public abstract IGridRow growWeight(double weight);
 }

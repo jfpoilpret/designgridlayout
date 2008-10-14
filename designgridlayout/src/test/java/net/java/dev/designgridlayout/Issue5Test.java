@@ -36,6 +36,17 @@ public class Issue5Test extends AbstractGuiTest
 		}
 	}
 
+	@Test public void checkComplexLayoutWithWeights() throws Exception
+	{
+		launchGui(Issue5CustomWeight.class);
+		checkSnapshot("pref-size");
+		for (int i = 1; i <= 14; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + 5);
+			checkSnapshot("extended-size-" + (i * 5));
+		}
+	}
+
 	@Test public void checkOneMultiComponentAllVarHeight() throws Exception
 	{
 		launchGui(Issue5b.class);
