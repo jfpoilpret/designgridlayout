@@ -329,6 +329,7 @@ public class DesignGridLayout implements LayoutManager
 	public Dimension preferredLayoutSize(Container parent)
 	{
 		checkParent(parent);
+		//TODO check if the next line is really useful... Remove it if not
 		reset();
 		initialize();
 		return _layoutSize;
@@ -377,10 +378,13 @@ public class DesignGridLayout implements LayoutManager
 	 * The vertical gaps between each component of the upper row and each 
 	 * component of the lower row are compared. The heights of each component is 
 	 * factored in, which seems to work well. 
-	 * FIXME To be absolutely correct, each component's actual layout position should 
-	 * be determined by factoring component heights, component baselines, and 
-	 * each row's maximum height.
 	 */
+	//FIXME vgaps calculation
+	// To be absolutely correct, each component's actual layout position should
+	// be determined by factoring component heights, component baselines, and 
+	// each row's maximum height.
+	// Problem is that this would have to be re-calculated every time... Maybe
+	// it's better not to try to improve vgaps
 	private void computeGutters()
 	{
 		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
