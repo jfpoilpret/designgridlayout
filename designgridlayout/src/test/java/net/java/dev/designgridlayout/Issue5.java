@@ -34,10 +34,6 @@ public class Issue5 extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		if (args.length > 0)
-		{
-			_alwaysGrowHeight = Boolean.parseBoolean(args[0]);
-		}
 		if (args.length > 1)
 		{
 			_loadPlafs = Boolean.parseBoolean(args[1]);
@@ -54,14 +50,6 @@ public class Issue5 extends AbstractBaseExample
 	
 	@Override public void build(DesignGridLayout layout)
 	{
-		if (_alwaysGrowHeight)
-		{
-			layout.alwaysGrowRowHeight();
-		}
-		else
-		{
-			layout.neverGrowRowHeight();
-		}
 		layout.row().label(label("Look & Feel")).add(_plafs);
 		layout.row().label(label("Label2")).add(table());
 		layout.row().label(label("L3")).add(field("Field31")).empty();
@@ -193,7 +181,6 @@ public class Issue5 extends AbstractBaseExample
 		"Gibson Les Paul",
 	};
 	
-	static private boolean _alwaysGrowHeight = true;
 	static private boolean _loadPlafs = true;
 
 	private final LafHelper _helper;

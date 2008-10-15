@@ -82,9 +82,6 @@ public class DesignGridLayout implements LayoutManager
 
 	private double _totalWeight = 0.0;
 	
-	static private boolean _defaultAlwaysGrowRowHeight = true;
-	private boolean _alwaysGrowRowHeight = _defaultAlwaysGrowRowHeight;
-
 	private int _explicitTop = MARGIN_DEFAULT;
 	private int _explicitLeft = MARGIN_DEFAULT;
 	private int _explicitBottom = MARGIN_DEFAULT;
@@ -138,19 +135,6 @@ public class DesignGridLayout implements LayoutManager
 		_explicitLeft = left;
 		_explicitBottom = bottom;
 		_explicitRight = right;
-		return this;
-	}
-	
-	DesignGridLayout alwaysGrowRowHeight()
-	{
-		_alwaysGrowRowHeight = true;
-		return this;
-	}
-	
-	//FIXME change to better name!
-	DesignGridLayout neverGrowRowHeight()
-	{
-		_alwaysGrowRowHeight = false;
 		return this;
 	}
 	
@@ -296,21 +280,12 @@ public class DesignGridLayout implements LayoutManager
 			for (AbstractRow row: _rowList)
 			{
 				int extraHeight = (int) (row.heightGrowth() * totalExtraHeight); 
-				int actualHeight = 0;
 				if (row.items().size() > 0)
 				{
 					helper.setRowAvailableHeight(extraHeight + row.height());
-					actualHeight = 
-						row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
+					row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
 				}
-				if (_alwaysGrowRowHeight)
-				{
-					y += row.height() + extraHeight + row.vgap();
-				}
-				else
-				{
-					y += row.height() + actualHeight + row.vgap();
-				}
+				y += row.height() + extraHeight + row.vgap();
 			}
 		}
 	}
