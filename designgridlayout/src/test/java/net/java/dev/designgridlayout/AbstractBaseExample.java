@@ -75,17 +75,17 @@ public abstract class AbstractBaseExample
 		return _lastCreatedButton;
 	}
 	
-	protected static JLabel label(int num)
+	protected JLabel label(int num)
 	{
 		return label("Row " + num);
 	}
 
-	protected static JLabel label(String label)
+	protected JLabel label(String label)
 	{
 		return new JLabel(label);
 	}
 
-	protected static JTextField field(String text)
+	protected JTextField field(String text)
 	{
 		JTextField field = new JTextField(text);
 		return field;

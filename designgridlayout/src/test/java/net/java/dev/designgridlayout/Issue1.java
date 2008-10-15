@@ -26,7 +26,14 @@ public class Issue1 extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label("First label")).add(new JTextField("First field"));
-		layout.row().label(label("Second label")).add(new JTextField("2nd field"));
+		layout.row().label(label("First label")).add(field("First field"));
+		layout.row().label(label("Second label")).add(field("2nd field"));
 	}
+
+	@Override protected JTextField field(String text)
+    {
+	    JTextField field = super.field(text);
+	    field.setEnabled(false);
+	    return field;
+    }
 }

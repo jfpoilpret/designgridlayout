@@ -125,13 +125,13 @@ public class AddressBookDemo extends AbstractBaseExample
 	}
 	// CSON: MagicNumber
 
-	static public JLabel label(String text)
-	{
-		JLabel label = AbstractBaseExample.label(text);
+	@Override protected JLabel label(String text)
+    {
+		JLabel label = super.label(text);
 		label.setHorizontalAlignment(JLabel.RIGHT);
 		return label;
-	}
-	
+    }
+
 	@Override public String name()
 	{
 		return "Address Book Demo";
