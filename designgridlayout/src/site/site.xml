@@ -7,6 +7,7 @@
 	<body>
 		<menu name="General">
 			<item name="Introduction" href="index.html" />
+			<item name="Canonical Grids" href="grids.html" />
 			<item name="Usage" href="usage.html" />
 			<item name="Examples" href="examples.html" />
 			<item name="Building from sources" href="build-from-sources.html" />

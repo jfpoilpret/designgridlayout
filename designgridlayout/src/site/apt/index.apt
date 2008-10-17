@@ -1,49 +1,122 @@
 							----------------------
 								Introduction
 							----------------------
-							    Jason Osgood
+							Jean-Francois Poilpret
 							----------------------
 							
-Canonical grids
+Swing LayoutManagers hell or the Genesis of DesignGridLayout
 
-	Canonical grids are visual tools used by graphic artists to design magazines, 
-	posters, advertisements, forms, and so forth. As an artist friend told the 
-	original author of DesignGridLayout, the use of grids is "graphic design 101, 
-	taught on the first day".
+* Why Swing LayoutManagers are bad
+
+	*	they are too simple (<<<FlowLayout>>>, <<<GridLayout>>>) to really get 
+		your forms as you want them
+		
+	*	or they are too complex (<<<GridBagLayout>>>) to make for maintainable 
+		GUI code
+		
+	*	they require graphical designers (integrated in your IDE) to generate 
+		code that is not human-readable and hard to maintain
+		
+	*	they allow developers to produce a bad user experience (and most 
+		developers are not good at designing visually correct UIs)
+		
+	*	even Java 6 <<<GroupLayout>>>, although it brings many improvements, is 
+		hard (not to say impossible) to use without a graphical designer
 	
-	Here are the steps to create a simple 4 column canonical grid. First, divide 
-	the rectangle horizontally into halves (1/2). The light gray represents the 
-	gaps (for gutters and margins) between columns.
-
-[images/grid-halves.png]
+	[]
 	
-	Then add divisions for thirds (1/3).
-
-[images/grid-thirds.png]
+	Some 3rd-party, open source, LayoutManagers exist and they try to overcome
+	most of the problems above; however, they still have some drawbacks such as:
 	
-	Lastly, add divisions for fourths (1/4).
+	*	don't prevent developers from producing bad UI
 	
-[images/grid-fourths.png]
+	*	often use cryptic strings to define location and sizing behavior of
+		components; without a proper graphical designer, you cannot be sure that 
+		these strings typed by developers are correct until you launch the GUI
+
+* The genesis of DesignGridLayout
+
+	DesignGridLayout was born based on the work from Mullet & Sanno on 
+	{{{grids.html}canonical grids}} (a tool used in publishing) to produce always 
+	balanced and good-looking UI.
 	
-	Voila! The black lines represent the 4 column canonical grid.
-
-	For each row, the row is divided by the number of components you add. Adding 
-	two components divides the grid in half. Adding three components divides 
-	the grid in thirds.
-
-	So here's an example. 
+	From the beginning, one major plus of DesignGridLayout was its API that really
+	helps the work of developers without the need for any graphical designer in 
+	the IDE, and with a very short learning curve.
 	
-[images/grid-example.png]
+DesignGridLayout "philosophy"
 
-	See how everything lines up nicely? There's two interesting cases to note.  
-
-	*	Row 3 has just two components, but the row is divided in thirds. That's 
-		because the first component spans 2 columns, so the total number of 
-		components is considered to be 3.
-
-	*	Row 4 has no component in the fourth column. Rows having empty columns 
-		is common for forms.
+	DesignGridLayout was designed with some important principles:
+	
+	*	layouts produced through it must <<always be good looking>> (in terms of
+		components alignment, spacing, sizing, visual balance, all compliant to
+		the current platform); it must be impossible (or very difficult) for a 
+		developer to produce an ugly UI with DesignGridLayout
+		
+	*	<<"What You Code Is What You Get">>: developers and maintainers must be 
+		able to immediately "visualize" the resulting UI when browsing source 
+		code using DesignGridLayout for it
+		
+	*	<<reduced learning curve>>: DesignGridLayout must provide an API that 
+		always guides the developer; this API must enable IDE code-completion 
+		and must be as <<compile-safe>> as possible; developers should never 
+		discover problems with their UI at runtime
+		
+	*	existing UIs must be <<easy to modify>>; e.g. adding a row to a form 
+		should be straightforward for the developer
+		
+	*	<<no need for any graphical designer>>: the API <is> the graphical 
+		designer
 
 	[]
 	
+	To implement these principles, DesignGridLayout has decided to follow a
+	different way of using LayoutManagers than the usual way (Note: this approach
+	is now also used by Java 6 <<<GroupLayout>>>): instead of adding 
+	<<<Component>>>s directly to a <<<Container>>> and specify a <<<String>>> or 
+	<<<Object>>> to describe location, size... of that <<<Component>>>, 
+	DesignGridLayout uses a fluent API which starts from the 
+	<<<DesignGridLayout>>> instance itself.
+
+DesignGridLayout Features (version 1.0)
+
+	*	<<Fluent and simple API>> to create grid-based layouts (from the layout, 
+		you create rows, from a row you add components)
+		
+	*	<<Respect of spacing>> between components (and container edges) based on
+		platform settings (i.e. installed LookAndFeel)
+		
+	*	<<Automatic baseline alignment>> for all components in a row
 	
+	*	Support for <<canonical grid>> rows, <<left-aligned>> rows, <<centered>>
+		rows and <<right-aligned>> rows (useful for command buttons)
+		
+	*	Special <<"label" columns>> (in canonical grid rows) that have constant 
+		width during horizontal resize (no waste of space after resize)
+		
+	*	<<Smart horizontal resize>> that preserves the UI balance (by enlarging 
+		all components consistently)
+		
+	*	<<Smart vertical resize>>: DesignGridLayout automatically detects rows 
+		that should grow in height during vertical resize (based on the 
+		components they contain); after resize, <<<JTable>>>, <<<JList>>>, 
+		<<<JTextArea>>> components never contain truncated items (row or text 
+		line)
+		
+	*	Automatic support for <<right-to-left languages>>
+	
+	*	No need for any hard-coded position or spacing
+		
+Roadmap
+
+	[1.1]	Planned by end 2008
+	
+		*	Support for components spanning several rows
+		
+		[]
+		
+	[1.2]	Planned during 1st Quarter 2009
+	
+		*	Support for HiDPI devices (resolution independence)
+	
+		[]

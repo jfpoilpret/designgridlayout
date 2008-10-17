@@ -1,0 +1,57 @@
+							-----------------------
+								Canonical Grids
+							-----------------------
+							      Jason Osgood
+							-----------------------
+							
+Canonical grids
+
+	The idea of user interfaces based on canonical grids is described in the book 
+	{{{http://www.amazon.com/gp/product/0133033899}Designing Visual Interfaces: Communication Oriented Techniques}} 
+	by Kevin Mullet and Darrell Sano. Available online, Patrizia Nanni's thesis 
+	{{{http://www.vhml.org/theses/nannip/HCI_final.htm}Human-Computer Interaction: Principles of Interface Design}}
+	has a nice chapter called 
+	{{{http://www.vhml.org/theses/nannip/HCI_final.htm#_Toc87596295}Module and Program: Grid-based Design}}, 
+	which also references Mullet and Sano's work.
+
+	Canonical grids are visual tools used by graphic artists to design magazines, 
+	posters, advertisements, forms, and so forth. As an artist friend told the 
+	original author of DesignGridLayout, the use of grids is "graphic design 101, 
+	taught on the first day".
+	
+	Here are the steps to create a simple 4 column canonical grid. First, divide 
+	the rectangle horizontally into halves (1/2). The light gray represents the 
+	gaps (for gutters and margins) between columns.
+
+[images/grid-halves.png]
+	
+	Then add divisions for thirds (1/3).
+
+[images/grid-thirds.png]
+	
+	Lastly, add divisions for fourths (1/4).
+	
+[images/grid-fourths.png]
+	
+	Voila! The black lines represent the 4 column canonical grid.
+
+	For each row, the row is divided by the number of components you add. Adding 
+	two components divides the grid in half. Adding three components divides 
+	the grid in thirds.
+
+	So here's an example. 
+	
+[images/grid-example.png]
+
+	See how everything lines up nicely? There's two interesting cases to note.  
+
+	*	Row 3 has just two components, but the row is divided in thirds. That's 
+		because the first component spans 2 columns, so the total number of 
+		components is considered to be 3.
+
+	*	Row 4 has no component in the fourth column. Rows having empty columns 
+		is common for forms.
+
+	[]
+	
+	
