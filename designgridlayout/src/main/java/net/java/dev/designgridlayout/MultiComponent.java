@@ -18,9 +18,10 @@ import javax.swing.JComponent;
 
 final class MultiComponent extends JComponent
 {
-	MultiComponent(HeightGrowPolicy heightTester, JComponent... children)
+	MultiComponent(HeightGrowPolicy heightTester, OrientationPolicy orientation, 
+		JComponent... children)
 	{
-		_layout = new HorizontalLayout(this, heightTester);
+		_layout = new HorizontalLayout(this, heightTester, orientation);
 		setLayout(_layout);
 		_layout.add(children);
 	}

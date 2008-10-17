@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
@@ -69,6 +68,7 @@ public class DesignGridLayout implements LayoutManager
 	private HeightGrowPolicy _heightTester = _defaultHeightTester;
 	
 	final private Container _parent;
+	final private DefaultOrientationPolicy _orientation;
 
 	private Dimension _layoutSize = null;
 
@@ -86,7 +86,7 @@ public class DesignGridLayout implements LayoutManager
 	private int _explicitLeft = MARGIN_DEFAULT;
 	private int _explicitBottom = MARGIN_DEFAULT;
 	private int _explicitRight = MARGIN_DEFAULT;
-
+	
 	final private List<AbstractRow> _rowList = new ArrayList<AbstractRow>();
 
 	/**
@@ -111,6 +111,7 @@ public class DesignGridLayout implements LayoutManager
 		}
 		_parent = parent;
 		_parent.setLayout(this);
+		_orientation = new DefaultOrientationPolicy(parent);
 		reset();
 	}
 
@@ -137,6 +138,48 @@ public class DesignGridLayout implements LayoutManager
 		_explicitRight = right;
 		return this;
 	}
+
+	/**
+	 * Forces the orientation of components inside this layout to be from left
+	 * to right, whatever the orientation defined by the current
+	 * {@code java.util.Locale}.
+	 * <p/>
+	 * <b>Note 1</b>: you normally never need to call this method because
+	 * {@code DesignGridLayout} automatically detects and uses the orientation 
+	 * defined by the current {@code java.util.Locale}. Calling this method is
+	 * useful only if you want to override the default orientation.
+	 * <b>Note 2</b>: calling this method will not affect the orientation of
+	 * text inside components themselves!
+	 * 
+	 * @return this instance of DesignGridLayout, allowing for chained calls
+	 * to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout leftToRight()
+	{
+		_orientation.setRightToLeft(false);
+		return this;
+	}
+	
+	/**
+	 * Forces the orientation of components inside this layout to be from right
+	 * to left, whatever the orientation defined by the current
+	 * {@code java.util.Locale}.
+	 * <p/>
+	 * <b>Note 1</b>: you normally never need to call this method because
+	 * {@code DesignGridLayout} automatically detects and uses the orientation 
+	 * defined by the current {@code java.util.Locale}. Calling this method is
+	 * useful only if you want to override the default orientation.
+	 * <b>Note 2</b>: calling this method will not affect the orientation of
+	 * text inside components themselves!
+	 * 
+	 * @return this instance of DesignGridLayout, allowing for chained calls
+	 * to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout rightToLeft()
+	{
+		_orientation.setRightToLeft(true);
+		return this;
+	}
 	
 	/**
 	 * Adds a left-aligned row. Left-aligned rows are NOT canonical grids but
@@ -152,7 +195,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow leftRow()
 	{
-		return addRow(new LeftRow(_parent, _heightTester));
+		return addRow(new LeftRow(_parent, _heightTester, _orientation));
 	}
 
 	/**
@@ -169,7 +212,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow rightRow()
 	{
-		return addRow(new RightRow(_parent, _heightTester));
+		return addRow(new RightRow(_parent, _heightTester, _orientation));
 	}
 
 	/**
@@ -186,7 +229,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow centerRow()
 	{
-		return addRow(new CenterRow(_parent, _heightTester));
+		return addRow(new CenterRow(_parent, _heightTester, _orientation));
 	}
 
 	/**
@@ -202,7 +245,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public IGridRow row()
 	{
-		return addRow(new GridRow(_parent, _heightTester));
+		return addRow(new GridRow(_parent, _heightTester, _orientation));
 	}
 
 	/**
@@ -214,7 +257,7 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public void emptyRow(int height)
 	{
-		addRow(new GridRow(_parent, _heightTester)).height(height);
+		addRow(new GridRow(_parent, _heightTester, _orientation)).height(height);
 	}
 	
 	private AbstractRow addRow(AbstractRow row)
@@ -269,8 +312,7 @@ public class DesignGridLayout implements LayoutManager
 			}
 			
 			// Check layout orientation
-			ComponentOrientation orientation = parent.getComponentOrientation();
-			boolean rtl = orientation.isHorizontal() && !orientation.isLeftToRight();
+			boolean rtl = _orientation.isRightToLeft();
 
 			int x = left();
 			int y = top();

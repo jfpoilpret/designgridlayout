@@ -14,28 +14,35 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 
-final class LeftRow extends AbstractNonGridRow
+class DefaultOrientationPolicy implements OrientationPolicy
 {
-	LeftRow(Container parent, HeightGrowPolicy heightTester, 
-		OrientationPolicy orientation)
+	public DefaultOrientationPolicy(Container parent)
 	{
-		super(parent, heightTester, orientation);
+		_parent = parent;
+	}
+	
+	public boolean isRightToLeft()
+	{
+		if (_rtl != null)
+		{
+			return _rtl;
+		}
+		else
+		{
+			// Check layout orientation
+			ComponentOrientation orientation = _parent.getComponentOrientation();
+			return orientation.isHorizontal() && !orientation.isLeftToRight();
+		}
+	}
+	
+	void setRightToLeft(boolean rtl)
+	{
+		_rtl = rtl;
 	}
 
-	@Override protected int xOffset(int rowWidth, int usedWidth)
-	{
-		return 0;
-	}
-
-	@Override protected int leftFiller(int count, int width, int availableWidth)
-	{
-		return width;
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
-	}
+	private final Container _parent;
+	private Boolean _rtl = null;
 }

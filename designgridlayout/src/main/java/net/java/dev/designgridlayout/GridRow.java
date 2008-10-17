@@ -26,9 +26,10 @@ import org.jdesktop.layout.LayoutStyle;
 
 final class GridRow extends AbstractRow
 {
-	GridRow(Container parent, HeightGrowPolicy heightTester)
+	GridRow(Container parent, HeightGrowPolicy heightTester, 
+		OrientationPolicy orientation)
 	{
-		super(parent, heightTester);
+		super(parent, heightTester, orientation);
 	}
 
 	@Override int gridColumns()

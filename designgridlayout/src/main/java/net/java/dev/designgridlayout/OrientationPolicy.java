@@ -14,28 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
-
-final class LeftRow extends AbstractNonGridRow
+interface OrientationPolicy
 {
-	LeftRow(Container parent, HeightGrowPolicy heightTester, 
-		OrientationPolicy orientation)
-	{
-		super(parent, heightTester, orientation);
-	}
-
-	@Override protected int xOffset(int rowWidth, int usedWidth)
-	{
-		return 0;
-	}
-
-	@Override protected int leftFiller(int count, int width, int availableWidth)
-	{
-		return width;
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
-	}
+	public boolean isRightToLeft();
 }

@@ -27,48 +27,74 @@ public class Issue9Test extends AbstractGuiTest
 		stopGui();
 	}
 	
-	@Test public void checkEnglish() throws Exception
+	@Test public void checkLTR() throws Exception
 	{
-		checkIssue9("LT");
+		checkIssue9("LT", null);
 	}
 	
-	@Test public void checkArabic() throws Exception
+	@Test public void checkRTL() throws Exception
 	{
-		checkIssue9("RT");
+		checkIssue9("RT", null);
+	}
+	
+	@Test public void checkForceLTR() throws Exception
+	{
+		checkIssue9("RT", false);
+	}
+	
+	@Test public void checkForceRTL() throws Exception
+	{
+		checkIssue9("LT", true);
 	}
 	
 	@Test(enabled = false) public void checkJapanese() throws Exception
 	{
-		checkIssue9("TR");
+		checkIssue9("TR", null);
 	}
 	
 	@Test(enabled = false) public void checkMongolian() throws Exception
 	{
-		checkIssue9("TL");
+		checkIssue9("TL", null);
 	}
 	
-	protected void checkIssue9(String orientation) throws Exception
+	protected void checkIssue9(String orientation, Boolean rtl) throws Exception
 	{
 		OrientationInitializer initializer = new OrientationInitializer(
-			ComponentOrientationHelper.getOrientation(new String[]{orientation}));
+			ComponentOrientationHelper.getOrientation(new String[]{orientation}),
+			rtl);
 		launchGui(Issue9.class, initializer);
-		checkSnapshot("small-" + orientation);
+		String suffix;
+		if (rtl != null)
+		{
+			suffix = orientation + "-" + (rtl ? "RT" : "LT");
+		}
+		else
+		{
+			suffix = orientation;
+		}
+		checkSnapshot("small-" + suffix);
 		frame().resizeWidthTo(frame().target.getWidth() * 2);
-		checkSnapshot("large-" + orientation);
+		checkSnapshot("large-" + suffix);
 	}
 	
 	static private class OrientationInitializer implements Initializer<Issue9>
 	{
-		public OrientationInitializer(ComponentOrientation orientation)
+		public OrientationInitializer(ComponentOrientation orientation, Boolean rtl)
 		{
 			_orientation = orientation;
+			_rtl = rtl;
 		}
 		
 		public void init(Issue9 instance)
         {
 			instance.setOrientation(_orientation);
+			if (_rtl != null)
+			{
+				instance.setForceOrientation(_rtl);
+			}
         }
 		
 		private final ComponentOrientation _orientation;
+		private final Boolean _rtl;
 	}
 }

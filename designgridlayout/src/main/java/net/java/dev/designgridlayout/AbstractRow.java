@@ -32,6 +32,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 
 	final protected Container _parent;
 	final protected HeightGrowPolicy _heightTester;
+	final protected OrientationPolicy _orientation;
 	final protected List<RowItem> _items = new ArrayList<RowItem>();
 
 	private JLabel _label = null;
@@ -46,10 +47,12 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	private int _maxWidth;
 	private int _vgap;
 
-	protected AbstractRow(Container parent, HeightGrowPolicy heightTester)
+	protected AbstractRow(Container parent, HeightGrowPolicy heightTester, 
+		OrientationPolicy orientation)
 	{
 		_parent = parent;
 		_heightTester = heightTester;
+		_orientation = orientation;
 	}
 
 	/* (non-Javadoc)
@@ -114,7 +117,7 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 	 */
 	public AbstractRow addMulti(int span, JComponent... children)
 	{
-		return add(new MultiComponent(_heightTester, children), span);
+		return add(new MultiComponent(_heightTester, _orientation, children), span);
 	}
 
 	/*

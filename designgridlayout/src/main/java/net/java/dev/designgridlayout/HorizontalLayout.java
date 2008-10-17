@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
@@ -32,6 +31,7 @@ final class HorizontalLayout implements LayoutManager
 {
 	private final Container _parent;
 	private final HeightGrowPolicy _heightTester;
+	private final OrientationPolicy _orientation;
 	private final List<JComponent> _children = new ArrayList<JComponent>();
 	private boolean _inited = false;
 	private int _baseline = 0;
@@ -41,10 +41,12 @@ final class HorizontalLayout implements LayoutManager
 	private int[] _gaps = null;
 	private int _gap = 0;
 	
-	HorizontalLayout(Container parent, HeightGrowPolicy heightTester)
+	HorizontalLayout(
+		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
 		_parent = parent;
 		_heightTester = heightTester;
+		_orientation = orientation;
 	}
 	
 	public HorizontalLayout add(JComponent... children)
@@ -76,8 +78,7 @@ final class HorizontalLayout implements LayoutManager
 			computeAll();
 
 			// Check layout orientation
-			ComponentOrientation orientation = parent.getComponentOrientation();
-			boolean rtl = orientation.isHorizontal() && !orientation.isLeftToRight();
+			boolean rtl = _orientation.isRightToLeft();
 
 			// Compute ratio actual size / preferred size (only if actual size smaller)
 			int parentWidth = parent.getSize().width;

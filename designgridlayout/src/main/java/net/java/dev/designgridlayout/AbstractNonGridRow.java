@@ -21,9 +21,10 @@ import javax.swing.JComponent;
 
 abstract class AbstractNonGridRow extends AbstractRow
 {
-	protected AbstractNonGridRow(Container parent, HeightGrowPolicy heightTester)
+	protected AbstractNonGridRow(Container parent, HeightGrowPolicy heightTester, 
+		OrientationPolicy orientation)
 	{
-		super(parent, heightTester);
+		super(parent, heightTester, orientation);
 	}
 
 	@Override int totalWidth(int hgap)

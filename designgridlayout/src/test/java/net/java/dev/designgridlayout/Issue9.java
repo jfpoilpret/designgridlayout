@@ -30,9 +30,25 @@ public class Issue9 extends AbstractBaseExample
 		_orientation = orientation;
 		ComponentOrientationHelper.debugOrientation(orientation);
 	}
+	
+	public void setForceOrientation(boolean rtl)
+	{
+		_rtl = rtl;
+	}
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		if (_rtl != null)
+		{
+			if (_rtl)
+			{
+				layout.rightToLeft();
+			}
+			else
+			{
+				layout.leftToRight();
+			}
+		}
 		layout.row().label(label("L1")).add(field("Field11")).add(field("F12"));
 		layout.row().label(label("Label2")).add(field("2nd field"));
 		layout.row().label(label("Lbl3")).add(field("F3"), 2);
@@ -52,4 +68,5 @@ public class Issue9 extends AbstractBaseExample
     }
 	
 	private ComponentOrientation _orientation;
+	private Boolean _rtl = null;
 }
