@@ -53,7 +53,7 @@ public class Issue9 extends AbstractBaseExample
 		layout.row().label(label("Label2")).add(field("2nd field"));
 		layout.row().label(label("Lbl3")).add(field("F3"), 2);
 		layout.row().label(label("L4")).empty().add(field("Field4"), 2).empty();
-		layout.row().add(field("F5"), 4);
+		layout.row().label().add(field("F5"), 4);
 		layout.centerRow().add(button("B1"), button("Button2"), button("3"));
 		layout.leftRow().add(button("B1"), button("Button2"), button("3"));
 		layout.rightRow().add(button("B1"), button("Button2"), button("3"));

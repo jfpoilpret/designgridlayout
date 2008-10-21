@@ -66,7 +66,7 @@ public class Figure178 extends AbstractBaseExample
 		layout.emptyRow(14);
 		layout.row().label(label("Interests:"))
 			.add(compilerCheckBox).add(databaseCheckBox).add(productivityCheckBox);
-		layout.row().add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
+		layout.row().label().add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
 		layout.emptyRow(20);
 		layout.centerRow().add(applyButton).add(resetButton);
 	}

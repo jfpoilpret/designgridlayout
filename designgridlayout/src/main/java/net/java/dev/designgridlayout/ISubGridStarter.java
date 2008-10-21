@@ -30,7 +30,7 @@ import javax.swing.JLabel;
  * 
  * @author Jean-Francois Poilpret
  */
-public interface IGridRowStarter
+public interface ISubGridStarter
 {
 	/**
 	 * Starts a new sub-grid in the row, starting with a label.
@@ -49,6 +49,8 @@ public interface IGridRowStarter
 	public abstract IGridRow label(JLabel label);
 	
 //	public abstract IGridRow label(JLabel label, int gridspan);
-//	public abstract IGridRow label();
+
+	public abstract IGridRow label();
+
 //	public abstract IGridRow label(int gridspan);
 }

@@ -62,8 +62,8 @@ public class Figure177 extends AbstractBaseExample
 		layout.row().label(label("Progress:")).add(progressBar).add(locationLabel);
 		layout.emptyRow(14);
 		layout.row().label(label("Scope:")).add(currentCheckBox).add(localCheckBox);
-		layout.row().add(referencedCheckBox).add(networkCheckBox);
-		layout.row().add(additionalCheckBox).add(unlicensedCheckBox);
+		layout.row().label().add(referencedCheckBox).add(networkCheckBox);
+		layout.row().label().add(additionalCheckBox).add(unlicensedCheckBox);
 		layout.emptyRow(20);
 		layout.centerRow().add(searchButton).add(clearButton);
 	}

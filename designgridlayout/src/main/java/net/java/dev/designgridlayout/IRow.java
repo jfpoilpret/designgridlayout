@@ -54,26 +54,4 @@ public interface IRow
 	 * row)
 	 */
 	public abstract IRow addMulti(JComponent... children);
-
-	/**
-	 * Explicitly sets the vertical growth weight for this row; this is 
-	 * applicable only if this row contains at least one component that can vary
-	 * in height (eg JScrollPane, vertical JSlider); if this row has no such
-	 * component, then calling this method will have no impact, ie this row will
-	 * always have a fixed height.
-	 * <p/>
-	 * <b>Important!</b> Note that it is generally useless to call this method:
-	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that 
-	 * should have a variable height, hence during resize, extra height will be
-	 * equally split to all such rows. Use this method only if you want a row to
-	 * get more ({@code weight > 1.0}) or less ({@code weight < 1.0}) extra 
-	 * height than other rows.
-	 * 
-	 * @param weight the weight given to this row when DesignGridLayout
-	 * distributes extra height during resize actions; must be {@code >= 0.0} or
-	 * the call will be ignored.
-	 * @return {@code this} row (to allow chaining other methods for the current 
-	 * row)
-	 */
-	public abstract IRow growWeight(double weight);
 }

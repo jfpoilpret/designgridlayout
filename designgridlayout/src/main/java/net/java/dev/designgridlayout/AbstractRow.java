@@ -60,23 +60,14 @@ abstract class AbstractRow
 
 	final void init()
 	{
-		if (!_inited)
+		_maxWidth = ComponentHelper.preferredWidth(components());
+		_height = ComponentHelper.preferredHeight(components());
+		_baseline = ComponentHelper.baseline(components());
+		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, components());
+		if (fixedHeight || _growWeight == -1.0)
 		{
-			_inited = true;
-			_maxWidth = ComponentHelper.preferredWidth(components());
-			_height = ComponentHelper.preferredHeight(components());
-			_baseline = ComponentHelper.baseline(components());
-			boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, components());
-			if (fixedHeight || _heightGrowth == -1.0)
-			{
-				_heightGrowth = (fixedHeight ? 0.0 : 1.0);
-			}
+			_growWeight = (fixedHeight ? 0.0 : 1.0);
 		}
-	}
-
-	final void reset()
-	{
-		_inited = false;
 	}
 
 	final protected int baseline()
@@ -94,17 +85,17 @@ abstract class AbstractRow
 		return _height;
 	}
 
-	final void setGrowWeight(double weight)
+	final void growWeight(double weight)
 	{
 		if (weight >= 0.0)
 		{
-			_heightGrowth = weight;
+			_growWeight = weight;
 		}
 	}
 
-	final double heightGrowth()
+	final double growWeight()
 	{
-		return _heightGrowth;
+		return _growWeight;
 	}
 
 	int gridColumns()
@@ -142,9 +133,8 @@ abstract class AbstractRow
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
 	private int _vgap;
-	private boolean _inited = false;
 	private int _baseline;
 	private int _height;
-	private double _heightGrowth = -1.0;
+	private double _growWeight = -1.0;
 	private int _maxWidth;
 }

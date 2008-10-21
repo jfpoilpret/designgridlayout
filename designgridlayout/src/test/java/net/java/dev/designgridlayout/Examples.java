@@ -30,11 +30,11 @@ public class Examples extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().add(launch("Example1a")).add(launch("Example1b"))
+		layout.row().label().add(launch("Example1a")).add(launch("Example1b"))
 			.add(launch("Example1c")).add(launch("Example1d")).add(launch("Example1e"));
-		layout.row().add(launch("Figure177")).add(launch("Figure178"))
+		layout.row().label().add(launch("Figure177")).add(launch("Figure178"))
 			.add(launch("Figure179")).add(launch("Figure179bis"));
-		layout.row().add(launch("AddressBookDemo"));
+		layout.row().label().add(launch("AddressBookDemo"));
 	}
 
 	public JButton launch(String name)

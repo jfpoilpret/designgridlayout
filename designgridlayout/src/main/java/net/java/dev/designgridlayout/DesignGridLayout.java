@@ -195,7 +195,41 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow leftRow()
 	{
-		return addRow(new LeftRow());
+		return leftRow(-1.0);
+	}
+
+	/**
+	 * Adds a left-aligned row. Left-aligned rows are NOT canonical grids but
+	 * avoid the otherwise mandatory use of several LayoutManager for one
+	 * single dialog.
+	 * <p/>
+	 * The new row is located under the previously created row, which means that
+	 * each line of code using this method creates a new row and all lines can 
+	 * be read as defining the visual UI of the container.
+	 * <p/>
+	 * This method explicitly sets the vertical growth weight for this row; this 
+	 * is applicable only if this row contains at least one component that can 
+	 * vary in height (eg JScrollPane, vertical JSlider); if this row has no such
+	 * component, then calling this method will have no impact, ie this row will
+	 * always have a fixed height.
+	 * <p/>
+	 * <b>Important!</b> Note that it is generally useless to use this method:
+	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that 
+	 * should have a variable height, hence during resize, extra height will be
+	 * equally split to all such rows. Use this method only if you want a row to
+	 * get more ({@code weight > 1.0}) or less ({@code weight < 1.0}) extra 
+	 * height than other rows.
+	 * 
+	 * @param verticalWeight the weight given to this row when DesignGridLayout
+	 * distributes extra height during resize actions; must be {@code >= 0.0} or
+	 * the value will be ignored.
+	 * @return a new left-aligned row which API is used in a chained-way (fluent 
+	 * API) to add components to the row.
+	 * @see #leftRow()
+	 */
+	public INonGridRow leftRow(double verticalWeight)
+	{
+		return addRow(new LeftRow(), verticalWeight);
 	}
 
 	/**
@@ -212,7 +246,41 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow rightRow()
 	{
-		return addRow(new RightRow());
+		return rightRow(-1.0);
+	}
+
+	/**
+	 * Adds a right-aligned row. Left-aligned rows are NOT canonical grids but
+	 * avoid the otherwise mandatory use of several LayoutManager for one
+	 * single dialog.
+	 * <p/>
+	 * The new row is located under the previously created row, which means that
+	 * each line of code using this method creates a new row and all lines can 
+	 * be read as defining the visual UI of the container.
+	 * <p/>
+	 * This method explicitly sets the vertical growth weight for this row; this 
+	 * is applicable only if this row contains at least one component that can 
+	 * vary in height (eg JScrollPane, vertical JSlider); if this row has no such
+	 * component, then calling this method will have no impact, ie this row will
+	 * always have a fixed height.
+	 * <p/>
+	 * <b>Important!</b> Note that it is generally useless to use this method:
+	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that 
+	 * should have a variable height, hence during resize, extra height will be
+	 * equally split to all such rows. Use this method only if you want a row to
+	 * get more ({@code weight > 1.0}) or less ({@code weight < 1.0}) extra 
+	 * height than other rows.
+	 * 
+	 * @param verticalWeight the weight given to this row when DesignGridLayout
+	 * distributes extra height during resize actions; must be {@code >= 0.0} or
+	 * the value will be ignored.
+	 * @return a new right-aligned row which API is used in a chained-way (fluent 
+	 * API) to add components to the row.
+	 * @see #rightRow()
+	 */
+	public INonGridRow rightRow(double verticalWeight)
+	{
+		return addRow(new RightRow(), verticalWeight);
 	}
 
 	/**
@@ -229,7 +297,41 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public INonGridRow centerRow()
 	{
-		return addRow(new CenterRow());
+		return centerRow(-1.0);
+	}
+
+	/**
+	 * Adds a center-aligned row. Left-aligned rows are NOT canonical grids but
+	 * avoid the otherwise mandatory use of several LayoutManager for one
+	 * single dialog.
+	 * <p/>
+	 * The new row is located under the previously created row, which means that
+	 * each line of code using this method creates a new row and all lines can 
+	 * be read as defining the visual UI of the container.
+	 * <p/>
+	 * This method explicitly sets the vertical growth weight for this row; this 
+	 * is applicable only if this row contains at least one component that can 
+	 * vary in height (eg JScrollPane, vertical JSlider); if this row has no such
+	 * component, then calling this method will have no impact, ie this row will
+	 * always have a fixed height.
+	 * <p/>
+	 * <b>Important!</b> Note that it is generally useless to use this method:
+	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that 
+	 * should have a variable height, hence during resize, extra height will be
+	 * equally split to all such rows. Use this method only if you want a row to
+	 * get more ({@code weight > 1.0}) or less ({@code weight < 1.0}) extra 
+	 * height than other rows.
+	 * 
+	 * @param verticalWeight the weight given to this row when DesignGridLayout
+	 * distributes extra height during resize actions; must be {@code >= 0.0} or
+	 * the value will be ignored.
+	 * @return a new center-aligned row which API is used in a chained-way (fluent 
+	 * API) to add components to the row.
+	 * @see #centerRow()
+	 */
+	public INonGridRow centerRow(double verticalWeight)
+	{
+		return addRow(new CenterRow(), verticalWeight);
 	}
 
 	/**
@@ -243,9 +345,42 @@ public class DesignGridLayout implements LayoutManager
 	 * @return a new grid-aligned row which API is used in a chained-way (fluent 
 	 * API) to add components to the row.
 	 */
-	public IGridRow row()
+	public ISubGridStarter row()
 	{
-		return addRow(new GridRow());
+		return row(-1.0);
+	}
+
+	/**
+	 * Adds a grid-aligned row. This row is using a canonical grid for 
+	 * determining size and location of components in the row.
+	 * <p/>
+	 * The new row is located under the previously created row, which means that
+	 * each line of code using this method creates a new row and all lines can 
+	 * be read as defining the visual UI of the container.
+	 * <p/>
+	 * This method explicitly sets the vertical growth weight for this row; this 
+	 * is applicable only if this row contains at least one component that can 
+	 * vary in height (eg JScrollPane, vertical JSlider); if this row has no such
+	 * component, then calling this method will have no impact, ie this row will
+	 * always have a fixed height.
+	 * <p/>
+	 * <b>Important!</b> Note that it is generally useless to use this method:
+	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that 
+	 * should have a variable height, hence during resize, extra height will be
+	 * equally split to all such rows. Use this method only if you want a row to
+	 * get more ({@code weight > 1.0}) or less ({@code weight < 1.0}) extra 
+	 * height than other rows.
+	 * 
+	 * @param verticalWeight the weight given to this row when DesignGridLayout
+	 * distributes extra height during resize actions; must be {@code >= 0.0} or
+	 * the value will be ignored.
+	 * @return a new grid-aligned row which API is used in a chained-way (fluent 
+	 * API) to add components to the row.
+	 * @see #row()
+	 */
+	public ISubGridStarter row(double verticalWeight)
+	{
+		return addRow(new GridRow(), verticalWeight);
 	}
 
 	/**
@@ -257,13 +392,14 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public void emptyRow(int height)
 	{
-		addRow(new EmptyRow(height));
+		addRow(new EmptyRow(height), -1.0);
 	}
 	
-	private <T extends AbstractRow> T addRow(T row)
+	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
 	{
 		_rowList.add(row);
 		row.init(_parent, _heightTester, _orientation);
+		row.growWeight(verticalWeight);
 		return row;
 	}
 
@@ -322,7 +458,7 @@ public class DesignGridLayout implements LayoutManager
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			for (AbstractRow row: _rowList)
 			{
-				int extraHeight = (int) (row.heightGrowth() * totalExtraHeight); 
+				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
 				if (row.components().iterator().hasNext())
 				{
 					helper.setRowAvailableHeight(extraHeight + row.height());
@@ -505,7 +641,7 @@ public class DesignGridLayout implements LayoutManager
 		_totalWeight = 0.0;
 		for (AbstractRow row: _rowList)
 		{
-			_totalWeight += row.heightGrowth();
+			_totalWeight += row.growWeight();
 		}
 
 		_layoutSize = new Dimension(preferredWidth, preferredHeight);

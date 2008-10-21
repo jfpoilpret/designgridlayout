@@ -24,7 +24,7 @@ import javax.swing.JComponent;
  * 
  * @author Jean-Francois Poilpret
  */
-public interface IGridRow extends IRow, IGridRowStarter
+public interface IGridRow extends IRow, ISubGridStarter
 {
 	/*
 	 * (non-Javadoc)
@@ -85,10 +85,4 @@ public interface IGridRow extends IRow, IGridRowStarter
 	 * row)
 	 */
 	public abstract IGridRow addMulti(int span, JComponent... children);
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IRow#growWeight(double)
-	 */
-	public abstract IGridRow growWeight(double weight);
 }

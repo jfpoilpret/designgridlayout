@@ -24,9 +24,9 @@ public class Example1b extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().add(button()).add(button());
-		layout.row().add(button()).add(button()).add(button());
-		layout.row().add(button(), 2).add(button());
-		layout.row().add(button()).add(button()).add(button()).empty();
+		layout.row().label().add(button()).add(button());
+		layout.row().label().add(button()).add(button()).add(button());
+		layout.row().label().add(button(), 2).add(button());
+		layout.row().label().add(button()).add(button()).add(button()).empty();
 	}
 }

@@ -57,17 +57,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.java.dev.designgridlayout.INonGridRow#growWeight(double)
-	 */
-	public INonGridRow growWeight(double weight)
-	{
-		setGrowWeight(weight);
-		return this;
-	}
-
 	@Override protected List<JComponent> components()
 	{
 		return _components;

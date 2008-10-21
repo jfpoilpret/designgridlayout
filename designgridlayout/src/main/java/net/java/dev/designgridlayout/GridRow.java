@@ -101,18 +101,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see net.java.dev.designgridlayout.IGridRow#growWeight(double)
-	 */
-	public IGridRow growWeight(double weight)
-	{
-		setGrowWeight(weight);
-		return this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.java.dev.designgridlayout.IGridRowStarter#label(javax.swing.JLabel)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#label(javax.swing.JLabel)
 	 */
 	public IGridRow label(JLabel label)
 	{
@@ -124,6 +113,16 @@ final class GridRow extends AbstractRow implements IGridRow
 		}
 		return this;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#label()
+	 */
+	public IGridRow label()
+    {
+	    // TODO Later on, when working actively on issue #13
+	    return this;
+    }
 
 	@Override int labelWidth()
 	{

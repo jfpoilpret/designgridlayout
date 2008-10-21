@@ -34,11 +34,11 @@ public class Issue5CustomWeight extends AbstractBaseExample
 	@Override public void build(DesignGridLayout layout)
 	{
 		layout.row().label(label("Label2")).add(table());
-		layout.row().growWeight(1.0).label(label("L3")).add(field("Field31")).empty();
-		layout.row().growWeight(2.0).label(label("Lbl4")).add(table()).add(table());
+		layout.row(1.0).label(label("L3")).add(field("Field31")).empty();
+		layout.row(2.0).label(label("Lbl4")).add(table()).add(table());
 		layout.row().label(label("L5")).add(field("F5")).add(slider(JSlider.HORIZONTAL));
 		layout.row().label(label("L6")).add(list()).add(textarea("Wonderful sound"));
-		layout.row().growWeight(0.0).label(label("Power")).add(slider(JSlider.VERTICAL));
+		layout.row(0.0).label(label("Power")).add(slider(JSlider.VERTICAL));
 		layout.centerRow().add(button(), button(), button());
 	}
 	
