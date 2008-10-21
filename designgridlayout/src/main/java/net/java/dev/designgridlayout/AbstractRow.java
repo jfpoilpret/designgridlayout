@@ -15,157 +15,96 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Container;
-import java.awt.Dimension;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import org.jdesktop.layout.Baseline;
-
-abstract class AbstractRow implements IGridRow, INonGridRow
+abstract class AbstractRow
 {
-	static final private int HEIGHT_DEFAULT = -1;
-
-	final protected Container _parent;
-	final protected HeightGrowPolicy _heightTester;
-	final protected OrientationPolicy _orientation;
-	final protected List<RowItem> _items = new ArrayList<RowItem>();
-
-	private JLabel _label = null;
-
-	private boolean _inited = false;
-	private boolean _fill = false;
-	private int _baseline;
-	private int _height;
-	private double _heightGrowth = -1.0;
-	private int _explicitHeight = HEIGHT_DEFAULT;
-
-	private int _maxWidth;
-	private int _vgap;
-
-	protected AbstractRow(Container parent, HeightGrowPolicy heightTester, 
-		OrientationPolicy orientation)
+	// Called by DesignGridLayout immediately after instanciation
+	final void init(
+	    Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
 		_parent = parent;
 		_heightTester = heightTester;
 		_orientation = orientation;
 	}
 
-	/* (non-Javadoc)
-	 * @see IGridRow#label(javax.swing.JLabel)
-	 */
-	public AbstractRow label(JLabel label)
+	// Used by children
+	final protected Container parent()
 	{
-		if (label != null)
+		return _parent;
+	}
+
+	// Used by children
+	final protected HeightGrowPolicy growPolicy()
+	{
+		return _heightTester;
+	}
+
+	// Used by children
+	final protected OrientationPolicy orientation()
+	{
+		return _orientation;
+	}
+
+	final void vgap(int vgap)
+	{
+		_vgap = vgap;
+	}
+
+	final int vgap()
+	{
+		return _vgap;
+	}
+
+	final void init()
+	{
+		if (!_inited)
 		{
-			_label = label;
-			_parent.add(_label);
-			_label.setHorizontalAlignment(SwingConstants.RIGHT);
+			_inited = true;
+			_maxWidth = ComponentHelper.preferredWidth(components());
+			_height = ComponentHelper.preferredHeight(components());
+			_baseline = ComponentHelper.baseline(components());
+			boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, components());
+			if (fixedHeight || _heightGrowth == -1.0)
+			{
+				_heightGrowth = (fixedHeight ? 0.0 : 1.0);
+			}
 		}
-		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see IGridRow#add(javax.swing.JComponent)
-	 */
-	public AbstractRow add(JComponent... children)
+	final void reset()
 	{
-		for (JComponent component: children)
-		{
-			add(component, 1);
-		}
-		return this;
+		_inited = false;
 	}
 
-	/* (non-Javadoc)
-	 * @see IGridRow#add(javax.swing.JComponent, int)
-	 */
-	public AbstractRow add(JComponent child, int span)
+	final protected int baseline()
 	{
-		RowItem item = new RowItem(span, child);
-		_items.add(item);
-		_parent.add(child);
-		return this;
+		return _baseline;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see INonGridRow#fill()
-	 */
-	public AbstractRow fill()
+	final protected int maxWidth()
 	{
-		_fill = true;
-		return this;
+		return _maxWidth;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see IGridRow#addMulti(javax.swing.JComponent[])
-	 */
-	public AbstractRow addMulti(JComponent... children)
+	int height()
 	{
-		return addMulti(1, children);
+		return _height;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see IGridRow#addMulti(int, javax.swing.JComponent[])
-	 */
-	public AbstractRow addMulti(int span, JComponent... children)
-	{
-		return add(new MultiComponent(_heightTester, _orientation, children), span);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see IGridRow#empty()
-	 */
-	public AbstractRow empty()
-	{
-		return empty(1);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see IGridRow#empty(int)
-	 */
-	public AbstractRow empty(int span)
-	{
-		return add(new JPanel(), span);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#growWeight(double)
-	 */
-	public AbstractRow growWeight(double weight)
+	final void setGrowWeight(double weight)
 	{
 		if (weight >= 0.0)
 		{
 			_heightGrowth = weight;
 		}
-		return this;
 	}
 
-
-	void height(int height)
+	final double heightGrowth()
 	{
-		_explicitHeight = height;
-	}
-
-	protected boolean isFill()
-	{
-		return _fill;
-	}
-
-	int baseline()
-	{
-		maximize();
-		return _baseline;
+		return _heightGrowth;
 	}
 
 	int gridColumns()
@@ -173,110 +112,39 @@ abstract class AbstractRow implements IGridRow, INonGridRow
 		return 0;
 	}
 
-	boolean hasLabel()
-	{
-		return _label != null;
-	}
-
-	int height()
-	{
-		if (_explicitHeight != HEIGHT_DEFAULT)
-		{
-			return _explicitHeight;
-		}
-
-		maximize();
-		return _height;
-	}
-
-	double heightGrowth()
-	{
-		maximize();
-		return _heightGrowth;
-	}
-	
-	List<RowItem> items()
-	{
-		return _items;
-	}
-
-	JLabel label()
-	{
-		return _label;
-	}
-
-	private void maximize()
-	{
-		if (!_inited )
-		{
-			double heightGrowth = 0.0;
-			_maxWidth = 0;
-			_height = 0;
-			_baseline = 0;
-			for (RowItem item: _items)
-			{
-				JComponent component = item.component();
-				Dimension d = component.getPreferredSize();
-				_maxWidth = Math.max(_maxWidth, d.width);
-				_height = Math.max(_height, d.height);
-				_baseline = Math.max(_baseline, Baseline.getBaseline(component));
-				if (_heightTester.canGrowHeight(component))
-				{
-					heightGrowth = 1.0;
-				}
-			}
-			if (heightGrowth == 0.0 || _heightGrowth == -1.0)
-			{
-				// If row cannot vary in height, override user setting
-				// Or if no explicit user setting, set height growth
-				_heightGrowth = heightGrowth;
-			}
-			_inited = true;
-		}
-	}
-	
 	int labelWidth()
 	{
-		return (_label != null ? _label.getPreferredSize().width : 0);
+		return 0;
 	}
 
-	int maxWidth()
-	{
-		maximize();
-		return _maxWidth;
-	}
-
-	void reset()
-	{
-		_inited = false;
-	}
-
-	int vgap()
-	{
-		return _vgap;
-	}
-
-	protected void vgap(int vgap)
-	{
-		_vgap = vgap;
-	}
-	
 	int maxColumnWidth(int maxColumns)
 	{
 		return 0;
 	}
 
-	int totalWidth(int hgap)
+	int totalNonGridWidth(int hgap)
 	{
 		return 0;
 	}
-	
+
 	int hgap()
 	{
 		return 0;
 	}
 
+	abstract protected List<JComponent> components();
+
 	// Returns the actual extra height allocated to the row
-	abstract int layoutRow(LayoutHelper helper, int x, int y, 
-		int hgap, int rowWidth, int labelWidth);
+	abstract int layoutRow(
+	    LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth);
+
+	private Container _parent;
+	private HeightGrowPolicy _heightTester;
+	private OrientationPolicy _orientation;
+	private int _vgap;
+	private boolean _inited = false;
+	private int _baseline;
+	private int _height;
+	private double _heightGrowth = -1.0;
+	private int _maxWidth;
 }

@@ -14,41 +14,81 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
-import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 
-abstract class AbstractNonGridRow extends AbstractRow
+abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 {
-	protected AbstractNonGridRow(Container parent, HeightGrowPolicy heightTester, 
-		OrientationPolicy orientation)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.INonGridRow#add(javax.swing.JComponent[])
+	 */
+	public INonGridRow add(JComponent... children)
 	{
-		super(parent, heightTester, orientation);
+		for (JComponent component: children)
+		{
+			_components.add(component);
+			parent().add(component);
+		}
+		return this;
 	}
 
-	@Override int totalWidth(int hgap)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.INonGridRow#addMulti(javax.swing.JComponent[])
+	 */
+	public INonGridRow addMulti(JComponent... children)
+	{
+		return add(new MultiComponent(growPolicy(), orientation(), children));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.INonGridRow#fill()
+	 */
+	public INonGridRow fill()
+	{
+		_fill = true;
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.INonGridRow#growWeight(double)
+	 */
+	public INonGridRow growWeight(double weight)
+	{
+		setGrowWeight(weight);
+		return this;
+	}
+
+	@Override protected List<JComponent> components()
+	{
+		return _components;
+	}
+
+	@Override int totalNonGridWidth(int hgap)
 	{
 		int maxWidth = 0;
-		int compWidth = 0;
-		for (RowItem item: items())
-		{
-			JComponent component = item.component();
-			Dimension d = component.getPreferredSize();
-			compWidth = Math.max(compWidth, d.width);
-		}
-		int count = items().size();
+		int compWidth = ComponentHelper.preferredWidth(_components);
+		int count = _components.size();
 		int width = compWidth * count + (hgap * (count - 1));
 		maxWidth = Math.max(maxWidth, width);
 		return maxWidth;
 	}
-	
+
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int y, 
-		int hgap, int rowWidth, int labelWidth)
+	@Override int layoutRow(
+	    LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth)
 	{
 		// Calculate various needed widths & origin
-		int count = items().size();
+		int count = _components.size();
 		int width = maxWidth();
 		int availableWidth = (rowWidth - ((count - 1) * hgap));
 		width = Math.min(width, availableWidth / count);
@@ -56,7 +96,7 @@ abstract class AbstractNonGridRow extends AbstractRow
 		int usedWidth;
 		int leftFiller = width;
 		int rightFiller = width;
-		if (!isFill())
+		if (!_fill)
 		{
 			usedWidth = width * count + ((count - 1) * hgap);
 			x += xOffset(rowWidth, usedWidth);
@@ -71,15 +111,15 @@ abstract class AbstractNonGridRow extends AbstractRow
 		return layoutRow(helper, x, y, hgap, width, leftFiller, rightFiller);
 	}
 	// CSON: ParameterAssignment
-	
+
 	// CSOFF: ParameterAssignment
-	protected int layoutRow(LayoutHelper helper, int x, int y, 
-		int hgap, int width, int leftFiller, int rightFiller)
+	protected int layoutRow(
+	    LayoutHelper helper, int x, int y, int hgap, int width, int leftFiller, int rightFiller)
 	{
-		int count = items().size();
+		int count = _components.size();
 		int i = 0;
 		int actualHeight = 0;
-		for (RowItem item: items())
+		for (JComponent component: _components)
 		{
 			int compWidth;
 			if (i == 0)
@@ -94,18 +134,22 @@ abstract class AbstractNonGridRow extends AbstractRow
 			{
 				compWidth = width;
 			}
-			JComponent component = item.component();
-			actualHeight = Math.max(actualHeight, 
-				helper.setSizeLocation(
-					component, x, y, compWidth, height(), baseline()));
+			actualHeight =
+			    Math.max(actualHeight, helper.setSizeLocation(
+			        component, x, y, compWidth, height(), baseline()));
 			x += compWidth + hgap;
 			i++;
 		}
 		return actualHeight;
 	}
 	// CSON: ParameterAssignment
-	
+
 	abstract protected int xOffset(int rowWidth, int usedWidth);
+
 	abstract protected int leftFiller(int count, int width, int availableWidth);
+
 	abstract protected int rightFiller(int count, int width, int availableWidth);
+
+	private final List<JComponent> _components = new ArrayList<JComponent>();
+	private boolean _fill = false;
 }

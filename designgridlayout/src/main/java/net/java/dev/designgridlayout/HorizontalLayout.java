@@ -24,7 +24,6 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
-import org.jdesktop.layout.Baseline;
 import org.jdesktop.layout.LayoutStyle;
 
 final class HorizontalLayout implements LayoutManager
@@ -142,14 +141,10 @@ final class HorizontalLayout implements LayoutManager
 	{
 		if (!_inited )
 		{
-			for (JComponent child: _children)
-			{
-				_baseline = Math.max(_baseline, Baseline.getBaseline(child));
-				_minWidth += child.getMinimumSize().width;
-				Dimension d = child.getPreferredSize();
-				_height = Math.max(_height, d.height);
-				_prefWidth += d.width;
-			}
+			_baseline = ComponentHelper.baseline(_children);
+			_minWidth = ComponentHelper.sumMinimumWidth(_children);
+			_prefWidth = ComponentHelper.sumPreferredWidth(_children);
+			_height = ComponentHelper.preferredHeight(_children);
 
 			LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 			_gaps = new int[_children.size()];

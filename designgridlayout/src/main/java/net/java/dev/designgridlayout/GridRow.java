@@ -14,22 +14,120 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
 import java.awt.Dimension;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
-final class GridRow extends AbstractRow
+final class GridRow extends AbstractRow implements IGridRow
 {
-	GridRow(Container parent, HeightGrowPolicy heightTester, 
-		OrientationPolicy orientation)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent,
+	 * int)
+	 */
+	public IGridRow add(JComponent child, int span)
 	{
-		super(parent, heightTester, orientation);
+		RowItem item = new RowItem(span, child);
+		_items.add(item);
+		parent().add(child);
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent[])
+	 */
+	public IGridRow add(JComponent... children)
+	{
+		for (JComponent component: children)
+		{
+			add(component, 1);
+		}
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(int,
+	 * javax.swing.JComponent[])
+	 */
+	public IGridRow addMulti(int span, JComponent... children)
+	{
+		return add(new MultiComponent(growPolicy(), orientation(), children), span);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(javax.swing.JComponent[])
+	 */
+	public IGridRow addMulti(JComponent... children)
+	{
+		return addMulti(1, children);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#empty()
+	 */
+	public IGridRow empty()
+	{
+		return empty(1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#empty(int)
+	 */
+	public IGridRow empty(int span)
+	{
+		return add(new JPanel(), span);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRow#growWeight(double)
+	 */
+	public IGridRow growWeight(double weight)
+	{
+		setGrowWeight(weight);
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.java.dev.designgridlayout.IGridRowStarter#label(javax.swing.JLabel)
+	 */
+	public IGridRow label(JLabel label)
+	{
+		if (label != null)
+		{
+			_label = label;
+			parent().add(_label);
+			_label.setHorizontalAlignment(SwingConstants.RIGHT);
+		}
+		return this;
+	}
+
+	@Override int labelWidth()
+	{
+		return (_label != null ? _label.getPreferredSize().width : 0);
 	}
 
 	@Override int gridColumns()
@@ -49,7 +147,7 @@ final class GridRow extends AbstractRow
 		int columns = gridColumns();
 		float divisions = (float) columns / (float) maxColumns;
 
-		for (RowItem item: items())
+		for (RowItem item: _items)
 		{
 			JComponent component = item.component();
 			Dimension d = component.getPreferredSize();
@@ -67,15 +165,16 @@ final class GridRow extends AbstractRow
 		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 
 		int hgap = 0;
-		List<RowItem> items = items();
+		List<RowItem> items = _items;
 
 		// Account for gap between label and first component
-		if (hasLabel() && items.size() > 0)
+		if (_label != null && items.size() > 0)
 		{
-			JComponent left = label();
+			JComponent left = _label;
 			JComponent right = items.get(0).component();
-			int gap = layoutStyle.getPreferredGap(
-				left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
+			int gap =
+			    layoutStyle.getPreferredGap(
+			        left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent());
 			hgap = Math.max(hgap, gap);
 		}
 
@@ -83,28 +182,27 @@ final class GridRow extends AbstractRow
 		{
 			JComponent left = items.get(nth).component();
 			JComponent right = items.get(nth + 1).component();
-			int gap = layoutStyle.getPreferredGap(
-				left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
+			int gap =
+			    layoutStyle.getPreferredGap(
+			        left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent());
 			hgap = Math.max(hgap, gap);
 		}
 		return hgap;
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int y, 
-		int hgap, int rowWidth, int labelWidth)
+	@Override int layoutRow(
+	    LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth)
 	{
 		int actualHeight = 0;
 		// Account for label column
 		if (labelWidth > 0)
 		{
 			int width = labelWidth;
-			if (hasLabel())
+			if (_label != null)
 			{
-				JComponent component = label();
-				actualHeight = Math.max(
-					0, helper.setSizeLocation(
-						component, x, y, width, height(), baseline()));
+				actualHeight = Math.max(0, helper.setSizeLocation(
+					_label, x, y, width, height(), baseline()));
 			}
 			x += width + hgap;
 			rowWidth -= (width + hgap);
@@ -120,7 +218,7 @@ final class GridRow extends AbstractRow
 			// fudge is whatever pixels are left over
 			int fudge = gridWidth % columns;
 
-			Iterator<RowItem> i = items().iterator();
+			Iterator<RowItem> i = _items.iterator();
 			while (i.hasNext())
 			{
 				RowItem item = i.next();
@@ -132,13 +230,34 @@ final class GridRow extends AbstractRow
 					width += fudge;
 				}
 				JComponent component = item.component();
-				actualHeight = Math.max(
-					0, helper.setSizeLocation(
-						component, x, y, width, height(), baseline()));
+				actualHeight = Math.max(0, helper.setSizeLocation(
+					component, x, y, width, height(), baseline()));
 				x += width + hgap;
 			}
 		}
 		return actualHeight;
 	}
 	// CSON: ParameterAssignment
+
+	@Override protected List<JComponent> components()
+	{
+		return _components;
+	}
+
+	private class ComponentList extends AbstractList<JComponent>
+	{
+		@Override public JComponent get(int index)
+		{
+			return _items.get(index).component();
+		}
+
+		@Override public int size()
+		{
+			return _items.size();
+		}
+	}
+
+	final private List<RowItem> _items = new ArrayList<RowItem>();
+	final private ComponentList _components = new ComponentList();
+	private JLabel _label = null;
 }

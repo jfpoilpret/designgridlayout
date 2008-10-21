@@ -14,16 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Container;
-
 final class RightRow extends AbstractNonGridRow
 {
-	RightRow(Container parent, HeightGrowPolicy heightTester, 
-		OrientationPolicy orientation)
-	{
-		super(parent, heightTester, orientation);
-	}
-
 	@Override protected int xOffset(int rowWidth, int usedWidth)
 	{
 		return rowWidth - usedWidth;

@@ -14,27 +14,33 @@
 
 package net.java.dev.designgridlayout;
 
-final class CenterRow extends AbstractNonGridRow
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.JComponent;
+
+class EmptyRow extends AbstractRow
 {
-	@Override protected int xOffset(int rowWidth, int usedWidth)
+	EmptyRow(int height)
 	{
-		return (rowWidth - usedWidth) / 2;
+		_height = height;
 	}
 
-	@Override protected int leftFiller(int count, int width, int availableWidth)
+	@Override protected List<JComponent> components()
 	{
-		int fillers = (count > 1 ? 2 : 1);
-		return (availableWidth - (count - fillers) * width) / fillers;
+		return Collections.emptyList();
 	}
 
-	@Override protected int rightFiller(int count, int width, int availableWidth)
+	@Override int layoutRow(
+		LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth)
 	{
-		int fillers = (count > 1 ? 2 : 1);
-		int rightFiller = (availableWidth - (count - fillers) * width) / fillers;
-		if (((availableWidth - (count - fillers) * width) % fillers) > 0)
-		{
-			rightFiller++;
-		}
-		return rightFiller;
+		return 0;
 	}
+
+	@Override int height()
+	{
+		return _height;
+	}
+
+	private final int _height;
 }

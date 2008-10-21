@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
 /**
  * Any row created by {@link DesignGridLayout#row()} implements this
@@ -25,25 +24,8 @@ import javax.swing.JLabel;
  * 
  * @author Jean-Francois Poilpret
  */
-public interface IGridRow extends IRow
+public interface IGridRow extends IRow, IGridRowStarter
 {
-	/**
-	 * Adds a label to the row. This label is always the first component in the
-	 * row (whatever the order in which this method is called).
-	 * <p/>
-	 * Labels have a special treatment: they are not a part of the canonical
-	 * grid but use a fixed-width on the left of the canonical grid. Labels
-	 * are automatically right-aligned.
-	 * <p/>
-	 * Only one label is allowed in a row, thus if this method is called several
-	 * times, only the last call will set the actual label.
-	 * 
-	 * @param label the label to add to this row
-	 * @return {@code this} row (to allow chaining other methods for the current 
-	 * row)
-	 */
-	public abstract IGridRow label(JLabel label);
-	
 	/*
 	 * (non-Javadoc)
 	 * @see IRow#add(javax.swing.JComponent[])
