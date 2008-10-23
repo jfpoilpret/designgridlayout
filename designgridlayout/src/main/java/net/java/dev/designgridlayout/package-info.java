@@ -84,7 +84,7 @@
  * in pixels), in order to introduce some space in your layout (e.g. to separate
  * different groups of logically releated items:
  * <pre>
- *     layout.row().add(...);
+ *     layout.row().label().add(...);
  *     layout.emptyRow(14);
  *     layout.rightRow().add(new JButton("OK"), new JButton("Cancel"));
  * </pre>
@@ -94,9 +94,9 @@
  * fields that require longer input occupy enough space to render this input,
  * compared with shorter fields):
  * <pre>
- *     layout.row().add(new JTextField(), new JTextField());
- *     layout.row().add(new JTextField(), 2).add(new JTextField());
- *     layout.row().add(new JTextField()).empty();
+ *     layout.row().label().add(new JTextField(), new JTextField());
+ *     layout.row().label().add(new JTextField(), 2).add(new JTextField());
+ *     layout.row().label().add(new JTextField()).empty();
  * </pre>
  * In this snippet, the first row has two short text fields on two columns (one
  * per field); the second row has one long text field (on two columns) and one 
@@ -107,7 +107,7 @@
  * associated span (when explicitly specified). Note however, that you can also
  * introduce empty columns in such a row:
  * <pre>
- *     layout.row().empty().add(new JTextField()).empty(2);
+ *     layout.row().label().empty().add(new JTextField()).empty(2);
  * </pre>
  * This code creates a row with four columns, but only the second contains a 
  * real component.

@@ -29,72 +29,49 @@ public class Issue9Test extends AbstractGuiTest
 	
 	@Test public void checkLTR() throws Exception
 	{
-		checkIssue9("LT", null);
+		checkIssue9("LT");
 	}
 	
 	@Test public void checkRTL() throws Exception
 	{
-		checkIssue9("RT", null);
-	}
-	
-	@Test public void checkForceLTR() throws Exception
-	{
-		checkIssue9("RT", false);
-	}
-	
-	@Test public void checkForceRTL() throws Exception
-	{
-		checkIssue9("LT", true);
+		checkIssue9("RT");
 	}
 	
 	@Test(enabled = false) public void checkJapanese() throws Exception
 	{
-		checkIssue9("TR", null);
+		checkIssue9("TR");
 	}
 	
 	@Test(enabled = false) public void checkMongolian() throws Exception
 	{
-		checkIssue9("TL", null);
+		checkIssue9("TL");
 	}
 	
-	protected void checkIssue9(String orientation, Boolean rtl) throws Exception
+	protected void checkIssue9(String orientation) throws Exception
 	{
 		OrientationInitializer initializer = new OrientationInitializer(
-			ComponentOrientationHelper.getOrientation(new String[]{orientation}),
-			rtl);
+			ComponentOrientationHelper.getOrientation(new String[]{orientation}));
 		launchGui(Issue9.class, initializer);
-		String suffix;
-		if (rtl != null)
-		{
-			suffix = orientation + "-" + (rtl ? "RT" : "LT");
-		}
-		else
-		{
-			suffix = orientation;
-		}
+		String suffix = orientation;
 		checkSnapshot("small-" + suffix);
+//		takeSnapshot("small-" + suffix);
 		frame().resizeWidthTo(frame().target.getWidth() * 2);
 		checkSnapshot("large-" + suffix);
+//		takeSnapshot("large-" + suffix);
 	}
 	
 	static private class OrientationInitializer implements Initializer<Issue9>
 	{
-		public OrientationInitializer(ComponentOrientation orientation, Boolean rtl)
+		public OrientationInitializer(ComponentOrientation orientation)
 		{
 			_orientation = orientation;
-			_rtl = rtl;
 		}
 		
 		public void init(Issue9 instance)
         {
 			instance.setOrientation(_orientation);
-			if (_rtl != null)
-			{
-				instance.setForceOrientation(_rtl);
-			}
         }
 		
 		private final ComponentOrientation _orientation;
-		private final Boolean _rtl;
 	}
 }

@@ -45,4 +45,10 @@ public class TestConfiguration
 		Assert.assertTrue(dir.exists() && dir.isDirectory(), 
 			"Directory \"" + SCREENSHOT_PATH + "\" must exist.");
 	}
+
+	@BeforeGroups(groups = "utest")
+	public void prepareFestDebug()
+	{
+//		org.fest.swing.edt.GuiActionRunner.executeInEDT(false);
+	}
 }

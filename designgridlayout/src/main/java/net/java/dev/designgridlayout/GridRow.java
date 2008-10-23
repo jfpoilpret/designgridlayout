@@ -14,10 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -37,9 +35,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	 */
 	public IGridRow add(JComponent child, int span)
 	{
-		RowItem item = new RowItem(span, child);
-		_items.add(item);
-		parent().add(child);
+		_current.add(child, span);
 		return this;
 	}
 
@@ -105,12 +101,8 @@ final class GridRow extends AbstractRow implements IGridRow
 	 */
 	public IGridRow label(JLabel label)
 	{
-		if (label != null)
-		{
-			_label = label;
-			parent().add(_label);
-			_label.setHorizontalAlignment(SwingConstants.RIGHT);
-		}
+		_current = new SubGrid(parent(), label, 1);
+		_grids.add(_current);
 		return this;
 	}
 
@@ -120,143 +112,142 @@ final class GridRow extends AbstractRow implements IGridRow
 	 */
 	public IGridRow label()
     {
-	    // TODO Later on, when working actively on issue #13
-	    return this;
+	    return label(null);
     }
 
-	@Override int labelWidth()
+	@Override int labelWidth(int grid)
 	{
-		return (_label != null ? _label.getPreferredSize().width : 0);
+		return findGrid(grid).labelWidth();
 	}
 
-	@Override int gridColumns()
+	@Override int numGrids()
 	{
-		int columns = 0;
-		for (RowItem item: _items)
-		{
-			columns += item.span();
-		}
-		return columns;
+		return _grids.size();
 	}
 
-	@Override int maxColumnWidth(int maxColumns)
+	@Override int gridColumns(int grid)
 	{
-		int maxWidth = 0;
-		// Note columns (sum item spans), not the count of components
-		int columns = gridColumns();
-		float divisions = (float) columns / (float) maxColumns;
+		return findGrid(grid).gridColumns();
+	}
 
-		for (RowItem item: _items)
-		{
-			JComponent component = item.component();
-			Dimension d = component.getPreferredSize();
-
-			// Ignores remainder (fudge), which is incorrect if remainder
-			// is greater than horizontal gap (hopefully rarely)
-			int width = (int) ((d.getWidth() * divisions) / item.span());
-			maxWidth = Math.max(maxWidth, width);
-		}
-		return maxWidth;
+	@Override int maxColumnWidth(int grid, int maxColumns)
+	{
+		return findGrid(grid).maxColumnWidth(maxColumns);
 	}
 
 	@Override int hgap()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-
 		int hgap = 0;
-		List<RowItem> items = _items;
-
-		// Account for gap between label and first component
-		if (_label != null && items.size() > 0)
+		for (ISubGrid grid : _grids)
 		{
-			JComponent left = _label;
-			JComponent right = items.get(0).component();
-			int gap =
-			    layoutStyle.getPreferredGap(
-			        left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent());
-			hgap = Math.max(hgap, gap);
-		}
-
-		for (int nth = 0; nth < (items.size() - 1); nth++)
-		{
-			JComponent left = items.get(nth).component();
-			JComponent right = items.get(nth + 1).component();
-			int gap =
-			    layoutStyle.getPreferredGap(
-			        left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent());
-			hgap = Math.max(hgap, gap);
+			hgap = Math.max(hgap, grid.hgap());
 		}
 		return hgap;
 	}
+	
+	@Override int gridgap()
+	{
+		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+		int gridgap = 0;
+		for (int i = 0; i < _grids.size() - 1; i++)
+		{
+			List<RowItem> leftGrid = _grids.get(i).items();
+			List<RowItem> rightGrid = _grids.get(i + 1).items();
+			if (!(leftGrid.isEmpty() || rightGrid.isEmpty()))
+			{
+				JComponent left = leftGrid.get(leftGrid.size() - 1).component();
+				JComponent right = rightGrid.get(0).component();
+				int gap = layoutStyle.getPreferredGap(
+					left, right, LayoutStyle.UNRELATED, SwingConstants.EAST, parent());
+				gridgap = Math.max(gridgap, gap);
+			}
+		}
+		return gridgap;
+	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(
-	    LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth)
+	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
+		int gridgap, int rowWidth, int gridWidth, List<Integer> labelsWidth)
 	{
 		int actualHeight = 0;
-		// Account for label column
-		if (labelWidth > 0)
+		for (int i = 0; i < _grids.size(); i++)
 		{
-			int width = labelWidth;
-			if (_label != null)
+			ISubGrid grid = _grids.get(i);
+			// Calculate the actual width for this sub-grid (depends on spans)
+			int width = gridWidth;
+			for (int j = 1; j < grid.gridspan(); j++)
 			{
-				actualHeight = Math.max(0, helper.setSizeLocation(
-					_label, x, y, width, height(), baseline()));
+				width += hgap + labelsWidth.get(i + j) + hgap;
 			}
-			x += width + hgap;
-			rowWidth -= (width + hgap);
-		}
-
-		int columns = gridColumns();
-		if (columns > 0)
-		{
-			// pre-subtract gaps
-			int gridWidth = rowWidth - ((columns - 1) * hgap);
-			int columnWidth = gridWidth / columns;
-
-			// fudge is whatever pixels are left over
-			int fudge = gridWidth % columns;
-
-			Iterator<RowItem> i = _items.iterator();
-			while (i.hasNext())
-			{
-				RowItem item = i.next();
-				int span = item.span();
-				int width = columnWidth * span + ((span - 1) * hgap);
-				// Apply the fudge to the last component/column
-				if (!i.hasNext())
-				{
-					width += fudge;
-				}
-				JComponent component = item.component();
-				actualHeight = Math.max(0, helper.setSizeLocation(
-					component, x, y, width, height(), baseline()));
-				x += width + hgap;
-			}
+			
+			int labelWidth = labelsWidth.get(i);
+			int height = grid.layoutRow(
+				helper, x, y, height(), baseline(), hgap, width, labelWidth);
+			actualHeight = Math.max(actualHeight, height);
+			// Position origin to the next grid
+			// Note: we don't account for the current gridspan and actual grid
+			// width because this will be accounted on next loop iteration through
+			// the use of EmptySubGrid fakes
+			x += labelWidth + hgap + gridWidth + gridgap;
 		}
 		return actualHeight;
 	}
 	// CSON: ParameterAssignment
 
-	@Override protected List<JComponent> components()
+	@Override List<JComponent> components()
 	{
 		return _components;
+	}
+	
+	private ISubGrid findGrid(int index)
+	{
+		int i = 0;
+		for (ISubGrid grid: _grids)
+		{
+			if (i == index)
+			{
+				return grid;
+			}
+			i += grid.gridspan();
+			if (i > index)
+			{
+				break;
+			}
+		}
+		return NULL_GRID;
 	}
 
 	private class ComponentList extends AbstractList<JComponent>
 	{
 		@Override public JComponent get(int index)
 		{
-			return _items.get(index).component();
+			int current = 0;
+			for (ISubGrid grid : _grids)
+			{
+				if (index < current + grid.items().size())
+				{
+					return grid.items().get(index - current).component();
+				}
+				current += grid.items().size();
+			}
+			// We should normally never come there
+			//FIXME clearer message just in case we pass here
+			throw new IndexOutOfBoundsException();
 		}
 
 		@Override public int size()
 		{
-			return _items.size();
+			int size = 0;
+			for (ISubGrid grid : _grids)
+			{
+				size += grid.items().size();
+			}
+			return size;
 		}
 	}
 
-	final private List<RowItem> _items = new ArrayList<RowItem>();
+	private SubGrid _current = null;
+	final private List<ISubGrid> _grids = new ArrayList<ISubGrid>();
 	final private ComponentList _components = new ComponentList();
-	private JLabel _label = null;
+	static final private ISubGrid NULL_GRID = new EmptySubGrid();
 }

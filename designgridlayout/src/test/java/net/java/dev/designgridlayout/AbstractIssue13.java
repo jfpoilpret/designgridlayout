@@ -14,33 +14,15 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.Collections;
-import java.util.List;
+import javax.swing.JTextField;
 
-import javax.swing.JComponent;
-
-class EmptyRow extends AbstractRow
+// Shows issue 13 example: multiple labels
+abstract public class AbstractIssue13 extends AbstractBaseExample
 {
-	EmptyRow(int height)
+	@Override protected JTextField field(String text)
 	{
-		_height = height;
+		JTextField field = super.field(text);
+		field.setColumns(8);
+		return field;
 	}
-
-	@Override List<JComponent> components()
-	{
-		return Collections.emptyList();
-	}
-
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
-		int gridgap, int rowWidth, int gridWidth, List<Integer> labelWidth)
-	{
-		return 0;
-	}
-
-	@Override int height()
-	{
-		return _height;
-	}
-
-	private final int _height;
 }

@@ -195,6 +195,11 @@
 					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>1.2</version>
+			</plugin>
 		</plugins>
 	</reporting>
 
@@ -204,6 +209,12 @@
 			<name>FEST repository</name>
 			<url>http://fest.googlecode.com/svn/trunk/fest/m2/repository</url>
 			<snapshots>
+				<!-- START: Only for FEST debugging -->
+<!--
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>ignore</checksumPolicy>
+-->
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
@@ -247,6 +258,16 @@
 				<classifier>jdk15</classifier>
 				<scope>test</scope>
 			</dependency>
+			<!-- START: Only for FEST debugging -->
+<!--
+			<dependency>
+				<groupId>fest</groupId>
+				<artifactId>fest-swing</artifactId>
+				<version>1.0b3-SNAPSHOT</version>
+				<scope>test</scope>
+			</dependency>
+-->
+			<!-- END: Only for FEST debugging -->
 		</dependencies>
 	</dependencyManagement>
 	
@@ -259,6 +280,10 @@
 		<dependency>
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
+			<!-- Version 1.0b2 is much too slow and makes non reproducable tests -->
+<!--
+			<version>1.0b2</version>
+-->
 			<version>1.0b1</version>
 			<scope>test</scope>
 		</dependency>

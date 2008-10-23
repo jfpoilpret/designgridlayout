@@ -98,17 +98,22 @@ abstract class AbstractRow
 		return _growWeight;
 	}
 
-	int gridColumns()
+	int numGrids()
 	{
 		return 0;
 	}
 
-	int labelWidth()
+	int gridColumns(int grid)
 	{
 		return 0;
 	}
 
-	int maxColumnWidth(int maxColumns)
+	int labelWidth(int grid)
+	{
+		return 0;
+	}
+
+	int maxColumnWidth(int grid, int maxColumns)
 	{
 		return 0;
 	}
@@ -123,11 +128,16 @@ abstract class AbstractRow
 		return 0;
 	}
 
-	abstract protected List<JComponent> components();
+	int gridgap()
+	{
+		return 0;
+	}
+
+	abstract List<JComponent> components();
 
 	// Returns the actual extra height allocated to the row
-	abstract int layoutRow(
-	    LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth);
+	abstract int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
+		int gridgap, int rowWidth, int gridWidth, List<Integer> labelsWidth);
 
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;

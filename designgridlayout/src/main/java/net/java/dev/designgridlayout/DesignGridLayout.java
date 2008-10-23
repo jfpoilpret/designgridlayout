@@ -68,7 +68,7 @@ public class DesignGridLayout implements LayoutManager
 	private HeightGrowPolicy _heightTester = _defaultHeightTester;
 	
 	final private Container _parent;
-	final private DefaultOrientationPolicy _orientation;
+	final private OrientationPolicy _orientation;
 
 	private Dimension _layoutSize = null;
 
@@ -78,7 +78,7 @@ public class DesignGridLayout implements LayoutManager
 	private int _right = 0;
 
 	private int _hgap = 0;
-	private int _labelWidth = 0;
+	private int _gridgap = 0;
 
 	private double _totalWeight = 0.0;
 	
@@ -88,6 +88,9 @@ public class DesignGridLayout implements LayoutManager
 	private int _explicitRight = MARGIN_DEFAULT;
 	
 	final private List<AbstractRow> _rowList = new ArrayList<AbstractRow>();
+	final private List<Integer> _labelWidths = new ArrayList<Integer>();
+	private int _totalLabelWidth;
+	private int _maxGrids;
 
 	/**
 	 * Builds a DesignGridLayout instance attached to a {@link Container}.
@@ -111,7 +114,7 @@ public class DesignGridLayout implements LayoutManager
 		}
 		_parent = parent;
 		_parent.setLayout(this);
-		_orientation = new DefaultOrientationPolicy(parent);
+		_orientation = new OrientationPolicy(parent);
 		reset();
 	}
 
@@ -139,48 +142,6 @@ public class DesignGridLayout implements LayoutManager
 		return this;
 	}
 
-	/**
-	 * Forces the orientation of components inside this layout to be from left
-	 * to right, whatever the orientation defined by the current
-	 * {@code java.util.Locale}.
-	 * <p/>
-	 * <b>Note 1</b>: you normally never need to call this method because
-	 * {@code DesignGridLayout} automatically detects and uses the orientation 
-	 * defined by the current {@code java.util.Locale}. Calling this method is
-	 * useful only if you want to override the default orientation.
-	 * <b>Note 2</b>: calling this method will not affect the orientation of
-	 * text inside components themselves!
-	 * 
-	 * @return this instance of DesignGridLayout, allowing for chained calls
-	 * to other methods (also known as "fluent API")
-	 */
-	public DesignGridLayout leftToRight()
-	{
-		_orientation.setRightToLeft(false);
-		return this;
-	}
-	
-	/**
-	 * Forces the orientation of components inside this layout to be from right
-	 * to left, whatever the orientation defined by the current
-	 * {@code java.util.Locale}.
-	 * <p/>
-	 * <b>Note 1</b>: you normally never need to call this method because
-	 * {@code DesignGridLayout} automatically detects and uses the orientation 
-	 * defined by the current {@code java.util.Locale}. Calling this method is
-	 * useful only if you want to override the default orientation.
-	 * <b>Note 2</b>: calling this method will not affect the orientation of
-	 * text inside components themselves!
-	 * 
-	 * @return this instance of DesignGridLayout, allowing for chained calls
-	 * to other methods (also known as "fluent API")
-	 */
-	public DesignGridLayout rightToLeft()
-	{
-		_orientation.setRightToLeft(true);
-		return this;
-	}
-	
 	/**
 	 * Adds a left-aligned row. Left-aligned rows are NOT canonical grids but
 	 * avoid the otherwise mandatory use of several LayoutManager for one
@@ -455,14 +416,27 @@ public class DesignGridLayout implements LayoutManager
 			int y = top();
 			int parentWidth = parent.getWidth();
 			int rowWidth = parentWidth - left() - right();
+			// Calculate the width per sub-grid
+			int gridWidth = rowWidth;
+			// Exclude labels (and their gaps) from available space
+			if (_totalLabelWidth > 0)
+			{
+				gridWidth -= _totalLabelWidth + _maxGrids * _hgap;
+			}
+			// Exclude inter-grid gaps
+			gridWidth -= (_maxGrids - 1) * _gridgap;
+			// Share available space between all grids
+			gridWidth /= _maxGrids;
+			//TODO split the fudge (gridWidth % _maxGrids) somewhere?
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			for (AbstractRow row: _rowList)
 			{
 				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
-				if (row.components().iterator().hasNext())
+				if (!row.components().isEmpty())
 				{
 					helper.setRowAvailableHeight(extraHeight + row.height());
-					row.layoutRow(helper, x, y, _hgap, rowWidth, _labelWidth);
+					row.layoutRow(helper, x, y, _hgap, _gridgap, rowWidth, 
+						gridWidth, _labelWidths);
 				}
 				y += row.height() + extraHeight + row.vgap();
 			}
@@ -523,7 +497,7 @@ public class DesignGridLayout implements LayoutManager
 		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 		return layoutStyle.getContainerGap(component, position, _parent);
 	}
-
+	
 	/*
 	 * Horizontal gaps are easy.
 	 * Since canonical grids are "balanced", just use the biggest intra-component 
@@ -547,6 +521,7 @@ public class DesignGridLayout implements LayoutManager
 		for (AbstractRow row: _rowList)
 		{
 			_hgap = Math.max(_hgap, row.hgap());
+			_gridgap = Math.max(_gridgap, row.gridgap());
 		}
 
 		// Vertical gaps (per row)
@@ -603,34 +578,49 @@ public class DesignGridLayout implements LayoutManager
 		computeMargins();
 		computeGutters();
 
-		// Now, initialize each row and count the number of columns in the grid
+		// Now, initialize each row and count the number of grids & columns 
+		// in the grids
 		for (AbstractRow row: _rowList)
 		{
 			row.init();
 		}
-		int maxColumns = countGridColumns();
+		countGrids();
 
-		// Second, calculate label width
-		computeLabelWidth();
-		
-		// Third, compute width to use for columns of grid
-		int maxWidth = maxGridRowsColumnWidth(maxColumns);
+		// Second, calculate labels width
+		computeLabelWidths();
 
-		// Then, calculate the preferred total width
-		int preferredWidth =
-			maxWidth * maxColumns + left() + right() + (_hgap * (maxColumns - 1)) + 1;
-
-		// Account for labels
-		if (_labelWidth > 0)
+		// Compute preferred width for each sub-grid (without labels), 
+		// use largest width for all grids
+		//FIXME: need to care for grid-span in calculation!
+		int preferredWidth = 0;
+		for (int grid = 0; grid < _maxGrids; grid++)
 		{
-			preferredWidth += _labelWidth;
-			// Be sure to add hgap if needed
-			if (maxColumns > 0)
-			{
-				preferredWidth += _hgap;
-			}
+			int maxColumns = countGridColumns(grid);
+	
+			// Third, compute width to use for columns of grid
+			int maxWidth = maxGridRowsColumnWidth(grid, maxColumns);
+	
+			// Then, calculate the preferred width for that grid
+			int gridWidth = maxWidth * maxColumns + (_hgap * (maxColumns - 1)) + 1;
+	
+			preferredWidth = Math.max(preferredWidth, gridWidth);
 		}
+		// Now use preferred width for each subgrid
+		preferredWidth *= _maxGrids;
 		
+		// Account for labels
+		if (_totalLabelWidth > 0)
+		{
+			preferredWidth += _totalLabelWidth + (_maxGrids * _hgap);
+		}
+
+		// Add gaps between grids
+		// first hgap is correct (label to 1st comp), 2nd gap should be bigger
+		preferredWidth += (_maxGrids - 1) * _gridgap;
+		
+		// Add left and right margins
+		preferredWidth += left() + right();
+
 		// Don't forget to account for the minimum width of non grid rows
 		preferredWidth = Math.max(preferredWidth, totalNonGridWidth());
 
@@ -647,24 +637,39 @@ public class DesignGridLayout implements LayoutManager
 		_layoutSize = new Dimension(preferredWidth, preferredHeight);
 	}
 	
-	private int countGridColumns()
+	private void countGrids()
+	{
+		_maxGrids = 0;
+		for (AbstractRow row: _rowList)
+		{
+			_maxGrids = Math.max(_maxGrids, row.numGrids());
+		}
+	}
+
+	private int countGridColumns(int grid)
 	{
 		int maxColumns = 0;
 		for (AbstractRow row: _rowList)
 		{
 			// Note columns (sum item spans), not the count of components
-			maxColumns = Math.max(maxColumns, row.gridColumns());
+			maxColumns = Math.max(maxColumns, row.gridColumns(grid));
 		}
 		return maxColumns;
 	}
 	
-	private void computeLabelWidth()
+	private void computeLabelWidths()
 	{
-		_labelWidth = 0;
-		for (AbstractRow row: _rowList)
+		_totalLabelWidth = 0;
+		for (int i = 0; i < _maxGrids; i++)
 		{
-			// Label width first
-			_labelWidth = Math.max(_labelWidth, row.labelWidth());
+			int width = 0;
+			for (AbstractRow row: _rowList)
+			{
+				// Label width first
+				width = Math.max(width, row.labelWidth(i));
+			}
+			_labelWidths.add(width);
+			_totalLabelWidth += width;
 		}
 	}
 
@@ -678,12 +683,12 @@ public class DesignGridLayout implements LayoutManager
 		return totalHeight;
 	}
 	
-	private int maxGridRowsColumnWidth(int maxColumns)
+	private int maxGridRowsColumnWidth(int grid, int maxColumns)
 	{
 		int maxWidth = 0;
 		for (AbstractRow row: _rowList)
 		{
-			maxWidth = Math.max(maxWidth, row.maxColumnWidth(maxColumns));
+			maxWidth = Math.max(maxWidth, row.maxColumnWidth(grid, maxColumns));
 		}
 		return maxWidth;
 	}
@@ -762,16 +767,18 @@ public class DesignGridLayout implements LayoutManager
 	private void reset()
 	{
 		_layoutSize = null;
+
 		_top = 0;
 		_left = 0;
 		_bottom = 0;
 		_right = 0;
+		
+		_labelWidths.clear();
+		_totalLabelWidth = 0;
+		
+		_maxGrids = 0;
 		_hgap = 0;
-		_labelWidth = 0;
+		_gridgap = 0;
 		_totalWeight = 0.0;
-		for (AbstractRow row: _rowList)
-		{
-			row.reset();
-		}
 	}
 }

@@ -14,35 +14,17 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.ComponentOrientation;
-import java.awt.Container;
+import java.util.List;
 
-class DefaultOrientationPolicy implements OrientationPolicy
+interface ISubGrid
 {
-	public DefaultOrientationPolicy(Container parent)
-	{
-		_parent = parent;
-	}
-	
-	public boolean isRightToLeft()
-	{
-		if (_rtl != null)
-		{
-			return _rtl;
-		}
-		else
-		{
-			// Check layout orientation
-			ComponentOrientation orientation = _parent.getComponentOrientation();
-			return orientation.isHorizontal() && !orientation.isLeftToRight();
-		}
-	}
-	
-	void setRightToLeft(boolean rtl)
-	{
-		_rtl = rtl;
-	}
-
-	private final Container _parent;
-	private Boolean _rtl = null;
+	int gridspan();
+	int labelWidth();
+	int gridColumns();
+	int maxColumnWidth(int maxColumns);
+	int hgap();
+	int layoutRow(
+		LayoutHelper helper, int x, int y, int height, int baseline, 
+		int hgap, int rowWidth, int labelWidth);
+	List<RowItem> items();
 }

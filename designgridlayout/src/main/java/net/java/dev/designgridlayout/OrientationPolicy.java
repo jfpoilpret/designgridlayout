@@ -14,7 +14,22 @@
 
 package net.java.dev.designgridlayout;
 
-interface OrientationPolicy
+import java.awt.ComponentOrientation;
+import java.awt.Container;
+
+class OrientationPolicy
 {
-	public boolean isRightToLeft();
+	public OrientationPolicy(Container parent)
+	{
+		_parent = parent;
+	}
+	
+	public boolean isRightToLeft()
+	{
+		// Check layout orientation
+		ComponentOrientation orientation = _parent.getComponentOrientation();
+		return orientation.isHorizontal() && !orientation.isLeftToRight();
+	}
+	
+	private final Container _parent;
 }

@@ -17,30 +17,43 @@ package net.java.dev.designgridlayout;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.JComponent;
-
-class EmptyRow extends AbstractRow
+// Fake subgrid that is used whenever a real SubGrid spans several grids
+final class EmptySubGrid implements ISubGrid
 {
-	EmptyRow(int height)
-	{
-		_height = height;
-	}
-
-	@Override List<JComponent> components()
-	{
-		return Collections.emptyList();
-	}
-
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
-		int gridgap, int rowWidth, int gridWidth, List<Integer> labelWidth)
+	public int gridColumns()
 	{
 		return 0;
 	}
 
-	@Override int height()
+	public int gridspan()
 	{
-		return _height;
+		return 0;
 	}
 
-	private final int _height;
+	public int hgap()
+	{
+		return 0;
+	}
+
+	public List<RowItem> items()
+	{
+		return Collections.emptyList();
+	}
+
+	public int labelWidth()
+	{
+		return 0;
+	}
+
+	public int layoutRow(
+	    LayoutHelper helper, int x, int y, int height, int baseline, int hgap, int rowWidth,
+	    int labelWidth)
+	{
+		return 0;
+	}
+
+	public int maxColumnWidth(int maxColumns)
+	{
+		return 0;
+	}
 }

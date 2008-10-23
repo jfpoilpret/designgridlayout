@@ -57,7 +57,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
-	@Override protected List<JComponent> components()
+	@Override List<JComponent> components()
 	{
 		return _components;
 	}
@@ -73,8 +73,8 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(
-	    LayoutHelper helper, int x, int y, int hgap, int rowWidth, int labelWidth)
+	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
+		int gridgap, int rowWidth, int gridWidth, List<Integer> labelsWidth)
 	{
 		// Calculate various needed widths & origin
 		int count = _components.size();
