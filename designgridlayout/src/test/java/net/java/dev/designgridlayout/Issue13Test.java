@@ -42,6 +42,12 @@ public class Issue13Test extends AbstractGuiTest
 		checkSnapshot("large");
 	}
 	
+	@Test public void checkComplexMultiLabelLayout() throws Exception
+	{
+		launchGui(Issue13c.class);
+		checkSnapshot();
+	}
+	
 	@DataProvider(name = "panels")
 	public Object[][] getPanelIndexes()
 	{
