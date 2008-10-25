@@ -41,14 +41,14 @@ public class Figure179bis extends AbstractBaseExample
 		layout.row().label(usageLabel).add(anyButton).add(textButton)
 			.add(displayButton).add(humorButton);
 		layout.row().label(fontLabel).add(familyListScroller).add(facesListScroller);
-		layout.emptyRow(14);
+		layout.emptyRow();
 		layout.row().label(sizeLabel).addMulti(2, sizeSpinner, sizePointsLabel)
 			.add(allCapsButton, 2).add(superscriptButton, 2).empty(2);
 		layout.row().label(leadingLabel).addMulti(2, leaderSpinner, leadingPointsLabel)
 			.add(smallCapsButton, 2).add(subscriptButton, 2).empty(2);
 		layout.row().label(kernLabel).addMulti(2, kernSpinner, kernPointsLabel)
 			.add(hightlightButton, 2).add(redlineButton, 2).empty(2);
-		layout.emptyRow(20);
+		layout.emptyRow();
 		layout.centerRow().add(setFontButton).add(encodingButton).add(previewButton);
 	}
 	// CSON: MagicNumber

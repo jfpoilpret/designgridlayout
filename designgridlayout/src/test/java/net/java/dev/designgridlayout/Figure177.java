@@ -58,13 +58,13 @@ public class Figure177 extends AbstractBaseExample
 		layout.row().label(label("Type:")).add(typeField);
 		layout.row().label(label("Vendor:")).add(vendorField);
 		layout.row().label(label("Note:")).add(nodeField);
-		layout.emptyRow(14);
+		layout.emptyRow();
 		layout.row().label(label("Progress:")).add(progressBar).add(locationLabel);
-		layout.emptyRow(14);
+		layout.emptyRow();
 		layout.row().label(label("Scope:")).add(currentCheckBox).add(localCheckBox);
 		layout.row().label().add(referencedCheckBox).add(networkCheckBox);
 		layout.row().label().add(additionalCheckBox).add(unlicensedCheckBox);
-		layout.emptyRow(20);
+		layout.emptyRow();
 		layout.centerRow().add(searchButton).add(clearButton);
 	}
 	// CSON: MagicNumber

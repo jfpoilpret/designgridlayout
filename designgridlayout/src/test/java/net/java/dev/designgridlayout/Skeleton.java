@@ -32,19 +32,19 @@ public class Skeleton extends AbstractBaseExample
 	{
 		layout.leftRow().add(projectLabel);
 		layout.row().label(idLabel).add(id).empty(2);
-		layout.emptyRow(24);
+		layout.emptyRow();
 
 		layout.leftRow().add(mfgLabel);
 		layout.row().label(companyLabel).add(company);
 		layout.row().label(contactLabel).add(contact);
 		layout.row().label(orderLabel).add(order).empty(2);
-		layout.emptyRow(24);
+		layout.emptyRow();
 
 		layout.leftRow().add(inspectorLabel);
 		layout.row().label(nameLabel).add(name);
 		layout.row().label(referenceLabel).add(reference).empty(2);
 		layout.row().label(statusLabel).add(status).empty(2);
-		layout.emptyRow(24);
+		layout.emptyRow();
 
 		layout.leftRow().add(shipLabel);
 		layout.row().label(shipyardLabel).add(shipyard);

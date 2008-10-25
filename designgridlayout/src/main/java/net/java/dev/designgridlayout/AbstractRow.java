@@ -146,7 +146,7 @@ abstract class AbstractRow
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
-	private int _vgap;
+	private int _vgap = 0;
 	private int _baseline;
 	private int _height;
 	private double _growWeight = -1.0;

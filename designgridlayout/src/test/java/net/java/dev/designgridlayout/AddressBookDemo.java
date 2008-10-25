@@ -91,7 +91,6 @@ public class AddressBookDemo extends AbstractBaseExample
 	}
 	// CSON: MagicNumber
 
-	// CSOFF: MagicNumber
 	@Override public void build(DesignGridLayout layout)
 	{
 		JTextField lastNameField = new JTextField("Martian");
@@ -121,11 +120,10 @@ public class AddressBookDemo extends AbstractBaseExample
 		layout.row().label(label("State")).add(stateField)
 						.label(label("Postal Code")).add(postalField);
 		layout.row().label(label("Country"), 1).add(countryField);
-		layout.emptyRow(18);
+		layout.emptyRow();
 		layout.centerRow().add(newButton).add(deleteButton).add(editButton)
 			.add(saveButton).add(cancelButton);
 	}
-	// CSON: MagicNumber
 
 	@Override protected JLabel label(String text)
     {

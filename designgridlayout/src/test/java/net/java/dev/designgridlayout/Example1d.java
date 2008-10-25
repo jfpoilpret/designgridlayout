@@ -31,7 +31,7 @@ public class Example1d extends AbstractBaseExample
 		layout.row().label(label(2)).add(button()).add(button()).add(button());
 		layout.row().label(label(3)).add(button(), 2).add(button());
 		layout.row().label(label(4)).add(button()).add(button()).add(button()).empty();
-		layout.emptyRow(20);
+		layout.emptyRow();
 		layout.rightRow().add(new JButton("Cancel")).add(new JButton("OK"));
 	}
 	// CSON: MagicNumber

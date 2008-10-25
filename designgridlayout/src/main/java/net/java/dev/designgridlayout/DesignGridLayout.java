@@ -345,15 +345,19 @@ public class DesignGridLayout implements LayoutManager
 	}
 
 	/**
-	 * Adds a new, fixed-height, empty row to the container. This row will never 
-	 * contain any component and is used only for introducing vertical space 
-	 * between rows or groups of rows.
-	 * 
-	 * @param height the height in pixels of the new created empty row.
+	 * Adds a new empty row to the container. This row will never contain any 
+	 * component and is used only for introducing vertical space between rows or 
+	 * groups of rows. The height of that row is automatically calculated based
+	 * on the fact that the previously-added row and the next-added row contain
+	 * unrelated components.
 	 */
-	public void emptyRow(int height)
+	public void emptyRow()
 	{
-		addRow(new EmptyRow(height), -1.0);
+		if (!_rowList.isEmpty())
+		{
+			AbstractRow current = _rowList.get(_rowList.size() - 1);
+			current.vgap(-1);
+		}
 	}
 	
 	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
@@ -527,6 +531,7 @@ public class DesignGridLayout implements LayoutManager
 			AbstractRow row = _rowList.get(nthRow);
 			List<JComponent> items1 = row.components();
 			List<JComponent> items2 = _rowList.get(nthRow + 1).components();
+			int style = (row.vgap() == -1 ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
 			for (int nthItems1 = 0; nthItems1 < items1.size(); nthItems1++)
 			{
@@ -539,7 +544,7 @@ public class DesignGridLayout implements LayoutManager
 					int belowHeight = lower.getPreferredSize().height;
 
 					int gap = layoutStyle.getPreferredGap(
-						upper, lower, LayoutStyle.RELATED, SwingConstants.SOUTH, _parent);
+						upper, lower, style, SwingConstants.SOUTH, _parent);
 					int comboHeight = aboveHeight + gap + belowHeight;
 					if (comboHeight > maxComboHeight)
 					{

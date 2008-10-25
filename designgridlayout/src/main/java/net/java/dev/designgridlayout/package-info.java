@@ -67,9 +67,8 @@
  *  <li>Right Row: all components in this row are aligned on the right, they are
  *  	never sized bigger than their preferred size (except when {@code fill()}
  *  	is used (see below))</li>
- *  <li>Empty Row: this row has no component but has a fixed height specified
- *  	programmatically. This is useful when you want to add some space between
- *  	groups of rows.</li>
+ *  <li>Empty Row: this row has no component but has a fixed height. This is 
+ *  	useful when you want to add some space between groups of rows.</li>
  * </ul>
  * Center, Left and Right Rows have a special "fill" option that allows their 
  * extreme component(s) (rightmost component for a Left Row, leftmost component 
@@ -80,12 +79,13 @@
  *     layout.leftRow().fill().add(new JLabel("Group"), new JSeparator());
  * </pre>
  * <p/>
- * DesignGridLayout allows you to add empty rows with a given height (expressed
- * in pixels), in order to introduce some space in your layout (e.g. to separate
- * different groups of logically releated items:
+ * DesignGridLayout allows you to add empty rows with a height that is 
+ * automatically calculated (depending on the current installed Look &amp; Feel),
+ * in order to introduce some space in your layout (e.g. to separate different 
+ * groups of logically releated items:
  * <pre>
  *     layout.row().label().add(...);
- *     layout.emptyRow(14);
+ *     layout.emptyRow();
  *     layout.rightRow().add(new JButton("OK"), new JButton("Cancel"));
  * </pre>
  * In grid rows (added by 

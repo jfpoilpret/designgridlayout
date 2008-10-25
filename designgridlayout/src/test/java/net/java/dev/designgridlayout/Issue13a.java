@@ -35,7 +35,7 @@ public class Issue13a extends AbstractIssue13
 		layout.row().label(label("Lbl9"))	.add(field("XX9"))	.label(label("LBL10"))	.add(field("XXXX10"));
 		layout.row().label(label("Lbl11"))	.add(field("XXXXXXX11"));
 		layout.row().label(label("Lbl12"),1).add(field("X12"))	.label()									.label(label("LBL13"))	.add(field("X13"));
-		layout.emptyRow(14);
+		layout.emptyRow();
 		layout.centerRow().add(button("OK"), button("Cancel"));
 	}
 	// CSON: LineLength
