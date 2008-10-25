@@ -153,10 +153,10 @@ final class GridRow extends AbstractRow implements IGridRow
 	{
 		// Set the correct grid-span for the last sub-grid if needed
 		int span = totalGrids;
-		Iterator<ISubGrid> i = _grids.iterator();
+		Iterator<SubGrid> i = _grids.iterator();
 		while (i.hasNext())
 		{
-			ISubGrid grid = i.next();
+			SubGrid grid = i.next();
 			if (i.hasNext())
 			{
 				span -= grid.gridspan();
@@ -183,7 +183,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	@Override int hgap()
 	{
 		int hgap = 0;
-		for (ISubGrid grid : _grids)
+		for (SubGrid grid : _grids)
 		{
 			hgap = Math.max(hgap, grid.hgap());
 		}
@@ -218,7 +218,7 @@ final class GridRow extends AbstractRow implements IGridRow
 		int gridWidth = gridsWidth / _totalGrids;
 		int gridIndex = 0;
 		Iterator<Integer> label = labelsWidth.iterator();
-		for (ISubGrid grid: _grids)
+		for (SubGrid grid: _grids)
 		{
 			// Find the label for the current sub-grid
 			int labelWidth = label.next();
@@ -258,7 +258,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	private ISubGrid findGrid(int index)
 	{
 		int i = 0;
-		for (ISubGrid grid: _grids)
+		for (SubGrid grid: _grids)
 		{
 			if (i == index)
 			{
@@ -278,7 +278,7 @@ final class GridRow extends AbstractRow implements IGridRow
 		@Override public JComponent get(int index)
 		{
 			int current = 0;
-			for (ISubGrid grid : _grids)
+			for (SubGrid grid : _grids)
 			{
 				if (index < current + grid.items().size())
 				{
@@ -294,7 +294,7 @@ final class GridRow extends AbstractRow implements IGridRow
 		@Override public int size()
 		{
 			int size = 0;
-			for (ISubGrid grid : _grids)
+			for (SubGrid grid : _grids)
 			{
 				size += grid.items().size();
 			}
@@ -304,7 +304,7 @@ final class GridRow extends AbstractRow implements IGridRow
 
 	private SubGrid _current = null;
 	private int _totalGrids = 0;
-	final private List<ISubGrid> _grids = new ArrayList<ISubGrid>();
+	final private List<SubGrid> _grids = new ArrayList<SubGrid>();
 	final private ComponentList _components = new ComponentList();
 
 	static final private ISubGrid NULL_GRID = new EmptySubGrid();

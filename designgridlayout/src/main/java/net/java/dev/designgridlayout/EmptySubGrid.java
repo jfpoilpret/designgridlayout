@@ -14,9 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.Collections;
-import java.util.List;
-
 // Fake subgrid that is used whenever a real SubGrid spans several grids
 final class EmptySubGrid implements ISubGrid
 {
@@ -25,33 +22,7 @@ final class EmptySubGrid implements ISubGrid
 		return 0;
 	}
 
-	public int gridspan()
-	{
-		return 0;
-	}
-	
-	public void gridspan(int span)
-	{
-	}
-
-	public int hgap()
-	{
-		return 0;
-	}
-
-	public List<RowItem> items()
-	{
-		return Collections.emptyList();
-	}
-
 	public int labelWidth()
-	{
-		return 0;
-	}
-
-	public int layoutRow(
-	    LayoutHelper helper, int x, int y, int height, int baseline, int hgap, int rowWidth,
-	    int labelWidth)
 	{
 		return 0;
 	}

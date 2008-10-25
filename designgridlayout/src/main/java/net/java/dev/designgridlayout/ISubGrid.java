@@ -14,18 +14,9 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.List;
-
 interface ISubGrid
 {
-	int gridspan();
-	void gridspan(int span);
 	int labelWidth();
 	int gridColumns();
 	int maxColumnWidth(int maxColumns);
-	int hgap();
-	int layoutRow(
-		LayoutHelper helper, int x, int y, int height, int baseline, 
-		int hgap, int rowWidth, int labelWidth);
-	List<RowItem> items();
 }
