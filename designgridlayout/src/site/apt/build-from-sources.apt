@@ -20,6 +20,13 @@ Building DesignGridLayout from source
 	You may also run <<<mvn eclipse:eclipse>>> to generate an eclipse project 
 	that you can then import into your Eclipse workspace.
 	
+	If you want to generate the maven site for DesignGridLayout project, you 
+	will first need to update the file <<<config/checkstyle/checkstyle.properties>>>;
+	it defines 2 properties that are <<absolute>> paths to 2 other files in the
+	same directory. Once you have done that, you can generate the project site
+	with <<<mvn site>>> (note that tests will be executed again for collecting
+	code coverage data).
+	
 	Finally, you may use ant rather than maven to build DesignGridLayout but in
 	this case the build is "minimalistic" and does not include tests.
 	
