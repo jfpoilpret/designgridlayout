@@ -14,14 +14,11 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.UIManager;
-
 // Shows issue 13 example: multiple labels
 public class Issue13a extends AbstractIssue13
 {
 	public static void main(String[] args) throws Exception
 	{
-//		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		Issue13a example = new Issue13a();
 		example.go(true);
 	}
@@ -32,11 +29,14 @@ public class Issue13a extends AbstractIssue13
 		layout.row().label(label("label1"))	.add(field("XX1"))	.label(label("lbl2"))	.add(field("XX2"))	.label(label("label3"))	.add(field("XX3"));
 		layout.row().label(label("L4"))		.add(field("XX4"))	.label(label("L5"))		.add(field("XX5"))	.label(label("L6"))		.add(field("XX6"));
 		layout.row().label()				.add(field("XXa"))	.label()				.add(field("XXb"))	.label()				.add(field("XXc"));
-		//TODO add grid span when implemented
-//		layout.row().label(label("Lbl7"),2)	.add(field("XXXXX7"))											.label(label("LBL8"))	.add(field("XX8"));
-//		layout.row().label(label("Lbl9"))	.add(field("XX9"))	.label(label("LBL10"))	.add(field("XXXX10"));
-//		layout.row().label(label("Lbl11"))	.add(field("XXXXXXX11"));
-//		layout.row().label(label("Lbl12"),1).add(field("X12"))												.label(label("LBL13"))	.add(field("X13"));
+		layout.row().label()									.label(label("WWWWWW"))	.add(field("XX8"))	.label(label("LLLL"))	.add(field("XXX"));
+
+		layout.row().label(label("Lbl7"),2)	.add(field("XXXXX7"))											.label(label("LBL8"))	.add(field("XX8"));
+		layout.row().label(label("Lbl9"))	.add(field("XX9"))	.label(label("LBL10"))	.add(field("XXXX10"));
+		layout.row().label(label("Lbl11"))	.add(field("XXXXXXX11"));
+		layout.row().label(label("Lbl12"),1).add(field("X12"))	.label()									.label(label("LBL13"))	.add(field("X13"));
+		layout.emptyRow(14);
+		layout.centerRow().add(button("OK"), button("Cancel"));
 	}
 	// CSON: LineLength
 }

@@ -31,7 +31,7 @@ public class ExamplesTest extends AbstractGuiTest
 		if (resize)
 		{
 			frame().resizeWidthTo(frame().target.getWidth() * 2);
-			frame().resizeWidthTo(frame().target.getWidth() / 3);
+//			frame().resizeWidthTo(frame().target.getWidth() / 3);
 		}
 	}
 	

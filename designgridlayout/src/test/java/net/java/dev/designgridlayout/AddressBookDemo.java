@@ -84,7 +84,9 @@ public class AddressBookDemo extends AbstractBaseExample
 		top.add(listPanel, BorderLayout.WEST);
 		top.add(addressPanel, BorderLayout.CENTER);
 		_frame.add(top);
+		prePack();
 		_frame.pack();
+		preDisplay();
 		_frame.setVisible(true);
 	}
 	// CSON: MagicNumber
@@ -109,16 +111,16 @@ public class AddressBookDemo extends AbstractBaseExample
 		JButton saveButton = new JButton("Save");
 		JButton cancelButton = new JButton("Cancel");
 
-		layout.row().label(label("Last Name"))
-			.add(lastNameField, 2).add(label("First Name")).add(firstNameField, 2);
-		layout.row().label(label("Phone"))
-			.add(phoneField, 2).add(label("Email")).add(emailField, 2);
+		layout.row().label(label("Last Name")).add(lastNameField)
+						.label(label("First Name")).add(firstNameField);
+		layout.row().label(label("Phone")).add(phoneField)
+						.label(label("Email")).add(emailField);
 		layout.row().label(label("Address 1")).add(address1Field);
 		layout.row().label(label("Address 2")).add(address2Field);
-		layout.row().label(label("City")).add(cityField, 2);
-		layout.row().label(label("State"))
-			.add(stateField, 2).add(label("Postal")).add(postalField, 2);
-		layout.row().label(label("Country")).add(countryField, 2).empty(3);
+		layout.row().label(label("City"), 1).add(cityField);
+		layout.row().label(label("State")).add(stateField)
+						.label(label("Postal Code")).add(postalField);
+		layout.row().label(label("Country"), 1).add(countryField);
 		layout.emptyRow(18);
 		layout.centerRow().add(newButton).add(deleteButton).add(editButton)
 			.add(saveButton).add(cancelButton);

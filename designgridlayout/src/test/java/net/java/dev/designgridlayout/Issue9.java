@@ -28,7 +28,7 @@ public class Issue9 extends AbstractBaseExample
 	public void setOrientation(ComponentOrientation orientation)
 	{
 		_orientation = orientation;
-		ComponentOrientationHelper.debugOrientation(orientation);
+//		ComponentOrientationHelper.debugOrientation(orientation);
 	}
 	
 	@Override public void build(DesignGridLayout layout)

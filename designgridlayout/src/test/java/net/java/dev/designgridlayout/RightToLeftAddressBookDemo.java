@@ -14,18 +14,19 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.List;
+import java.awt.ComponentOrientation;
 
-interface ISubGrid
+// Same as AddressBookDemo but in RTL orientation
+public class RightToLeftAddressBookDemo extends AddressBookDemo
 {
-	int gridspan();
-	void gridspan(int span);
-	int labelWidth();
-	int gridColumns();
-	int maxColumnWidth(int maxColumns);
-	int hgap();
-	int layoutRow(
-		LayoutHelper helper, int x, int y, int height, int baseline, 
-		int hgap, int rowWidth, int labelWidth);
-	List<RowItem> items();
+	public static void main(String[] args)
+	{
+		RightToLeftAddressBookDemo example = new RightToLeftAddressBookDemo();
+		example.go(true);
+	}
+
+	@Override protected void prePack()
+    {
+		frame().applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    }
 }

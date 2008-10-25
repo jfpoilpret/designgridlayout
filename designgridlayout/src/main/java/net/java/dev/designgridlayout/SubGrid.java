@@ -32,7 +32,7 @@ final class SubGrid implements ISubGrid
 	{
 		_parent = parent;
 		_label = label;
-		_gridspan = gridspan;
+		_gridspan = (gridspan < 0 ? 0 : gridspan);
 		if (_label != null)
 		{
 			_parent.add(_label);
@@ -50,6 +50,14 @@ final class SubGrid implements ISubGrid
 	public int gridspan()
 	{
 		return _gridspan;
+	}
+	
+	public void gridspan(int span)
+	{
+		if (_gridspan == 0)
+		{
+			_gridspan = span;
+		}
 	}
 
 	public int labelWidth()
@@ -122,14 +130,12 @@ final class SubGrid implements ISubGrid
 		// Account for label column
 		if (labelWidth > 0)
 		{
-			int width = labelWidth;
 			if (_label != null)
 			{
 				actualHeight = Math.max(0, helper.setSizeLocation(
-					_label, x, y, width, height, baseline));
+					_label, x, y, labelWidth, height, baseline));
 			}
-			x += width + hgap;
-//			rowWidth -= (width + hgap);
+			x += labelWidth + hgap;
 		}
 
 		int columns = gridColumns();
@@ -149,6 +155,7 @@ final class SubGrid implements ISubGrid
 				int span = item.span();
 				int width = columnWidth * span + ((span - 1) * hgap);
 				// Apply the fudge to the last component/column
+				//TODO maybe can find better split of the fudge among components?
 				if (!i.hasNext())
 				{
 					width += fudge;
@@ -171,5 +178,6 @@ final class SubGrid implements ISubGrid
 	final private List<RowItem> _items = new ArrayList<RowItem>();
 	final private Container _parent;
 	final private JLabel _label;
-	final private int _gridspan;
+	// 0 means auto span until the right-most edge
+	private int _gridspan;
 }

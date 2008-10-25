@@ -73,8 +73,8 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
-		int gridgap, int rowWidth, int gridWidth, List<Integer> labelsWidth)
+	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
+		int rowWidth, int gridWidth, int totalGrids, List<Integer> labelsWidth)
 	{
 		// Calculate various needed widths & origin
 		int count = _components.size();

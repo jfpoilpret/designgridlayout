@@ -48,9 +48,53 @@ public interface ISubGridStarter
 	 */
 	public abstract IGridRow label(JLabel label);
 	
-//	public abstract IGridRow label(JLabel label, int gridspan);
+	/**
+	 * Starts a new sub-grid in the row, starting with a label.
+	 * <p/>
+	 * Labels have a special treatment: they are not a part of the canonical
+	 * grid but use a fixed-width on the left of the canonical grid. Labels
+	 * are automatically right-aligned.
+	 * <p/>
+	 * The new sub-grid initiated by this call will span a certain number of
+	 * sub-grids on its right, as determined by {@code gridspan}.
+	 * 
+	 * @param label the label to add to this row
+	 * @param gridspan the number of sub-grids this new sub-grid should span;
+	 * if {@code <= 0}, then the behavior is the same as {@link #label(JLabel)}.
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
+	public abstract IGridRow label(JLabel label, int gridspan);
 
+	/**
+	 * Starts a new sub-grid in the row, starting with an empty label.
+	 * <p/>
+	 * Labels (empty or not) have a special treatment: they are not a part of 
+	 * the canonical grid but use a fixed-width on the left of the canonical 
+	 * grid. Labels are automatically right-aligned.
+	 * <p/>
+	 * The new sub-grid initiated by this call will span all space on its right
+	 * unless another call to a {@code label()} method occurs in the same row. 
+	 * 
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
 	public abstract IGridRow label();
 
-//	public abstract IGridRow label(int gridspan);
+	/**
+	 * Starts a new sub-grid in the row, starting with an empty label.
+	 * <p/>
+	 * Labels (empty or not) have a special treatment: they are not a part of 
+	 * the canonical grid but use a fixed-width on the left of the canonical 
+	 * grid. Labels are automatically right-aligned.
+	 * <p/>
+	 * The new sub-grid initiated by this call will span a certain number of
+	 * sub-grids on its right, as determined by {@code gridspan}.
+	 * 
+	 * @param gridspan the number of sub-grids this new sub-grid should span;
+	 * if {@code <= 0}, then the behavior is the same as {@link #label()}.
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
+	public abstract IGridRow label(int gridspan);
 }

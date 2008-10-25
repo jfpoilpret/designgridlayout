@@ -29,6 +29,10 @@ final class EmptySubGrid implements ISubGrid
 	{
 		return 0;
 	}
+	
+	public void gridspan(int span)
+	{
+	}
 
 	public int hgap()
 	{

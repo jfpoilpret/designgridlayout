@@ -31,8 +31,8 @@ class EmptyRow extends AbstractRow
 		return Collections.emptyList();
 	}
 
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
-		int gridgap, int rowWidth, int gridWidth, List<Integer> labelWidth)
+	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
+		int rowWidth, int gridWidth, int totalGrids, List<Integer> labelWidth)
 	{
 		return 0;
 	}

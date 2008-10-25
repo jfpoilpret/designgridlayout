@@ -16,6 +16,7 @@ package net.java.dev.designgridlayout;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -101,9 +102,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	 */
 	public IGridRow label(JLabel label)
 	{
-		_current = new SubGrid(parent(), label, 1);
-		_grids.add(_current);
-		return this;
+		return label(label, 0);
 	}
 
 	/*
@@ -112,8 +111,33 @@ final class GridRow extends AbstractRow implements IGridRow
 	 */
 	public IGridRow label()
     {
-	    return label(null);
+	    return label(null, 0);
     }
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#label(int)
+	 */
+	public IGridRow label(int gridspan)
+	{
+		return label(null, gridspan);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#label(javax.swing.JLabel, int)
+	 */
+	public IGridRow label(JLabel label, int gridspan)
+	{
+		// Fix the span of the previous sub-grid (if it was in auto-span mode)
+		if (_current != null)
+		{
+			_current.gridspan(1);
+		}
+		_current = new SubGrid(parent(), label, gridspan);
+		_grids.add(_current);
+		return this;
+	}
 
 	@Override int labelWidth(int grid)
 	{
@@ -124,7 +148,26 @@ final class GridRow extends AbstractRow implements IGridRow
 	{
 		return _grids.size();
 	}
-
+	
+	@Override void totalGrids(int totalGrids)
+	{
+		// Set the correct grid-span for the last sub-grid if needed
+		int span = totalGrids;
+		Iterator<ISubGrid> i = _grids.iterator();
+		while (i.hasNext())
+		{
+			ISubGrid grid = i.next();
+			if (i.hasNext())
+			{
+				span -= grid.gridspan();
+			}
+			else
+			{
+				grid.gridspan(span);
+			}
+		}
+	}
+		
 	@Override int gridColumns(int grid)
 	{
 		return findGrid(grid).gridColumns();
@@ -166,29 +209,30 @@ final class GridRow extends AbstractRow implements IGridRow
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, 
-		int gridgap, int rowWidth, int gridWidth, List<Integer> labelsWidth)
+	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
+		int rowWidth, int gridWidth, int totalGrids, List<Integer> labelsWidth)
 	{
 		int actualHeight = 0;
-		for (int i = 0; i < _grids.size(); i++)
+		Iterator<Integer> label = labelsWidth.iterator();
+		for (ISubGrid grid: _grids)
 		{
-			ISubGrid grid = _grids.get(i);
+			// Find the label for the current sub-grid
+			int labelWidth = label.next();
+
 			// Calculate the actual width for this sub-grid (depends on spans)
 			int width = gridWidth;
-			for (int j = 1; j < grid.gridspan(); j++)
+			for (int i = 1; i < grid.gridspan(); i++)
 			{
-				width += hgap + labelsWidth.get(i + j) + hgap;
+				width += gridgap + label.next() + hgap + gridWidth;
 			}
 			
-			int labelWidth = labelsWidth.get(i);
+			// Layout the sub-grid
 			int height = grid.layoutRow(
 				helper, x, y, height(), baseline(), hgap, width, labelWidth);
 			actualHeight = Math.max(actualHeight, height);
+
 			// Position origin to the next grid
-			// Note: we don't account for the current gridspan and actual grid
-			// width because this will be accounted on next loop iteration through
-			// the use of EmptySubGrid fakes
-			x += labelWidth + hgap + gridWidth + gridgap;
+			x += labelWidth + hgap + width + gridgap;
 		}
 		return actualHeight;
 	}

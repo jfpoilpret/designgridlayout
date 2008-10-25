@@ -436,7 +436,7 @@ public class DesignGridLayout implements LayoutManager
 				{
 					helper.setRowAvailableHeight(extraHeight + row.height());
 					row.layoutRow(helper, x, y, _hgap, _gridgap, rowWidth, 
-						gridWidth, _labelWidths);
+						gridWidth, _maxGrids, _labelWidths);
 				}
 				y += row.height() + extraHeight + row.vgap();
 			}
@@ -639,10 +639,16 @@ public class DesignGridLayout implements LayoutManager
 	
 	private void countGrids()
 	{
+		// Calculate the actual number of sub-grids
 		_maxGrids = 0;
 		for (AbstractRow row: _rowList)
 		{
 			_maxGrids = Math.max(_maxGrids, row.numGrids());
+		}
+		// Inform each row about the total number of sub-grids
+		for (AbstractRow row: _rowList)
+		{
+			row.totalGrids(_maxGrids);
 		}
 	}
 
