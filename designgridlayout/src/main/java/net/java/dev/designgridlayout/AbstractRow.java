@@ -141,7 +141,7 @@ abstract class AbstractRow
 
 	// Returns the actual extra height allocated to the row
 	abstract int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
-		int rowWidth, int gridWidth, int totalGrids, List<Integer> labelsWidth);
+		int rowWidth, int gridsWidth, List<Integer> labelsWidth);
 
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;

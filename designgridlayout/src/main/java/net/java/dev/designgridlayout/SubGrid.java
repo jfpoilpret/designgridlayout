@@ -155,7 +155,6 @@ final class SubGrid implements ISubGrid
 				int span = item.span();
 				int width = columnWidth * span + ((span - 1) * hgap);
 				// Apply the fudge to the last component/column
-				//TODO maybe can find better split of the fudge among components?
 				if (!i.hasNext())
 				{
 					width += fudge;

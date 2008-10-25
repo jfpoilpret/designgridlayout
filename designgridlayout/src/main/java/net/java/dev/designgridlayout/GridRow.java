@@ -166,6 +166,8 @@ final class GridRow extends AbstractRow implements IGridRow
 				grid.gridspan(span);
 			}
 		}
+		// Add as many fake grids as necessary to the sub-grids list
+		_totalGrids = totalGrids;
 	}
 		
 	@Override int gridColumns(int grid)
@@ -210,9 +212,11 @@ final class GridRow extends AbstractRow implements IGridRow
 
 	// CSOFF: ParameterAssignment
 	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
-		int rowWidth, int gridWidth, int totalGrids, List<Integer> labelsWidth)
+		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
 		int actualHeight = 0;
+		int gridWidth = gridsWidth / _totalGrids;
+		int gridIndex = 0;
 		Iterator<Integer> label = labelsWidth.iterator();
 		for (ISubGrid grid: _grids)
 		{
@@ -224,6 +228,14 @@ final class GridRow extends AbstractRow implements IGridRow
 			for (int i = 1; i < grid.gridspan(); i++)
 			{
 				width += gridgap + label.next() + hgap + gridWidth;
+			}
+			gridIndex += grid.gridspan();
+			if (gridIndex == _totalGrids)
+			{
+				// Add fudge to the true last grid 
+				// Note that this is not necessarily the last grid of _grids!
+				int fudge = gridsWidth % _totalGrids;
+				width += fudge;
 			}
 			
 			// Layout the sub-grid
@@ -291,7 +303,9 @@ final class GridRow extends AbstractRow implements IGridRow
 	}
 
 	private SubGrid _current = null;
+	private int _totalGrids = 0;
 	final private List<ISubGrid> _grids = new ArrayList<ISubGrid>();
 	final private ComponentList _components = new ComponentList();
+
 	static final private ISubGrid NULL_GRID = new EmptySubGrid();
 }

@@ -32,7 +32,7 @@ class EmptyRow extends AbstractRow
 	}
 
 	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
-		int rowWidth, int gridWidth, int totalGrids, List<Integer> labelWidth)
+		int rowWidth, int gridsWidth, List<Integer> labelWidth)
 	{
 		return 0;
 	}

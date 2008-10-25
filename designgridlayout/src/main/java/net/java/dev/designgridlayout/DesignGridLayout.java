@@ -416,28 +416,22 @@ public class DesignGridLayout implements LayoutManager
 			int y = top();
 			int parentWidth = parent.getWidth();
 			int rowWidth = parentWidth - left() - right();
-			// Calculate the width per sub-grid
-			int gridWidth = rowWidth;
+			// Calculate the total width assigned exclusively to sub-grids components
+			int gridsWidth = rowWidth;
 			// Exclude labels (and their gaps) from available space
 			if (_totalLabelWidth > 0)
 			{
-				gridWidth -= _totalLabelWidth + _maxGrids * _hgap;
+				gridsWidth -= _totalLabelWidth + _maxGrids * _hgap;
 			}
 			// Exclude inter-grid gaps
-			gridWidth -= (_maxGrids - 1) * _gridgap;
-			// Share available space between all grids
-			gridWidth /= _maxGrids;
-			//TODO split the fudge (gridWidth % _maxGrids) somewhere?
+			gridsWidth -= (_maxGrids - 1) * _gridgap;
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			for (AbstractRow row: _rowList)
 			{
 				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
-				if (!row.components().isEmpty())
-				{
-					helper.setRowAvailableHeight(extraHeight + row.height());
-					row.layoutRow(helper, x, y, _hgap, _gridgap, rowWidth, 
-						gridWidth, _maxGrids, _labelWidths);
-				}
+				helper.setRowAvailableHeight(extraHeight + row.height());
+				row.layoutRow(helper, x, y, _hgap, _gridgap, rowWidth, 
+					gridsWidth, _labelWidths);
 				y += row.height() + extraHeight + row.vgap();
 			}
 		}
