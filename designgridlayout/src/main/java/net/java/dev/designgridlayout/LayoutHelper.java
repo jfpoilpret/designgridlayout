@@ -34,9 +34,13 @@ final class LayoutHelper
 		_availableHeight = availableHeight;
 	}
 	
+	void setY(int y)
+	{
+		_y = y;
+	}
+	
 	// Returns the actual extra height used by this component
-	// CSOFF: ParameterAssignment
-	int setSizeLocation(JComponent component, int x, int y, int width, 
+	int setSizeLocation(JComponent component, int x, int width, 
 		int maxHeight, int maxBaseline)
 	{
 		Dimension d = component.getPreferredSize();
@@ -64,17 +68,13 @@ final class LayoutHelper
 		{
 			yy = (maxHeight - d.height) / 2;
 		}
-		if (_rtl)
-		{
-			x = _parentWidth - x - width;
-		}
-		component.setLocation(x, y + yy);
+		component.setLocation((_rtl ? _parentWidth - x - width : x), _y + yy);
 		return usedExtraHeight;
 	}
-	// CSON: ParameterAssignment
 	
 	private final HeightGrowPolicy _tester;
 	private final int _parentWidth;
 	private final boolean _rtl;
 	private int _availableHeight;
+	private int _y;
 }

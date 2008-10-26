@@ -405,9 +405,10 @@ public class DesignGridLayout implements LayoutManager
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			for (AbstractRow row: _rowList)
 			{
+				helper.setY(y);
 				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
 				helper.setRowAvailableHeight(extraHeight + row.height());
-				row.layoutRow(helper, x, y, _hgap, _gridgap, rowWidth, 
+				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 					gridsWidth, _labelWidths);
 				y += row.height() + extraHeight + row.vgap();
 			}

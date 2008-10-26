@@ -78,14 +78,14 @@ final class HorizontalLayout implements LayoutManager
 			}
 			int nth = 0;
 			int x = 0;
-			int y = 0;
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
+			helper.setY(0);
 			for (JComponent child: _children)
 			{
 				helper.setRowAvailableHeight(_parent.getHeight());
 				// Apply reduction ratio to component width
 				int width = (int) (child.getPreferredSize().width * ratio);
-				helper.setSizeLocation(child, x, y, width, _height, _baseline);
+				helper.setSizeLocation(child, x, width, _height, _baseline);
 				x += width + _gaps[nth];
 				nth++;
 			}

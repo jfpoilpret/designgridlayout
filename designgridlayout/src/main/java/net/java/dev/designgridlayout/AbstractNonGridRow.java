@@ -73,7 +73,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
+	@Override int layoutRow(LayoutHelper helper, int x, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
 		// Calculate various needed widths & origin
@@ -97,13 +97,13 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 			rightFiller = rightFiller(count, width, availableWidth);
 		}
 
-		return layoutRow(helper, x, y, hgap, width, leftFiller, rightFiller);
+		return layoutRow(helper, x, hgap, width, leftFiller, rightFiller);
 	}
 	// CSON: ParameterAssignment
 
 	// CSOFF: ParameterAssignment
 	protected int layoutRow(
-	    LayoutHelper helper, int x, int y, int hgap, int width, int leftFiller, int rightFiller)
+	    LayoutHelper helper, int x, int hgap, int width, int leftFiller, int rightFiller)
 	{
 		int count = _components.size();
 		int i = 0;
@@ -125,7 +125,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 			}
 			actualHeight =
 			    Math.max(actualHeight, helper.setSizeLocation(
-			        component, x, y, compWidth, height(), baseline()));
+			        component, x, compWidth, height(), baseline()));
 			x += compWidth + hgap;
 			i++;
 		}

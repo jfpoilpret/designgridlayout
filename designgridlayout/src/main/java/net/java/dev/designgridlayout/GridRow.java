@@ -211,7 +211,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	}
 
 	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int y, int hgap, int gridgap, 
+	@Override int layoutRow(LayoutHelper helper, int x, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
 		int actualHeight = 0;
@@ -240,7 +240,7 @@ final class GridRow extends AbstractRow implements IGridRow
 			
 			// Layout the sub-grid
 			int height = grid.layoutRow(
-				helper, x, y, height(), baseline(), hgap, width, labelWidth);
+				helper, x, height(), baseline(), hgap, width, labelWidth);
 			actualHeight = Math.max(actualHeight, height);
 
 			// Position origin to the next grid

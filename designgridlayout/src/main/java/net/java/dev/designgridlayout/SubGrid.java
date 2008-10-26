@@ -32,7 +32,7 @@ final class SubGrid implements ISubGrid
 	{
 		_parent = parent;
 		_label = label;
-		_gridspan = (gridspan < 0 ? 0 : gridspan);
+		_gridspan = (gridspan <= 0 ? 0 : gridspan);
 		if (_label != null)
 		{
 			_parent.add(_label);
@@ -123,8 +123,8 @@ final class SubGrid implements ISubGrid
 	}
 
 	// CSOFF: ParameterAssignment
-	public int layoutRow(LayoutHelper helper, int x, int y, 
-		int height, int baseline, int hgap, int rowWidth, int labelWidth)
+	public int layoutRow(LayoutHelper helper, int x, int height, int baseline, 
+		int hgap, int rowWidth, int labelWidth)
 	{
 		int actualHeight = 0;
 		// Account for label column
@@ -133,7 +133,7 @@ final class SubGrid implements ISubGrid
 			if (_label != null)
 			{
 				actualHeight = Math.max(0, helper.setSizeLocation(
-					_label, x, y, labelWidth, height, baseline));
+					_label, x, labelWidth, height, baseline));
 			}
 			x += labelWidth + hgap;
 		}
@@ -161,7 +161,7 @@ final class SubGrid implements ISubGrid
 				}
 				JComponent component = item.component();
 				actualHeight = Math.max(0, helper.setSizeLocation(
-					component, x, y, width, height, baseline));
+					component, x, width, height, baseline));
 				x += width + hgap;
 			}
 		}
