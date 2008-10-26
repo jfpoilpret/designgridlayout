@@ -571,8 +571,8 @@ public class DesignGridLayout implements LayoutManager
 
 		// Compute preferred & minimum widths for each sub-grid (without labels), 
 		// use largest width for all grids
-		int preferredWidth = computeGridWidth(true);
-		int minimumWidth = computeGridWidth(false);
+		int preferredWidth = computeGridWidth(PrefWidthExtractor.INSTANCE);
+		int minimumWidth = computeGridWidth(MinWidthExtractor.INSTANCE);
 
 		// Total height
 		int preferredHeight = totalHeight() + top() + bottom() + 1;
@@ -641,7 +641,7 @@ public class DesignGridLayout implements LayoutManager
 		return totalHeight;
 	}
 	
-	private int computeGridWidth(boolean preferred)
+	private int computeGridWidth(IExtractor extractor)
 	{
 		// Compute preferred width for each sub-grid (without labels), 
 		// use largest width for all grids
@@ -652,7 +652,7 @@ public class DesignGridLayout implements LayoutManager
 			int maxColumns = countGridColumns(grid);
 	
 			// Third, compute width to use for columns of grid
-			int maxWidth = maxGridRowsColumnWidth(grid, maxColumns, preferred);
+			int maxWidth = maxGridRowsColumnWidth(grid, maxColumns, extractor);
 	
 			// Then, calculate the preferred width for that grid
 			int gridWidth = maxWidth * maxColumns + (_hgap * (maxColumns - 1)) + 1;
@@ -676,28 +676,28 @@ public class DesignGridLayout implements LayoutManager
 		width += left() + right();
 
 		// Don't forget to account for the minimum width of non grid rows
-		width = Math.max(width, totalNonGridWidth(preferred));
+		width = Math.max(width, totalNonGridWidth(extractor));
 
 		return width;
 	}
 	
-	private int maxGridRowsColumnWidth(int grid, int maxColumns, boolean preferred)
+	private int maxGridRowsColumnWidth(int grid, int maxColumns, IExtractor extractor)
 	{
 		int maxWidth = 0;
 		for (AbstractRow row: _rowList)
 		{
 			maxWidth = Math.max(
-				maxWidth, row.maxColumnWidth(grid, maxColumns, preferred));
+				maxWidth, row.maxColumnWidth(grid, maxColumns, extractor));
 		}
 		return maxWidth;
 	}
 
-	private int totalNonGridWidth(boolean preferred)
+	private int totalNonGridWidth(IExtractor extractor)
 	{
 		int maxWidth = 0;
 		for (AbstractRow row: _rowList)
 		{
-			maxWidth = Math.max(maxWidth, row.totalNonGridWidth(_hgap, preferred));
+			maxWidth = Math.max(maxWidth, row.totalNonGridWidth(_hgap, extractor));
 		}
 		return maxWidth + left() + right() + 1;
 	}

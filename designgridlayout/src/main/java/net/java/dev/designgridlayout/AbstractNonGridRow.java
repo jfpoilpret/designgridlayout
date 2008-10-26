@@ -62,16 +62,12 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return _components;
 	}
 
-	@Override int totalNonGridWidth(int hgap, boolean preferred)
+	@Override int totalNonGridWidth(int hgap, IExtractor extractor)
 	{
-		int maxWidth = 0;
-		int compWidth = (preferred ? 
-			ComponentHelper.preferredWidth(_components) : 
-			ComponentHelper.minimumWidth(_components));
+		int compWidth = ComponentHelper.maxValues(_components, extractor);
 		int count = _components.size();
 		int width = compWidth * count + (hgap * (count - 1));
-		maxWidth = Math.max(maxWidth, width);
-		return maxWidth;
+		return width;
 	}
 
 	// CSOFF: ParameterAssignment

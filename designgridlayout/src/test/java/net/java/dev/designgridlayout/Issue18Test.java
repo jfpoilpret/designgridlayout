@@ -14,9 +14,24 @@
 
 package net.java.dev.designgridlayout;
 
-interface ISubGrid
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+
+@Test(groups = "utest")
+public class Issue18Test extends AbstractGuiTest
 {
-	int labelWidth();
-	int gridColumns();
-	int maxColumnWidth(int maxColumns, IExtractor extractor);
+	@AfterMethod public void closeGui()
+	{
+		stopGui();
+	}
+	
+	@Test public void checkAddressBookDemo() throws Exception
+	{
+		launchGui(AddressBookDemo.class);
+		checkSnapshot("preferred");
+		frame().resizeWidthTo(frame().target.getWidth() * 9 / 10);
+		checkSnapshot("smaller");
+		frame().resizeWidthTo(frame().target.getWidth() * 9 / 10);
+		checkSnapshot("smallest");
+	}
 }

@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Container;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -75,7 +74,7 @@ final class SubGrid implements ISubGrid
 		return columns;
 	}
 
-	public int maxColumnWidth(int maxColumns, boolean preferred)
+	public int maxColumnWidth(int maxColumns, IExtractor extractor)
 	{
 		int maxWidth = 0;
 		// Note columns (sum item spans), not the count of components
@@ -84,14 +83,11 @@ final class SubGrid implements ISubGrid
 
 		for (RowItem item: _items)
 		{
-			JComponent component = item.component();
-			Dimension d = (preferred ? 
-				component.getPreferredSize() : 
-				component.getMinimumSize());
+			int width = extractor.value(item.component());
 
 			// Ignores remainder (fudge), which is incorrect if remainder
 			// is greater than horizontal gap (hopefully rarely)
-			int width = (int) ((d.getWidth() * divisions) / item.span());
+			width = (int) ((width * divisions) / item.span());
 			maxWidth = Math.max(maxWidth, width);
 		}
 		return maxWidth;

@@ -129,10 +129,10 @@ final class HorizontalLayout implements LayoutManager
 	{
 		if (!_inited )
 		{
-			_baseline = ComponentHelper.baseline(_children);
-			_minWidth = ComponentHelper.sumMinimumWidth(_children);
-			_prefWidth = ComponentHelper.sumPreferredWidth(_children);
-			_height = ComponentHelper.preferredHeight(_children);
+			_baseline = ComponentHelper.maxValues(_children, BaselineExtractor.INSTANCE);
+			_minWidth = ComponentHelper.sumValues(_children, MinWidthExtractor.INSTANCE);
+			_prefWidth = ComponentHelper.sumValues(_children, PrefWidthExtractor.INSTANCE);
+			_height = ComponentHelper.maxValues(_children, PrefHeightExtractor.INSTANCE);
 
 			LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 			_gaps = new int[_children.size()];

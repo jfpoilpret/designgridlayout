@@ -16,72 +16,30 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-import org.jdesktop.layout.Baseline;
-
 final class ComponentHelper
 {
 	private ComponentHelper()
 	{
 	}
 	
-	static int baseline(Iterable<JComponent> components)
+	static int maxValues(Iterable<JComponent> components, IExtractor extractor)
 	{
-		int baseline = 0;
+		int max = 0;
 		for (JComponent component: components)
 		{
-			baseline = Math.max(baseline, Baseline.getBaseline(component));
+			max = Math.max(max, extractor.value(component));
 		}
-		return baseline;
+		return max;
 	}
-
-	static int preferredHeight(Iterable<JComponent> components)
+	
+	static int sumValues(Iterable<JComponent> components, IExtractor extractor)
 	{
-		int height = 0;
+		int sum = 0;
 		for (JComponent component: components)
 		{
-			height = Math.max(height, component.getPreferredSize().height);
+			sum += extractor.value(component);
 		}
-		return height;
-	}
-
-	static int preferredWidth(Iterable<JComponent> components)
-	{
-		int width = 0;
-		for (JComponent component: components)
-		{
-			width = Math.max(width, component.getPreferredSize().width);
-		}
-		return width;
-	}
-
-	static int minimumWidth(Iterable<JComponent> components)
-	{
-		int width = 0;
-		for (JComponent component: components)
-		{
-			width = Math.max(width, component.getMinimumSize().width);
-		}
-		return width;
-	}
-
-	static int sumPreferredWidth(Iterable<JComponent> components)
-	{
-		int width = 0;
-		for (JComponent component: components)
-		{
-			width += component.getPreferredSize().width;
-		}
-		return width;
-	}
-
-	static int sumMinimumWidth(Iterable<JComponent> components)
-	{
-		int width = 0;
-		for (JComponent component: components)
-		{
-			width += component.getMinimumSize().width;
-		}
-		return width;
+		return sum;
 	}
 	
 	static boolean isFixedHeight(

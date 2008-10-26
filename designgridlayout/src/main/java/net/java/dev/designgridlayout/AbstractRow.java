@@ -60,9 +60,9 @@ abstract class AbstractRow
 
 	final void init()
 	{
-		_maxWidth = ComponentHelper.preferredWidth(components());
-		_height = ComponentHelper.preferredHeight(components());
-		_baseline = ComponentHelper.baseline(components());
+		_maxWidth = ComponentHelper.maxValues(components(), PrefWidthExtractor.INSTANCE);
+		_height = ComponentHelper.maxValues(components(), PrefHeightExtractor.INSTANCE);
+		_baseline = ComponentHelper.maxValues(components(), BaselineExtractor.INSTANCE);
 		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, components());
 		if (fixedHeight || _growWeight == -1.0)
 		{
@@ -117,12 +117,12 @@ abstract class AbstractRow
 		return 0;
 	}
 
-	int maxColumnWidth(int grid, int maxColumns, boolean preferred)
+	int maxColumnWidth(int grid, int maxColumns, IExtractor extractor)
 	{
 		return 0;
 	}
 
-	int totalNonGridWidth(int hgap, boolean preferred)
+	int totalNonGridWidth(int hgap, IExtractor extractor)
 	{
 		return 0;
 	}
