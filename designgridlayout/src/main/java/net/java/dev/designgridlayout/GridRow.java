@@ -287,8 +287,8 @@ final class GridRow extends AbstractRow implements IGridRow
 				current += grid.items().size();
 			}
 			// We should normally never come there
-			//FIXME clearer message just in case we pass here
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException(
+				"Index: " + index + ", Size = " + size());
 		}
 
 		@Override public int size()
