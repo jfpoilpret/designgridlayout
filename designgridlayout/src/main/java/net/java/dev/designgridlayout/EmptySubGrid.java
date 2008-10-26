@@ -27,7 +27,7 @@ final class EmptySubGrid implements ISubGrid
 		return 0;
 	}
 
-	public int maxColumnWidth(int maxColumns)
+	public int maxColumnWidth(int maxColumns, boolean preferred)
 	{
 		return 0;
 	}

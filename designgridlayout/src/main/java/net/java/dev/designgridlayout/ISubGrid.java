@@ -18,5 +18,5 @@ interface ISubGrid
 {
 	int labelWidth();
 	int gridColumns();
-	int maxColumnWidth(int maxColumns);
+	int maxColumnWidth(int maxColumns, boolean preferred);
 }

@@ -54,6 +54,16 @@ final class ComponentHelper
 		return width;
 	}
 
+	static int minimumWidth(Iterable<JComponent> components)
+	{
+		int width = 0;
+		for (JComponent component: components)
+		{
+			width = Math.max(width, component.getMinimumSize().width);
+		}
+		return width;
+	}
+
 	static int sumPreferredWidth(Iterable<JComponent> components)
 	{
 		int width = 0;

@@ -117,12 +117,12 @@ abstract class AbstractRow
 		return 0;
 	}
 
-	int maxColumnWidth(int grid, int maxColumns)
+	int maxColumnWidth(int grid, int maxColumns, boolean preferred)
 	{
 		return 0;
 	}
 
-	int totalNonGridWidth(int hgap)
+	int totalNonGridWidth(int hgap, boolean preferred)
 	{
 		return 0;
 	}

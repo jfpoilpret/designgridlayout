@@ -175,9 +175,9 @@ final class GridRow extends AbstractRow implements IGridRow
 		return findGrid(grid).gridColumns();
 	}
 
-	@Override int maxColumnWidth(int grid, int maxColumns)
+	@Override int maxColumnWidth(int grid, int maxColumns, boolean preferred)
 	{
-		return findGrid(grid).maxColumnWidth(maxColumns);
+		return findGrid(grid).maxColumnWidth(maxColumns, preferred);
 	}
 
 	@Override int hgap()

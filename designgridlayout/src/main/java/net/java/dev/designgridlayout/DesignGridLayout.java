@@ -550,12 +550,11 @@ public class DesignGridLayout implements LayoutManager
 		if (_rowList.size() < 1)
 		{
 			_preferredSize = new Dimension(0, 0);
+			_minimumSize = new Dimension(0, 0);
 			return;
 		}
 
-		// Prior to computation start, reset everything and
-		// calculate margins and gutters
-		reset();
+		// Calculate margins and gutters
 		computeMargins();
 		computeGutters();
 
@@ -570,40 +569,10 @@ public class DesignGridLayout implements LayoutManager
 		// Second, calculate labels width
 		computeLabelWidths();
 
-		// Compute preferred width for each sub-grid (without labels), 
+		// Compute preferred & minimum widths for each sub-grid (without labels), 
 		// use largest width for all grids
-		//FIXME: need to care for grid-span in calculation!
-		int preferredWidth = 0;
-		for (int grid = 0; grid < _maxGrids; grid++)
-		{
-			int maxColumns = countGridColumns(grid);
-	
-			// Third, compute width to use for columns of grid
-			int maxWidth = maxGridRowsColumnWidth(grid, maxColumns);
-	
-			// Then, calculate the preferred width for that grid
-			int gridWidth = maxWidth * maxColumns + (_hgap * (maxColumns - 1)) + 1;
-	
-			preferredWidth = Math.max(preferredWidth, gridWidth);
-		}
-		// Now use preferred width for each subgrid
-		preferredWidth *= _maxGrids;
-		
-		// Account for labels
-		if (_totalLabelWidth > 0)
-		{
-			preferredWidth += _totalLabelWidth + (_maxGrids * _hgap);
-		}
-
-		// Add gaps between grids
-		// first hgap is correct (label to 1st comp), 2nd gap should be bigger
-		preferredWidth += (_maxGrids - 1) * _gridgap;
-		
-		// Add left and right margins
-		preferredWidth += left() + right();
-
-		// Don't forget to account for the minimum width of non grid rows
-		preferredWidth = Math.max(preferredWidth, totalNonGridWidth());
+		int preferredWidth = computeGridWidth(true);
+		int minimumWidth = computeGridWidth(false);
 
 		// Total height
 		int preferredHeight = totalHeight() + top() + bottom() + 1;
@@ -616,8 +585,7 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		_preferredSize = new Dimension(preferredWidth, preferredHeight);
-		//TODO: to be improved for Issue #18
-		_minimumSize = _preferredSize;
+		_minimumSize = new Dimension(minimumWidth, preferredHeight);
 	}
 	
 	private void countGrids()
@@ -673,22 +641,63 @@ public class DesignGridLayout implements LayoutManager
 		return totalHeight;
 	}
 	
-	private int maxGridRowsColumnWidth(int grid, int maxColumns)
+	private int computeGridWidth(boolean preferred)
+	{
+		// Compute preferred width for each sub-grid (without labels), 
+		// use largest width for all grids
+		//FIXME: need to care for grid-span in calculation!
+		int width = 0;
+		for (int grid = 0; grid < _maxGrids; grid++)
+		{
+			int maxColumns = countGridColumns(grid);
+	
+			// Third, compute width to use for columns of grid
+			int maxWidth = maxGridRowsColumnWidth(grid, maxColumns, preferred);
+	
+			// Then, calculate the preferred width for that grid
+			int gridWidth = maxWidth * maxColumns + (_hgap * (maxColumns - 1)) + 1;
+	
+			width = Math.max(width, gridWidth);
+		}
+		// Now use preferred width for each subgrid
+		width *= _maxGrids;
+		
+		// Account for labels
+		if (_totalLabelWidth > 0)
+		{
+			width += _totalLabelWidth + (_maxGrids * _hgap);
+		}
+
+		// Add gaps between grids
+		// first hgap is correct (label to 1st comp), 2nd gap should be bigger
+		width += (_maxGrids - 1) * _gridgap;
+		
+		// Add left and right margins
+		width += left() + right();
+
+		// Don't forget to account for the minimum width of non grid rows
+		width = Math.max(width, totalNonGridWidth(preferred));
+
+		return width;
+	}
+	
+	private int maxGridRowsColumnWidth(int grid, int maxColumns, boolean preferred)
 	{
 		int maxWidth = 0;
 		for (AbstractRow row: _rowList)
 		{
-			maxWidth = Math.max(maxWidth, row.maxColumnWidth(grid, maxColumns));
+			maxWidth = Math.max(
+				maxWidth, row.maxColumnWidth(grid, maxColumns, preferred));
 		}
 		return maxWidth;
 	}
 
-	private int totalNonGridWidth()
+	private int totalNonGridWidth(boolean preferred)
 	{
 		int maxWidth = 0;
 		for (AbstractRow row: _rowList)
 		{
-			maxWidth = Math.max(maxWidth, row.totalNonGridWidth(_hgap));
+			maxWidth = Math.max(maxWidth, row.totalNonGridWidth(_hgap, preferred));
 		}
 		return maxWidth + left() + right() + 1;
 	}

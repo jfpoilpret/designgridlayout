@@ -75,7 +75,7 @@ final class SubGrid implements ISubGrid
 		return columns;
 	}
 
-	public int maxColumnWidth(int maxColumns)
+	public int maxColumnWidth(int maxColumns, boolean preferred)
 	{
 		int maxWidth = 0;
 		// Note columns (sum item spans), not the count of components
@@ -85,7 +85,9 @@ final class SubGrid implements ISubGrid
 		for (RowItem item: _items)
 		{
 			JComponent component = item.component();
-			Dimension d = component.getPreferredSize();
+			Dimension d = (preferred ? 
+				component.getPreferredSize() : 
+				component.getMinimumSize());
 
 			// Ignores remainder (fudge), which is incorrect if remainder
 			// is greater than horizontal gap (hopefully rarely)
