@@ -63,35 +63,6 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	static final public int MARGIN_DEFAULT = -1;
 
-	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
-
-	private HeightGrowPolicy _heightTester = _defaultHeightTester;
-	
-	final private Container _parent;
-	final private OrientationPolicy _orientation;
-
-	private Dimension _layoutSize = null;
-
-	private int _top = 0;
-	private int _left = 0;
-	private int _bottom = 0;
-	private int _right = 0;
-
-	private int _hgap = 0;
-	private int _gridgap = 0;
-
-	private double _totalWeight = 0.0;
-	
-	private int _explicitTop = MARGIN_DEFAULT;
-	private int _explicitLeft = MARGIN_DEFAULT;
-	private int _explicitBottom = MARGIN_DEFAULT;
-	private int _explicitRight = MARGIN_DEFAULT;
-	
-	final private List<AbstractRow> _rowList = new ArrayList<AbstractRow>();
-	final private List<Integer> _labelWidths = new ArrayList<Integer>();
-	private int _totalLabelWidth;
-	private int _maxGrids;
-
 	/**
 	 * Builds a DesignGridLayout instance attached to a {@link Container}.
 	 * This instance should be then used to add rows and components to the parent
@@ -115,7 +86,6 @@ public class DesignGridLayout implements LayoutManager
 		_parent = parent;
 		_parent.setLayout(this);
 		_orientation = new OrientationPolicy(parent);
-		reset();
 	}
 
 	/**
@@ -410,7 +380,7 @@ public class DesignGridLayout implements LayoutManager
 			if (_totalWeight > 0.0)
 			{
 				totalExtraHeight = Math.max(
-					0, (parent.getHeight() - _layoutSize.height) / _totalWeight);
+					0, (parent.getHeight() - _preferredSize.height) / _totalWeight);
 			}
 			
 			// Check layout orientation
@@ -419,6 +389,9 @@ public class DesignGridLayout implements LayoutManager
 			int x = left();
 			int y = top();
 			int parentWidth = parent.getWidth();
+			// Never layout components smaller than the minimu size
+			parentWidth = Math.max(parentWidth, _minimumSize.width);
+
 			int rowWidth = parentWidth - left() - right();
 			// Calculate the total width assigned exclusively to sub-grids components
 			int gridsWidth = rowWidth;
@@ -446,7 +419,12 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public Dimension minimumLayoutSize(Container parent)
 	{
-		return preferredLayoutSize(parent);
+		checkParent(parent);
+		//TODO check if the next line is really useful... Remove it if not
+		reset();
+		initialize();
+		// Note: Dimension instances can be mutated by an outsider
+		return new Dimension(_minimumSize);
 	}
 
 	/* (non-Javadoc)
@@ -458,7 +436,8 @@ public class DesignGridLayout implements LayoutManager
 		//TODO check if the next line is really useful... Remove it if not
 		reset();
 		initialize();
-		return _layoutSize;
+		// Note: Dimension instances can be mutated by an outsider
+		return new Dimension(_preferredSize);
 	}
 	
 	private void checkParent(Container parent)
@@ -516,6 +495,8 @@ public class DesignGridLayout implements LayoutManager
 		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 
 		// Handle horizontal gaps
+		_hgap = 0;
+		_gridgap = 0;
 		for (AbstractRow row: _rowList)
 		{
 			_hgap = Math.max(_hgap, row.hgap());
@@ -559,7 +540,7 @@ public class DesignGridLayout implements LayoutManager
 
 	private void initialize()
 	{
-		if (_layoutSize != null)
+		if (_preferredSize != null)
 		{
 			return;
 		}
@@ -567,7 +548,7 @@ public class DesignGridLayout implements LayoutManager
 		// Make sure there's something to do
 		if (_rowList.size() < 1)
 		{
-			_layoutSize = new Dimension(0, 0);
+			_preferredSize = new Dimension(0, 0);
 			return;
 		}
 
@@ -633,7 +614,9 @@ public class DesignGridLayout implements LayoutManager
 			_totalWeight += row.growWeight();
 		}
 
-		_layoutSize = new Dimension(preferredWidth, preferredHeight);
+		_preferredSize = new Dimension(preferredWidth, preferredHeight);
+		//TODO: to be improved for Issue #18
+		_minimumSize = _preferredSize;
 	}
 	
 	private void countGrids()
@@ -664,6 +647,7 @@ public class DesignGridLayout implements LayoutManager
 	
 	private void computeLabelWidths()
 	{
+		_labelWidths.clear();
 		_totalLabelWidth = 0;
 		for (int i = 0; i < _maxGrids; i++)
 		{
@@ -710,51 +694,57 @@ public class DesignGridLayout implements LayoutManager
 	
 	private void computeMargins()
 	{
-		// Make sure there's something to do
-		if (_rowList.size() > 0)
-		{
-			// Handle top row
-			computeTopMargin();
-		
-			// Handle bottom row
-			computeBottomMargin();
-		
-			// Handle left-most and right-most columns
-			computeLeftRightMargins();
-		}
+		// Handle top row
+		computeTopMargin();
+	
+		// Handle bottom row
+		computeBottomMargin();
+	
+		// Handle left-most and right-most columns
+		computeLeftRightMargins();
 	}
 	
 	private void computeTopMargin()
 	{
-		AbstractRow topRow = _rowList.get(0);
-		for (JComponent component: topRow.components())
+		_top = 0;
+		if (!_rowList.isEmpty())
 		{
-			int gap = getContainerGap(component, SwingConstants.NORTH);
-			_top = Math.max(_top, gap);
+			AbstractRow topRow = _rowList.get(0);
+			for (JComponent component: topRow.components())
+			{
+				int gap = getContainerGap(component, SwingConstants.NORTH);
+				_top = Math.max(_top, gap);
+			}
 		}
 	}
 
 	private void computeBottomMargin()
 	{
-		int maxComboHeight = 0;
-		int bottomGap = 0;
-		AbstractRow bottomRow = _rowList.get(_rowList.size() - 1);
-		for (JComponent component: bottomRow.components())
+		_bottom = 0;
+		if (!_rowList.isEmpty())
 		{
-			int height = component.getPreferredSize().height;
-			int gap = getContainerGap(component, SwingConstants.SOUTH);
-			int comboHeight = height + gap;
-			if (comboHeight > maxComboHeight)
+			int maxComboHeight = 0;
+			int bottomGap = 0;
+			AbstractRow bottomRow = _rowList.get(_rowList.size() - 1);
+			for (JComponent component: bottomRow.components())
 			{
-				maxComboHeight = comboHeight;
-				bottomGap = gap;
+				int height = component.getPreferredSize().height;
+				int gap = getContainerGap(component, SwingConstants.SOUTH);
+				int comboHeight = height + gap;
+				if (comboHeight > maxComboHeight)
+				{
+					maxComboHeight = comboHeight;
+					bottomGap = gap;
+				}
 			}
+			_bottom = Math.max(_bottom, bottomGap);
 		}
-		_bottom = Math.max(_bottom, bottomGap);
 	}
 	
 	private void computeLeftRightMargins()
 	{
+		_left = 0;
+		_right = 0;
 		for (AbstractRow row: _rowList)
 		{
 			List<JComponent> components = row.components();
@@ -771,19 +761,36 @@ public class DesignGridLayout implements LayoutManager
 	
 	private void reset()
 	{
-		_layoutSize = null;
-
-		_top = 0;
-		_left = 0;
-		_bottom = 0;
-		_right = 0;
-		
-		_labelWidths.clear();
-		_totalLabelWidth = 0;
-		
-		_maxGrids = 0;
-		_hgap = 0;
-		_gridgap = 0;
-		_totalWeight = 0.0;
+		_preferredSize = null;
 	}
+
+	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
+
+	private HeightGrowPolicy _heightTester = _defaultHeightTester;
+	
+	final private Container _parent;
+	final private OrientationPolicy _orientation;
+
+	private Dimension _preferredSize = null;
+	private Dimension _minimumSize = null;
+
+	private int _top;
+	private int _left;
+	private int _bottom;
+	private int _right;
+
+	private int _hgap;
+	private int _gridgap;
+
+	private double _totalWeight;
+	
+	private int _explicitTop = MARGIN_DEFAULT;
+	private int _explicitLeft = MARGIN_DEFAULT;
+	private int _explicitBottom = MARGIN_DEFAULT;
+	private int _explicitRight = MARGIN_DEFAULT;
+	
+	final private List<AbstractRow> _rowList = new ArrayList<AbstractRow>();
+	final private List<Integer> _labelWidths = new ArrayList<Integer>();
+	private int _totalLabelWidth;
+	private int _maxGrids;
 }
