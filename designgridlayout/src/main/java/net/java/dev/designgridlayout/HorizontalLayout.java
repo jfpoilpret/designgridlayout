@@ -28,18 +28,6 @@ import org.jdesktop.layout.LayoutStyle;
 
 final class HorizontalLayout implements LayoutManager
 {
-	private final Container _parent;
-	private final HeightGrowPolicy _heightTester;
-	private final OrientationPolicy _orientation;
-	private final List<JComponent> _children = new ArrayList<JComponent>();
-	private boolean _inited = false;
-	private int _baseline = 0;
-	private int _height = 0;
-	private int _minWidth = 0;
-	private int _prefWidth = 0;
-	private int[] _gaps = null;
-	private int _gap = 0;
-	
 	HorizontalLayout(
 		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
@@ -164,4 +152,16 @@ final class HorizontalLayout implements LayoutManager
 			_inited = true;
 		}
 	}
+
+	private final Container _parent;
+	private final HeightGrowPolicy _heightTester;
+	private final OrientationPolicy _orientation;
+	private final List<JComponent> _children = new ArrayList<JComponent>();
+	private boolean _inited = false;
+	private int _baseline = 0;
+	private int _height = 0;
+	private int _minWidth = 0;
+	private int _prefWidth = 0;
+	private int[] _gaps = null;
+	private int _gap = 0;
 }

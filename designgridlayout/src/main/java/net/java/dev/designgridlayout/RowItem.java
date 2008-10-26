@@ -18,9 +18,6 @@ import javax.swing.JComponent;
 
 class RowItem
 {
-	final private JComponent _component;
-	final private int _span;
-
 	RowItem(int span, JComponent component)
 	{
 		_component = component;
@@ -36,4 +33,7 @@ class RowItem
 	{
 		return _span;
 	}
+
+	final private JComponent _component;
+	final private int _span;
 }
