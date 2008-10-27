@@ -452,22 +452,26 @@ public class DesignGridLayout implements LayoutManager
 
 	private int top()
 	{
-		return (_explicitTop <= MARGIN_DEFAULT ? _top : _explicitTop);
+		return (_explicitTop <= MARGIN_DEFAULT ? _top : _explicitTop) + 
+			_parent.getInsets().top;
 	}
 
 	private int left()
 	{
-		return (_explicitLeft <= MARGIN_DEFAULT ? _left : _explicitLeft);
+		return (_explicitLeft <= MARGIN_DEFAULT ? _left : _explicitLeft) +
+			_parent.getInsets().left;
 	}
 
 	private int bottom()
 	{
-		return (_explicitBottom <= MARGIN_DEFAULT ? _bottom : _explicitBottom);
+		return (_explicitBottom <= MARGIN_DEFAULT ? _bottom : _explicitBottom) +
+			_parent.getInsets().bottom;
 	}
 
 	private int right()
 	{
-		return (_explicitRight <= MARGIN_DEFAULT ? _right : _explicitRight);
+		return (_explicitRight <= MARGIN_DEFAULT ? _right : _explicitRight) +
+			_parent.getInsets().right;
 	}
 
 	private int getContainerGap(JComponent component, int position)
@@ -677,7 +681,7 @@ public class DesignGridLayout implements LayoutManager
 
 		// Don't forget to account for the minimum width of non grid rows
 		width = Math.max(width, totalNonGridWidth(extractor));
-
+		
 		return width;
 	}
 	
