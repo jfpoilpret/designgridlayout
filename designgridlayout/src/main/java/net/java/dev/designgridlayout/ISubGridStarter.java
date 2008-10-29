@@ -17,14 +17,14 @@ package net.java.dev.designgridlayout;
 import javax.swing.JLabel;
 
 /**
- * Any row created by {@link DesignGridLayout#row()} implements this
- * interface. This interface is used to start a new sub-grid in the current
- * row.
+ * This interface is used to start a new canonical grid row (when called from
+ * {@link DesignGridLayout#row()}), or to start a new canonical sub-grid in the
+ * current grid row (when called from {@link IGridRow}). 
  * <p/>
- * Using one of the {@code label()} methods of this interface is mandatory
+ * Using one of the {@code grid()} methods of this interface is mandatory
  * before adding any further component to the current row.
  * <p/>
- * Every time {@code label()} is called for the current row, a new sub-grid is
+ * Every time {@code grid()} is called for the current row, a new sub-grid is
  * started, with its own specific label column, and additional gap from the
  * previous sub-grid.
  * 
@@ -40,13 +40,13 @@ public interface ISubGridStarter
 	 * are automatically right-aligned.
 	 * <p/>
 	 * The new sub-grid initiated by this call will span all space on its right
-	 * unless another call to a {@code label()} method occurs in the same row. 
+	 * unless another call to a {@code grid()} method occurs in the same row. 
 	 * 
 	 * @param label the label to add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IGridRow label(JLabel label);
+	public abstract IGridRow grid(JLabel label);
 	
 	/**
 	 * Starts a new sub-grid in the row, starting with a label.
@@ -60,11 +60,11 @@ public interface ISubGridStarter
 	 * 
 	 * @param label the label to add to this row
 	 * @param gridspan the number of sub-grids this new sub-grid should span;
-	 * if {@code <= 0}, then the behavior is the same as {@link #label(JLabel)}.
+	 * if {@code <= 0}, then the behavior is the same as {@link #grid(JLabel)}.
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IGridRow label(JLabel label, int gridspan);
+	public abstract IGridRow grid(JLabel label, int gridspan);
 
 	/**
 	 * Starts a new sub-grid in the row, starting with an empty label.
@@ -74,12 +74,12 @@ public interface ISubGridStarter
 	 * grid. Labels are automatically right-aligned.
 	 * <p/>
 	 * The new sub-grid initiated by this call will span all space on its right
-	 * unless another call to a {@code label()} method occurs in the same row. 
+	 * unless another call to a {@code grid()} method occurs in the same row. 
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IGridRow label();
+	public abstract IGridRow grid();
 
 	/**
 	 * Starts a new sub-grid in the row, starting with an empty label.
@@ -92,9 +92,9 @@ public interface ISubGridStarter
 	 * sub-grids on its right, as determined by {@code gridspan}.
 	 * 
 	 * @param gridspan the number of sub-grids this new sub-grid should span;
-	 * if {@code <= 0}, then the behavior is the same as {@link #label()}.
+	 * if {@code <= 0}, then the behavior is the same as {@link #grid()}.
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IGridRow label(int gridspan);
+	public abstract IGridRow grid(int gridspan);
 }

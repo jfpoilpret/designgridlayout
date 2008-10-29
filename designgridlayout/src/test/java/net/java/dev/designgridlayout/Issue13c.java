@@ -29,27 +29,27 @@ public class Issue13c extends AbstractIssue13
 	@Override public void build(DesignGridLayout layout)
 	{
 		// Simple cases, multi-columns on sub-grid with 1-gridspan
-		layout.row().label(label("label1"))	.add(field("XX1a"), field("XX1b"), field("XX1c"))
-					.label(label("lbl2"))	.add(field("XX2a"), field("XX2b"), field("XX2c"))
-					.label(label("label3"))	.add(field("XX3a"), field("XX3b"), field("XX3c"));
-		layout.row().label(label("L4"))		.add(field("XX4a"), field("XX4b"))	
-					.label(label("L5"))		.add(field("XX5a"), field("XX5b"))	
-					.label(label("L6"))		.add(field("XX6a"), field("XX6b"));
-		layout.row().label()				.add(field("XXa"))	
-					.label()				.add(field("XXb"))	
-					.label()				.add(field("XXc"));
+		layout.row().grid(label("label1"))	.add(field("XX1a"), field("XX1b"), field("XX1c"))
+					.grid(label("lbl2"))	.add(field("XX2a"), field("XX2b"), field("XX2c"))
+					.grid(label("label3"))	.add(field("XX3a"), field("XX3b"), field("XX3c"));
+		layout.row().grid(label("L4"))		.add(field("XX4a"), field("XX4b"))	
+					.grid(label("L5"))		.add(field("XX5a"), field("XX5b"))	
+					.grid(label("L6"))		.add(field("XX6a"), field("XX6b"));
+		layout.row().grid()					.add(field("XXa"))	
+					.grid()					.add(field("XXb"))	
+					.grid()					.add(field("XXc"));
 
-		layout.row().label(label("Lbl7"),2)	.add(field("XXXX7a"), field("XXXX7b"));
-		layout.row().label(label("Lbl8"), 2).add(field("XX8a"), field("XX8b"), field("XX8c"));
-		layout.row().label(label("Lbl9"), 2).add(field("XX9a"), field("XX9b"), field("XX9c"), field("XX9d"));
+		layout.row().grid(label("Lbl7"),2)	.add(field("XXXX7a"), field("XXXX7b"));
+		layout.row().grid(label("Lbl8"), 2)	.add(field("XX8a"), field("XX8b"), field("XX8c"));
+		layout.row().grid(label("Lbl9"), 2)	.add(field("XX9a"), field("XX9b"), field("XX9c"), field("XX9d"));
 
-		layout.row().label(label("Lbl10"))	.add(field("XXX10a"), field("XXX10b"));
-		layout.row().label(label("Lbl11"))	.add(field("XX11a"), field("XX11b"), field("XX11c"));
-		layout.row().label(label("Lbl12"))	.add(field("XX12a"), field("XX12b"), field("XX12c"), field("XX12d"));
-		layout.row().label(label("Lbl13"))	.add(field("XX13a"), field("XX13b"), field("XX13c"), field("XX13d"), field("XX13e"));
+		layout.row().grid(label("Lbl10"))	.add(field("XXX10a"), field("XXX10b"));
+		layout.row().grid(label("Lbl11"))	.add(field("XX11a"), field("XX11b"), field("XX11c"));
+		layout.row().grid(label("Lbl12"))	.add(field("XX12a"), field("XX12b"), field("XX12c"), field("XX12d"));
+		layout.row().grid(label("Lbl13"))	.add(field("XX13a"), field("XX13b"), field("XX13c"), field("XX13d"), field("XX13e"));
 
 		layout.emptyRow();
-		layout.centerRow().add(button("OK"), button("Cancel"));
+		layout.row().center().add(button("OK"), button("Cancel"));
 	}
 	// CSON: LineLength
 

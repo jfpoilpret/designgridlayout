@@ -35,7 +35,7 @@ public class MyPanel extends JPanel {
 public class MyPanel extends JPanel {
     public MyPanel() {
         DesignGridLayout layout = new DesignGridLayout(this);
-        layout.row().label().add(new JLabel("Hello"));
+        layout.row().grid().add(new JLabel("Hello"));
     }
 }
 +------------------------------------------------------------------------------+
@@ -57,8 +57,8 @@ public class MyPanel extends JPanel {
 	
 +------------------------------------------------------------------------------+
 DesignGridLayout layout = new DesignGridLayout(this);
-layout.row().label(new JLabel("First name")).add(new JTextField());
-layout.row().label(new JLabel("Last name")).add(new JTextField());
+layout.row().grid(new JLabel("First name")).add(new JTextField());
+layout.row().grid(new JLabel("Last name")).add(new JTextField());
 +------------------------------------------------------------------------------+
 	
 	The snippet above creates 2 rows, each with a label and a text field.
@@ -68,9 +68,9 @@ layout.row().label(new JLabel("Last name")).add(new JTextField());
 	
 +------------------------------------------------------------------------------+
 DesignGridLayout layout = new DesignGridLayout(this);
-layout.row().label(new JLabel("First name")).add(new JTextField());
-layout.row().label(new JLabel("Middle initial")).add(new JTextField());
-layout.row().label(new JLabel("Last name")).add(new JTextField());
+layout.row().grid(new JLabel("First name")).add(new JTextField());
+layout.row().grid(new JLabel("Middle initial")).add(new JTextField());
+layout.row().grid(new JLabel("Last name")).add(new JTextField());
 +------------------------------------------------------------------------------+
 	
 	DesignGridLayout always takes care of the correct spacing between components
@@ -108,16 +108,16 @@ public class Example1a
         JPanel top = new JPanel();		
         DesignGridLayout layout = new DesignGridLayout(top);
 
-        // You can add components one line at a time
-        IRow row = layout.row().label();
+        // You can add components one line at a time (not advised)
+        IRow row = layout.row().grid();
         row.add(button());
         row.add(button());
 
         // Or using method chaining
-        layout.row().label().add(button()).add(button());
+        layout.row().grid().add(button()).add(button());
 
         // Or, even better, using variable arguments
-        layout.row().label().add(button(), button());
+        layout.row().grid().add(button(), button());
 
         frame.add(top);
         frame.pack();
@@ -143,10 +143,10 @@ public class Example1a
 	Example 1b reflects the design above.
 	
 +------------------------------------------------------------------------------+
-layout.row().label().add(button()).add(button());
-layout.row().label().add(button()).add(button()).add(button());
-layout.row().label().add(button(), 2).add(button());
-layout.row().label().add(button()).add(button()).add(button()).empty();
+layout.row().grid().add(button()).add(button());
+layout.row().grid().add(button()).add(button()).add(button());
+layout.row().grid().add(button(), 2).add(button());
+layout.row().grid().add(button()).add(button()).add(button()).empty();
 +------------------------------------------------------------------------------+
 
 [images/Example1b.png] Example 1b
@@ -172,10 +172,10 @@ layout.row().label().add(button()).add(button()).add(button()).empty();
 	Most forms have labels for each row. So let's add some for Example 1c.
 
 +------------------------------------------------------------------------------+
-layout.row().label(new JLabel("Row 1")).add(button().add(button());
-layout.row().label(new JLabel("Row 2")).add(button().add(button().add(button());
-layout.row().label(new JLabel("Row 3")).add(button(), 2).add( button());
-layout.row().label(new JLabel("Row 4")).add(button()).add(button()).add(button()).empty());
+layout.row().grid(new JLabel("Row 1")).add(button().add(button());
+layout.row().grid(new JLabel("Row 2")).add(button().add(button().add(button());
+layout.row().grid(new JLabel("Row 3")).add(button(), 2).add( button());
+layout.row().grid(new JLabel("Row 4")).add(button()).add(button()).add(button()).empty());
 +------------------------------------------------------------------------------+
 
 [images/Example1c.png] Example 1c
@@ -193,7 +193,7 @@ layout.row().label(new JLabel("Row 4")).add(button()).add(button()).add(button()
 
 +------------------------------------------------------------------------------+
 layout.emptyRow();
-layout.rightRow().add(new JButton("Cancel")).add(new JButton("OK"));
+layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 +------------------------------------------------------------------------------+
 
 [images/Example1d.png] Example 1d

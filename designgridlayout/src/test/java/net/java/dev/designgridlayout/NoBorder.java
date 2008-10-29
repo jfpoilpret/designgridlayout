@@ -24,9 +24,9 @@ public class NoBorder extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label("First Label"))	.add(field("field1"), field("field2"), field("field3"));
-		layout.row().label(label("Second Label"))	.add(field("field1"), field("field2"), field("field3"));
-		layout.row().label(label("Third Label"))	.add(field("field1"), field("field2"), field("field3"));
-		layout.centerRow().add(button());
+		layout.row().grid(label("First Label"))	.add(field("field1"), field("field2"), field("field3"));
+		layout.row().grid(label("Second Label")).add(field("field1"), field("field2"), field("field3"));
+		layout.row().grid(label("Third Label"))	.add(field("field1"), field("field2"), field("field3"));
+		layout.row().center().add(button());
 	}
 }

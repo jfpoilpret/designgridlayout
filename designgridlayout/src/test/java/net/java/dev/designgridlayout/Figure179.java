@@ -38,18 +38,18 @@ public class Figure179 extends AbstractBaseExample
 		familyList.setVisibleRowCount(6);
 		facesList.setVisibleRowCount(6);
 
-		layout.row().label(usageLabel).add(anyButton).add(textButton)
+		layout.row().grid(usageLabel).add(anyButton).add(textButton)
 			.add(displayButton).add(humorButton);
-		layout.row().label(fontLabel).add(familyListScroller).add(facesListScroller);
+		layout.row().grid(fontLabel).add(familyListScroller).add(facesListScroller);
 		layout.emptyRow();
-		layout.row().label(sizeLabel).add(sizeSpinner).add(sizePointsLabel)
+		layout.row().grid(sizeLabel).add(sizeSpinner).add(sizePointsLabel)
 			.add(allCapsButton, 2).add(superscriptButton, 2).empty(2);
-		layout.row().label(leadingLabel).add(leaderSpinner).add(leadingPointsLabel)
+		layout.row().grid(leadingLabel).add(leaderSpinner).add(leadingPointsLabel)
 			.add(smallCapsButton, 2).add(subscriptButton, 2).empty(2);
-		layout.row().label(kernLabel).add(kernSpinner).add(kernPointsLabel)
+		layout.row().grid(kernLabel).add(kernSpinner).add(kernPointsLabel)
 			.add(hightlightButton, 2).add(redlineButton, 2).empty(2);
 		layout.emptyRow();
-		layout.centerRow().add(setFontButton).add(encodingButton).add(previewButton);
+		layout.row().center().add(setFontButton).add(encodingButton).add(previewButton);
 	}
 	// CSON: MagicNumber
 

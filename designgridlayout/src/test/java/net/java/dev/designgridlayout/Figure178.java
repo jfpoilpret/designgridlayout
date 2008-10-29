@@ -55,20 +55,20 @@ public class Figure178 extends AbstractBaseExample
 		applyButton = new JButton("Apply");
 		JButton resetButton = new JButton("Reset");
 
-		layout.row().label(label("Name:")).add(nameField);
-		layout.row().label(label("Address:"))
+		layout.row().grid(label("Name:")).add(nameField);
+		layout.row().grid(label("Address:"))
 			.add(homeButton).add(officeButton).add(alternateButton);
-		layout.row().label(label("Street:")).add(streetField);
-		layout.row().label(label("City/State:")).add(cityField, 2).add(stateField);
-		layout.row().label(label("Zip:")).add(zipField).empty(2);
-		layout.row().label(label("Phone/FAX:")).add(phoneField).add(faxField).empty();
-		layout.row().label(label("E-mail:")).add(emailField, 2).empty();
+		layout.row().grid(label("Street:")).add(streetField);
+		layout.row().grid(label("City/State:")).add(cityField, 2).add(stateField);
+		layout.row().grid(label("Zip:")).add(zipField).empty(2);
+		layout.row().grid(label("Phone/FAX:")).add(phoneField).add(faxField).empty();
+		layout.row().grid(label("E-mail:")).add(emailField, 2).empty();
 		layout.emptyRow();
-		layout.row().label(label("Interests:"))
+		layout.row().grid(label("Interests:"))
 			.add(compilerCheckBox).add(databaseCheckBox).add(productivityCheckBox);
-		layout.row().label().add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
+		layout.row().grid().add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
 		layout.emptyRow();
-		layout.centerRow().add(applyButton).add(resetButton);
+		layout.row().center().add(applyButton).add(resetButton);
 	}
 	// CSON: MagicNumber
 

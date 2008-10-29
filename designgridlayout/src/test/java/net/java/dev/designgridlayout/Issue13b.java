@@ -28,21 +28,21 @@ public class Issue13b extends AbstractIssue13
 		switch (_panel)
 		{
 			case 0:
-			layout.row().label(label("label1"))	.add(field("XX1"));
-			layout.row().label(label("L4"))		.add(field("XX4"));
-			layout.row().label()				.add(field("XXa"));
+			layout.row().grid(label("label1"))	.add(field("XX1"));
+			layout.row().grid(label("L4"))		.add(field("XX4"));
+			layout.row().grid()					.add(field("XXa"));
 			break;
 			
 			case 1:
-			layout.row().label(label("lbl2"))	.add(field("XX2"));
-			layout.row().label(label("L5"))		.add(field("XX5"));
-			layout.row().label()				.add(field("XXb"));
+			layout.row().grid(label("lbl2"))	.add(field("XX2"));
+			layout.row().grid(label("L5"))		.add(field("XX5"));
+			layout.row().grid()					.add(field("XXb"));
 			break;
 				
 			case 2:
-			layout.row().label(label("label3"))	.add(field("XX3"));
-			layout.row().label(label("L6"))		.add(field("XX6"));
-			layout.row().label()				.add(field("XXc"));
+			layout.row().grid(label("label3"))	.add(field("XX3"));
+			layout.row().grid(label("L6"))		.add(field("XX6"));
+			layout.row().grid()					.add(field("XXc"));
 			break;
 		}
 	}

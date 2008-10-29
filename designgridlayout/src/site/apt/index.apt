@@ -92,7 +92,9 @@ DesignGridLayout Features (version 1.0)
 		rows and <<right-aligned>> rows (useful for command buttons)
 		
 	*	Special <<"label" columns>> (in canonical grid rows) that have constant 
-		width during horizontal resize (no waste of space after resize)
+		width during horizontal resize (no waste of space after resize);
+		DesignGridLayout supports <<several groups of columns>>, each having 
+		their dedicated label column
 		
 	*	<<Smart horizontal resize>> that preserves the UI balance (by enlarging 
 		all components consistently)
@@ -105,7 +107,8 @@ DesignGridLayout Features (version 1.0)
 		
 	*	Automatic support for <<right-to-left languages>>
 	
-	*	No need for any hard-coded position or spacing
+	*	Total <<resolution independence>>: no need for any hard-coded position 
+		or spacing
 		
 Roadmap
 
@@ -117,6 +120,7 @@ Roadmap
 		
 	[1.2]	Planned during 1st Quarter 2009
 	
-		*	Support for HiDPI devices (resolution independence)
+		*	Support for layouts synchronization: allows consistent alignment 
+			among different layouts (usefult for tabbed panes or wizard dialogs)
 	
 		[]

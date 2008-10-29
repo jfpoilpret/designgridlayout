@@ -27,10 +27,10 @@
  *     public MyPanel() {
  *         DesignGridLayout layout = new DesignGridLayout(this);
  *         
- *         layout.row().label(labelA).add(fieldA);
- *         layout.row().label(labelB).add(fieldB);
+ *         layout.row().grid(labelA).add(fieldA);
+ *         layout.row().grid(labelB).add(fieldB);
  *         //...
- *         layout.centerRow().add(okButton, cancelButton);
+ *         layout.row().center().add(okButton, cancelButton);
  *     }
  *     
  *     private JLabel labelA = new JLabel("aaa");
@@ -46,7 +46,8 @@
  * set through one single line of source code. Each component is added from left 
  * to right.
  * <p/>
- * Labels have a special treatment: they are automatically right-aligned and the 
+ * Labels (when created with {@link ISubGridStarter#grid(javax.swing.JLabel)})
+ * have a special treatment: they are automatically right-aligned and the 
  * label column in the panel has constant width.
  * <p/>
  * All gaps between components and between components and panel borders are
@@ -67,7 +68,8 @@
  *  <li>Right Row: all components in this row are aligned on the right, they are
  *  	never sized bigger than their preferred size (except when {@code fill()}
  *  	is used (see below))</li>
- *  <li>Empty Row: this row has no component but has a fixed height. This is 
+ *  <li>Empty Row: this row has no component but has a fixed height (automatically
+ *  	calculated to "visually separate" two groups of components). This is 
  *  	useful when you want to add some space between groups of rows.</li>
  * </ul>
  * Center, Left and Right Rows have a special "fill" option that allows their 
@@ -76,7 +78,7 @@
  * fill all the extra space. This can be useful for instance when you want to 
  * visually separate groups of rows:
  * <pre>
- *     layout.leftRow().fill().add(new JLabel("Group"), new JSeparator());
+ *     layout.row().left().fill().add(new JLabel("Group"), new JSeparator());
  * </pre>
  * <p/>
  * DesignGridLayout allows you to add empty rows with a height that is 
@@ -84,19 +86,18 @@
  * in order to introduce some space in your layout (e.g. to separate different 
  * groups of logically releated items:
  * <pre>
- *     layout.row().label().add(...);
+ *     layout.row().grid().add(...);
  *     layout.emptyRow();
- *     layout.rightRow().add(new JButton("OK"), new JButton("Cancel"));
+ *     layout.row().right().add(new JButton("OK"), new JButton("Cancel"));
  * </pre>
- * In grid rows (added by 
- * {@link net.java.dev.designgridlayout.DesignGridLayout#row()}), you may specify
- * that a given component spans several columns, this way, you can ensure that
- * fields that require longer input occupy enough space to render this input,
- * compared with shorter fields):
+ * In grid rows (added by calling {@code DesignGridLayout.row().grid()}), you 
+ * may specify that a given component spans several columns, this way, you can 
+ * ensure that fields that require longer input occupy enough space to render 
+ * this input, compared with shorter fields):
  * <pre>
- *     layout.row().label().add(new JTextField(), new JTextField());
- *     layout.row().label().add(new JTextField(), 2).add(new JTextField());
- *     layout.row().label().add(new JTextField()).empty();
+ *     layout.row().grid().add(new JTextField(), new JTextField());
+ *     layout.row().grid().add(new JTextField(), 2).add(new JTextField());
+ *     layout.row().grid().add(new JTextField()).empty();
  * </pre>
  * In this snippet, the first row has two short text fields on two columns (one
  * per field); the second row has one long text field (on two columns) and one 
@@ -107,10 +108,12 @@
  * associated span (when explicitly specified). Note however, that you can also
  * introduce empty columns in such a row:
  * <pre>
- *     layout.row().label().empty().add(new JTextField()).empty(2);
+ *     layout.row().grid().empty().add(new JTextField()).empty(2);
  * </pre>
  * This code creates a row with four columns, but only the second contains a 
  * real component.
+ * <p/>
+ * TODO additional comments on canonical sub-grids
  * 
  * @author Jason Aaron Osgood
  * @author Jean-Francois Poilpret

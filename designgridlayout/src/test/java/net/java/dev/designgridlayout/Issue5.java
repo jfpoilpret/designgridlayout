@@ -50,14 +50,14 @@ public class Issue5 extends AbstractBaseExample
 	
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label("Look & Feel")).add(_plafs);
-		layout.row().label(label("Label2")).add(table());
-		layout.row().label(label("L3")).add(field("Field31")).empty();
-		layout.row().label(label("Lbl4")).add(table()).add(table());
-		layout.row().label(label("L5")).add(field("F5")).add(slider(JSlider.HORIZONTAL));
-		layout.row().label(label("L6")).add(list()).add(textarea("Wonderful sound"));
-		layout.row().label(label("Power")).add(slider(JSlider.VERTICAL));
-		layout.centerRow().add(systemLafSetter(), javaLafSetter(), lafSetter());
+		layout.row().grid(label("Look & Feel")).add(_plafs);
+		layout.row().grid(label("Label2")).add(table());
+		layout.row().grid(label("L3")).add(field("Field31")).empty();
+		layout.row().grid(label("Lbl4")).add(table()).add(table());
+		layout.row().grid(label("L5")).add(field("F5")).add(slider(JSlider.HORIZONTAL));
+		layout.row().grid(label("L6")).add(list()).add(textarea("Wonderful sound"));
+		layout.row().grid(label("Power")).add(slider(JSlider.VERTICAL));
+		layout.row().center().add(systemLafSetter(), javaLafSetter(), lafSetter());
 	}
 	
 	static private JSlider slider(int orientation)

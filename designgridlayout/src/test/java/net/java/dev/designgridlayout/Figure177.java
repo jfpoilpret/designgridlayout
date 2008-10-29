@@ -53,19 +53,19 @@ public class Figure177 extends AbstractBaseExample
 		JButton searchButton = new JButton("Search");
 		JButton clearButton = new JButton("Clear");
 
-		layout.row().label(label("Mode:")).add(searchOnQueryButton).add(filterOnQueryButton);
-		layout.row().label(label("Name:")).add(nameField);
-		layout.row().label(label("Type:")).add(typeField);
-		layout.row().label(label("Vendor:")).add(vendorField);
-		layout.row().label(label("Note:")).add(nodeField);
+		layout.row().grid(label("Mode:")).add(searchOnQueryButton).add(filterOnQueryButton);
+		layout.row().grid(label("Name:")).add(nameField);
+		layout.row().grid(label("Type:")).add(typeField);
+		layout.row().grid(label("Vendor:")).add(vendorField);
+		layout.row().grid(label("Note:")).add(nodeField);
 		layout.emptyRow();
-		layout.row().label(label("Progress:")).add(progressBar).add(locationLabel);
+		layout.row().grid(label("Progress:")).add(progressBar).add(locationLabel);
 		layout.emptyRow();
-		layout.row().label(label("Scope:")).add(currentCheckBox).add(localCheckBox);
-		layout.row().label().add(referencedCheckBox).add(networkCheckBox);
-		layout.row().label().add(additionalCheckBox).add(unlicensedCheckBox);
+		layout.row().grid(label("Scope:")).add(currentCheckBox).add(localCheckBox);
+		layout.row().grid().add(referencedCheckBox).add(networkCheckBox);
+		layout.row().grid().add(additionalCheckBox).add(unlicensedCheckBox);
 		layout.emptyRow();
-		layout.centerRow().add(searchButton).add(clearButton);
+		layout.row().center().add(searchButton).add(clearButton);
 	}
 	// CSON: MagicNumber
 }

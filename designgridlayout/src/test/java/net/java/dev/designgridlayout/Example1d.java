@@ -27,12 +27,12 @@ public class Example1d extends AbstractBaseExample
 	// CSOFF: MagicNumber
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label(1)).add(button()).add(button());
-		layout.row().label(label(2)).add(button()).add(button()).add(button());
-		layout.row().label(label(3)).add(button(), 2).add(button());
-		layout.row().label(label(4)).add(button()).add(button()).add(button()).empty();
+		layout.row().grid(label(1)).add(button()).add(button());
+		layout.row().grid(label(2)).add(button()).add(button()).add(button());
+		layout.row().grid(label(3)).add(button(), 2).add(button());
+		layout.row().grid(label(4)).add(button()).add(button()).add(button()).empty();
 		layout.emptyRow();
-		layout.rightRow().add(new JButton("Cancel")).add(new JButton("OK"));
+		layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 	}
 	// CSON: MagicNumber
 }

@@ -25,14 +25,14 @@ public class Example1a extends AbstractBaseExample
 	@Override public void build(DesignGridLayout layout)
 	{
 		// You can add components one line at a time
-		IRow row = layout.row().label();
+		IRow row = layout.row().grid();
 		row.add(button());
 		row.add(button());
 
 		// Or using method chaining
-		layout.row().label().add(button()).add(button());
+		layout.row().grid().add(button()).add(button());
 
 		// Or, even better, using variable arguments
-		layout.row().label().add(button(), button());
+		layout.row().grid().add(button(), button());
 	}
 }

@@ -33,17 +33,17 @@ public class Issue9 extends AbstractBaseExample
 	
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label("L1")).add(field("Field11")).add(field("F12"));
-		layout.row().label(label("Label2")).add(field("2nd field"));
-		layout.row().label(label("Lbl3")).add(field("F3"), 2);
-		layout.row().label(label("L4")).empty().add(field("Field4"), 2).empty();
-		layout.row().label().add(field("F5"), 4);
-		layout.centerRow().add(button("B1"), button("Button2"), button("3"));
-		layout.leftRow().add(button("B1"), button("Button2"), button("3"));
-		layout.rightRow().add(button("B1"), button("Button2"), button("3"));
-		layout.centerRow().add(button("B1"), button("Button2"), button("3")).fill();
-		layout.leftRow().fill().add(button("B1"), button("Button2"), button("3"));
-		layout.rightRow().add(button("B1"), button("Button2"), button("3")).fill();
+		layout.row().grid(label("L1")).add(field("Field11")).add(field("F12"));
+		layout.row().grid(label("Label2")).add(field("2nd field"));
+		layout.row().grid(label("Lbl3")).add(field("F3"), 2);
+		layout.row().grid(label("L4")).empty().add(field("Field4"), 2).empty();
+		layout.row().grid().add(field("F5"), 4);
+		layout.row().center().add(button("B1"), button("Button2"), button("3"));
+		layout.row().left().add(button("B1"), button("Button2"), button("3"));
+		layout.row().right().add(button("B1"), button("Button2"), button("3"));
+		layout.row().center().add(button("B1"), button("Button2"), button("3")).fill();
+		layout.row().left().fill().add(button("B1"), button("Button2"), button("3"));
+		layout.row().right().add(button("B1"), button("Button2"), button("3")).fill();
 	}
 
 	@Override protected void prePack()

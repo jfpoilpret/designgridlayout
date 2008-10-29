@@ -110,19 +110,15 @@ public class AddressBookDemo extends AbstractBaseExample
 		JButton saveButton = new JButton("Save");
 		JButton cancelButton = new JButton("Cancel");
 
-		layout.row().label(label("Last Name")).add(lastNameField)
-						.label(label("First Name")).add(firstNameField);
-		layout.row().label(label("Phone")).add(phoneField)
-						.label(label("Email")).add(emailField);
-		layout.row().label(label("Address 1")).add(address1Field);
-		layout.row().label(label("Address 2")).add(address2Field);
-		layout.row().label(label("City"), 1).add(cityField);
-		layout.row().label(label("State")).add(stateField)
-						.label(label("Postal Code")).add(postalField);
-		layout.row().label(label("Country"), 1).add(countryField);
+		layout.row().grid(label("Last Name"))	.add(lastNameField)	.grid(label("First Name"))	.add(firstNameField);
+		layout.row().grid(label("Phone"))		.add(phoneField)	.grid(label("Email"))		.add(emailField);
+		layout.row().grid(label("Address 1"))	.add(address1Field);
+		layout.row().grid(label("Address 2"))	.add(address2Field);
+		layout.row().grid(label("City"), 1)		.add(cityField);
+		layout.row().grid(label("State"))		.add(stateField)	.grid(label("Postal Code"))	.add(postalField);
+		layout.row().grid(label("Country"), 1)	.add(countryField);
 		layout.emptyRow();
-		layout.centerRow().add(newButton).add(deleteButton).add(editButton)
-			.add(saveButton).add(cancelButton);
+		layout.row().center().add(newButton).add(deleteButton).add(editButton).add(saveButton).add(cancelButton);
 	}
 
 	@Override protected JLabel label(String text)

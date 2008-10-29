@@ -26,16 +26,14 @@ public class Issue3 extends AbstractBaseExample
 		example.go(true);
 	}
 
-	// CSOFF: MagicNumber
 	@Override public void build(DesignGridLayout layout)
 	{
 		// You can add components one line at a time
-		layout.row().label(label("One")).add(new JTextField("1"));
+		layout.row().grid(label("One")).add(new JTextField("1"));
 //		layout.row().label(label("Two")).add(table);
-		layout.row().label(label("Two")).add(new JScrollPane(_table));
+		layout.row().grid(label("Two")).add(new JScrollPane(_table));
 //		layout.row().center().add(button(), button());
 	}
-	// CSON: MagicNumber
 
 	@Override protected void preDisplay()
     {

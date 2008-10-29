@@ -27,9 +27,9 @@ public class Issue5b extends AbstractBaseExample
 	
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label("Label1")).add(field("Field1")).empty();
-		layout.row().label(label("Power")).addMulti(slider(), slider(), slider());
-		layout.centerRow().add(button(), button(), button());
+		layout.row().grid(label("Label1")).add(field("Field1")).empty();
+		layout.row().grid(label("Power")).addMulti(slider(), slider(), slider());
+		layout.row().center().add(button(), button(), button());
 	}
 	
 	static private JSlider slider()

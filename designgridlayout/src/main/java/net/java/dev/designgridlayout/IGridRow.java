@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import javax.swing.JComponent;
 
 /**
- * Any row created by {@link DesignGridLayout#row()} implements this
+ * Any row created by {@code DesignGridLayout.row().grid()} implements this
  * interface. Through this interface, you can add components to the current row;
  * position and size of components will use the canonical grid calculated for
  * the whole layout.

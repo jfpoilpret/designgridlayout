@@ -17,14 +17,15 @@ package net.java.dev.designgridlayout;
 import javax.swing.JComponent;
 
 /**
- * Any row created by one of {@link DesignGridLayout#leftRow()}, 
- * {@link DesignGridLayout#centerRow()} or {@link DesignGridLayout#rightRow()} 
+ * Any row created by one of {@code DesignGridLayout.row().left()}, 
+ * {@code DesignGridLayout.row().center()} or {@code DesignGridLayout.row().right()} 
  * implements this interface. Through this interface, you can add components to 
  * the current row.
  * <p/>
  * All added components share the same width (the maximum of all components
  * preferred widths) and are aligned on the left, center or right depending on
- * which {@code DesignGridLayout} method was called to create this row.
+ * which {@link IRowCreator} (returned by {@link DesignGridLayout#row()}) method 
+ * was called to create this row.
  * 
  * @author Jean-Francois Poilpret
  */

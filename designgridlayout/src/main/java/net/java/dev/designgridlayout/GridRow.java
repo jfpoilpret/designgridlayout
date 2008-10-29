@@ -98,36 +98,36 @@ final class GridRow extends AbstractRow implements IGridRow
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#label(javax.swing.JLabel)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel)
 	 */
-	public IGridRow label(JLabel label)
+	public IGridRow grid(JLabel label)
 	{
-		return label(label, 0);
+		return grid(label, 0);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#label()
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid()
 	 */
-	public IGridRow label()
+	public IGridRow grid()
     {
-	    return label(null, 0);
+	    return grid(null, 0);
     }
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#label(int)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(int)
 	 */
-	public IGridRow label(int gridspan)
+	public IGridRow grid(int gridspan)
 	{
-		return label(null, gridspan);
+		return grid(null, gridspan);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#label(javax.swing.JLabel, int)
+	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel, int)
 	 */
-	public IGridRow label(JLabel label, int gridspan)
+	public IGridRow grid(JLabel label, int gridspan)
 	{
 		// Fix the span of the previous sub-grid (if it was in auto-span mode)
 		if (_current != null)

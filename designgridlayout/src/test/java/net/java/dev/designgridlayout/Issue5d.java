@@ -27,10 +27,10 @@ public class Issue5d extends AbstractBaseExample
 	
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().label(label("Label1")).add(field("Field1")).empty();
-		layout.row().label(label("Power"))
+		layout.row().grid(label("Label1")).add(field("Field1")).empty();
+		layout.row().grid(label("Power"))
 			.addMulti(slider(), field("Field2")).add(field("Field3"));
-		layout.centerRow().add(button(), button(), button());
+		layout.row().center().add(button(), button(), button());
 	}
 	
 	static private JSlider slider()

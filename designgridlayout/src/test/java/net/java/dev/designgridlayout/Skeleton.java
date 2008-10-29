@@ -30,27 +30,27 @@ public class Skeleton extends AbstractBaseExample
 	// CSOFF: MagicNumber
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.leftRow().add(projectLabel);
-		layout.row().label(idLabel).add(id).empty(2);
+		layout.row().left().add(projectLabel);
+		layout.row().grid(idLabel).add(id).empty(2);
 		layout.emptyRow();
 
-		layout.leftRow().add(mfgLabel);
-		layout.row().label(companyLabel).add(company);
-		layout.row().label(contactLabel).add(contact);
-		layout.row().label(orderLabel).add(order).empty(2);
+		layout.row().left().add(mfgLabel);
+		layout.row().grid(companyLabel).add(company);
+		layout.row().grid(contactLabel).add(contact);
+		layout.row().grid(orderLabel).add(order).empty(2);
 		layout.emptyRow();
 
-		layout.leftRow().add(inspectorLabel);
-		layout.row().label(nameLabel).add(name);
-		layout.row().label(referenceLabel).add(reference).empty(2);
-		layout.row().label(statusLabel).add(status).empty(2);
+		layout.row().left().add(inspectorLabel);
+		layout.row().grid(nameLabel).add(name);
+		layout.row().grid(referenceLabel).add(reference).empty(2);
+		layout.row().grid(statusLabel).add(status).empty(2);
 		layout.emptyRow();
 
-		layout.leftRow().add(shipLabel);
-		layout.row().label(shipyardLabel).add(shipyard);
-		layout.row().label(registerNoLabel).add(registerNo).empty(2);
-		layout.row().label(hullNumsLabel).add(hullNums).empty(2);
-		layout.row().label(projectTypeLabel).add(projectType).empty(2);
+		layout.row().left().add(shipLabel);
+		layout.row().grid(shipyardLabel).add(shipyard);
+		layout.row().grid(registerNoLabel).add(registerNo).empty(2);
+		layout.row().grid(hullNumsLabel).add(hullNums).empty(2);
+		layout.row().grid(projectTypeLabel).add(projectType).empty(2);
 	}
 	// CSON: MagicNumber
 
