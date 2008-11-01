@@ -26,7 +26,7 @@ public class Issue4 extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.margins(2, 2, 2, 2);
+		layout.margins(0.5);
 		layout.row().grid(label("One")).add(new JTextField("1"));
 		layout.row().grid(label("Two")).add(new JTextField("22222222"));
 		layout.row().center().add(button()).add(button());

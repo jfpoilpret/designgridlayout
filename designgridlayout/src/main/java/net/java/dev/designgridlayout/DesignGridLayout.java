@@ -58,13 +58,6 @@ import org.jdesktop.layout.LayoutStyle;
 public class DesignGridLayout implements LayoutManager
 {
 	/**
-	 * Use this constant with {@link #margins(int, int, int, int)} method if you 
-	 * want to keep the calculated margins for one or more of top, left, bottom 
-	 * or right margins values.
-	 */
-	static final public int MARGIN_DEFAULT = -1;
-
-	/**
 	 * Builds a DesignGridLayout instance attached to a {@link Container}.
 	 * This instance should be then used to add rows and components to the parent
 	 * container.
@@ -90,27 +83,49 @@ public class DesignGridLayout implements LayoutManager
 	}
 
 	/**
-	 * Define special margins (in pixels) for the parent container. You normally
+	 * Define special margins ratios for the parent container. You normally
 	 * won't use this method because DesignGridLayout uses the best margin values 
 	 * for the current used Look and Feel. However, it may be useful when you use
 	 * DesignGridLayout in special containers such as views used in a 
 	 * docking-based application, in which case you would rather avoid wasting
 	 * too much space as margins for each single docked view.
 	 * 
-	 * @param top top margin in pixels
-	 * @param left left margin in pixels
-	 * @param bottom bottom margin in pixels
-	 * @param right right margin in pixels
+	 * @param top top margin ratio that will be applied to the standard top
+	 * margin for the current platform
+	 * @param left left margin ratio that will be applied to the standard left
+	 * margin for the current platform
+	 * @param bottom bottom margin ratio that will be applied to the standard 
+	 * bottom margin for the current platform
+	 * @param right right margin ratio that will be applied to the standard 
+	 * right margin for the current platform
 	 * @return this instance of DesignGridLayout, allowing for chained calls
 	 * to other methods (also known as "fluent API")
 	 */
-	public DesignGridLayout margins(int top, int left, int bottom, int right)
+	public DesignGridLayout margins(double top, double left, double bottom, double right)
 	{
-		_explicitTop = top;
-		_explicitLeft = left;
-		_explicitBottom = bottom;
-		_explicitRight = right;
+		_topWeight = (top < 0.0 ? 0.0 : top);
+		_leftWeight = (left < 0.0 ? 0.0 : left);
+		_bottomWeight = (bottom < 0.0 ? 0.0 : bottom);
+		_rightWeight = (right < 0.0 ? 0.0 : right);
 		return this;
+	}
+	
+	/**
+	 * Define a special margins ratio for the parent container. You normally
+	 * won't use this method because DesignGridLayout uses the best margin values 
+	 * for the current used Look and Feel. However, it may be useful when you use
+	 * DesignGridLayout in special containers such as views used in a 
+	 * docking-based application, in which case you would rather avoid wasting
+	 * too much space as margins for each single docked view.
+	 * 
+	 * @param ratio the ratio to apply to each standard margin for the current 
+	 * platform
+	 * @return this instance of DesignGridLayout, allowing for chained calls
+	 * to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout margins(double ratio)
+	{
+		return margins(ratio, ratio, ratio, ratio);
 	}
 
 	/**
@@ -310,26 +325,22 @@ public class DesignGridLayout implements LayoutManager
 
 	private int top()
 	{
-		return (_explicitTop <= MARGIN_DEFAULT ? _top : _explicitTop) + 
-			_parent.getInsets().top;
+		return _parent.getInsets().top + (int)(_topWeight * _top);
 	}
 
 	private int left()
 	{
-		return (_explicitLeft <= MARGIN_DEFAULT ? _left : _explicitLeft) +
-			_parent.getInsets().left;
+		return _parent.getInsets().left + (int)(_leftWeight * _left);
 	}
 
 	private int bottom()
 	{
-		return (_explicitBottom <= MARGIN_DEFAULT ? _bottom : _explicitBottom) +
-			_parent.getInsets().bottom;
+		return _parent.getInsets().bottom + (int)(_bottomWeight * _bottom);
 	}
 
 	private int right()
 	{
-		return (_explicitRight <= MARGIN_DEFAULT ? _right : _explicitRight) +
-			_parent.getInsets().right;
+		return _parent.getInsets().right + (int)(_rightWeight * _right);
 	}
 
 	private int getContainerGap(JComponent component, int position)
@@ -702,10 +713,10 @@ public class DesignGridLayout implements LayoutManager
 
 	private double _totalWeight;
 	
-	private int _explicitTop = MARGIN_DEFAULT;
-	private int _explicitLeft = MARGIN_DEFAULT;
-	private int _explicitBottom = MARGIN_DEFAULT;
-	private int _explicitRight = MARGIN_DEFAULT;
+	private double _topWeight = 1.0;
+	private double _leftWeight = 1.0;
+	private double _bottomWeight = 1.0;
+	private double _rightWeight = 1.0;
 	
 	final private List<AbstractRow> _rowList = new ArrayList<AbstractRow>();
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
