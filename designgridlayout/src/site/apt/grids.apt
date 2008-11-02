@@ -54,4 +54,56 @@ Canonical grids
 
 	[]
 	
+DesignGridLayout Grids and "Sub-grids"
+
+	Normal Canonical grids work well as long as we don't use a label column. 
+	Indeed, it is common to have forms that have a first column made exclusively 
+	of labels defining the fields that follow.
+	
+	For this reason, DesignGridLayout extends the possibilities of canonical
+	grids by putting the extra label column outside of the grid, which means
+	that its width is always fixed (and equal to the largest width of all labels
+	put in that column).
+	
+	However, it is also not uncommon to have forms that have several vertical
+	"groups" of input fields, each with their own label column. 
+	DesignGridLayout supports this through the use of "sub-grids".
+	
+	The "sub-grid" concept is defined as follows:
+		
+	*	Each layout is made of a certain number of sub-grids
+	
+	*	The actual number of sub-grids of a layout is determined by the row that
+		defines the biggest number of sub-grids
+	
+	*	Each sub-grid is made of a label column (with fixed width) and one or 
+		several component columns (which width is managed canonically)
+	
+	*	The label column of each sub-grid has its own width (independently of 
+		the width of other label columns)
+		
+	*	The remaining available horizontal space (container width less the 
+		widths used by all label columns of all sub-grids) is equally shared
+		between all sub-grids (more exactly, between the canonical parts of all
+		sub-grids)
+	
+	*	It is possible, in a row, to define a "wide" sub-grid that spans several 
+		sub-grids of the layout. In this case, all components of this sub-grid
+		will form a canonical grid which width spans several sub-grids (in
+		roughly the same way that one component inside a canonical grid can span
+		several columns)
+		
+	[]
+	
+	The example below summarizes these principles:
+	
+[images/subgrids.png]
+
+	In this example you can see 2 sub-grids, each with its label column (of
+	different widths due to the max length of labels). Canonical parts of both
+	sub-grids are equal in size. In the second row, there is no label for the
+	second sub-grid. Finally, the last row has only one sub-grid that spans
+	both sub-grids defined in other rows.
+
+	You will find more concrete examples {{{usage.html}here}}.
 	

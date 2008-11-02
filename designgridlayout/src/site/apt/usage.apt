@@ -200,10 +200,26 @@ layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 
 	{{{xref-test/net/java/dev/designgridlayout/Example1d.html}(Example 1d source)}}
 
-Special features
+Forms with several label columns
 
-	Starting with version 1.0 (fix of 
-	{{{https://designgridlayout.dev.java.net/issues/show_bug.cgi?id=9}issue 9}}), 
+	DesignGridLayout also allows you to design large forms that contain several
+	groups of components, each with its own dedicated label column.
+	
+	Here is a snippet that implements the example of sub-grids found in 
+	{{{grids.html}this page on canonical grids}}:
+	
++------------------------------------------------------------------------------+
+layout.row().grid(label("Label 1:")).add(button(), button())
+                          .grid(label("Long Label 1:")).add(button(), button());
+layout.row().grid(label("Lbl 2:"))  .add(button(), button(), button())
+                          .grid()                      .add(button(), button());
+layout.row().grid(label("Label 3:")).add(button(), 2).add(button())
+                          .grid(label("Label 3+:"))    .add(button(), 2).add(button());
+layout.row().grid(label("Lbl 4:"))  .add(button());
++------------------------------------------------------------------------------+
+
+Automatic support for right-to-left text orientation
+
 	DesignGridLayout transparently supports right-to-left languages (such as 
 	Arabic or Hebrew) depending on the current default Locale used by the 
 	application. You don't need any special action on your layout code for it to 
