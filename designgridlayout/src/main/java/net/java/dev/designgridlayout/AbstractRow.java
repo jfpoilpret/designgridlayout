@@ -106,6 +106,11 @@ abstract class AbstractRow
 	void totalGrids(int totalGrids)
 	{
 	}
+	
+	int gridspan(int grid)
+	{
+		return 1;
+	}
 		
 	int gridColumns(int grid)
 	{
@@ -140,7 +145,7 @@ abstract class AbstractRow
 	abstract List<JComponent> components();
 
 	// Returns the actual extra height allocated to the row
-	abstract int layoutRow(LayoutHelper helper, int x, int hgap, int gridgap, 
+	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth);
 
 	private Container _parent;

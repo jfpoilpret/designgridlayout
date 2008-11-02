@@ -139,6 +139,11 @@ final class GridRow extends AbstractRow implements IGridRow
 		return this;
 	}
 
+	@Override int gridspan(int grid)
+	{
+		return findGrid(grid).gridspan();
+	}
+
 	@Override int labelWidth(int grid)
 	{
 		return findGrid(grid).labelWidth();
@@ -210,10 +215,10 @@ final class GridRow extends AbstractRow implements IGridRow
 		return gridgap;
 	}
 
-	// CSOFF: ParameterAssignment
-	@Override int layoutRow(LayoutHelper helper, int x, int hgap, int gridgap, 
+	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
+		int x = left;
 		int actualHeight = 0;
 		int gridWidth = gridsWidth / _totalGrids;
 		int gridIndex = 0;
@@ -248,7 +253,6 @@ final class GridRow extends AbstractRow implements IGridRow
 		}
 		return actualHeight;
 	}
-	// CSON: ParameterAssignment
 
 	@Override List<JComponent> components()
 	{

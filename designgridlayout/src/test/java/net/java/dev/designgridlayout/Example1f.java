@@ -14,26 +14,20 @@
 
 package net.java.dev.designgridlayout;
 
-// Fake subgrid that is used whenever a real SubGrid spans several grids
-final class EmptySubGrid implements ISubGrid
+// This example checks the preferred size calculated when having a large 
+// component spanning several grids
+public class Example1f extends AbstractBaseExample
 {
-	public int gridColumns()
+	public static void main(String[] args)
 	{
-		return 0;
+		Example1f example = new Example1f();
+		example.go(true);
 	}
 
-	public int labelWidth()
+	@Override public void build(DesignGridLayout layout)
 	{
-		return 0;
-	}
-
-	public int maxColumnWidth(int maxColumns, IExtractor extractor)
-	{
-		return 0;
-	}
-
-	public int gridspan()
-	{
-		return 1;
+		layout.row().grid(label("1")).add(field("X")).grid(label("1")).add(field("Y"));
+		layout.row().grid(label("2")).add(field("XXXXYYYYZZZZ"));
+		layout.row().center().add(button("OK"));
 	}
 }

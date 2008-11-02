@@ -325,22 +325,22 @@ public class DesignGridLayout implements LayoutManager
 
 	private int top()
 	{
-		return _parent.getInsets().top + (int)(_topWeight * _top);
+		return _parent.getInsets().top + (int) (_topWeight * _top);
 	}
 
 	private int left()
 	{
-		return _parent.getInsets().left + (int)(_leftWeight * _left);
+		return _parent.getInsets().left + (int) (_leftWeight * _left);
 	}
 
 	private int bottom()
 	{
-		return _parent.getInsets().bottom + (int)(_bottomWeight * _bottom);
+		return _parent.getInsets().bottom + (int) (_bottomWeight * _bottom);
 	}
 
 	private int right()
 	{
-		return _parent.getInsets().right + (int)(_rightWeight * _right);
+		return _parent.getInsets().right + (int) (_rightWeight * _right);
 	}
 
 	private int getContainerGap(JComponent component, int position)
@@ -518,13 +518,12 @@ public class DesignGridLayout implements LayoutManager
 	{
 		// Compute preferred width for each sub-grid (without labels), 
 		// use largest width for all grids
-		//FIXME: need to care for grid-span in calculation!
 		int width = 0;
 		for (int grid = 0; grid < _maxGrids; grid++)
 		{
 			int maxColumns = countGridColumns(grid);
 	
-			// Third, compute width to use for columns of grid
+			// Compute width to use for columns of grid
 			int maxWidth = maxGridRowsColumnWidth(grid, maxColumns, extractor);
 	
 			// Then, calculate the preferred width for that grid
@@ -559,8 +558,25 @@ public class DesignGridLayout implements LayoutManager
 		int maxWidth = 0;
 		for (AbstractRow row: _rowList)
 		{
-			maxWidth = Math.max(
-				maxWidth, row.maxColumnWidth(grid, maxColumns, extractor));
+			int width = row.maxColumnWidth(grid, maxColumns, extractor);
+			// If current grid spans several sub-grids, then colum width must
+			// be reduced (by removing extra labels) and divide result by number
+			// of spanned sub-grids
+			int span = row.gridspan(grid);
+			if (span > 1)
+			{
+				for (int i = 1; i < span; i++)
+				{
+					width -= _gridgap + _labelWidths.get(grid + i) + _hgap;
+				}
+				int fudge = width % span;
+				width /= span;
+				if (fudge > 0)
+				{
+					width += 1;
+				}
+			}
+			maxWidth = Math.max(maxWidth, width);
 		}
 		return maxWidth;
 	}

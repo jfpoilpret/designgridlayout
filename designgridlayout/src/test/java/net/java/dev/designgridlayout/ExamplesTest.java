@@ -27,6 +27,7 @@ public class ExamplesTest extends AbstractGuiTest
 		throws Exception
 	{
 		launchGui(clazz);
+//		takeSnapshot();
 		checkSnapshot();
 		if (resize)
 		{
@@ -64,6 +65,11 @@ public class ExamplesTest extends AbstractGuiTest
 	@Test public void checkExample1e() throws Exception
 	{
 		checkExample(Example1e.class, true);
+	}
+
+	@Test public void checkExample1f() throws Exception
+	{
+		checkExample(Example1f.class, true);
 	}
 
 	@Test public void checkFigure177() throws Exception

@@ -28,10 +28,13 @@ public class Issue18Test extends AbstractGuiTest
 	@Test public void checkAddressBookDemo() throws Exception
 	{
 		launchGui(AddressBookDemo.class);
+//		takeSnapshot("preferred");
 		checkSnapshot("preferred");
 		frame().resizeWidthTo(frame().target.getWidth() * 9 / 10);
+//		takeSnapshot("smaller");
 		checkSnapshot("smaller");
 		frame().resizeWidthTo(frame().target.getWidth() * 9 / 10);
+//		takeSnapshot("smallest");
 		checkSnapshot("smallest");
 	}
 }
