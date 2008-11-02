@@ -46,7 +46,8 @@
  * set through one single line of source code. Each component is added from left 
  * to right.
  * <p/>
- * Labels (when created with {@link ISubGridStarter#grid(javax.swing.JLabel)})
+ * Labels (when created with 
+ * {@link net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel)})
  * have a special treatment: they are automatically right-aligned and the 
  * label column in the panel has constant width.
  * <p/>
