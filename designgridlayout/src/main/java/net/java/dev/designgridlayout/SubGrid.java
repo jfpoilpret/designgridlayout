@@ -120,10 +120,10 @@ final class SubGrid implements ISubGrid
 		return hgap;
 	}
 
-	// CSOFF: ParameterAssignment
-	public int layoutRow(LayoutHelper helper, int x, int height, int baseline, 
+	public int layoutRow(LayoutHelper helper, int left, int height, int baseline, 
 		int hgap, int rowWidth, int labelWidth)
 	{
+		int x = left;
 		int actualHeight = 0;
 		// Account for label column
 		if (labelWidth > 0)
@@ -165,7 +165,6 @@ final class SubGrid implements ISubGrid
 		}
 		return actualHeight;
 	}
-	// CSON: ParameterAssignment
 
 	public List<RowItem> items()
 	{
