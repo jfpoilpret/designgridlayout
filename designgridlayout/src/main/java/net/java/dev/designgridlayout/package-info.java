@@ -113,8 +113,60 @@
  * </pre>
  * This code creates a row with four columns, but only the second contains a 
  * real component.
+ * 
+ * <h3>Forms with multiple label columns</h3>
+ * With DesignGridLayout, it is also possible to define layouts with several 
+ * label columns. 
  * <p/>
- * TODO additional comments on canonical sub-grids
+ * Each such label column actually defines a new canonical grid (called 
+ * <b>"sub-grid"</b>). In one grid row, you can indicate you want to start a new 
+ * sub-grid by calling one of the existing 
+ * {@link net.java.dev.designgridlayout.ISubGridStarter#grid()} methods, then
+ * all components added to this sub-grid (by one of the several 
+ * {@link net.java.dev.designgridlayout.IGridRow IGridRow#add()} methods) will 
+ * be part of the sub-grid:
+ * <pre>
+ *     layout.row().grid(label1).add(field1, field2).grid(label3).add(field3, field4);
+ *     layout.row().grid(label5).add(field5)        .grid()      .add(field6);
+ * </pre>
+ * In this snippet, there are two rows and two sub-grids; in the first sub-grid, 
+ * there are 3 components, {@code field1}, {@code field2}, {@code field5}, in
+ * addition to labels {@code label1} and {@code label5}; the second sub-grid
+ * contains 3 components, {@code field3}, {@code field4}, {@code field6}, and
+ * one label {@code label5}; note that the second sub-grid in the second row
+ * has no label.
+ * <p/>
+ * To handle multiple sub-grids, special processing occurs in DesignGridLayout:
+ * <ul>
+ * <li>first of all, find out the total number of sub-grids in the whole layout
+ * (this is defined by the maximum number of calls to {@code grid()} among all
+ * rows of the layout). Note that this calculus is a bit more complex because
+ * it also accounts for {@code gridspan}s specified when starting a sub-grid).</li>
+ * <li>for each sub-grid, the width of its label column is always fixed 
+ * (calculated based on the largest label in the column); the other components
+ * in the sub-grid are organized canonically. All canonical parts of all 
+ * sub-grids (thus excluding the fixed-width label column) get an equal part of
+ * the available width.</li>
+ * </ul>
+ * Each sub-grid can be assigned an explicit {@code gridspan} to specify that it
+ * will span several sub-grids of the other rows. If you don't specify any
+ * {@code gridspan} when starting a new sub-grid, then this sub-grid will 
+ * automatically span all space on its right unless another call to a 
+ * {@code grid()} method occurs in the same row:
+ * <pre>
+ *     layout.row().grid(label1).add(field1, field2).grid(label3).add(field3);
+ *     layout.row().grid(label4).add(field4);
+ * </pre>
+ * In this snippet, there are 2 rows and 2 sub-grids; the first sub-grid in the
+ * second row ({@code field4}) spans the whole width of the form. If you want 
+ * the same layout but don't want {@code field4} to span the second sub-grid, 
+ * then you can write:
+ * <pre>
+ *     layout.row().grid(label1)   .add(field1, field2).grid(label3).add(field3);
+ *     layout.row().grid(label4, 1).add(field4);
+ * </pre>
+ * If you want more details about this feature, you can look at the API 
+ * documentation for {@link net.java.dev.designgridlayout.ISubGridStarter}.
  * 
  * @author Jason Aaron Osgood
  * @author Jean-Francois Poilpret
