@@ -238,7 +238,7 @@ public class DesignGridLayout implements LayoutManager
 		checkParent(parent);
 
 		// Make sure there's something to do
-		if (_rowList.size() < 1)
+		if (_rowList.isEmpty())
 		{
 			return;
 		}
@@ -420,7 +420,7 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		// Make sure there's something to do
-		if (_rowList.size() < 1)
+		if (_rowList.isEmpty())
 		{
 			_preferredSize = new Dimension(0, 0);
 			_minimumSize = new Dimension(0, 0);
@@ -606,38 +606,32 @@ public class DesignGridLayout implements LayoutManager
 	private void computeTopMargin()
 	{
 		_top = 0;
-		if (!_rowList.isEmpty())
+		AbstractRow topRow = _rowList.get(0);
+		for (JComponent component: topRow.components())
 		{
-			AbstractRow topRow = _rowList.get(0);
-			for (JComponent component: topRow.components())
-			{
-				int gap = getContainerGap(component, SwingConstants.NORTH);
-				_top = Math.max(_top, gap);
-			}
+			int gap = getContainerGap(component, SwingConstants.NORTH);
+			_top = Math.max(_top, gap);
 		}
 	}
 
 	private void computeBottomMargin()
 	{
 		_bottom = 0;
-		if (!_rowList.isEmpty())
+		int maxComboHeight = 0;
+		int bottomGap = 0;
+		AbstractRow bottomRow = _rowList.get(_rowList.size() - 1);
+		for (JComponent component: bottomRow.components())
 		{
-			int maxComboHeight = 0;
-			int bottomGap = 0;
-			AbstractRow bottomRow = _rowList.get(_rowList.size() - 1);
-			for (JComponent component: bottomRow.components())
+			int height = component.getPreferredSize().height;
+			int gap = getContainerGap(component, SwingConstants.SOUTH);
+			int comboHeight = height + gap;
+			if (comboHeight > maxComboHeight)
 			{
-				int height = component.getPreferredSize().height;
-				int gap = getContainerGap(component, SwingConstants.SOUTH);
-				int comboHeight = height + gap;
-				if (comboHeight > maxComboHeight)
-				{
-					maxComboHeight = comboHeight;
-					bottomGap = gap;
-				}
+				maxComboHeight = comboHeight;
+				bottomGap = gap;
 			}
-			_bottom = Math.max(_bottom, bottomGap);
 		}
+		_bottom = Math.max(_bottom, bottomGap);
 	}
 	
 	private void computeLeftRightMargins()
@@ -647,7 +641,7 @@ public class DesignGridLayout implements LayoutManager
 		for (AbstractRow row: _rowList)
 		{
 			List<JComponent> components = row.components();
-			if (components.size() > 0)
+			if (!components.isEmpty())
 			{
 				JComponent left = components.get(0);
 				_left = Math.max(_left, getContainerGap(left, SwingConstants.WEST));
@@ -672,39 +666,39 @@ public class DesignGridLayout implements LayoutManager
 		}
 		
 		public INonGridRow center()
-        {
+		{
 			return addRow(new CenterRow(), _weight);
-        }
+		}
 
 		public INonGridRow left()
-        {
+		{
 			return addRow(new LeftRow(), _weight);
-        }
+		}
 
 		public INonGridRow right()
-        {
+		{
 			return addRow(new RightRow(), _weight);
-        }
+		}
 
 		public IGridRow grid(JLabel label)
-        {
+		{
 			return addRow(new GridRow(), _weight).grid(label);
-        }
+		}
 
 		public IGridRow grid(JLabel label, int gridspan)
-        {
+		{
 			return addRow(new GridRow(), _weight).grid(label, gridspan);
-        }
+		}
 
 		public IGridRow grid()
-        {
+		{
 			return addRow(new GridRow(), _weight).grid();
-        }
+		}
 
 		public IGridRow grid(int gridspan)
-        {
+		{
 			return addRow(new GridRow(), _weight).grid(gridspan);
-        }
+		}
 
 		private final double _weight;
 	}
