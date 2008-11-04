@@ -121,8 +121,8 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 				compWidth = width;
 			}
 			actualHeight =
-			    Math.max(actualHeight, helper.setSizeLocation(
-			        component, x, compWidth, height(), baseline()));
+				Math.max(actualHeight, helper.setSizeLocation(
+					component, x, compWidth, height(), baseline()));
 			x += compWidth + hgap;
 			i++;
 		}

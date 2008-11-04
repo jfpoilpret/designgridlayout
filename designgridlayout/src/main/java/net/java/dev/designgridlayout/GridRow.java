@@ -110,9 +110,9 @@ final class GridRow extends AbstractRow implements IGridRow
 	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid()
 	 */
 	public IGridRow grid()
-    {
-	    return grid(null, 0);
-    }
+	{
+		return grid(null, 0);
+	}
 
 	/*
 	 * (non-Javadoc)

@@ -20,13 +20,13 @@ class MultiComponentHeightGrowPolicy
 	extends AbstractClassBasedHeightGrowPolicy<MultiComponent>
 {
 	public MultiComponentHeightGrowPolicy(HeightGrowPolicy defaultPolicy)
-    {
-	    super(MultiComponent.class);
-	    _defaultPolicy = defaultPolicy;
-    }
+	{
+		super(MultiComponent.class);
+		_defaultPolicy = defaultPolicy;
+	}
 
 	@Override protected boolean componentCanGrowHeight(MultiComponent component)
-    {
+	{
 		for (Component child: component.getComponents())
 		{
 			if (_defaultPolicy.canGrowHeight(child))
@@ -34,12 +34,12 @@ class MultiComponentHeightGrowPolicy
 				return true;
 			}
 		}
-	    return false;
-    }
+		return false;
+	}
 	
 	@Override protected int componentComputeExtraHeight(
 		MultiComponent component, int extraHeight)
-    {
+	{
 		int actualHeight = 0;
 		for (Component child: component.getComponents())
 		{
@@ -49,8 +49,8 @@ class MultiComponentHeightGrowPolicy
 					_defaultPolicy.computeExtraHeight(child, extraHeight));
 			}
 		}
-	    return actualHeight;
-    }
+		return actualHeight;
+	}
 
 	private final HeightGrowPolicy _defaultPolicy;
 }

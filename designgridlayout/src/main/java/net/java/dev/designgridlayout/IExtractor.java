@@ -36,9 +36,9 @@ final class MinWidthExtractor extends AbstractExtractor
 	static final IExtractor INSTANCE = new MinWidthExtractor();
 	
 	public int value(JComponent c)
-    {
-	    return c.getMinimumSize().width;
-    }
+	{
+		return c.getMinimumSize().width;
+	}
 }
 
 final class PrefWidthExtractor implements IExtractor
@@ -46,9 +46,9 @@ final class PrefWidthExtractor implements IExtractor
 	static final IExtractor INSTANCE = new PrefWidthExtractor();
 	
 	public int value(JComponent c)
-    {
-	    return c.getPreferredSize().width;
-    }
+	{
+		return c.getPreferredSize().width;
+	}
 }
 
 final class PrefHeightExtractor implements IExtractor
@@ -56,9 +56,9 @@ final class PrefHeightExtractor implements IExtractor
 	static final IExtractor INSTANCE = new PrefHeightExtractor();
 	
 	public int value(JComponent c)
-    {
-	    return c.getPreferredSize().height;
-    }
+	{
+		return c.getPreferredSize().height;
+	}
 }
 
 final class BaselineExtractor implements IExtractor
@@ -66,8 +66,8 @@ final class BaselineExtractor implements IExtractor
 	static final IExtractor INSTANCE = new BaselineExtractor();
 	
 	public int value(JComponent c)
-    {
-	    return Baseline.getBaseline(c);
-    }
+	{
+		return Baseline.getBaseline(c);
+	}
 }
 

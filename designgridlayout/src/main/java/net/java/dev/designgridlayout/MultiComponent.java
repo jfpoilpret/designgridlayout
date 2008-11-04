@@ -27,9 +27,9 @@ final class MultiComponent extends JComponent
 	}
 
 	public int getBaseline(int width, int height)
-    {
+	{
 		return _layout.getBaseline();
-    }
+	}
 	
 	private final HorizontalLayout _layout;
 }

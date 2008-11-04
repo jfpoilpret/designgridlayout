@@ -20,12 +20,12 @@ class JSliderHeightGrowPolicy
 	extends AbstractClassBasedHeightGrowPolicy<JSlider>
 {
 	public JSliderHeightGrowPolicy()
-    {
-	    super(JSlider.class);
-    }
+	{
+		super(JSlider.class);
+	}
 
 	@Override protected boolean componentCanGrowHeight(JSlider component)
-    {
-	    return component.getOrientation() == JSlider.VERTICAL;
-    }
+	{
+		return component.getOrientation() == JSlider.VERTICAL;
+	}
 }

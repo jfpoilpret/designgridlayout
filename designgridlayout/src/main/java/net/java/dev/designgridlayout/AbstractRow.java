@@ -23,7 +23,7 @@ abstract class AbstractRow
 {
 	// Called by DesignGridLayout immediately after instanciation
 	final void init(
-	    Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
+		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
 		_parent = parent;
 		_heightTester = heightTester;
