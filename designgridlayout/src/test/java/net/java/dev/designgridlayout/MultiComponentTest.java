@@ -14,23 +14,28 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JSeparator;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
-public class Example1e extends AbstractBaseExample
+@Test(groups = "utest")
+public class MultiComponentTest extends AbstractGuiTest
 {
-	public static void main(String[] args)
+	@Test public void checkExample()
+		throws Exception
 	{
-		Example1e example = new Example1e();
-		example.go(true);
+		launchGui(MultiComponentExample.class);
+		checkSnapshot();
+		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
+		checkSnapshot("small-1");
+		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
+		checkSnapshot("small-2");
+		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
+		checkSnapshot("big");
 	}
-
-	@Override public void build(DesignGridLayout layout)
+	
+	@AfterMethod(groups = "utest")
+	public void cleanUp()
 	{
-		layout.row().left().fill().add(label("Special Group")).add(new JSeparator());
-		layout.row().grid(label(1)).add(button(), button(), button());
-		layout.row().left().fill().add(button(), button(), button());
-		layout.row().center().fill().add(button(), button(), button());
-		layout.row().right().fill().add(button(), button(), button());
-		layout.row().center().fill().add(button());
+		stopGui();
 	}
 }

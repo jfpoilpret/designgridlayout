@@ -14,23 +14,17 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JSeparator;
-
-public class Example1e extends AbstractBaseExample
+public class MultiComponentExample extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		Example1e example = new Example1e();
+		MultiComponentExample example = new MultiComponentExample();
 		example.go(true);
 	}
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().left().fill().add(label("Special Group")).add(new JSeparator());
-		layout.row().grid(label(1)).add(button(), button(), button());
-		layout.row().left().fill().add(button(), button(), button());
-		layout.row().center().fill().add(button(), button(), button());
-		layout.row().right().fill().add(button(), button(), button());
-		layout.row().center().fill().add(button());
+		layout.row().grid().addMulti(field("1234567890"), field("1234567890")).add(button());
+		layout.row().center().addMulti(field("1234567890"), field("1234567890")).add(button());
 	}
 }
