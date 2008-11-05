@@ -43,7 +43,7 @@
   
     
             <div class="xleft">
-        Last Published: 2008-09-27
+        Last Published: 2008-11-05
                       </div>
             <div class="xright">      
   
@@ -73,6 +73,10 @@
               
     <li class="none">
                     <a href="index.html">Introduction</a>
+          </li>
+              
+    <li class="none">
+                    <a href="grids.html">Canonical Grids</a>
           </li>
               
     <li class="none">
@@ -123,6 +127,8 @@
       
             
       
+            
+      
               
         <li class="collapsed">
                     <a href="project-reports.html">Project Reports</a>
@@ -162,8 +168,7 @@ s that require to add components to the <tt>Container</tt>
 <div class="source"><pre>public class MyPanel extends JPanel {
     public MyPanel() {
         DesignGridLayout layout = new DesignGridLayout(this);
-        setLayout(layout);
-        layout.row().add(new JLabel(&quot;Hello&quot;));
+        layout.row().grid().add(new JLabel(&quot;Hello&quot;));
     }
 }</pre>
 </div>
@@ -177,22 +182,20 @@ s that require to add components to the <tt>Container</tt>
  appear in each row.</p>
 <p>Hence this allows you to &quot;visualize&quot; the container layout just by viewing the source code:</p>
 <div class="source"><pre>DesignGridLayout layout = new DesignGridLayout(this);
-setLayout(layout);
-layout.row().add(new JLabel(&quot;First name&quot;)).add(new JTextField());
-layout.row().add(new JLabel(&quot;Last name&quot;)).add(new JTextField());</pre>
+layout.row().grid(new JLabel(&quot;First name&quot;)).add(new JTextField());
+layout.row().grid(new JLabel(&quot;Last name&quot;)).add(new JTextField());</pre>
 </div>
 <p>The snippet above creates 2 rows, each with a label and a text field.</p>
 <p>Moreover, this allows inserting a new row without any hassle (try to imagine the following snippet with GridBagLayout...):</p>
 <div class="source"><pre>DesignGridLayout layout = new DesignGridLayout(this);
-setLayout(layout);
-layout.row().add(new JLabel(&quot;First name&quot;)).add(new JTextField());
-layout.row().add(new JLabel(&quot;Middle initial&quot;)).add(new JTextField());
-layout.row().add(new JLabel(&quot;Last name&quot;)).add(new JTextField());</pre>
+layout.row().grid(new JLabel(&quot;First name&quot;)).add(new JTextField());
+layout.row().grid(new JLabel(&quot;Middle initial&quot;)).add(new JTextField());
+layout.row().grid(new JLabel(&quot;Last name&quot;)).add(new JTextField());</pre>
 </div>
 <p>DesignGridLayout always takes care of the correct spacing between components inside the container, without requiring you to specify any value. In addition, all components inside a row are automatically &quot;baseline-aligned&quot;.</p>
 </div>
 <div class="section"><h2>DesignGridLayout API by example</h2>
-<p>After the first steps, this section gives more details and explanations on DesignGridLayout API through simple examples. The source for all examples is available in DesignGridLayout <a href="https://designgridlayout.dev.java.net/files/documents/4350/111778/designgridlayout-0.9-test-sources.jar" class="externalLink">test sources archive</a>
+<p>After the first steps, this section gives more details and explanations on DesignGridLayout API through simple examples. The source for all examples is available in DesignGridLayout <a href="https://designgridlayout.dev.java.net/files/documents/4350/113974/designgridlayout-1.0-rc1-test-sources.jar" class="externalLink">test sources archive</a>
 .</p>
 <p>Although not mandatory, it is advised to first read the DesignGridLayout <a href="index.html">Introduction</a>
 .</p>
@@ -210,18 +213,17 @@ public class Example1a
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel top = new JPanel();              
         DesignGridLayout layout = new DesignGridLayout(top);
-        top.setLayout(layout);
 
-        // You can add components one line at a time
-        IRow row = layout.row();
+        // You can add components one line at a time (not advised)
+        IRow row = layout.row().grid();
         row.add(button());
         row.add(button());
 
         // Or using method chaining
-        layout.row().add(button()).add(button());
+        layout.row().grid().add(button()).add(button());
 
         // Or, even better, using variable arguments
-        layout.row().add(button(), button());
+        layout.row().grid().add(button(), button());
 
         frame.add(top);
         frame.pack();
@@ -238,10 +240,10 @@ public class Example1a
 </p>
 <p>Then, we'll build a simple form based on the 4 column canonical grid shown below: </p>
 <img src="images/grid-example.png.png" /><p>Example 1b reflects the design above.</p>
-<div class="source"><pre>layout.row().add(button()).add(button());
-layout.row().add(button()).add(button()).add(button());
-layout.row().add(button(), 2).add(button());
-layout.row().add(button()).add(button()).add(button()).empty();</pre>
+<div class="source"><pre>layout.row().grid().add(button()).add(button());
+layout.row().grid().add(button()).add(button()).add(button());
+layout.row().grid().add(button(), 2).add(button());
+layout.row().grid().add(button()).add(button()).add(button()).empty();</pre>
 </div>
 <img src="images/Example1b.png" alt="Example 1b" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1b.html">(Example 1b source)</a>
 </p>
@@ -253,20 +255,53 @@ layout.row().add(button()).add(button()).add(button()).empty();</pre>
  for each empty column you need.</li>
 </ul>
 <p>Most forms have labels for each row. So let's add some for Example 1c.</p>
-<div class="source"><pre>layout.row().label(new JLabel(&quot;Row 1&quot;)).add(button().add(button());
-layout.row().label(new JLabel(&quot;Row 2&quot;)).add(button().add(button().add(button());
-layout.row().label(new JLabel(&quot;Row 3&quot;)).add(button(), 2).add( button());
-layout.row().label(new JLabel(&quot;Row 4&quot;)).add(button()).add(button()).add(button()).empty());</pre>
+<div class="source"><pre>layout.row().grid(new JLabel(&quot;Row 1&quot;)).add(button().add(button());
+layout.row().grid(new JLabel(&quot;Row 2&quot;)).add(button().add(button().add(button());
+layout.row().grid(new JLabel(&quot;Row 3&quot;)).add(button(), 2).add( button());
+layout.row().grid(new JLabel(&quot;Row 4&quot;)).add(button()).add(button()).add(button()).empty());</pre>
 </div>
 <img src="images/Example1c.png" alt="Example 1c" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1c.html">(Example 1c source)</a>
 </p>
 <p>In Example 1c above, labels do not get resized if the window is resized, only components from grid columns get resized on such event.</p>
 <p>Another common exception to the canonical grid are the &quot;Cancel&quot; and &quot;OK&quot; buttons found in dialog boxes. DesignGridLayout allows you to create rows with either grid, left, right, or center alignment per row. We'll also add a blank row with some additional height, to add space before the &quot;Cancel&quot; and &quot;OK&quot; buttons.</p>
-<div class="source"><pre>layout.emptyRow(20);
-layout.rightRow().add(new JButton(&quot;Cancel&quot;)).add(new JButton(&quot;OK&quot;));</pre>
+<div class="source"><pre>layout.emptyRow();
+layout.row().right().add(new JButton(&quot;Cancel&quot;)).add(new JButton(&quot;OK&quot;));</pre>
 </div>
 <img src="images/Example1d.png" alt="Example 1d" /><p><a href="xref-test/net/java/dev/designgridlayout/Example1d.html">(Example 1d source)</a>
 </p>
+</div>
+<div class="section"><h2>Forms with several label columns</h2>
+<p>DesignGridLayout also allows you to design large forms that contain several groups of components, each with its own dedicated label column.</p>
+<p>Here is a snippet that implements the example of sub-grids found in <a href="grids.html">this page on canonical grids</a>
+:</p>
+<div class="source"><pre>layout.row().grid(label(&quot;Label 1:&quot;)).add(button(), button())
+                          .grid(label(&quot;Long Label 1:&quot;)).add(button(), button());
+layout.row().grid(label(&quot;Lbl 2:&quot;))  .add(button(), button(), button())
+                          .grid()                      .add(button(), button());
+layout.row().grid(label(&quot;Label 3:&quot;)).add(button(), 2).add(button())
+                          .grid(label(&quot;Label 3+:&quot;))    .add(button(), 2).add(button());
+layout.row().grid(label(&quot;Lbl 4:&quot;))  .add(button());</pre>
+</div>
+</div>
+<div class="section"><h2>Automatic support for right-to-left text orientation</h2>
+<p>DesignGridLayout transparently supports right-to-left languages (such as Arabic or Hebrew) depending on the current default Locale used by the application. You don't need any special action on your layout code for it to work: this comes for free!</p>
+<p>The following screenshots demonstrate the same dialog (with exactly the same layout code, excerpted hereafter) one using the &quot;usual&quot; left-to-right text orientation, the other using right-to-left.</p>
+<img src="images/Issue9-large-LT.png" alt="Issue 9 test with left-to-right orientation" /><p>Sample dialog with left-to-right orientation</p>
+<img src="images/Issue9-large-RT.png" alt="Issue 9 test with right-to-left orientation" /><p>Same dialog with right-to-left orientation</p>
+<p><a href="xref-test/net/java/dev/designgridlayout/Issue9.html">(Issue 9 test sample source)</a>
+</p>
+<p>Note that there are several ways in Swing to change text orientation in dialogs:</p>
+<ul><li>As mentioned above, set the default Locale for the application, through <tt>Locale.setDefaultLocale(new Locale(...))</tt>
+: all Swing visuals are impacted</li>
+<li>Set the default Locale to be used by Swing exclusively, through <tt>JComponent.setDefaultLocale(new Locale(...))</tt>
+: all Swing visuals are impacted</li>
+<li>Set the Locale for a given dialog or frame only, through <tt>JComponent#setLocale(new Locale(...))</tt>
+: only the given dialog is impacted</li>
+<li>Directly set the <tt>ComponentOrientation</tt>
+ of a given dialog or frame, through <tt>JComponent#applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT)</tt>
+: only the given dialog is impacted and the Locale is independent of the selected text orientation (as in the right-to-left screenshot above).</li>
+</ul>
+<p>Also note that changing a Locale works only if it has been installed in your JRE (which depends on the way you have installed your JRE).</p>
 </div>
 <div class="section"><h2>Where to go next?</h2>
 <p>This section has covered the main features of DesignGridLayout. A few other features exist but are not yet presented here. You may want to consult the <a href="apidocs/index.html">API javadoc</a>

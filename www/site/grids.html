@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>DesignGridLayout - Canonical Grids</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Jason Osgood" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="../../" id="bannerLeft">
+    
+            DesignGridLayout
+    
+            </a>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2008-11-05
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>General</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Introduction</a>
+          </li>
+              
+    <li class="none">
+              <strong>Canonical Grids</strong>
+        </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
+          </li>
+              
+    <li class="none">
+                    <a href="examples.html">Examples</a>
+          </li>
+              
+    <li class="none">
+                    <a href="build-from-sources.html">Building from sources</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Canonical grids</h2>
+<p>The idea of user interfaces based on canonical grids is described in the book <a href="http://www.amazon.com/gp/product/0133033899" class="externalLink">Designing Visual Interfaces: Communication Oriented Techniques</a>
+ by Kevin Mullet and Darrell Sano. Available online, Patrizia Nanni's thesis <a href="http://www.vhml.org/theses/nannip/HCI_final.htm" class="externalLink">Human-Computer Interaction: Principles of Interface Design</a>
+ has a nice chapter called <a href="http://www.vhml.org/theses/nannip/HCI_final.htm#_Toc87596295" class="externalLink">Module and Program: Grid-based Design</a>
+, which also references Mullet and Sano's work.</p>
+<p>Canonical grids are visual tools used by graphic artists to design magazines, posters, advertisements, forms, and so forth. As an artist friend told the original author of DesignGridLayout, the use of grids is &quot;graphic design 101, taught on the first day&quot;.</p>
+<p>Here are the steps to create a simple 4 column canonical grid. First, divide the rectangle horizontally into halves (1/2). The light gray represents the gaps (for gutters and margins) between columns.</p>
+<img src="images/grid-halves.png" /><p>Then add divisions for thirds (1/3).</p>
+<img src="images/grid-thirds.png" /><p>Lastly, add divisions for fourths (1/4).</p>
+<img src="images/grid-fourths.png" /><p>Voila! The black lines represent the 4 column canonical grid.</p>
+<p>For each row, the row is divided by the number of components you add. Adding two components divides the grid in half. Adding three components divides the grid in thirds.</p>
+<p>So here's an example. </p>
+<img src="images/grid-example.png" /><p>See how everything lines up nicely? There's two interesting cases to note. </p>
+<ul><li>Row 3 has just two components, but the row is divided in thirds. That's because the first component spans 2 columns, so the total number of components is considered to be 3.</li>
+<li>Row 4 has no component in the fourth column. Rows having empty columns is common for forms.</li>
+</ul>
+</div>
+<div class="section"><h2>DesignGridLayout Grids and &quot;Sub-grids&quot;</h2>
+<p>Normal Canonical grids work well as long as we don't use a label column. Indeed, it is common to have forms that have a first column made exclusively of labels defining the fields that follow.</p>
+<p>For this reason, DesignGridLayout extends the possibilities of canonical grids by putting the extra label column outside of the grid, which means that its width is always fixed (and equal to the largest width of all labels put in that column).</p>
+<p>However, it is also not uncommon to have forms that have several vertical &quot;groups&quot; of input fields, each with their own label column. DesignGridLayout supports this through the use of &quot;sub-grids&quot;.</p>
+<p>The &quot;sub-grid&quot; concept is defined as follows:</p>
+<ul><li>Each layout is made of a certain number of sub-grids</li>
+<li>The actual number of sub-grids of a layout is determined by the row that defines the biggest number of sub-grids</li>
+<li>Each sub-grid is made of a label column (with fixed width) and one or several component columns (which width is managed canonically)</li>
+<li>The label column of each sub-grid has its own width (independently of the width of other label columns)</li>
+<li>The remaining available horizontal space (container width less the widths used by all label columns of all sub-grids) is equally shared between all sub-grids (more exactly, between the canonical parts of all sub-grids)</li>
+<li>It is possible, in a row, to define a &quot;wide&quot; sub-grid that spans several sub-grids of the layout. In this case, all components of this sub-grid will form a canonical grid which width spans several sub-grids (in roughly the same way that one component inside a canonical grid can span several columns)</li>
+</ul>
+<p>The example below summarizes these principles:</p>
+<img src="images/subgrids.png" /><p>In this example you can see 2 sub-grids, each with its label column (of different widths due to the max length of labels). Canonical parts of both sub-grids are equal in size. In the second row, there is no label for the second sub-grid. Finally, the last row has only one sub-grid that spans both sub-grids defined in other rows.</p>
+<p>You will find more concrete examples <a href="usage.html">here</a>
+.</p>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2005-2008
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
