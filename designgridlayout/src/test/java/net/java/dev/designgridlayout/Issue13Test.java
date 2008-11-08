@@ -31,7 +31,7 @@ public class Issue13Test extends AbstractGuiTest
 	{
 		PanelInitializer initializer = new PanelInitializer(panel);
 		launchGui(Issue13b.class, initializer);
-		checkSnapshot("small-grid-" + panel);
+		takeSnapshot("small-grid-" + panel);
 	}
 	
 	@Test public void checkMultiLabelLayout() throws Exception

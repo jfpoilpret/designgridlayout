@@ -116,4 +116,19 @@ public class ExamplesTest extends AbstractGuiTest
 	{
 		checkExample(Issue4.class, false);
 	}
+
+	@Test public void checkIssue22() throws Exception
+	{
+		checkExample(Issue22.class, false);
+	}
+
+	@Test public void checkIssue23() throws Exception
+	{
+		checkExample(Issue23.class, false);
+	}
+
+	@Test public void checkIssue24() throws Exception
+	{
+		checkExample(Issue24.class, false);
+	}
 }
