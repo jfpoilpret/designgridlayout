@@ -14,7 +14,13 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Container;
+import java.util.List;
+
 import javax.swing.JComponent;
+import javax.swing.SwingConstants;
+
+import org.jdesktop.layout.LayoutStyle;
 
 final class ComponentHelper
 {
@@ -40,6 +46,22 @@ final class ComponentHelper
 			sum += extractor.value(component);
 		}
 		return sum;
+	}
+	
+	static int hgap(List<JComponent> components, Container parent)
+	{
+		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+		int hgap = 0;
+		int size = components.size() - 1;
+		for (int nth = 0; nth < size; nth++)
+		{
+			JComponent left = components.get(nth);
+			JComponent right = components.get(nth + 1);
+			int gap = layoutStyle.getPreferredGap(
+				left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent);
+			hgap = Math.max(hgap, gap);
+		}
+		return hgap;
 	}
 	
 	static boolean isFixedHeight(

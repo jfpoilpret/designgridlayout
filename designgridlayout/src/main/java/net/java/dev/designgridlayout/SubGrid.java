@@ -15,6 +15,7 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Container;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -95,29 +96,7 @@ final class SubGrid implements ISubGrid
 
 	public int hgap()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-
-		int hgap = 0;
-
-		// Account for gap between label and first component
-		if (_label != null && _items.size() > 0)
-		{
-			JComponent left = _label;
-			JComponent right = _items.get(0).component();
-			int gap = layoutStyle.getPreferredGap(
-				left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
-			hgap = Math.max(hgap, gap);
-		}
-
-		for (int nth = 0; nth < (_items.size() - 1); nth++)
-		{
-			JComponent left = _items.get(nth).component();
-			JComponent right = _items.get(nth + 1).component();
-			int gap = layoutStyle.getPreferredGap(
-				left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
-			hgap = Math.max(hgap, gap);
-		}
-		return hgap;
+		return ComponentHelper.hgap(_components, _parent);
 	}
 
 	public int layoutRow(LayoutHelper helper, int left, int height, int baseline, 
@@ -170,8 +149,41 @@ final class SubGrid implements ISubGrid
 	{
 		return _items;
 	}
+	
+	private class ComponentsList extends AbstractList<JComponent>
+	{
+		@Override public JComponent get(int index)
+		{
+			if (_label != null)
+			{
+				if (index == 0)
+				{
+					return _label;
+				}
+				else
+				{
+					return _items.get(index - 1).component();
+				}
+			}
+			else
+			{
+				return _items.get(index).component();
+			}
+		}
+
+		@Override public int size()
+		{
+			int size = _items.size();
+			if (_label != null)
+			{
+				size++;
+			}
+			return size;
+		}
+	}
 
 	final private List<RowItem> _items = new ArrayList<RowItem>();
+	final private ComponentsList _components = new ComponentsList();
 	final private Container _parent;
 	final private JLabel _label;
 	// 0 means auto span until the right-most edge
