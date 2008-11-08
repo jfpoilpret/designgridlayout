@@ -24,8 +24,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import org.jdesktop.layout.LayoutStyle;
-
 final class SubGrid implements ISubGrid
 {
 	SubGrid(Container parent, JLabel label, int gridspan)
