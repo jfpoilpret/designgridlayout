@@ -27,7 +27,10 @@ public class Issue23 extends AbstractBaseExample
 	@Override public void build(DesignGridLayout layout)
 	{
 		layout.row().left().fill().add(new JSeparator());
+		layout.row().left().fill().add(label("Hello"), new JSeparator());
 		layout.row().center().fill().add(new JSeparator());
+		layout.row().center().fill().add(new JSeparator(), label("Hello"), new JSeparator());
 		layout.row().right().fill().add(new JSeparator());
+		layout.row().right().fill().add(new JSeparator(), label("Hello"));
 	}
 }
