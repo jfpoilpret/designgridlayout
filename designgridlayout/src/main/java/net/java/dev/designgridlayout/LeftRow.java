@@ -23,7 +23,7 @@ final class LeftRow extends AbstractNonGridRow
 
 	@Override protected int leftFiller(int count, int width, int availableWidth)
 	{
-		return width;
+		return (count > 1 ? width : rightFiller(count, width, availableWidth));
 	}
 
 	@Override protected int rightFiller(int count, int width, int availableWidth)

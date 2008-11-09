@@ -134,7 +134,7 @@ abstract class AbstractRow
 
 	int hgap()
 	{
-		return 0;
+		return ComponentHelper.hgap(components(), parent());
 	}
 
 	int gridgap()

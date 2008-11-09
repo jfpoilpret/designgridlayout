@@ -410,6 +410,11 @@ public class DesignGridLayout implements LayoutManager
 			}
 			row.vgap(rowGap);
 		}
+		// Issue #24: force vgap of last row to 0 (might be -1)
+		if (!_rowList.isEmpty())
+		{
+			_rowList.get(_rowList.size() - 1).vgap(0);
+		}
 	}
 
 	private void initialize()
