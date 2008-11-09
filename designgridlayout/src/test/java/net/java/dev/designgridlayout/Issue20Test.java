@@ -34,6 +34,6 @@ public class Issue20Test extends AbstractGuiTest
 	@Test public void checkBorder() throws Exception
 	{
 		launchGui(Border.class);
-		takeSnapshot();
+		checkSnapshot();
 	}
 }
