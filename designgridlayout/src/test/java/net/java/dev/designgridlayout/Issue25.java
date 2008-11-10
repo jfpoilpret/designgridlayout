@@ -14,26 +14,24 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-
-@Test(groups = "utest")
-public class Issue20Test extends AbstractGuiTest
+// Issue 25: multiple calls to pack() clears the effect of emptyRow()
+public class Issue25 extends AbstractBaseExample
 {
-	@AfterMethod public void closeGui()
+	public static void main(String[] args)
 	{
-		stopGui();
-	}
-	
-	@Test public void checkNoBorder() throws Exception
-	{
-		launchGui(NoBorder.class);
-		checkSnapshot();
+		Issue25 example = new Issue25();
+		example.go(true);
 	}
 
-	@Test public void checkBorder() throws Exception
+	@Override public void build(DesignGridLayout layout)
 	{
-		launchGui(Border.class);
-		checkSnapshot();
+		layout.row().grid().add(button(), button());
+		layout.emptyRow();
+		layout.row().grid().add(button(), button());
 	}
+
+	@Override protected void prePack()
+    {
+		_frame.pack();
+    }
 }
