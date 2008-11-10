@@ -199,7 +199,7 @@ public class DesignGridLayout implements LayoutManager
 		if (!_rowList.isEmpty())
 		{
 			AbstractRow current = _rowList.get(_rowList.size() - 1);
-			current.vgap(-1);
+			current.setUnrelatedGap();
 		}
 	}
 	
@@ -386,7 +386,7 @@ public class DesignGridLayout implements LayoutManager
 			AbstractRow row = _rowList.get(nthRow);
 			List<JComponent> items1 = row.components();
 			List<JComponent> items2 = _rowList.get(nthRow + 1).components();
-			int style = (row.vgap() == -1 ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
+			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
 			for (int nthItems1 = 0; nthItems1 < items1.size(); nthItems1++)
 			{
@@ -409,11 +409,6 @@ public class DesignGridLayout implements LayoutManager
 				}
 			}
 			row.vgap(rowGap);
-		}
-		// Issue #24: force vgap of last row to 0 (might be -1)
-		if (!_rowList.isEmpty())
-		{
-			_rowList.get(_rowList.size() - 1).vgap(0);
 		}
 	}
 

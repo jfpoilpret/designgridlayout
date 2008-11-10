@@ -47,6 +47,16 @@ abstract class AbstractRow
 	{
 		return _orientation;
 	}
+	
+	final void setUnrelatedGap()
+	{
+		_unrelatedGap = true;
+	}
+	
+	final boolean hasUnrelatedGap()
+	{
+		return _unrelatedGap;
+	}
 
 	final void vgap(int vgap)
 	{
@@ -151,6 +161,7 @@ abstract class AbstractRow
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
+	private boolean _unrelatedGap = false;
 	private int _vgap = 0;
 	private int _baseline;
 	private int _height;
