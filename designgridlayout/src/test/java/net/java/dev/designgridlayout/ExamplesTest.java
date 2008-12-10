@@ -135,4 +135,9 @@ public class ExamplesTest extends AbstractGuiTest
 	{
 		checkExample(Issue25.class, false);
 	}
+
+	@Test public void checkIssue26() throws Exception
+	{
+		checkExample(Issue26.class, false);
+	}
 }
