@@ -22,7 +22,6 @@ public class ExamplesTest extends AbstractGuiTest
 {
 	// Note: don't use @DataProvider because all tests appear under the same name
 	// in maven surefire reports...
-	//TODO Maybe add later on some snapshots checks before/after resize
 	protected void checkExample(Class<? extends AbstractBaseExample> clazz, boolean resize)
 		throws Exception
 	{
