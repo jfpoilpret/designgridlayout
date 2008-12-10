@@ -46,7 +46,7 @@ public interface ISubGridStarter
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IGridRow grid(JLabel label);
+	public abstract ISpannableGridRow grid(JLabel label);
 	
 	/**
 	 * Starts a new sub-grid in the row, starting with a label.
@@ -79,7 +79,7 @@ public interface ISubGridStarter
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IGridRow grid();
+	public abstract ISpannableGridRow grid();
 
 	/**
 	 * Starts a new sub-grid in the row, starting with an empty label.

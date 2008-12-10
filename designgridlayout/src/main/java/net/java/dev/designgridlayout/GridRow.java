@@ -26,15 +26,24 @@ import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
-final class GridRow extends AbstractRow implements IGridRow
+final class GridRow extends AbstractRow implements ISpannableGridRow
 {
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @see net.java.dev.designgridlayout.ISpannableGridRow#spanRow()
+	 */
+	public ISpannableGridRow spanRow()
+	{
+		_current.spanRow();
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent,
 	 * int)
 	 */
-	public IGridRow add(JComponent child, int span)
+	public ISpannableGridRow add(JComponent child, int span)
 	{
 		_current.add(child, span);
 		return this;
@@ -42,10 +51,9 @@ final class GridRow extends AbstractRow implements IGridRow
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent[])
 	 */
-	public IGridRow add(JComponent... children)
+	public ISpannableGridRow add(JComponent... children)
 	{
 		for (JComponent component: children)
 		{
@@ -56,62 +64,57 @@ final class GridRow extends AbstractRow implements IGridRow
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(int,
 	 * javax.swing.JComponent[])
 	 */
-	public IGridRow addMulti(int span, JComponent... children)
+	public ISpannableGridRow addMulti(int span, JComponent... children)
 	{
 		return add(new MultiComponent(growPolicy(), orientation(), children), span);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(javax.swing.JComponent[])
 	 */
-	public IGridRow addMulti(JComponent... children)
+	public ISpannableGridRow addMulti(JComponent... children)
 	{
 		return addMulti(1, children);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.java.dev.designgridlayout.IGridRow#empty()
 	 */
-	public IGridRow empty()
+	public ISpannableGridRow empty()
 	{
 		return empty(1);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.java.dev.designgridlayout.IGridRow#empty(int)
 	 */
-	public IGridRow empty(int span)
+	public ISpannableGridRow empty(int span)
 	{
 		return add(new JPanel(), span);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel)
 	 */
-	public IGridRow grid(JLabel label)
+	public ISpannableGridRow grid(JLabel label)
 	{
-		return grid(label, 0);
+		return newGrid(label, 0);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid()
 	 */
-	public IGridRow grid()
+	public ISpannableGridRow grid()
 	{
-		return grid(null, 0);
+		return newGrid(null, 0);
 	}
 
 	/*
@@ -120,7 +123,7 @@ final class GridRow extends AbstractRow implements IGridRow
 	 */
 	public IGridRow grid(int gridspan)
 	{
-		return grid(null, gridspan);
+		return newGrid(null, gridspan);
 	}
 
 	/*
@@ -128,6 +131,11 @@ final class GridRow extends AbstractRow implements IGridRow
 	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel, int)
 	 */
 	public IGridRow grid(JLabel label, int gridspan)
+	{
+		return newGrid(label, gridspan);
+	}
+
+	private ISpannableGridRow newGrid(JLabel label, int gridspan)
 	{
 		// Fix the span of the previous sub-grid (if it was in auto-span mode)
 		if (_current != null)
@@ -151,7 +159,12 @@ final class GridRow extends AbstractRow implements IGridRow
 
 	@Override int numGrids()
 	{
-		return _grids.size();
+		int numGrids = 0;
+		for (SubGrid grid: _grids)
+		{
+			numGrids += (grid.gridspan() > 0 ? grid.gridspan() : 1);
+		}
+		return numGrids;
 	}
 	
 	@Override void totalGrids(int totalGrids)

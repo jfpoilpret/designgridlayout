@@ -38,6 +38,15 @@ final class SubGrid implements ISubGrid
 		}
 	}
 
+	void spanRow()
+	{
+		_spanRow = true;
+		// Ideally this should share the original RowItem no? or at least the component?
+		RowItem previousItem = null;//####
+		RowItem item = new RowItem(previousItem);
+		_items.add(item);
+	}
+	
 	void add(JComponent child, int span)
 	{
 		RowItem item = new RowItem(span, child);
@@ -186,4 +195,5 @@ final class SubGrid implements ISubGrid
 	final private JLabel _label;
 	// 0 means auto span until the right-most edge
 	private int _gridspan;
+	private boolean _spanRow;
 }

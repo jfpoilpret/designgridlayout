@@ -427,19 +427,25 @@ public class DesignGridLayout implements LayoutManager
 			return;
 		}
 
-		// Calculate margins and gutters
-		computeMargins();
-		computeGutters();
+		// First of all count number of canonical grids in the whole panel
+		//TODO Should also make sure sub-grids containing span-row components 
+		// have their gridspan setup correctly!
+		countGrids();
 
-		// Now, initialize each row and count the number of grids & columns 
+		//TODO Check all spanRow() calls are correct on all GridRows
+		
+		// Initialize each row and count the number of grids & columns 
 		// in the grids
 		for (AbstractRow row: _rowList)
 		{
 			row.init();
 		}
-		countGrids();
 
-		// Second, calculate labels width
+		// Calculate margins and gutters
+		computeMargins();
+		computeGutters();
+
+		// Calculate labels width for all grids
 		computeLabelWidths();
 
 		// Compute preferred & minimum widths for each sub-grid (without labels), 
@@ -680,7 +686,7 @@ public class DesignGridLayout implements LayoutManager
 			return addRow(new RightRow(), _weight);
 		}
 
-		public IGridRow grid(JLabel label)
+		public ISpannableGridRow grid(JLabel label)
 		{
 			return addRow(new GridRow(), _weight).grid(label);
 		}
@@ -690,7 +696,7 @@ public class DesignGridLayout implements LayoutManager
 			return addRow(new GridRow(), _weight).grid(label, gridspan);
 		}
 
-		public IGridRow grid()
+		public ISpannableGridRow grid()
 		{
 			return addRow(new GridRow(), _weight).grid();
 		}

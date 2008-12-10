@@ -18,22 +18,46 @@ import javax.swing.JComponent;
 
 class RowItem
 {
+	// Used for all components added to a SubGrid
 	RowItem(int span, JComponent component)
 	{
+		_original = null;
 		_component = component;
 		_span = span;
 	}
 
+	// Used for components that span several rows (used only for rows that have
+	// an explicit call to spanRow()
+	RowItem(RowItem spannedItem)
+	{
+		_original = spannedItem;
+		_component = null;
+		_span = 0;
+		original()._rows++;
+	}
+
 	JComponent component()
 	{
-		return _component;
+		return original()._component;
 	}
 	
 	int span()
 	{
-		return _span;
+		return original()._span;
+	}
+	
+	int spannedRows()
+	{
+		return _rows;
+	}
+	
+	private RowItem original()
+	{
+		return (_original != null ? _original.original() : this);
 	}
 
 	final private JComponent _component;
 	final private int _span;
+	private int _rows = 1;
+	final private RowItem _original;
 }
