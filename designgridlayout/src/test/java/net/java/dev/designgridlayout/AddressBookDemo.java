@@ -121,14 +121,6 @@ public class AddressBookDemo extends AbstractBaseExample
 		layout.row().center().add(newButton).add(deleteButton).add(editButton).add(saveButton).add(cancelButton);
 	}
 
-	//TODO is that really necessary?
-	@Override protected JLabel label(String text)
-    {
-		JLabel label = super.label(text);
-		label.setHorizontalAlignment(JLabel.RIGHT);
-		return label;
-    }
-
 	@Override public String name()
 	{
 		return "Address Book Demo";
