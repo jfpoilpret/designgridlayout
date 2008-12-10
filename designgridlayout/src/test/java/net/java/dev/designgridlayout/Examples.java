@@ -48,9 +48,11 @@ public class Examples extends AbstractBaseExample
 				// CSOFF: IllegalCatch
 				try
 				{
-					Class c = Class.forName(
+					Class<?> c = Class.forName(
 						"net.java.dev.designgridlayout." + getValue(Action.NAME));
-					AbstractBaseExample example = (AbstractBaseExample) c.newInstance();
+					Class<? extends AbstractBaseExample> clazz = 
+						c.asSubclass(AbstractBaseExample.class);
+					AbstractBaseExample example = clazz.newInstance();
 					example.go(false);
 				}
 				catch (Exception e1)
