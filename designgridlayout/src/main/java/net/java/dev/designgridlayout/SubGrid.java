@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ import javax.swing.SwingConstants;
 
 final class SubGrid implements ISubGrid
 {
-	SubGrid(Container parent, JLabel label, int gridspan)
+	SubGrid(SubGrid previous, Container parent, JLabel label, int gridspan)
 	{
+		_previous = previous;
 		_parent = parent;
 		_label = label;
 		_gridspan = (gridspan <= 0 ? 0 : gridspan);
@@ -40,20 +42,79 @@ final class SubGrid implements ISubGrid
 
 	void spanRow()
 	{
-		_spanRow = true;
-		// Ideally this should share the original RowItem no? or at least the component?
-		RowItem previousItem = null;//####
-		RowItem item = new RowItem(previousItem);
-		_items.add(item);
+		if (_previous == null)
+		{
+			// Bad use of DesignGridLayout, use a maker component
+			add(createMarker(1, NO_PREVIOUS_SUBGRID), 1);
+		}
+		else
+		{
+			// Find the RowItem, in the above subgrid, matching the current
+			// column position.
+			RowItem previous = _previous.findItem(_column);
+			if (previous == null)
+			{
+				// Bad use of DesignGridLayout, use a maker component
+				add(createMarker(1, NO_MATCHING_COMPONENT), 1);
+			}
+			else
+			{
+				// It is impossible to say now if this call can succeed, this can
+				// only be checked later (checkSpanRows()), for now we consider
+				// that it works
+				_spanRow = true;
+				_items.add(new RowItem(previous));
+			}
+		}
 	}
 	
 	void add(JComponent child, int span)
 	{
 		RowItem item = new RowItem(span, child);
+		_column += span;
 		_parent.add(child);
 		_items.add(item);
 	}
 	
+	void checkSpanRows()
+	{
+		// If there is no remaining spanRow() call to check, then we're done
+		if (!_spanRow)
+		{
+			return;
+		}
+
+		// Check that the number of columns in this sub-grid matches the 
+		// previous sub-grid. If not, then we have to replace all spanning
+		// RowItems with marker components
+		if (_previous.gridColumns() != gridColumns())
+		{
+			for (RowItem item: _items)
+			{
+				if (!item.isRealComponent())
+				{
+					JComponent marker = createMarker(item.span(), UNMATCHED_COLUMNS_SUBGRIDS);
+					item.replace(marker);
+					_parent.add(marker);
+				}
+			}
+		}
+	}
+	
+	List<RowSpanItem> initRowSpanItems(int rowIndex)
+	{
+		List<RowSpanItem> allSpanItems =  new ArrayList<RowSpanItem>();
+		for (RowItem item: _items)
+		{
+			if (item.isSpanComponent())
+			{
+				allSpanItems.add(
+					new RowSpanItem(rowIndex, item.component(), item.rowSpan()));
+			}
+		}
+		return allSpanItems;
+	}
+
 	public int gridspan()
 	{
 		return _gridspan;
@@ -61,6 +122,10 @@ final class SubGrid implements ISubGrid
 	
 	public void gridspan(int span)
 	{
+		if (_previous != null && _spanRow)
+		{
+			_gridspan = _previous.gridspan();
+		}
 		if (_gridspan == 0)
 		{
 			_gridspan = span;
@@ -91,7 +156,7 @@ final class SubGrid implements ISubGrid
 
 		for (RowItem item: _items)
 		{
-			int width = extractor.value(item.component());
+			int width = extractor.value(item);
 
 			// Ignores remainder (fudge), which is incorrect if remainder
 			// is greater than horizontal gap (hopefully rarely)
@@ -143,9 +208,12 @@ final class SubGrid implements ISubGrid
 				{
 					width += fudge;
 				}
-				JComponent component = item.component();
-				actualHeight = Math.max(0, helper.setSizeLocation(
-					component, x, width, height, baseline));
+				if (item.isRealComponent())
+				{
+					JComponent component = item.component();
+					actualHeight = Math.max(0, helper.setSizeLocation(
+						component, x, width, height, baseline));
+				}
 				x += width + hgap;
 			}
 		}
@@ -157,24 +225,51 @@ final class SubGrid implements ISubGrid
 		return _items;
 	}
 	
-	private class ComponentsList extends AbstractList<JComponent>
+	private JComponent createMarker(int span, String tooltip)
 	{
-		@Override public JComponent get(int index)
+		JLabel marker = new JLabel(MARKER_LABEL);
+		marker.setBackground(Color.RED);
+		marker.setToolTipText(tooltip);
+		return marker;
+	}
+	
+	private RowItem findItem(int column)
+	{
+		int i = 0;
+		for (RowItem item: _items)
+		{
+			if (i == column)
+			{
+				return item;
+			}
+			i += item.span();
+			if (i > column)
+			{
+				return null;
+			}
+		}
+		return null;
+	}
+	
+	//#### Can't we do without this terrible class (just to use ComponentHelper.hgap())?
+	private class AllItemsList extends AbstractList<RowItem>
+	{
+		@Override public RowItem get(int index)
 		{
 			if (_label != null)
 			{
 				if (index == 0)
 				{
-					return _label;
+					return new RowItem(1, _label);
 				}
 				else
 				{
-					return _items.get(index - 1).component();
+					return _items.get(index - 1);
 				}
 			}
 			else
 			{
-				return _items.get(index).component();
+				return _items.get(index);
 			}
 		}
 
@@ -189,11 +284,23 @@ final class SubGrid implements ISubGrid
 		}
 	}
 
+	static final private String MARKER_LABEL = "spanRow()"; 
+	static final private String NO_PREVIOUS_SUBGRID = 
+		"spanRow() cannot work on a grid-row with no grid-row immediately above, " +
+		"or with no matching sub-grid (same column position) in the above grid-row";
+	static final private String NO_MATCHING_COMPONENT = 
+		"spanRow() cannot work when there is no component, on the above grid-row, " +
+		"with a matching column location";
+	static final private String UNMATCHED_COLUMNS_SUBGRIDS = 
+		"spanRow() cannot work on a sub-grid where the number of columns is different " +
+		"from the above sub-grid";
 	final private List<RowItem> _items = new ArrayList<RowItem>();
-	final private ComponentsList _components = new ComponentsList();
+	final private AllItemsList _components = new AllItemsList();
+	final private SubGrid _previous;
 	final private Container _parent;
 	final private JLabel _label;
 	// 0 means auto span until the right-most edge
 	private int _gridspan;
 	private boolean _spanRow;
+	private int _column = 0;
 }

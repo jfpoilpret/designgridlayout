@@ -17,8 +17,6 @@ package net.java.dev.designgridlayout;
 import java.awt.Container;
 import java.util.List;
 
-import javax.swing.JComponent;
-
 abstract class AbstractRow
 {
 	// Called by DesignGridLayout immediately after instanciation
@@ -70,10 +68,10 @@ abstract class AbstractRow
 
 	final void init()
 	{
-		_maxWidth = ComponentHelper.maxValues(components(), PrefWidthExtractor.INSTANCE);
-		_height = ComponentHelper.maxValues(components(), PrefHeightExtractor.INSTANCE);
-		_baseline = ComponentHelper.maxValues(components(), BaselineExtractor.INSTANCE);
-		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, components());
+		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
+		_height = ComponentHelper.maxValues(items(), PrefHeightExtractor.INSTANCE);
+		_baseline = ComponentHelper.maxValues(items(), BaselineExtractor.INSTANCE);
+		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, items());
 		if (fixedHeight || _growWeight == -1.0)
 		{
 			_growWeight = (fixedHeight ? 0.0 : 1.0);
@@ -93,6 +91,16 @@ abstract class AbstractRow
 	int height()
 	{
 		return _height;
+	}
+	
+	void actualHeight(int height)
+	{
+		_actualHeight = height;
+	}
+
+	int actualHeight()
+	{
+		return _actualHeight;
 	}
 
 	final void growWeight(double weight)
@@ -144,7 +152,7 @@ abstract class AbstractRow
 
 	int hgap()
 	{
-		return ComponentHelper.hgap(components(), parent());
+		return ComponentHelper.hgap(items(), parent());
 	}
 
 	int gridgap()
@@ -152,7 +160,10 @@ abstract class AbstractRow
 		return 0;
 	}
 
-	abstract List<JComponent> components();
+	abstract void checkSpanRows();
+	abstract List<RowSpanItem> initRowSpanItems(int rowIndex);
+
+	abstract List<? extends ISpannableRowItem> items();
 
 	// Returns the actual extra height allocated to the row
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
@@ -167,4 +178,5 @@ abstract class AbstractRow
 	private int _height;
 	private double _growWeight = -1.0;
 	private int _maxWidth;
+	private int _actualHeight;
 }

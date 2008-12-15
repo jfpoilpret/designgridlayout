@@ -27,8 +27,8 @@ public class Issue10 extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().grid(label("lbl1")).add(list()).add(field("field1"));
-		layout.row().grid().spanRow().add(field("field3"));
+		layout.row().grid(label("lbl1")).add(field("field1")).add(list());
+		layout.row().grid(label("lbl3")).add(field("field3")).spanRow();
 		layout.row().grid(label("lbl4")).add(field("field4"));
 	}
 

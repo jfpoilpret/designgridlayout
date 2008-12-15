@@ -196,16 +196,16 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public void emptyRow()
 	{
-		if (!_rowList.isEmpty())
+		if (!_rows.isEmpty())
 		{
-			AbstractRow current = _rowList.get(_rowList.size() - 1);
+			AbstractRow current = _rows.get(_rows.size() - 1);
 			current.setUnrelatedGap();
 		}
 	}
 	
 	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
 	{
-		_rowList.add(row);
+		_rows.add(row);
 		row.init(_parent, _heightTester, _orientation);
 		row.growWeight(verticalWeight);
 		return row;
@@ -238,7 +238,7 @@ public class DesignGridLayout implements LayoutManager
 		checkParent(parent);
 
 		// Make sure there's something to do
-		if (_rowList.isEmpty())
+		if (_rows.isEmpty())
 		{
 			return;
 		}
@@ -275,15 +275,27 @@ public class DesignGridLayout implements LayoutManager
 			}
 			// Exclude inter-grid gaps
 			gridsWidth -= (_maxGrids - 1) * _gridgap;
+			
+			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
-			for (AbstractRow row: _rowList)
+			for (AbstractRow row: _rows)
 			{
 				helper.setY(y);
 				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
 				helper.setRowAvailableHeight(extraHeight + row.height());
 				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 					gridsWidth, _labelWidths);
-				y += row.height() + extraHeight + row.vgap();
+				row.actualHeight(row.height() + extraHeight);
+				y += row.actualHeight() + row.vgap();
+			}
+			
+			// Second pass: all row-span components
+			helper.initRowSpanLayout(_rows, totalExtraHeight);
+			int rowIndex = 0;
+			for (RowSpanItem item: _rowspans)
+			{
+				// Calculate size based on number of spanned rows
+				helper.setHeight(rowIndex, item.component(), item.spannedRows());
 			}
 		}
 	}
@@ -371,31 +383,31 @@ public class DesignGridLayout implements LayoutManager
 		// Handle horizontal gaps
 		_hgap = 0;
 		_gridgap = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			_hgap = Math.max(_hgap, row.hgap());
 			_gridgap = Math.max(_gridgap, row.gridgap());
 		}
 
 		// Vertical gaps (per row)
-		for (int nthRow = 0; nthRow < (_rowList.size() - 1); nthRow++)
+		for (int nthRow = 0; nthRow < (_rows.size() - 1); nthRow++)
 		{
 			int maxComboHeight = 0;
 			int rowGap = 0;
 
-			AbstractRow row = _rowList.get(nthRow);
-			List<JComponent> items1 = row.components();
-			List<JComponent> items2 = _rowList.get(nthRow + 1).components();
+			AbstractRow row = _rows.get(nthRow);
+			List<? extends ISpannableRowItem> items1 = row.items();
+			List<? extends ISpannableRowItem> items2 = _rows.get(nthRow + 1).items();
 			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
 			for (int nthItems1 = 0; nthItems1 < items1.size(); nthItems1++)
 			{
-				JComponent upper = items1.get(nthItems1);
+				JComponent upper = items1.get(nthItems1).spanComponent();
 				int aboveHeight = upper.getPreferredSize().height;
 
 				for (int nthItems2 = 0; nthItems2 < items2.size(); nthItems2++)
 				{
-					JComponent lower = items2.get(nthItems2);
+					JComponent lower = items2.get(nthItems2).spanComponent();
 					int belowHeight = lower.getPreferredSize().height;
 
 					int gap = layoutStyle.getPreferredGap(
@@ -420,7 +432,7 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		// Make sure there's something to do
-		if (_rowList.isEmpty())
+		if (_rows.isEmpty())
 		{
 			_preferredSize = new Dimension(0, 0);
 			_minimumSize = new Dimension(0, 0);
@@ -428,22 +440,28 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		// First of all count number of canonical grids in the whole panel
-		//TODO Should also make sure sub-grids containing span-row components 
-		// have their gridspan setup correctly!
 		countGrids();
 
-		//TODO Check all spanRow() calls are correct on all GridRows
-		
-		// Initialize each row and count the number of grids & columns 
-		// in the grids
-		for (AbstractRow row: _rowList)
+		// Check all spanRow() calls are correct on all GridRows
+		// (show colored placeholder in all locations where a problem occurs)
+		for (AbstractRow row: _rows)
 		{
-			row.init();
+			row.checkSpanRows();
 		}
-
+		
 		// Calculate margins and gutters
 		computeMargins();
 		computeGutters();
+		
+		// Initialize the list of all rowspan items across the layout
+		initRowSpanItems();
+
+		// Initialize each row (compute width, height, baseline)
+		//TODO need some way to adjust rowspan component height
+		for (AbstractRow row: _rows)
+		{
+			row.init();
+		}
 
 		// Calculate labels width for all grids
 		computeLabelWidths();
@@ -458,7 +476,7 @@ public class DesignGridLayout implements LayoutManager
 
 		// Calculate total height growth factor of all variable height rows
 		_totalWeight = 0.0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			_totalWeight += row.growWeight();
 		}
@@ -466,17 +484,41 @@ public class DesignGridLayout implements LayoutManager
 		_preferredSize = new Dimension(preferredWidth, preferredHeight);
 		_minimumSize = new Dimension(minimumWidth, preferredHeight);
 	}
+
+	private void initRowSpanItems()
+    {
+		// First, build the whole list of rowspan items
+	    int rowIndex = 0;
+		for (AbstractRow row: _rows)
+		{
+			_rowspans.addAll(row.initRowSpanItems(rowIndex));
+			rowIndex++;
+		}
+		
+		// Then, perform pre-calculation of preferred height per row
+		for (RowSpanItem item: _rowspans)
+		{
+			int vgap = 0;
+			rowIndex = item.firstRow();
+			for (int i = 0; i < item.spannedRows() - 1; i++)
+			{
+				vgap += _rows.get(rowIndex).vgap();
+				rowIndex++;
+			}
+			item.initUsableVgap(vgap);
+		}
+    }
 	
 	private void countGrids()
 	{
 		// Calculate the actual number of sub-grids
 		_maxGrids = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			_maxGrids = Math.max(_maxGrids, row.numGrids());
 		}
 		// Inform each row about the total number of sub-grids
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			row.totalGrids(_maxGrids);
 		}
@@ -485,7 +527,7 @@ public class DesignGridLayout implements LayoutManager
 	private int countGridColumns(int grid)
 	{
 		int maxColumns = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			// Note columns (sum item spans), not the count of components
 			maxColumns = Math.max(maxColumns, row.gridColumns(grid));
@@ -500,7 +542,7 @@ public class DesignGridLayout implements LayoutManager
 		for (int i = 0; i < _maxGrids; i++)
 		{
 			int width = 0;
-			for (AbstractRow row: _rowList)
+			for (AbstractRow row: _rows)
 			{
 				// Label width first
 				width = Math.max(width, row.labelWidth(i));
@@ -513,7 +555,7 @@ public class DesignGridLayout implements LayoutManager
 	private int totalHeight()
 	{
 		int totalHeight = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			totalHeight += row.height() + row.vgap();
 		}
@@ -562,7 +604,7 @@ public class DesignGridLayout implements LayoutManager
 	private int maxGridRowsColumnWidth(int grid, int maxColumns, IExtractor extractor)
 	{
 		int maxWidth = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			int width = row.maxColumnWidth(grid, maxColumns, extractor);
 			// If current grid spans several sub-grids, then colum width must
@@ -590,7 +632,7 @@ public class DesignGridLayout implements LayoutManager
 	private int totalNonGridWidth(IExtractor extractor)
 	{
 		int maxWidth = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
 			maxWidth = Math.max(maxWidth, row.totalNonGridWidth(_hgap, extractor));
 		}
@@ -612,10 +654,10 @@ public class DesignGridLayout implements LayoutManager
 	private void computeTopMargin()
 	{
 		_top = 0;
-		AbstractRow topRow = _rowList.get(0);
-		for (JComponent component: topRow.components())
+		AbstractRow topRow = _rows.get(0);
+		for (ISpannableRowItem item: topRow.items())
 		{
-			int gap = getContainerGap(component, SwingConstants.NORTH);
+			int gap = getContainerGap(item.spanComponent(), SwingConstants.NORTH);
 			_top = Math.max(_top, gap);
 		}
 	}
@@ -625,11 +667,12 @@ public class DesignGridLayout implements LayoutManager
 		_bottom = 0;
 		int maxComboHeight = 0;
 		int bottomGap = 0;
-		AbstractRow bottomRow = _rowList.get(_rowList.size() - 1);
-		for (JComponent component: bottomRow.components())
+		AbstractRow bottomRow = _rows.get(_rows.size() - 1);
+		for (ISpannableRowItem item: bottomRow.items())
 		{
-			int height = component.getPreferredSize().height;
-			int gap = getContainerGap(component, SwingConstants.SOUTH);
+			//#### Replace with direct IRowItem call to preferrefHeight?
+			int height = item.spanComponent().getPreferredSize().height;
+			int gap = getContainerGap(item.spanComponent(), SwingConstants.SOUTH);
 			int comboHeight = height + gap;
 			if (comboHeight > maxComboHeight)
 			{
@@ -644,15 +687,15 @@ public class DesignGridLayout implements LayoutManager
 	{
 		_left = 0;
 		_right = 0;
-		for (AbstractRow row: _rowList)
+		for (AbstractRow row: _rows)
 		{
-			List<JComponent> components = row.components();
-			if (!components.isEmpty())
+			List<? extends ISpannableRowItem> items = row.items();
+			if (!items.isEmpty())
 			{
-				JComponent left = components.get(0);
+				JComponent left = items.get(0).spanComponent();
 				_left = Math.max(_left, getContainerGap(left, SwingConstants.WEST));
 
-				JComponent right = components.get(components.size() - 1);
+				JComponent right = items.get(items.size() - 1).spanComponent();
 				_right = Math.max(_right, getContainerGap(right, SwingConstants.EAST));
 			}
 		}
@@ -688,22 +731,35 @@ public class DesignGridLayout implements LayoutManager
 
 		public ISpannableGridRow grid(JLabel label)
 		{
-			return addRow(new GridRow(), _weight).grid(label);
+			return addRow(newGridRow(), _weight).grid(label);
 		}
 
 		public IGridRow grid(JLabel label, int gridspan)
 		{
-			return addRow(new GridRow(), _weight).grid(label, gridspan);
+			return addRow(newGridRow(), _weight).grid(label, gridspan);
 		}
 
 		public ISpannableGridRow grid()
 		{
-			return addRow(new GridRow(), _weight).grid();
+			return addRow(newGridRow(), _weight).grid();
 		}
 
 		public IGridRow grid(int gridspan)
 		{
-			return addRow(new GridRow(), _weight).grid(gridspan);
+			return addRow(newGridRow(), _weight).grid(gridspan);
+		}
+		
+		private GridRow newGridRow()
+		{
+			if (!_rows.isEmpty())
+			{
+				AbstractRow previous = _rows.get(_rows.size() - 1);
+				if (previous instanceof GridRow)
+				{
+					return new GridRow((GridRow) previous);
+				}
+			}
+			return new GridRow(null);
 		}
 
 		private final double _weight;
@@ -734,8 +790,9 @@ public class DesignGridLayout implements LayoutManager
 	private double _bottomWeight = 1.0;
 	private double _rightWeight = 1.0;
 	
-	final private List<AbstractRow> _rowList = new ArrayList<AbstractRow>();
+	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
+	final private List<RowSpanItem> _rowspans = new ArrayList<RowSpanItem>();
 	private int _totalLabelWidth;
 	private int _maxGrids;
 }

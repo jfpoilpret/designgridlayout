@@ -40,7 +40,7 @@ final class HorizontalLayout implements LayoutManager
 	{
 		for (JComponent child: children)
 		{
-			_children.add(child);
+			_children.add(new SimpleRowItem(child));
 			_parent.add(child);
 		}
 		return this;
@@ -80,12 +80,12 @@ final class HorizontalLayout implements LayoutManager
 			int x = 0;
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			helper.setY(0);
-			for (JComponent child: _children)
+			for (IRowItem child: _children)
 			{
 				helper.setRowAvailableHeight(_parent.getHeight());
 				// Apply reduction ratio to component width
-				int width = (int) (child.getPreferredSize().width * ratio);
-				helper.setSizeLocation(child, x, width, _height, _baseline);
+				int width = (int) (child.preferredWidth() * ratio);
+				helper.setSizeLocation(child.component(), x, width, _height, _baseline);
 				x += width + _gaps[nth];
 				nth++;
 			}
@@ -138,8 +138,8 @@ final class HorizontalLayout implements LayoutManager
 			_gaps = new int[_children.size()];
 			for (int nth = 0; nth < _children.size() - 1; nth++)
 			{
-				JComponent left = _children.get(nth);
-				JComponent right = _children.get(nth + 1);
+				JComponent left = _children.get(nth).component();
+				JComponent right = _children.get(nth + 1).component();
 				int gap = layoutStyle.getPreferredGap(
 					left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
 				_gaps[nth] = gap;
@@ -156,7 +156,7 @@ final class HorizontalLayout implements LayoutManager
 	private final Container _parent;
 	private final HeightGrowPolicy _heightTester;
 	private final OrientationPolicy _orientation;
-	private final List<JComponent> _children = new ArrayList<JComponent>();
+	private final List<SimpleRowItem> _children = new ArrayList<SimpleRowItem>();
 	private boolean _inited = false;
 	private int _baseline = 0;
 	private int _height = 0;

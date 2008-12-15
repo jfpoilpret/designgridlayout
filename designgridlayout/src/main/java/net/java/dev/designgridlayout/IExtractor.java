@@ -14,14 +14,10 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JComponent;
-
-import org.jdesktop.layout.Baseline;
-
 // Utility to factor out similar code dealing with common JComponent properties
 interface IExtractor
 {
-	int value(JComponent c);
+	int value(IRowItem item);
 }
 
 abstract class AbstractExtractor implements IExtractor
@@ -35,9 +31,9 @@ final class MinWidthExtractor extends AbstractExtractor
 {
 	static final IExtractor INSTANCE = new MinWidthExtractor();
 	
-	public int value(JComponent c)
+	public int value(IRowItem item)
 	{
-		return c.getMinimumSize().width;
+		return item.minimumWidth();
 	}
 }
 
@@ -45,9 +41,9 @@ final class PrefWidthExtractor implements IExtractor
 {
 	static final IExtractor INSTANCE = new PrefWidthExtractor();
 	
-	public int value(JComponent c)
+	public int value(IRowItem item)
 	{
-		return c.getPreferredSize().width;
+		return item.preferredWidth();
 	}
 }
 
@@ -55,9 +51,9 @@ final class PrefHeightExtractor implements IExtractor
 {
 	static final IExtractor INSTANCE = new PrefHeightExtractor();
 	
-	public int value(JComponent c)
+	public int value(IRowItem item)
 	{
-		return c.getPreferredSize().height;
+		return item.preferredHeight();
 	}
 }
 
@@ -65,9 +61,8 @@ final class BaselineExtractor implements IExtractor
 {
 	static final IExtractor INSTANCE = new BaselineExtractor();
 	
-	public int value(JComponent c)
+	public int value(IRowItem item)
 	{
-		return Baseline.getBaseline(c);
+		return item.baseline();
 	}
 }
-

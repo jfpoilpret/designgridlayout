@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JComponent;
 
@@ -39,24 +39,49 @@ final class LayoutHelper
 		_y = y;
 	}
 	
-	// Returns the actual extra height used by this component
-	int setSizeLocation(JComponent component, int x, int width, 
-		int maxHeight, int maxBaseline)
+	void initRowSpanLayout(List<AbstractRow> rows, double totalExtraHeight)
 	{
-		Dimension d = component.getPreferredSize();
-		int usedExtraHeight;
+		_rows = rows;
+		_totalExtraHeight = totalExtraHeight;
+	}
+	
+	void setHeight(int rowIndex, JComponent component, int spannedRows)
+	{
+		// Calculate the total available height
+		int availableHeight = 0;
+		for (int i = 0; i < spannedRows; i++)
+		{
+			AbstractRow row = _rows.get(rowIndex + i);
+			availableHeight += row.actualHeight();
+			if (i + 1 < spannedRows)
+			{
+				availableHeight += row.vgap();
+			}
+		}
+		int height = component.getPreferredSize().height;
+		int usedExtraHeight = 0;
 		if (_tester.canGrowHeight(component))
 		{
 			// Checks how much extra height this component can really use
 			usedExtraHeight = 
-				_tester.computeExtraHeight(component, _availableHeight - d.height);
-			component.setSize(width, d.height + usedExtraHeight);
+				_tester.computeExtraHeight(component, availableHeight - height);
 		}
-		else
+		component.setSize(component.getWidth(), height + usedExtraHeight);
+	}
+	
+	// Returns the actual extra height used by this component
+	int setSizeLocation(JComponent component, int x, int width, 
+		int maxHeight, int maxBaseline)
+	{
+		int height = component.getPreferredSize().height;
+		int usedExtraHeight = 0;
+		if (_tester.canGrowHeight(component))
 		{
-			usedExtraHeight = 0;
-			component.setSize(width, d.height);
+			// Checks how much extra height this component can really use
+			usedExtraHeight = 
+				_tester.computeExtraHeight(component, _availableHeight - height);
 		}
+		component.setSize(width, height + usedExtraHeight);
 
 		int baseline = Baseline.getBaseline(component);
 		int yy = 0;
@@ -66,7 +91,7 @@ final class LayoutHelper
 		}
 		else
 		{
-			yy = (maxHeight - d.height) / 2;
+			yy = (maxHeight - height) / 2;
 		}
 		component.setLocation((_rtl ? _parentWidth - x - width : x), _y + yy);
 		return usedExtraHeight;
@@ -77,4 +102,6 @@ final class LayoutHelper
 	private final boolean _rtl;
 	private int _availableHeight;
 	private int _y;
+	private List<AbstractRow> _rows;
+	private double _totalExtraHeight;
 }

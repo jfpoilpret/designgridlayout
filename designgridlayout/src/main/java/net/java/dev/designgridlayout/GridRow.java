@@ -28,6 +28,11 @@ import org.jdesktop.layout.LayoutStyle;
 
 final class GridRow extends AbstractRow implements ISpannableGridRow
 {
+	GridRow(GridRow previous)
+	{
+		_previous = previous;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.ISpannableGridRow#spanRow()
@@ -141,20 +146,41 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		if (_current != null)
 		{
 			_current.gridspan(1);
+			_gridIndex += _current.gridspan();
 		}
-		_current = new SubGrid(parent(), label, gridspan);
+		// Find the matching subgrid (if any) of the previous row
+		SubGrid previous = (_previous != null ? _previous.findGrid(_gridIndex) : null);
+		_current = new SubGrid(previous, parent(), label, gridspan);
 		_grids.add(_current);
 		return this;
 	}
 
+	@Override void checkSpanRows()
+	{
+		for (SubGrid grid: _grids)
+		{
+			grid.checkSpanRows();
+		}
+	}
+
+	@Override List<RowSpanItem> initRowSpanItems(int rowIndex)
+    {
+		List<RowSpanItem> allSpanItems =  new ArrayList<RowSpanItem>();
+		for (SubGrid grid: _grids)
+		{
+			allSpanItems.addAll(grid.initRowSpanItems(rowIndex));
+		}
+		return allSpanItems;
+    }
+
 	@Override int gridspan(int grid)
 	{
-		return findGrid(grid).gridspan();
+		return findNonNulGrid(grid).gridspan();
 	}
 
 	@Override int labelWidth(int grid)
 	{
-		return findGrid(grid).labelWidth();
+		return findNonNulGrid(grid).labelWidth();
 	}
 
 	@Override int numGrids()
@@ -190,18 +216,18 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		
 	@Override int gridColumns(int grid)
 	{
-		return findGrid(grid).gridColumns();
+		return findNonNulGrid(grid).gridColumns();
 	}
 
 	@Override int maxColumnWidth(int grid, int maxColumns, IExtractor extractor)
 	{
-		return findGrid(grid).maxColumnWidth(maxColumns, extractor);
+		return findNonNulGrid(grid).maxColumnWidth(maxColumns, extractor);
 	}
 
 	@Override int hgap()
 	{
 		int hgap = 0;
-		for (SubGrid grid : _grids)
+		for (SubGrid grid: _grids)
 		{
 			hgap = Math.max(hgap, grid.hgap());
 		}
@@ -267,12 +293,12 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return actualHeight;
 	}
 
-	@Override List<JComponent> components()
+	@Override List<RowItem> items()
 	{
-		return _components;
+		return _allItems;
 	}
 	
-	private ISubGrid findGrid(int index)
+	SubGrid findGrid(int index)
 	{
 		int i = 0;
 		for (SubGrid grid: _grids)
@@ -287,19 +313,25 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 				break;
 			}
 		}
-		return NULL_GRID;
+		return null;
 	}
 
-	private class ComponentList extends AbstractList<JComponent>
+	private ISubGrid findNonNulGrid(int index)
 	{
-		@Override public JComponent get(int index)
+		SubGrid grid = findGrid(index);
+		return (grid != null ? grid : NULL_GRID);
+	}
+
+	private class AllComponentList extends AbstractList<RowItem>
+	{
+		@Override public RowItem get(int index)
 		{
 			int current = 0;
-			for (SubGrid grid : _grids)
+			for (SubGrid grid: _grids)
 			{
 				if (index < current + grid.items().size())
 				{
-					return grid.items().get(index - current).component();
+					return grid.items().get(index - current);
 				}
 				current += grid.items().size();
 			}
@@ -311,7 +343,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		@Override public int size()
 		{
 			int size = 0;
-			for (SubGrid grid : _grids)
+			for (SubGrid grid: _grids)
 			{
 				size += grid.items().size();
 			}
@@ -320,9 +352,11 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	}
 
 	private SubGrid _current = null;
+	private int _gridIndex = 0;
 	private int _totalGrids = 0;
+	final private GridRow _previous;
 	final private List<SubGrid> _grids = new ArrayList<SubGrid>();
-	final private ComponentList _components = new ComponentList();
+	final private AllComponentList _allItems = new AllComponentList();
 
 	static final private ISubGrid NULL_GRID = new EmptySubGrid();
 }

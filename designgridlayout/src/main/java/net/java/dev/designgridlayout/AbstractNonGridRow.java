@@ -15,6 +15,7 @@
 package net.java.dev.designgridlayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -30,7 +31,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	{
 		for (JComponent component: children)
 		{
-			_components.add(component);
+			_items.add(new NonGridRowItem(component));
 			parent().add(component);
 		}
 		return this;
@@ -57,15 +58,24 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
-	@Override List<JComponent> components()
+	@Override void checkSpanRows()
+    {
+    }
+
+	@Override List<RowSpanItem> initRowSpanItems(int rowIndex)
+    {
+		return Collections.emptyList();
+    }
+
+	@Override List<NonGridRowItem> items()
 	{
-		return _components;
+		return _items;
 	}
 
 	@Override int totalNonGridWidth(int hgap, IExtractor extractor)
 	{
-		int compWidth = ComponentHelper.maxValues(_components, extractor);
-		int count = _components.size();
+		int compWidth = ComponentHelper.maxValues(_items, extractor);
+		int count = _items.size();
 		int width = compWidth * count + (hgap * (count - 1));
 		return width;
 	}
@@ -75,7 +85,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	{
 		// Calculate various needed widths & origin
 		int x = left;
-		int count = _components.size();
+		int count = _items.size();
 		int width = maxWidth();
 		int availableWidth = (rowWidth - ((count - 1) * hgap));
 		width = Math.min(width, availableWidth / count);
@@ -102,10 +112,10 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		int leftFiller, int rightFiller)
 	{
 		int x = left;
-		int count = _components.size();
+		int count = _items.size();
 		int i = 0;
 		int actualHeight = 0;
-		for (JComponent component: _components)
+		for (NonGridRowItem item: _items)
 		{
 			int compWidth;
 			if (i == 0)
@@ -120,9 +130,8 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 			{
 				compWidth = width;
 			}
-			actualHeight =
-				Math.max(actualHeight, helper.setSizeLocation(
-					component, x, compWidth, height(), baseline()));
+			actualHeight = Math.max(actualHeight, helper.setSizeLocation(
+				item.component(), x, compWidth, height(), baseline()));
 			x += compWidth + hgap;
 			i++;
 		}
@@ -135,6 +144,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	abstract protected int rightFiller(int count, int width, int availableWidth);
 
-	private final List<JComponent> _components = new ArrayList<JComponent>();
+	private final List<NonGridRowItem> _items = new ArrayList<NonGridRowItem>();
 	private boolean _fill = false;
 }

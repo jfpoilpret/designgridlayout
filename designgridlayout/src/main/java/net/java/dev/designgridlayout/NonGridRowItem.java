@@ -20,23 +20,15 @@ import org.jdesktop.layout.Baseline;
 
 // Used for all components added to a SubGrid, real or spanned
 // Instances are mutable but only under some conditions
-class RowItem implements ISpannableRowItem
+class NonGridRowItem implements ISpannableRowItem
 {
 	// Used to create an item holding a real component (that may span several
 	// rows below or not)
-	public RowItem(int span, JComponent component)
+	public NonGridRowItem(JComponent component)
 	{
 		_component = component;
-		_span = span;
 	}
 
-	// Used to create a placeholder for a component spanning a row
-	public RowItem(RowItem original)
-	{
-		_spanPrevious = original;
-		original._spanNext = this;
-	}
-	
 	public JComponent component()
 	{
 		return _component;
@@ -44,7 +36,7 @@ class RowItem implements ISpannableRowItem
 	
 	public JComponent spanComponent()
 	{
-		return (_spanPrevious != null ? _spanPrevious.spanComponent() : _component);
+		return _component;
 	}
 	
 	public int preferredHeight()
@@ -67,50 +59,5 @@ class RowItem implements ISpannableRowItem
 		return Baseline.getBaseline(spanComponent());
 	}
 
-	// Used to replace a rowspan placeholder with a real component (error marker)
-	public void replace(JComponent component)
-	{
-		_component = component;
-		_span = _spanPrevious.span();
-		_spanPrevious._spanNext = null;
-		_spanPrevious = null;
-	}
-	
-	public RowItem addRowSpan()
-	{
-		//TODO later
-		return null;
-	}
-	
-	boolean isRealComponent()
-	{
-		return _component != null;
-	}
-	
-	boolean isSpanComponent()
-	{
-		return _component != null && _spanNext != null;
-	}
-
-	int span()
-	{
-		return (_spanPrevious != null ? _spanPrevious.span() : _span);
-	}
-	
-	int rowSpan()
-	{
-		int rows = 1;
-		RowItem next = _spanNext;
-		while (next != null)
-		{
-			rows++;
-			next = next._spanNext;
-		}
-		return rows;
-	}
-	
-	private JComponent _component = null;
-	private int _span = 1;
-	private RowItem _spanPrevious = null;
-	private RowItem _spanNext = null;
+	final private JComponent _component;
 }

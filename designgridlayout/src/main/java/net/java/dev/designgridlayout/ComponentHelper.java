@@ -28,35 +28,35 @@ final class ComponentHelper
 	{
 	}
 	
-	static int maxValues(Iterable<JComponent> components, IExtractor extractor)
+	static int maxValues(Iterable<? extends IRowItem> items, IExtractor extractor)
 	{
 		int max = 0;
-		for (JComponent component: components)
+		for (IRowItem item: items)
 		{
-			max = Math.max(max, extractor.value(component));
+			max = Math.max(max, extractor.value(item));
 		}
 		return max;
 	}
 	
-	static int sumValues(Iterable<JComponent> components, IExtractor extractor)
+	static int sumValues(Iterable<? extends IRowItem> items, IExtractor extractor)
 	{
 		int sum = 0;
-		for (JComponent component: components)
+		for (IRowItem item: items)
 		{
-			sum += extractor.value(component);
+			sum += extractor.value(item);
 		}
 		return sum;
 	}
 	
-	static int hgap(List<JComponent> components, Container parent)
+	static int hgap(List<? extends IRowItem> items, Container parent)
 	{
 		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 		int hgap = 0;
-		int size = components.size() - 1;
+		int size = items.size() - 1;
 		for (int nth = 0; nth < size; nth++)
 		{
-			JComponent left = components.get(nth);
-			JComponent right = components.get(nth + 1);
+			JComponent left = items.get(nth).component();
+			JComponent right = items.get(nth + 1).component();
 			int gap = layoutStyle.getPreferredGap(
 				left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent);
 			hgap = Math.max(hgap, gap);
@@ -65,11 +65,11 @@ final class ComponentHelper
 	}
 	
 	static boolean isFixedHeight(
-		HeightGrowPolicy policy, Iterable<JComponent> components)
+		HeightGrowPolicy policy, Iterable<? extends ISpannableRowItem> items)
 	{
-		for (JComponent component: components)
+		for (IRowItem item: items)
 		{
-			if (policy.canGrowHeight(component))
+			if (policy.canGrowHeight(item.component()))
 			{
 				return false;
 			}
