@@ -39,34 +39,58 @@ class RowItem implements ISpannableRowItem
 	
 	public JComponent component()
 	{
-		return _component;
-	}
-	
-	public JComponent spanComponent()
-	{
-		return (_spanPrevious != null ? _spanPrevious.spanComponent() : _component);
+		return (_spanPrevious != null ? _spanPrevious.component() : _component);
 	}
 	
 	public int preferredHeight()
 	{
-		return spanComponent().getPreferredSize().height;
+		return component().getPreferredSize().height;
 	}
 
 	public int minimumWidth()
 	{
-		return spanComponent().getMinimumSize().width;
+		return component().getMinimumSize().width;
 	}
 	
 	public int preferredWidth()
 	{
-		return spanComponent().getPreferredSize().width;
+		return component().getPreferredSize().width;
 	}
 	
 	public int baseline()
 	{
-		return Baseline.getBaseline(spanComponent());
+		return Baseline.getBaseline(component());
 	}
 
+	public boolean isFirstSpanRow()
+	{
+		return _spanPrevious == null;
+	}
+
+	public boolean isLastSpanRow()
+	{
+		return _spanNext == null;
+	}
+
+	public int rowSpan()
+	{
+		if (_spanPrevious == null)
+		{
+			int rows = 1;
+			RowItem next = _spanNext;
+			while (next != null)
+			{
+				rows++;
+				next = next._spanNext;
+			}
+			return rows;
+		}
+		else
+		{
+			return _spanPrevious.rowSpan();
+		}
+	}
+	
 	// Used to replace a rowspan placeholder with a real component (error marker)
 	public void replace(JComponent component)
 	{
@@ -78,7 +102,7 @@ class RowItem implements ISpannableRowItem
 	
 	public RowItem addRowSpan()
 	{
-		//TODO later
+		//TODO later?
 		return null;
 	}
 	
@@ -95,18 +119,6 @@ class RowItem implements ISpannableRowItem
 	int span()
 	{
 		return (_spanPrevious != null ? _spanPrevious.span() : _span);
-	}
-	
-	int rowSpan()
-	{
-		int rows = 1;
-		RowItem next = _spanNext;
-		while (next != null)
-		{
-			rows++;
-			next = next._spanNext;
-		}
-		return rows;
 	}
 	
 	private JComponent _component = null;

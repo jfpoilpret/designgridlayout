@@ -402,21 +402,29 @@ public class DesignGridLayout implements LayoutManager
 
 			for (int nthItems1 = 0; nthItems1 < items1.size(); nthItems1++)
 			{
-				JComponent upper = items1.get(nthItems1).spanComponent();
-				int aboveHeight = upper.getPreferredSize().height;
-
-				for (int nthItems2 = 0; nthItems2 < items2.size(); nthItems2++)
+				ISpannableRowItem item1 = items1.get(nthItems1);
+				if (item1.isLastSpanRow())
 				{
-					JComponent lower = items2.get(nthItems2).spanComponent();
-					int belowHeight = lower.getPreferredSize().height;
-
-					int gap = layoutStyle.getPreferredGap(
-						upper, lower, style, SwingConstants.SOUTH, _parent);
-					int comboHeight = aboveHeight + gap + belowHeight;
-					if (comboHeight > maxComboHeight)
+					JComponent upper = item1.component();
+					int aboveHeight = upper.getPreferredSize().height;
+	
+					for (int nthItems2 = 0; nthItems2 < items2.size(); nthItems2++)
 					{
-						maxComboHeight = comboHeight;
-						rowGap = gap;
+						ISpannableRowItem item2 = items2.get(nthItems2);
+						if (item2.isFirstSpanRow())
+						{
+							JComponent lower = items2.get(nthItems2).component();
+							int belowHeight = lower.getPreferredSize().height;
+		
+							int gap = layoutStyle.getPreferredGap(
+								upper, lower, style, SwingConstants.SOUTH, _parent);
+							int comboHeight = aboveHeight + gap + belowHeight;
+							if (comboHeight > maxComboHeight)
+							{
+								maxComboHeight = comboHeight;
+								rowGap = gap;
+							}
+						}
 					}
 				}
 			}
@@ -657,7 +665,7 @@ public class DesignGridLayout implements LayoutManager
 		AbstractRow topRow = _rows.get(0);
 		for (ISpannableRowItem item: topRow.items())
 		{
-			int gap = getContainerGap(item.spanComponent(), SwingConstants.NORTH);
+			int gap = getContainerGap(item.component(), SwingConstants.NORTH);
 			_top = Math.max(_top, gap);
 		}
 	}
@@ -671,8 +679,8 @@ public class DesignGridLayout implements LayoutManager
 		for (ISpannableRowItem item: bottomRow.items())
 		{
 			//#### Replace with direct IRowItem call to preferrefHeight?
-			int height = item.spanComponent().getPreferredSize().height;
-			int gap = getContainerGap(item.spanComponent(), SwingConstants.SOUTH);
+			int height = item.component().getPreferredSize().height;
+			int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
 			int comboHeight = height + gap;
 			if (comboHeight > maxComboHeight)
 			{
@@ -692,10 +700,10 @@ public class DesignGridLayout implements LayoutManager
 			List<? extends ISpannableRowItem> items = row.items();
 			if (!items.isEmpty())
 			{
-				JComponent left = items.get(0).spanComponent();
+				JComponent left = items.get(0).component();
 				_left = Math.max(_left, getContainerGap(left, SwingConstants.WEST));
 
-				JComponent right = items.get(items.size() - 1).spanComponent();
+				JComponent right = items.get(items.size() - 1).component();
 				_right = Math.max(_right, getContainerGap(right, SwingConstants.EAST));
 			}
 		}

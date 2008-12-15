@@ -14,9 +14,11 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JComponent;
-
 interface ISpannableRowItem extends IRowItem
 {
-	public JComponent spanComponent();
+	public int rowSpan();
+	// always true if rowSpan() ==  1
+	public boolean isFirstSpanRow();
+	// always true if rowSpan() ==  1
+	public boolean isLastSpanRow();
 }

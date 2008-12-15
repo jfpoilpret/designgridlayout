@@ -34,30 +34,40 @@ class NonGridRowItem implements ISpannableRowItem
 		return _component;
 	}
 	
-	public JComponent spanComponent()
-	{
-		return _component;
-	}
-	
 	public int preferredHeight()
 	{
-		return spanComponent().getPreferredSize().height;
+		return component().getPreferredSize().height;
 	}
 
 	public int minimumWidth()
 	{
-		return spanComponent().getMinimumSize().width;
+		return component().getMinimumSize().width;
 	}
 	
 	public int preferredWidth()
 	{
-		return spanComponent().getPreferredSize().width;
+		return component().getPreferredSize().width;
 	}
 	
 	public int baseline()
 	{
-		return Baseline.getBaseline(spanComponent());
+		return Baseline.getBaseline(component());
 	}
+
+	public boolean isFirstSpanRow()
+	{
+		return true;
+	}
+
+	public boolean isLastSpanRow()
+	{
+		return true;
+	}
+
+	public int rowSpan()
+    {
+	    return 1;
+    }
 
 	final private JComponent _component;
 }
