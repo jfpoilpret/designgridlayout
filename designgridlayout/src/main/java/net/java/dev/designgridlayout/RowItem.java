@@ -75,7 +75,6 @@ class RowItem implements ISpannableRowItem
 
 	public void initUsableVgap(int vgap)
 	{
-		System.out.println("initUsableVgap");
 		_usableVgap = vgap;
 		_heightPerRow = -1;
 	}

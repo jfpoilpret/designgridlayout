@@ -298,9 +298,6 @@ public class DesignGridLayout implements LayoutManager
 				{
 					if (item.isFirstSpanRow() && !item.isLastSpanRow())
 					{
-						//FIXME: seems we pass here on 3 TC?
-						System.out.println(
-							"#### Passed here once #### item.rowspan() = " + item.rowSpan());
 						// Calculate size based on number of spanned rows
 						helper.setHeight(rowIndex, item.component(), item.rowSpan());
 					}
