@@ -154,7 +154,7 @@ final class SubGrid implements ISubGrid
 
 	public int hgap()
 	{
-		return ComponentHelper.hgap(_components, _parent);
+		return ComponentHelper.hgap(_allItems, _parent);
 	}
 
 	public int layoutRow(LayoutHelper helper, int left, int height, int baseline, 
@@ -241,6 +241,7 @@ final class SubGrid implements ISubGrid
 	}
 	
 	//#### Can't we do without this terrible class (just to use ComponentHelper.hgap())?
+	// CAREFUL! Risk of regression! Must be modified and tested in isolation!
 	private class AllItemsList extends AbstractList<RowItem>
 	{
 		@Override public RowItem get(int index)
@@ -284,7 +285,7 @@ final class SubGrid implements ISubGrid
 		"spanRow() cannot work on a sub-grid where the number of columns is different " +
 		"from the above sub-grid";
 	final private List<RowItem> _items = new ArrayList<RowItem>();
-	final private AllItemsList _components = new AllItemsList();
+	final private AllItemsList _allItems = new AllItemsList();
 	final private SubGrid _previous;
 	final private Container _parent;
 	final private JLabel _label;
