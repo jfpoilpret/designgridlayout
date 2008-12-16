@@ -694,6 +694,7 @@ public class DesignGridLayout implements LayoutManager
 		_bottom = Math.max(_bottom, bottomGap);
 	}
 	
+	//FIXME: why don't we use labels (if any) for calculating LEFT margin?
 	private void computeLeftRightMargins()
 	{
 		_left = 0;
