@@ -58,15 +58,19 @@ final class LayoutHelper
 				availableHeight += row.vgap();
 			}
 		}
-		int height = component.getPreferredSize().height;
-		int usedExtraHeight = 0;
-		if (_tester.canGrowHeight(component))
-		{
-			// Checks how much extra height this component can really use
-			usedExtraHeight = 
-				_tester.computeExtraHeight(component, availableHeight - height);
-		}
-		component.setSize(component.getWidth(), height + usedExtraHeight);
+		// Fix for Issue10a TC
+		//FIXME has an impact of "smart vertical resize" (check Issue10 TC)
+		// Maybe should be settable? How? Best Effort?
+//		int height = component.getPreferredSize().height;
+//		int usedExtraHeight = 0;
+//		if (_tester.canGrowHeight(component))
+//		{
+//			// Checks how much extra height this component can really use
+//			usedExtraHeight = 
+//				_tester.computeExtraHeight(component, availableHeight - height);
+//		}
+//		component.setSize(component.getWidth(), height + usedExtraHeight);
+		component.setSize(component.getWidth(), availableHeight);
 	}
 	
 	// Returns the actual extra height used by this component
