@@ -211,9 +211,12 @@ final class SubGrid implements ISubGrid
 		return _items;
 	}
 	
+	// Refactor out (will be used in other locations later on)
 	private JComponent createMarker(int span, String tooltip)
 	{
 		JLabel marker = new JLabel(MARKER_LABEL);
+		marker.setHorizontalAlignment(JLabel.CENTER);
+		marker.setOpaque(true);
 		marker.setBackground(Color.RED);
 		marker.setToolTipText(tooltip);
 		return marker;
