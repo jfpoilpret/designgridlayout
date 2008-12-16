@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 final class SubGrid implements ISubGrid
 {
@@ -68,9 +69,17 @@ final class SubGrid implements ISubGrid
 	
 	void add(JComponent child, int span)
 	{
-		RowItem item = new RowItem(span, child);
+		RowItem item;
+		if (child != null)
+		{
+			item = new RowItem(span, child);
+			_parent.add(child);
+		}
+		else
+		{
+			item = new RowItem(span, EMPTY);
+		}
 		_column += span;
-		_parent.add(child);
 		_items.add(item);
 	}
 	
@@ -237,7 +246,13 @@ final class SubGrid implements ISubGrid
 	static final private String UNMATCHED_COLUMNS_SUBGRIDS = 
 		"spanRow() cannot work on a sub-grid where the number of columns is different " +
 		"from the above sub-grid";
-	
+
+	static final private JComponent EMPTY = new JPanel();
+	static
+	{
+		EMPTY.setOpaque(false);
+	}
+
 	final private List<RowItem> _items = new ArrayList<RowItem>();
 	final private SubGrid _previous;
 	final private Container _parent;

@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
@@ -101,7 +100,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow empty(int span)
 	{
-		return add(new JPanel(), span);
+		return add(null, span);
 	}
 
 	/*
