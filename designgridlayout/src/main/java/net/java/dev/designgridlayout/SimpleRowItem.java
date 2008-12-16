@@ -36,22 +36,22 @@ class SimpleRowItem implements IRowItem
 	
 	public int preferredHeight()
 	{
-		return _component.getPreferredSize().height;
+		return component().getPreferredSize().height;
 	}
 
 	public int minimumWidth()
 	{
-		return _component.getMinimumSize().width;
+		return component().getMinimumSize().width;
 	}
 	
 	public int preferredWidth()
 	{
-		return _component.getPreferredSize().width;
+		return component().getPreferredSize().width;
 	}
 	
 	public int baseline()
 	{
-		return Baseline.getBaseline(_component);
+		return Baseline.getBaseline(component());
 	}
 
 	final private JComponent _component;

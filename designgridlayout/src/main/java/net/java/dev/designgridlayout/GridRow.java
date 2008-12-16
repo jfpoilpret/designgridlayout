@@ -163,16 +163,6 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		}
 	}
 
-	@Override List<RowSpanItem> initRowSpanItems(int rowIndex)
-    {
-		List<RowSpanItem> allSpanItems =  new ArrayList<RowSpanItem>();
-		for (SubGrid grid: _grids)
-		{
-			allSpanItems.addAll(grid.initRowSpanItems(rowIndex));
-		}
-		return allSpanItems;
-    }
-
 	@Override int gridspan(int grid)
 	{
 		return findNonNulGrid(grid).gridspan();

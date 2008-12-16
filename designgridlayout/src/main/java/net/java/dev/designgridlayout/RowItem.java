@@ -44,7 +44,18 @@ class RowItem implements ISpannableRowItem
 	
 	public int preferredHeight()
 	{
-		return component().getPreferredSize().height;
+		return (_spanPrevious != null ? _spanPrevious.preferredHeight() : calculateHeight());
+	}
+	
+	private int calculateHeight()
+	{
+		if (_heightPerRow == -1)
+		{
+			int height = _component.getPreferredSize().height;
+			int rows = rowSpan();
+			_heightPerRow = Math.max(0, (height / rows) + (height % rows) - _usableVgap);
+		}
+		return _heightPerRow;
 	}
 
 	public int minimumWidth()
@@ -62,6 +73,13 @@ class RowItem implements ISpannableRowItem
 		return Baseline.getBaseline(component());
 	}
 
+	public void initUsableVgap(int vgap)
+	{
+		System.out.println("initUsableVgap");
+		_usableVgap = vgap;
+		_heightPerRow = -1;
+	}
+	
 	public boolean isFirstSpanRow()
 	{
 		return _spanPrevious == null;
@@ -95,34 +113,21 @@ class RowItem implements ISpannableRowItem
 	public void replace(JComponent component)
 	{
 		_component = component;
+		_heightPerRow = -1;
 		_span = _spanPrevious.span();
 		_spanPrevious._spanNext = null;
 		_spanPrevious = null;
 	}
 	
-	public RowItem addRowSpan()
-	{
-		//TODO later?
-		return null;
-	}
-	
-	boolean isRealComponent()
-	{
-		return _component != null;
-	}
-	
-	boolean isSpanComponent()
-	{
-		return _component != null && _spanNext != null;
-	}
-
-	int span()
+	public int span()
 	{
 		return (_spanPrevious != null ? _spanPrevious.span() : _span);
 	}
 	
 	private JComponent _component = null;
 	private int _span = 1;
+	private int _usableVgap = 0;
+	private int _heightPerRow = -1;
 	private RowItem _spanPrevious = null;
 	private RowItem _spanNext = null;
 }

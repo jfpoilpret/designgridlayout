@@ -65,7 +65,7 @@ final class ComponentHelper
 	}
 	
 	static boolean isFixedHeight(
-		HeightGrowPolicy policy, Iterable<? extends ISpannableRowItem> items)
+		HeightGrowPolicy policy, Iterable<? extends IRowItem> items)
 	{
 		for (IRowItem item: items)
 		{

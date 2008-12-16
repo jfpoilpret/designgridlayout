@@ -292,11 +292,22 @@ public class DesignGridLayout implements LayoutManager
 			// Second pass: all row-span components
 			helper.initRowSpanLayout(_rows, totalExtraHeight);
 			int rowIndex = 0;
-			for (RowSpanItem item: _rowspans)
+			for (AbstractRow row: _rows)
 			{
-				// Calculate size based on number of spanned rows
-				helper.setHeight(rowIndex, item.component(), item.spannedRows());
+				for (ISpannableRowItem item: row.items())
+				{
+					if (item.isFirstSpanRow() && !item.isLastSpanRow())
+					{
+						//FIXME: seems we pass here on 3 TC?
+						System.out.println(
+							"#### Passed here once #### item.rowspan() = " + item.rowSpan());
+						// Calculate size based on number of spanned rows
+						helper.setHeight(rowIndex, item.component(), item.rowSpan());
+					}
+				}
+				rowIndex++;
 			}
+
 		}
 	}
 
@@ -495,25 +506,23 @@ public class DesignGridLayout implements LayoutManager
 
 	private void initRowSpanItems()
     {
-		// First, build the whole list of rowspan items
+		// Perform pre-calculation of preferred height per row for each spanned item
 	    int rowIndex = 0;
 		for (AbstractRow row: _rows)
 		{
-			_rowspans.addAll(row.initRowSpanItems(rowIndex));
-			rowIndex++;
-		}
-		
-		// Then, perform pre-calculation of preferred height per row
-		for (RowSpanItem item: _rowspans)
-		{
-			int vgap = 0;
-			rowIndex = item.firstRow();
-			for (int i = 0; i < item.spannedRows() - 1; i++)
+			for (ISpannableRowItem item: row.items())
 			{
-				vgap += _rows.get(rowIndex).vgap();
-				rowIndex++;
+				if (item.isFirstSpanRow() && !item.isLastSpanRow())
+				{
+					int vgap = 0;
+					for (int i = 0; i < item.rowSpan() - 1; i++)
+					{
+						vgap += _rows.get(rowIndex + i).vgap();
+					}
+					item.initUsableVgap(vgap);
+				}
 			}
-			item.initUsableVgap(vgap);
+			rowIndex++;
 		}
     }
 	
@@ -800,7 +809,6 @@ public class DesignGridLayout implements LayoutManager
 	
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
-	final private List<RowSpanItem> _rowspans = new ArrayList<RowSpanItem>();
 	private int _totalLabelWidth;
 	private int _maxGrids;
 }

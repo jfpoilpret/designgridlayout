@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -60,11 +59,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	@Override void checkSpanRows()
     {
-    }
-
-	@Override List<RowSpanItem> initRowSpanItems(int rowIndex)
-    {
-		return Collections.emptyList();
     }
 
 	@Override List<NonGridRowItem> items()

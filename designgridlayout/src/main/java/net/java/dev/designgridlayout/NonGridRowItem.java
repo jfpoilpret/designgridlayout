@@ -54,6 +54,10 @@ class NonGridRowItem implements ISpannableRowItem
 		return Baseline.getBaseline(component());
 	}
 
+	public void initUsableVgap(int vgap)
+    {
+    }
+
 	public boolean isFirstSpanRow()
 	{
 		return true;

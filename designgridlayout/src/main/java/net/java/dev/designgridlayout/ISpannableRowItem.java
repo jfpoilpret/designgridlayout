@@ -16,6 +16,8 @@ package net.java.dev.designgridlayout;
 
 interface ISpannableRowItem extends IRowItem
 {
+	public void initUsableVgap(int vgap);
+	
 	public int rowSpan();
 	// always true if rowSpan() ==  1
 	public boolean isFirstSpanRow();

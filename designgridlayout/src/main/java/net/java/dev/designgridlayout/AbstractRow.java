@@ -161,7 +161,6 @@ abstract class AbstractRow
 	}
 
 	abstract void checkSpanRows();
-	abstract List<RowSpanItem> initRowSpanItems(int rowIndex);
 
 	abstract List<? extends ISpannableRowItem> items();
 

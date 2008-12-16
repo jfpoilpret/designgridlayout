@@ -91,7 +91,7 @@ final class SubGrid implements ISubGrid
 		{
 			for (RowItem item: _items)
 			{
-				if (!item.isRealComponent())
+				if (!item.isFirstSpanRow())
 				{
 					JComponent marker = createMarker(item.span(), UNMATCHED_COLUMNS_SUBGRIDS);
 					item.replace(marker);
@@ -101,20 +101,6 @@ final class SubGrid implements ISubGrid
 		}
 	}
 	
-	List<RowSpanItem> initRowSpanItems(int rowIndex)
-	{
-		List<RowSpanItem> allSpanItems =  new ArrayList<RowSpanItem>();
-		for (RowItem item: _items)
-		{
-			if (item.isSpanComponent())
-			{
-				allSpanItems.add(
-					new RowSpanItem(rowIndex, item.component(), item.rowSpan()));
-			}
-		}
-		return allSpanItems;
-	}
-
 	public int gridspan()
 	{
 		return _gridspan;
@@ -208,7 +194,7 @@ final class SubGrid implements ISubGrid
 				{
 					width += fudge;
 				}
-				if (item.isRealComponent())
+				if (item.isFirstSpanRow())
 				{
 					JComponent component = item.component();
 					actualHeight = Math.max(0, helper.setSizeLocation(
