@@ -682,9 +682,7 @@ public class DesignGridLayout implements LayoutManager
 		AbstractRow bottomRow = _rows.get(_rows.size() - 1);
 		for (IRowItem item: bottomRow.items())
 		{
-			//TODO check if can replace with direct IRowItem call to preferrefHeight
-			// CAREFUL! Risk of regression! Must be modified and tested in isolation!
-			int height = item.component().getPreferredSize().height;
+			int height = item.preferredHeight();
 			int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
 			int comboHeight = height + gap;
 			if (comboHeight > maxComboHeight)
