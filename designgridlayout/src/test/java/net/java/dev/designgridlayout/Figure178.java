@@ -73,9 +73,9 @@ public class Figure178 extends AbstractBaseExample
 	// CSON: MagicNumber
 
 	@Override protected void preDisplay()
-    {
+	{
 		applyButton.requestFocusInWindow();
-    }
+	}
 
 	private JButton applyButton;
 }

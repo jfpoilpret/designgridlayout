@@ -31,7 +31,7 @@ public class Issue25 extends AbstractBaseExample
 	}
 
 	@Override protected void prePack()
-    {
+	{
 		_frame.pack();
-    }
+	}
 }

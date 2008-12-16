@@ -68,9 +68,9 @@ public class Issue9Test extends AbstractGuiTest
 		}
 		
 		public void init(Issue9 instance)
-        {
+		{
 			instance.setOrientation(_orientation);
-        }
+		}
 		
 		private final ComponentOrientation _orientation;
 	}

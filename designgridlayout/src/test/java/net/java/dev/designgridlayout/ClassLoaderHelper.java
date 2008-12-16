@@ -49,7 +49,7 @@ final class ClassLoaderHelper
 	}
 	
 	static private void fillJarsList(List<URL> jars, File dir, boolean includeSubDirs)
-    {
+	{
 		try
 		{
 			for (File jar: dir.listFiles(_jarsFilter))
@@ -70,7 +70,7 @@ final class ClassLoaderHelper
 			_logger.log(
 				Level.SEVERE, "fillJarsList() in directory " + dir.getName(), e);
 		}
-    }
+	}
 
 	private ClassLoaderHelper()
 	{

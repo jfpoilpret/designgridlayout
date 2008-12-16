@@ -81,8 +81,8 @@ public class Figure179bis extends AbstractBaseExample
 	final private JButton encodingButton = new JButton("Encoding...");
 	final private JButton previewButton = new JButton("Preview...");
 	final private JList familyList =
-	    new JList(GraphicsEnvironment.getLocalGraphicsEnvironment()
-	        .getAvailableFontFamilyNames());
+		new JList(GraphicsEnvironment.getLocalGraphicsEnvironment()
+			.getAvailableFontFamilyNames());
 	final private JScrollPane familyListScroller = new JScrollPane(familyList);
 	final private JList facesList = new JList(FACE_NAMES);
 	final private JScrollPane facesListScroller = new JScrollPane(facesList);

@@ -54,9 +54,9 @@ public class Issue13c extends AbstractIssue13
 	// CSON: LineLength
 
 	@Override protected JTextField field(String text)
-    {
+	{
 		JTextField field = super.field(text);
 		field.setColumns(5);
 		return field;
-    }
+	}
 }

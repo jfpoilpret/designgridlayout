@@ -26,9 +26,9 @@ public class Border extends NoBorder
 	}
 
 	@Override protected void prePack()
-    {
+	{
 		// Add a border to the container using DeisgnGridLayout
 		JComponent panel = (JComponent) frame().getContentPane().getComponent(0);
 		panel.setBorder(new TitledBorder("NoBorder"));
-    }
+	}
 }

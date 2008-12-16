@@ -48,8 +48,8 @@ public class AddressBookDemo extends AbstractBaseExample
 		_frame.setName(getClass().getSimpleName());
 
 		_frame.setDefaultCloseOperation(exitOnClose
-		    ? JFrame.EXIT_ON_CLOSE
-		    : WindowConstants.DISPOSE_ON_CLOSE);
+			? JFrame.EXIT_ON_CLOSE
+			: WindowConstants.DISPOSE_ON_CLOSE);
 
 		String[] items =
 		{
@@ -64,9 +64,9 @@ public class AddressBookDemo extends AbstractBaseExample
 		};
 		JList list = new JList(items);
 		JScrollPane scroller =
-		    new JScrollPane(
-		        list, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-		        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			new JScrollPane(
+				list, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		JPanel listPanel = new JPanel();
 		listPanel.setLayout(new BorderLayout());
 		listPanel.add(scroller, BorderLayout.CENTER);

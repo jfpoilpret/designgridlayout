@@ -26,7 +26,7 @@ public class RightToLeftAddressBookDemo extends AddressBookDemo
 	}
 
 	@Override protected void prePack()
-    {
+	{
 		frame().applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-    }
+	}
 }

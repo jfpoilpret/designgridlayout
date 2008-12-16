@@ -44,8 +44,8 @@ public abstract class AbstractBaseExample
 		_frame.setName(getClass().getSimpleName());
 
 		_frame.setDefaultCloseOperation(exitOnClose
-		    ? JFrame.EXIT_ON_CLOSE
-		    : WindowConstants.DISPOSE_ON_CLOSE);
+			? JFrame.EXIT_ON_CLOSE
+			: WindowConstants.DISPOSE_ON_CLOSE);
 		JPanel top = new JPanel();
 		DesignGridLayout layout = new DesignGridLayout(top);
 		top.setName("TOP");
@@ -60,16 +60,16 @@ public abstract class AbstractBaseExample
 	}
 
 	protected void prePack()
-    {
-    }
+	{
+	}
 
 	protected void preDisplay()
-    {
+	{
 		if (_lastCreatedButton != null)
 		{
 			_lastCreatedButton.requestFocusInWindow();
 		}
-    }
+	}
 
 	protected JButton button()
 	{

@@ -36,9 +36,9 @@ public class Issue3 extends AbstractBaseExample
 	}
 
 	@Override protected void preDisplay()
-    {
+	{
 		_table.requestFocusInWindow();
-    }
+	}
 
 	private final JTable _table = new JTable(10, 2);
 }

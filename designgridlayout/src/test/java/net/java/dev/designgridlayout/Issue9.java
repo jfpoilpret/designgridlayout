@@ -47,9 +47,9 @@ public class Issue9 extends AbstractBaseExample
 	}
 
 	@Override protected void prePack()
-    {
+	{
 		frame().applyComponentOrientation(_orientation);
-    }
+	}
 	
 	private ComponentOrientation _orientation;
 }

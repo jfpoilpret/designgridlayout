@@ -31,9 +31,9 @@ public class Issue26 extends AbstractBaseExample
 	}
 
 	@Override protected JTextField field(String text)
-    {
-	    JTextField field = super.field(text);
-	    field.setEnabled(false);
-	    return field;
-    }
+	{
+		JTextField field = super.field(text);
+		field.setEnabled(false);
+		return field;
+	}
 }

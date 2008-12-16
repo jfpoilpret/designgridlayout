@@ -63,9 +63,9 @@ public class Issue13Test extends AbstractGuiTest
 		}
 		
 		public void init(Issue13b instance)
-        {
+		{
 			instance.setPanelIndex(_panel);
-        }
+		}
 		
 		private final int _panel;
 	}
