@@ -24,9 +24,16 @@ final class LayoutHelper
 {
 	LayoutHelper(HeightGrowPolicy tester, int parentWidth, boolean rtl)
 	{
+		this(tester, parentWidth, rtl, null);
+	}
+	
+	LayoutHelper(
+		HeightGrowPolicy tester, int parentWidth, boolean rtl, List<AbstractRow> rows)
+	{
 		_tester = tester;
 		_parentWidth = parentWidth;
 		_rtl = rtl;
+		_rows = rows;
 	}
 	
 	void setRowAvailableHeight(int availableHeight)
@@ -37,12 +44,6 @@ final class LayoutHelper
 	void setY(int y)
 	{
 		_y = y;
-	}
-	
-	void initRowSpanLayout(List<AbstractRow> rows, double totalExtraHeight)
-	{
-		_rows = rows;
-		_totalExtraHeight = totalExtraHeight;
 	}
 	
 	void setHeight(int rowIndex, JComponent component, int spannedRows)
@@ -104,8 +105,7 @@ final class LayoutHelper
 	private final HeightGrowPolicy _tester;
 	private final int _parentWidth;
 	private final boolean _rtl;
+	private final List<AbstractRow> _rows;
 	private int _availableHeight;
 	private int _y;
-	private List<AbstractRow> _rows;
-	private double _totalExtraHeight;
 }

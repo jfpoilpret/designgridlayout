@@ -277,7 +277,7 @@ public class DesignGridLayout implements LayoutManager
 			gridsWidth -= (_maxGrids - 1) * _gridgap;
 			
 			// Start laying out every single row (all components but row-span ones)
-			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
+			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
 			for (AbstractRow row: _rows)
 			{
 				helper.setY(y);
@@ -290,7 +290,6 @@ public class DesignGridLayout implements LayoutManager
 			}
 			
 			// Second pass: all row-span components
-			helper.initRowSpanLayout(_rows, totalExtraHeight);
 			int rowIndex = 0;
 			for (AbstractRow row: _rows)
 			{
@@ -684,6 +683,7 @@ public class DesignGridLayout implements LayoutManager
 		for (IRowItem item: bottomRow.items())
 		{
 			//TODO check if can replace with direct IRowItem call to preferrefHeight
+			// CAREFUL! Risk of regression! Must be modified and tested in isolation!
 			int height = item.component().getPreferredSize().height;
 			int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
 			int comboHeight = height + gap;

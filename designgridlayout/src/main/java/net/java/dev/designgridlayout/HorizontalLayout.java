@@ -19,6 +19,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -54,11 +55,7 @@ final class HorizontalLayout implements LayoutManager
 	
 	public void layoutContainer(Container parent)
 	{
-		if (parent != _parent)
-		{
-			throw new IllegalArgumentException(
-				"must use HorizontalLayout instance with original parent container");
-		}
+		checkParent(parent);
 		
 		synchronized(parent.getTreeLock())
 		{
@@ -106,12 +103,7 @@ final class HorizontalLayout implements LayoutManager
 	
 	private void initSizeCalculation(Container parent)
 	{
-		if (parent != _parent)
-		{
-			throw new IllegalArgumentException(
-				"must use HorizontalLayout instance with original parent container");
-		}
-
+		checkParent(parent);
 		computeAll();
 	}
 
@@ -150,6 +142,15 @@ final class HorizontalLayout implements LayoutManager
 			_gaps[_children.size() - 1] = 0;
 
 			_inited = true;
+		}
+	}
+	
+	private void checkParent(Container parent)
+	{
+		if (parent != _parent)
+		{
+			throw new IllegalArgumentException(
+				"must use HorizontalLayout instance with original parent container");
 		}
 	}
 
