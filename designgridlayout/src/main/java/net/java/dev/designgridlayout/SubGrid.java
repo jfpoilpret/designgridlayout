@@ -14,16 +14,13 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Color;
 import java.awt.Container;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 final class SubGrid implements ISubGrid
 {
@@ -36,7 +33,8 @@ final class SubGrid implements ISubGrid
 		if (_label != null)
 		{
 			_parent.add(_label);
-			_label.setHorizontalAlignment(SwingConstants.TRAILING);
+			_label.setHorizontalAlignment(JLabel.TRAILING);
+			_items.add(new RowItem(0, _label));
 		}
 	}
 
@@ -45,7 +43,7 @@ final class SubGrid implements ISubGrid
 		if (_previous == null)
 		{
 			// Bad use of DesignGridLayout, use a maker component
-			add(createMarker(1, NO_PREVIOUS_SUBGRID), 1);
+			add(MarkerHelper.createMarker(1, NO_PREVIOUS_SUBGRID), 1);
 		}
 		else
 		{
@@ -55,7 +53,7 @@ final class SubGrid implements ISubGrid
 			if (previous == null)
 			{
 				// Bad use of DesignGridLayout, use a maker component
-				add(createMarker(1, NO_MATCHING_COMPONENT), 1);
+				add(MarkerHelper.createMarker(1, NO_MATCHING_COMPONENT), 1);
 			}
 			else
 			{
@@ -93,7 +91,8 @@ final class SubGrid implements ISubGrid
 			{
 				if (!item.isFirstSpanRow())
 				{
-					JComponent marker = createMarker(item.span(), UNMATCHED_COLUMNS_SUBGRIDS);
+					JComponent marker = MarkerHelper.createMarker(
+						item.span(), UNMATCHED_COLUMNS_SUBGRIDS);
 					item.replace(marker);
 					_parent.add(marker);
 				}
@@ -140,7 +139,7 @@ final class SubGrid implements ISubGrid
 		int columns = gridColumns();
 		float divisions = (float) columns / (float) maxColumns;
 
-		for (RowItem item: _items)
+		for (RowItem item: items())
 		{
 			int width = extractor.value(item);
 
@@ -154,7 +153,7 @@ final class SubGrid implements ISubGrid
 
 	public int hgap()
 	{
-		return ComponentHelper.hgap(_allItems, _parent);
+		return ComponentHelper.hgap(_items, _parent);
 	}
 
 	public int layoutRow(LayoutHelper helper, int left, int height, int baseline, 
@@ -183,7 +182,7 @@ final class SubGrid implements ISubGrid
 			// fudge is whatever pixels are left over
 			int fudge = gridWidth % columns;
 
-			Iterator<RowItem> i = _items.iterator();
+			Iterator<RowItem> i = items().iterator();
 			while (i.hasNext())
 			{
 				RowItem item = i.next();
@@ -208,24 +207,13 @@ final class SubGrid implements ISubGrid
 
 	public List<RowItem> items()
 	{
-		return _items;
-	}
-	
-	// Refactor out (will be used in other locations later on)
-	private JComponent createMarker(int span, String tooltip)
-	{
-		JLabel marker = new JLabel(MARKER_LABEL);
-		marker.setHorizontalAlignment(JLabel.CENTER);
-		marker.setOpaque(true);
-		marker.setBackground(Color.RED);
-		marker.setToolTipText(tooltip);
-		return marker;
+		return (_label == null ? _items : _items.subList(1, _items.size()));
 	}
 	
 	private RowItem findItem(int column)
 	{
 		int i = 0;
-		for (RowItem item: _items)
+		for (RowItem item: items())
 		{
 			if (i == column)
 			{
@@ -240,41 +228,6 @@ final class SubGrid implements ISubGrid
 		return null;
 	}
 	
-	//#### Can't we do without this terrible class (just to use ComponentHelper.hgap())?
-	// CAREFUL! Risk of regression! Must be modified and tested in isolation!
-	private class AllItemsList extends AbstractList<RowItem>
-	{
-		@Override public RowItem get(int index)
-		{
-			if (_label != null)
-			{
-				if (index == 0)
-				{
-					return new RowItem(1, _label);
-				}
-				else
-				{
-					return _items.get(index - 1);
-				}
-			}
-			else
-			{
-				return _items.get(index);
-			}
-		}
-
-		@Override public int size()
-		{
-			int size = _items.size();
-			if (_label != null)
-			{
-				size++;
-			}
-			return size;
-		}
-	}
-
-	static final private String MARKER_LABEL = "spanRow()"; 
 	static final private String NO_PREVIOUS_SUBGRID = 
 		"spanRow() cannot work on a grid-row with no grid-row immediately above, " +
 		"or with no matching sub-grid (same column position) in the above grid-row";
@@ -284,8 +237,8 @@ final class SubGrid implements ISubGrid
 	static final private String UNMATCHED_COLUMNS_SUBGRIDS = 
 		"spanRow() cannot work on a sub-grid where the number of columns is different " +
 		"from the above sub-grid";
+	
 	final private List<RowItem> _items = new ArrayList<RowItem>();
-	final private AllItemsList _allItems = new AllItemsList();
 	final private SubGrid _previous;
 	final private Container _parent;
 	final private JLabel _label;
