@@ -14,9 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-
 public class Issue10 extends AbstractBaseExample
 {
 	public static void main(String[] args)
@@ -30,19 +27,13 @@ public class Issue10 extends AbstractBaseExample
 		layout.row().grid(label("lbl1")).add(field("field1")).add(list());
 		layout.row().grid(label("lbl3")).add(field("field3")).spanRow();
 		layout.row().grid(label("lbl4")).add(field("field4"));
-	}
+		
+		layout.row().grid(label("lbl5")).add(list(), 2).add(field("field6"));
+		layout.row().grid().spanRow().add(field("field7"));
 
-	static private JScrollPane list()
-	{
-		JList list = new JList(guitars);
-		list.setVisibleRowCount(2);
-		return new JScrollPane(list);
+		layout.row().grid(label("lbl8")).empty().add(field("field8"));
+		layout.row().grid(label("lbl9")).spanRow().add(field("field9"));
+		
+		layout.row().center().add(button());
 	}
-
-	static private final Object[] guitars =
-	{
-		"Fender Telecaster",
-		"Fender Stratocaster",
-		"Gibson Les Paul",
-	};
 }

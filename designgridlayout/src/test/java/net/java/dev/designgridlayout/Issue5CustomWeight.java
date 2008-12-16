@@ -14,13 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
-
-import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.JSlider;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 
 // Shows issue 5 with lack of variable height rows
 public class Issue5CustomWeight extends AbstractBaseExample
@@ -41,60 +35,4 @@ public class Issue5CustomWeight extends AbstractBaseExample
 		layout.row(0.0).grid(label("Power")).add(slider(JSlider.VERTICAL));
 		layout.row().center().add(button(), button(), button());
 	}
-	
-	static private JSlider slider(int orientation)
-	{
-		JSlider slider = new JSlider(orientation, 0, 100, 50);
-		slider.setMajorTickSpacing(20);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		return slider;
-	}
-	
-	static private JScrollPane textarea(String content)
-	{
-		JTextArea area = new JTextArea(3, 10);
-		area.setText(content);
-		return new JScrollPane(area);
-	}
-	
-	static private JScrollPane table()
-	{
-		JTable table = new JTable(content_players, columns_players);
-		setTableHeight(table, 4);
-		return new JScrollPane(table);
-	}
-	
-	static private JScrollPane list()
-	{
-		JList list = new JList(guitars);
-		list.setVisibleRowCount(2);
-		return new JScrollPane(list);
-	}
-	
-	static private void setTableHeight(JTable table, int rows)
-	{
-//		int width = table.getColumnModel().getTotalColumnWidth();
-		int width = 200;
-		int height = rows * table.getRowHeight();
-		table.setPreferredScrollableViewportSize(new Dimension(width, height));
-	}
-	
-	static private final Object[] columns_players = {"First name", "Surname", "Band"};
-	static private final Object[][] content_players =
-	{
-		{"Eric", "Clapton", "The Yardbirds"},
-		{"Jimmy", "Page", "Led Zeppelin"},
-		{"Jimi", "Hendrix", "The Jimi Hendrix Experience"},
-		{"Mark", "Knopfler", "Dire Straits"},
-		{"", "The Edge", "U2"},
-		{"Gary", "Moore", "Thin Lizzy"},
-	};
-	
-	static private final Object[] guitars =
-	{
-		"Fender Telecaster",
-		"Fender Stratocaster",
-		"Gibson Les Paul",
-	};
 }

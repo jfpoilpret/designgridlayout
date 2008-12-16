@@ -14,18 +14,13 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.JSlider;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -58,44 +53,6 @@ public class Issue5 extends AbstractBaseExample
 		layout.row().grid(label("L6")).add(list()).add(textarea("Wonderful sound"));
 		layout.row().grid(label("Power")).add(slider(JSlider.VERTICAL));
 		layout.row().center().add(systemLafSetter(), javaLafSetter(), lafSetter());
-	}
-	
-	static private JSlider slider(int orientation)
-	{
-		JSlider slider = new JSlider(orientation, 0, 100, 50);
-		slider.setMajorTickSpacing(20);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		return slider;
-	}
-	
-	static private JScrollPane textarea(String content)
-	{
-		JTextArea area = new JTextArea(3, 10);
-		area.setText(content);
-		return new JScrollPane(area);
-	}
-	
-	static private JScrollPane table()
-	{
-		JTable table = new JTable(content_players, columns_players);
-		setTableHeight(table, 4);
-		return new JScrollPane(table);
-	}
-	
-	static private JScrollPane list()
-	{
-		JList list = new JList(guitars);
-		list.setVisibleRowCount(2);
-		return new JScrollPane(list);
-	}
-	
-	static private void setTableHeight(JTable table, int rows)
-	{
-//		int width = table.getColumnModel().getTotalColumnWidth();
-		int width = 200;
-		int height = rows * table.getRowHeight();
-		table.setPreferredScrollableViewportSize(new Dimension(width, height));
 	}
 	
 	private JButton lafSetter()
@@ -162,24 +119,6 @@ public class Issue5 extends AbstractBaseExample
 		}
 		// CSON: IllegalCatch
 	}
-	
-	static private final Object[] columns_players = {"First name", "Surname", "Band"};
-	static private final Object[][] content_players =
-	{
-		{"Eric", "Clapton", "The Yardbirds"},
-		{"Jimmy", "Page", "Led Zeppelin"},
-		{"Jimi", "Hendrix", "The Jimi Hendrix Experience"},
-		{"Mark", "Knopfler", "Dire Straits"},
-		{"", "The Edge", "U2"},
-		{"Gary", "Moore", "Thin Lizzy"},
-	};
-	
-	static private final Object[] guitars =
-	{
-		"Fender Telecaster",
-		"Fender Stratocaster",
-		"Gibson Les Paul",
-	};
 	
 	static private boolean _loadPlafs = true;
 
