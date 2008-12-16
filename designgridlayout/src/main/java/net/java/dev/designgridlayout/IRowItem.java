@@ -23,4 +23,9 @@ interface IRowItem
 	public int minimumWidth();
 	public int preferredWidth();
 	public int baseline();
+
+	public void initUsableVgap(int vgap);
+	public int rowSpan();
+	public boolean isFirstSpanRow();
+	public boolean isLastSpanRow();
 }

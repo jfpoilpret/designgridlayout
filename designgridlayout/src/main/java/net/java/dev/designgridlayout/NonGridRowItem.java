@@ -18,9 +18,8 @@ import javax.swing.JComponent;
 
 import org.jdesktop.layout.Baseline;
 
-// Used for all components added to a SubGrid, real or spanned
-// Instances are mutable but only under some conditions
-class NonGridRowItem implements ISpannableRowItem
+// Used for all components added to a non-grid row
+class NonGridRowItem implements IRowItem
 {
 	// Used to create an item holding a real component (that may span several
 	// rows below or not)
@@ -36,27 +35,27 @@ class NonGridRowItem implements ISpannableRowItem
 	
 	public int preferredHeight()
 	{
-		return component().getPreferredSize().height;
+		return _component.getPreferredSize().height;
 	}
 
 	public int minimumWidth()
 	{
-		return component().getMinimumSize().width;
+		return _component.getMinimumSize().width;
 	}
 	
 	public int preferredWidth()
 	{
-		return component().getPreferredSize().width;
+		return _component.getPreferredSize().width;
 	}
 	
 	public int baseline()
 	{
-		return Baseline.getBaseline(component());
+		return Baseline.getBaseline(_component);
 	}
 
 	public void initUsableVgap(int vgap)
-    {
-    }
+	{
+	}
 
 	public boolean isFirstSpanRow()
 	{
@@ -69,9 +68,9 @@ class NonGridRowItem implements ISpannableRowItem
 	}
 
 	public int rowSpan()
-    {
-	    return 1;
-    }
+	{
+		return 1;
+	}
 
 	final private JComponent _component;
 }

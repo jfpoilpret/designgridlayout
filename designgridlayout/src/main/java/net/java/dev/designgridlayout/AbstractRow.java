@@ -162,7 +162,7 @@ abstract class AbstractRow
 
 	abstract void checkSpanRows();
 
-	abstract List<? extends ISpannableRowItem> items();
+	abstract List<? extends IRowItem> items();
 
 	// Returns the actual extra height allocated to the row
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 

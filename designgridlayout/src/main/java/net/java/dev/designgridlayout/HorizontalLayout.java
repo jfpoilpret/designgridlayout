@@ -40,7 +40,7 @@ final class HorizontalLayout implements LayoutManager
 	{
 		for (JComponent child: children)
 		{
-			_children.add(new SimpleRowItem(child));
+			_children.add(new NonGridRowItem(child));
 			_parent.add(child);
 		}
 		return this;
@@ -156,7 +156,7 @@ final class HorizontalLayout implements LayoutManager
 	private final Container _parent;
 	private final HeightGrowPolicy _heightTester;
 	private final OrientationPolicy _orientation;
-	private final List<SimpleRowItem> _children = new ArrayList<SimpleRowItem>();
+	private final List<NonGridRowItem> _children = new ArrayList<NonGridRowItem>();
 	private boolean _inited = false;
 	private int _baseline = 0;
 	private int _height = 0;

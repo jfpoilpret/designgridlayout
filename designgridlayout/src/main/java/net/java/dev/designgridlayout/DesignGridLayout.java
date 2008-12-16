@@ -294,7 +294,7 @@ public class DesignGridLayout implements LayoutManager
 			int rowIndex = 0;
 			for (AbstractRow row: _rows)
 			{
-				for (ISpannableRowItem item: row.items())
+				for (IRowItem item: row.items())
 				{
 					if (item.isFirstSpanRow() && !item.isLastSpanRow())
 					{
@@ -404,13 +404,13 @@ public class DesignGridLayout implements LayoutManager
 			int rowGap = 0;
 
 			AbstractRow row = _rows.get(nthRow);
-			List<? extends ISpannableRowItem> items1 = row.items();
-			List<? extends ISpannableRowItem> items2 = _rows.get(nthRow + 1).items();
+			List<? extends IRowItem> items1 = row.items();
+			List<? extends IRowItem> items2 = _rows.get(nthRow + 1).items();
 			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
 			for (int nthItems1 = 0; nthItems1 < items1.size(); nthItems1++)
 			{
-				ISpannableRowItem item1 = items1.get(nthItems1);
+				IRowItem item1 = items1.get(nthItems1);
 				if (item1.isLastSpanRow())
 				{
 					JComponent upper = item1.component();
@@ -418,7 +418,7 @@ public class DesignGridLayout implements LayoutManager
 	
 					for (int nthItems2 = 0; nthItems2 < items2.size(); nthItems2++)
 					{
-						ISpannableRowItem item2 = items2.get(nthItems2);
+						IRowItem item2 = items2.get(nthItems2);
 						if (item2.isFirstSpanRow())
 						{
 							JComponent lower = items2.get(nthItems2).component();
@@ -473,7 +473,6 @@ public class DesignGridLayout implements LayoutManager
 		initRowSpanItems();
 
 		// Initialize each row (compute width, height, baseline)
-		//TODO need some way to adjust rowspan component height
 		for (AbstractRow row: _rows)
 		{
 			row.init();
@@ -502,12 +501,12 @@ public class DesignGridLayout implements LayoutManager
 	}
 
 	private void initRowSpanItems()
-    {
+	{
 		// Perform pre-calculation of preferred height per row for each spanned item
-	    int rowIndex = 0;
+		int rowIndex = 0;
 		for (AbstractRow row: _rows)
 		{
-			for (ISpannableRowItem item: row.items())
+			for (IRowItem item: row.items())
 			{
 				if (item.isFirstSpanRow() && !item.isLastSpanRow())
 				{
@@ -521,7 +520,7 @@ public class DesignGridLayout implements LayoutManager
 			}
 			rowIndex++;
 		}
-    }
+	}
 	
 	private void countGrids()
 	{
@@ -669,7 +668,7 @@ public class DesignGridLayout implements LayoutManager
 	{
 		_top = 0;
 		AbstractRow topRow = _rows.get(0);
-		for (ISpannableRowItem item: topRow.items())
+		for (IRowItem item: topRow.items())
 		{
 			int gap = getContainerGap(item.component(), SwingConstants.NORTH);
 			_top = Math.max(_top, gap);
@@ -682,9 +681,9 @@ public class DesignGridLayout implements LayoutManager
 		int maxComboHeight = 0;
 		int bottomGap = 0;
 		AbstractRow bottomRow = _rows.get(_rows.size() - 1);
-		for (ISpannableRowItem item: bottomRow.items())
+		for (IRowItem item: bottomRow.items())
 		{
-			//#### Replace with direct IRowItem call to preferrefHeight?
+			//TODO check if can replace with direct IRowItem call to preferrefHeight
 			int height = item.component().getPreferredSize().height;
 			int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
 			int comboHeight = height + gap;
@@ -703,7 +702,7 @@ public class DesignGridLayout implements LayoutManager
 		_right = 0;
 		for (AbstractRow row: _rows)
 		{
-			List<? extends ISpannableRowItem> items = row.items();
+			List<? extends IRowItem> items = row.items();
 			if (!items.isEmpty())
 			{
 				JComponent left = items.get(0).component();

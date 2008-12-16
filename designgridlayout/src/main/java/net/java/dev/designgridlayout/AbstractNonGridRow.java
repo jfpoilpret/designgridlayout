@@ -58,8 +58,8 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	}
 
 	@Override void checkSpanRows()
-    {
-    }
+	{
+	}
 
 	@Override List<NonGridRowItem> items()
 	{

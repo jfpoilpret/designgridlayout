@@ -20,7 +20,7 @@ import org.jdesktop.layout.Baseline;
 
 // Used for all components added to a SubGrid, real or spanned
 // Instances are mutable but only under some conditions
-class RowItem implements ISpannableRowItem
+class RowItem implements IRowItem
 {
 	// Used to create an item holding a real component (that may span several
 	// rows below or not)
