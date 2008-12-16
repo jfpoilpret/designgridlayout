@@ -25,16 +25,42 @@ public class Issue10Test extends AbstractGuiTest
 		stopGui();
 	}
 	
-	@Test(enabled = false)
-	public void check1ComponentSpanning2RowsOn1Grid() throws Exception
+	@Test public void checkSpanRowsOnOneGrid() throws Exception
 	{
 		launchGui(Issue10.class);
-		takeSnapshot("pref-size");
-//		for (int i = 1; i <= 10; i++)
-//		{
-//			frame().resizeHeightTo(frame().target.getHeight() + 3);
-//			takeSnapshot("extended-size-" + (i * 3));
-//		}
+		checkSnapshot("pref-size");
+		for (int i = 1; i <= 10; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + 3);
+			checkSnapshot("extended-size-" + (i * 3));
+		}
+	}
+	
+	@Test public void checkSpanRowsAndHeighGrowth() throws Exception
+	{
+		launchGui(Issue10c.class);
+		checkSnapshot("pref-size");
+		for (int i = 1; i <= 10; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + 3);
+			checkSnapshot("extended-size-" + (i * 3));
+		}
 	}
 
+	@Test public void checkSpanRowsOnSeveralGrids() throws Exception
+	{
+		launchGui(Issue10b.class);
+		checkSnapshot("pref-size");
+		for (int i = 1; i <= 10; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + 3);
+			checkSnapshot("extended-size-" + (i * 3));
+		}
+	}
+	
+	@Test public void checkBadUsageOfSpanRow() throws Exception
+	{
+		launchGui(Issue10a.class);
+		checkSnapshot();
+	}
 }
