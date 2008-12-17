@@ -91,21 +91,14 @@ class RowItem implements IRowItem
 
 	public int rowSpan()
 	{
-		if (_spanPrevious == null)
+		int rows = 1;
+		RowItem next = _spanNext;
+		while (next != null)
 		{
-			int rows = 1;
-			RowItem next = _spanNext;
-			while (next != null)
-			{
-				rows++;
-				next = next._spanNext;
-			}
-			return rows;
+			rows++;
+			next = next._spanNext;
 		}
-		else
-		{
-			return _spanPrevious.rowSpan();
-		}
+		return rows;
 	}
 	
 	// Used to replace a rowspan placeholder with a real component (error marker)
