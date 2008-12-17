@@ -41,7 +41,9 @@ public class MyPanel extends JPanel {
 +------------------------------------------------------------------------------+
 	
 	In this very simple example, you can see that <<<layout>>> is the principal
-	object to be used for adding components to the container.
+	object to be used for adding components to the container. Please also note
+	that with DesignGridLayout, you don't need to explicitly call <<<setLayout>>>
+	on the container, DesignGridLayout takes care of that for you.
 	
 	For every row of components you want created in a container, you need to call 
 	<<<layout.row()>>> (or one of the alternatives to <<<row()>>>, explained
@@ -49,7 +51,7 @@ public class MyPanel extends JPanel {
 	components to this row.
 	
 	Rows are created vertically from top to bottom, in the same order as lines
-	of codes that call <<<layout.row()>>>. Inside one row, you add components 
+	of code that call <<<layout.row()>>>. Inside one row, you add components 
 	from left to right in the same order calls to <<<add()>>> appear in each row.
 	
 	Hence this allows you to "visualize" the container layout just by viewing
@@ -217,6 +219,12 @@ layout.row().grid(label("Label 3:")).add(button(), 2).add(button())
                           .grid(label("Label 3+:"))    .add(button(), 2).add(button());
 layout.row().grid(label("Lbl 4:"))  .add(button());
 +------------------------------------------------------------------------------+
+
+Components spanning several rows
+
+	TODO ~1h (general: description + sample code + snapshot)
+	
+	TODO ~1h (warning markers + sample code + snapshot with tooltips!)
 
 Automatic support for right-to-left text orientation
 

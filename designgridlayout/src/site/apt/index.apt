@@ -46,7 +46,8 @@ Swing LayoutManagers hell or the Genesis of DesignGridLayout
 	
 DesignGridLayout "philosophy"
 
-	DesignGridLayout was designed with some important principles:
+	DesignGridLayout was designed with the following important principles in 
+	mind:
 	
 	*	layouts produced through it must <<always be good looking>> (in terms of
 		components alignment, spacing, sizing, visual balance, all compliant to
@@ -61,6 +62,10 @@ DesignGridLayout "philosophy"
 		always guides the developer; this API must enable IDE code-completion 
 		and must be as <<compile-safe>> as possible; developers should never 
 		discover problems with their UI at runtime
+	
+	*	in the rare cases where it is possible for the developer to write layout 
+		code that cannot work, then the produced UI should show hints to the 
+		developer and help him quickly fix the layout code
 		
 	*	existing UIs must be <<easy to modify>>; e.g. adding a row to a form 
 		should be straightforward for the developer
@@ -71,14 +76,14 @@ DesignGridLayout "philosophy"
 	[]
 	
 	To implement these principles, DesignGridLayout has decided to follow a
-	different way of using LayoutManagers than the usual way (Note: this approach
-	is now also used by Java 6 <<<GroupLayout>>>): instead of adding 
-	<<<Component>>>s directly to a <<<Container>>> and specify a <<<String>>> or 
-	<<<Object>>> to describe location, size... of that <<<Component>>>, 
-	DesignGridLayout uses a fluent API which starts from the 
+	different way of using LayoutManagers than the usual way (please note that
+	this approach is now also used by Java 6 <<<GroupLayout>>>): instead of 
+	adding <<<Component>>>s directly to a <<<Container>>> and specify a 
+	<<<String>>> or <<<Object>>> to describe location, size... of that 
+	<<<Component>>>, DesignGridLayout uses a fluent API which starts from the 
 	<<<DesignGridLayout>>> instance itself.
 
-DesignGridLayout Features (version 1.0)
+DesignGridLayout Features (version 1.1)
 
 	*	<<Fluent and simple API>> to create grid-based layouts (from the layout, 
 		you create rows, from a row you add components)
@@ -96,6 +101,9 @@ DesignGridLayout Features (version 1.0)
 		DesignGridLayout supports <<several groups of columns>>, each having 
 		their dedicated label column
 		
+	*	Support for high components (e.g. <<<JList>>>) <<spanning several grid
+		rows>>
+		
 	*	<<Smart horizontal resize>> that preserves the UI balance (by enlarging 
 		all components consistently)
 		
@@ -112,15 +120,9 @@ DesignGridLayout Features (version 1.0)
 		
 Roadmap
 
-	[1.1]	Planned by end 2008
-	
-		*	Support for components spanning several rows
-		
-		[]
-		
 	[1.2]	Planned during 1st Quarter 2009
 	
 		*	Support for layouts synchronization: allows consistent alignment 
-			among different layouts (usefult for tabbed panes or wizard dialogs)
+			among different layouts (useful for tabbed panes or wizard dialogs)
 	
 		[]
