@@ -50,20 +50,20 @@ final class ComponentHelper
 	
 	static int hgap(List<? extends IRowItem> items, Container parent)
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-		int hgap = 0;
-		int size = items.size() - 1;
-		for (int nth = 0; nth < size; nth++)
-		{
-			JComponent left = items.get(nth).component();
-			JComponent right = items.get(nth + 1).component();
-			int gap = layoutStyle.getPreferredGap(
-				left, right, LayoutStyle.RELATED, SwingConstants.EAST, parent);
-			hgap = Math.max(hgap, gap);
-		}
-		return hgap;
+		return hgap(LayoutStyle.getSharedInstance(), items, parent);
 	}
 	
+	static int hgap(JComponent first, List<? extends IRowItem> items, Container parent)
+	{
+		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+		int hgap = 0;
+		if (first != null && !items.isEmpty())
+		{
+			hgap = hgap(layoutStyle, first, items.get(0).component(), parent);
+		}
+		return Math.max(hgap, hgap(layoutStyle, items, parent));
+	}
+
 	static boolean isFixedHeight(
 		HeightGrowPolicy policy, Iterable<? extends IRowItem> items)
 	{
@@ -75,5 +75,26 @@ final class ComponentHelper
 			}
 		}
 		return true;
+	}
+
+	static private int hgap(
+		LayoutStyle ls, List<? extends IRowItem> items, Container parent)
+	{
+		int hgap = 0;
+		int size = items.size() - 1;
+		for (int nth = 0; nth < size; nth++)
+		{
+			JComponent left = items.get(nth).component();
+			JComponent right = items.get(nth + 1).component();
+			int gap = hgap(ls, left, right, parent);
+			hgap = Math.max(hgap, gap);
+		}
+		return hgap;
+	}
+	
+	static private int hgap(
+		LayoutStyle ls, JComponent left, JComponent right, Container parent)
+	{
+		return ls.getPreferredGap(left, right, ls.RELATED, SwingConstants.EAST, parent);
 	}
 }
