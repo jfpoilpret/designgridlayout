@@ -692,20 +692,21 @@ public class DesignGridLayout implements LayoutManager
 		_bottom = Math.max(_bottom, bottomGap);
 	}
 	
-	//FIXME: why don't we use labels (if any) for calculating LEFT margin?
 	private void computeLeftRightMargins()
 	{
 		_left = 0;
 		_right = 0;
 		for (AbstractRow row: _rows)
 		{
-			List<? extends IRowItem> items = row.items();
-			if (!items.isEmpty())
+			JComponent left = row.leftComponent();
+			if (left != null)
 			{
-				JComponent left = items.get(0).component();
 				_left = Math.max(_left, getContainerGap(left, SwingConstants.WEST));
+			}
 
-				JComponent right = items.get(items.size() - 1).component();
+			JComponent right = row.rightComponent();
+			if (right != null)
+			{
 				_right = Math.max(_right, getContainerGap(right, SwingConstants.EAST));
 			}
 		}

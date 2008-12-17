@@ -109,6 +109,14 @@ final class SubGrid implements ISubGrid
 		}
 	}
 	
+	JComponent leftComponent()
+	{
+		// Will always return the first component (either _label or not)
+		//#### Careful: if changes are to be made to the way _items is currently
+		// managed (ie includes _label), then this method will need some change!
+		return (_items.isEmpty() ? null : _items.get(0).component());
+	}
+	
 	public int gridspan()
 	{
 		return _gridspan;

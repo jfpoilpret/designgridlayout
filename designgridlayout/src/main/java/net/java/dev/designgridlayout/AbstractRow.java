@@ -17,6 +17,8 @@ package net.java.dev.designgridlayout;
 import java.awt.Container;
 import java.util.List;
 
+import javax.swing.JComponent;
+
 abstract class AbstractRow
 {
 	// Called by DesignGridLayout immediately after instanciation
@@ -160,6 +162,16 @@ abstract class AbstractRow
 		return 0;
 	}
 
+	JComponent leftComponent()
+	{
+		return (items().isEmpty() ? null : items().get(0).component());
+	}
+	
+	JComponent rightComponent()
+	{
+		return (items().isEmpty() ? null : items().get(items().size() - 1).component());
+	}
+	
 	abstract void checkSpanRows();
 
 	abstract List<? extends IRowItem> items();

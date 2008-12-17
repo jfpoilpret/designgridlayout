@@ -243,6 +243,16 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return gridgap;
 	}
 
+	@Override JComponent leftComponent()
+	{
+		return (_grids.isEmpty() ? null : _grids.get(0).leftComponent());
+	}
+	
+	@Override List<RowItem> items()
+	{
+		return _allItems;
+	}
+	
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
@@ -282,11 +292,6 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return actualHeight;
 	}
 
-	@Override List<RowItem> items()
-	{
-		return _allItems;
-	}
-	
 	SubGrid findGrid(int index)
 	{
 		int i = 0;
