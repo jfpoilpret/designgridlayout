@@ -313,7 +313,6 @@ public class DesignGridLayout implements LayoutManager
 	public Dimension minimumLayoutSize(Container parent)
 	{
 		checkParent(parent);
-		//TODO check if the next line is really useful... Remove it if not
 		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
@@ -326,7 +325,6 @@ public class DesignGridLayout implements LayoutManager
 	public Dimension preferredLayoutSize(Container parent)
 	{
 		checkParent(parent);
-		//TODO check if the next line is really useful... Remove it if not
 		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
