@@ -168,6 +168,33 @@
  * If you want more details about this feature, you can look at the API 
  * documentation for {@link net.java.dev.designgridlayout.ISubGridStarter}.
  * 
+ * <h3>Components spanning multiple grid rows</h3>
+ * DesignGridLayout also allows you to define components that span several rows.
+ * This feature is available only on grid-rows (i.e. rows created with 
+ * {@code layout.row().grid(...)}).
+ * The way to use it is quite straightforward, you define a first row as usual:
+ * <pre>
+ *     layout.row().grid(label1).add(field1).add(list);
+ * </pre>
+ * Then on the <b>next</b> row, you specify which grid column will "share" the
+ * same component as the first row (that component will thus span row 2):
+ * <pre>
+ *     layout.row().grid(label2).add(field2).spanRow();
+ * </pre>
+ * Please note the use of {@code spanRow()} (instead of {@code add(...)}) to
+ * specify that we want the matching component in the previous row to span this
+ * row.
+ * <p/>
+ * This feature is described in further details in the API documentation of
+ * {@link net.java.dev.designgridlayout.ISpannableGridRow#spanRow()}.
+ * <p/>
+ * There are some limitations in the use of {@code spanRow()} that, unfortunately,
+ * are not detectable at compile-time. When you mistakenly call {@code spanRow()}
+ * in an impossible layout situation, DesignGridLayout will not throw any
+ * Exception at run-time, but will replace your calls to {@code spanRow()} by
+ * a special marker component: a <b>"spanRow()"</b> label with red background 
+ * and a tooltip describing the problem further.
+ * 
  * @author Jason Aaron Osgood
  * @author Jean-Francois Poilpret
  * @see net.java.dev.designgridlayout.DesignGridLayout
