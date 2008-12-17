@@ -17,7 +17,8 @@
 	
 	<!-- Checks that each package has a package.html file -->
 	<module name="PackageHtml">
-		<property name="severity" value="warning"/>
+		<!-- Ignore because current Checkstyle does not support package-info.java -->
+		<property name="severity" value="ignore"/>
 	</module>
 	
 	<module name="NewlineAtEndOfFile">
