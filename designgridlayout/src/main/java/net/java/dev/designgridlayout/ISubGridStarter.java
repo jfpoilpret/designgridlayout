@@ -41,10 +41,14 @@ public interface ISubGridStarter
 	 * <p/>
 	 * The new sub-grid initiated by this call will span all space on its right
 	 * unless another call to a {@code grid()} method occurs in the same row. 
+	 * <p/>
+	 * That sub-grid also allows adding span components, i.e. components that
+	 * have been added to a row above {@code this} row.
 	 * 
 	 * @param label the label to add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
+	 * @see ISpannableGridRow#spanRow()
 	 */
 	public abstract ISpannableGridRow grid(JLabel label);
 	
@@ -75,9 +79,13 @@ public interface ISubGridStarter
 	 * <p/>
 	 * The new sub-grid initiated by this call will span all space on its right
 	 * unless another call to a {@code grid()} method occurs in the same row. 
+	 * <p/>
+	 * That sub-grid also allows adding span components, i.e. components that
+	 * have been added to a row above {@code this} row.
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
+	 * @see ISpannableGridRow#spanRow()
 	 */
 	public abstract ISpannableGridRow grid();
 

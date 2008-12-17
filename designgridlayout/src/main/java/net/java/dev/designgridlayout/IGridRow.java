@@ -36,9 +36,9 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * Adds one component to this row and allows it to span several columns of
 	 * the canonical grid.
 	 * <p/>
-	 * The order of calls match the order in which the components will
-	 * row. Components are added left to right, in the same order as they appear
-	 * in the arguments list.
+	 * The order of calls match the order in which the components will be added
+	 * to this row. Components are added left to right, in the same order as 
+	 * they appear in the arguments list.
 	 * 
 	 * @param child component to add to this row; it is added to the right of
 	 * the component that was added by the nearest previous call to an add

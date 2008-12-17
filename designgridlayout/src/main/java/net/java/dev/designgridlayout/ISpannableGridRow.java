@@ -16,10 +16,57 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-//TODO javadoc
+/**
+ * Rows created by {@code DesignGridLayout.row().grid()} and 
+ * {@code DesignGridLayout.row().grid(JLabel)} implement this interface.
+ * Through this interface, in addition to methods inherited from {@link IGridRow},
+ * you can specify components spanning multiple rows with the new
+ * {@link #spanRow()} method.
+ * 
+ * @author Jean-Francois Poilpret
+ */
 public interface ISpannableGridRow extends IGridRow
 {
-	//TODO javadoc
+	/**
+	 * Specifies that the next grid column will be filled with the same
+	 * component in the same column location in the row above this row.
+	 * <p/>
+	 * Calling {@code spanRow()} in one row behaves as follows:
+	 * <ol>
+	 * <li>the component on the previous row at the same column position in the 
+	 * same sub-grid will span this row</li>
+	 * <li>the horizontal span of this component will be the same as the column 
+	 * span defined for that same component on the previous row</li>
+	 * <li>the sub-grid in which {@code spanRow()} appears will have its 
+	 * gridspan forced to the same value as the sub-grid in the same position of 
+	 * the previous row</li>
+	 * <li>if the matching component in the previous row is {@link IGridRow#empty()}
+	 * or {@link IGridRow#empty(int)}, then {@code spanRow()} is also {@code empty()}
+	 * or {@code empty(int)}</li>
+	 * <li>if this is the first row in the layout, then {@code spanRow()} is 
+	 * equivalent to {@code empty()}</li>
+	 * <li>if there is no grid row above {@code this} row, then {@code spanRow()}
+	 * will be replaced with a marker component, used for fixing the layout</li>
+	 * <li>if there is no matching subgrid (same position) in the above row, then 
+	 * {@code spanRow()} will be replaced with a marker component, used for 
+	 * fixing the layout</li>
+	 * <li>if there is no matching component (same position) in the matching
+	 * gridrow of the above row, then {@code spanRow()} will be replaced with a 
+	 * marker component, used for fixing the layout</li>
+	 * <li>if the matching subgrid in the above row does not have the same number
+	 * of columns of the current subgrid in {@code this} row, then 
+	 * {@code spanRow()} will be replaced with a marker component, used for 
+	 * fixing the layout</li>
+	 * </ol>
+	 * <p/>
+	 * A marker component is used to show bad calls to {@code spanRow()} which
+	 * could not be avoided at compile-time. This marker is a "<b>spanRow()</b>" 
+	 * label with a red background and a tooltip giving more details about the 
+	 * actual problem.
+	 * 
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
 	public abstract ISpannableGridRow spanRow();
 
 	/*
