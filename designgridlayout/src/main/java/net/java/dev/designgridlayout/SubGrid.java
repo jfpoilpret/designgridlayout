@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Container;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,17 +24,18 @@ import javax.swing.JPanel;
 
 final class SubGrid implements ISubGrid
 {
-	SubGrid(SubGrid previous, Container parent, JLabel label, int gridspan)
+	SubGrid(List<RowItem> items, SubGrid previous, Container parent, 
+		JLabel label, int gridspan)
 	{
+		_items = items;
 		_previous = previous;
 		_parent = parent;
 		_label = label;
 		_gridspan = (gridspan <= 0 ? 0 : gridspan);
 		if (_label != null)
 		{
-			_parent.add(_label);
 			_label.setHorizontalAlignment(JLabel.TRAILING);
-			_items.add(new RowItem(0, _label));
+			_parent.add(_label);
 		}
 	}
 
@@ -111,10 +111,14 @@ final class SubGrid implements ISubGrid
 	
 	JComponent leftComponent()
 	{
-		// Will always return the first component (either _label or not)
-		//#### Careful: if changes are to be made to the way _items is currently
-		// managed (ie includes _label), then this method will need some change!
-		return (_items.isEmpty() ? null : _items.get(0).component());
+		if (_label != null)
+		{
+			return _label;
+		}
+		else
+		{
+			return (_items.isEmpty() ? null : _items.get(0).component());
+		}
 	}
 	
 	public int gridspan()
@@ -156,7 +160,7 @@ final class SubGrid implements ISubGrid
 		int columns = gridColumns();
 		float divisions = (float) columns / (float) maxColumns;
 
-		for (RowItem item: items())
+		for (RowItem item: _items)
 		{
 			int width = extractor.value(item);
 
@@ -170,7 +174,7 @@ final class SubGrid implements ISubGrid
 
 	public int hgap()
 	{
-		return ComponentHelper.hgap(_items, _parent);
+		return ComponentHelper.hgap(_label, _items, _parent);
 	}
 
 	public int layoutRow(LayoutHelper helper, int left, int height, int baseline, 
@@ -199,7 +203,7 @@ final class SubGrid implements ISubGrid
 			// fudge is whatever pixels are left over
 			int fudge = gridWidth % columns;
 
-			Iterator<RowItem> i = items().iterator();
+			Iterator<RowItem> i = _items.iterator();
 			while (i.hasNext())
 			{
 				RowItem item = i.next();
@@ -224,13 +228,13 @@ final class SubGrid implements ISubGrid
 
 	public List<RowItem> items()
 	{
-		return (_label == null ? _items : _items.subList(1, _items.size()));
+		return _items;
 	}
 	
 	private RowItem findItem(int column)
 	{
 		int i = 0;
-		for (RowItem item: items())
+		for (RowItem item: _items)
 		{
 			if (i == column)
 			{
@@ -261,7 +265,7 @@ final class SubGrid implements ISubGrid
 		EMPTY.setOpaque(false);
 	}
 
-	final private List<RowItem> _items = new ArrayList<RowItem>();
+	final private List<RowItem> _items;
 	final private SubGrid _previous;
 	final private Container _parent;
 	final private JLabel _label;

@@ -14,7 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -149,7 +148,8 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		}
 		// Find the matching subgrid (if any) of the previous row
 		SubGrid previous = (_previous != null ? _previous.findGrid(_gridIndex) : null);
-		_current = new SubGrid(previous, parent(), label, gridspan);
+		// Initialize the sublist of _items to be used by the new subgrid
+		_current = new SubGrid(new SubList(_items), previous, parent(), label, gridspan);
 		_grids.add(_current);
 		return this;
 	}
@@ -250,7 +250,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	
 	@Override List<RowItem> items()
 	{
-		return _allItems;
+		return _items;
 	}
 	
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
@@ -315,42 +315,13 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		SubGrid grid = findGrid(index);
 		return (grid != null ? grid : NULL_GRID);
 	}
-
-	private class AllComponentList extends AbstractList<RowItem>
-	{
-		@Override public RowItem get(int index)
-		{
-			int current = 0;
-			for (SubGrid grid: _grids)
-			{
-				if (index < current + grid.items().size())
-				{
-					return grid.items().get(index - current);
-				}
-				current += grid.items().size();
-			}
-			// We should normally never come there
-			throw new IndexOutOfBoundsException(
-				"Index: " + index + ", Size = " + size());
-		}
-
-		@Override public int size()
-		{
-			int size = 0;
-			for (SubGrid grid: _grids)
-			{
-				size += grid.items().size();
-			}
-			return size;
-		}
-	}
-
+	
 	private SubGrid _current = null;
 	private int _gridIndex = 0;
 	private int _totalGrids = 0;
 	final private GridRow _previous;
 	final private List<SubGrid> _grids = new ArrayList<SubGrid>();
-	final private AllComponentList _allItems = new AllComponentList();
+	final private List<RowItem> _items = new ArrayList<RowItem>();
 
 	static final private ISubGrid NULL_GRID = new EmptySubGrid();
 }
