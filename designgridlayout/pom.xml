@@ -281,16 +281,6 @@
 				<classifier>jdk15</classifier>
 				<scope>test</scope>
 			</dependency>
-			<!-- START: Only for FEST debugging -->
-<!--
-			<dependency>
-				<groupId>fest</groupId>
-				<artifactId>fest-swing</artifactId>
-				<version>1.0b2.1</version>
-				<scope>test</scope>
-			</dependency>
--->
-			<!-- END: Only for FEST debugging -->
 		</dependencies>
 	</dependencyManagement>
 	
@@ -303,11 +293,15 @@
 		<dependency>
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
-			<!-- Version 1.0b2 is much too slow and makes non reproducable tests -->
-<!--
-			<version>1.0b2</version>
--->
-			<version>1.0b1</version>
+			<version>1.0rc</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- TODO: remove this dependency once FEST has added it to its own POM -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.8</version>
+			<classifier>jdk15</classifier>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
