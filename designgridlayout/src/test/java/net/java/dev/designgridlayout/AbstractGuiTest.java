@@ -72,15 +72,8 @@ abstract class AbstractGuiTest
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
 		
 		// Compare with previously recorded snapshots
-		URL expected = Thread.currentThread().getContextClassLoader().getResource(name);
-		try
-		{
-			assertThat(new File(snapshot)).hasSameContentAs(new File(expected.toURI()));
-		}
-		catch (URISyntaxException e)
-		{
-			throw new RuntimeException(e);
-		}
+		String expected = REFERENCE_SCREENSHOT_PATH + name;
+		assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
 	}
 	
 	final protected void takeSnapshot()
@@ -120,4 +113,7 @@ abstract class AbstractGuiTest
 	{
 		public void init(T instance);
 	}
+
+	static final public String REFERENCE_SCREENSHOT_PATH = 
+		"src/test/resources/screenshots/";
 }

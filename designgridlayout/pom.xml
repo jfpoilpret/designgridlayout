@@ -41,7 +41,13 @@
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
-				<filtering>false</filtering>
+				<excludes>
+					<!-- 
+						Don't include reference screenshots used by test cases
+						so that generated tests jars are kept small
+					-->
+					<exclude>screenshots/**</exclude>
+				</excludes>
 			</testResource>
 		</testResources>
 		<plugins>
