@@ -31,9 +31,6 @@ abstract class AbstractGuiTest
 	private FrameFixture _frame;
 	private ScreenshotTaker _screenshot;
 	
-//TODO remove comment when sure it works!
-//	final protected <T extends AbstractBaseExample> void launchGui(
-//		Class<T> clazz, Initializer<T> initializer) 
 	final protected <T extends AbstractBaseExample, U extends T> void launchGui(
 		Class<U> clazz, Initializer<T> initializer) 
 		throws Exception
@@ -73,19 +70,19 @@ abstract class AbstractGuiTest
 	
 	final protected void checkSnapshot(String suffix)
 	{
-		takeSnapshot(suffix);
-//		// Take snapshot of current layout
-//		if (suffix.length() > 0)
-//		{
-//			suffix = "-" + suffix;
-//		}
-//		String name = _example.getClass().getSimpleName() + suffix + ".png";
-//		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + name;
-//		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
-//		
-//		// Compare with previously recorded snapshots
-//		String expected = REFERENCE_SCREENSHOT_PATH + name;
-//		assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
+//		takeSnapshot(suffix);
+		// Take snapshot of current layout
+		if (suffix.length() > 0)
+		{
+			suffix = "-" + suffix;
+		}
+		String name = _example.getClass().getSimpleName() + suffix + ".png";
+		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + name;
+		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
+		
+		// Compare with previously recorded snapshots
+		String expected = REFERENCE_SCREENSHOT_PATH + name;
+		assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
 	}
 	
 	final protected void takeSnapshot()

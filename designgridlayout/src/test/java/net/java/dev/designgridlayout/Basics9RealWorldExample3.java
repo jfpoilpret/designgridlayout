@@ -14,8 +14,11 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Color;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 public class Basics9RealWorldExample3 extends AbstractBaseExample
@@ -29,30 +32,40 @@ public class Basics9RealWorldExample3 extends AbstractBaseExample
 	// CSOFF: MagicNumber
 	@Override public void build(DesignGridLayout layout)
 	{
-		//TODO use separators
-		layout.row().left().add(projectLabel);
+		addGroup(layout, projectLabel);
 		layout.row().grid(idLabel).add(id).empty(2);
 		layout.emptyRow();
 
-		layout.row().left().add(mfgLabel);
+		addGroup(layout, mfgLabel);
 		layout.row().grid(companyLabel).add(company);
 		layout.row().grid(contactLabel).add(contact);
 		layout.row().grid(orderLabel).add(order).empty(2);
 		layout.emptyRow();
 
-		layout.row().left().add(inspectorLabel);
+		addGroup(layout, inspectorLabel);
 		layout.row().grid(nameLabel).add(name);
 		layout.row().grid(referenceLabel).add(reference).empty(2);
 		layout.row().grid(statusLabel).add(status).empty(2);
 		layout.emptyRow();
 
-		layout.row().left().add(shipLabel);
+		addGroup(layout, shipLabel);
 		layout.row().grid(shipyardLabel).add(shipyard);
 		layout.row().grid(registerNoLabel).add(registerNo).empty(2);
 		layout.row().grid(hullNumsLabel).add(hullNums).empty(2);
 		layout.row().grid(projectTypeLabel).add(projectType).empty(2);
 	}
 	// CSON: MagicNumber
+	
+	static private void addGroup(DesignGridLayout layout, JLabel group)
+	{
+		group.setForeground(Color.BLUE);
+		layout.row().left().add(group).add(new JSeparator()).fill();
+	}
+	
+	@Override protected void preDisplay()
+	{
+		status.requestFocusInWindow();
+	}
 
 	@Override public String name()
 	{
