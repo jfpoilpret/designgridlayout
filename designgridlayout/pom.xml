@@ -238,7 +238,6 @@
 				<updatePolicy>always</updatePolicy>
 				<checksumPolicy>ignore</checksumPolicy>
 -->
-				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
@@ -281,6 +280,15 @@
 				<classifier>jdk15</classifier>
 				<scope>test</scope>
 			</dependency>
+			<!-- FEST tests only -->
+<!--
+			<dependency>
+				<groupId>fest</groupId>
+				<artifactId>fest-swing</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<scope>test</scope>
+			</dependency>
+-->
 		</dependencies>
 	</dependencyManagement>
 	
