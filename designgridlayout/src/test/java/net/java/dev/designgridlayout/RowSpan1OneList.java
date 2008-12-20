@@ -14,28 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class RowSpan1OneList extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		RowSpan1OneList example = new RowSpan1OneList();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().grid(label("lbl11")).add(field("field11")).grid(label("lbl12")).add(list());
+		layout.row().grid(label("lbl21")).add(field("field21")).grid().spanRow();
+		layout.row().center().add(button());
 	}
 }

@@ -14,28 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import java.awt.ComponentOrientation;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class RightToLeft2RTL extends AbstractRightToLeft
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		RightToLeft2RTL example = new RightToLeft2RTL();
+		example.go(false);
 	}
 	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
-	{
-		stopGui();
-	}
+	public RightToLeft2RTL()
+    {
+	    super(ComponentOrientation.RIGHT_TO_LEFT);
+    }
 }

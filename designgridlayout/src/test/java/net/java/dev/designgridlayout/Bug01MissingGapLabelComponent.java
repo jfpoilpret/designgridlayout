@@ -14,28 +14,26 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import javax.swing.JTextField;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class Bug01MissingGapLabelComponent extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Bug01MissingGapLabelComponent example = new Bug01MissingGapLabelComponent();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().grid(label("First label")).add(field("First field"));
+		layout.row().grid(label("Second label")).add(field("2nd field"));
+	}
+
+	@Override protected JTextField field(String text)
+	{
+		JTextField field = super.field(text);
+		field.setEnabled(false);
+		return field;
 	}
 }

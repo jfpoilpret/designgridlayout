@@ -14,28 +14,20 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+// This example checks the preferred size calculated when having a large 
+// component spanning several grids
+public class MultiGrid1Simple extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		MultiGrid1Simple example = new MultiGrid1Simple();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().grid(label("1")).add(field("X")).grid(label("1")).add(field("Y"));
+		layout.row().grid(label("2")).add(field("XXXXYYYYZZZZ"));
+		layout.row().center().add(button("OK"));
 	}
 }

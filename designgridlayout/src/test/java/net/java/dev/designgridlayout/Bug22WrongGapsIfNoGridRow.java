@@ -14,28 +14,19 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+// Issue 22: no hgap between components when layout has no grid row at all
+public class Bug22WrongGapsIfNoGridRow extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Bug22WrongGapsIfNoGridRow example = new Bug22WrongGapsIfNoGridRow();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().left().add(button("Previous"), button("Next"));
+		layout.row().center().add(button("Previous"), button("Next"));
+		layout.row().right().add(button("Previous"), button("Next"));
 	}
 }

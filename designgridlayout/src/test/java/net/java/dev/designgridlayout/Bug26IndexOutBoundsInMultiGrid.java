@@ -14,28 +14,26 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import javax.swing.JTextField;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class Bug26IndexOutBoundsInMultiGrid extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Bug26IndexOutBoundsInMultiGrid example = new Bug26IndexOutBoundsInMultiGrid();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().grid(label("lbl12"), 2).add(field("field12")).grid(label("lbl3"), 1).add(field("field3"));
+		layout.row().grid(label("lbl1"), 1).add(field("field1")).grid(label("lbl23"), 2).add(field("field23"));
+	}
+
+	@Override protected JTextField field(String text)
+	{
+		JTextField field = super.field(text);
+		field.setEnabled(false);
+		return field;
 	}
 }

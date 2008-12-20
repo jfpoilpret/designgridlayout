@@ -14,28 +14,23 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import javax.swing.JSeparator;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class Basics6NonGridRowsWithFiller extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Basics6NonGridRowsWithFiller example = new Basics6NonGridRowsWithFiller();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().left().fill().add(new JSeparator());
+		layout.row().left().fill().add(label("Hello"), new JSeparator());
+		layout.row().center().fill().add(new JSeparator());
+		layout.row().center().fill().add(new JSeparator(), label("Hello"), new JSeparator());
+		layout.row().right().fill().add(new JSeparator());
+		layout.row().right().fill().add(new JSeparator(), label("Hello"));
 	}
 }

@@ -14,28 +14,15 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import javax.swing.JTextField;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+// Shows issue 13 example: multiple labels
+abstract public class AbstractMultiGrid extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	@Override protected JTextField field(String text)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
-	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
-	{
-		stopGui();
+		JTextField field = super.field(text);
+		field.setColumns(8);
+		return field;
 	}
 }

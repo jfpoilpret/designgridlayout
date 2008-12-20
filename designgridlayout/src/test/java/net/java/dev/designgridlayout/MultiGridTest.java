@@ -18,24 +18,33 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class MultiGridTest extends AbstractGuiTest
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
-	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
-	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+	@AfterMethod public void closeGui()
 	{
 		stopGui();
+	}
+	
+	@Test public void checkSimpleMultiGrid() throws Exception
+	{
+		checkExample(MultiGrid1Simple.class);
+	}
+
+	@Test public void checkThreeMultiGridWithGridSpan() throws Exception
+	{
+		launchGui(MultiGrid2ThreeGridsWithGridSpan.class);
+		checkSnapshot("small");
+		frame().resizeWidthTo(frame().target.getWidth() * 2);
+		checkSnapshot("large");
+	}
+	
+	@Test public void checkComplexMultiGrid() throws Exception
+	{
+		checkExample(MultiGrid3ThreeComplexGrids.class);
+	}
+	
+	@Test public void checkAddressBookDemo() throws Exception
+	{
+		checkExample(AddressBookDemo.class);
 	}
 }

@@ -14,28 +14,24 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+// Issue 25: multiple calls to pack() clears the effect of emptyRow()
+public class Bug25InoperantEmptyRowIfPackTwice extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Bug25InoperantEmptyRowIfPackTwice example = new Bug25InoperantEmptyRowIfPackTwice();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().grid().add(button(), button());
+		layout.emptyRow();
+		layout.row().grid().add(button(), button());
+	}
+
+	@Override protected void prePack()
+	{
+		_frame.pack();
 	}
 }

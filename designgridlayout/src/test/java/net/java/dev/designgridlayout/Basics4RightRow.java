@@ -14,28 +14,25 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import javax.swing.JButton;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class Basics4RightRow extends AbstractBaseExample
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Basics4RightRow example = new Basics4RightRow();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	// CSOFF: MagicNumber
+	@Override public void build(DesignGridLayout layout)
 	{
-		stopGui();
+		layout.row().grid(label(1)).add(button()).add(button());
+		layout.row().grid(label(2)).add(button()).add(button()).add(button());
+		layout.row().grid(label(3)).add(button(), 2).add(button());
+		layout.row().grid(label(4)).add(button()).add(button()).add(button()).empty();
+		layout.emptyRow();
+		layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 	}
+	// CSON: MagicNumber
 }

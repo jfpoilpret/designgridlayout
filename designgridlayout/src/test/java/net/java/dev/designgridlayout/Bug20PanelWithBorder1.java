@@ -14,28 +14,21 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import javax.swing.JComponent;
+import javax.swing.border.TitledBorder;
 
-@Test(groups = "utest")
-public class MultiComponentTest extends AbstractGuiTest
+public class Bug20PanelWithBorder1 extends Bug20PanelWithBorder2
 {
-	@Test public void checkMultiComponentResize()
-		throws Exception
+	public static void main(String[] args)
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		Bug20PanelWithBorder1 example = new Bug20PanelWithBorder1();
+		example.go(true);
 	}
-	
-	@AfterMethod(groups = "utest")
-	public void cleanUp()
+
+	@Override protected void prePack()
 	{
-		stopGui();
+		// Add a border to the container using DeisgnGridLayout
+		JComponent panel = (JComponent) frame().getContentPane().getComponent(0);
+		panel.setBorder(new TitledBorder("NoBorder"));
 	}
 }
