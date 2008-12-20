@@ -47,6 +47,11 @@ public class RightToLeftTest extends AbstractGuiTest
 		checkRtlExample(RightToLeft1LTR.class);
 	}
 	
+	@Test public void checkRealExampleRTL() throws Exception
+	{
+		checkExample(RightToLeft3RealWorldExample.class);
+	}
+
 	protected void checkRtlExample(Class<? extends AbstractRightToLeft> clazz) 
 		throws Exception
 	{

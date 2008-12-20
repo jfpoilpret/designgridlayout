@@ -33,6 +33,11 @@ public class MultiComponentTest extends AbstractGuiTest
 		checkSnapshot("big");
 	}
 	
+	@Test public void checkMultiComponentRealExample() throws Exception
+	{
+		checkExample(Figure179bis.class);
+	}
+	
 	@AfterMethod(groups = "utest")
 	public void cleanUp()
 	{

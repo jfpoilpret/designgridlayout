@@ -71,7 +71,8 @@ public class AddressBookDemo extends AbstractBaseExample
 		listPanel.setLayout(new BorderLayout());
 		listPanel.add(scroller, BorderLayout.CENTER);
 		listPanel.setPreferredSize(new Dimension(150, 1));
-		listPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 0));
+		//TODO: improve margins calculations for List
+		listPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
 		JPanel addressPanel = new JPanel();
 		DesignGridLayout layout = new DesignGridLayout(addressPanel);
@@ -80,7 +81,7 @@ public class AddressBookDemo extends AbstractBaseExample
 		JPanel top = new JPanel();
 		top.setName("TOP");
 		top.setLayout(new BorderLayout());
-		top.add(listPanel, BorderLayout.WEST);
+		top.add(listPanel, BorderLayout.LINE_START);
 		top.add(addressPanel, BorderLayout.CENTER);
 		_frame.add(top);
 		prePack();
