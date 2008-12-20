@@ -25,9 +25,24 @@ public class MultiRowSpanTest extends AbstractGuiTest
 		stopGui();
 	}
 	
+	@Test public void checkSpanRowsSimplestExample() throws Exception
+	{
+		checkExample(RowSpan5SimplestExample.class);
+	}
+	
 	@Test public void checkSpanRowsOnOneGrid() throws Exception
 	{
 		checkExampleAndResize(RowSpan2TwoLists.class);
+	}
+	
+	@Test public void checkSpanRowsSimpleExampleTwoGrids() throws Exception
+	{
+		checkExample(RowSpan6SimpleExampleOnTwoGrids.class);
+	}
+	
+	@Test public void checkSpanRowsOnSeveralGrids() throws Exception
+	{
+		checkExampleAndResize(RowSpan1OneList.class);
 	}
 	
 	@Test public void checkSpanRowsAndHeightGrowth() throws Exception
@@ -35,11 +50,6 @@ public class MultiRowSpanTest extends AbstractGuiTest
 		checkExampleAndResize(RowSpan3TwoListsCustomWeights.class);
 	}
 
-	@Test public void checkSpanRowsOnSeveralGrids() throws Exception
-	{
-		checkExampleAndResize(RowSpan1OneList.class);
-	}
-	
 	@Test public void checkBadUsageOfSpanRow() throws Exception
 	{
 		checkExample(RowSpan4ErrorMarkers.class);
