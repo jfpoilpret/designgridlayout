@@ -39,13 +39,7 @@ public class SmartVerticalResizeTest extends AbstractGuiTest
 
 	@Test public void checkComplexLayoutWithWeights() throws Exception
 	{
-		launchGui(SmartVerticalResize3CustomWeights.class);
-		checkSnapshot("pref-size");
-		for (int i = 1; i <= 14; i++)
-		{
-			frame().resizeHeightTo(frame().target.getHeight() + 5);
-			checkSnapshot("extended-size-" + (i * 5));
-		}
+		checkExampleAndResizeHeight(SmartVerticalResize3CustomWeights.class, 5, 14);
 	}
 
 	@Test public void checkOneMultiComponentAllVarHeight() throws Exception
@@ -65,12 +59,9 @@ public class SmartVerticalResizeTest extends AbstractGuiTest
 
 	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz) throws Exception
 	{
-		launchGui(clazz);
-		checkSnapshot("pref-size");
-		for (int i = 1; i <= 10; i++)
-		{
-			frame().resizeHeightTo(frame().target.getHeight() + 3);
-			checkSnapshot("extended-size-" + (i * 3));
-		}
+		checkExampleAndResizeHeight(clazz, RESIZE_INCREMENT, RESIZE_STEPS);
 	}
+	
+	static final private int RESIZE_INCREMENT = 3;
+	static final private int RESIZE_STEPS = 10;
 }

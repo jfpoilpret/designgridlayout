@@ -56,6 +56,7 @@ public abstract class AbstractBaseExample
 		prePack();
 		_frame.pack();
 		preDisplay();
+		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
 	}
 

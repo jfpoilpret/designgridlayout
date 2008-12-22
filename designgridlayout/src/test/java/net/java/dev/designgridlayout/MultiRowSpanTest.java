@@ -58,12 +58,9 @@ public class MultiRowSpanTest extends AbstractGuiTest
 	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz)
 		throws Exception
 	{
-		launchGui(clazz);
-		checkSnapshot("pref-size");
-		for (int i = 1; i <= 10; i++)
-		{
-			frame().resizeHeightTo(frame().target.getHeight() + 3);
-			checkSnapshot("extended-size-" + (i * 3));
-		}
+		checkExampleAndResizeHeight(clazz, RESIZE_INCREMENT, RESIZE_STEPS);
 	}
+	
+	static final private int RESIZE_INCREMENT = 3;
+	static final private int RESIZE_STEPS = 10;
 }

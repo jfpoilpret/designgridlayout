@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Point;
 import java.io.File;
 
 import org.fest.swing.core.Robot;
@@ -63,6 +64,32 @@ abstract class AbstractGuiTest
 		checkSnapshot();
 	}
 	
+	final protected void checkExampleAndResizeHeight(
+		Class<? extends AbstractBaseExample> clazz, int increment, int steps) throws Exception
+	{
+		launchGui(clazz);
+		checkSnapshot("pref-size");
+		frame().moveTo(new Point(frame().target.getX(), 0));
+		for (int i = 1; i <= steps; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + increment);
+			checkSnapshot("extended-size-" + (i * increment));
+		}
+	}
+
+	final protected void checkExampleAndResizeWidth(
+		Class<? extends AbstractBaseExample> clazz, double ratio, int steps) throws Exception
+	{
+		launchGui(clazz);
+		checkSnapshot("pref-size");
+		frame().moveTo(new Point(0, frame().target.getY()));
+		for (int i = 1; i <= steps; i++)
+		{
+			frame().resizeWidthTo((int) (frame().target.getWidth() * ratio));
+			checkSnapshot("extended-size-" + i);
+		}
+	}
+
 	final protected void checkSnapshot()
 	{
 		checkSnapshot("");
@@ -97,7 +124,6 @@ abstract class AbstractGuiTest
 		{
 			suffix = "-" + suffix;
 		}
-		//TODO remove "-org" later
 		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
 			_example.getClass().getSimpleName() + suffix + "-org.png";
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
