@@ -1,0 +1,1 @@
+This section shows examples of DesignGridLayout automatic support for right-to-left text orientation.

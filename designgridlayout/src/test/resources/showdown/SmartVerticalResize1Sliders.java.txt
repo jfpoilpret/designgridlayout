@@ -1,0 +1,6 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid(label("Label1")).add(field("Field1")).empty();
+	layout.row().grid(label("Power")).addMulti(slider(), slider(), slider());
+	layout.row().center().add(button(), button(), button());
+}

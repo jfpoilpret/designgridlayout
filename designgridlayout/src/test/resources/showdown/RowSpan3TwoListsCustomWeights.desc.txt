@@ -1,0 +1,7 @@
+This example is based on the previous layout example but demonstrates the use of custom vertical weight growth factors.
+
+DesignGridLayout can automatically detect which rows are candidates to grow when the dialog is vertically resized. By default, all rows receive the same amount of extra vertical space during vertical resize, their growth factors are all equal to 1.0. if a vertically resizable component spans several rows, then each spanned row will by default be assigned a weight of 1.0.
+
+This may not always look visually good when vertically resizing a form. In general, you would rather prefer to make all but the last spanned rows not resizable.
+
+The source code slightly defers from the previous example by the argument added to the call to the row() method.

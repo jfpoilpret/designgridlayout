@@ -1,0 +1,4 @@
+This example matches Figure 179 from "Designing Visual Interfaces" (the book by Mullet & Sanno, source of DesignGridLayout original inspiration), originally used to demonstrate use of canonical grids. 
+It does not introduce new feature or API but shows a more real-life example of using DesignGridLayout. It also uses DesignGridLayout "smart vertical vertical" feature.
+
+Once again, this feature comes for free: nothing in the source code needs to indicate that row 2 should grow vertically when the dialog is resized.

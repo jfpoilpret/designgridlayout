@@ -1,0 +1,11 @@
+This section shows an important new feature of DesignGridLayout 1.1: defining components that can span several rows.
+
+This feature is all based on a simple API: the spanRow() method.
+Every time spanRow() is called in a grid row, DesignGridLayout will search for a component in the row above, at the same position (grid and column) as in the current row, the found component will then span the current row.
+This simple API allows to keep a visual feedback of the layout in the code.
+
+Unfortunately, there are situations where DesignGridLayout cannot find a matching component in the row above (eg there is no row above, or the grid in the row above has a different number of columns, hence different width dimensions, thus no component can span next row...). These situations are only detectable at run-time, not compile-time. When this happens, DesignGridLayout "marks" the resulting visual layout by using a special component at the position(s) where spanRow() was called but should not have.
+
+When playing with DesignGridLayout row-span feature, you may find out that you want to assign different vertical growth weights than the default on some rows. This is shown in one of the examples in this section.
+
+TODO no smart height anymore?

@@ -1,0 +1,4 @@
+This example matches Figure 177 from "Designing Visual Interfaces" (the book by Mullet & Sanno, source of DesignGridLayout original inspiration), originally used to demonstrate use of canonical grids. It does not introduce new feature or API but shows a more real-life example of using DesignGridLayout.
+
+The interesting point of the source code is the low number of lines of code required to layout this dialog of average complexity: only 13 (more or less the number of rows in the dialog)!
+Compare this with the required code to layout the same dialog with any other LayoutManager, not only does DesignGridLayout reduces the amount of required code, but it also makes the layout clear just by reading the code.

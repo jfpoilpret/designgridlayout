@@ -1,0 +1,1 @@
+This example is demonstrating a way to follow Karsten Lentzsch (of the JGoodies fame) practice for grouping components in a dialog. It looks the same as one example screenshot used by Karsten.

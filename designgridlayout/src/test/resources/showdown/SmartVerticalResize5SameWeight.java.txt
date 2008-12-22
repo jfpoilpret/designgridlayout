@@ -1,0 +1,10 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid(label("Label2")).add(table());
+	layout.row().grid(label("L3")).add(field("Field31")).empty();
+	layout.row().grid(label("Lbl4")).add(table()).add(table());
+	layout.row().grid(label("L5")).add(field("F5")).add(slider(JSlider.HORIZONTAL));
+	layout.row().grid(label("L6")).add(list()).add(textarea("Wonderful sound"));
+	layout.row().grid(label("Power")).add(slider(JSlider.VERTICAL));
+	layout.row().center().add(button(), button(), button());
+}

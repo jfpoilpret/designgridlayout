@@ -1,0 +1,7 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid().add(button()).add(button());
+	layout.row().grid().add(button()).add(button()).add(button());
+	layout.row().grid().add(button(), 2).add(button());
+	layout.row().grid().add(button()).add(button()).add(button()).empty();
+}

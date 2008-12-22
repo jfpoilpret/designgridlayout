@@ -1,0 +1,8 @@
+This example shows further examples of non grid rows (rows that don't obey the "canonical grids" rules).
+The example shows the three kinds of rows (left-aligned, centered, right-aligned), along with the special "fill" feature for such rows that allows extreme components to take all remaining available space in the row.
+Using this feature is particular useful for using "group separators" as seen in the first row of this example.
+
+Source code shows the use of "fill()" to get this specific behavior; calling fill() means that the "extreme" component(s) of the row will span to the edge of the container. The meaning of "extreme" depends on the kind of row:
+- left-aligned: the rightmost component expands to the right
+- right-aligned: the leftmost component expands to the left
+- centered: the 2 outermost components expand to the left and right respectively

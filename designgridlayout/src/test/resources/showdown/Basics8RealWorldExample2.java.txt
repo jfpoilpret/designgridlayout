@@ -1,0 +1,17 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid(label("Name:")).add(nameField);
+	layout.row().grid(label("Address:"))
+		.add(homeButton).add(officeButton).add(alternateButton);
+	layout.row().grid(label("Street:")).add(streetField);
+	layout.row().grid(label("City/State:")).add(cityField, 2).add(stateField);
+	layout.row().grid(label("Zip:")).add(zipField).empty(2);
+	layout.row().grid(label("Phone/FAX:")).add(phoneField).add(faxField).empty();
+	layout.row().grid(label("E-mail:")).add(emailField, 2).empty();
+	layout.emptyRow();
+	layout.row().grid(label("Interests:"))
+		.add(compilerCheckBox).add(databaseCheckBox).add(productivityCheckBox);
+	layout.row().grid().add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
+	layout.emptyRow();
+	layout.row().center().add(applyButton).add(resetButton);
+}

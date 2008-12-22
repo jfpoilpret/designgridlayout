@@ -1,0 +1,7 @@
+This example implements the "Layout Showdown" initiated by John O'Conner on java.net late 2006. The information about this "contest" can be found there: http://weblogs.java.net/blog/joconner/archive/2006/10/more_informatio.html.
+Note that the implementation posted at that time for DesignGridLayout is not the new one presented here (DesignGridLayout has evolved a lot since 2006 and the new features have helped to better support this particular example).
+
+Although DesignGridLayout does not allow a direct implementation of the exact snapshot required by John, it allows a different -but better visually- implementation.
+
+The source code shows the implementation. It is worth noticing that DesignGridLayout does not handle the whole dialog by itself (the list on the left is not part of the layout managed by DesignGridLayout). This made the implementation a little bit more complex than what we could wish but the whole code is still quite short, straightforward and easy to read.
+Please note that the source code for this example is using a special convention for aligning the calls to grid() on every row with the other rows, in order to better show  the visual aspect of the layout. Although not reauired, this may prove useful during maintenance, however it makes longer lines of code.

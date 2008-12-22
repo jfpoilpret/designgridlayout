@@ -1,0 +1,5 @@
+This third example explains the special case of labels used in grid rows. It is based on the previous example, but it simply sets a label for each grid row.
+
+The peculiarity of labels in grid rows is that they define a specific "label column" which does not obey the rules of canonical grids, ie its width is always constant whatever the total available width of the dialog.
+Moreover, such labels are not added by the usual "add()" method but directly in the "grid()" method that starts a grid row.
+As you can guess, passing no label to "grid()" means there is no label for the current grid row. In this situation, if no row has a label then the "label column" is actually empty (width = 0), otherwise rows without a label will have an empty space in the "label column".

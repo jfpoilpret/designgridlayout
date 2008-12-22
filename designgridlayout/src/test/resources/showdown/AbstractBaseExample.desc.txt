@@ -1,0 +1,15 @@
+Welcome to the DesignGridLayout Showdown!
+
+This application acts both as a tutorial for new DesignGridLayout users, and as a showdown of all major features of DesignGridLayout.
+
+For each example, you can see its source code and run it in its own frame so that you can play with it and check the behavior when resizing the frame.
+
+All examples are grouped into 6 topics:
+1. Basic Examples: step by step tutorial of "basic" DesignGridLayout features
+2. Smart Vertical Resize: illustration of this advanced (but automatic) feature of DesignGridLayout
+3. Multiple Grids: shows how to define forms with several vertical grids, each with its own column of labels
+4. Row Span: illustrate the use of DesignGridLayout 1.1 new feature allowing you to define components spanning several rows
+5. Right to Left Support: shows examples demonstrating DesignGridLayout automatic support for both LTR and RTL orientations
+6. Miscellaneous: gives some more examples about a few remaining DesignGridLayout features which, although less commonly used, may prove useful in some occasions
+
+The source code of all examples is based on a common super-class "AbstractBaseExample" that provides the skeleton and utility methods for all examples; particularly, it provides methods to create buttons, fields, lists... that are often directly embedded in the lines of code that create the layout of examples. It is shown here for the sake of completeness but you normally don't need it to understand the examples presented here.

@@ -1,0 +1,4 @@
+This is almost the same example as above, except it demonstrates that row-span also works when you have several grids in a row.
+This sample creates 2 rows with 2 grids, each with one column; the first grid always contains a field, while the second column contains a list that spans both rows.
+
+The source code is interesting, in that there is no major change, compared with the previous example. Using "spanRow()" is still easy and clear.

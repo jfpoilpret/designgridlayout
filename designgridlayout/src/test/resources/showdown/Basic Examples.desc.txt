@@ -1,0 +1,3 @@
+This section serves as a tutorial to DesignGridLayout for new users.
+
+It contains examples for the main important features of DesignGridLayout: canonical grids, non grid-aligned rows. It also contains more real-life examples of dialogs that are based on these main features of DesignGridLayout.

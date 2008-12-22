@@ -6,6 +6,7 @@
 <suppressions>
   <!-- Remove checks for test files -->
   <suppress checks=".*" files=".*Test\.java$" />
+  <suppress checks=".*" files="showdown.*\.java$" />
 
   <!-- Remove checks for binary files -->
   <suppress checks=".*" files=".*\.png$" />

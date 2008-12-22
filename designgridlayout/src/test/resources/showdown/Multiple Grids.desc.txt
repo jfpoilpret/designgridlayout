@@ -1,0 +1,7 @@
+This section illustrates the capacity of DesignGridLayout to define several vertical groups of components in a form.
+
+Each group defines a "grid" (sometimes also called "sub-grid" because it is part of a "grid row") that is canonical and has an optional column for labels.
+
+At the row level, it is possible to define components that span several grids of the layout. When several grids are spanned this way in a row, they act as a single canonical grid (with the visual balance as normal canonical grids).
+
+This feature makes it easy to define complex forms with a lot of information in a limited space (without this feature, if you definitly need a form with a lot of fields, then you end up with a very high but narrow form).

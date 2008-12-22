@@ -1,0 +1,5 @@
+This is a more complex sample showing multiple grids.
+This sample creates 3 grids and several rows; some rows have exactly 3 grids (each with one label and one field), other rows illustrate "row-spanning" where their fields span 2 or all grids.
+
+The source code is just a bit complicated, due to the number of components in place. The important point in the code is the use of "grid(JLabel lbl, int n)" where the second argument specifies that this grid will span "n" actual grids of the layout. This is used in row #5.
+Please note that the source code for this example is using a special convention for aligning the calls to grid() on every row with the other rows, in order to better show  the visual aspect of the layout. Although not reauired, this may prove useful during maintenance, however it makes longer lines of code.

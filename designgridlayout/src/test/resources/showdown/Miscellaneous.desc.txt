@@ -1,0 +1,1 @@
+This section shows a few additional DesignGridLayout features that were not covered before, because they did not deserved a special section and also because their usage is probably more rare, although useful in some situations.

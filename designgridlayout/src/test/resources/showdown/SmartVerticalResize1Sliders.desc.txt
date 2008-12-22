@@ -1,0 +1,3 @@
+This is the first sample showing the vertical resize of DesignGridLayout. In this example, one row contains 3 identical vertical JSliders which receive all extra space when the dialog is vertically resized.
+
+The source code shows nothing special, or more precisely it shows that you DON'T NEED to do anything special in your code to have this behavior, it comes for free!

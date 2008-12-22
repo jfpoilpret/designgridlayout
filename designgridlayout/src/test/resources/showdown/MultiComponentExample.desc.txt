@@ -1,0 +1,8 @@
+This example shows how to avoid that some components in a grid row get resized when the whole form is resized.
+Please note that normally you would not want to do that, because this could break the visual balance of the whole form.
+This is achieved by defining "multi components" (1 or more components) that will have a fixed size (their preferred size).
+
+In the example, the first row is a grid row with 2 columns, the first of which is a multi-component (made of 2 fields). The second row is a centered row with 2 cells, the first of which is also a multi-component made of 2 fields.
+Note the behavior when horizontally resizing the form.
+
+The source code shows the use of "addMulti()" method (instead of "add()").

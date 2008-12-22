@@ -1,0 +1,10 @@
+This example is based on the previous layout example but demonstrates the use of custom vertical weight growth factors.
+
+DesignGridLayout can automatically detect which rows are candidates to grow when the dialog is vertically resized. By default, all rows receive the same amount of extra vertical space during vertical resize, their growth factors are all equal to 1.0.
+
+You can change the growth factor for any of these rows, and assign it any value greater or equal to 0.0:
+- if 0.0, you specify that, although this row could grow (ie it contains a component that can profitably use extra vertical space), you don't want it to ever grow, it will always keep its preferred height
+- if < 1.0, you specify this row will grow less than other rows
+- if > 1.0, this row will grow more than other rows
+
+The source code slightly defers from the previous example by the argument added to the call to the row() method. The source code also demonstrates that setting a growth factor > 0.0 on a row that has no component which can benefit extra height (second row) is inoperant: that row will not grow anyway!

@@ -1,0 +1,3 @@
+This example matches Figure 178 from "Designing Visual Interfaces" (the book by Mullet & Sanno, source of DesignGridLayout original inspiration), originally used to demonstrate use of canonical grids. It does not introduce new feature or API but shows a more real-life example of using DesignGridLayout.
+
+Once again the number of lines of code required to layout this dialog is incredibly small and the code really straightforward to understand and "visualize".

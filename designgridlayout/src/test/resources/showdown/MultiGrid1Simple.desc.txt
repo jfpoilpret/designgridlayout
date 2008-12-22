@@ -1,0 +1,4 @@
+This is the simplest sample demonstrating DesignGridLayout capability to create in one layout several "grids" of components, each with its own label column.
+This sample creates 2 rows on 2 grids; first row defines both grids with 1 label and one field each, second row has just a label and one field that spans both grids.
+
+The source code is quite straightforward, every call to grid() in a row defines a new grid. The number of grids in the layout is determined by the row that defines the biggest number of grids. The code also shows that if a row defines only one grid, then this grid will, by default, span all grids of the global layout (this is what happens for the second row).

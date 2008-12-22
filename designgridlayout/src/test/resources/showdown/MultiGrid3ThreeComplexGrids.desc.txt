@@ -1,0 +1,4 @@
+This is a very complex sample showing multiple grids. Although it is not lkely that all your dialogs have this look, some of your most complex dialogs may have though.
+This sample creates 3 grids and several rows; inside rows, all grids themselves have various numbers of components; once again, for some rows, some grids span several grids of the global layout.
+
+Although the dialog is very complex, the source code itself is no more complex than need be (ie as complex as the layout itself but no more).

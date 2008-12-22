@@ -1,0 +1,8 @@
+This example shows how to add rows that don't obey the "canonical grids" rules. Such rows can be aligned in different ways: left, right or center. It is based on the previous example.
+This kind of row is particularly useful when you need a row of action buttons.
+In addition, it is often useful to introduce some vertical space between rows to split the dialog into "groups", this is especially useful for rows of action buttons that should be visually separated from the rows of components above.
+
+In special "non grid" rows, all components have exactly the same width (the maximum of preferred widths of all components in the row).
+
+Source code shows how easy it is to add a right row to your layout (of course, it is as simple for left-aligned or centered rows).
+It also demonstrates the use of "emptyRow()" method that automatically introduces the right amount of vertical space between 2 rows (no need for hard-coded pixels values, hence your layout is independent of the resolution of your monitor).

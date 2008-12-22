@@ -1,0 +1,6 @@
+This example shows that, in specific situations, you can change the default margins assigned by DesignGridLayout.
+Please note that normally you would not want to do that, because the margins used by DesignGridLayout are the best margins for the platform (as defined by the current Look & Feel).
+
+Situations where this is useful include "views" that are used in a docked GUI (because docked GUI need to avoid "wasting" real estate so that the user can put all information (views) he wants.
+
+The source code shows the use of one of both "margins()" methods of DesignGridLayout. The passed argument is a ratio that will be applied to the default margins (if 0.0, then there will be no margins will at all). The other "margins()" method (not shown here) allows to specify different ratios for each margin (top, left, bottom, right).

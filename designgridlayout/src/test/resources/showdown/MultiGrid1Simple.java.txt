@@ -1,0 +1,6 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid(label("1")).add(field("X")).grid(label("1")).add(field("Y"));
+	layout.row().grid(label("2")).add(field("XXXXYYYYZZZZ"));
+	layout.row().center().add(button("OK"));
+}

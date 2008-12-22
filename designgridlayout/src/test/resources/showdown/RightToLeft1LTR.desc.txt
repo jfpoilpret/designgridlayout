@@ -1,0 +1,5 @@
+This is an example with various components and rows of all types.
+This example appears there in normal left-to-right orientation for reference.
+
+The source code shows 2 classes, one abstract class (that is also used in the next example) and the concrete class used for the example.
+The relevant bits are the way the example "forces" the text orientation to left-to-right". This is useful for the purpose of the example, but in a real application, text orientation of components is automatically set based on the current Locale used by the application.

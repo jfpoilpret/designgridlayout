@@ -1,0 +1,8 @@
+This is the simplest sample to help you get started with DesignGridLayout concepts of canonical grids. It uses just 3 grid rows, each with 2 identical columns, each containing a button. 
+With this example, you can see that DesignGridLayout takes care of the margins (intervals with the border of the container) and also the gutters (intervals between components). Alignment is always preserved.
+You can resize the dialog to see the behavior: 
+- horizontally, extending size will distribute the extra space evenly to each column, so that alignment and visual balance are always preserved. Note that components will never be resized under their minimum width.
+- vertically, resize will have no effect in this example because all components (only buttons) are not components that can effectively use extra height.
+
+Source code presents 3 different ways to create the same row for the sake of exhaustiveness; however, the first way should be avoided at all costs because it would defeat the powerful use of fluent interfaces in DesignGridLayout.
+The 2 other options are a matter of personal preference.

@@ -1,0 +1,5 @@
+This example shows the same example as before but on right-to-left orientation.
+When you compare with the previous example (left-to-right) you'll see that the whole layout is mirrored according to the y (vertical) axis.
+
+The source code doesn't show the abstract class introduced in the previous example but only the concrete subclass.
+Once again it is important to remember that, in real life, you won't even need any specific code for automatic RTL support which is based on the current Locale used by the application.

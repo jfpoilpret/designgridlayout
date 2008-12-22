@@ -1,0 +1,9 @@
+This section illustrates "Smart Vertical Resize", a unique feature of DesignGridLayout.
+
+This feature makes layouts designed with DesignGridLayout very powerful in terms of behavior during vertical resize.
+
+DesignGridLayout automatically detects which rows in a layout can take vary in height (and hence take advantage of any additional height available during resize), based on the components present in rows:
+- any component embedded inside a JScrollPane
+- a JSlider with VERTICAL orientation
+
+During resize, only such rows will get extra height, other rows have a fixed height. Moreover, vertical resize is smart in the sense that DesignGridLayout will grow components only when the amount of available pixels is matching the space needed to display an entire piece of information (eg a whole JTable row, a whole line of text in JTextArea...) hence DesignGridLayout will not allow displaying "partial rows" in these components during resize.

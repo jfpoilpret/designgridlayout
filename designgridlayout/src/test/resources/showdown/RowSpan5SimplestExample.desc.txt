@@ -1,0 +1,4 @@
+This is the simplest sample demonstrating DesignGridLayout capability to span components across several rows.
+This sample creates 2 rows with 2 columns; the first column always contains a field, while the second column contains a list that spans both rows.
+
+The source code is interesting, it shows that DesignGridLayout inroduced no complex API to bring this feature: it all boils down to the "spanRow()" call. Simply stated, calling spanRow() means that the component at the same position on the previous row will span the current.

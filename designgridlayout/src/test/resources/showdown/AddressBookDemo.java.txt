@@ -1,0 +1,33 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid(label("Last Name"))	.add(lastNameField)	.grid(label("First Name"))	.add(firstNameField);
+	layout.row().grid(label("Phone"))		.add(phoneField)	.grid(label("Email"))		.add(emailField);
+	layout.row().grid(label("Address 1"))	.add(address1Field);
+	layout.row().grid(label("Address 2"))	.add(address2Field);
+	layout.row().grid(label("City"), 1)		.add(cityField);
+	layout.row().grid(label("State"))		.add(stateField)	.grid(label("Postal Code"))	.add(postalField);
+	layout.row().grid(label("Country"), 1)	.add(countryField);
+	layout.emptyRow();
+	layout.row().center().add(newButton).add(deleteButton).add(editButton).add(saveButton).add(cancelButton);
+}
+
+@Override public void go(boolean exitOnClose)
+{
+	...
+	JPanel listPanel = new JPanel();
+	listPanel.setLayout(new BorderLayout());
+	listPanel.add(scroller, BorderLayout.CENTER);
+	listPanel.setPreferredSize(new Dimension(150, 1));
+	listPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+
+	JPanel addressPanel = new JPanel();
+	DesignGridLayout layout = new DesignGridLayout(addressPanel);
+	build(layout);
+
+	// Use BorderLayout to split the layout in the List (left) and the Detail (right)
+	JPanel top = new JPanel();
+	top.setLayout(new BorderLayout());
+	top.add(listPanel, BorderLayout.LINE_START);
+	top.add(addressPanel, BorderLayout.CENTER);
+	...
+}

@@ -1,0 +1,5 @@
+This example is based on the previous "Example - Address Book Demo", but shows it with right-to-left orientation.
+When you compare with the original example, you'll see that the whole layout is mirrored according to the y (vertical) axis.
+
+The source code shows a subclass of the original AddressBookDemo class, which sole purpose is to force the right-to-left orientation.
+Once again it is important to remember that, in real life, such code is useless because RTL support is automatic and is based on the current Locale used by the application.
