@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Frame;
 import java.awt.Point;
 import java.io.File;
 
@@ -98,6 +99,9 @@ abstract class AbstractGuiTest
 	final protected void checkSnapshot(String suffix)
 	{
 //		takeSnapshot(suffix);
+		// To make sure the mouse is not over a component in the frame, which
+		//would change its appearance, hence modify the snapshot.
+		hideMouse();
 		// Take snapshot of current layout
 		if (suffix.length() > 0)
 		{
@@ -119,6 +123,9 @@ abstract class AbstractGuiTest
 	
 	final protected void takeSnapshot(String suffix)
 	{
+		// To make sure the mouse is not over a component in the frame, which
+		//would change its appearance, hence modify the snapshot.
+		hideMouse();
 		// Take snapshot
 		if (suffix.length() > 0)
 		{
@@ -143,6 +150,13 @@ abstract class AbstractGuiTest
 	{
 		_frame.close();
 		_frame.cleanUp();
+	}
+	
+	final private void hideMouse()
+	{
+		Frame frame = _frame.component();
+		_robot.moveMouse(frame, frame.getWidth() + 32, frame.getHeight() + 32);
+		_robot.waitForIdle();
 	}
 	
 	protected interface Initializer<T extends AbstractBaseExample>
