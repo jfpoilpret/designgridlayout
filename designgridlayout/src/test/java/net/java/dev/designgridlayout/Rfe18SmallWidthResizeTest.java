@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Point;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -30,6 +32,7 @@ public class Rfe18SmallWidthResizeTest extends AbstractGuiTest
 		launchGui(AddressBookDemo.class);
 //		takeSnapshot("preferred");
 		checkSnapshot("preferred");
+		frame().moveTo(new Point(0, frame().target.getY()));
 		frame().resizeWidthTo(frame().target.getWidth() * 9 / 10);
 //		takeSnapshot("smaller");
 		checkSnapshot("smaller");

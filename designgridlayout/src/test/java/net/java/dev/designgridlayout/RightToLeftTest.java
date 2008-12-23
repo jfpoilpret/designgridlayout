@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Point;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -58,6 +60,7 @@ public class RightToLeftTest extends AbstractGuiTest
 		launchGui(clazz);
 		checkSnapshot("small");
 //		takeSnapshot("small");
+		frame().moveTo(new Point(0, frame().target.getY()));
 		frame().resizeWidthTo(frame().target.getWidth() * 2);
 		checkSnapshot("large");
 //		takeSnapshot("large");
