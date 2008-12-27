@@ -61,6 +61,11 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExample(Bug26IndexOutBoundsInMultiGrid.class);
 	}
 
+	@Test public void checkBug27Java5WinLAFBadBaselines() throws Exception
+	{
+		checkExample(Bug27Java5WinLAFBadBaselines.class);
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);

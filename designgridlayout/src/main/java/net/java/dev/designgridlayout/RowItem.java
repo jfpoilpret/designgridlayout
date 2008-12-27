@@ -16,8 +16,6 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-import org.jdesktop.layout.Baseline;
-
 // Used for all components added to a SubGrid, real or spanned
 // Instances are mutable but only under some conditions
 class RowItem implements IRowItem
@@ -70,7 +68,7 @@ class RowItem implements IRowItem
 	
 	public int baseline()
 	{
-		return Baseline.getBaseline(component());
+		return BaselineHelper.getBaseline(component());
 	}
 
 	public void initUsableVgap(int vgap)

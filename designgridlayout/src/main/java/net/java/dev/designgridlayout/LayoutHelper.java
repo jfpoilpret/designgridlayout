@@ -18,8 +18,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import org.jdesktop.layout.Baseline;
-
 final class LayoutHelper
 {
 	LayoutHelper(HeightGrowPolicy tester, int parentWidth, boolean rtl)
@@ -88,7 +86,7 @@ final class LayoutHelper
 		}
 		component.setSize(width, height + usedExtraHeight);
 
-		int baseline = Baseline.getBaseline(component);
+		int baseline = BaselineHelper.getBaseline(component);
 		int yy = 0;
 		if (baseline > 0)
 		{

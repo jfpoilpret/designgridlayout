@@ -16,8 +16,6 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-import org.jdesktop.layout.Baseline;
-
 // Used for all components added to a non-grid row
 class NonGridRowItem implements IRowItem
 {
@@ -50,7 +48,7 @@ class NonGridRowItem implements IRowItem
 	
 	public int baseline()
 	{
-		return Baseline.getBaseline(_component);
+		return BaselineHelper.getBaseline(_component);
 	}
 
 	public void initUsableVgap(int vgap)
