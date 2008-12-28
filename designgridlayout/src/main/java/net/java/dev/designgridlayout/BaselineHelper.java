@@ -45,7 +45,17 @@ final class BaselineHelper
 	// CSOFF: ReturnCountCheck
 	static private int getBaseline(Component comp, int width, int height)
 	{
-		// Handle special cases that swing-layout does not address well
+		if (!(comp instanceof JComponent))
+		{
+			// Heavyweight AWT Component is not supported
+			return -1;
+		}
+		if (_isJava6)
+		{
+			// No required workaround for Java >= 6
+			return Baseline.getBaseline((JComponent) comp, width, height);
+		}
+		// Handle special cases that swing-layout does not address well in Java5
 		if (comp instanceof JScrollPane)
 		{
 			return getScrollPaneBaseline((JScrollPane) comp, width, height);
@@ -59,13 +69,9 @@ final class BaselineHelper
 			Dimension size = comp.getPreferredSize();
 			return ((MultiComponent) comp).getBaseline(size.width, size.height);
 		}
-		else if (comp instanceof JComponent)
-		{
-			return Baseline.getBaseline((JComponent) comp, width, height);
-		}
 		else
 		{
-			return -1;
+			return Baseline.getBaseline((JComponent) comp, width, height);
 		}
 	}
 	// CSON: ReturnCountCheck
@@ -161,4 +167,21 @@ final class BaselineHelper
 		return -1;
 	}
 	// CSON: ParameterAssignmentCheck
+	
+	static private final boolean _isJava6;
+	
+	static
+	{
+		boolean isJava6;
+		try
+		{
+			Component.class.getMethod("getBaseline", int.class, int.class);
+			isJava6 = true;
+		}
+		catch (Exception e)
+		{
+			isJava6 = false;
+		}
+		_isJava6 = isJava6;
+	}
 }
