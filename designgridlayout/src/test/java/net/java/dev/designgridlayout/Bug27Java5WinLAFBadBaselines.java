@@ -17,7 +17,6 @@ package net.java.dev.designgridlayout;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 public class Bug27Java5WinLAFBadBaselines extends AbstractBaseExample
 {
@@ -27,53 +26,17 @@ public class Bug27Java5WinLAFBadBaselines extends AbstractBaseExample
 		{
 			public void run()
 			{
-//				setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				Bug27Java5WinLAFBadBaselines example = new Bug27Java5WinLAFBadBaselines();
 				example.go(true);
-				example.displayBaselines("after show:");
 			}
 		});
 	}
 	
-	static public void setLookAndFeel(String laf)
-	{
-		try
-		{
-			UIManager.setLookAndFeel(laf);
-//			if (_frame != null)
-//			{
-//				_frame.pack();
-//			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
 	@Override protected void build(DesignGridLayout layout)
 	{
 		layout.row().grid(label).add(list);
 	}
 	
-	@Override protected void prePack()
-	{
-		displayBaselines("prePack:");
-	}
-	
-	@Override protected void preDisplay()
-	{
-		displayBaselines("preDisplay:");
-	}
-
-	protected void displayBaselines(String title)
-	{
-		System.out.println(title);
-		System.out.println("label = " + BaselineHelper.getBaseline(label));
-		System.out.println("list = " + BaselineHelper.getBaseline(list));
-		System.out.println();
-	}
-
 	final private JLabel label = label("Label:");
 	final private JScrollPane list = list();
 }
