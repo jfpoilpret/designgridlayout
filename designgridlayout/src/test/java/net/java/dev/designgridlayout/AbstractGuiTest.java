@@ -18,6 +18,8 @@ import java.awt.Frame;
 import java.awt.Point;
 import java.io.File;
 
+import javax.swing.SwingUtilities;
+
 import org.fest.swing.core.Robot;
 import org.fest.swing.core.RobotFixture;
 import org.fest.swing.fixture.FrameFixture;
@@ -48,11 +50,42 @@ abstract class AbstractGuiTest
 		_frame = findFrame(clazz.getSimpleName()).withTimeout(2000).using(_robot);
 		_screenshot = new ScreenshotTaker();
 	}
-
+	
 	final protected <T extends AbstractBaseExample> void launchGui(Class<T> clazz) 
 		throws Exception
 	{
 		launchGui(clazz, null);
+	}
+	
+	final protected void checkExampleFromEDT(
+		final Class<? extends AbstractBaseExample> clazz) throws Exception
+	{
+		final ExceptionHolder holder = new ExceptionHolder();
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
+					AbstractBaseExample example = clazz.newInstance();
+					_example = example;
+					_example.go(false);
+				}
+				catch (Exception e)
+				{
+					holder.setException(e);
+				}
+			}
+		});
+		_robot = RobotFixture.robotWithCurrentAwtHierarchy();
+		_frame = findFrame(clazz.getSimpleName()).withTimeout(2000).using(_robot);
+		_screenshot = new ScreenshotTaker();
+		if (holder.getException() != null)
+		{
+			throw holder.getException();
+		}
+//		takeSnapshot();
+		checkSnapshot();
 	}
 
 	// Note: don't use @DataProvider because all tests appear under the same name
@@ -162,6 +195,21 @@ abstract class AbstractGuiTest
 	protected interface Initializer<T extends AbstractBaseExample>
 	{
 		public void init(T instance);
+	}
+	
+	static class ExceptionHolder
+	{
+		public void setException(Exception e)
+		{
+			_exception = e;
+		}
+		
+		public Exception getException()
+		{
+			return _exception;
+		}
+		
+		private Exception _exception = null;
 	}
 
 	static final public String REFERENCE_SCREENSHOT_PATH = 

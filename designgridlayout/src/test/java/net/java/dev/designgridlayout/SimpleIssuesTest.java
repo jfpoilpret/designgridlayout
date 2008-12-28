@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import javax.swing.SwingUtilities;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -64,6 +66,16 @@ public class SimpleIssuesTest extends AbstractGuiTest
 	@Test public void checkBug27Java5WinLAFBadBaselines() throws Exception
 	{
 		checkExample(Bug27Java5WinLAFBadBaselines.class);
+	}
+
+	@Test public void checkBug28aBadHeightWhenStartedFromEDT() throws Exception
+	{
+		checkExampleFromEDT(Bug28aBadHeightWhenStartedFromEDT.class);
+	}
+
+	@Test public void checkBug28bBadHeightWhenStartedFromEDT() throws Exception
+	{
+		checkExampleFromEDT(Bug28bBadHeightWhenStartedFromEDT.class);
 	}
 
 	@Test public void checkPanelWithoutBorder() throws Exception
