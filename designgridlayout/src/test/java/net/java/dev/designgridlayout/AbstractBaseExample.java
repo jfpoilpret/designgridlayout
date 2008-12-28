@@ -33,7 +33,7 @@ public abstract class AbstractBaseExample
 	protected JFrame _frame = null;
 	protected JButton _lastCreatedButton = null;
 
-	protected JFrame frame()
+	public JFrame frame()
 	{
 		return _frame;
 	}

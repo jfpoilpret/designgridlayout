@@ -44,6 +44,7 @@ final class Node
 		{
 			AbstractBaseExample example = _clazz.newInstance();
 			example.go(false);
+			example.frame().setTitle(_name);
 		}
 		catch (Exception e)
 		{
