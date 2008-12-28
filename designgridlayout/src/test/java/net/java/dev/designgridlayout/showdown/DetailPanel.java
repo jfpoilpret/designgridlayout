@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout.showdown;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,6 +40,7 @@ class DetailPanel extends JPanel
 		JScrollPane descScroller = new JScrollPane(_txpDescription);
 		descScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
+		_txpSource.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		_txpSource.setEditable(false);
 		_txpSource.setLineWrap(false);
 		_txpSource.setTabSize(4);
