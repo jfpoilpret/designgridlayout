@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 class JScrollPaneHeightGrowPolicy 
@@ -27,14 +28,21 @@ class JScrollPaneHeightGrowPolicy
 	@Override protected int componentComputeExtraHeight(JScrollPane component, int extraHeight)
 	{
 		int unit = component.getVerticalScrollBar().getUnitIncrement(+1);
-		if (unit <= 0)
+		// Fix for issue #28
+		// TODO prepare a more extensible fix that can deal with any specific
+		// component
+		if (unit == 0 && component.getViewport().getView() instanceof JList)
 		{
-			return extraHeight;
+			JList list = (JList) component.getViewport().getView();
+			int visibleRows = list.getVisibleRowCount();
+			if (visibleRows > 0)
+			{
+				unit = list.getPreferredScrollableViewportSize().height / visibleRows;
+			}
 		}
-		else
-		{
-			// Return an integral number of units pixels
-			return (extraHeight / unit) * unit;
-		}
+		// Make sure unit cannot be <= 0
+		unit = Math.max(1, unit);
+		// Return an integral number of units pixels
+		return (extraHeight / unit) * unit;
 	}
 }
