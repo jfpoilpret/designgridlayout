@@ -14,18 +14,13 @@
 
 package net.java.dev.designgridlayout.showdown;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -62,20 +57,22 @@ import net.java.dev.designgridlayout.SmartVerticalResize5SameWeight;
 
 public class Examples extends JFrame
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
+		// First ask for the LAF to use (modal dialog)
+		SwingUtilities.invokeAndWait(new Runnable()
+		{
+			public void run()
+			{
+				LafChooserDialog dialog = new LafChooserDialog();
+				dialog.setVisible(true);
+			}
+		});
+		// Then show the Examples main frame
 		SwingUtilities.invokeLater(new Runnable()
 		{
 			public void run()
 			{
-				try
-				{
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
 				Examples examples = new Examples();
 				examples.pack();
 				examples.setLocationRelativeTo(null);
@@ -90,6 +87,26 @@ public class Examples extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// Initialize tree
+		initTree();
+
+		// Add listeners
+		initListeners();
+		
+		// Further initialization
+		_tree.setSelectionRow(0);
+		_tree.setShowsRootHandles(false);
+		_tree.setCellRenderer(new NodeRenderer());
+		
+		// Layout frame
+		_split.setLeftComponent(_tree);
+		_split.setRightComponent(_detail);
+		_split.setDividerLocation(_tree.getPreferredSize().width);
+		
+		setContentPane(_split);
+	}
+
+	private void initTree()
+	{
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 		DefaultMutableTreeNode node;
 
@@ -177,8 +194,10 @@ public class Examples extends JFrame
 		{
 			_tree.expandRow(i);
 		}
-
-		// Add listeners
+	}
+	
+	private void initListeners()
+	{
 		_tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener()
 		{
 			public void valueChanged(TreeSelectionEvent e)
@@ -211,47 +230,6 @@ public class Examples extends JFrame
 				}
 			}
 		});
-		_tree.setSelectionRow(0);
-		_tree.setShowsRootHandles(false);
-		_tree.setCellRenderer(new NodeRenderer());
-		
-		// Layout frame
-		_split.setLeftComponent(_tree);
-		_split.setRightComponent(_detail);
-		
-		setContentPane(_split);
-	}
-
-	public JButton launch(String name)
-	{
-		Action action = new AbstractAction(name)
-		{
-			private static final long serialVersionUID = 1L;
-
-			public void actionPerformed(ActionEvent e)
-			{
-				// CSOFF: IllegalCatch
-				try
-				{
-					Class<?> c = Class.forName(
-						"net.java.dev.designgridlayout." + getValue(Action.NAME));
-					Class<? extends AbstractBaseExample> clazz = 
-						c.asSubclass(AbstractBaseExample.class);
-					AbstractBaseExample example = clazz.newInstance();
-					example.go(false);
-				}
-				catch (Exception e1)
-				{
-					// CSOFF: GenericIllegalRegexp
-					e1.printStackTrace();
-					// CSON: GenericIllegalRegexp
-				}
-				// CSON: IllegalCatch
-			}
-		};
-		JButton button = new JButton(action);
-		button.setName(name);
-		return button;
 	}
 	
 	final private JSplitPane _split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
