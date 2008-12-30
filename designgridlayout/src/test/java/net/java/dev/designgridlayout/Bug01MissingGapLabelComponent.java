@@ -29,11 +29,4 @@ public class Bug01MissingGapLabelComponent extends AbstractBaseExample
 		layout.row().grid(label("First label")).add(field("First field"));
 		layout.row().grid(label("Second label")).add(field("2nd field"));
 	}
-
-	@Override protected JTextField field(String text)
-	{
-		JTextField field = super.field(text);
-		field.setEnabled(false);
-		return field;
-	}
 }

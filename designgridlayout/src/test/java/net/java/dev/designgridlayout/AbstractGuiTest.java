@@ -84,7 +84,6 @@ abstract class AbstractGuiTest
 		{
 			throw holder.getException();
 		}
-//		takeSnapshot();
 		checkSnapshot();
 	}
 
@@ -94,7 +93,6 @@ abstract class AbstractGuiTest
 		throws Exception
 	{
 		launchGui(clazz);
-//		takeSnapshot();
 		checkSnapshot();
 	}
 	
@@ -164,6 +162,8 @@ abstract class AbstractGuiTest
 		{
 			suffix = "-" + suffix;
 		}
+//		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
+//			_example.getClass().getSimpleName() + suffix + ".png";
 		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
 			_example.getClass().getSimpleName() + suffix + "-org.png";
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
@@ -188,7 +188,9 @@ abstract class AbstractGuiTest
 	final private void hideMouse()
 	{
 		Frame frame = _frame.component();
-		_robot.moveMouse(frame, frame.getWidth() + 32, frame.getHeight() + 32);
+		_robot.moveMouse(frame, frame.getWidth() + 2, 0);
+		_robot.waitForIdle();
+		_robot.moveMouse(frame, frame.getWidth() + 2, frame.getHeight() + 2);
 		_robot.waitForIdle();
 	}
 	

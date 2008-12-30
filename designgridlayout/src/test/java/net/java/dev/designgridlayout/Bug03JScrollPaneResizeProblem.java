@@ -35,10 +35,5 @@ public class Bug03JScrollPaneResizeProblem extends AbstractBaseExample
 //		layout.row().center().add(button(), button());
 	}
 
-	@Override protected void preDisplay()
-	{
-		_table.requestFocusInWindow();
-	}
-
 	private final JTable _table = new JTable(10, 2);
 }

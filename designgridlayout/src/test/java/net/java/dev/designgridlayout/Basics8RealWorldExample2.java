@@ -72,10 +72,5 @@ public class Basics8RealWorldExample2 extends AbstractBaseExample
 	}
 	// CSON: MagicNumber
 
-	@Override protected void preDisplay()
-	{
-		applyButton.requestFocusInWindow();
-	}
-
 	private JButton applyButton;
 }

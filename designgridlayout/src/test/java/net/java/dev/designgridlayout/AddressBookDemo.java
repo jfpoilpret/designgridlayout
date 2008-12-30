@@ -86,7 +86,6 @@ public class AddressBookDemo extends AbstractBaseExample
 		_frame.add(top);
 		prePack();
 		_frame.pack();
-		preDisplay();
 		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
 	}

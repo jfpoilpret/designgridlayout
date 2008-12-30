@@ -62,11 +62,6 @@ public class Basics9RealWorldExample3 extends AbstractBaseExample
 		layout.row().left().add(group).add(new JSeparator()).fill();
 	}
 	
-	@Override protected void preDisplay()
-	{
-		status.requestFocusInWindow();
-	}
-
 	@Override public String name()
 	{
 		return "Skeleton";

@@ -30,10 +30,5 @@ public class RowSpan5SimplestExample extends AbstractBaseExample
 		layout.row().grid(label("Label 2:")).add(field("field2")).spanRow();
 	}
 	
-	@Override protected void preDisplay()
-	{
-		_list.requestFocusInWindow();
-	}
-	
 	final private JScrollPane _list = list();
 }
