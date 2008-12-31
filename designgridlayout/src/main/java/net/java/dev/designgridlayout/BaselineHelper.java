@@ -170,6 +170,7 @@ final class BaselineHelper
 	
 	static private final boolean _isJava6;
 	
+	// CSOFF: IllegalCatchCheck
 	static
 	{
 		boolean isJava6;
@@ -184,4 +185,5 @@ final class BaselineHelper
 		}
 		_isJava6 = isJava6;
 	}
+	// CSON: IllegalCatchCheck
 }
