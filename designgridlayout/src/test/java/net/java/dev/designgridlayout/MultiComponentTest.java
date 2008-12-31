@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Point;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -25,15 +23,8 @@ public class MultiComponentTest extends AbstractGuiTest
 	@Test public void checkMultiComponentResize()
 		throws Exception
 	{
-		launchGui(MultiComponentExample.class);
-		checkSnapshot();
-		frame().moveTo(new Point(0, frame().target.getY()));
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-1");
-		frame().resizeWidthTo(frame().target.getWidth() * 2 / 3);
-		checkSnapshot("small-2");
-		frame().resizeWidthTo(frame().target.getWidth() * 5 / 2);
-		checkSnapshot("big");
+		checkExampleAndResizeWidth(
+			MultiComponentExample.class, 0.666667, 0.666667, 2.5);
 	}
 	
 	@Test public void checkMultiComponentRealExample() throws Exception

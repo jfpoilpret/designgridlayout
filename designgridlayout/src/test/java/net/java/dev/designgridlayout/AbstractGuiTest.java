@@ -105,20 +105,20 @@ abstract class AbstractGuiTest
 		for (int i = 1; i <= steps; i++)
 		{
 			frame().resizeHeightTo(frame().target.getHeight() + increment);
-			checkSnapshot("extended-size-" + (i * increment));
+			checkSnapshot("resize-" + (i * increment));
 		}
 	}
 
 	final protected void checkExampleAndResizeWidth(
-		Class<? extends AbstractBaseExample> clazz, double ratio, int steps) throws Exception
+		Class<? extends AbstractBaseExample> clazz, double... ratios) throws Exception
 	{
 		launchGui(clazz);
 		checkSnapshot("pref-size");
 		frame().moveTo(new Point(0, frame().target.getY()));
-		for (int i = 1; i <= steps; i++)
+		for (int i = 0; i < ratios.length; i++)
 		{
-			frame().resizeWidthTo((int) (frame().target.getWidth() * ratio));
-			checkSnapshot("extended-size-" + i);
+			frame().resizeWidthTo((int) (frame().target.getWidth() * ratios[i]));
+			checkSnapshot("resize-" + (i + 1));
 		}
 	}
 
