@@ -69,7 +69,7 @@ final class ComponentHelper
 	{
 		for (IRowItem item: items)
 		{
-			if (policy.canGrowHeight(item.component()))
+			if (policy.canGrowHeight(item.component()) && item.isLastSpanRow())
 			{
 				return false;
 			}

@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JScrollPane;
-
 public class RowSpan6SimpleExampleOnTwoGrids extends AbstractBaseExample
 {
 	public static void main(String[] args)
@@ -26,9 +24,7 @@ public class RowSpan6SimpleExampleOnTwoGrids extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().grid(label("Label 1:")).add(field("field1")).grid(label("List:")).add(_list);
+		layout.row().grid(label("Label 1:")).add(field("field1")).grid(label("List:")).add(list());
 		layout.row().grid(label("Label 2:")).add(field("field2")).grid().spanRow();
 	}
-	
-	final private JScrollPane _list = list();
 }

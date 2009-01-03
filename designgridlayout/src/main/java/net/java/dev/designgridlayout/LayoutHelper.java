@@ -44,6 +44,7 @@ final class LayoutHelper
 		_y = y;
 	}
 	
+	// Called for mutiple row-span components
 	void setHeight(int rowIndex, JComponent component, int spannedRows)
 	{
 		// Calculate the total available height
@@ -57,19 +58,22 @@ final class LayoutHelper
 				availableHeight += row.vgap();
 			}
 		}
-		// Fix for Issue10a TC
-		//FIXME has an impact of "smart vertical resize" (check Issue10 TC)
-		// Maybe should be settable? How? Best Effort?
-//		int height = component.getPreferredSize().height;
-//		int usedExtraHeight = 0;
-//		if (_tester.canGrowHeight(component))
-//		{
-//			// Checks how much extra height this component can really use
-//			usedExtraHeight = 
-//				_tester.computeExtraHeight(component, availableHeight - height);
-//		}
-//		component.setSize(component.getWidth(), height + usedExtraHeight);
-		component.setSize(component.getWidth(), availableHeight);
+		// Keep smart vertical resize behavior in any case
+		//TODO check this also works with other JComponents (eg a resizable picture)
+		int height = component.getPreferredSize().height;
+		int usedExtraHeight = 0;
+		if (MarkerHelper.isMarker(component))
+		{
+			// spanRow() error markers are special, they must take all available height
+			usedExtraHeight = availableHeight - height;
+		}
+		else if (_tester.canGrowHeight(component))
+		{
+			// Checks how much extra height this component can really use
+			usedExtraHeight = 
+				_tester.computeExtraHeight(component, availableHeight - height);
+		}
+		component.setSize(component.getWidth(), height + usedExtraHeight);
 	}
 	
 	// Returns the actual extra height used by this component

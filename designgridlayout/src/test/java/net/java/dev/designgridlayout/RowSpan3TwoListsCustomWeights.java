@@ -24,11 +24,11 @@ public class RowSpan3TwoListsCustomWeights extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row(0.0).grid(label("lbl1")).add(field("field1")).add(list());
-		layout.row().grid(label("lbl3")).add(field("field3")).spanRow();
+		layout.row().grid(label("lbl1")).add(field("field1")).add(list());
+		layout.row(0.0).grid(label("lbl3")).add(field("field3")).spanRow();
 		layout.row().grid(label("lbl4")).add(field("field4"));
 		
-		layout.row(0.0).grid(label("lbl5")).add(list(), 2).add(field("field6"));
+		layout.row().grid(label("lbl5")).add(list(), 2).add(field("field6"));
 		layout.row().grid().spanRow().add(field("field7"));
 
 		layout.row().grid(label("lbl8")).empty().add(field("field8"));

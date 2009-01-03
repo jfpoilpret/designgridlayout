@@ -28,12 +28,20 @@ final class MarkerHelper
 	static JComponent createMarker(int span, String tooltip)
 	{
 		JLabel marker = new JLabel(MARKER_LABEL);
+		marker.setName(MARKER_NAME);
 		marker.setHorizontalAlignment(JLabel.CENTER);
 		marker.setOpaque(true);
 		marker.setBackground(Color.RED);
 		marker.setToolTipText(tooltip);
 		return marker;
 	}
+	
+	static boolean isMarker(JComponent component)
+	{
+		return		(component instanceof JLabel)
+				&&	(MARKER_NAME.equals(component.getName()));
+	}
 
 	static final private String MARKER_LABEL = "spanRow()"; 
+	static final private String MARKER_NAME = "DesignGridLayout.spanRow-Marker"; 
 }
