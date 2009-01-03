@@ -1,7 +1,7 @@
 This is a more complex example, helping show DesignGridLayout "smart vertical resize".
 In this example, 4 rows have components that can take advantage of extra height, 3 of these have components that are not interested in receiving ANY number of pixels but rather a defined amount which varies with every component. Those components are: JTable, JList, JTextArea and the vertical JSlider.
 
-If you resize the dialog, you'll see that eg JTable grow one full row at a time, so that the dialog never displays a table with a partial row.
+If you resize the dialog, you'll see that eg JTable grows one full row at a time, so that the dialog never displays a table with a partial row.
 
 Once again, the source code shows nothing special, because nothing special is needed to get this behavior, it works out of the box!
 Indeed, DesignGridLayout can automatically detect those rows that have this kind of components which can accept additional height and can give them exactly the height they need, never less nor more.

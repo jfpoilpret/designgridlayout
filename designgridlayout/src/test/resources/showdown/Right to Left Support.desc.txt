@@ -1,1 +1,3 @@
 This section shows examples of DesignGridLayout automatic support for right-to-left text orientation.
+
+This feature eases the internationalization effort of your application to support special languages such as Arabic or Hebrew, which are read from right to left.

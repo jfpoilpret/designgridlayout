@@ -1,5 +1,5 @@
 This example illustrates examples where "spanRow()" is called in a location that is incompatible with the way the above row has been setup.
 
-These situations are only detectable at run-time, not compile-time. When this happens, DesignGridLayout "marks" the resulting visual layout by using a special component at the position(s) where spanRow() was called but should not have. These marks are red "spanRow()" labels with a red background and a tooltip explaining the reason why spanRow() could not work in this case.
+These situations are only detectable at run-time, not compile-time. When this happens, DesignGridLayout "marks" the resulting visual layout by using a special component at the position(s) where spanRow() was called but should not have. These marks are "spanRow()" labels with a red background and a tooltip explaining the reason why spanRow() could not work in this case.
 
 The source code shows all bad usage examples of "spanRow()", don't look at it!

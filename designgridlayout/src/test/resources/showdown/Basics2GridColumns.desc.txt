@@ -1,10 +1,10 @@
 This second example shows a slightly more complex layout with 4 canonical rows. 
-For the sake of simplicity, the layout is based exclusively on buttons (hecen is not much realistic).
+For the sake of simplicity, the layout is based exclusively on buttons (hence is not much realistic).
 
 Rows have different numbers of columns (2, 3 and 4). 
 The third row demonstrates a component that spans 2 columns.
 The last row shows an empty column.
 
-With this example, you can see that the canonical grids concept used by DesignGridLayout that although all rows have a different number of columns or components, they still reamin visually balanced, even if the dialog is horizontally resized.
+With this example, you can see the canonical grids concept used by DesignGridLayout in action: although all rows have a different number of columns or components, they still reamin visually balanced, even if the dialog is horizontally resized.
 
 In the source code, you will see that the number of columns in a grid row is determined by the number of calls to add() and empty() along with the optional "span" value  (1 by default) passed to these methods.

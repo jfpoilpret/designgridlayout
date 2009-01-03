@@ -2,7 +2,7 @@ This section illustrates "Smart Vertical Resize", a unique feature of DesignGrid
 
 This feature makes layouts designed with DesignGridLayout very powerful in terms of behavior during vertical resize.
 
-DesignGridLayout automatically detects which rows in a layout can take vary in height (and hence take advantage of any additional height available during resize), based on the components present in rows:
+DesignGridLayout automatically detects which rows in a layout can vary in height (and hence take advantage of any additional height available during resize), based on the components present in rows:
 - any component embedded inside a JScrollPane
 - a JSlider with VERTICAL orientation
 

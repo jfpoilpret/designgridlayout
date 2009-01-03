@@ -24,16 +24,11 @@ public abstract class AbstractBaseExample
 		_frame.add(top);
 		prePack();
 		_frame.pack();
-		preDisplay();
 		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
 	}
 
 	protected void prePack()
-	{
-	}
-
-	protected void preDisplay()
 	{
 	}
 
@@ -44,8 +39,7 @@ public abstract class AbstractBaseExample
 	
 	protected JButton button(String text)
 	{
-		_lastCreatedButton = new JButton(text);
-		return _lastCreatedButton;
+		return new JButton(text);
 	}
 	
 	protected JLabel label(int num)
@@ -109,5 +103,6 @@ public abstract class AbstractBaseExample
 		return getClass().getSimpleName();
 	}
 
+	// Member variables & constants go there
 	...
 }

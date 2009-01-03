@@ -1,4 +1,4 @@
-This is a slightly more complex example including 2 lists each spanning atwo different pairs of rows.
-The example also includes an empty column spanning two rows. Note that this is capability does not really bring any advantage, compared with using "empty()" once on each row.
+This is a slightly more complex example including 2 lists each spanning two different pairs of rows.
+The example also includes an empty column spanning two rows. Note that this capability does not really bring any advantage, compared with using "empty()" once on each row.
 
 The source code is still as straightforward.
