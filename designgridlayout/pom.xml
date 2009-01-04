@@ -35,6 +35,7 @@
 	
 	<properties>
 		<javaVersion>1.5</javaVersion>
+		<screenshots>false</screenshots>
 	</properties>
 
 	<build>
