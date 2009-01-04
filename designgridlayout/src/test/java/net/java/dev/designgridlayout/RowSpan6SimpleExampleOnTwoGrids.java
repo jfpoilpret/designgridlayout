@@ -1,4 +1,4 @@
-//  Copyright 2008 Jason Aaron Osgood, Jean-Francois Poilpret
+//  Copyright 2009 Jason Aaron Osgood, Jean-Francois Poilpret
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
