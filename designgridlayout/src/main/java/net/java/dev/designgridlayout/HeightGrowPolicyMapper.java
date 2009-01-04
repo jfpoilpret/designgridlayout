@@ -47,20 +47,26 @@ class HeightGrowPolicyMapper implements HeightGrowPolicy
 	
 	protected final HeightGrowPolicy findPolicy(Component component)
 	{
+		// Lookup the most specialized policy for this component based on
+		// the class hierarchy of that component
 		Class<? extends Component> clazz = component.getClass();
 		while (true)
 		{
-			HeightGrowPolicy policy = _policies.get(component.getClass());
+			HeightGrowPolicy policy = _policies.get(clazz);
 			if (policy != null)
 			{
 				return policy;
 			}
 			if (clazz == Component.class)
 			{
-				return null;
+				break;
 			}
 			clazz = clazz.getSuperclass().asSubclass(Component.class);
 		}
+		//TODO Not sure this is necessary (not until this API is made open, if ever)
+		// If no policy was found for concrete classed in this component 
+		// class hierarchy, then search for a policy for implemented interfaces 
+		return null;
 	}
 
 	protected final Map<Class<? extends Component>, HeightGrowPolicy> _policies =

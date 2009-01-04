@@ -405,20 +405,18 @@ public class DesignGridLayout implements LayoutManager
 			List<? extends IRowItem> items2 = _rows.get(nthRow + 1).items();
 			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
-			for (int nthItems1 = 0; nthItems1 < items1.size(); nthItems1++)
+			for (IRowItem item1: items1)
 			{
-				IRowItem item1 = items1.get(nthItems1);
 				if (item1.isLastSpanRow())
 				{
 					JComponent upper = item1.component();
 					int aboveHeight = upper.getPreferredSize().height;
-	
-					for (int nthItems2 = 0; nthItems2 < items2.size(); nthItems2++)
+
+					for (IRowItem item2: items2)
 					{
-						IRowItem item2 = items2.get(nthItems2);
 						if (item2.isFirstSpanRow())
 						{
-							JComponent lower = items2.get(nthItems2).component();
+							JComponent lower = item2.component();
 							int belowHeight = lower.getPreferredSize().height;
 		
 							int gap = layoutStyle.getPreferredGap(
@@ -505,14 +503,11 @@ public class DesignGridLayout implements LayoutManager
 		{
 			for (IRowItem item: row.items())
 			{
-				if (item.isFirstSpanRow() && !item.isLastSpanRow())
+				if (item.isFirstSpanRow())
 				{
-					int vgap = 0;
-					for (int i = 0; i < item.rowSpan() - 1; i++)
-					{
-						vgap += _rows.get(rowIndex + i).vgap();
-					}
-					item.initUsableVgap(vgap);
+					List<AbstractRow> spannedRows = 
+						_rows.subList(rowIndex, rowIndex + item.rowSpan());
+					item.setSpannedRows(spannedRows);
 				}
 			}
 			rowIndex++;

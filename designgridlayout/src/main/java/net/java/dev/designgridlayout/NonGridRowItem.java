@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import java.util.List;
+
 import javax.swing.JComponent;
 
 // Used for all components added to a non-grid row
@@ -51,10 +53,10 @@ class NonGridRowItem implements IRowItem
 		return BaselineHelper.getBaseline(_component);
 	}
 
-	public void initUsableVgap(int vgap)
+	public void setSpannedRows(List<AbstractRow> rows)
 	{
 	}
-
+	
 	public boolean isFirstSpanRow()
 	{
 		return true;

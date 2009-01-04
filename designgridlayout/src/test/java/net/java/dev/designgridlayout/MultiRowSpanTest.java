@@ -55,6 +55,11 @@ public class MultiRowSpanTest extends AbstractGuiTest
 		checkExample(RowSpan4ErrorMarkers.class);
 	}
 	
+	@Test public void checkVGapsAlwaysCorrect() throws Exception
+	{
+		checkExample(Rfe10CheckVGaps.class);
+	}
+	
 	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz)
 		throws Exception
 	{

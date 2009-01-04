@@ -14,20 +14,27 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.List;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
-import javax.swing.JComponent;
-
-interface IRowItem
+public class Rfe10CheckVGaps extends AbstractBaseExample
 {
-	public JComponent component();
-	public int preferredHeight();
-	public int minimumWidth();
-	public int preferredWidth();
-	public int baseline();
+	public static void main(String[] args)
+	{
+		Rfe10CheckVGaps example = new Rfe10CheckVGaps();
+		example.go(true);
+	}
 
-	public void setSpannedRows(List<AbstractRow> rows);
-	public int rowSpan();
-	public boolean isFirstSpanRow();
-	public boolean isLastSpanRow();
+	@Override protected void build(DesignGridLayout layout)
+	{
+		layout.row().grid(label("Label1")).add(field("field1")).add(list());
+		layout.row().grid(label("Label2")).add(field("field2")).spanRow();
+	}
+
+	@Override protected JScrollPane list()
+	{
+		JScrollPane list = super.list();
+		((JList) list.getViewport().getView()).setVisibleRowCount(3);
+		return list;
+	}
 }

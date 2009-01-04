@@ -14,6 +14,9 @@
 
 package net.java.dev.designgridlayout;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.swing.JComponent;
 
 // Used for all components added to a SubGrid, real or spanned
@@ -39,23 +42,34 @@ class RowItem implements IRowItem
 	{
 		return (_spanPrevious != null ? _spanPrevious.component() : _component);
 	}
-	
+
+	// TODO optimize computation here (lazy evaluation with cache)
 	public int preferredHeight()
 	{
-		return (_spanPrevious != null ? _spanPrevious.preferredHeight() : calculateHeight());
+		if (_spanPrevious == null && _spanNext == null)
+		{
+			// Component spanning no rows at all
+			return _component.getPreferredSize().height;
+		}
+		else if (_spanNext == null)
+		{
+			// Multi row-span component on the last spanned row
+			// Calculate the preferred height less the height of all previous rows
+			int height = 0;
+			for (int i = 0; i < _rows.size() - 1; i++)
+			{
+				AbstractRow row = _rows.get(i);
+				height += row.height() + row.vgap();
+			}
+			return Math.max(0, component().getPreferredSize().height - height);
+		}
+		else
+		{
+			// Multi row-span component on any row but the last spanned row
+			return 0;
+		}
 	}
 	
-	private int calculateHeight()
-	{
-		if (_heightPerRow == -1)
-		{
-			int height = _component.getPreferredSize().height;
-			int rows = rowSpan();
-			_heightPerRow = Math.max(0, (height / rows) + (height % rows) - _usableVgap);
-		}
-		return _heightPerRow;
-	}
-
 	public int minimumWidth()
 	{
 		return component().getMinimumSize().width;
@@ -71,10 +85,13 @@ class RowItem implements IRowItem
 		return BaselineHelper.getBaseline(component());
 	}
 
-	public void initUsableVgap(int vgap)
+	public void setSpannedRows(List<AbstractRow> rows)
 	{
-		_usableVgap = vgap;
-		_heightPerRow = -1;
+		_rows = rows;
+		if (_spanNext != null)
+		{
+			_spanNext.setSpannedRows(_rows);
+		}
 	}
 	
 	public boolean isFirstSpanRow()
@@ -103,7 +120,6 @@ class RowItem implements IRowItem
 	public void replace(JComponent component)
 	{
 		_component = component;
-		_heightPerRow = -1;
 		_span = _spanPrevious.span();
 		_spanPrevious._spanNext = null;
 		_spanPrevious = null;
@@ -116,8 +132,7 @@ class RowItem implements IRowItem
 	
 	private JComponent _component = null;
 	private int _span = 1;
-	private int _usableVgap = 0;
-	private int _heightPerRow = -1;
 	private RowItem _spanPrevious = null;
 	private RowItem _spanNext = null;
+	private List<AbstractRow> _rows = Collections.emptyList();
 }
