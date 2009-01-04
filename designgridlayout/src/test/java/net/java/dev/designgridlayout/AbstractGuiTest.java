@@ -129,22 +129,28 @@ abstract class AbstractGuiTest
 	
 	final protected void checkSnapshot(String suffix)
 	{
-//		takeSnapshot(suffix);
-		// To make sure the mouse is not over a component in the frame, which
-		//would change its appearance, hence modify the snapshot.
-		hideMouse();
-		// Take snapshot of current layout
-		if (suffix.length() > 0)
+		if (_checkSnapshots)
 		{
-			suffix = "-" + suffix;
+			// To make sure the mouse is not over a component in the frame, which
+			//would change its appearance, hence modify the snapshot.
+			hideMouse();
+			// Take snapshot of current layout
+			if (suffix.length() > 0)
+			{
+				suffix = "-" + suffix;
+			}
+			String name = _example.getClass().getSimpleName() + suffix;
+			String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + name + "-org.png";
+			_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
+			
+			// Compare with previously recorded snapshots
+			String expected = REFERENCE_SCREENSHOT_PATH + name + ".png";
+			assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
 		}
-		String name = _example.getClass().getSimpleName() + suffix + ".png";
-		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + name;
-		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
-		
-		// Compare with previously recorded snapshots
-		String expected = REFERENCE_SCREENSHOT_PATH + name;
-		assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
+		else
+		{
+			takeSnapshot(suffix);
+		}
 	}
 	
 	final protected void takeSnapshot()
@@ -162,10 +168,8 @@ abstract class AbstractGuiTest
 		{
 			suffix = "-" + suffix;
 		}
-//		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
-//			_example.getClass().getSimpleName() + suffix + ".png";
 		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
-			_example.getClass().getSimpleName() + suffix + "-org.png";
+			_example.getClass().getSimpleName() + suffix + ".png";
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
 	}
 	
@@ -214,6 +218,9 @@ abstract class AbstractGuiTest
 		private Exception _exception = null;
 	}
 
+	static final private boolean _checkSnapshots = !Boolean.getBoolean("screenshots");
+	static final private boolean _isJava5 = 
+		System.getProperty("java.version").startsWith("1.5");
 	static final public String REFERENCE_SCREENSHOT_PATH = 
-		"src/test/resources/screenshots/";
+		"src/test/resources/screenshots/" + (_isJava5 ? "java5/" : "java6/");
 }
