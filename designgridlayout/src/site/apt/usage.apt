@@ -101,11 +101,11 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.*;
 
-public class Example1a 
+public class Basics1SimpleGrid 
 {
     public static void main(String[] args) 
     {
-        JFrame frame = new JFrame("Example 1a");
+        JFrame frame = new JFrame("Example 1");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel top = new JPanel();		
         DesignGridLayout layout = new DesignGridLayout(top);
@@ -133,16 +133,16 @@ public class Example1a
 }
 +------------------------------------------------------------------------------+
 
-[images/Example1a.png] Example 1a
+[images/Basics1SimpleGrid-org.png] Example 1: Simple grid
 
-	{{{xref-test/net/java/dev/designgridlayout/Example1a.html}(Example 1a source)}}
+	{{{xref-test/net/java/dev/designgridlayout/Basics1SimpleGrid.html}(Example 1 source)}}
 
 	Then, we'll build a simple form based on the 4 column canonical grid shown 
 	below: 
 	
-[images/grid-example.png.png]
+[images/grid-example.png]
 
-	Example 1b reflects the design above.
+	Example 2 reflects the design above.
 	
 +------------------------------------------------------------------------------+
 layout.row().grid().add(button()).add(button());
@@ -151,9 +151,9 @@ layout.row().grid().add(button(), 2).add(button());
 layout.row().grid().add(button()).add(button()).add(button()).empty();
 +------------------------------------------------------------------------------+
 
-[images/Example1b.png] Example 1b
+[images/Basics2GridColumns-org.png] Example 2: Grid columns
 
-	{{{xref-test/net/java/dev/designgridlayout/Example1b.html}(Example 1b source)}}
+	{{{xref-test/net/java/dev/designgridlayout/Basics2GridColumns.html}(Example 2 source)}}
 
 	Some cool things to note:
 
@@ -171,7 +171,7 @@ layout.row().grid().add(button()).add(button()).add(button()).empty();
 
 	[]
 	
-	Most forms have labels for each row. So let's add some for Example 1c.
+	Most forms have labels for each row. So let's add some for Example 3.
 
 +------------------------------------------------------------------------------+
 layout.row().grid(new JLabel("Row 1")).add(button().add(button());
@@ -180,11 +180,11 @@ layout.row().grid(new JLabel("Row 3")).add(button(), 2).add( button());
 layout.row().grid(new JLabel("Row 4")).add(button()).add(button()).add(button()).empty());
 +------------------------------------------------------------------------------+
 
-[images/Example1c.png] Example 1c
+[images/Basics3GridLabels-org.png] Example 3: Grid with labels
 
-	{{{xref-test/net/java/dev/designgridlayout/Example1c.html}(Example 1c source)}}
+	{{{xref-test/net/java/dev/designgridlayout/Basics3GridLabels.html}(Example 3 source)}}
 
-	In Example 1c above, labels do not get resized if the window is resized, only
+	In Example 3 above, labels do not get resized if the window is resized, only
 	components from grid columns get resized on such event.
 
 	Another common exception to the canonical grid are the "Cancel" and "OK" 
@@ -198,9 +198,9 @@ layout.emptyRow();
 layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 +------------------------------------------------------------------------------+
 
-[images/Example1d.png] Example 1d
+[images/Basics4RightRow-org.png] Example 4: Grid and right-aligned row
 
-	{{{xref-test/net/java/dev/designgridlayout/Example1d.html}(Example 1d source)}}
+	{{{xref-test/net/java/dev/designgridlayout/Basics4RightRow.html}(Example 4 source)}}
 
 Forms with several label columns
 
@@ -222,9 +222,95 @@ layout.row().grid(label("Lbl 4:"))  .add(button());
 
 Components spanning several rows
 
-	TODO ~1h (general: description + sample code + snapshot)
+	DesignGridLayout enables you to define components that span several rows.
+	This is particularly useful in forms that contain "high" components such as
+	<<<JList>>>, <<<JTable>>>, <<<JSlider>>>.
 	
-	TODO ~1h (warning markers + sample code + snapshot with tooltips!)
+	Of course, DesignGridLayout already supports smart vertical resize for rows
+	containing such high components, without having to span several rows.
+	However, in some situations (e.g. forms that contain a lot of components
+	like <<<JTextField>>> and only one or a few higher components), it can be 
+	useful to have a couple of normal rows with <<<JTextField>>> components and
+	one <<<JList>>> spanning all those rows, for example.
+	
+	The following snippet shows the simplest example of a row-span component:
+
++------------------------------------------------------------------------------+
+layout.row().grid(label("Label 1:")).add(field1).add(list);
+layout.row().grid(label("Label 2:")).add(field2).spanRow();
++------------------------------------------------------------------------------+
+
+	That snippet will display as follows:
+	
+[images/RowSpan5SimplestExample.png] Example: List spanning two rows
+
+	You can also use row-span components with forms with several label columns:
+	
++------------------------------------------------------------------------------+
+layout.row().grid(label("Label 1:")).add(field1).grid(label("List:")).add(list);
+layout.row().grid(label("Label 2:")).add(field2).grid().spanRow();
++------------------------------------------------------------------------------+
+
+	which will show as follows:
+	
+[images/RowSpan6SimpleExampleOnTwoGrids.png] Example: Row-span and multi-grid
+
+	Please note that, contrarily to all other DesignGridLayout features, this 
+	special feature cannot prevent incorrect usage of the method <<<spanRow()>>>;
+	Hence, when <<<spanRow()>>> has been used incorrectly, rather than throwing
+	an exception at runtime, DesignGridLayout will display a special marker on
+	positions where <<<spanRow()>>> could not properly work.
+	
+	The following example exhibits many situations where <<<spanRow()>>> is
+	misused; you can see a screenshot of the result below:
+	
++------------------------------------------------------------------------------+
+// spanrow() called in first row
+layout.row().grid(label("lbl0")).spanRow();
+layout.row().center().fill().add(new JSeparator());
+
+// spanrow() called on a subgrid with different number of columns
+layout.row().grid(label("lbl1")).add(field("field1"), field("field1"), field("field1"));
+layout.row().grid(label("lbl2")).add(field("field2")).spanRow();
+layout.row().center().fill().add(new JSeparator());
+
+// spanrow() called with no matching item
+layout.row().grid(label("lbl1")).add(field("field1"), 2);
+layout.row().grid(label("lbl2")).add(field("field2")).spanRow();
+layout.row().center().fill().add(new JSeparator());
+
+// spanrow() called with no matching item
+layout.row().grid(label("lbl1")).add(field("field1"), 2);
+layout.row().grid(label("lbl2")).spanRow().add(field("field2"));
+layout.row().center().fill().add(new JSeparator());
+
+// spanrow() called with no matching item
+layout.row().grid(label("lbl1")).add(field("field1"), 2).add(field("field1"));
+layout.row().grid(label("lbl2")).spanRow();
+layout.row().center().fill().add(new JSeparator());
+
+// spanrow() called on non matching subgrids
+layout.row().grid(label("lbl11"), 2).add(field("field1")).grid(label("lbl13")).add(field("field1"));
+layout.row().grid(label("lbl21"), 1).add(field("field2")).grid(label("lbl22")).spanRow();
+layout.row().center().fill().add(new JSeparator());
+
+// spanrow() called while the previous row is not a gridrow
+layout.row().left().add(button());
+layout.row().grid(label("lbl1")).spanRow();
+layout.row().center().fill().add(new JSeparator());
+
+// multiple spanrow() in consecutive gridrows, the first being bad
+// Note: the red marker must span rows 2 & 3
+layout.row().grid(label("lbl1")).add(field("field1"), field("field1"), field("field1"));
+layout.row().grid(label("lbl2")).add(field("field2")).spanRow();
+layout.row().grid(label("lbl3")).add(field("field3")).spanRow();
++------------------------------------------------------------------------------+
+
+[images/RowSpan4ErrorMarkers-org.png] Example of markers for "spanRow()" misuse
+
+	This way, you can spot all mistakes made in any dialog, and fix them all at
+	once. Note that each marker above has a tooltip that describes further the
+	reason why <<<spanRow()>>> cannot work properly.
 
 Automatic support for right-to-left text orientation
 
@@ -237,15 +323,13 @@ Automatic support for right-to-left text orientation
 	layout code, excerpted hereafter) one using the "usual" left-to-right text
 	orientation, the other using right-to-left.
 
-[images/Issue9-large-LT.png] Issue 9 test with left-to-right orientation
+[images/RightToLeft1LTR-resize-1-org.png] Sample form with left-to-right orientation
 
 	Sample dialog with left-to-right orientation
 	
-[images/Issue9-large-RT.png] Issue 9 test with right-to-left orientation
+[images/RightToLeft2RTL-resize-1-org.png] Sample form with right-to-left orientation
 
 	Same dialog with right-to-left orientation
-
-	{{{xref-test/net/java/dev/designgridlayout/Issue9.html}(Issue 9 test sample source)}}
 
 	Note that there are several ways in Swing to change text orientation in 
 	dialogs:

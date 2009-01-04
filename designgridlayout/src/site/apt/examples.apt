@@ -10,7 +10,7 @@ Real life examples
 	pitting everyone's favorite layout manager against all challengers in 
 	no-holds-barred cage fight. Here's the entry for DesignGridLayout:
 
-[images/AddressBookDemo.png] Address Book Demo
+[images/AddressBookDemo-org.png] Address Book Demo
 
 	{{{xref-test/net/java/dev/designgridlayout/AddressBookDemo.html}(AddressBookDemo source)}}
 
@@ -21,15 +21,15 @@ Real life examples
 	(scroll down to the bottom).  Here are the screenshots from matching those 
 	figures while using DesignGridLayout.
 	
-[images/Figure177.png] Figure 177
+[images/Basics7RealWorldExample1-org.png] Figure 177
 
-	{{{xref-test/net/java/dev/designgridlayout/Figure177.html}(Figure177 source)}}
+	{{{xref-test/net/java/dev/designgridlayout/Basics7RealWorldExample1.html}(Figure177 source)}}
 
-[images/Figure178.png] Figure 178
+[images/Basics8RealWorldExample2-org.png] Figure 178
 
-	{{{xref-test/net/java/dev/designgridlayout/Figure178.html}(Figure178 source)}}
+	{{{xref-test/net/java/dev/designgridlayout/Basics8RealWorldExample2.html}(Figure178 source)}}
 
-[images/Figure179.png] Figure 179
+[images/SmartVerticalResize4RealWorldExample-pref-size-org.png] Figure 179
 
-	{{{xref-test/net/java/dev/designgridlayout/Figure179.html}(Figure179 source)}}
+	{{{xref-test/net/java/dev/designgridlayout/SmartVerticalResize4RealWorldExample.html}(Figure179 source)}}
 	
