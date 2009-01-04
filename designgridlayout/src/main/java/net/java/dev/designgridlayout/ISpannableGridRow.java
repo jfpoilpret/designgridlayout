@@ -44,14 +44,14 @@ public interface ISpannableGridRow extends IGridRow
 	 * or {@link IGridRow#empty(int)}, then {@code spanRow()} is also {@code empty()}
 	 * or {@code empty(int)}</li>
 	 * <li>if this is the first row in the layout, then {@code spanRow()} is 
-	 * equivalent to {@code empty()}</li>
+	 * replaced with a marker component, used for fixing the layout</li>
 	 * <li>if there is no grid row above {@code this} row, then {@code spanRow()}
 	 * will be replaced with a marker component, used for fixing the layout</li>
 	 * <li>if there is no matching subgrid (same position) in the above row, then 
 	 * {@code spanRow()} will be replaced with a marker component, used for 
 	 * fixing the layout</li>
 	 * <li>if there is no matching component (same position) in the matching
-	 * gridrow of the above row, then {@code spanRow()} will be replaced with a 
+	 * subgrid of the above row, then {@code spanRow()} will be replaced with a 
 	 * marker component, used for fixing the layout</li>
 	 * <li>if the matching subgrid in the above row does not have the same number
 	 * of columns of the current subgrid in {@code this} row, then 

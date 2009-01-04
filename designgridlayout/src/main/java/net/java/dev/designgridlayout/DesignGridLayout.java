@@ -98,8 +98,8 @@ public class DesignGridLayout implements LayoutManager
 	 * bottom margin for the current platform
 	 * @param right right margin ratio that will be applied to the standard 
 	 * right margin for the current platform
-	 * @return this instance of DesignGridLayout, allowing for chained calls
-	 * to other methods (also known as "fluent API")
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
 	 */
 	public DesignGridLayout margins(double top, double left, double bottom, double right)
 	{
@@ -120,8 +120,8 @@ public class DesignGridLayout implements LayoutManager
 	 * 
 	 * @param ratio the ratio to apply to each standard margin for the current 
 	 * platform
-	 * @return this instance of DesignGridLayout, allowing for chained calls
-	 * to other methods (also known as "fluent API")
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
 	 */
 	public DesignGridLayout margins(double ratio)
 	{
