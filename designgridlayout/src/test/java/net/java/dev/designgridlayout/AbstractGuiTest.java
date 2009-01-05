@@ -20,8 +20,8 @@ import java.io.File;
 
 import javax.swing.SwingUtilities;
 
+import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
-import org.fest.swing.core.RobotFixture;
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.image.ScreenshotTaker;
 
@@ -46,7 +46,7 @@ abstract class AbstractGuiTest
 			initializer.init(example);
 		}
 		_example.go(false);
-		_robot = RobotFixture.robotWithCurrentAwtHierarchy();
+		_robot = BasicRobot.robotWithCurrentAwtHierarchy();
 		_frame = findFrame(clazz.getSimpleName()).withTimeout(2000).using(_robot);
 		_screenshot = new ScreenshotTaker();
 	}
@@ -77,7 +77,7 @@ abstract class AbstractGuiTest
 				}
 			}
 		});
-		_robot = RobotFixture.robotWithCurrentAwtHierarchy();
+		_robot = BasicRobot.robotWithCurrentAwtHierarchy();
 		_frame = findFrame(clazz.getSimpleName()).withTimeout(2000).using(_robot);
 		_screenshot = new ScreenshotTaker();
 		if (holder.getException() != null)

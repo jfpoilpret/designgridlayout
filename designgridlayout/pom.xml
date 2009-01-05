@@ -232,14 +232,14 @@
 			<id>fest</id>
 			<name>FEST repository</name>
 			<url>http://fest.googlecode.com/svn/trunk/fest/m2/repository</url>
-			<snapshots>
-				<!-- START: Only for FEST debugging -->
+			<!-- START: Only for FEST debugging -->
 <!--
--->
+			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
 				<checksumPolicy>ignore</checksumPolicy>
 			</snapshots>
+-->
 		</repository>
 		<repository>
 			<id>maven2-repository.dev.java.net</id>
@@ -293,7 +293,7 @@
 		<dependency>
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0rc2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
