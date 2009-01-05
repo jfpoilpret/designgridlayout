@@ -50,6 +50,7 @@ import net.java.dev.designgridlayout.RowSpan3TwoListsCustomWeights;
 import net.java.dev.designgridlayout.RowSpan4ErrorMarkers;
 import net.java.dev.designgridlayout.RowSpan5SimplestExample;
 import net.java.dev.designgridlayout.RowSpan6SimpleExampleOnTwoGrids;
+import net.java.dev.designgridlayout.RowSpan7SpecialComponent;
 import net.java.dev.designgridlayout.SmartVerticalResize1Sliders;
 import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
@@ -167,6 +168,8 @@ public class Examples extends JFrame
 			new Node("Same with custom weights", RowSpan3TwoListsCustomWeights.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Markers on bad API usage", RowSpan4ErrorMarkers.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("Example - Contact entry", RowSpan7SpecialComponent.class)));
 		root.add(node);
 
 		node = new DefaultMutableTreeNode("Right to Left Support");

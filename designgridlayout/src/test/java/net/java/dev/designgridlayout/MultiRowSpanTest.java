@@ -14,6 +14,9 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Dimension;
+import java.awt.Point;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -58,6 +61,22 @@ public class MultiRowSpanTest extends AbstractGuiTest
 	@Test public void checkVGapsAlwaysCorrect() throws Exception
 	{
 		checkExample(Rfe10CheckVGaps.class);
+	}
+	
+	@Test public void checkSpanRowsOnCustomComponent() throws Exception
+	{
+		launchGui(RowSpan7SpecialComponent.class);
+		checkSnapshot("pref-size");
+		frame().moveTo(new Point(frame().target.getX(), 0));
+		Dimension size = new Dimension(
+			frame().target.getWidth(), frame().target.getHeight());
+		for (int i = 1; i <= 5; i++)
+		{
+			size.width += 6;
+			size.height += 9;
+			frame().resizeTo(size);
+			checkSnapshot("resize-" + i);
+		}
 	}
 	
 	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz)

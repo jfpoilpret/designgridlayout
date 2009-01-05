@@ -1,0 +1,41 @@
+public class RowSpan7SpecialComponent extends AbstractBaseExample
+{
+	@Override protected void build(DesignGridLayout layout)
+	{
+		JScrollPane picture = new JScrollPane(new Picture());
+		picture.setHorizontalScrollBarPolicy(
+			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		picture.setVerticalScrollBarPolicy(
+			ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		layout.row().grid(label("First name:")).add(field("Jean-Francois"))
+								.grid(label("Picture:")).add(picture);
+		layout.row().grid(label("Last name:")).add(field("Poilpret"))
+								.grid().spanRow();
+		layout.row().grid(label("Nationality:")).add(field("french"))
+								.grid().spanRow();
+		layout.row().grid(label("Address 1:")).add(field("Hoang Hoa Tham street"));
+		layout.row().grid(label("Address 2:")).add(field("Binh Thanh district"));
+		layout.row().grid(label("City:")).add(field("Ho Chi Minh city"));
+	}
+}
+
+public class Picture extends JComponent implements Scrollable
+{
+	...
+	public int getBaseline(int width, int height)
+	{
+		return BaselineHelper.getBaseline(_label);
+	}
+	
+	public boolean getScrollableTracksViewportHeight()
+	{
+		return true;
+	}
+	
+	public boolean getScrollableTracksViewportWidth()
+	{
+		return true;
+	}
+	...
+	final private JLabel _label = new JLabel("Dummy");
+}
