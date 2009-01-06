@@ -25,7 +25,7 @@ public class RightToLeft1LTR extends AbstractRightToLeft
 	}
 	
 	public RightToLeft1LTR()
-    {
-	    super(ComponentOrientation.LEFT_TO_RIGHT);
-    }
+	{
+		super(ComponentOrientation.LEFT_TO_RIGHT);
+	}
 }

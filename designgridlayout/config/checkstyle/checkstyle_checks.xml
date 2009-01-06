@@ -196,7 +196,7 @@
 		<module name="TypecastParenPad">
 			<property name="severity" value="warning"/>
 		</module>
-		<!--    <module name="TabCharacter"/>-->
+		<!--	<module name="TabCharacter"/>-->
 		<module name="WhitespaceAfter">
 			<property name="severity" value="warning"/>
 		</module>
@@ -205,8 +205,8 @@
 			<property name="severity" value="warning"/>
 		</module>
 		<!-- Modifiers -->
-		<!-- 	<module name="ModifierOrder"/>-->
-		<!--    <module name="RedundantModifier"/>-->
+		<!--	<module name="ModifierOrder"/>-->
+		<!--	<module name="RedundantModifier"/>-->
 		
 		<!-- Block Checks -->
 		<module name="EmptyBlock">
@@ -317,7 +317,7 @@
 			<property name="severity" value="warning"/>
 		</module>
 		-->
-		<!--    <module name="DeclarationOrder"/>-->
+		<!--	<module name="DeclarationOrder"/>-->
 		<module name="ParameterAssignment">
 			<property name="severity" value="warning"/>
 		</module>

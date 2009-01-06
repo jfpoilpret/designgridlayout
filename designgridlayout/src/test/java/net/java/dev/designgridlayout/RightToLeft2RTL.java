@@ -25,7 +25,7 @@ public class RightToLeft2RTL extends AbstractRightToLeft
 	}
 	
 	public RightToLeft2RTL()
-    {
-	    super(ComponentOrientation.RIGHT_TO_LEFT);
-    }
+	{
+		super(ComponentOrientation.RIGHT_TO_LEFT);
+	}
 }
