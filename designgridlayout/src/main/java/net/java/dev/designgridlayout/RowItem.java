@@ -43,7 +43,8 @@ class RowItem implements IRowItem
 		return (_spanPrevious != null ? _spanPrevious.component() : _component);
 	}
 
-	// TODO optimize computation here (lazy evaluation with cache)
+	// NB: Don't try to optimize this method by caching the calculated preferred
+	// height because it may change across calls, hence it would become wrong!
 	public int preferredHeight()
 	{
 		if (_spanPrevious == null && _spanNext == null)
