@@ -25,6 +25,7 @@
 			<item name="Canonical Grids" href="grids.html" />
 			<item name="Usage" href="usage.html" />
 			<item name="Examples" href="examples.html" />
+			<item name="Using in Maven Project" href="maven.html" />
 			<item name="Building from sources" href="build-from-sources.html" />
 		</menu>
 		<menu ref="reports" />
