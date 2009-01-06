@@ -242,7 +242,7 @@ layout.row().grid(label("Label 2:")).add(field2).spanRow();
 
 	That snippet will display as follows:
 	
-[images/RowSpan5SimplestExample.png] Example: List spanning two rows
+[images/RowSpan5SimplestExample-org.png] Example: List spanning two rows
 
 	You can also use row-span components with forms with several label columns:
 	
@@ -253,7 +253,7 @@ layout.row().grid(label("Label 2:")).add(field2).grid().spanRow();
 
 	which will show as follows:
 	
-[images/RowSpan6SimpleExampleOnTwoGrids.png] Example: Row-span and multi-grid
+[images/RowSpan6SimpleExampleOnTwoGrids-org.png] Example: Row-span and multi-grid
 
 	Please note that, contrarily to all other DesignGridLayout features, this 
 	special feature cannot prevent incorrect usage of the method <<<spanRow()>>>;
