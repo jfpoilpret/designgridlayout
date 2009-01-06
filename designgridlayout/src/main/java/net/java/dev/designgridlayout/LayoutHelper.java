@@ -59,7 +59,6 @@ final class LayoutHelper
 			}
 		}
 		// Keep smart vertical resize behavior in any case
-		//TODO check this also works with other JComponents (eg a resizable picture)
 		int height = component.getPreferredSize().height;
 		int usedExtraHeight = 0;
 		if (MarkerHelper.isMarker(component))
