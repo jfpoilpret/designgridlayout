@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>DesignGridLayout - How to use in a Maven project</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Jean-Francois Poilpret" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="../../" id="bannerLeft">
+    
+            DesignGridLayout
+    
+            </a>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2009-01-07
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>General</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Introduction</a>
+          </li>
+              
+    <li class="none">
+                    <a href="grids.html">Canonical Grids</a>
+          </li>
+              
+    <li class="none">
+                    <a href="usage.html">Usage</a>
+          </li>
+              
+    <li class="none">
+                    <a href="examples.html">Examples</a>
+          </li>
+              
+    <li class="none">
+              <strong>Using in Maven Project</strong>
+        </li>
+              
+    <li class="none">
+                    <a href="build-from-sources.html">Building from sources</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>How to use in a Maven project</h2>
+<p>DesignGridLayout is directly usable by Maven-based projects.</p>
+<p>For this, however, since DesignGridLayout is not uploaded in Maven central repository, you will have some special setup in your pom.xml.</p>
+<p>First, you will have to set the repository where Maven can find DesignGridLayout artifacts (and also swing-layout, DesignGridLayout only dependency):</p>
+<div class="source"><pre>&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;maven2-repository.dev.java.net&lt;/id&gt;
+        &lt;name&gt;Java.net Repository for Maven&lt;/name&gt;
+        &lt;url&gt;http://download.java.net/maven/2/&lt;/url&gt;
+        &lt;layout&gt;default&lt;/layout&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;</pre>
+</div>
+<p>Then you can declare DesignGridLayout dependency as for any other artifact used by your project:</p>
+<div class="source"><pre>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;net.java.dev.designgridlayout&lt;/groupId&gt;
+        &lt;artifactId&gt;designgridlayout&lt;/artifactId&gt;
+        &lt;version&gt;1.1-rc1&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</pre>
+</div>
+<p>And voila! You are now ready to use DesignGridLayout for your GUI project!</p>
+<p>In addition to DesignGridLayout jar artifact, the repository also contains javadoc and source artifacts that you can automatically download, eg for your IDE (for eclipse, you can follow the instructions <a href="http://maven.apache.org/plugins/maven-eclipse-plugin/examples/attach-library-sources.html" class="externalLink">there</a>
+).</p>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2005-2009
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

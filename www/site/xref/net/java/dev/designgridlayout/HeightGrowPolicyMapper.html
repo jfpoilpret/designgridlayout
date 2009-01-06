@@ -8,7 +8,7 @@
 <body>
 <div id="overview"><a href="../../../../../apidocs/net/java/dev/designgridlayout/HeightGrowPolicyMapper.html">View Javadoc</a></div><pre>
 
-<a name="1" href="#1">1</a>   <em class="jxr_comment">//  Copyright 2008 Jason Aaron Osgood, Jean-Francois Poilpret</em>
+<a name="1" href="#1">1</a>   <em class="jxr_comment">//  Copyright 2009 Jason Aaron Osgood, Jean-Francois Poilpret</em>
 <a name="2" href="#2">2</a>   <em class="jxr_comment">//</em>
 <a name="3" href="#3">3</a>   <em class="jxr_comment">// Licensed under the Apache License, Version 2.0 (the "License");</em>
 <a name="4" href="#4">4</a>   <em class="jxr_comment">// you may not use this file except in compliance with the License.</em>
@@ -57,25 +57,31 @@
 <a name="47" href="#47">47</a>  	
 <a name="48" href="#48">48</a>  	<strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> findPolicy(Component component)
 <a name="49" href="#49">49</a>  	{
-<a name="50" href="#50">50</a>  		Class&lt;? <strong class="jxr_keyword">extends</strong> Component&gt; clazz = component.getClass();
-<a name="51" href="#51">51</a>  		<strong class="jxr_keyword">while</strong> (<strong class="jxr_keyword">true</strong>)
-<a name="52" href="#52">52</a>  		{
-<a name="53" href="#53">53</a>  			HeightGrowPolicy policy = _policies.get(component.getClass());
-<a name="54" href="#54">54</a>  			<strong class="jxr_keyword">if</strong> (policy != <strong class="jxr_keyword">null</strong>)
-<a name="55" href="#55">55</a>  			{
-<a name="56" href="#56">56</a>  				<strong class="jxr_keyword">return</strong> policy;
-<a name="57" href="#57">57</a>  			}
-<a name="58" href="#58">58</a>  			<strong class="jxr_keyword">if</strong> (clazz == Component.<strong class="jxr_keyword">class</strong>)
-<a name="59" href="#59">59</a>  			{
-<a name="60" href="#60">60</a>  				<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
-<a name="61" href="#61">61</a>  			}
-<a name="62" href="#62">62</a>  			clazz = clazz.getSuperclass().asSubclass(Component.<strong class="jxr_keyword">class</strong>);
-<a name="63" href="#63">63</a>  		}
-<a name="64" href="#64">64</a>  	}
-<a name="65" href="#65">65</a>  
-<a name="66" href="#66">66</a>  	<strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> Map&lt;Class&lt;? <strong class="jxr_keyword">extends</strong> Component&gt;, HeightGrowPolicy&gt; _policies =
-<a name="67" href="#67">67</a>  		<strong class="jxr_keyword">new</strong> HashMap&lt;Class&lt;? <strong class="jxr_keyword">extends</strong> Component&gt;, HeightGrowPolicy&gt;();
-<a name="68" href="#68">68</a>  }
+<a name="50" href="#50">50</a>  		<em class="jxr_comment">// Lookup the most specialized policy for this component based on</em>
+<a name="51" href="#51">51</a>  		<em class="jxr_comment">// the class hierarchy of that component</em>
+<a name="52" href="#52">52</a>  		Class&lt;? <strong class="jxr_keyword">extends</strong> Component&gt; clazz = component.getClass();
+<a name="53" href="#53">53</a>  		<strong class="jxr_keyword">while</strong> (<strong class="jxr_keyword">true</strong>)
+<a name="54" href="#54">54</a>  		{
+<a name="55" href="#55">55</a>  			HeightGrowPolicy policy = _policies.get(clazz);
+<a name="56" href="#56">56</a>  			<strong class="jxr_keyword">if</strong> (policy != <strong class="jxr_keyword">null</strong>)
+<a name="57" href="#57">57</a>  			{
+<a name="58" href="#58">58</a>  				<strong class="jxr_keyword">return</strong> policy;
+<a name="59" href="#59">59</a>  			}
+<a name="60" href="#60">60</a>  			<strong class="jxr_keyword">if</strong> (clazz == Component.<strong class="jxr_keyword">class</strong>)
+<a name="61" href="#61">61</a>  			{
+<a name="62" href="#62">62</a>  				<strong class="jxr_keyword">break</strong>;
+<a name="63" href="#63">63</a>  			}
+<a name="64" href="#64">64</a>  			clazz = clazz.getSuperclass().asSubclass(Component.<strong class="jxr_keyword">class</strong>);
+<a name="65" href="#65">65</a>  		}
+<a name="66" href="#66">66</a>  		<em class="jxr_comment">//TODO Not sure this is necessary (not until this API is made open, if ever)</em>
+<a name="67" href="#67">67</a>  		<em class="jxr_comment">// If no policy was found for concrete classed in this component </em>
+<a name="68" href="#68">68</a>  		<em class="jxr_comment">// class hierarchy, then search for a policy for implemented interfaces </em>
+<a name="69" href="#69">69</a>  		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a name="70" href="#70">70</a>  	}
+<a name="71" href="#71">71</a>  
+<a name="72" href="#72">72</a>  	<strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> Map&lt;Class&lt;? <strong class="jxr_keyword">extends</strong> Component&gt;, HeightGrowPolicy&gt; _policies =
+<a name="73" href="#73">73</a>  		<strong class="jxr_keyword">new</strong> HashMap&lt;Class&lt;? <strong class="jxr_keyword">extends</strong> Component&gt;, HeightGrowPolicy&gt;();
+<a name="74" href="#74">74</a>  }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

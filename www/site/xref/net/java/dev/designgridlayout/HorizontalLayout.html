@@ -8,7 +8,7 @@
 <body>
 <div id="overview"><a href="../../../../../apidocs/net/java/dev/designgridlayout/HorizontalLayout.html">View Javadoc</a></div><pre>
 
-<a name="1" href="#1">1</a>   <em class="jxr_comment">//  Copyright 2008 Jason Aaron Osgood, Jean-Francois Poilpret</em>
+<a name="1" href="#1">1</a>   <em class="jxr_comment">//  Copyright 2009 Jason Aaron Osgood, Jean-Francois Poilpret</em>
 <a name="2" href="#2">2</a>   <em class="jxr_comment">//</em>
 <a name="3" href="#3">3</a>   <em class="jxr_comment">// Licensed under the Apache License, Version 2.0 (the "License");</em>
 <a name="4" href="#4">4</a>   <em class="jxr_comment">// you may not use this file except in compliance with the License.</em>
@@ -50,7 +50,7 @@
 <a name="40" href="#40">40</a>  	{
 <a name="41" href="#41">41</a>  		<strong class="jxr_keyword">for</strong> (JComponent child: children)
 <a name="42" href="#42">42</a>  		{
-<a name="43" href="#43">43</a>  			_children.add(child);
+<a name="43" href="#43">43</a>  			_children.add(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/NonGridRowItem.html">NonGridRowItem</a>(child));
 <a name="44" href="#44">44</a>  			_parent.add(child);
 <a name="45" href="#45">45</a>  		}
 <a name="46" href="#46">46</a>  		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>;
@@ -64,109 +64,109 @@
 <a name="54" href="#54">54</a>  	
 <a name="55" href="#55">55</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> layoutContainer(Container parent)
 <a name="56" href="#56">56</a>  	{
-<a name="57" href="#57">57</a>  		<strong class="jxr_keyword">if</strong> (parent != _parent)
-<a name="58" href="#58">58</a>  		{
-<a name="59" href="#59">59</a>  			<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a name="60" href="#60">60</a>  				<span class="jxr_string">"must use HorizontalLayout instance with original parent container"</span>);
-<a name="61" href="#61">61</a>  		}
-<a name="62" href="#62">62</a>  		
-<a name="63" href="#63">63</a>  		<strong class="jxr_keyword">synchronized</strong>(parent.getTreeLock())
-<a name="64" href="#64">64</a>  		{
-<a name="65" href="#65">65</a>  			computeAll();
-<a name="66" href="#66">66</a>  
-<a name="67" href="#67">67</a>  			<em class="jxr_comment">// Check layout orientation</em>
-<a name="68" href="#68">68</a>  			<strong class="jxr_keyword">boolean</strong> rtl = _orientation.isRightToLeft();
-<a name="69" href="#69">69</a>  
-<a name="70" href="#70">70</a>  			<em class="jxr_comment">// Compute ratio actual size / preferred size (only if actual size smaller)</em>
-<a name="71" href="#71">71</a>  			<strong class="jxr_keyword">int</strong> parentWidth = parent.getSize().width;
-<a name="72" href="#72">72</a>  			<strong class="jxr_keyword">int</strong> availableWidth = parentWidth - _gap;
-<a name="73" href="#73">73</a>  			<strong class="jxr_keyword">int</strong> prefWidth = _prefWidth - _gap;
-<a name="74" href="#74">74</a>  			<strong class="jxr_keyword">float</strong> ratio = 1.0f;
-<a name="75" href="#75">75</a>  			<strong class="jxr_keyword">if</strong> (availableWidth &lt; prefWidth)
-<a name="76" href="#76">76</a>  			{
-<a name="77" href="#77">77</a>  				ratio = (<strong class="jxr_keyword">float</strong>) availableWidth / prefWidth;
-<a name="78" href="#78">78</a>  			}
-<a name="79" href="#79">79</a>  			<strong class="jxr_keyword">int</strong> nth = 0;
-<a name="80" href="#80">80</a>  			<strong class="jxr_keyword">int</strong> x = 0;
-<a name="81" href="#81">81</a>  			LayoutHelper helper = <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a>(_heightTester, parentWidth, rtl);
-<a name="82" href="#82">82</a>  			helper.setY(0);
-<a name="83" href="#83">83</a>  			<strong class="jxr_keyword">for</strong> (JComponent child: _children)
-<a name="84" href="#84">84</a>  			{
-<a name="85" href="#85">85</a>  				helper.setRowAvailableHeight(_parent.getHeight());
-<a name="86" href="#86">86</a>  				<em class="jxr_comment">// Apply reduction ratio to component width</em>
-<a name="87" href="#87">87</a>  				<strong class="jxr_keyword">int</strong> width = (<strong class="jxr_keyword">int</strong>) (child.getPreferredSize().width * ratio);
-<a name="88" href="#88">88</a>  				helper.setSizeLocation(child, x, width, _height, _baseline);
-<a name="89" href="#89">89</a>  				x += width + _gaps[nth];
-<a name="90" href="#90">90</a>  				nth++;
-<a name="91" href="#91">91</a>  			}
-<a name="92" href="#92">92</a>  		}
-<a name="93" href="#93">93</a>  	}
-<a name="94" href="#94">94</a>  
-<a name="95" href="#95">95</a>  	<strong class="jxr_keyword">public</strong> Dimension minimumLayoutSize(Container parent)
-<a name="96" href="#96">96</a>  	{
-<a name="97" href="#97">97</a>  		initSizeCalculation(parent);
-<a name="98" href="#98">98</a>  		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Dimension(_minWidth, _height);
-<a name="99" href="#99">99</a>  	}
-<a name="100" href="#100">100</a> 
-<a name="101" href="#101">101</a> 	<strong class="jxr_keyword">public</strong> Dimension preferredLayoutSize(Container parent)
-<a name="102" href="#102">102</a> 	{
-<a name="103" href="#103">103</a> 		initSizeCalculation(parent);
-<a name="104" href="#104">104</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Dimension(_prefWidth, _height);
-<a name="105" href="#105">105</a> 	}
-<a name="106" href="#106">106</a> 	
-<a name="107" href="#107">107</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> initSizeCalculation(Container parent)
-<a name="108" href="#108">108</a> 	{
-<a name="109" href="#109">109</a> 		<strong class="jxr_keyword">if</strong> (parent != _parent)
-<a name="110" href="#110">110</a> 		{
-<a name="111" href="#111">111</a> 			<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a name="112" href="#112">112</a> 				<span class="jxr_string">"must use HorizontalLayout instance with original parent container"</span>);
-<a name="113" href="#113">113</a> 		}
-<a name="114" href="#114">114</a> 
-<a name="115" href="#115">115</a> 		computeAll();
-<a name="116" href="#116">116</a> 	}
-<a name="117" href="#117">117</a> 
-<a name="118" href="#118">118</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addLayoutComponent(String name, Component comp)
-<a name="119" href="#119">119</a> 	{
-<a name="120" href="#120">120</a> 		<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"do not use this method"</span>);
-<a name="121" href="#121">121</a> 	}
-<a name="122" href="#122">122</a> 
-<a name="123" href="#123">123</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> removeLayoutComponent(Component comp)
-<a name="124" href="#124">124</a> 	{
-<a name="125" href="#125">125</a> 		<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"do not use this method"</span>);
-<a name="126" href="#126">126</a> 	}
-<a name="127" href="#127">127</a> 	
-<a name="128" href="#128">128</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> computeAll()
-<a name="129" href="#129">129</a> 	{
-<a name="130" href="#130">130</a> 		<strong class="jxr_keyword">if</strong> (!_inited )
-<a name="131" href="#131">131</a> 		{
-<a name="132" href="#132">132</a> 			_baseline = ComponentHelper.maxValues(_children, BaselineExtractor.INSTANCE);
-<a name="133" href="#133">133</a> 			_minWidth = ComponentHelper.sumValues(_children, MinWidthExtractor.INSTANCE);
-<a name="134" href="#134">134</a> 			_prefWidth = ComponentHelper.sumValues(_children, PrefWidthExtractor.INSTANCE);
-<a name="135" href="#135">135</a> 			_height = ComponentHelper.maxValues(_children, PrefHeightExtractor.INSTANCE);
-<a name="136" href="#136">136</a> 
-<a name="137" href="#137">137</a> 			LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-<a name="138" href="#138">138</a> 			_gaps = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">int</strong>[_children.size()];
-<a name="139" href="#139">139</a> 			<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> nth = 0; nth &lt; _children.size() - 1; nth++)
-<a name="140" href="#140">140</a> 			{
-<a name="141" href="#141">141</a> 				JComponent left = _children.get(nth);
-<a name="142" href="#142">142</a> 				JComponent right = _children.get(nth + 1);
-<a name="143" href="#143">143</a> 				<strong class="jxr_keyword">int</strong> gap = layoutStyle.getPreferredGap(
-<a name="144" href="#144">144</a> 					left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
-<a name="145" href="#145">145</a> 				_gaps[nth] = gap;
-<a name="146" href="#146">146</a> 				_gap += gap;
-<a name="147" href="#147">147</a> 			}
-<a name="148" href="#148">148</a> 			_minWidth += _gap;
-<a name="149" href="#149">149</a> 			_prefWidth += _gap;
-<a name="150" href="#150">150</a> 			_gaps[_children.size() - 1] = 0;
-<a name="151" href="#151">151</a> 
-<a name="152" href="#152">152</a> 			_inited = <strong class="jxr_keyword">true</strong>;
+<a name="57" href="#57">57</a>  		checkParent(parent);
+<a name="58" href="#58">58</a>  		
+<a name="59" href="#59">59</a>  		<strong class="jxr_keyword">synchronized</strong>(parent.getTreeLock())
+<a name="60" href="#60">60</a>  		{
+<a name="61" href="#61">61</a>  			computeAll();
+<a name="62" href="#62">62</a>  
+<a name="63" href="#63">63</a>  			<em class="jxr_comment">// Check layout orientation</em>
+<a name="64" href="#64">64</a>  			<strong class="jxr_keyword">boolean</strong> rtl = _orientation.isRightToLeft();
+<a name="65" href="#65">65</a>  
+<a name="66" href="#66">66</a>  			<em class="jxr_comment">// Compute ratio actual size / preferred size (only if actual size smaller)</em>
+<a name="67" href="#67">67</a>  			<strong class="jxr_keyword">int</strong> parentWidth = parent.getSize().width;
+<a name="68" href="#68">68</a>  			<strong class="jxr_keyword">int</strong> availableWidth = parentWidth - _gap;
+<a name="69" href="#69">69</a>  			<strong class="jxr_keyword">int</strong> prefWidth = _prefWidth - _gap;
+<a name="70" href="#70">70</a>  			<strong class="jxr_keyword">float</strong> ratio = 1.0f;
+<a name="71" href="#71">71</a>  			<strong class="jxr_keyword">if</strong> (availableWidth &lt; prefWidth)
+<a name="72" href="#72">72</a>  			{
+<a name="73" href="#73">73</a>  				ratio = (<strong class="jxr_keyword">float</strong>) availableWidth / prefWidth;
+<a name="74" href="#74">74</a>  			}
+<a name="75" href="#75">75</a>  			<strong class="jxr_keyword">int</strong> nth = 0;
+<a name="76" href="#76">76</a>  			<strong class="jxr_keyword">int</strong> x = 0;
+<a name="77" href="#77">77</a>  			LayoutHelper helper = <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a>(_heightTester, parentWidth, rtl);
+<a name="78" href="#78">78</a>  			helper.setY(0);
+<a name="79" href="#79">79</a>  			<strong class="jxr_keyword">for</strong> (IRowItem child: _children)
+<a name="80" href="#80">80</a>  			{
+<a name="81" href="#81">81</a>  				helper.setRowAvailableHeight(_parent.getHeight());
+<a name="82" href="#82">82</a>  				<em class="jxr_comment">// Apply reduction ratio to component width</em>
+<a name="83" href="#83">83</a>  				<strong class="jxr_keyword">int</strong> width = (<strong class="jxr_keyword">int</strong>) (child.preferredWidth() * ratio);
+<a name="84" href="#84">84</a>  				helper.setSizeLocation(child.component(), x, width, _height, _baseline);
+<a name="85" href="#85">85</a>  				x += width + _gaps[nth];
+<a name="86" href="#86">86</a>  				nth++;
+<a name="87" href="#87">87</a>  			}
+<a name="88" href="#88">88</a>  		}
+<a name="89" href="#89">89</a>  	}
+<a name="90" href="#90">90</a>  
+<a name="91" href="#91">91</a>  	<strong class="jxr_keyword">public</strong> Dimension minimumLayoutSize(Container parent)
+<a name="92" href="#92">92</a>  	{
+<a name="93" href="#93">93</a>  		initSizeCalculation(parent);
+<a name="94" href="#94">94</a>  		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Dimension(_minWidth, _height);
+<a name="95" href="#95">95</a>  	}
+<a name="96" href="#96">96</a>  
+<a name="97" href="#97">97</a>  	<strong class="jxr_keyword">public</strong> Dimension preferredLayoutSize(Container parent)
+<a name="98" href="#98">98</a>  	{
+<a name="99" href="#99">99</a>  		initSizeCalculation(parent);
+<a name="100" href="#100">100</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Dimension(_prefWidth, _height);
+<a name="101" href="#101">101</a> 	}
+<a name="102" href="#102">102</a> 	
+<a name="103" href="#103">103</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> initSizeCalculation(Container parent)
+<a name="104" href="#104">104</a> 	{
+<a name="105" href="#105">105</a> 		checkParent(parent);
+<a name="106" href="#106">106</a> 		computeAll();
+<a name="107" href="#107">107</a> 	}
+<a name="108" href="#108">108</a> 
+<a name="109" href="#109">109</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addLayoutComponent(String name, Component comp)
+<a name="110" href="#110">110</a> 	{
+<a name="111" href="#111">111</a> 		<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"do not use this method"</span>);
+<a name="112" href="#112">112</a> 	}
+<a name="113" href="#113">113</a> 
+<a name="114" href="#114">114</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> removeLayoutComponent(Component comp)
+<a name="115" href="#115">115</a> 	{
+<a name="116" href="#116">116</a> 		<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"do not use this method"</span>);
+<a name="117" href="#117">117</a> 	}
+<a name="118" href="#118">118</a> 	
+<a name="119" href="#119">119</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> computeAll()
+<a name="120" href="#120">120</a> 	{
+<a name="121" href="#121">121</a> 		<strong class="jxr_keyword">if</strong> (!_inited )
+<a name="122" href="#122">122</a> 		{
+<a name="123" href="#123">123</a> 			_baseline = ComponentHelper.maxValues(_children, BaselineExtractor.INSTANCE);
+<a name="124" href="#124">124</a> 			_minWidth = ComponentHelper.sumValues(_children, MinWidthExtractor.INSTANCE);
+<a name="125" href="#125">125</a> 			_prefWidth = ComponentHelper.sumValues(_children, PrefWidthExtractor.INSTANCE);
+<a name="126" href="#126">126</a> 			_height = ComponentHelper.maxValues(_children, PrefHeightExtractor.INSTANCE);
+<a name="127" href="#127">127</a> 
+<a name="128" href="#128">128</a> 			LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+<a name="129" href="#129">129</a> 			_gaps = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">int</strong>[_children.size()];
+<a name="130" href="#130">130</a> 			<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> nth = 0; nth &lt; _children.size() - 1; nth++)
+<a name="131" href="#131">131</a> 			{
+<a name="132" href="#132">132</a> 				JComponent left = _children.get(nth).component();
+<a name="133" href="#133">133</a> 				JComponent right = _children.get(nth + 1).component();
+<a name="134" href="#134">134</a> 				<strong class="jxr_keyword">int</strong> gap = layoutStyle.getPreferredGap(
+<a name="135" href="#135">135</a> 					left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
+<a name="136" href="#136">136</a> 				_gaps[nth] = gap;
+<a name="137" href="#137">137</a> 				_gap += gap;
+<a name="138" href="#138">138</a> 			}
+<a name="139" href="#139">139</a> 			_minWidth += _gap;
+<a name="140" href="#140">140</a> 			_prefWidth += _gap;
+<a name="141" href="#141">141</a> 			_gaps[_children.size() - 1] = 0;
+<a name="142" href="#142">142</a> 
+<a name="143" href="#143">143</a> 			_inited = <strong class="jxr_keyword">true</strong>;
+<a name="144" href="#144">144</a> 		}
+<a name="145" href="#145">145</a> 	}
+<a name="146" href="#146">146</a> 	
+<a name="147" href="#147">147</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> checkParent(Container parent)
+<a name="148" href="#148">148</a> 	{
+<a name="149" href="#149">149</a> 		<strong class="jxr_keyword">if</strong> (parent != _parent)
+<a name="150" href="#150">150</a> 		{
+<a name="151" href="#151">151</a> 			<strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a name="152" href="#152">152</a> 				<span class="jxr_string">"must use HorizontalLayout instance with original parent container"</span>);
 <a name="153" href="#153">153</a> 		}
 <a name="154" href="#154">154</a> 	}
 <a name="155" href="#155">155</a> 
 <a name="156" href="#156">156</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> Container _parent;
 <a name="157" href="#157">157</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _heightTester;
 <a name="158" href="#158">158</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../net/java/dev/designgridlayout/OrientationPolicy.html">OrientationPolicy</a> _orientation;
-<a name="159" href="#159">159</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> List&lt;JComponent&gt; _children = <strong class="jxr_keyword">new</strong> ArrayList&lt;JComponent&gt;();
+<a name="159" href="#159">159</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> List&lt;NonGridRowItem&gt; _children = <strong class="jxr_keyword">new</strong> ArrayList&lt;NonGridRowItem&gt;();
 <a name="160" href="#160">160</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> _inited = false;
 <a name="161" href="#161">161</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _baseline = 0;
 <a name="162" href="#162">162</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _height = 0;

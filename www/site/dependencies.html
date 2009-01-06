@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2008-12-07
+        Last Published: 2009-01-07
                       </div>
             <div class="xright">      
   
@@ -84,6 +84,10 @@
               
     <li class="none">
                     <a href="examples.html">Examples</a>
+          </li>
+              
+    <li class="none">
+                    <a href="maven.html">Using in Maven Project</a>
           </li>
               
     <li class="none">
@@ -158,6 +162,8 @@
       
             
       
+            
+      
               
         <li class="collapsed">
                     <a href="project-reports.html">Project Reports</a>
@@ -208,7 +214,7 @@
 </tr>
 <tr class="b"><td>fest</td>
 <td>fest-swing-testng</td>
-<td>1.0b1</td>
+<td>1.0rc2</td>
 <td>-</td>
 <td>jar</td>
 <td> </td>
@@ -229,28 +235,28 @@
 </tr>
 <tr class="b"><td>fest</td>
 <td>fest-assert</td>
-<td>1.0a1</td>
+<td>1.0</td>
 <td>-</td>
 <td>jar</td>
 <td> </td>
 </tr>
 <tr class="a"><td>fest</td>
 <td>fest-reflect</td>
-<td>0.4</td>
+<td>1.0</td>
 <td>-</td>
 <td>jar</td>
 <td> </td>
 </tr>
 <tr class="b"><td>fest</td>
 <td>fest-swing</td>
-<td>1.0b1</td>
+<td>1.0rc2</td>
 <td>-</td>
 <td>jar</td>
 <td> </td>
 </tr>
 <tr class="a"><td>fest</td>
 <td>fest-util</td>
-<td>0.4</td>
+<td>1.0</td>
 <td>-</td>
 <td>jar</td>
 <td> </td>
@@ -269,10 +275,24 @@
 <td>jar</td>
 <td> </td>
 </tr>
-<tr class="b"><td>org.testng</td>
+<tr class="b"><td>net.jcip</td>
+<td>jcip-annotations</td>
+<td>1.0</td>
+<td>-</td>
+<td>jar</td>
+<td> </td>
+</tr>
+<tr class="a"><td>org.testng</td>
 <td>testng</td>
 <td>5.8</td>
 <td>jdk15</td>
+<td>jar</td>
+<td> </td>
+</tr>
+<tr class="b"><td>swinghelper</td>
+<td>debug</td>
+<td>1.0</td>
+<td>-</td>
 <td>jar</td>
 <td> </td>
 </tr>
@@ -282,9 +302,7 @@
 <div class="section"><h2>Project Dependency Graph</h2>
 <div class="section"><h3>Dependency Tree</h3>
 <p><ul><li><a href="#net.java.dev.designgridlayout:designgridlayout:jar">net.java.dev.designgridlayout:designgridlayout:jar</a>
-<ul><li><a href="#net.java.dev.swing-layout:swing-layout:jar">net.java.dev.swing-layout:swing-layout:jar</a>
-</li>
-<li><a href="#fest:fest-swing-testng:jar">fest:fest-swing-testng:jar</a>
+<ul><li><a href="#fest:fest-swing-testng:jar">fest:fest-swing-testng:jar</a>
 <ul><li><a href="#org.testng:testng:jar:jdk15">org.testng:testng:jar:jdk15</a>
 <ul><li><a href="#junit:junit:jar">junit:junit:jar</a>
 </li>
@@ -302,11 +320,17 @@
 </ul>
 </p>
 </li>
+<li><a href="#net.jcip:jcip-annotations:jar">net.jcip:jcip-annotations:jar</a>
+</li>
+<li><a href="#swinghelper:debug:jar">swinghelper:debug:jar</a>
+</li>
 </ul>
 </p>
 </li>
 </ul>
 </p>
+</li>
+<li><a href="#net.java.dev.swing-layout:swing-layout:jar">net.java.dev.swing-layout:swing-layout:jar</a>
 </li>
 </ul>
 </p>
@@ -322,16 +346,6 @@
 		always good looking dialogs through a very easy-to-use API, without
 		any need for a graphical GUI designer.</p>
 <p><a href="http://designgridlayout.dev.java.net/nonav/site/" class="externalLink">http://designgridlayout.dev.java.net/nonav/site/</a>
-</p>
-<p><a name="net.java.dev.swing-layout:swing-layout:jar"><b>Extensions to Swing to create professional cross platform layout</b>
-</a>
-</p>
-<p>Swing Layout Extensions goal is to make it easy to create professional cross platform layouts with Swing. This project has an eye towards the needs of GUI builders, such as NetBeans. 
-    This project consists of the following pieces:
-        * Ability to get the baseline for components.
-        * Ability to get the preferred gap between components.
-        * A new LayoutManager that utilizes both of these concepts and is tuned toward a free-form drag and drop layout model as can be provided by GUI builders.</p>
-<p><a href="https://swing-layout.dev.java.net/" class="externalLink">https://swing-layout.dev.java.net/</a>
 </p>
 <p><a name="fest:fest-swing-testng:jar"><b>FEST Swing - TestNG Extension</b>
 </a>
@@ -376,6 +390,26 @@
 </a>
 </p>
 <p>Utility methods used by FEST modules</p>
+<p><a name="net.jcip:jcip-annotations:jar"><b>Unnamed - net.jcip:jcip-annotations:jar:1.0</b>
+</a>
+</p>
+<p>Java Concurrency In Practice Annotations</p>
+<p><a href="http://www.jcip.net/" class="externalLink">http://www.jcip.net/</a>
+</p>
+<p><a name="swinghelper:debug:jar"><b>Unnamed - swinghelper:debug:jar:1.0</b>
+</a>
+</p>
+<p>POM was created from install:install-file</p>
+<p><a name="net.java.dev.swing-layout:swing-layout:jar"><b>Extensions to Swing to create professional cross platform layout</b>
+</a>
+</p>
+<p>Swing Layout Extensions goal is to make it easy to create professional cross platform layouts with Swing. This project has an eye towards the needs of GUI builders, such as NetBeans. 
+    This project consists of the following pieces:
+        * Ability to get the baseline for components.
+        * Ability to get the preferred gap between components.
+        * A new LayoutManager that utilizes both of these concepts and is tuned toward a free-form drag and drop layout model as can be provided by GUI builders.</p>
+<p><a href="https://swing-layout.dev.java.net/" class="externalLink">https://swing-layout.dev.java.net/</a>
+</p>
 </div>
 </div>
 
@@ -386,7 +420,7 @@
     </div>
     <div id="footer">
       <div class="xright">&#169;  
-          2005-2008
+          2005-2009
     
           
   
