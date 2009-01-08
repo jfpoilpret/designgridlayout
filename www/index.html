@@ -8,8 +8,10 @@
 
 	<body bgcolor="#FFFFFF" text="#000000">
 		<p>
-		DesignGridLayout is a Swing LayoutManager inspired by the use of canonical grids for user interface design. Its goal is to 
-		be useful for typical form-based designs.  DesignGridLayout is an alternative to other grid-based layout managers 
+		DesignGridLayout is a revolutionary and innovative Swing LayoutManager inspired by 
+		the use of canonical grids for user interface design. Its goal is to 
+		be useful for typical form-based designs.  DesignGridLayout is an alternative to 
+		other grid-based layout managers 
 		(<a href="http://www.jgoodies.com/freeware/forms/index.html">FormsLayout</a>, 
 		<a href="http://java.sun.com/docs/books/tutorial/uiswing/layout/grid.html">GridLayout</a>,
 		<a href="http://java.sun.com/docs/books/tutorial/uiswing/layout/gridbag.html">GridBagLayout</a>, 
@@ -18,23 +20,48 @@
 		<a href="http://www.datadosen.se/riverlayout/">RiverLayout</a>,
 		<a href="http://www.javaworld.com/javaworld/javatips/jw-javatip129.html">SGLayout</a>, 
 		<a href="http://java.sun.com/products/jfc/tsc/articles/tablelayout/">TableLayout</a> and
-		<a href="http://www.miglayout.com/">MiGLayout</a>).  DesignGridLayout works with JDK 1.5
-		and later.
+		<a href="http://www.miglayout.com/">MiGLayout</a>).
+		DesignGridLayout works with JDK 1.5 and later.
 		</p> 
 		<p>
-		The idea of user interfaces based on canonical grids is 
-	    described in the book 
+		The idea of user interfaces based on canonical grids is described in the book 
 		<a href="http://www.amazon.com/gp/product/0133033899">Designing Visual Interfaces: Communication Oriented Techniques</a> 
-		by Kevin Mullet and Darrell Sano.  Available online, Patrizia Nanni's thesis <a href="http://www.vhml.org/theses/nannip/HCI_final.htm">
-		Human-Computer Interaction: Principles of Interface Design</a> has a nice chapter called 
-		<a href="http://www.vhml.org/theses/nannip/HCI_final.htm#_Toc87596295">Module and Program: Grid-based Design</a>, which also
-		references Mullet and Sano's work.
+		by Kevin Mullet and Darrell Sano.  Available online, Patrizia Nanni's thesis 
+		<a href="http://www.vhml.org/theses/nannip/HCI_final.htm">Human-Computer Interaction: Principles of Interface Design</a> 
+		has a nice chapter called 
+		<a href="http://www.vhml.org/theses/nannip/HCI_final.htm#_Toc87596295">Module and Program: Grid-based Design</a>, 
+		which also references Mullet and Sano's work.
  		</p>
+		<h3> What makes DesignGridLayout revolutionary and innovative? </h3>
 		<p>
-		DesignGridLayout's primary 
-		innovation is a well behaved simple layout algorithm exposed as a convenient API.  No need to specify constraints.  Just
-		add rows from top to bottom and components from left to right.  Sizing, resizing, aligning component baselines, margins,
-		and gutters are all handled automatically.
+		DesignGridLayout's primary innovation is a well behaved simple layout algorithm 
+		exposed as a convenient API. Just add rows from top to bottom and components 
+		from left to right.
+		</p>
+		<p>
+		But more than that, DesignGridLayout is <b>smart</b>:
+		<ul>
+			<li>it manages all margins, gaps, alignments (baseline and vertical) automagically 
+				for you, while respecting UI guidelines for the current platform 
+				(as defined by the Look and Feel)</li>
+			<li>it makes sure your UI is always visually pleasing (that's the 
+				power of canoncial grids)</li>
+			<li>it knows how to count: you never need to specify upfront how many 
+				columns or rows you have in your UI, DesignGridLayout will automatically 
+				count that for you! This way, you generally don't need to mock up your UI 
+				on paper first and try to draw virtual grid lines like most grid-oriented 
+				LayoutManagers impose</li>
+			<li>it does not require you to specify which rows should be able to vertically 
+				grow during user resize and which rows should have fixed height: 
+				DesignGridLayout automatically detect both types of rows!</li>
+			<li>DesignGridLayout will also make sure that the height of special components 
+				-such as a <code>JList</code>- is always appropriate for the content, i.e. allows to 
+				display all rows in their full height (not truncated like all other 
+				LayoutManagers)</li>
+			<li>thanks to its fluent API, DesignGridLayout makes it a breeze to define 
+				your UI forms; it also makes the learning curve very short: you can be 
+				fully effective in less than one hour!</li>
+		</ul>
 		</p>
 		<h3> Praise </h3>
  		<p>
