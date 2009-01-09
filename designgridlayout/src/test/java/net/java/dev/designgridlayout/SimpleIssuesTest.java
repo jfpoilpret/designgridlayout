@@ -78,6 +78,11 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExampleFromEDT(Bug28bBadHeightWhenStartedFromEDT.class);
 	}
 
+	@Test public void checkBug30ExceptionRowsWithoutComponents() throws Exception
+	{
+		checkExample(Bug30ExceptionRowsWithoutComponents.class);
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);
