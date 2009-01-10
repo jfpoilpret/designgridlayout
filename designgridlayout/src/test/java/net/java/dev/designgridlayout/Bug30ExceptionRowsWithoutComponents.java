@@ -24,13 +24,17 @@ public class Bug30ExceptionRowsWithoutComponents extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		// Just in order to see somehting...
-		layout.row().grid(label("label")).add(field("field"));
-		// All special (normally impossible) cases
 		layout.row().left();
+		layout.row().grid(label("label")).add(field("field"));
 		layout.row().center();
+		layout.row().grid(label("label")).add(field("field"));
 		layout.row().right();
+		layout.row().grid(label("label")).add(field("field"));
 		layout.row().grid();
+		layout.row().grid(label("label")).add(field("field"));
 		layout.row();
+		layout.emptyRow();
+		layout.row().center().add(button(), button());
+		layout.row().grid();
 	}
 }
