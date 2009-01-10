@@ -161,6 +161,11 @@ abstract class AbstractRow
 	{
 		return 0;
 	}
+	
+	boolean isEmpty()
+	{
+		return items().isEmpty();
+	}
 
 	JComponent leftComponent()
 	{

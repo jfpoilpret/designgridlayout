@@ -243,6 +243,18 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return gridgap;
 	}
 
+	@Override boolean isEmpty()
+	{
+		for (SubGrid grid: _grids)
+		{
+			if (grid.leftComponent() != null)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	@Override JComponent leftComponent()
 	{
 		return (_grids.isEmpty() ? null : _grids.get(0).leftComponent());
