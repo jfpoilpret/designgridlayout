@@ -71,8 +71,8 @@ abstract class AbstractRow
 	final void init()
 	{
 		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
-		_height = ComponentHelper.maxValues(items(), PrefHeightExtractor.INSTANCE);
-		_baseline = ComponentHelper.maxValues(items(), BaselineExtractor.INSTANCE);
+		_height = ComponentHelper.maxValues(allItems(), PrefHeightExtractor.INSTANCE);
+		_baseline = ComponentHelper.maxValues(allItems(), BaselineExtractor.INSTANCE);
 		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, items());
 		if (fixedHeight || _growWeight == -1.0)
 		{
@@ -154,7 +154,7 @@ abstract class AbstractRow
 
 	int hgap()
 	{
-		return ComponentHelper.hgap(items(), parent());
+		return ComponentHelper.hgap(allItems(), parent());
 	}
 
 	int gridgap()
@@ -164,23 +164,30 @@ abstract class AbstractRow
 	
 	boolean isEmpty()
 	{
-		return items().isEmpty();
+		return allItems().isEmpty();
 	}
 
 	JComponent leftComponent()
 	{
-		return (items().isEmpty() ? null : items().get(0).component());
+		return (allItems().isEmpty() ? null : allItems().get(0).component());
 	}
 	
 	JComponent rightComponent()
 	{
-		return (items().isEmpty() ? null : items().get(items().size() - 1).component());
+		return (allItems().isEmpty() ? null : 
+			allItems().get(allItems().size() - 1).component());
 	}
 	
 	abstract void checkSpanRows();
 
 	abstract List<? extends IRowItem> items();
 
+	// Returns all items including potential labels
+	List<? extends IRowItem> allItems()
+	{
+		return items();
+	}
+	
 	// Returns the actual extra height allocated to the row
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth);

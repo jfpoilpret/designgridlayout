@@ -420,8 +420,8 @@ public class DesignGridLayout implements LayoutManager
 			int maxComboHeight = 0;
 			int rowGap = 0;
 
-			List<? extends IRowItem> items1 = row.items();
-			List<? extends IRowItem> items2 = next.items();
+			List<? extends IRowItem> items1 = row.allItems();
+			List<? extends IRowItem> items2 = next.allItems();
 			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
 			for (IRowItem item1: items1)
@@ -682,7 +682,7 @@ public class DesignGridLayout implements LayoutManager
 		AbstractRow topRow = firstNonEmptyRow();
 		if (topRow != null)
 		{
-			for (IRowItem item: topRow.items())
+			for (IRowItem item: topRow.allItems())
 			{
 				int gap = getContainerGap(item.component(), SwingConstants.NORTH);
 				_top = Math.max(_top, gap);
@@ -699,7 +699,7 @@ public class DesignGridLayout implements LayoutManager
 		AbstractRow bottomRow = lastNonEmptyRow();
 		if (bottomRow != null)
 		{
-			for (IRowItem item: bottomRow.items())
+			for (IRowItem item: bottomRow.allItems())
 			{
 				int height = item.preferredHeight();
 				int gap = getContainerGap(item.component(), SwingConstants.SOUTH);

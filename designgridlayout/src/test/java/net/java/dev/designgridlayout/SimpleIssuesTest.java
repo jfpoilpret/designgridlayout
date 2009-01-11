@@ -83,6 +83,11 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExample(Bug30ExceptionRowsWithoutComponents.class);
 	}
 
+	@Test public void checkBug31GridRowWithLabelButNoComponent() throws Exception
+	{
+		checkExample(Bug31GridRowWithLabelButNoComponent.class);
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);
