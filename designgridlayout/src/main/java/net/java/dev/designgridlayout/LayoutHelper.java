@@ -59,7 +59,7 @@ final class LayoutHelper
 			}
 		}
 		// Keep smart vertical resize behavior in any case
-		int height = component.getPreferredSize().height;
+		int height = getComponentHeight(component);
 		int usedExtraHeight = 0;
 		if (MarkerHelper.isMarker(component))
 		{
@@ -79,7 +79,7 @@ final class LayoutHelper
 	int setSizeLocation(JComponent component, int x, int width, 
 		int maxHeight, int maxBaseline)
 	{
-		int height = component.getPreferredSize().height;
+		int height = getComponentHeight(component);
 		int usedExtraHeight = 0;
 		if (_tester.canGrowHeight(component))
 		{
@@ -90,17 +90,29 @@ final class LayoutHelper
 		component.setSize(width, height + usedExtraHeight);
 
 		int baseline = BaselineHelper.getBaseline(component);
-		int yy = 0;
+		int yy;
 		if (baseline > 0)
 		{
 			yy = maxBaseline - baseline;
 		}
+		else if (baseline == 0)
+		{
+			// if zero baseline for component, then align component on the top
+			yy = 0;
+		}
 		else
 		{
+			// if no baseline defined (-1), then align component in its middle
 			yy = (maxHeight - height) / 2;
 		}
 		component.setLocation((_rtl ? _parentWidth - x - width : x), _y + yy);
 		return usedExtraHeight;
+	}
+	
+	static private int getComponentHeight(JComponent component)
+	{
+		int height = component.getHeight();
+		return (height > 0 ? height : component.getPreferredSize().height);
 	}
 	
 	private final HeightGrowPolicy _tester;

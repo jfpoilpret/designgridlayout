@@ -88,6 +88,16 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExample(Bug31GridRowWithLabelButNoComponent.class);
 	}
 
+	@Test public void checkBug32ProblemWithJTextPane() throws Exception
+	{
+		// First problem: bad initial baseline
+		checkExample(Bug32ProblemWithJTextPane.class);
+		// Second problem: very bad baseline after appending a lot of text
+		frame().button("append").click();
+		frame().resizeWidthTo(frame().component().getWidth() + 1);
+		checkSnapshot("after-append");
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);
