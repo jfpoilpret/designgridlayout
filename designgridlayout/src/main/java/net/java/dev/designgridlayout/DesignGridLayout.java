@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -196,15 +197,15 @@ public class DesignGridLayout implements LayoutManager
 	 */
 	public void emptyRow()
 	{
-		if (!_rows.isEmpty())
+		if (_current != null)
 		{
-			AbstractRow current = _rows.get(_rows.size() - 1);
-			current.setUnrelatedGap();
+			_current.setUnrelatedGap();
 		}
 	}
 	
 	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
 	{
+		_current = row;
 		_rows.add(row);
 		row.init(_parent, _heightTester, _orientation);
 		row.growWeight(verticalWeight);
@@ -280,13 +281,17 @@ public class DesignGridLayout implements LayoutManager
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
 			for (AbstractRow row: _rows)
 			{
-				helper.setY(y);
-				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
-				helper.setRowAvailableHeight(extraHeight + row.height());
-				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
-					gridsWidth, _labelWidths);
-				row.actualHeight(row.height() + extraHeight);
-				y += row.actualHeight() + row.vgap();
+				// Issue #30 - check that row is not empty
+				if (!row.isEmpty())
+				{
+					helper.setY(y);
+					int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
+					helper.setRowAvailableHeight(extraHeight + row.height());
+					row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
+						gridsWidth, _labelWidths);
+					row.actualHeight(row.height() + extraHeight);
+					y += row.actualHeight() + row.vgap();
+				}
 			}
 			
 			// Second pass: all row-span components
@@ -395,14 +400,28 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		// Vertical gaps (per row)
-		for (int nthRow = 0; nthRow < (_rows.size() - 1); nthRow++)
+		int nthRow = 0;
+		for (AbstractRow row: _rows)
 		{
+			nthRow++;
+			if (row.isEmpty())
+			{
+				// Current row has no component: nothing to compute!
+				continue;
+			}
+			AbstractRow next = nextNonEmptyRow(nthRow);
+			if (next == null)
+			{
+				// Current row is the last row with components: 
+				// computation is finished
+				break;
+			}
+
 			int maxComboHeight = 0;
 			int rowGap = 0;
 
-			AbstractRow row = _rows.get(nthRow);
-			List<? extends IRowItem> items1 = row.items();
-			List<? extends IRowItem> items2 = _rows.get(nthRow + 1).items();
+			List<? extends IRowItem> items1 = row.allItems();
+			List<? extends IRowItem> items2 = next.allItems();
 			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
 
 			for (IRowItem item1: items1)
@@ -449,7 +468,7 @@ public class DesignGridLayout implements LayoutManager
 			_minimumSize = new Dimension(0, 0);
 			return;
 		}
-
+		
 		// First of all count number of canonical grids in the whole panel
 		countGrids();
 
@@ -659,11 +678,15 @@ public class DesignGridLayout implements LayoutManager
 	private void computeTopMargin()
 	{
 		_top = 0;
-		AbstractRow topRow = _rows.get(0);
-		for (IRowItem item: topRow.items())
+		// Issue #30 - find the first non empty row
+		AbstractRow topRow = firstNonEmptyRow();
+		if (topRow != null)
 		{
-			int gap = getContainerGap(item.component(), SwingConstants.NORTH);
-			_top = Math.max(_top, gap);
+			for (IRowItem item: topRow.allItems())
+			{
+				int gap = getContainerGap(item.component(), SwingConstants.NORTH);
+				_top = Math.max(_top, gap);
+			}
 		}
 	}
 
@@ -672,21 +695,64 @@ public class DesignGridLayout implements LayoutManager
 		_bottom = 0;
 		int maxComboHeight = 0;
 		int bottomGap = 0;
-		AbstractRow bottomRow = _rows.get(_rows.size() - 1);
-		for (IRowItem item: bottomRow.items())
+		// Issue #30 - find the last non empty row
+		AbstractRow bottomRow = lastNonEmptyRow();
+		if (bottomRow != null)
 		{
-			int height = item.preferredHeight();
-			int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
-			int comboHeight = height + gap;
-			if (comboHeight > maxComboHeight)
+			for (IRowItem item: bottomRow.allItems())
 			{
-				maxComboHeight = comboHeight;
-				bottomGap = gap;
+				int height = item.preferredHeight();
+				int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
+				int comboHeight = height + gap;
+				if (comboHeight > maxComboHeight)
+				{
+					maxComboHeight = comboHeight;
+					bottomGap = gap;
+				}
 			}
+			_bottom = Math.max(_bottom, bottomGap);
 		}
-		_bottom = Math.max(_bottom, bottomGap);
 	}
 	
+	private AbstractRow firstNonEmptyRow()
+	{
+		for (AbstractRow row: _rows)
+		{
+			if (!row.isEmpty())
+			{
+				return row;
+			}
+		}
+		return null;
+	}
+	
+	private AbstractRow nextNonEmptyRow(int index)
+	{
+		for (int i = index; i < _rows.size(); i++)
+		{
+			AbstractRow row = _rows.get(i);
+			if (!row.isEmpty())
+			{
+				return row;
+			}
+		}
+		return null;
+	}
+	
+	private AbstractRow lastNonEmptyRow()
+	{
+		ListIterator<AbstractRow> i = _rows.listIterator(_rows.size());
+		while (i.hasPrevious())
+		{
+			AbstractRow row = i.previous();
+			if (!row.isEmpty())
+			{
+				return row;
+			}
+		}
+		return null;
+	}
+
 	private void computeLeftRightMargins()
 	{
 		_left = 0;
@@ -796,6 +862,7 @@ public class DesignGridLayout implements LayoutManager
 	private double _bottomWeight = 1.0;
 	private double _rightWeight = 1.0;
 	
+	private AbstractRow _current = null;
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
 	private int _totalLabelWidth;

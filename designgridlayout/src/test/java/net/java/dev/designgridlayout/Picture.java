@@ -20,7 +20,6 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
@@ -64,11 +63,6 @@ public class Picture extends JComponent implements Scrollable
 		}
 		// Always center the image
 		g.drawImage(_image.getImage(), x, y, width, height, null);
-	}
-	
-	public int getBaseline(int width, int height)
-	{
-		return BaselineHelper.getBaseline(_label);
 	}
 	
 	public Dimension getPreferredScrollableViewportSize()
@@ -143,7 +137,6 @@ public class Picture extends JComponent implements Scrollable
 	}
 
 	final private ImageIcon _image;
-	final private JLabel _label = new JLabel("Dummy");
 	
 	static final private String IMAGE_PATH = "image.jpg";
 	static final private int MIN_SIZE = 80;

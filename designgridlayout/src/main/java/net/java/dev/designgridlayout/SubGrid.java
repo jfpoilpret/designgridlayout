@@ -109,6 +109,11 @@ final class SubGrid implements ISubGrid
 		}
 	}
 	
+	JLabel label()
+	{
+		return _label;
+	}
+	
 	JComponent leftComponent()
 	{
 		if (_label != null)

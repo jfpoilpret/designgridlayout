@@ -243,6 +243,18 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return gridgap;
 	}
 
+	@Override boolean isEmpty()
+	{
+		for (SubGrid grid: _grids)
+		{
+			if (grid.leftComponent() != null)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	@Override JComponent leftComponent()
 	{
 		return (_grids.isEmpty() ? null : _grids.get(0).leftComponent());
@@ -251,6 +263,24 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	@Override List<RowItem> items()
 	{
 		return _items;
+	}
+	
+	@Override List<RowItem> allItems()
+	{
+		if (_allItems == null)
+		{
+			_allItems = new ArrayList<RowItem>(_items.size() + _grids.size());
+			for (SubGrid grid: _grids)
+			{
+				// Add label if any
+				if (grid.label() != null)
+				{
+					_allItems.add(new RowItem(1, grid.label()));
+				}
+				_allItems.addAll(grid.items());
+			}
+		}
+		return _allItems;
 	}
 	
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
@@ -322,6 +352,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	final private GridRow _previous;
 	final private List<SubGrid> _grids = new ArrayList<SubGrid>();
 	final private List<RowItem> _items = new ArrayList<RowItem>();
+	private List<RowItem> _allItems = null;
 
 	static final private ISubGrid NULL_GRID = new EmptySubGrid();
 }
