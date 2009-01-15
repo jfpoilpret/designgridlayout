@@ -253,88 +253,119 @@
 <a name="243" href="#243">243</a> 		<strong class="jxr_keyword">return</strong> gridgap;
 <a name="244" href="#244">244</a> 	}
 <a name="245" href="#245">245</a> 
-<a name="246" href="#246">246</a> 	@Override JComponent leftComponent()
+<a name="246" href="#246">246</a> 	@Override <strong class="jxr_keyword">boolean</strong> isEmpty()
 <a name="247" href="#247">247</a> 	{
-<a name="248" href="#248">248</a> 		<strong class="jxr_keyword">return</strong> (_grids.isEmpty() ? <strong class="jxr_keyword">null</strong> : _grids.get(0).leftComponent());
-<a name="249" href="#249">249</a> 	}
-<a name="250" href="#250">250</a> 	
-<a name="251" href="#251">251</a> 	@Override List&lt;RowItem&gt; items()
-<a name="252" href="#252">252</a> 	{
-<a name="253" href="#253">253</a> 		<strong class="jxr_keyword">return</strong> _items;
-<a name="254" href="#254">254</a> 	}
-<a name="255" href="#255">255</a> 	
-<a name="256" href="#256">256</a> 	@Override <strong class="jxr_keyword">int</strong> layoutRow(<a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a> helper, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> hgap, <strong class="jxr_keyword">int</strong> gridgap, 
-<a name="257" href="#257">257</a> 		<strong class="jxr_keyword">int</strong> rowWidth, <strong class="jxr_keyword">int</strong> gridsWidth, List&lt;Integer&gt; labelsWidth)
-<a name="258" href="#258">258</a> 	{
-<a name="259" href="#259">259</a> 		<strong class="jxr_keyword">int</strong> x = left;
-<a name="260" href="#260">260</a> 		<strong class="jxr_keyword">int</strong> actualHeight = 0;
-<a name="261" href="#261">261</a> 		<strong class="jxr_keyword">int</strong> gridWidth = gridsWidth / _totalGrids;
-<a name="262" href="#262">262</a> 		<strong class="jxr_keyword">int</strong> gridIndex = 0;
-<a name="263" href="#263">263</a> 		Iterator&lt;Integer&gt; label = labelsWidth.iterator();
-<a name="264" href="#264">264</a> 		<strong class="jxr_keyword">for</strong> (SubGrid grid: _grids)
-<a name="265" href="#265">265</a> 		{
-<a name="266" href="#266">266</a> 			<em class="jxr_comment">// Find the label for the current sub-grid</em>
-<a name="267" href="#267">267</a> 			<strong class="jxr_keyword">int</strong> labelWidth = label.next();
-<a name="268" href="#268">268</a> 
-<a name="269" href="#269">269</a> 			<em class="jxr_comment">// Calculate the actual width for this sub-grid (depends on spans)</em>
-<a name="270" href="#270">270</a> 			<strong class="jxr_keyword">int</strong> width = gridWidth;
-<a name="271" href="#271">271</a> 			<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 1; i &lt; grid.gridspan(); i++)
-<a name="272" href="#272">272</a> 			{
-<a name="273" href="#273">273</a> 				width += gridgap + label.next() + hgap + gridWidth;
-<a name="274" href="#274">274</a> 			}
-<a name="275" href="#275">275</a> 			gridIndex += grid.gridspan();
-<a name="276" href="#276">276</a> 			<strong class="jxr_keyword">if</strong> (gridIndex == _totalGrids)
-<a name="277" href="#277">277</a> 			{
-<a name="278" href="#278">278</a> 				<em class="jxr_comment">// Add fudge to the true last grid </em>
-<a name="279" href="#279">279</a> 				<em class="jxr_comment">// Note that this is not necessarily the last grid of _grids!</em>
-<a name="280" href="#280">280</a> 				<strong class="jxr_keyword">int</strong> fudge = gridsWidth % _totalGrids;
-<a name="281" href="#281">281</a> 				width += fudge;
-<a name="282" href="#282">282</a> 			}
-<a name="283" href="#283">283</a> 			
-<a name="284" href="#284">284</a> 			<em class="jxr_comment">// Layout the sub-grid</em>
-<a name="285" href="#285">285</a> 			<strong class="jxr_keyword">int</strong> height = grid.layoutRow(
-<a name="286" href="#286">286</a> 				helper, x, height(), baseline(), hgap, width, labelWidth);
-<a name="287" href="#287">287</a> 			actualHeight = Math.max(actualHeight, height);
-<a name="288" href="#288">288</a> 
-<a name="289" href="#289">289</a> 			<em class="jxr_comment">// Position origin to the next grid</em>
-<a name="290" href="#290">290</a> 			x += labelWidth + hgap + width + gridgap;
-<a name="291" href="#291">291</a> 		}
-<a name="292" href="#292">292</a> 		<strong class="jxr_keyword">return</strong> actualHeight;
-<a name="293" href="#293">293</a> 	}
-<a name="294" href="#294">294</a> 
-<a name="295" href="#295">295</a> 	SubGrid findGrid(<strong class="jxr_keyword">int</strong> index)
-<a name="296" href="#296">296</a> 	{
-<a name="297" href="#297">297</a> 		<strong class="jxr_keyword">int</strong> i = 0;
-<a name="298" href="#298">298</a> 		<strong class="jxr_keyword">for</strong> (SubGrid grid: _grids)
-<a name="299" href="#299">299</a> 		{
-<a name="300" href="#300">300</a> 			<strong class="jxr_keyword">if</strong> (i == index)
-<a name="301" href="#301">301</a> 			{
-<a name="302" href="#302">302</a> 				<strong class="jxr_keyword">return</strong> grid;
-<a name="303" href="#303">303</a> 			}
-<a name="304" href="#304">304</a> 			i += grid.gridspan();
-<a name="305" href="#305">305</a> 			<strong class="jxr_keyword">if</strong> (i &gt; index)
-<a name="306" href="#306">306</a> 			{
-<a name="307" href="#307">307</a> 				<strong class="jxr_keyword">break</strong>;
-<a name="308" href="#308">308</a> 			}
-<a name="309" href="#309">309</a> 		}
-<a name="310" href="#310">310</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
-<a name="311" href="#311">311</a> 	}
-<a name="312" href="#312">312</a> 
-<a name="313" href="#313">313</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/ISubGrid.html">ISubGrid</a> findNonNulGrid(<strong class="jxr_keyword">int</strong> index)
-<a name="314" href="#314">314</a> 	{
-<a name="315" href="#315">315</a> 		SubGrid grid = findGrid(index);
-<a name="316" href="#316">316</a> 		<strong class="jxr_keyword">return</strong> (grid != <strong class="jxr_keyword">null</strong> ? grid : NULL_GRID);
-<a name="317" href="#317">317</a> 	}
-<a name="318" href="#318">318</a> 	
-<a name="319" href="#319">319</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/SubGrid.html">SubGrid</a> _current = <strong class="jxr_keyword">null</strong>;
-<a name="320" href="#320">320</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _gridIndex = 0;
-<a name="321" href="#321">321</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _totalGrids = 0;
-<a name="322" href="#322">322</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a> _previous;
-<a name="323" href="#323">323</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;SubGrid&gt; _grids = <strong class="jxr_keyword">new</strong> ArrayList&lt;SubGrid&gt;();
-<a name="324" href="#324">324</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;RowItem&gt; _items = <strong class="jxr_keyword">new</strong> ArrayList&lt;RowItem&gt;();
-<a name="325" href="#325">325</a> 
-<a name="326" href="#326">326</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/ISubGrid.html">ISubGrid</a> NULL_GRID = <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/EmptySubGrid.html">EmptySubGrid</a>();
-<a name="327" href="#327">327</a> }
+<a name="248" href="#248">248</a> 		<strong class="jxr_keyword">for</strong> (SubGrid grid: _grids)
+<a name="249" href="#249">249</a> 		{
+<a name="250" href="#250">250</a> 			<strong class="jxr_keyword">if</strong> (grid.leftComponent() != <strong class="jxr_keyword">null</strong>)
+<a name="251" href="#251">251</a> 			{
+<a name="252" href="#252">252</a> 				<strong class="jxr_keyword">return</strong> false;
+<a name="253" href="#253">253</a> 			}
+<a name="254" href="#254">254</a> 		}
+<a name="255" href="#255">255</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
+<a name="256" href="#256">256</a> 	}
+<a name="257" href="#257">257</a> 	
+<a name="258" href="#258">258</a> 	@Override JComponent leftComponent()
+<a name="259" href="#259">259</a> 	{
+<a name="260" href="#260">260</a> 		<strong class="jxr_keyword">return</strong> (_grids.isEmpty() ? <strong class="jxr_keyword">null</strong> : _grids.get(0).leftComponent());
+<a name="261" href="#261">261</a> 	}
+<a name="262" href="#262">262</a> 	
+<a name="263" href="#263">263</a> 	@Override List&lt;RowItem&gt; items()
+<a name="264" href="#264">264</a> 	{
+<a name="265" href="#265">265</a> 		<strong class="jxr_keyword">return</strong> _items;
+<a name="266" href="#266">266</a> 	}
+<a name="267" href="#267">267</a> 	
+<a name="268" href="#268">268</a> 	@Override List&lt;RowItem&gt; allItems()
+<a name="269" href="#269">269</a> 	{
+<a name="270" href="#270">270</a> 		<strong class="jxr_keyword">if</strong> (_allItems == <strong class="jxr_keyword">null</strong>)
+<a name="271" href="#271">271</a> 		{
+<a name="272" href="#272">272</a> 			_allItems = <strong class="jxr_keyword">new</strong> ArrayList&lt;RowItem&gt;(_items.size() + _grids.size());
+<a name="273" href="#273">273</a> 			<strong class="jxr_keyword">for</strong> (SubGrid grid: _grids)
+<a name="274" href="#274">274</a> 			{
+<a name="275" href="#275">275</a> 				<em class="jxr_comment">// Add label if any</em>
+<a name="276" href="#276">276</a> 				<strong class="jxr_keyword">if</strong> (grid.label() != <strong class="jxr_keyword">null</strong>)
+<a name="277" href="#277">277</a> 				{
+<a name="278" href="#278">278</a> 					_allItems.add(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/RowItem.html">RowItem</a>(1, grid.label()));
+<a name="279" href="#279">279</a> 				}
+<a name="280" href="#280">280</a> 				_allItems.addAll(grid.items());
+<a name="281" href="#281">281</a> 			}
+<a name="282" href="#282">282</a> 		}
+<a name="283" href="#283">283</a> 		<strong class="jxr_keyword">return</strong> _allItems;
+<a name="284" href="#284">284</a> 	}
+<a name="285" href="#285">285</a> 	
+<a name="286" href="#286">286</a> 	@Override <strong class="jxr_keyword">int</strong> layoutRow(<a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a> helper, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> hgap, <strong class="jxr_keyword">int</strong> gridgap, 
+<a name="287" href="#287">287</a> 		<strong class="jxr_keyword">int</strong> rowWidth, <strong class="jxr_keyword">int</strong> gridsWidth, List&lt;Integer&gt; labelsWidth)
+<a name="288" href="#288">288</a> 	{
+<a name="289" href="#289">289</a> 		<strong class="jxr_keyword">int</strong> x = left;
+<a name="290" href="#290">290</a> 		<strong class="jxr_keyword">int</strong> actualHeight = 0;
+<a name="291" href="#291">291</a> 		<strong class="jxr_keyword">int</strong> gridWidth = gridsWidth / _totalGrids;
+<a name="292" href="#292">292</a> 		<strong class="jxr_keyword">int</strong> gridIndex = 0;
+<a name="293" href="#293">293</a> 		Iterator&lt;Integer&gt; label = labelsWidth.iterator();
+<a name="294" href="#294">294</a> 		<strong class="jxr_keyword">for</strong> (SubGrid grid: _grids)
+<a name="295" href="#295">295</a> 		{
+<a name="296" href="#296">296</a> 			<em class="jxr_comment">// Find the label for the current sub-grid</em>
+<a name="297" href="#297">297</a> 			<strong class="jxr_keyword">int</strong> labelWidth = label.next();
+<a name="298" href="#298">298</a> 
+<a name="299" href="#299">299</a> 			<em class="jxr_comment">// Calculate the actual width for this sub-grid (depends on spans)</em>
+<a name="300" href="#300">300</a> 			<strong class="jxr_keyword">int</strong> width = gridWidth;
+<a name="301" href="#301">301</a> 			<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 1; i &lt; grid.gridspan(); i++)
+<a name="302" href="#302">302</a> 			{
+<a name="303" href="#303">303</a> 				width += gridgap + label.next() + hgap + gridWidth;
+<a name="304" href="#304">304</a> 			}
+<a name="305" href="#305">305</a> 			gridIndex += grid.gridspan();
+<a name="306" href="#306">306</a> 			<strong class="jxr_keyword">if</strong> (gridIndex == _totalGrids)
+<a name="307" href="#307">307</a> 			{
+<a name="308" href="#308">308</a> 				<em class="jxr_comment">// Add fudge to the true last grid </em>
+<a name="309" href="#309">309</a> 				<em class="jxr_comment">// Note that this is not necessarily the last grid of _grids!</em>
+<a name="310" href="#310">310</a> 				<strong class="jxr_keyword">int</strong> fudge = gridsWidth % _totalGrids;
+<a name="311" href="#311">311</a> 				width += fudge;
+<a name="312" href="#312">312</a> 			}
+<a name="313" href="#313">313</a> 			
+<a name="314" href="#314">314</a> 			<em class="jxr_comment">// Layout the sub-grid</em>
+<a name="315" href="#315">315</a> 			<strong class="jxr_keyword">int</strong> height = grid.layoutRow(
+<a name="316" href="#316">316</a> 				helper, x, height(), baseline(), hgap, width, labelWidth);
+<a name="317" href="#317">317</a> 			actualHeight = Math.max(actualHeight, height);
+<a name="318" href="#318">318</a> 
+<a name="319" href="#319">319</a> 			<em class="jxr_comment">// Position origin to the next grid</em>
+<a name="320" href="#320">320</a> 			x += labelWidth + hgap + width + gridgap;
+<a name="321" href="#321">321</a> 		}
+<a name="322" href="#322">322</a> 		<strong class="jxr_keyword">return</strong> actualHeight;
+<a name="323" href="#323">323</a> 	}
+<a name="324" href="#324">324</a> 
+<a name="325" href="#325">325</a> 	SubGrid findGrid(<strong class="jxr_keyword">int</strong> index)
+<a name="326" href="#326">326</a> 	{
+<a name="327" href="#327">327</a> 		<strong class="jxr_keyword">int</strong> i = 0;
+<a name="328" href="#328">328</a> 		<strong class="jxr_keyword">for</strong> (SubGrid grid: _grids)
+<a name="329" href="#329">329</a> 		{
+<a name="330" href="#330">330</a> 			<strong class="jxr_keyword">if</strong> (i == index)
+<a name="331" href="#331">331</a> 			{
+<a name="332" href="#332">332</a> 				<strong class="jxr_keyword">return</strong> grid;
+<a name="333" href="#333">333</a> 			}
+<a name="334" href="#334">334</a> 			i += grid.gridspan();
+<a name="335" href="#335">335</a> 			<strong class="jxr_keyword">if</strong> (i &gt; index)
+<a name="336" href="#336">336</a> 			{
+<a name="337" href="#337">337</a> 				<strong class="jxr_keyword">break</strong>;
+<a name="338" href="#338">338</a> 			}
+<a name="339" href="#339">339</a> 		}
+<a name="340" href="#340">340</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a name="341" href="#341">341</a> 	}
+<a name="342" href="#342">342</a> 
+<a name="343" href="#343">343</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/ISubGrid.html">ISubGrid</a> findNonNulGrid(<strong class="jxr_keyword">int</strong> index)
+<a name="344" href="#344">344</a> 	{
+<a name="345" href="#345">345</a> 		SubGrid grid = findGrid(index);
+<a name="346" href="#346">346</a> 		<strong class="jxr_keyword">return</strong> (grid != <strong class="jxr_keyword">null</strong> ? grid : NULL_GRID);
+<a name="347" href="#347">347</a> 	}
+<a name="348" href="#348">348</a> 	
+<a name="349" href="#349">349</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/SubGrid.html">SubGrid</a> _current = <strong class="jxr_keyword">null</strong>;
+<a name="350" href="#350">350</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _gridIndex = 0;
+<a name="351" href="#351">351</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _totalGrids = 0;
+<a name="352" href="#352">352</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a> _previous;
+<a name="353" href="#353">353</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;SubGrid&gt; _grids = <strong class="jxr_keyword">new</strong> ArrayList&lt;SubGrid&gt;();
+<a name="354" href="#354">354</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;RowItem&gt; _items = <strong class="jxr_keyword">new</strong> ArrayList&lt;RowItem&gt;();
+<a name="355" href="#355">355</a> 	<strong class="jxr_keyword">private</strong> List&lt;RowItem&gt; _allItems = <strong class="jxr_keyword">null</strong>;
+<a name="356" href="#356">356</a> 
+<a name="357" href="#357">357</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/ISubGrid.html">ISubGrid</a> NULL_GRID = <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/EmptySubGrid.html">EmptySubGrid</a>();
+<a name="358" href="#358">358</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

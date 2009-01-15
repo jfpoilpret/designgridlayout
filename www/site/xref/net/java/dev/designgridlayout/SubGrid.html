@@ -119,171 +119,176 @@
 <a name="109" href="#109">109</a> 		}
 <a name="110" href="#110">110</a> 	}
 <a name="111" href="#111">111</a> 	
-<a name="112" href="#112">112</a> 	JComponent leftComponent()
+<a name="112" href="#112">112</a> 	JLabel label()
 <a name="113" href="#113">113</a> 	{
-<a name="114" href="#114">114</a> 		<strong class="jxr_keyword">if</strong> (_label != <strong class="jxr_keyword">null</strong>)
-<a name="115" href="#115">115</a> 		{
-<a name="116" href="#116">116</a> 			<strong class="jxr_keyword">return</strong> _label;
-<a name="117" href="#117">117</a> 		}
-<a name="118" href="#118">118</a> 		<strong class="jxr_keyword">else</strong>
-<a name="119" href="#119">119</a> 		{
-<a name="120" href="#120">120</a> 			<strong class="jxr_keyword">return</strong> (_items.isEmpty() ? <strong class="jxr_keyword">null</strong> : _items.get(0).component());
-<a name="121" href="#121">121</a> 		}
-<a name="122" href="#122">122</a> 	}
-<a name="123" href="#123">123</a> 	
-<a name="124" href="#124">124</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> gridspan()
-<a name="125" href="#125">125</a> 	{
-<a name="126" href="#126">126</a> 		<strong class="jxr_keyword">return</strong> _gridspan;
+<a name="114" href="#114">114</a> 		<strong class="jxr_keyword">return</strong> _label;
+<a name="115" href="#115">115</a> 	}
+<a name="116" href="#116">116</a> 	
+<a name="117" href="#117">117</a> 	JComponent leftComponent()
+<a name="118" href="#118">118</a> 	{
+<a name="119" href="#119">119</a> 		<strong class="jxr_keyword">if</strong> (_label != <strong class="jxr_keyword">null</strong>)
+<a name="120" href="#120">120</a> 		{
+<a name="121" href="#121">121</a> 			<strong class="jxr_keyword">return</strong> _label;
+<a name="122" href="#122">122</a> 		}
+<a name="123" href="#123">123</a> 		<strong class="jxr_keyword">else</strong>
+<a name="124" href="#124">124</a> 		{
+<a name="125" href="#125">125</a> 			<strong class="jxr_keyword">return</strong> (_items.isEmpty() ? <strong class="jxr_keyword">null</strong> : _items.get(0).component());
+<a name="126" href="#126">126</a> 		}
 <a name="127" href="#127">127</a> 	}
 <a name="128" href="#128">128</a> 	
-<a name="129" href="#129">129</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> gridspan(<strong class="jxr_keyword">int</strong> span)
+<a name="129" href="#129">129</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> gridspan()
 <a name="130" href="#130">130</a> 	{
-<a name="131" href="#131">131</a> 		<strong class="jxr_keyword">if</strong> (_previous != <strong class="jxr_keyword">null</strong> &amp;&amp; _spanRow)
-<a name="132" href="#132">132</a> 		{
-<a name="133" href="#133">133</a> 			_gridspan = _previous.gridspan();
-<a name="134" href="#134">134</a> 		}
-<a name="135" href="#135">135</a> 		<strong class="jxr_keyword">if</strong> (_gridspan == 0)
-<a name="136" href="#136">136</a> 		{
-<a name="137" href="#137">137</a> 			_gridspan = span;
-<a name="138" href="#138">138</a> 		}
-<a name="139" href="#139">139</a> 	}
-<a name="140" href="#140">140</a> 
-<a name="141" href="#141">141</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> labelWidth()
-<a name="142" href="#142">142</a> 	{
-<a name="143" href="#143">143</a> 		<strong class="jxr_keyword">return</strong> (_label != <strong class="jxr_keyword">null</strong> ? _label.getPreferredSize().width : 0);
+<a name="131" href="#131">131</a> 		<strong class="jxr_keyword">return</strong> _gridspan;
+<a name="132" href="#132">132</a> 	}
+<a name="133" href="#133">133</a> 	
+<a name="134" href="#134">134</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> gridspan(<strong class="jxr_keyword">int</strong> span)
+<a name="135" href="#135">135</a> 	{
+<a name="136" href="#136">136</a> 		<strong class="jxr_keyword">if</strong> (_previous != <strong class="jxr_keyword">null</strong> &amp;&amp; _spanRow)
+<a name="137" href="#137">137</a> 		{
+<a name="138" href="#138">138</a> 			_gridspan = _previous.gridspan();
+<a name="139" href="#139">139</a> 		}
+<a name="140" href="#140">140</a> 		<strong class="jxr_keyword">if</strong> (_gridspan == 0)
+<a name="141" href="#141">141</a> 		{
+<a name="142" href="#142">142</a> 			_gridspan = span;
+<a name="143" href="#143">143</a> 		}
 <a name="144" href="#144">144</a> 	}
 <a name="145" href="#145">145</a> 
-<a name="146" href="#146">146</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> gridColumns()
+<a name="146" href="#146">146</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> labelWidth()
 <a name="147" href="#147">147</a> 	{
-<a name="148" href="#148">148</a> 		<strong class="jxr_keyword">int</strong> columns = 0;
-<a name="149" href="#149">149</a> 		<strong class="jxr_keyword">for</strong> (RowItem item: _items)
-<a name="150" href="#150">150</a> 		{
-<a name="151" href="#151">151</a> 			columns += item.span();
-<a name="152" href="#152">152</a> 		}
-<a name="153" href="#153">153</a> 		<strong class="jxr_keyword">return</strong> columns;
-<a name="154" href="#154">154</a> 	}
-<a name="155" href="#155">155</a> 
-<a name="156" href="#156">156</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> maxColumnWidth(<strong class="jxr_keyword">int</strong> maxColumns, <a href="../../../../net/java/dev/designgridlayout/IExtractor.html">IExtractor</a> extractor)
-<a name="157" href="#157">157</a> 	{
-<a name="158" href="#158">158</a> 		<strong class="jxr_keyword">int</strong> maxWidth = 0;
-<a name="159" href="#159">159</a> 		<em class="jxr_comment">// Note columns (sum item spans), not the count of components</em>
-<a name="160" href="#160">160</a> 		<strong class="jxr_keyword">int</strong> columns = gridColumns();
-<a name="161" href="#161">161</a> 		<strong class="jxr_keyword">float</strong> divisions = (<strong class="jxr_keyword">float</strong>) columns / (<strong class="jxr_keyword">float</strong>) maxColumns;
-<a name="162" href="#162">162</a> 
-<a name="163" href="#163">163</a> 		<strong class="jxr_keyword">for</strong> (RowItem item: _items)
-<a name="164" href="#164">164</a> 		{
-<a name="165" href="#165">165</a> 			<strong class="jxr_keyword">int</strong> width = extractor.value(item);
-<a name="166" href="#166">166</a> 
-<a name="167" href="#167">167</a> 			<em class="jxr_comment">// Ignores remainder (fudge), which is incorrect if remainder</em>
-<a name="168" href="#168">168</a> 			<em class="jxr_comment">// is greater than horizontal gap (hopefully rarely)</em>
-<a name="169" href="#169">169</a> 			width = (<strong class="jxr_keyword">int</strong>) ((width * divisions) / item.span());
-<a name="170" href="#170">170</a> 			maxWidth = Math.max(maxWidth, width);
-<a name="171" href="#171">171</a> 		}
-<a name="172" href="#172">172</a> 		<strong class="jxr_keyword">return</strong> maxWidth;
-<a name="173" href="#173">173</a> 	}
-<a name="174" href="#174">174</a> 
-<a name="175" href="#175">175</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> hgap()
-<a name="176" href="#176">176</a> 	{
-<a name="177" href="#177">177</a> 		<strong class="jxr_keyword">return</strong> ComponentHelper.hgap(_label, _items, _parent);
+<a name="148" href="#148">148</a> 		<strong class="jxr_keyword">return</strong> (_label != <strong class="jxr_keyword">null</strong> ? _label.getPreferredSize().width : 0);
+<a name="149" href="#149">149</a> 	}
+<a name="150" href="#150">150</a> 
+<a name="151" href="#151">151</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> gridColumns()
+<a name="152" href="#152">152</a> 	{
+<a name="153" href="#153">153</a> 		<strong class="jxr_keyword">int</strong> columns = 0;
+<a name="154" href="#154">154</a> 		<strong class="jxr_keyword">for</strong> (RowItem item: _items)
+<a name="155" href="#155">155</a> 		{
+<a name="156" href="#156">156</a> 			columns += item.span();
+<a name="157" href="#157">157</a> 		}
+<a name="158" href="#158">158</a> 		<strong class="jxr_keyword">return</strong> columns;
+<a name="159" href="#159">159</a> 	}
+<a name="160" href="#160">160</a> 
+<a name="161" href="#161">161</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> maxColumnWidth(<strong class="jxr_keyword">int</strong> maxColumns, <a href="../../../../net/java/dev/designgridlayout/IExtractor.html">IExtractor</a> extractor)
+<a name="162" href="#162">162</a> 	{
+<a name="163" href="#163">163</a> 		<strong class="jxr_keyword">int</strong> maxWidth = 0;
+<a name="164" href="#164">164</a> 		<em class="jxr_comment">// Note columns (sum item spans), not the count of components</em>
+<a name="165" href="#165">165</a> 		<strong class="jxr_keyword">int</strong> columns = gridColumns();
+<a name="166" href="#166">166</a> 		<strong class="jxr_keyword">float</strong> divisions = (<strong class="jxr_keyword">float</strong>) columns / (<strong class="jxr_keyword">float</strong>) maxColumns;
+<a name="167" href="#167">167</a> 
+<a name="168" href="#168">168</a> 		<strong class="jxr_keyword">for</strong> (RowItem item: _items)
+<a name="169" href="#169">169</a> 		{
+<a name="170" href="#170">170</a> 			<strong class="jxr_keyword">int</strong> width = extractor.value(item);
+<a name="171" href="#171">171</a> 
+<a name="172" href="#172">172</a> 			<em class="jxr_comment">// Ignores remainder (fudge), which is incorrect if remainder</em>
+<a name="173" href="#173">173</a> 			<em class="jxr_comment">// is greater than horizontal gap (hopefully rarely)</em>
+<a name="174" href="#174">174</a> 			width = (<strong class="jxr_keyword">int</strong>) ((width * divisions) / item.span());
+<a name="175" href="#175">175</a> 			maxWidth = Math.max(maxWidth, width);
+<a name="176" href="#176">176</a> 		}
+<a name="177" href="#177">177</a> 		<strong class="jxr_keyword">return</strong> maxWidth;
 <a name="178" href="#178">178</a> 	}
 <a name="179" href="#179">179</a> 
-<a name="180" href="#180">180</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> layoutRow(<a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a> helper, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> height, <strong class="jxr_keyword">int</strong> baseline, 
-<a name="181" href="#181">181</a> 		<strong class="jxr_keyword">int</strong> hgap, <strong class="jxr_keyword">int</strong> rowWidth, <strong class="jxr_keyword">int</strong> labelWidth)
-<a name="182" href="#182">182</a> 	{
-<a name="183" href="#183">183</a> 		<strong class="jxr_keyword">int</strong> x = left;
-<a name="184" href="#184">184</a> 		<strong class="jxr_keyword">int</strong> actualHeight = 0;
-<a name="185" href="#185">185</a> 		<em class="jxr_comment">// Account for label column</em>
-<a name="186" href="#186">186</a> 		<strong class="jxr_keyword">if</strong> (labelWidth &gt; 0)
-<a name="187" href="#187">187</a> 		{
-<a name="188" href="#188">188</a> 			<strong class="jxr_keyword">if</strong> (_label != <strong class="jxr_keyword">null</strong>)
-<a name="189" href="#189">189</a> 			{
-<a name="190" href="#190">190</a> 				actualHeight = Math.max(0, helper.setSizeLocation(
-<a name="191" href="#191">191</a> 					_label, x, labelWidth, height, baseline));
-<a name="192" href="#192">192</a> 			}
-<a name="193" href="#193">193</a> 			x += labelWidth + hgap;
-<a name="194" href="#194">194</a> 		}
-<a name="195" href="#195">195</a> 
-<a name="196" href="#196">196</a> 		<strong class="jxr_keyword">int</strong> columns = gridColumns();
-<a name="197" href="#197">197</a> 		<strong class="jxr_keyword">if</strong> (columns &gt; 0)
-<a name="198" href="#198">198</a> 		{
-<a name="199" href="#199">199</a> 			<em class="jxr_comment">// pre-subtract gaps</em>
-<a name="200" href="#200">200</a> 			<strong class="jxr_keyword">int</strong> gridWidth = rowWidth - ((columns - 1) * hgap);
-<a name="201" href="#201">201</a> 			<strong class="jxr_keyword">int</strong> columnWidth = gridWidth / columns;
-<a name="202" href="#202">202</a> 
-<a name="203" href="#203">203</a> 			<em class="jxr_comment">// fudge is whatever pixels are left over</em>
-<a name="204" href="#204">204</a> 			<strong class="jxr_keyword">int</strong> fudge = gridWidth % columns;
-<a name="205" href="#205">205</a> 
-<a name="206" href="#206">206</a> 			Iterator&lt;RowItem&gt; i = _items.iterator();
-<a name="207" href="#207">207</a> 			<strong class="jxr_keyword">while</strong> (i.hasNext())
-<a name="208" href="#208">208</a> 			{
-<a name="209" href="#209">209</a> 				RowItem item = i.next();
-<a name="210" href="#210">210</a> 				<strong class="jxr_keyword">int</strong> span = item.span();
-<a name="211" href="#211">211</a> 				<strong class="jxr_keyword">int</strong> width = columnWidth * span + ((span - 1) * hgap);
-<a name="212" href="#212">212</a> 				<em class="jxr_comment">// Apply the fudge to the last component/column</em>
-<a name="213" href="#213">213</a> 				<strong class="jxr_keyword">if</strong> (!i.hasNext())
-<a name="214" href="#214">214</a> 				{
-<a name="215" href="#215">215</a> 					width += fudge;
-<a name="216" href="#216">216</a> 				}
-<a name="217" href="#217">217</a> 				<strong class="jxr_keyword">if</strong> (item.isFirstSpanRow())
-<a name="218" href="#218">218</a> 				{
-<a name="219" href="#219">219</a> 					JComponent component = item.component();
-<a name="220" href="#220">220</a> 					actualHeight = Math.max(0, helper.setSizeLocation(
-<a name="221" href="#221">221</a> 						component, x, width, height, baseline));
-<a name="222" href="#222">222</a> 				}
-<a name="223" href="#223">223</a> 				x += width + hgap;
-<a name="224" href="#224">224</a> 			}
-<a name="225" href="#225">225</a> 		}
-<a name="226" href="#226">226</a> 		<strong class="jxr_keyword">return</strong> actualHeight;
-<a name="227" href="#227">227</a> 	}
-<a name="228" href="#228">228</a> 
-<a name="229" href="#229">229</a> 	<strong class="jxr_keyword">public</strong> List&lt;RowItem&gt; items()
-<a name="230" href="#230">230</a> 	{
-<a name="231" href="#231">231</a> 		<strong class="jxr_keyword">return</strong> _items;
+<a name="180" href="#180">180</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> hgap()
+<a name="181" href="#181">181</a> 	{
+<a name="182" href="#182">182</a> 		<strong class="jxr_keyword">return</strong> ComponentHelper.hgap(_label, _items, _parent);
+<a name="183" href="#183">183</a> 	}
+<a name="184" href="#184">184</a> 
+<a name="185" href="#185">185</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> layoutRow(<a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a> helper, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> height, <strong class="jxr_keyword">int</strong> baseline, 
+<a name="186" href="#186">186</a> 		<strong class="jxr_keyword">int</strong> hgap, <strong class="jxr_keyword">int</strong> rowWidth, <strong class="jxr_keyword">int</strong> labelWidth)
+<a name="187" href="#187">187</a> 	{
+<a name="188" href="#188">188</a> 		<strong class="jxr_keyword">int</strong> x = left;
+<a name="189" href="#189">189</a> 		<strong class="jxr_keyword">int</strong> actualHeight = 0;
+<a name="190" href="#190">190</a> 		<em class="jxr_comment">// Account for label column</em>
+<a name="191" href="#191">191</a> 		<strong class="jxr_keyword">if</strong> (labelWidth &gt; 0)
+<a name="192" href="#192">192</a> 		{
+<a name="193" href="#193">193</a> 			<strong class="jxr_keyword">if</strong> (_label != <strong class="jxr_keyword">null</strong>)
+<a name="194" href="#194">194</a> 			{
+<a name="195" href="#195">195</a> 				actualHeight = Math.max(0, helper.setSizeLocation(
+<a name="196" href="#196">196</a> 					_label, x, labelWidth, height, baseline));
+<a name="197" href="#197">197</a> 			}
+<a name="198" href="#198">198</a> 			x += labelWidth + hgap;
+<a name="199" href="#199">199</a> 		}
+<a name="200" href="#200">200</a> 
+<a name="201" href="#201">201</a> 		<strong class="jxr_keyword">int</strong> columns = gridColumns();
+<a name="202" href="#202">202</a> 		<strong class="jxr_keyword">if</strong> (columns &gt; 0)
+<a name="203" href="#203">203</a> 		{
+<a name="204" href="#204">204</a> 			<em class="jxr_comment">// pre-subtract gaps</em>
+<a name="205" href="#205">205</a> 			<strong class="jxr_keyword">int</strong> gridWidth = rowWidth - ((columns - 1) * hgap);
+<a name="206" href="#206">206</a> 			<strong class="jxr_keyword">int</strong> columnWidth = gridWidth / columns;
+<a name="207" href="#207">207</a> 
+<a name="208" href="#208">208</a> 			<em class="jxr_comment">// fudge is whatever pixels are left over</em>
+<a name="209" href="#209">209</a> 			<strong class="jxr_keyword">int</strong> fudge = gridWidth % columns;
+<a name="210" href="#210">210</a> 
+<a name="211" href="#211">211</a> 			Iterator&lt;RowItem&gt; i = _items.iterator();
+<a name="212" href="#212">212</a> 			<strong class="jxr_keyword">while</strong> (i.hasNext())
+<a name="213" href="#213">213</a> 			{
+<a name="214" href="#214">214</a> 				RowItem item = i.next();
+<a name="215" href="#215">215</a> 				<strong class="jxr_keyword">int</strong> span = item.span();
+<a name="216" href="#216">216</a> 				<strong class="jxr_keyword">int</strong> width = columnWidth * span + ((span - 1) * hgap);
+<a name="217" href="#217">217</a> 				<em class="jxr_comment">// Apply the fudge to the last component/column</em>
+<a name="218" href="#218">218</a> 				<strong class="jxr_keyword">if</strong> (!i.hasNext())
+<a name="219" href="#219">219</a> 				{
+<a name="220" href="#220">220</a> 					width += fudge;
+<a name="221" href="#221">221</a> 				}
+<a name="222" href="#222">222</a> 				<strong class="jxr_keyword">if</strong> (item.isFirstSpanRow())
+<a name="223" href="#223">223</a> 				{
+<a name="224" href="#224">224</a> 					JComponent component = item.component();
+<a name="225" href="#225">225</a> 					actualHeight = Math.max(0, helper.setSizeLocation(
+<a name="226" href="#226">226</a> 						component, x, width, height, baseline));
+<a name="227" href="#227">227</a> 				}
+<a name="228" href="#228">228</a> 				x += width + hgap;
+<a name="229" href="#229">229</a> 			}
+<a name="230" href="#230">230</a> 		}
+<a name="231" href="#231">231</a> 		<strong class="jxr_keyword">return</strong> actualHeight;
 <a name="232" href="#232">232</a> 	}
-<a name="233" href="#233">233</a> 	
-<a name="234" href="#234">234</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/RowItem.html">RowItem</a> findItem(<strong class="jxr_keyword">int</strong> column)
+<a name="233" href="#233">233</a> 
+<a name="234" href="#234">234</a> 	<strong class="jxr_keyword">public</strong> List&lt;RowItem&gt; items()
 <a name="235" href="#235">235</a> 	{
-<a name="236" href="#236">236</a> 		<strong class="jxr_keyword">int</strong> i = 0;
-<a name="237" href="#237">237</a> 		<strong class="jxr_keyword">for</strong> (RowItem item: _items)
-<a name="238" href="#238">238</a> 		{
-<a name="239" href="#239">239</a> 			<strong class="jxr_keyword">if</strong> (i == column)
-<a name="240" href="#240">240</a> 			{
-<a name="241" href="#241">241</a> 				<strong class="jxr_keyword">return</strong> item;
-<a name="242" href="#242">242</a> 			}
-<a name="243" href="#243">243</a> 			i += item.span();
-<a name="244" href="#244">244</a> 			<strong class="jxr_keyword">if</strong> (i &gt; column)
+<a name="236" href="#236">236</a> 		<strong class="jxr_keyword">return</strong> _items;
+<a name="237" href="#237">237</a> 	}
+<a name="238" href="#238">238</a> 	
+<a name="239" href="#239">239</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/RowItem.html">RowItem</a> findItem(<strong class="jxr_keyword">int</strong> column)
+<a name="240" href="#240">240</a> 	{
+<a name="241" href="#241">241</a> 		<strong class="jxr_keyword">int</strong> i = 0;
+<a name="242" href="#242">242</a> 		<strong class="jxr_keyword">for</strong> (RowItem item: _items)
+<a name="243" href="#243">243</a> 		{
+<a name="244" href="#244">244</a> 			<strong class="jxr_keyword">if</strong> (i == column)
 <a name="245" href="#245">245</a> 			{
-<a name="246" href="#246">246</a> 				<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a name="246" href="#246">246</a> 				<strong class="jxr_keyword">return</strong> item;
 <a name="247" href="#247">247</a> 			}
-<a name="248" href="#248">248</a> 		}
-<a name="249" href="#249">249</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
-<a name="250" href="#250">250</a> 	}
-<a name="251" href="#251">251</a> 	
-<a name="252" href="#252">252</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> String NO_PREVIOUS_SUBGRID = 
-<a name="253" href="#253">253</a> 		<span class="jxr_string">"spanRow() cannot work on a grid-row with no grid-row immediately above, "</span> +
-<a name="254" href="#254">254</a> 		<span class="jxr_string">"or with no matching sub-grid (same column position) in the above grid-row"</span>;
-<a name="255" href="#255">255</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> String NO_MATCHING_COMPONENT = 
-<a name="256" href="#256">256</a> 		<span class="jxr_string">"spanRow() cannot work when there is no component, on the above grid-row, "</span> +
-<a name="257" href="#257">257</a> 		<span class="jxr_string">"with a matching column location"</span>;
-<a name="258" href="#258">258</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> String UNMATCHED_COLUMNS_SUBGRIDS = 
-<a name="259" href="#259">259</a> 		<span class="jxr_string">"spanRow() cannot work on a sub-grid where the number of columns is different "</span> +
-<a name="260" href="#260">260</a> 		<span class="jxr_string">"from the above sub-grid"</span>;
-<a name="261" href="#261">261</a> 
-<a name="262" href="#262">262</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> JComponent EMPTY = <strong class="jxr_keyword">new</strong> JPanel();
-<a name="263" href="#263">263</a> 	<strong class="jxr_keyword">static</strong>
-<a name="264" href="#264">264</a> 	{
-<a name="265" href="#265">265</a> 		EMPTY.setOpaque(false);
-<a name="266" href="#266">266</a> 	}
-<a name="267" href="#267">267</a> 
-<a name="268" href="#268">268</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;RowItem&gt; _items;
-<a name="269" href="#269">269</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/SubGrid.html">SubGrid</a> _previous;
-<a name="270" href="#270">270</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> Container _parent;
-<a name="271" href="#271">271</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> JLabel _label;
-<a name="272" href="#272">272</a> 	<em class="jxr_comment">// 0 means auto span until the right-most edge</em>
-<a name="273" href="#273">273</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _gridspan;
-<a name="274" href="#274">274</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> _spanRow;
-<a name="275" href="#275">275</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _column = 0;
-<a name="276" href="#276">276</a> }
+<a name="248" href="#248">248</a> 			i += item.span();
+<a name="249" href="#249">249</a> 			<strong class="jxr_keyword">if</strong> (i &gt; column)
+<a name="250" href="#250">250</a> 			{
+<a name="251" href="#251">251</a> 				<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a name="252" href="#252">252</a> 			}
+<a name="253" href="#253">253</a> 		}
+<a name="254" href="#254">254</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a name="255" href="#255">255</a> 	}
+<a name="256" href="#256">256</a> 	
+<a name="257" href="#257">257</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> String NO_PREVIOUS_SUBGRID = 
+<a name="258" href="#258">258</a> 		<span class="jxr_string">"spanRow() cannot work on a grid-row with no grid-row immediately above, "</span> +
+<a name="259" href="#259">259</a> 		<span class="jxr_string">"or with no matching sub-grid (same column position) in the above grid-row"</span>;
+<a name="260" href="#260">260</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> String NO_MATCHING_COMPONENT = 
+<a name="261" href="#261">261</a> 		<span class="jxr_string">"spanRow() cannot work when there is no component, on the above grid-row, "</span> +
+<a name="262" href="#262">262</a> 		<span class="jxr_string">"with a matching column location"</span>;
+<a name="263" href="#263">263</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> String UNMATCHED_COLUMNS_SUBGRIDS = 
+<a name="264" href="#264">264</a> 		<span class="jxr_string">"spanRow() cannot work on a sub-grid where the number of columns is different "</span> +
+<a name="265" href="#265">265</a> 		<span class="jxr_string">"from the above sub-grid"</span>;
+<a name="266" href="#266">266</a> 
+<a name="267" href="#267">267</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> JComponent EMPTY = <strong class="jxr_keyword">new</strong> JPanel();
+<a name="268" href="#268">268</a> 	<strong class="jxr_keyword">static</strong>
+<a name="269" href="#269">269</a> 	{
+<a name="270" href="#270">270</a> 		EMPTY.setOpaque(false);
+<a name="271" href="#271">271</a> 	}
+<a name="272" href="#272">272</a> 
+<a name="273" href="#273">273</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;RowItem&gt; _items;
+<a name="274" href="#274">274</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/SubGrid.html">SubGrid</a> _previous;
+<a name="275" href="#275">275</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> Container _parent;
+<a name="276" href="#276">276</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> JLabel _label;
+<a name="277" href="#277">277</a> 	<em class="jxr_comment">// 0 means auto span until the right-most edge</em>
+<a name="278" href="#278">278</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _gridspan;
+<a name="279" href="#279">279</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> _spanRow;
+<a name="280" href="#280">280</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _column = 0;
+<a name="281" href="#281">281</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
