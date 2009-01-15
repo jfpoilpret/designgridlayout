@@ -80,11 +80,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		// Calculate various needed widths & origin
 		int x = left;
 		int count = _items.size();
-		// Fix for issue #30
-		if (count == 0)
-		{
-			return 0;
-		}
 		int width = maxWidth();
 		int availableWidth = (rowWidth - ((count - 1) * hgap));
 		width = Math.min(width, availableWidth / count);
