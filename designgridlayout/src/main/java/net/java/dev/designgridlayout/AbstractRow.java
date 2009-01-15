@@ -174,8 +174,8 @@ abstract class AbstractRow
 	
 	JComponent rightComponent()
 	{
-		return (allItems().isEmpty() ? null : 
-			allItems().get(allItems().size() - 1).component());
+		return (allItems().isEmpty() ? null 
+			: allItems().get(allItems().size() - 1).component());
 	}
 	
 	abstract void checkSpanRows();
