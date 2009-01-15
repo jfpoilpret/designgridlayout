@@ -81,8 +81,8 @@
 <a name="71" href="#71">71</a>  	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> init()
 <a name="72" href="#72">72</a>  	{
 <a name="73" href="#73">73</a>  		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
-<a name="74" href="#74">74</a>  		_height = ComponentHelper.maxValues(items(), PrefHeightExtractor.INSTANCE);
-<a name="75" href="#75">75</a>  		_baseline = ComponentHelper.maxValues(items(), BaselineExtractor.INSTANCE);
+<a name="74" href="#74">74</a>  		_height = ComponentHelper.maxValues(allItems(), PrefHeightExtractor.INSTANCE);
+<a name="75" href="#75">75</a>  		_baseline = ComponentHelper.maxValues(allItems(), BaselineExtractor.INSTANCE);
 <a name="76" href="#76">76</a>  		<strong class="jxr_keyword">boolean</strong> fixedHeight = ComponentHelper.isFixedHeight(_heightTester, items());
 <a name="77" href="#77">77</a>  		<strong class="jxr_keyword">if</strong> (fixedHeight || _growWeight == -1.0)
 <a name="78" href="#78">78</a>  		{
@@ -164,43 +164,55 @@
 <a name="154" href="#154">154</a> 
 <a name="155" href="#155">155</a> 	<strong class="jxr_keyword">int</strong> hgap()
 <a name="156" href="#156">156</a> 	{
-<a name="157" href="#157">157</a> 		<strong class="jxr_keyword">return</strong> ComponentHelper.hgap(items(), parent());
+<a name="157" href="#157">157</a> 		<strong class="jxr_keyword">return</strong> ComponentHelper.hgap(allItems(), parent());
 <a name="158" href="#158">158</a> 	}
 <a name="159" href="#159">159</a> 
 <a name="160" href="#160">160</a> 	<strong class="jxr_keyword">int</strong> gridgap()
 <a name="161" href="#161">161</a> 	{
 <a name="162" href="#162">162</a> 		<strong class="jxr_keyword">return</strong> 0;
 <a name="163" href="#163">163</a> 	}
-<a name="164" href="#164">164</a> 
-<a name="165" href="#165">165</a> 	JComponent leftComponent()
+<a name="164" href="#164">164</a> 	
+<a name="165" href="#165">165</a> 	<strong class="jxr_keyword">boolean</strong> isEmpty()
 <a name="166" href="#166">166</a> 	{
-<a name="167" href="#167">167</a> 		<strong class="jxr_keyword">return</strong> (items().isEmpty() ? <strong class="jxr_keyword">null</strong> : items().get(0).component());
+<a name="167" href="#167">167</a> 		<strong class="jxr_keyword">return</strong> allItems().isEmpty();
 <a name="168" href="#168">168</a> 	}
-<a name="169" href="#169">169</a> 	
-<a name="170" href="#170">170</a> 	JComponent rightComponent()
+<a name="169" href="#169">169</a> 
+<a name="170" href="#170">170</a> 	JComponent leftComponent()
 <a name="171" href="#171">171</a> 	{
-<a name="172" href="#172">172</a> 		<strong class="jxr_keyword">return</strong> (items().isEmpty() ? <strong class="jxr_keyword">null</strong> : items().get(items().size() - 1).component());
+<a name="172" href="#172">172</a> 		<strong class="jxr_keyword">return</strong> (allItems().isEmpty() ? <strong class="jxr_keyword">null</strong> : allItems().get(0).component());
 <a name="173" href="#173">173</a> 	}
 <a name="174" href="#174">174</a> 	
-<a name="175" href="#175">175</a> 	<strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">void</strong> checkSpanRows();
-<a name="176" href="#176">176</a> 
-<a name="177" href="#177">177</a> 	<strong class="jxr_keyword">abstract</strong> List&lt;? <strong class="jxr_keyword">extends</strong> IRowItem&gt; items();
-<a name="178" href="#178">178</a> 
-<a name="179" href="#179">179</a> 	<em class="jxr_comment">// Returns the actual extra height allocated to the row</em>
-<a name="180" href="#180">180</a> 	<strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">int</strong> layoutRow(<a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a> helper, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> hgap, <strong class="jxr_keyword">int</strong> gridgap, 
-<a name="181" href="#181">181</a> 		<strong class="jxr_keyword">int</strong> rowWidth, <strong class="jxr_keyword">int</strong> gridsWidth, List&lt;Integer&gt; labelsWidth);
+<a name="175" href="#175">175</a> 	JComponent rightComponent()
+<a name="176" href="#176">176</a> 	{
+<a name="177" href="#177">177</a> 		<strong class="jxr_keyword">return</strong> (allItems().isEmpty() ? <strong class="jxr_keyword">null</strong> 
+<a name="178" href="#178">178</a> 			: allItems().get(allItems().size() - 1).component());
+<a name="179" href="#179">179</a> 	}
+<a name="180" href="#180">180</a> 	
+<a name="181" href="#181">181</a> 	<strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">void</strong> checkSpanRows();
 <a name="182" href="#182">182</a> 
-<a name="183" href="#183">183</a> 	<strong class="jxr_keyword">private</strong> Container _parent;
-<a name="184" href="#184">184</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _heightTester;
-<a name="185" href="#185">185</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/OrientationPolicy.html">OrientationPolicy</a> _orientation;
-<a name="186" href="#186">186</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> _unrelatedGap = false;
-<a name="187" href="#187">187</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _vgap = 0;
-<a name="188" href="#188">188</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _baseline;
-<a name="189" href="#189">189</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _height;
-<a name="190" href="#190">190</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">double</strong> _growWeight = -1.0;
-<a name="191" href="#191">191</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _maxWidth;
-<a name="192" href="#192">192</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _actualHeight;
-<a name="193" href="#193">193</a> }
+<a name="183" href="#183">183</a> 	<strong class="jxr_keyword">abstract</strong> List&lt;? <strong class="jxr_keyword">extends</strong> IRowItem&gt; items();
+<a name="184" href="#184">184</a> 
+<a name="185" href="#185">185</a> 	<em class="jxr_comment">// Returns all items including potential labels</em>
+<a name="186" href="#186">186</a> 	List&lt;? <strong class="jxr_keyword">extends</strong> IRowItem&gt; allItems()
+<a name="187" href="#187">187</a> 	{
+<a name="188" href="#188">188</a> 		<strong class="jxr_keyword">return</strong> items();
+<a name="189" href="#189">189</a> 	}
+<a name="190" href="#190">190</a> 	
+<a name="191" href="#191">191</a> 	<em class="jxr_comment">// Returns the actual extra height allocated to the row</em>
+<a name="192" href="#192">192</a> 	<strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">int</strong> layoutRow(<a href="../../../../net/java/dev/designgridlayout/LayoutHelper.html">LayoutHelper</a> helper, <strong class="jxr_keyword">int</strong> left, <strong class="jxr_keyword">int</strong> hgap, <strong class="jxr_keyword">int</strong> gridgap, 
+<a name="193" href="#193">193</a> 		<strong class="jxr_keyword">int</strong> rowWidth, <strong class="jxr_keyword">int</strong> gridsWidth, List&lt;Integer&gt; labelsWidth);
+<a name="194" href="#194">194</a> 
+<a name="195" href="#195">195</a> 	<strong class="jxr_keyword">private</strong> Container _parent;
+<a name="196" href="#196">196</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _heightTester;
+<a name="197" href="#197">197</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/OrientationPolicy.html">OrientationPolicy</a> _orientation;
+<a name="198" href="#198">198</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> _unrelatedGap = false;
+<a name="199" href="#199">199</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _vgap = 0;
+<a name="200" href="#200">200</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _baseline;
+<a name="201" href="#201">201</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _height;
+<a name="202" href="#202">202</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">double</strong> _growWeight = -1.0;
+<a name="203" href="#203">203</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _maxWidth;
+<a name="204" href="#204">204</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> _actualHeight;
+<a name="205" href="#205">205</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
