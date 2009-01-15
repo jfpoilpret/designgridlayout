@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Component;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -30,7 +28,7 @@ public class RowSpan7SpecialComponent extends AbstractBaseExample
 
 	@Override protected void build(DesignGridLayout layout)
 	{
-		JScrollPane picture = new JScrollPane(createPicture());
+		JScrollPane picture = new JScrollPane(new Picture());
 		picture.setHorizontalScrollBarPolicy(
 			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		picture.setVerticalScrollBarPolicy(
@@ -46,20 +44,6 @@ public class RowSpan7SpecialComponent extends AbstractBaseExample
 		layout.row().grid(label("City:")).add(field("Ho Chi Minh city"));
 	}
 	
-	static private Picture createPicture()
-	{
-		// Check if we are using Java6
-		try
-		{
-			Component.class.getMethod("getBaseline", int.class, int.class);
-			return new PictureJava6();
-		}
-		catch (Exception e)
-		{
-			return new Picture();
-		}
-	}
-
 	@Override protected JTextField field(String text)
 	{
 		JTextField field = super.field(text);
