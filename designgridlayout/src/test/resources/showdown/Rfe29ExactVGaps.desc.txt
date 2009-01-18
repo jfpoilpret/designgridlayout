@@ -1,0 +1,7 @@
+This example (and the next one) shows how DesignGridLayout computes vertical gaps between consecutive rows.
+
+By default, DesignGridLayout calculates the exact vertical gap between every pair of consecutive rows in the layout. Hence this vertical gap may vary from one pair of rows to another.
+
+Despite this variation, you can observe that the UI still seems well balanced in terms of real estate occupation; that's the reason why this behavior is the default.
+
+The source code doesn't show anything special here.

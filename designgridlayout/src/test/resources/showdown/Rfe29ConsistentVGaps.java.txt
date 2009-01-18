@@ -1,0 +1,8 @@
+public class Rfe29ConsistentVGaps extends Rfe29ExactVGaps
+{
+	@Override protected void build(DesignGridLayout layout)
+	{
+		layout.forceConsistentVGaps();
+		super.build(layout);
+	}
+}
