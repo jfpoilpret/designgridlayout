@@ -293,7 +293,7 @@
 		<dependency>
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
-			<version>1.0rc2</version>
+			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
