@@ -75,7 +75,8 @@ public class DesignGridLayout implements LayoutManager
 		}
 		_parent = parent;
 		_orientation = new OrientationPolicy(parent);
-		_engine = new LayoutEngine(_parent, _rows, _orientation, _heightTester);
+		_engine = new LayoutEngine(
+			_locker, _parent, _rows, _orientation, _heightTester);
 		_parent.setLayout(this);
 	}
 
@@ -97,9 +98,13 @@ public class DesignGridLayout implements LayoutManager
 	 * right margin for the current platform
 	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
 	 * calls to other methods (also known as "fluent API")
+	 * @throws IllegalStateException if this layout has been locked (which happens
+	 * automatically the first its container frame is packed or displayed)
 	 */
 	public DesignGridLayout margins(double top, double left, double bottom, double right)
+		throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		_engine.margins(top, left, bottom, right);
 		return this;
 	}
@@ -116,8 +121,10 @@ public class DesignGridLayout implements LayoutManager
 	 * platform
 	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
 	 * calls to other methods (also known as "fluent API")
+	 * @throws IllegalStateException if this layout has been locked (which happens
+	 * automatically the first its container frame is packed or displayed)
 	 */
-	public DesignGridLayout margins(double ratio)
+	public DesignGridLayout margins(double ratio) throws IllegalStateException
 	{
 		return margins(ratio, ratio, ratio, ratio);
 	}
@@ -135,9 +142,12 @@ public class DesignGridLayout implements LayoutManager
 	 * 
 	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
 	 * calls to other methods (also known as "fluent API")
+	 * @throws IllegalStateException if this layout has been locked (which happens
+	 * automatically the first its container frame is packed or displayed)
 	 */
-	public DesignGridLayout forceConsistentVGaps()
+	public DesignGridLayout forceConsistentVGaps() throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		_engine.forceConsistentVGaps();
 		return this;
 	}
@@ -157,9 +167,12 @@ public class DesignGridLayout implements LayoutManager
 	 * 
 	 * @return a new {@code IRowCreator} that must be used to set the actual 
 	 * type of the created row.
+	 * @throws IllegalStateException if this layout has been locked (which happens
+	 * automatically the first its container frame is packed or displayed)
 	 */
-	public IRowCreator row()
+	public IRowCreator row() throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		return new RowCreator(-1.0);
 	}
 	
@@ -194,10 +207,13 @@ public class DesignGridLayout implements LayoutManager
 	 * the value will be ignored.
 	 * @return a new {@code IRowCreator} that must be used to set the actual 
 	 * type of the created row.
+	 * @throws IllegalStateException if this layout has been locked (which happens
+	 * automatically the first its container frame is packed or displayed)
 	 * @see #row()
 	 */
-	public IRowCreator row(double verticalWeight)
+	public IRowCreator row(double verticalWeight) throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		return new RowCreator(verticalWeight);
 	}
 	
@@ -207,9 +223,13 @@ public class DesignGridLayout implements LayoutManager
 	 * groups of rows. The height of that row is automatically calculated based
 	 * on the fact that the previously-added row and the next-added row contain
 	 * unrelated components.
+	 * 
+	 * @throws IllegalStateException if this layout has been locked (which happens
+	 * automatically the first its container frame is packed or displayed)
 	 */
-	public void emptyRow()
+	public void emptyRow() throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		if (_current != null)
 		{
 			_current.setUnrelatedGap();
@@ -217,10 +237,12 @@ public class DesignGridLayout implements LayoutManager
 	}
 	
 	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
+		throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		_current = row;
 		_rows.add(row);
-		row.init(_parent, _heightTester, _orientation);
+		row.init(_locker, _parent, _heightTester, _orientation);
 		row.growWeight(verticalWeight);
 		return row;
 	}
@@ -338,6 +360,16 @@ public class DesignGridLayout implements LayoutManager
 
 		private final double _weight;
 	}
+	
+	ILayoutEngine getLayoutEngine()
+	{
+		return _engine;
+	}
+
+	void setLayoutEngine(ILayoutEngine engine)
+	{
+		_engine = engine;
+	}
 
 	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
 
@@ -345,7 +377,8 @@ public class DesignGridLayout implements LayoutManager
 	
 	final private Container _parent;
 	final private OrientationPolicy _orientation;
-	final private ILayoutEngine _engine;
+	final private LayoutLocker _locker = new LayoutLocker();
+	private ILayoutEngine _engine;
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 	private AbstractRow _current = null;
 }

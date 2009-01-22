@@ -14,20 +14,26 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
-import java.util.List;
-
-// The interface implemented by all layout engines, those which actually
-// perform all the work
-interface ILayoutEngine
+// This class is used to manage "layout locking", ie that, after computations
+// have been performed, library users will not attempt to modify the layout
+// (eg by adding rows, adding components to rows, changing the margins...)
+// Any such attempt would throw an exception
+final class LayoutLocker
 {
-	public void margins(double top, double left, double bottom, double right);
-	public void forceConsistentVGaps();
-
-	public List<Integer> initLabelWidths();
-	public void initDimensions();
-
-	public Dimension minimumLayoutSize();
-	public Dimension preferredLayoutSize();
-	public void layoutContainer();
+	void checkUnlocked() throws IllegalStateException
+	{
+		if (_locked)
+		{
+			throw new IllegalStateException(
+				"DesignGridLayout instance has been locked, hence modify the " +
+				"layout is no more possible");
+		}
+	}
+	
+	void lock()
+	{
+		_locked = true;
+	}
+	
+	private boolean _locked = false;
 }

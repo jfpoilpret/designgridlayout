@@ -27,9 +27,10 @@ import org.jdesktop.layout.LayoutStyle;
 
 class LayoutEngine implements ILayoutEngine
 {
-	LayoutEngine(Container parent, List<AbstractRow> rows, 
+	LayoutEngine(LayoutLocker locker, Container parent, List<AbstractRow> rows, 
 		OrientationPolicy orientation, HeightGrowPolicy heightTester)
 	{
+		_locker = locker;
 		_parent = parent;
 		_rows = rows;
 		_orientation = orientation;
@@ -60,7 +61,8 @@ class LayoutEngine implements ILayoutEngine
 		synchronized(_parent.getTreeLock())
 		{
 			// Always calculate the size of our contents
-			initialize();
+			initLabelWidths();
+			initDimensions();
 
 			// Calculate extra height to split between variable height rows
 			double totalExtraHeight = 0.0;
@@ -124,10 +126,16 @@ class LayoutEngine implements ILayoutEngine
 		}
 	}
 
+	private void lockLayout()
+	{
+		_locker.lock();
+	}
+	
 	public Dimension minimumLayoutSize()
 	{
 		reset();
-		initialize();
+		initLabelWidths();
+		initDimensions();
 		// Note: Dimension instances can be mutated by an outsider
 		return new Dimension(_minimumSize);
 	}
@@ -135,7 +143,8 @@ class LayoutEngine implements ILayoutEngine
 	public Dimension preferredLayoutSize()
 	{
 		reset();
-		initialize();
+		initLabelWidths();
+		initDimensions();
 		// Note: Dimension instances can be mutated by an outsider
 		return new Dimension(_preferredSize);
 	}
@@ -266,11 +275,12 @@ class LayoutEngine implements ILayoutEngine
 		}
 	}
 
-	private void initialize()
+	//TODO make init1/init2 public and add method to get labelwidths
+	public List<Integer> initLabelWidths()
 	{
 		if (_preferredSize != null)
 		{
-			return;
+			return _labelWidths;
 		}
 
 		// Make sure there's something to do
@@ -278,7 +288,7 @@ class LayoutEngine implements ILayoutEngine
 		{
 			_preferredSize = new Dimension(0, 0);
 			_minimumSize = new Dimension(0, 0);
-			return;
+			return _labelWidths;
 		}
 		
 		// First of all count number of canonical grids in the whole panel
@@ -307,6 +317,16 @@ class LayoutEngine implements ILayoutEngine
 		// Calculate labels width for all grids
 		computeLabelWidths();
 
+		return _labelWidths;
+	}
+	
+	public void initDimensions()
+	{
+		if (_preferredSize != null)
+		{
+			return;
+		}
+		
 		// Compute preferred & minimum widths for each sub-grid (without labels), 
 		// use largest width for all grids
 		int preferredWidth = computeGridWidth(PrefWidthExtractor.INSTANCE);
@@ -587,6 +607,7 @@ class LayoutEngine implements ILayoutEngine
 	
 	private void reset()
 	{
+		lockLayout();
 		_preferredSize = null;
 	}
 
@@ -613,7 +634,8 @@ class LayoutEngine implements ILayoutEngine
 	private double _rightWeight = 1.0;
 	
 	private boolean _consistentVGaps = false;
-	
+
+	final private LayoutLocker _locker;
 	final private List<AbstractRow> _rows;
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
 	private int _totalLabelWidth;

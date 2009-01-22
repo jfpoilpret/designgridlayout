@@ -37,6 +37,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow spanRow()
 	{
+		checkUnlocked();
 		_current.spanRow();
 		return this;
 	}
@@ -48,6 +49,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow add(JComponent child, int span)
 	{
+		checkUnlocked();
 		_current.add(child, span);
 		return this;
 	}
@@ -58,6 +60,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow add(JComponent... children)
 	{
+		checkUnlocked();
 		for (JComponent component: children)
 		{
 			add(component, 1);
@@ -72,6 +75,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow addMulti(int span, JComponent... children)
 	{
+		checkUnlocked();
 		return add(new MultiComponent(growPolicy(), orientation(), children), span);
 	}
 
@@ -81,6 +85,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow addMulti(JComponent... children)
 	{
+		checkUnlocked();
 		return addMulti(1, children);
 	}
 
@@ -90,6 +95,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow empty()
 	{
+		checkUnlocked();
 		return empty(1);
 	}
 
@@ -99,6 +105,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	 */
 	public ISpannableGridRow empty(int span)
 	{
+		checkUnlocked();
 		return add(null, span);
 	}
 
@@ -140,6 +147,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 
 	private ISpannableGridRow newGrid(JLabel label, int gridspan)
 	{
+		checkUnlocked();
 		// Fix the span of the previous sub-grid (if it was in auto-span mode)
 		if (_current != null)
 		{
