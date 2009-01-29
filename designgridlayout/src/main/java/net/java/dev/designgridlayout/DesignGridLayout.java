@@ -128,6 +128,33 @@ public class DesignGridLayout implements LayoutManager
 	{
 		return margins(ratio, ratio, ratio, ratio);
 	}
+	
+	/**
+	 * Disable DesignGridLayout "smart vertical resize" feature. This means that
+	 * all variable height components in {@code this} layout will have their
+	 * height take every single available pixel, possibly showing partial
+	 * information (e.g. a {@code JTable} would show its last row truncated).
+	 * <p/>
+	 * <b>IMPORTANT NOTE!</b> This method should be called before adding any
+	 * row to {@code this} layout, otherwise results are unpredictable. This
+	 * will not be considered a bug and, as such, will not be fixed in future
+	 * versions (or just as a side effect of potential future refactoring).
+	 * <p/>
+	 * <b>WARNING!</b> You should avoid using this method at all costs since it
+	 * gives your application a poor user experience. It was added as a special
+	 * request (issue #34) from one DesignGridLayout user.
+	 * 
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout disableSmartVerticalResize()
+	{
+		if (!(_heightTester instanceof UnitHeightGrowPolicy))
+		{
+			_heightTester = new UnitHeightGrowPolicy(_heightTester);
+		}
+		return this;
+	}
 
 	/**
 	 * Creates a new row. The type of the row is not determined yet, but will
