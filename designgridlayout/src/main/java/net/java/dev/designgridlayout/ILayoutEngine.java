@@ -15,7 +15,9 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.util.List;
+import java.util.Map;
 
 // The interface implemented by all layout engines, those which actually
 // perform all the work
@@ -24,10 +26,17 @@ interface ILayoutEngine
 	public void margins(double top, double left, double bottom, double right);
 	public void forceConsistentVGaps();
 
-	public List<Integer> initLabelWidths();
-	public void initDimensions();
+	public void reset();
+	
+	public int getNumGrids();
+	public List<Integer> getLabelWidths();
+	public Insets getMargins();
+	public int hgap();
+	public void hgap(int hgap);
+	public List<AbstractRow> rows();
+	public void setMapRowsPosition(Map<String, Integer> rowsPosition);
 
-	public Dimension minimumLayoutSize();
-	public Dimension preferredLayoutSize();
+	public Dimension getMinimumSize();
+	public Dimension getPreferredSize();
 	public void layoutContainer();
 }

@@ -15,6 +15,7 @@
 package net.java.dev.designgridlayout;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JComponent;
 
@@ -37,6 +38,11 @@ final class LayoutHelper
 	void setRowAvailableHeight(int availableHeight)
 	{
 		_availableHeight = availableHeight;
+	}
+	
+	void setMapRowsPosition(Map<String, Integer> rowsPosition)
+	{
+		_rowsPosition = rowsPosition;
 	}
 	
 	void setY(int y)
@@ -121,4 +127,5 @@ final class LayoutHelper
 	private final List<AbstractRow> _rows;
 	private int _availableHeight;
 	private int _y;
+	private Map<String, Integer> _rowsPosition = null;
 }

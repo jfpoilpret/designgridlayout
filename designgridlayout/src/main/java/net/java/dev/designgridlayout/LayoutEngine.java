@@ -16,9 +16,11 @@ package net.java.dev.designgridlayout;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
@@ -36,7 +38,7 @@ class LayoutEngine implements ILayoutEngine
 		_orientation = orientation;
 		_heightTester = heightTester;
 	}
-
+	
 	public void margins(double top, double left, double bottom, double right)
 	{
 		_topWeight = (top < 0.0 ? 0.0 : top);
@@ -50,6 +52,68 @@ class LayoutEngine implements ILayoutEngine
 		_consistentVGaps = true;
 	}
 
+	public void reset()
+	{
+		lockLayout();
+		_preferredSize = null;
+		_preInitDone = false;
+		_margins = null;
+	}
+	
+	public int getNumGrids()
+	{
+		preInit();
+		return _maxGrids;
+	}
+
+	public List<Integer> getLabelWidths()
+	{
+		preInit();
+		return _labelWidths;
+	}
+	
+	public Insets getMargins()
+	{
+		preInit();
+		return _margins;
+	}
+
+	public int hgap()
+	{
+		preInit();
+		return _hgap;
+	}
+	
+	public void hgap(int hgap)
+	{
+		_hgap = hgap;
+	}
+	
+	public List<AbstractRow> rows()
+	{
+		preInit();
+		return _rows;
+	}
+	
+	public void setMapRowsPosition(Map<String, Integer> rowsPosition)
+	{
+		_rowsPosition = rowsPosition;
+	}
+	
+	public Dimension getMinimumSize()
+	{
+		initialize();
+		// Note: Dimension instances can be mutated by an outsider
+		return new Dimension(_minimumSize);
+	}
+
+	public Dimension getPreferredSize()
+	{
+		initialize();
+		// Note: Dimension instances can be mutated by an outsider
+		return new Dimension(_preferredSize);
+	}
+	
 	public void layoutContainer()
 	{
 		// Make sure there's something to do
@@ -61,8 +125,7 @@ class LayoutEngine implements ILayoutEngine
 		synchronized(_parent.getTreeLock())
 		{
 			// Always calculate the size of our contents
-			initLabelWidths();
-			initDimensions();
+			initialize();
 
 			// Calculate extra height to split between variable height rows
 			double totalExtraHeight = 0.0;
@@ -94,6 +157,7 @@ class LayoutEngine implements ILayoutEngine
 			
 			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
+			helper.setMapRowsPosition(_rowsPosition);
 			for (AbstractRow row: _rows)
 			{
 				// Issue #30 - check that row is not empty
@@ -131,48 +195,40 @@ class LayoutEngine implements ILayoutEngine
 		_locker.lock();
 	}
 	
-	public Dimension minimumLayoutSize()
-	{
-		reset();
-		initLabelWidths();
-		initDimensions();
-		// Note: Dimension instances can be mutated by an outsider
-		return new Dimension(_minimumSize);
-	}
-
-	public Dimension preferredLayoutSize()
-	{
-		reset();
-		initLabelWidths();
-		initDimensions();
-		// Note: Dimension instances can be mutated by an outsider
-		return new Dimension(_preferredSize);
-	}
-	
 	private int top()
 	{
-		return _parent.getInsets().top + (int) (_topWeight * _top);
+		return _margins.top;
 	}
 
 	private int left()
 	{
-		return _parent.getInsets().left + (int) (_leftWeight * _left);
+		return _margins.left;
 	}
 
 	private int bottom()
 	{
-		return _parent.getInsets().bottom + (int) (_bottomWeight * _bottom);
+		return _margins.bottom;
 	}
 
 	private int right()
 	{
-		return _parent.getInsets().right + (int) (_rightWeight * _right);
+		return _margins.right;
 	}
 
 	private int getContainerGap(JComponent component, int position)
 	{
 		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 		return layoutStyle.getContainerGap(component, position, _parent);
+	}
+	
+	private void computeGutters()
+	{
+		computeHorizontalGaps();
+		computeVerticalGaps();
+		if (_consistentVGaps)
+		{
+			computeConsistentVGaps();
+		}
 	}
 	
 	/*
@@ -184,16 +240,8 @@ class LayoutEngine implements ILayoutEngine
 	 * component of the lower row are compared. The heights of each component is 
 	 * factored in, which seems to work well. 
 	 */
-	//FIXME vgaps calculation
-	// To be absolutely correct, each component's actual layout position should
-	// be determined by factoring component heights, component baselines, and 
-	// each row's maximum height.
-	// Problem is that this would have to be re-calculated every time... Maybe
-	// it's better not to try to improve vgaps
-	private void computeGutters()
+	private void computeHorizontalGaps()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-
 		// Handle horizontal gaps
 		_hgap = 0;
 		_gridgap = 0;
@@ -202,11 +250,20 @@ class LayoutEngine implements ILayoutEngine
 			_hgap = Math.max(_hgap, row.hgap());
 			_gridgap = Math.max(_gridgap, row.gridgap());
 		}
+	}
+
+	//FIXME vgaps calculation
+	// To be absolutely correct, each component's actual layout position should
+	// be determined by factoring component heights, component baselines, and 
+	// each row's maximum height.
+	// Problem is that this would have to be re-calculated every time... Maybe
+	// it's better not to try to improve vgaps
+	private void computeVerticalGaps()
+	{
+		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
 
 		// Vertical gaps (per row)
 		int nthRow = 0;
-		int maxVGap = 0;
-		int maxUnrelatedVGap = 0;
 		for (AbstractRow row: _rows)
 		{
 			nthRow++;
@@ -256,6 +313,18 @@ class LayoutEngine implements ILayoutEngine
 					}
 				}
 			}
+			row.vgap(rowGap);
+		}
+	}
+
+	private void computeConsistentVGaps()
+	{
+		// Vertical gaps (per row)
+		int maxVGap = 0;
+		int maxUnrelatedVGap = 0;
+		for (AbstractRow row: _rows)
+		{
+			int rowGap = row.vgap();
 			if (row.hasUnrelatedGap())
 			{
 				maxUnrelatedVGap = Math.max(maxUnrelatedVGap, rowGap);
@@ -264,23 +333,18 @@ class LayoutEngine implements ILayoutEngine
 			{
 				maxVGap = Math.max(maxVGap, rowGap);
 			}
-			row.vgap(rowGap);
 		}
-		if (_consistentVGaps)
+		for (AbstractRow row: _rows.subList(0, _rows.size() - 1))
 		{
-			for (AbstractRow row: _rows.subList(0, _rows.size() - 1))
-			{
-				row.vgap(row.hasUnrelatedGap() ? maxUnrelatedVGap : maxVGap);
-			}
+			row.vgap(row.hasUnrelatedGap() ? maxUnrelatedVGap : maxVGap);
 		}
 	}
 
-	//TODO make init1/init2 public and add method to get labelwidths
-	public List<Integer> initLabelWidths()
+	private void preInit()
 	{
-		if (_preferredSize != null)
+		if (_preferredSize != null || _preInitDone)
 		{
-			return _labelWidths;
+			return;
 		}
 
 		// Make sure there's something to do
@@ -288,7 +352,8 @@ class LayoutEngine implements ILayoutEngine
 		{
 			_preferredSize = new Dimension(0, 0);
 			_minimumSize = new Dimension(0, 0);
-			return _labelWidths;
+			_preInitDone = true;
+			return;
 		}
 		
 		// First of all count number of canonical grids in the whole panel
@@ -316,16 +381,23 @@ class LayoutEngine implements ILayoutEngine
 
 		// Calculate labels width for all grids
 		computeLabelWidths();
-
-		return _labelWidths;
+		_preInitDone = true;
 	}
 	
-	public void initDimensions()
+	private void initialize()
 	{
+		// Perform reliminary computations if not yet done
+		preInit();
+		
 		if (_preferredSize != null)
 		{
 			return;
 		}
+		
+		// Compute the total width given to labels
+		// Note that it is not done in preInit() to give Synchronizer a chance
+		// to homogenize all labels widths between sync'ed layouts
+		computeTotalLabelWidth();
 		
 		// Compute preferred & minimum widths for each sub-grid (without labels), 
 		// use largest width for all grids
@@ -394,7 +466,6 @@ class LayoutEngine implements ILayoutEngine
 	private void computeLabelWidths()
 	{
 		_labelWidths.clear();
-		_totalLabelWidth = 0;
 		for (int i = 0; i < _maxGrids; i++)
 		{
 			int width = 0;
@@ -404,6 +475,14 @@ class LayoutEngine implements ILayoutEngine
 				width = Math.max(width, row.labelWidth(i));
 			}
 			_labelWidths.add(width);
+		}
+	}
+
+	private void computeTotalLabelWidth()
+	{
+		_totalLabelWidth = 0;
+		for (Integer width: _labelWidths)
+		{
 			_totalLabelWidth += width;
 		}
 	}
@@ -505,6 +584,12 @@ class LayoutEngine implements ILayoutEngine
 	
 		// Handle left-most and right-most columns
 		computeLeftRightMargins();
+
+		_margins = new Insets(
+			_parent.getInsets().top + (int) (_topWeight * _top),
+			_parent.getInsets().left + (int) (_leftWeight * _left),
+			_parent.getInsets().bottom + (int) (_bottomWeight * _bottom),
+			_parent.getInsets().right + (int) (_rightWeight * _right));
 	}
 	
 	private void computeTopMargin()
@@ -605,16 +690,11 @@ class LayoutEngine implements ILayoutEngine
 		}
 	}
 	
-	private void reset()
-	{
-		lockLayout();
-		_preferredSize = null;
-	}
-
 	final private Container _parent;
 	final private OrientationPolicy _orientation;
 	final private HeightGrowPolicy _heightTester;
 
+	private boolean _preInitDone = false;
 	private Dimension _preferredSize = null;
 	private Dimension _minimumSize = null;
 
@@ -638,6 +718,8 @@ class LayoutEngine implements ILayoutEngine
 	final private LayoutLocker _locker;
 	final private List<AbstractRow> _rows;
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
+	private Insets _margins = null;
 	private int _totalLabelWidth;
 	private int _maxGrids;
+	private Map<String, Integer> _rowsPosition = null;
 }

@@ -30,6 +30,16 @@ abstract class AbstractRow
 		_heightTester = heightTester;
 		_orientation = orientation;
 	}
+	
+	final void name(String name)
+	{
+		_name = name;
+	}
+	
+	final String name()
+	{
+		return _name;
+	}
 
 	// Used by children
 	final protected Container parent()
@@ -89,6 +99,11 @@ abstract class AbstractRow
 	final protected int baseline()
 	{
 		return _baseline;
+	}
+
+	final protected void baseline(int baseline)
+	{
+		_baseline = baseline;
 	}
 
 	final protected int maxWidth()
@@ -202,6 +217,7 @@ abstract class AbstractRow
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
+	private String _name = null;
 	private boolean _unrelatedGap = false;
 	private int _vgap = 0;
 	private int _baseline;
