@@ -14,20 +14,24 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
-import java.util.List;
+import java.awt.Component;
 
-// The interface implemented by all layout engines, those which actually
-// perform all the work
-interface ILayoutEngine
+final class UnitHeightGrowPolicy implements HeightGrowPolicy
 {
-	public void margins(double top, double left, double bottom, double right);
-	public void forceConsistentVGaps();
+	public UnitHeightGrowPolicy(HeightGrowPolicy delegate)
+	{
+		_delegate = delegate;
+	}
 
-	public List<Integer> initLabelWidths();
-	public void initDimensions();
+	public boolean canGrowHeight(Component component)
+	{
+		return _delegate.canGrowHeight(component);
+	}
 
-	public Dimension minimumLayoutSize();
-	public Dimension preferredLayoutSize();
-	public void layoutContainer();
+	public int computeExtraHeight(Component component, int extraHeight)
+	{
+		return extraHeight;
+	}
+
+	private final HeightGrowPolicy _delegate;
 }

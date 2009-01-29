@@ -28,7 +28,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	 */
 	public INonGridRow add(JComponent... children)
 	{
-		checkUnlocked();
 		for (JComponent component: children)
 		{
 			_items.add(new NonGridRowItem(component));
@@ -44,7 +43,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	 */
 	public INonGridRow addMulti(JComponent... children)
 	{
-		checkUnlocked();
 		return add(new MultiComponent(growPolicy(), orientation(), children));
 	}
 
@@ -55,7 +53,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	 */
 	public INonGridRow fill()
 	{
-		checkUnlocked();
 		_fill = true;
 		return this;
 	}

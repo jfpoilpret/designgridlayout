@@ -14,17 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
-public class Rfe29ConsistentVGaps extends Rfe29ExactVGaps
+public class SmartVerticalResizeDisabled4RealWorldExample 
+	extends SmartVerticalResize4RealWorldExample
 {
 	public static void main(String[] args)
 	{
-		Rfe29ConsistentVGaps example = new Rfe29ConsistentVGaps();
+		SmartVerticalResizeDisabled4RealWorldExample example = new SmartVerticalResizeDisabled4RealWorldExample();
 		example.go(true);
 	}
 
-	@Override protected void build(DesignGridLayout layout)
+	@Override public void build(DesignGridLayout layout)
 	{
-		layout.forceConsistentVGaps();
+		layout.disableSmartVerticalResize();
 		super.build(layout);
 	}
 }

@@ -34,10 +34,8 @@ public interface IRowCreator extends ISubGridStarter
 	 * 
 	 * @return a new center-aligned row which API is used in a chained-way 
 	 * (fluent API) to add components to the row.
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow center() throws IllegalStateException;
+	public abstract INonGridRow center();
 
 	/**
 	 * Creates a left-aligned row. Left-aligned rows are NOT canonical grids but
@@ -50,10 +48,8 @@ public interface IRowCreator extends ISubGridStarter
 	 * 
 	 * @return a new left-aligned row which API is used in a chained-way (fluent 
 	 * API) to add components to the row.
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow left() throws IllegalStateException;
+	public abstract INonGridRow left();
 
 	/**
 	 * Creates a right-aligned row. Right-aligned rows are NOT canonical grids 
@@ -66,8 +62,6 @@ public interface IRowCreator extends ISubGridStarter
 	 * 
 	 * @return a new right-aligned row which API is used in a chained-way (fluent 
 	 * API) to add components to the row.
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow right() throws IllegalStateException;
+	public abstract INonGridRow right();
 }

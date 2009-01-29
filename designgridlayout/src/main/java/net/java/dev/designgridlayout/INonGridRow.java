@@ -35,15 +35,13 @@ public interface INonGridRow extends IRow
 	 * (non-Javadoc)
 	 * @see IRow#add(javax.swing.JComponent[])
 	 */
-	public abstract INonGridRow add(JComponent... children) 
-		throws IllegalStateException;
+	public abstract INonGridRow add(JComponent... children);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see IRow#addMulti(javax.swing.JComponent[])
 	 */
-	public abstract INonGridRow addMulti(JComponent... children)
-		throws IllegalStateException;
+	public abstract INonGridRow addMulti(JComponent... children);
 	
 	/**
 	 * Sets the "extreme" component(s) of this row to fill the whole space
@@ -58,8 +56,6 @@ public interface INonGridRow extends IRow
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow fill() throws IllegalStateException;
+	public abstract INonGridRow fill();
 }
