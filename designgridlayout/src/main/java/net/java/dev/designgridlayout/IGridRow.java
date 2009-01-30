@@ -30,7 +30,7 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * (non-Javadoc)
 	 * @see IRow#add(javax.swing.JComponent[])
 	 */
-	public abstract IGridRow add(JComponent... children) throws IllegalStateException;
+	public abstract IGridRow add(JComponent... children);
 	
 	/**
 	 * Adds one component to this row and allows it to span several columns of
@@ -46,21 +46,16 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * @param span the number of columns to span (must be &gt; 0)
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IGridRow add(JComponent child, int span) 
-		throws IllegalStateException;
+	public abstract IGridRow add(JComponent child, int span);
 
 	/**
 	 * Adds an empty column to the current row.
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IGridRow empty() throws IllegalStateException;
+	public abstract IGridRow empty();
 
 	/**
 	 * Adds one or more empty columns to the current row.
@@ -68,17 +63,14 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * @param span the number of columns to span (must be &gt; 0)
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IGridRow empty(int span) throws IllegalStateException;
+	public abstract IGridRow empty(int span);
 
 	/*
 	 * (non-Javadoc)
 	 * @see IRow#addMulti(javax.swing.JComponent[])
 	 */
-	public abstract IGridRow addMulti(JComponent... children) 
-		throws IllegalStateException;
+	public abstract IGridRow addMulti(JComponent... children);
 	
 	/**
 	 * Adds components to this row; all components are "assembled" as one
@@ -91,9 +83,6 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * @param children components to assemble and add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IGridRow addMulti(int span, JComponent... children)
-		throws IllegalStateException;
+	public abstract IGridRow addMulti(int span, JComponent... children);
 }

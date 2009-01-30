@@ -22,7 +22,7 @@
 	<groupId>net.java.dev.designgridlayout</groupId>
 	<artifactId>designgridlayout</artifactId>
 	<packaging>jar</packaging>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.1-rc4</version>
 
 	<name>DesignGridLayout</name>
 	<description>
@@ -122,6 +122,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
+					<addVersionToProjectName>true</addVersionToProjectName>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
@@ -293,7 +294,7 @@
 		<dependency>
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
-			<version>1.0</version>
+			<version>1.0rc2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Point;
+
 import javax.swing.SwingUtilities;
 
 import org.testng.annotations.AfterMethod;
@@ -98,6 +100,23 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkSnapshot("after-append");
 	}
 
+	@Test public void checkBug36SmartVerticalResize() throws Exception
+	{
+		launchGui(SmartVerticalResize4RealWorldExample.class);
+		checkSnapshot("bug36-pref-size");
+		frame().moveTo(new Point(frame().target.getX(), 0));
+		for (int i = 1; i <= BUG36_STEPS; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + BUG36_INCREMENT);
+			checkSnapshot("bug36-resize-" + (i * BUG36_INCREMENT));
+		}
+		for (int i = 1; i <= BUG36_STEPS; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() - BUG36_INCREMENT);
+			checkSnapshot("bug36-reverse-" + (i * BUG36_INCREMENT));
+		}
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);
@@ -107,4 +126,7 @@ public class SimpleIssuesTest extends AbstractGuiTest
 	{
 		checkExample(Bug20PanelWithBorder1.class);
 	}
+	
+	static final private int BUG36_INCREMENT = 3;
+	static final private int BUG36_STEPS = 6;
 }

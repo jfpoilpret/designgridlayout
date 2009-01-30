@@ -22,23 +22,12 @@ import javax.swing.JComponent;
 abstract class AbstractRow
 {
 	// Called by DesignGridLayout immediately after instanciation
-	final void init(LayoutLocker locker, Container parent, 
-		HeightGrowPolicy heightTester, OrientationPolicy orientation)
+	final void init(
+		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
-		_locker = locker;
 		_parent = parent;
 		_heightTester = heightTester;
 		_orientation = orientation;
-	}
-	
-	final void name(String name)
-	{
-		_name = name;
-	}
-	
-	final String name()
-	{
-		return _name;
 	}
 
 	// Used by children
@@ -90,20 +79,10 @@ abstract class AbstractRow
 			_growWeight = (fixedHeight ? 0.0 : 1.0);
 		}
 	}
-	
-	final protected void checkUnlocked() throws IllegalStateException
-	{
-		_locker.checkUnlocked();
-	}
 
 	final protected int baseline()
 	{
 		return _baseline;
-	}
-
-	final protected void baseline(int baseline)
-	{
-		_baseline = baseline;
 	}
 
 	final protected int maxWidth()
@@ -213,11 +192,9 @@ abstract class AbstractRow
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth);
 
-	private LayoutLocker _locker;
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
-	private String _name = null;
 	private boolean _unrelatedGap = false;
 	private int _vgap = 0;
 	private int _baseline;

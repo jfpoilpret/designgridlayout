@@ -42,8 +42,6 @@ import net.java.dev.designgridlayout.MultiComponentExample;
 import net.java.dev.designgridlayout.MultiGrid1Simple;
 import net.java.dev.designgridlayout.MultiGrid2ThreeGridsWithGridSpan;
 import net.java.dev.designgridlayout.MultiGrid3ThreeComplexGrids;
-import net.java.dev.designgridlayout.Rfe29ConsistentVGaps;
-import net.java.dev.designgridlayout.Rfe29ExactVGaps;
 import net.java.dev.designgridlayout.RightToLeft1LTR;
 import net.java.dev.designgridlayout.RightToLeft2RTL;
 import net.java.dev.designgridlayout.RightToLeft3RealWorldExample;
@@ -188,10 +186,6 @@ public class Examples extends JFrame
 			new Node("Custom Margins", Misc1CustomizedMargins.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Multi-Components", MultiComponentExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Exact Vertical Gaps", Rfe29ExactVGaps.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Consistent Vertical Gaps", Rfe29ConsistentVGaps.class)));
 		root.add(node);
 
 		DefaultTreeModel model = new DefaultTreeModel(root);

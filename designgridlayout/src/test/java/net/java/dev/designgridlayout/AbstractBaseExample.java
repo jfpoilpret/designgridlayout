@@ -17,12 +17,10 @@ package net.java.dev.designgridlayout;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTable;
@@ -119,17 +117,7 @@ public abstract class AbstractBaseExample
 		setTableHeight(table, 4);
 		return new JScrollPane(table);
 	}
-
-	protected JRadioButton radio(String text)
-	{
-		return new JRadioButton(text);
-	}
-
-	protected JCheckBox checkbox(String text)
-	{
-		return new JCheckBox(text);
-	}
-
+	
 	static protected void setTableHeight(JTable table, int rows)
 	{
 //		int width = table.getColumnModel().getTotalColumnWidth();

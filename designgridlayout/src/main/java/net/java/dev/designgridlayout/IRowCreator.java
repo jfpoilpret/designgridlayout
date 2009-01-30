@@ -24,28 +24,6 @@ package net.java.dev.designgridlayout;
 public interface IRowCreator extends ISubGridStarter
 {
 	/**
-	 * Gives a logical name to the row to be created. This name will be used
-	 * by {@link Synchronizer} to align rows from different panels if they
-	 * have the same name. 
-	 * <p/>
-	 * Giving a name is optional. If a row has no name, then it won't be aligned
-	 * if its layout is synchronized with another layout.
-	 * <p/>
-	 * The name given to the row must be unique in a given {@link DesignGridLayout}
-	 * instance.
-	 * 
-	 * @param name logical name of the new row, used when synchronizing layouts
-	 * @return {@code this} instance of IRowCreator, allowing for chained 
-	 * calls to other methods (also known as "fluent API")
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
-	 * @throws IllegalArgumentException if name is null or not unique in the
-	 * current DesignGridLayout
-	 */
-	public abstract IRowCreator sync(String name) 
-		throws IllegalStateException, IllegalArgumentException;
-	
-	/**
 	 * Creates a center-aligned row. Center-aligned rows are NOT canonical grids 
 	 * but avoid the otherwise mandatory use of several {@code LayoutManager}s 
 	 * for one single dialog.
@@ -56,10 +34,8 @@ public interface IRowCreator extends ISubGridStarter
 	 * 
 	 * @return a new center-aligned row which API is used in a chained-way 
 	 * (fluent API) to add components to the row.
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow center() throws IllegalStateException;
+	public abstract INonGridRow center();
 
 	/**
 	 * Creates a left-aligned row. Left-aligned rows are NOT canonical grids but
@@ -72,10 +48,8 @@ public interface IRowCreator extends ISubGridStarter
 	 * 
 	 * @return a new left-aligned row which API is used in a chained-way (fluent 
 	 * API) to add components to the row.
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow left() throws IllegalStateException;
+	public abstract INonGridRow left();
 
 	/**
 	 * Creates a right-aligned row. Right-aligned rows are NOT canonical grids 
@@ -88,8 +62,6 @@ public interface IRowCreator extends ISubGridStarter
 	 * 
 	 * @return a new right-aligned row which API is used in a chained-way (fluent 
 	 * API) to add components to the row.
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract INonGridRow right() throws IllegalStateException;
+	public abstract INonGridRow right();
 }
