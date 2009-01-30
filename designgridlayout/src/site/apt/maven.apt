@@ -34,7 +34,7 @@ How to use in a Maven project
     <dependency>
         <groupId>net.java.dev.designgridlayout</groupId>
         <artifactId>designgridlayout</artifactId>
-        <version>1.1-rc3</version>
+        <version>1.1-rc4</version>
     </dependency>
 </dependencies>
 +------------------------------------------------------------------------------+
