@@ -20,7 +20,6 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
@@ -95,11 +94,6 @@ class LayoutEngine implements ILayoutEngine
 		return _rows;
 	}
 	
-	public void setMapRowsPosition(Map<String, Integer> rowsPosition)
-	{
-		_rowsPosition = rowsPosition;
-	}
-	
 	public Dimension getMinimumSize()
 	{
 		initialize();
@@ -157,7 +151,6 @@ class LayoutEngine implements ILayoutEngine
 			
 			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
-			helper.setMapRowsPosition(_rowsPosition);
 			for (AbstractRow row: _rows)
 			{
 				// Issue #30 - check that row is not empty
@@ -165,10 +158,13 @@ class LayoutEngine implements ILayoutEngine
 				{
 					helper.setY(y);
 					int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
-					helper.setRowAvailableHeight(extraHeight + row.height());
+//					helper.setRowAvailableHeight(extraHeight + row.height());
+					int rowHeight = row.height() + row.extraHeight() + extraHeight;
+					helper.setRowAvailableHeight(rowHeight);
 					row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 						gridsWidth, _labelWidths);
-					row.actualHeight(row.height() + extraHeight);
+//					row.actualHeight(row.height() + extraHeight);
+					row.actualHeight(rowHeight);
 					y += row.actualHeight() + row.vgap();
 				}
 			}
@@ -492,7 +488,8 @@ class LayoutEngine implements ILayoutEngine
 		int totalHeight = 0;
 		for (AbstractRow row: _rows)
 		{
-			totalHeight += row.height() + row.vgap();
+//			totalHeight += row.height() + row.vgap();
+			totalHeight += row.height() + row.vgap() + row.extraHeight();
 		}
 		return totalHeight;
 	}
@@ -721,5 +718,4 @@ class LayoutEngine implements ILayoutEngine
 	private Insets _margins = null;
 	private int _totalLabelWidth;
 	private int _maxGrids;
-	private Map<String, Integer> _rowsPosition = null;
 }

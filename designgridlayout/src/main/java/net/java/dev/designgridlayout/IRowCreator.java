@@ -24,28 +24,6 @@ package net.java.dev.designgridlayout;
 public interface IRowCreator extends ISubGridStarter
 {
 	/**
-	 * Gives a logical name to the row to be created. This name will be used
-	 * by {@link Synchronizer} to align rows from different panels if they
-	 * have the same name. 
-	 * <p/>
-	 * Giving a name is optional. If a row has no name, then it won't be aligned
-	 * if its layout is synchronized with another layout.
-	 * <p/>
-	 * The name given to the row must be unique in a given {@link DesignGridLayout}
-	 * instance.
-	 * 
-	 * @param name logical name of the new row, used when synchronizing layouts
-	 * @return {@code this} instance of IRowCreator, allowing for chained 
-	 * calls to other methods (also known as "fluent API")
-	 * @throws IllegalStateException if this layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
-	 * @throws IllegalArgumentException if name is null or not unique in the
-	 * current DesignGridLayout
-	 */
-	public abstract IRowCreator sync(String name) 
-		throws IllegalStateException, IllegalArgumentException;
-	
-	/**
 	 * Creates a center-aligned row. Center-aligned rows are NOT canonical grids 
 	 * but avoid the otherwise mandatory use of several {@code LayoutManager}s 
 	 * for one single dialog.

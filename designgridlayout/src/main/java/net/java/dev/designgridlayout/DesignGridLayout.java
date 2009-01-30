@@ -236,40 +236,12 @@ public class DesignGridLayout implements LayoutManager
 		}
 	}
 	
-	private void checkSyncName(String name, boolean checkNull)
-		throws IllegalStateException, IllegalArgumentException
-	{
-		_locker.checkUnlocked();
-		if (name == null)
-		{
-			if (checkNull)
-			{
-				throw new IllegalArgumentException(
-					"Calling IRowCreator.sync(null) is incorrect");
-			}
-			else
-			{
-				return;
-			}
-		}
-		for (AbstractRow row: _rows)
-		{
-			if (name.equals(row.name()))
-			{
-				throw new IllegalArgumentException(
-					"'" + name + "' already exists in this DesignGridLayout");
-			}
-		}
-	}
-	
-	private <T extends AbstractRow> T addRow(T row, double verticalWeight, String name)
+	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
 		throws IllegalStateException
 	{
-		checkSyncName(name, false);
 		_current = row;
 		_rows.add(row);
 		row.init(_locker, _parent, _heightTester, _orientation);
-		row.name(name);
 		row.growWeight(verticalWeight);
 		return row;
 	}
@@ -341,46 +313,39 @@ public class DesignGridLayout implements LayoutManager
 			_weight = weight;
 		}
 		
-		public IRowCreator sync(String name)
-		{
-			checkSyncName(name, true);
-			_name = name;
-			return this;
-		}
-		
 		public INonGridRow center()
 		{
-			return addRow(new CenterRow(), _weight, _name);
+			return addRow(new CenterRow(), _weight);
 		}
 
 		public INonGridRow left()
 		{
-			return addRow(new LeftRow(), _weight, _name);
+			return addRow(new LeftRow(), _weight);
 		}
 
 		public INonGridRow right()
 		{
-			return addRow(new RightRow(), _weight, _name);
+			return addRow(new RightRow(), _weight);
 		}
 
 		public ISpannableGridRow grid(JLabel label)
 		{
-			return addRow(newGridRow(), _weight, _name).grid(label);
+			return addRow(newGridRow(), _weight).grid(label);
 		}
 
 		public IGridRow grid(JLabel label, int gridspan)
 		{
-			return addRow(newGridRow(), _weight, _name).grid(label, gridspan);
+			return addRow(newGridRow(), _weight).grid(label, gridspan);
 		}
 
 		public ISpannableGridRow grid()
 		{
-			return addRow(newGridRow(), _weight, _name).grid();
+			return addRow(newGridRow(), _weight).grid();
 		}
 
 		public IGridRow grid(int gridspan)
 		{
-			return addRow(newGridRow(), _weight, _name).grid(gridspan);
+			return addRow(newGridRow(), _weight).grid(gridspan);
 		}
 		
 		private GridRow newGridRow()
@@ -397,7 +362,6 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		private final double _weight;
-		private String _name = null;
 	}
 	
 	ILayoutEngine getLayoutEngine()

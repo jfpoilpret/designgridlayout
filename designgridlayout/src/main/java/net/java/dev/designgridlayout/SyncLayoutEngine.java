@@ -19,7 +19,6 @@ import java.awt.Insets;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 class SyncLayoutEngine implements ILayoutEngine
 {
@@ -105,11 +104,6 @@ class SyncLayoutEngine implements ILayoutEngine
 		return _current.rows();
 	}
 
-	public void setMapRowsPosition(Map<String, Integer> rowsPosition)
-	{
-		_rowsPosition = rowsPosition;
-	}
-	
 	public Dimension getMinimumSize()
 	{
 		initialize();
@@ -127,14 +121,9 @@ class SyncLayoutEngine implements ILayoutEngine
 	public void layoutContainer()
 	{
 		initialize();
-		//TODO this is where the whole complex stuff begins!
 		if (_alignRows)
 		{
-			//TODO later
-			// Align the first row always
-			
-			// Then best effort for aligning other rows, based on their heights
-			
+			computeRowsAlignment();
 		}
 		_current.layoutContainer();
 	}
@@ -269,45 +258,7 @@ class SyncLayoutEngine implements ILayoutEngine
 	
 	private void computeRowsAlignment()
 	{
-		boolean hasName = false;
-		// Check if at least one row is named
-		for (ILayoutEngine engine: _engines)
-		{
-			for (AbstractRow row: engine.rows())
-			{
-				if (row.name() != null)
-				{
-					hasName = true;
-					break;
-				}
-			}
-		}
-		if (!hasName)
-		{
-			computeFirstRowBaseline();
-		}
-	}
-	
-	private void computeFirstRowBaseline()
-	{
-		int baseline = 0;
-		for (ILayoutEngine engine: _engines)
-		{
-			for (AbstractRow row: engine.rows())
-			{
-				baseline = Math.max(baseline, row.baseline());
-				break;
-			}
-		}
-		// Make sure baseline is consistent across engines
-		for (ILayoutEngine engine: _engines)
-		{
-			for (AbstractRow row: engine.rows())
-			{
-				row.baseline(baseline);
-				break;
-			}
-		}
+		_policy.synchronize(_engines);
 	}
 	
 	private void initialize()
@@ -352,8 +303,7 @@ class SyncLayoutEngine implements ILayoutEngine
 	}
 
 	private final List<ILayoutEngine> _engines = new ArrayList<ILayoutEngine>();
-//	private final Map<ILayoutEngine, SyncRowMapping> _engines = 
-//		new LinkedHashMap<ILayoutEngine, SyncRowMapping>();
+	private final ILayoutRowSyncPolicy _policy = new SimpleLayoutSyncPolicy();
 	private ILayoutEngine _current = null;
 
 	// Synchronization settings
@@ -366,6 +316,4 @@ class SyncLayoutEngine implements ILayoutEngine
 	private Insets _margins = null;
 	private Dimension _minimumSize = null;
 	private Dimension _preferredSize = null;
-	//TODO remove initialization?
-	private Map<String, Integer> _rowsPosition = null;
 }

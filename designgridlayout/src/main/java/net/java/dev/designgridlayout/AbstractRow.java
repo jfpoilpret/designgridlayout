@@ -31,16 +31,6 @@ abstract class AbstractRow
 		_orientation = orientation;
 	}
 	
-	final void name(String name)
-	{
-		_name = name;
-	}
-	
-	final String name()
-	{
-		return _name;
-	}
-
 	// Used by children
 	final protected Container parent()
 	{
@@ -68,6 +58,16 @@ abstract class AbstractRow
 	{
 		return _unrelatedGap;
 	}
+	
+	final void extraHeight(int extraHeight)
+	{
+		_extraHeight = extraHeight;
+	}
+	
+	final int extraHeight()
+	{
+		return _extraHeight;
+	}
 
 	final void vgap(int vgap)
 	{
@@ -81,6 +81,7 @@ abstract class AbstractRow
 
 	final void init()
 	{
+		_extraHeight = 0;
 		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
 		_height = ComponentHelper.maxValues(allItems(), PrefHeightExtractor.INSTANCE);
 		_baseline = ComponentHelper.maxValues(allItems(), BaselineExtractor.INSTANCE);
@@ -217,7 +218,6 @@ abstract class AbstractRow
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
-	private String _name = null;
 	private boolean _unrelatedGap = false;
 	private int _vgap = 0;
 	private int _baseline;
@@ -225,4 +225,5 @@ abstract class AbstractRow
 	private double _growWeight = -1.0;
 	private int _maxWidth;
 	private int _actualHeight;
+	private int _extraHeight;
 }
