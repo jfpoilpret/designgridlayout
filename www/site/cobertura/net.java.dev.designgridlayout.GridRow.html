@@ -74,9 +74,9 @@
   <td class="src"><pre class="src">&nbsp;{</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;29</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        GridRow(GridRow previous)</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;30</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;31</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;                _previous = previous;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;32</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;30</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;31</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;                _previous = previous;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;32</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;33</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        </pre></td></tr>
 <tr>  <td class="numLine">&nbsp;34</td>  <td class="nbHits">&nbsp;</td>
@@ -111,8 +111,8 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> ISpannableGridRow add(JComponent child, <span class="keyword">int</span> span)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;50</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;405</td>  <td class="src"><pre class="src">&nbsp;                _current.add(child, span);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;405</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;426</td>  <td class="src"><pre class="src">&nbsp;                _current.add(child, span);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;426</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;53</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;54</td>  <td class="nbHits">&nbsp;</td>
@@ -129,13 +129,13 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> ISpannableGridRow add(JComponent... children)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;60</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;61</td>  <td class="nbHitsCovered"><a title="Line 61: Conditional coverage 100% (2/2).">&nbsp;611</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 61: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (JComponent component: children)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;61</td>  <td class="nbHitsCovered"><a title="Line 61: Conditional coverage 100% (2/2).">&nbsp;635</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 61: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (JComponent component: children)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;62</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;63</td>  <td class="nbHitsCovered">&nbsp;331</td>  <td class="src"><pre class="src">&nbsp;                        add(component, 1);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;63</td>  <td class="nbHitsCovered">&nbsp;343</td>  <td class="src"><pre class="src">&nbsp;                        add(component, 1);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;64</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;65</td>  <td class="nbHitsCovered">&nbsp;280</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;65</td>  <td class="nbHitsCovered">&nbsp;292</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;66</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;67</td>  <td class="nbHits">&nbsp;</td>
@@ -205,7 +205,7 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> ISpannableGridRow empty(<span class="keyword">int</span> span)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;101</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;102</td>  <td class="nbHitsCovered">&nbsp;33</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> add(<span class="keyword">null</span>, span);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;102</td>  <td class="nbHitsCovered">&nbsp;36</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> add(<span class="keyword">null</span>, span);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;103</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;104</td>  <td class="nbHits">&nbsp;</td>
@@ -222,7 +222,7 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> ISpannableGridRow grid(JLabel label)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;110</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;111</td>  <td class="nbHitsCovered">&nbsp;196</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> newGrid(label, 0);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;111</td>  <td class="nbHitsCovered">&nbsp;201</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> newGrid(label, 0);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;112</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;113</td>  <td class="nbHits">&nbsp;</td>
@@ -284,7 +284,7 @@
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;143</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="comment">// Fix the span of the previous sub-grid (if it was in auto-span mode)</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;144</td>  <td class="nbHitsCovered"><a title="Line 144: Conditional coverage 100% (2/2).">&nbsp;247</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 144: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (_current != <span class="keyword">null</span>)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;144</td>  <td class="nbHitsCovered"><a title="Line 144: Conditional coverage 100% (2/2).">&nbsp;252</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 144: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (_current != <span class="keyword">null</span>)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;145</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;146</td>  <td class="nbHitsCovered">&nbsp;39</td>  <td class="src"><pre class="src">&nbsp;                        _current.gridspan(1);</pre></td></tr>
@@ -293,12 +293,12 @@
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;149</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="comment">// Find the matching subgrid (if any) of the previous row</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;150</td>  <td class="nbHitsCovered"><a title="Line 150: Conditional coverage 100% (2/2).">&nbsp;247</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 150: Conditional coverage 100% (2/2).">                SubGrid previous = (_previous != <span class="keyword">null</span> ? _previous.findGrid(_gridIndex) : <span class="keyword">null</span>);</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;150</td>  <td class="nbHitsCovered"><a title="Line 150: Conditional coverage 100% (2/2).">&nbsp;252</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 150: Conditional coverage 100% (2/2).">                SubGrid previous = (_previous != <span class="keyword">null</span> ? _previous.findGrid(_gridIndex) : <span class="keyword">null</span>);</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;151</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="comment">// Initialize the sublist of _items to be used by the new subgrid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;152</td>  <td class="nbHitsCovered">&nbsp;247</td>  <td class="src"><pre class="src">&nbsp;                _current = <span class="keyword">new</span> SubGrid(<span class="keyword">new</span> SubList(_items), previous, parent(), label, gridspan);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;153</td>  <td class="nbHitsCovered">&nbsp;247</td>  <td class="src"><pre class="src">&nbsp;                _grids.add(_current);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;154</td>  <td class="nbHitsCovered">&nbsp;247</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;152</td>  <td class="nbHitsCovered">&nbsp;252</td>  <td class="src"><pre class="src">&nbsp;                _current = <span class="keyword">new</span> SubGrid(<span class="keyword">new</span> SubList(_items), previous, parent(), label, gridspan);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;153</td>  <td class="nbHitsCovered">&nbsp;252</td>  <td class="src"><pre class="src">&nbsp;                _grids.add(_current);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;154</td>  <td class="nbHitsCovered">&nbsp;252</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;155</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;156</td>  <td class="nbHits">&nbsp;</td>
@@ -307,19 +307,19 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">void</span> checkSpanRows()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;158</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;159</td>  <td class="nbHitsCovered"><a title="Line 159: Conditional coverage 100% (2/2).">&nbsp;210</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 159: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;159</td>  <td class="nbHitsCovered"><a title="Line 159: Conditional coverage 100% (2/2).">&nbsp;215</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 159: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;160</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;161</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                        grid.checkSpanRows();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;162</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;163</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;161</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                        grid.checkSpanRows();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;162</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;163</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;164</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;165</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> gridspan(<span class="keyword">int</span> grid)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;166</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered">&nbsp;626</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).gridspan();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered">&nbsp;636</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).gridspan();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;168</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;169</td>  <td class="nbHits">&nbsp;</td>
@@ -328,7 +328,7 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> labelWidth(<span class="keyword">int</span> grid)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;171</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;172</td>  <td class="nbHitsCovered">&nbsp;313</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).labelWidth();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;172</td>  <td class="nbHitsCovered">&nbsp;318</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).labelWidth();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;173</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;174</td>  <td class="nbHits">&nbsp;</td>
@@ -337,13 +337,13 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> numGrids()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;176</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;177</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> numGrids = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;178</td>  <td class="nbHitsCovered"><a title="Line 178: Conditional coverage 100% (2/2).">&nbsp;210</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 178: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;177</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> numGrids = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;178</td>  <td class="nbHitsCovered"><a title="Line 178: Conditional coverage 100% (2/2).">&nbsp;215</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 178: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;179</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;180</td>  <td class="nbHitsCovered"><a title="Line 180: Conditional coverage 100% (2/2).">&nbsp;249</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 180: Conditional coverage 100% (2/2).">                        numGrids += (grid.gridspan() &gt; 0 ? grid.gridspan() : 1);</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;181</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;182</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> numGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;180</td>  <td class="nbHitsCovered"><a title="Line 180: Conditional coverage 100% (2/2).">&nbsp;254</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 180: Conditional coverage 100% (2/2).">                        numGrids += (grid.gridspan() &gt; 0 ? grid.gridspan() : 1);</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;181</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;182</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> numGrids;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;183</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;184</td>  <td class="nbHits">&nbsp;</td>
@@ -354,13 +354,13 @@
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;187</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="comment">// Set the correct grid-span for the last sub-grid if needed</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;188</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> span = totalGrids;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;189</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                Iterator&lt;SubGrid&gt; i = _grids.iterator();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;190</td>  <td class="nbHitsCovered"><a title="Line 190: Conditional coverage 100% (2/2).">&nbsp;459</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 190: Conditional coverage 100% (2/2).">                <span class="keyword">while</span> (i.hasNext())</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;188</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> span = totalGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;189</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                Iterator&lt;SubGrid&gt; i = _grids.iterator();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;190</td>  <td class="nbHitsCovered"><a title="Line 190: Conditional coverage 100% (2/2).">&nbsp;469</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 190: Conditional coverage 100% (2/2).">                <span class="keyword">while</span> (i.hasNext())</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;191</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;192</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                        SubGrid grid = i.next();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;193</td>  <td class="nbHitsCovered"><a title="Line 193: Conditional coverage 100% (2/2).">&nbsp;249</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 193: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (i.hasNext())</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;192</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                        SubGrid grid = i.next();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;193</td>  <td class="nbHitsCovered"><a title="Line 193: Conditional coverage 100% (2/2).">&nbsp;254</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 193: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (i.hasNext())</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;194</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;195</td>  <td class="nbHitsCovered">&nbsp;39</td>  <td class="src"><pre class="src">&nbsp;                                span -= grid.gridspan();</pre></td></tr>
@@ -369,21 +369,21 @@
   <td class="src"><pre class="src">&nbsp;                        <span class="keyword">else</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;198</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;199</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                                grid.gridspan(span);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;199</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                                grid.gridspan(span);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;200</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;201</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;201</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;202</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="comment">// Add as many fake grids as necessary to the sub-grids list</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;203</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                _totalGrids = totalGrids;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;204</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;203</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                _totalGrids = totalGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;204</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;205</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                </pre></td></tr>
 <tr>  <td class="numLine">&nbsp;206</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> gridColumns(<span class="keyword">int</span> grid)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;207</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered">&nbsp;626</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).gridColumns();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered">&nbsp;636</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).gridColumns();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;209</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;210</td>  <td class="nbHits">&nbsp;</td>
@@ -392,7 +392,7 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> maxColumnWidth(<span class="keyword">int</span> grid, <span class="keyword">int</span> maxColumns, IExtractor extractor)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;212</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;213</td>  <td class="nbHitsCovered">&nbsp;626</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).maxColumnWidth(maxColumns, extractor);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;213</td>  <td class="nbHitsCovered">&nbsp;636</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> findNonNulGrid(grid).maxColumnWidth(maxColumns, extractor);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;214</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;215</td>  <td class="nbHits">&nbsp;</td>
@@ -401,13 +401,13 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> hgap()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;217</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;218</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> hgap = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;219</td>  <td class="nbHitsCovered"><a title="Line 219: Conditional coverage 100% (2/2).">&nbsp;210</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 219: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;218</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> hgap = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;219</td>  <td class="nbHitsCovered"><a title="Line 219: Conditional coverage 100% (2/2).">&nbsp;215</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 219: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;220</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;221</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                        hgap = Math.max(hgap, grid.hgap());</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;222</td>  <td class="nbHitsCovered">&nbsp;249</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;223</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> hgap;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;221</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                        hgap = Math.max(hgap, grid.hgap());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;222</td>  <td class="nbHitsCovered">&nbsp;254</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;223</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> hgap;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;224</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;225</td>  <td class="nbHits">&nbsp;</td>
@@ -416,9 +416,9 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">int</span> gridgap()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;227</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;228</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;229</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridgap = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;230</td>  <td class="nbHitsCovered"><a title="Line 230: Conditional coverage 100% (2/2).">&nbsp;249</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 230: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; _grids.size() - 1; i++)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;228</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;229</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridgap = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;230</td>  <td class="nbHitsCovered"><a title="Line 230: Conditional coverage 100% (2/2).">&nbsp;254</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 230: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; _grids.size() - 1; i++)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;231</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;232</td>  <td class="nbHitsCovered">&nbsp;39</td>  <td class="src"><pre class="src">&nbsp;                        List&lt;RowItem&gt; leftGrid = _grids.get(i).items();</pre></td></tr>
@@ -436,7 +436,7 @@
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;242</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;243</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> gridgap;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;243</td>  <td class="nbHitsCovered">&nbsp;215</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> gridgap;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;244</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;245</td>  <td class="nbHits">&nbsp;</td>
@@ -445,13 +445,13 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">boolean</span> isEmpty()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;247</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;248</td>  <td class="nbHitsCovered"><a title="Line 248: Conditional coverage 100% (2/2).">&nbsp;1199</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 248: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;248</td>  <td class="nbHitsCovered"><a title="Line 248: Conditional coverage 100% (2/2).">&nbsp;1276</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 248: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;249</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;250</td>  <td class="nbHitsCovered"><a title="Line 250: Conditional coverage 100% (2/2).">&nbsp;1203</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 250: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (grid.leftComponent() != <span class="keyword">null</span>)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;250</td>  <td class="nbHitsCovered"><a title="Line 250: Conditional coverage 100% (2/2).">&nbsp;1280</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 250: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (grid.leftComponent() != <span class="keyword">null</span>)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;251</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;252</td>  <td class="nbHitsCovered">&nbsp;1193</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;252</td>  <td class="nbHitsCovered">&nbsp;1270</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;253</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;254</td>  <td class="nbHitsCovered">&nbsp;10</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
@@ -464,7 +464,7 @@
   <td class="src"><pre class="src">&nbsp;        @Override JComponent leftComponent()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;259</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;260</td>  <td class="nbHitsUncovered"><a title="Line 260: Conditional coverage 50% (1/2).">&nbsp;210</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 260: Conditional coverage 50% (1/2).">                <span class="keyword">return</span> (_grids.isEmpty() ? <span class="keyword">null</span> : _grids.get(0).leftComponent());</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;260</td>  <td class="nbHitsUncovered"><a title="Line 260: Conditional coverage 50% (1/2).">&nbsp;215</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 260: Conditional coverage 50% (1/2).">                <span class="keyword">return</span> (_grids.isEmpty() ? <span class="keyword">null</span> : _grids.get(0).leftComponent());</a></span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;261</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;262</td>  <td class="nbHits">&nbsp;</td>
@@ -473,7 +473,7 @@
   <td class="src"><pre class="src">&nbsp;        @Override List&lt;RowItem&gt; items()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;264</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;265</td>  <td class="nbHitsCovered">&nbsp;1390</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> _items;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;265</td>  <td class="nbHitsCovered">&nbsp;1472</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> _items;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;266</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;267</td>  <td class="nbHits">&nbsp;</td>
@@ -482,26 +482,26 @@
   <td class="src"><pre class="src">&nbsp;        @Override List&lt;RowItem&gt; allItems()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;269</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;270</td>  <td class="nbHitsCovered"><a title="Line 270: Conditional coverage 100% (2/2).">&nbsp;1462</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 270: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (_allItems == <span class="keyword">null</span>)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;270</td>  <td class="nbHitsCovered"><a title="Line 270: Conditional coverage 100% (2/2).">&nbsp;1497</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 270: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (_allItems == <span class="keyword">null</span>)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;271</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;272</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;                        _allItems = <span class="keyword">new</span> ArrayList&lt;RowItem&gt;(_items.size() + _grids.size());</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;273</td>  <td class="nbHitsCovered"><a title="Line 273: Conditional coverage 100% (2/2).">&nbsp;208</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 273: Conditional coverage 100% (2/2).">                        <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;272</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;                        _allItems = <span class="keyword">new</span> ArrayList&lt;RowItem&gt;(_items.size() + _grids.size());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;273</td>  <td class="nbHitsCovered"><a title="Line 273: Conditional coverage 100% (2/2).">&nbsp;213</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 273: Conditional coverage 100% (2/2).">                        <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;274</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;275</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                <span class="comment">// Add label if any</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;276</td>  <td class="nbHitsCovered"><a title="Line 276: Conditional coverage 100% (2/2).">&nbsp;247</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 276: Conditional coverage 100% (2/2).">                                <span class="keyword">if</span> (grid.label() != <span class="keyword">null</span>)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;276</td>  <td class="nbHitsCovered"><a title="Line 276: Conditional coverage 100% (2/2).">&nbsp;252</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 276: Conditional coverage 100% (2/2).">                                <span class="keyword">if</span> (grid.label() != <span class="keyword">null</span>)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;277</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;278</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;                                        _allItems.add(<span class="keyword">new</span> RowItem(1, grid.label()));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;278</td>  <td class="nbHitsCovered">&nbsp;218</td>  <td class="src"><pre class="src">&nbsp;                                        _allItems.add(<span class="keyword">new</span> RowItem(1, grid.label()));</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;279</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;280</td>  <td class="nbHitsCovered">&nbsp;247</td>  <td class="src"><pre class="src">&nbsp;                                _allItems.addAll(grid.items());</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;281</td>  <td class="nbHitsCovered">&nbsp;247</td>  <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;280</td>  <td class="nbHitsCovered">&nbsp;252</td>  <td class="src"><pre class="src">&nbsp;                                _allItems.addAll(grid.items());</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;281</td>  <td class="nbHitsCovered">&nbsp;252</td>  <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;282</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;283</td>  <td class="nbHitsCovered">&nbsp;1462</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> _allItems;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;283</td>  <td class="nbHitsCovered">&nbsp;1497</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> _allItems;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;284</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;285</td>  <td class="nbHits">&nbsp;</td>
@@ -512,55 +512,55 @@
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> rowWidth, <span class="keyword">int</span> gridsWidth, List&lt;Integer&gt; labelsWidth)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;288</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;289</td>  <td class="nbHitsCovered">&nbsp;758</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> x = left;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;290</td>  <td class="nbHitsCovered">&nbsp;758</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> actualHeight = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;291</td>  <td class="nbHitsCovered">&nbsp;758</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridWidth = gridsWidth / _totalGrids;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;292</td>  <td class="nbHitsCovered">&nbsp;758</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridIndex = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;293</td>  <td class="nbHitsCovered">&nbsp;758</td>  <td class="src"><pre class="src">&nbsp;                Iterator&lt;Integer&gt; label = labelsWidth.iterator();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;294</td>  <td class="nbHitsCovered"><a title="Line 294: Conditional coverage 100% (2/2).">&nbsp;758</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 294: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;289</td>  <td class="nbHitsCovered">&nbsp;825</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> x = left;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;290</td>  <td class="nbHitsCovered">&nbsp;825</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> actualHeight = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;291</td>  <td class="nbHitsCovered">&nbsp;825</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridWidth = gridsWidth / _totalGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;292</td>  <td class="nbHitsCovered">&nbsp;825</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridIndex = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;293</td>  <td class="nbHitsCovered">&nbsp;825</td>  <td class="src"><pre class="src">&nbsp;                Iterator&lt;Integer&gt; label = labelsWidth.iterator();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;294</td>  <td class="nbHitsCovered"><a title="Line 294: Conditional coverage 100% (2/2).">&nbsp;825</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 294: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;295</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;296</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Find the label for the current sub-grid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;297</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> labelWidth = label.next();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;297</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> labelWidth = label.next();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;298</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;299</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Calculate the actual width for this sub-grid (depends on spans)</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;300</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> width = gridWidth;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;301</td>  <td class="nbHitsCovered"><a title="Line 301: Conditional coverage 100% (2/2).">&nbsp;928</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 301: Conditional coverage 100% (2/2).">                        <span class="keyword">for</span> (<span class="keyword">int</span> i = 1; i &lt; grid.gridspan(); i++)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;300</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> width = gridWidth;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;301</td>  <td class="nbHitsCovered"><a title="Line 301: Conditional coverage 100% (2/2).">&nbsp;995</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 301: Conditional coverage 100% (2/2).">                        <span class="keyword">for</span> (<span class="keyword">int</span> i = 1; i &lt; grid.gridspan(); i++)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;302</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;303</td>  <td class="nbHitsCovered">&nbsp;78</td>  <td class="src"><pre class="src">&nbsp;                                width += gridgap + label.next() + hgap + gridWidth;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;304</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;305</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                        gridIndex += grid.gridspan();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;306</td>  <td class="nbHitsCovered"><a title="Line 306: Conditional coverage 100% (2/2).">&nbsp;850</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 306: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (gridIndex == _totalGrids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;305</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                        gridIndex += grid.gridspan();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;306</td>  <td class="nbHitsCovered"><a title="Line 306: Conditional coverage 100% (2/2).">&nbsp;917</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 306: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (gridIndex == _totalGrids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;307</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;308</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                <span class="comment">// Add fudge to the true last grid </span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;309</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                <span class="comment">// Note that this is not necessarily the last grid of _grids!</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;310</td>  <td class="nbHitsCovered">&nbsp;745</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">int</span> fudge = gridsWidth % _totalGrids;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;311</td>  <td class="nbHitsCovered">&nbsp;745</td>  <td class="src"><pre class="src">&nbsp;                                width += fudge;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;310</td>  <td class="nbHitsCovered">&nbsp;812</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">int</span> fudge = gridsWidth % _totalGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;311</td>  <td class="nbHitsCovered">&nbsp;812</td>  <td class="src"><pre class="src">&nbsp;                                width += fudge;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;312</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;313</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        </pre></td></tr>
 <tr>  <td class="numLine">&nbsp;314</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Layout the sub-grid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;315</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> height = grid.layoutRow(</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;315</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> height = grid.layoutRow(</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;316</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                helper, x, height(), baseline(), hgap, width, labelWidth);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;317</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                        actualHeight = Math.max(actualHeight, height);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;317</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                        actualHeight = Math.max(actualHeight, height);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;318</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;319</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Position origin to the next grid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;320</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                        x += labelWidth + hgap + width + gridgap;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;321</td>  <td class="nbHitsCovered">&nbsp;850</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;322</td>  <td class="nbHitsCovered">&nbsp;758</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> actualHeight;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;320</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                        x += labelWidth + hgap + width + gridgap;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;321</td>  <td class="nbHitsCovered">&nbsp;917</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;322</td>  <td class="nbHitsCovered">&nbsp;825</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> actualHeight;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;323</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;324</td>  <td class="nbHits">&nbsp;</td>
@@ -569,14 +569,14 @@
   <td class="src"><pre class="src">&nbsp;        SubGrid findGrid(<span class="keyword">int</span> index)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;326</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;327</td>  <td class="nbHitsCovered">&nbsp;2364</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> i = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;328</td>  <td class="nbHitsCovered"><a title="Line 328: Conditional coverage 100% (2/2).">&nbsp;2364</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 328: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;327</td>  <td class="nbHitsCovered">&nbsp;2403</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> i = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;328</td>  <td class="nbHitsCovered"><a title="Line 328: Conditional coverage 100% (2/2).">&nbsp;2403</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 328: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;329</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;330</td>  <td class="nbHitsCovered"><a title="Line 330: Conditional coverage 100% (2/2).">&nbsp;2738</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 330: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (i == index)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;330</td>  <td class="nbHitsCovered"><a title="Line 330: Conditional coverage 100% (2/2).">&nbsp;2777</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 330: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (i == index)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;331</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;332</td>  <td class="nbHitsCovered">&nbsp;1908</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> grid;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;332</td>  <td class="nbHitsCovered">&nbsp;1947</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> grid;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;333</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;334</td>  <td class="nbHitsCovered">&nbsp;830</td>  <td class="src"><pre class="src">&nbsp;                        i += grid.gridspan();</pre></td></tr>
@@ -596,20 +596,20 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> ISubGrid findNonNulGrid(<span class="keyword">int</span> index)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;344</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;345</td>  <td class="nbHitsCovered">&nbsp;2191</td>  <td class="src"><pre class="src">&nbsp;                SubGrid grid = findGrid(index);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;346</td>  <td class="nbHitsCovered"><a title="Line 346: Conditional coverage 100% (2/2).">&nbsp;2191</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 346: Conditional coverage 100% (2/2).">                <span class="keyword">return</span> (grid != <span class="keyword">null</span> ? grid : NULL_GRID);</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;345</td>  <td class="nbHitsCovered">&nbsp;2226</td>  <td class="src"><pre class="src">&nbsp;                SubGrid grid = findGrid(index);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;346</td>  <td class="nbHitsCovered"><a title="Line 346: Conditional coverage 100% (2/2).">&nbsp;2226</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 346: Conditional coverage 100% (2/2).">                <span class="keyword">return</span> (grid != <span class="keyword">null</span> ? grid : NULL_GRID);</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;347</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;348</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        </pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;349</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> SubGrid _current = <span class="keyword">null</span>;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;350</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">int</span> _gridIndex = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;351</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">int</span> _totalGrids = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;349</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> SubGrid _current = <span class="keyword">null</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;350</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">int</span> _gridIndex = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;351</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">int</span> _totalGrids = 0;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;352</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">final</span> <span class="keyword">private</span> GridRow _previous;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;353</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">final</span> <span class="keyword">private</span> List&lt;SubGrid&gt; _grids = <span class="keyword">new</span> ArrayList&lt;SubGrid&gt;();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;354</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">final</span> <span class="keyword">private</span> List&lt;RowItem&gt; _items = <span class="keyword">new</span> ArrayList&lt;RowItem&gt;();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;355</td>  <td class="nbHitsCovered">&nbsp;208</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> List&lt;RowItem&gt; _allItems = <span class="keyword">null</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;353</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">final</span> <span class="keyword">private</span> List&lt;SubGrid&gt; _grids = <span class="keyword">new</span> ArrayList&lt;SubGrid&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;354</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">final</span> <span class="keyword">private</span> List&lt;RowItem&gt; _items = <span class="keyword">new</span> ArrayList&lt;RowItem&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;355</td>  <td class="nbHitsCovered">&nbsp;213</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> List&lt;RowItem&gt; _allItems = <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;356</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;357</td>  <td class="nbHitsCovered">&nbsp;1</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">private</span> ISubGrid NULL_GRID = <span class="keyword">new</span> EmptySubGrid();</pre></td></tr>
@@ -617,6 +617,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9 on 1/29/09 2:33 PM.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9 on 1/30/09 10:35 AM.</div>
 </body>
 </html>
