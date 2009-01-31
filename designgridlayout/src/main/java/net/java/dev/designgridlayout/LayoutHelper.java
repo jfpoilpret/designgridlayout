@@ -79,8 +79,6 @@ final class LayoutHelper
 	int setSizeLocation(JComponent component, int x, int width, 
 		int maxHeight, int maxBaseline)
 	{
-		//FIXME: probably a bug there, should always get preferred height!
-//		int height = getComponentHeight(component);
 		int height = component.getPreferredSize().height;
 		int usedExtraHeight = 0;
 		if (_tester.canGrowHeight(component))

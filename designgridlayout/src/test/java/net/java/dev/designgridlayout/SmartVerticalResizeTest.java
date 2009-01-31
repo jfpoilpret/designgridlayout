@@ -55,6 +55,11 @@ public class SmartVerticalResizeTest extends AbstractGuiTest
 		checkExampleAndResize(Rfe05SmartVerticalResizeMultiComponent2.class);
 	}
 
+	@Test public void checkFigure179WithoutSmartResize() throws Exception
+	{
+		checkExampleAndResize(SmartVerticalResizeDisabled4RealWorldExample.class);
+	}
+
 	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz) throws Exception
 	{
 		checkExampleAndResizeHeight(clazz, RESIZE_INCREMENT, RESIZE_STEPS);

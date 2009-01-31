@@ -128,6 +128,35 @@ public class DesignGridLayout implements LayoutManager
 	{
 		return margins(ratio, ratio, ratio, ratio);
 	}
+	
+	/**
+	 * Disable DesignGridLayout "smart vertical resize" feature. This means that
+	 * all variable height components in {@code this} layout will have their
+	 * height take every single available pixel, possibly showing partial
+	 * information (e.g. a {@code JTable} would show its last row truncated).
+	 * <p/>
+	 * <b>IMPORTANT NOTE!</b> This method should be called before adding any
+	 * row to {@code this} layout, otherwise results are unpredictable. This
+	 * will not be considered a bug and, as such, will not be fixed in future
+	 * versions (or just as a side effect of potential future refactoring).
+	 * <p/>
+	 * <b>WARNING!</b> You should avoid using this method at all costs since it
+	 * gives your application a poor user experience. It was added as a special
+	 * request (issue #34) from one DesignGridLayout user.
+	 * 
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout disableSmartVerticalResize()
+	{
+		_locker.checkUnlocked();
+		if (!(_heightTester.getDelegate() instanceof UnitHeightGrowPolicy))
+		{
+			_heightTester.setDelegate(
+				new UnitHeightGrowPolicy(_heightTester.getDelegate()));
+		}
+		return this;
+	}
 
 	/**
 	 * Requires to use consistent vertical gaps between rows (ie the vertical gap
@@ -239,6 +268,7 @@ public class DesignGridLayout implements LayoutManager
 	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
 		throws IllegalStateException
 	{
+		_locker.checkUnlocked();
 		_current = row;
 		_rows.add(row);
 		row.init(_locker, _parent, _heightTester, _orientation);
@@ -376,12 +406,13 @@ public class DesignGridLayout implements LayoutManager
 	
 	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
 
-	private HeightGrowPolicy _heightTester = _defaultHeightTester;
+	private HeightGrowPolicyProxy _heightTester = 
+		new HeightGrowPolicyProxy(_defaultHeightTester);
 	
 	final private Container _parent;
 	final private OrientationPolicy _orientation;
 	final private LayoutLocker _locker = new LayoutLocker();
 	private ILayoutEngine _engine;
-	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 	private AbstractRow _current = null;
+	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 }

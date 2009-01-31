@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,7 +41,12 @@ public class Bug32ProblemWithJTextPane extends AbstractBaseExample
 			}
 		});
 		append();
-		layout.row().grid(label("label1")).add(new JScrollPane(_text));
+		//TODO The following lines only show a workaround to the actual bug
+		// If this bug must be fixed in DesignGridLayout one day, then this
+		// code should be removed.
+		_scroller.getViewport().setPreferredSize(_text.getPreferredSize());
+		_scroller.getVerticalScrollBar().setUnitIncrement(20);
+		layout.row().grid(label("label1")).add(_scroller);
 		layout.row().center().add(_append);
 	}
 	
@@ -55,5 +61,6 @@ public class Bug32ProblemWithJTextPane extends AbstractBaseExample
 	}
 	
 	private final JTextPane	_text = new JTextPane();
+	private final JScrollPane _scroller = new JScrollPane(_text);
 	private final JButton _append = new JButton("Append");
 }
