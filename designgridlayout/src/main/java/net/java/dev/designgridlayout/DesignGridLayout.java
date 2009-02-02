@@ -301,7 +301,7 @@ public class DesignGridLayout implements LayoutManager
 	public void layoutContainer(Container parent)
 	{
 		checkParent(parent);
-		_engine.layoutContainer();
+		_engine.layoutContainer(_parent.getWidth(), _parent.getHeight());
 	}
 
 	/* (non-Javadoc)

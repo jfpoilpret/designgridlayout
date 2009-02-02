@@ -14,6 +14,12 @@
 
 package net.java.dev.designgridlayout;
 
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+
+//TODO
+//- one test with setVisibleRowCount(3)
+//- one test with setVisibleRowCount(2)
 public class SyncLayoutHorizontal2LayoutsVariableHeightRows 
 	extends AbstractSyncLayoutExample
 {
@@ -41,5 +47,13 @@ public class SyncLayoutHorizontal2LayoutsVariableHeightRows
 		layout2.row().grid(label("lbl3")).add(radio("radio3"));
 
 		Synchronizer.synchronize(layout1, layout2).alignRows();
+	}
+	
+	@Override protected JScrollPane list()
+	{
+		JScrollPane scroller = super.list();
+		((JList) scroller.getViewport().getView()).setVisibleRowCount(3);
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		return scroller;
 	}
 }

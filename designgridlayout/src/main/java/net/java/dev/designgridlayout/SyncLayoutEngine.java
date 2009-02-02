@@ -118,14 +118,26 @@ class SyncLayoutEngine implements ILayoutEngine
 		return computeDimension(pref, _preferredSize);
 	}
 	
-	public void layoutContainer()
+	public int computeRowsActualHeight(int height)
 	{
 		initialize();
+		// Pass correct height to _current engine
+		int availableHeight = height;
 		if (_alignRows)
 		{
-			computeRowsAlignment();
+			availableHeight = _policy.availableHeight(height, _engines, _current);
 		}
-		_current.layoutContainer();
+		return _current.computeRowsActualHeight(availableHeight);
+	}
+	
+	public void layoutContainer(int width, int height)
+	{
+		int availableHeight = computeRowsActualHeight(height);
+		if (_alignRows)
+		{
+			_policy.synchronize(_engines);
+		}
+		_current.layoutContainer(width, availableHeight);
 	}
 
 	// Package methods (used by SyncLayoutEngine)
@@ -158,7 +170,7 @@ class SyncLayoutEngine implements ILayoutEngine
 		}
 		if (_alignRows)
 		{
-			computeRowsAlignment();
+//			computeRowsAlignment(false);
 			computeVerticalMargins();
 		}
 	}
@@ -256,11 +268,6 @@ class SyncLayoutEngine implements ILayoutEngine
 		}
 	}
 	
-	private void computeRowsAlignment()
-	{
-		_policy.synchronize(_engines);
-	}
-	
 	private void initialize()
     {
 		preInit();
@@ -284,7 +291,11 @@ class SyncLayoutEngine implements ILayoutEngine
 			_preferredSize.width = Math.max(_preferredSize.width, pref.width);
 			_preferredSize.height = Math.max(_preferredSize.height, pref.height);
 		}
-		//TODO other early initialization there?
+		if (_alignRows)
+		{
+			_preferredSize.height = _policy.preferredHeight(_engines);
+			_minimumSize.height = _preferredSize.height;
+		}
     }
 	
 	private Dimension computeDimension(Dimension source, Dimension destination)
@@ -297,13 +308,14 @@ class SyncLayoutEngine implements ILayoutEngine
 		if (_alignRows)
 		{
 			// Consistent height
-			source.height = Math.max(source.height, destination.height);
+			source.height = destination.height;
 		}
 		return source;
 	}
 
 	private final List<ILayoutEngine> _engines = new ArrayList<ILayoutEngine>();
-	private final ILayoutRowSyncPolicy _policy = new SimpleLayoutSyncPolicy();
+//	private final ILayoutRowSyncPolicy _policy = new SimpleLayoutSyncPolicy();
+	private final ILayoutRowSyncPolicy _policy = new DefaultLayoutSyncPolicy();
 	private ILayoutEngine _current = null;
 
 	// Synchronization settings

@@ -18,5 +18,8 @@ import java.util.List;
 
 interface ILayoutRowSyncPolicy
 {
+	public int preferredHeight(List<ILayoutEngine> engines);
+	public int availableHeight(
+		int height, List<ILayoutEngine> engines, ILayoutEngine current);
 	public void synchronize(List<ILayoutEngine> engines);
 }

@@ -108,7 +108,7 @@ class LayoutEngine implements ILayoutEngine
 		return new Dimension(_preferredSize);
 	}
 	
-	public void layoutContainer()
+	public void layoutContainer(int width, int height)
 	{
 		// Make sure there's something to do
 		if (_rows.isEmpty())
@@ -119,24 +119,15 @@ class LayoutEngine implements ILayoutEngine
 		synchronized(_parent.getTreeLock())
 		{
 			// Always calculate the size of our contents
-			initialize();
+			computeRowsActualHeight(height);
 
-			// Calculate extra height to split between variable height rows
-			double totalExtraHeight = 0.0;
-			if (_totalWeight > 0.0)
-			{
-				totalExtraHeight = Math.max(
-					0, (_parent.getHeight() - _preferredSize.height) / _totalWeight);
-			}
-			
 			// Check layout orientation
 			boolean rtl = _orientation.isRightToLeft();
 
 			int x = left();
 			int y = top();
-			int parentWidth = _parent.getWidth();
-			// Never layout components smaller than the minimu size
-			parentWidth = Math.max(parentWidth, _minimumSize.width);
+			// Never layout components smaller than the minimum size
+			int parentWidth = Math.max(width, _minimumSize.width);
 
 			int rowWidth = parentWidth - left() - right();
 			// Calculate the total width assigned exclusively to sub-grids components
@@ -157,15 +148,12 @@ class LayoutEngine implements ILayoutEngine
 				if (!row.isEmpty())
 				{
 					helper.setY(y);
-					int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
-//					helper.setRowAvailableHeight(extraHeight + row.height());
-					int rowHeight = row.height() + row.extraHeight() + extraHeight;
+					int rowHeight = row.actualHeight();
 					helper.setRowAvailableHeight(rowHeight);
 					row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 						gridsWidth, _labelWidths);
-//					row.actualHeight(row.height() + extraHeight);
 					row.actualHeight(rowHeight);
-					y += row.actualHeight() + row.vgap();
+					y += rowHeight + row.vgap() + row.extraHeight();
 				}
 			}
 			
@@ -184,6 +172,33 @@ class LayoutEngine implements ILayoutEngine
 				rowIndex++;
 			}
 		}
+	}
+	
+	public int computeRowsActualHeight(int height)
+	{
+		// Always calculate the size of our contents
+		initialize();
+
+		// Calculate extra height to split between variable height rows
+		double totalExtraHeight = 0.0;
+		if (_totalWeight > 0.0)
+		{
+			totalExtraHeight = Math.max(
+				0, (height - _preferredSize.height) / _totalWeight);
+		}
+		
+		// Start laying out every single row (all components but row-span ones)
+		for (AbstractRow row: _rows)
+		{
+			// Issue #30 - check that row is not empty
+			if (!row.isEmpty())
+			{
+				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
+				int rowHeight = row.height() + extraHeight;
+				row.actualHeight(rowHeight);
+			}
+		}
+		return height;
 	}
 
 	private void lockLayout()
@@ -488,8 +503,8 @@ class LayoutEngine implements ILayoutEngine
 		int totalHeight = 0;
 		for (AbstractRow row: _rows)
 		{
-//			totalHeight += row.height() + row.vgap();
-			totalHeight += row.height() + row.vgap() + row.extraHeight();
+			totalHeight += row.height() + row.vgap();
+//			totalHeight += row.height() + row.vgap() + row.extraHeight();
 		}
 		return totalHeight;
 	}

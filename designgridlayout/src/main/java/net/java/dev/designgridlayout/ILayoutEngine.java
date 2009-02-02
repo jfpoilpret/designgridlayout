@@ -22,11 +22,13 @@ import java.util.List;
 // perform all the work
 interface ILayoutEngine
 {
+	// Calls to DesignGridLayout, directly forwarded to ILayoutEngine
 	public void margins(double top, double left, double bottom, double right);
 	public void forceConsistentVGaps();
 
 	public void reset();
-	
+
+	// Used for synchronization
 	public int getNumGrids();
 	public List<Integer> getLabelWidths();
 	public Insets getMargins();
@@ -34,7 +36,9 @@ interface ILayoutEngine
 	public void hgap(int hgap);
 	public List<AbstractRow> rows();
 
+	// Called by DesignGridLayout for actual LayoutManager stuff
 	public Dimension getMinimumSize();
 	public Dimension getPreferredSize();
-	public void layoutContainer();
+	public int computeRowsActualHeight(int height);
+	public void layoutContainer(int width, int height);
 }
