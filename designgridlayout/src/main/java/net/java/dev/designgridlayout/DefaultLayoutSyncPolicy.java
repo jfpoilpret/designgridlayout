@@ -16,6 +16,8 @@ package net.java.dev.designgridlayout;
 
 import java.util.List;
 
+import static net.java.dev.designgridlayout.RowIterator.each;
+
 // This very simple policy for synchronizing rows of various layouts simply
 // algns the first row of all layouts.
 class DefaultLayoutSyncPolicy extends AbstractLayoutSyncPolicy

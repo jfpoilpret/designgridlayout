@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
+import static net.java.dev.designgridlayout.RowIterator.each;
+
 class LayoutEngine implements ILayoutEngine
 {
 	LayoutEngine(LayoutLocker locker, Container parent, List<AbstractRow> rows, 
@@ -88,6 +90,12 @@ class LayoutEngine implements ILayoutEngine
 		_hgap = hgap;
 	}
 	
+	public double getTotalWeight()
+	{
+		preInit();
+		return _totalWeight;
+	}
+
 	public List<AbstractRow> rows()
 	{
 		preInit();
@@ -142,19 +150,15 @@ class LayoutEngine implements ILayoutEngine
 			
 			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
-			for (AbstractRow row: _rows)
+			for (AbstractRow row: each(_rows))
 			{
-				// Issue #30 - check that row is not empty
-				if (!row.isEmpty())
-				{
-					helper.setY(y);
-					int rowHeight = row.actualHeight();
-					helper.setRowAvailableHeight(rowHeight);
-					row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
-						gridsWidth, _labelWidths);
-					row.actualHeight(rowHeight);
-					y += rowHeight + row.vgap() + row.extraHeight();
-				}
+				helper.setY(y);
+				int rowHeight = row.actualHeight();
+				helper.setRowAvailableHeight(rowHeight);
+				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
+					gridsWidth, _labelWidths);
+				row.actualHeight(rowHeight);
+				y += rowHeight + row.vgap() + row.extraHeight();
 			}
 			
 			// Second pass: all row-span components
@@ -188,15 +192,11 @@ class LayoutEngine implements ILayoutEngine
 		}
 		
 		// Start laying out every single row (all components but row-span ones)
-		for (AbstractRow row: _rows)
+		for (AbstractRow row: each(_rows))
 		{
-			// Issue #30 - check that row is not empty
-			if (!row.isEmpty())
-			{
-				int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
-				int rowHeight = row.height() + extraHeight;
-				row.actualHeight(rowHeight);
-			}
+			int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
+			int rowHeight = row.height() + extraHeight;
+			row.actualHeight(rowHeight);
 		}
 		return height;
 	}
@@ -390,6 +390,13 @@ class LayoutEngine implements ILayoutEngine
 			row.init();
 		}
 
+		// Calculate total height growth factor of all variable height rows
+		_totalWeight = 0.0;
+		for (AbstractRow row: _rows)
+		{
+			_totalWeight += row.growWeight();
+		}
+
 		// Calculate labels width for all grids
 		computeLabelWidths();
 		_preInitDone = true;
@@ -417,13 +424,6 @@ class LayoutEngine implements ILayoutEngine
 
 		// Total height
 		int preferredHeight = totalHeight() + top() + bottom() + 1;
-
-		// Calculate total height growth factor of all variable height rows
-		_totalWeight = 0.0;
-		for (AbstractRow row: _rows)
-		{
-			_totalWeight += row.growWeight();
-		}
 
 		_preferredSize = new Dimension(preferredWidth, preferredHeight);
 		_minimumSize = new Dimension(minimumWidth, preferredHeight);
@@ -645,12 +645,9 @@ class LayoutEngine implements ILayoutEngine
 	
 	private AbstractRow firstNonEmptyRow()
 	{
-		for (AbstractRow row: _rows)
+		for (AbstractRow row: each(_rows))
 		{
-			if (!row.isEmpty())
-			{
-				return row;
-			}
+			return row;
 		}
 		return null;
 	}

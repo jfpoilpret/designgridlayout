@@ -18,6 +18,7 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -128,6 +129,11 @@ public abstract class AbstractBaseExample
 	protected JCheckBox checkbox(String text)
 	{
 		return new JCheckBox(text);
+	}
+	
+	protected JComboBox combobox()
+	{
+		return new JComboBox(GUITARS);
 	}
 
 	static protected void setTableHeight(JTable table, int rows)

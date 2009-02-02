@@ -18,7 +18,10 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import static net.java.dev.designgridlayout.RowIterator.each;
 
 class SyncLayoutEngine implements ILayoutEngine
 {
@@ -98,6 +101,12 @@ class SyncLayoutEngine implements ILayoutEngine
 		}
 	}
 
+	public double getTotalWeight()
+	{
+		preInit();
+		return _current.getTotalWeight();
+	}
+
 	public List<AbstractRow> rows()
 	{
 		preInit();
@@ -125,7 +134,7 @@ class SyncLayoutEngine implements ILayoutEngine
 		int availableHeight = height;
 		if (_alignRows)
 		{
-			availableHeight = _policy.availableHeight(height, _engines, _current);
+			availableHeight = syncPolicy().availableHeight(height, _engines, _current);
 		}
 		return _current.computeRowsActualHeight(availableHeight);
 	}
@@ -135,7 +144,8 @@ class SyncLayoutEngine implements ILayoutEngine
 		int availableHeight = computeRowsActualHeight(height);
 		if (_alignRows)
 		{
-			_policy.synchronize(_engines);
+			System.out.println("layoutContainer");
+			syncPolicy().synchronize(_engines);
 		}
 		_current.layoutContainer(width, availableHeight);
 	}
@@ -293,7 +303,7 @@ class SyncLayoutEngine implements ILayoutEngine
 		}
 		if (_alignRows)
 		{
-			_preferredSize.height = _policy.preferredHeight(_engines);
+			_preferredSize.height = syncPolicy().preferredHeight(_engines);
 			_minimumSize.height = _preferredSize.height;
 		}
     }
@@ -312,10 +322,111 @@ class SyncLayoutEngine implements ILayoutEngine
 		}
 		return source;
 	}
+	
+	private ILayoutRowSyncPolicy syncPolicy()
+	{
+		if (_policy == null)
+		{
+			// Check if all layouts have row weights mapping 1 to 1
+			if (checkOneToOneRowMapping())
+			{
+				System.out.println("use 1-1 row mapping (SimpleLayoutSyncPolicy)");
+				// Align all rows 1 to 1
+				_policy = new SimpleLayoutSyncPolicy();
+			}
+			else
+			{
+				// Align only on first row baseline
+				_policy = new DefaultLayoutSyncPolicy();
+			}
+		}
+		return _policy;
+	}
+	
+	private boolean checkOneToOneRowMapping()
+	{
+		// First check if no layout has variable height
+		boolean allWeightsZero = true;
+		List<RowWeightChecker> checkers = new ArrayList<RowWeightChecker>();
+		for (ILayoutEngine engine: _engines)
+		{
+			RowWeightChecker checker = new RowWeightChecker(engine);
+			checkers.add(checker);
+			if (!checker.isFixedHeight())
+			{
+				allWeightsZero = false;
+			}
+		}
+		if (allWeightsZero)
+		{
+			return true;
+		}
+
+		// At least one layout has variable height
+		// We have to check if individual rows have similar weights
+		double refWeight;
+		do
+		{
+			refWeight = -1.0;
+			for (RowWeightChecker checker: checkers)
+			{
+				double weight = checker.getWeight();
+				if (weight != -1.0)
+				{
+					if (refWeight == -1.0)
+					{
+						refWeight = weight;
+					}
+					else if (weight != refWeight) 
+					{
+						if (	weight == 0.0
+							||	refWeight == 0.0
+							||	Math.abs((weight - refWeight) / refWeight) < SIMILAR_WEIGHTS)
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+		while (refWeight != -1.0);
+
+		return true;
+	}
+	
+	static private class RowWeightChecker
+	{
+		public RowWeightChecker(ILayoutEngine engine)
+		{
+			_weight = engine.getTotalWeight();
+			_next = each(engine.rows()).iterator();
+		}
+		
+		public boolean isFixedHeight()
+		{
+			return _weight == 0.0;
+		}
+		
+		public double getWeight()
+		{
+			if (_next.hasNext())
+			{
+				return _next.next().growWeight();
+			}
+			else
+			{
+				return -1.0;
+			}
+		}
+		
+		private final double _weight;
+		private final Iterator<AbstractRow> _next;
+	}
+	
+	static private final double SIMILAR_WEIGHTS = 0.1;
 
 	private final List<ILayoutEngine> _engines = new ArrayList<ILayoutEngine>();
-//	private final ILayoutRowSyncPolicy _policy = new SimpleLayoutSyncPolicy();
-	private final ILayoutRowSyncPolicy _policy = new DefaultLayoutSyncPolicy();
+	private ILayoutRowSyncPolicy _policy = null;
 	private ILayoutEngine _current = null;
 
 	// Synchronization settings

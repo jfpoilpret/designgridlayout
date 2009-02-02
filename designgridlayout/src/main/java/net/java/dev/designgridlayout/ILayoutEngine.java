@@ -34,6 +34,7 @@ interface ILayoutEngine
 	public Insets getMargins();
 	public int hgap();
 	public void hgap(int hgap);
+	public double getTotalWeight();
 	public List<AbstractRow> rows();
 
 	// Called by DesignGridLayout for actual LayoutManager stuff

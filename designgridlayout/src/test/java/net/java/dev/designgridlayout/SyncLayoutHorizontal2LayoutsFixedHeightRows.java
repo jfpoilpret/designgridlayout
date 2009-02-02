@@ -33,10 +33,16 @@ public class SyncLayoutHorizontal2LayoutsFixedHeightRows extends AbstractSyncLay
 		DesignGridLayout layout1 = createSubPanel();
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2"));
+		layout1.row().grid(label("lbl3")).add(field("field3"));
+		layout1.row().grid(label("lbl4")).add(field("field4"));
+		layout1.row().grid(label("lbl5")).add(field("field5"));
 
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("label1")).add(radio("radio1"));
 		layout2.row().grid(label("lbl2")).add(radio("radio2"));
+		layout2.row().grid(label("lbl3")).add(combobox());
+		layout2.row().grid(label("lbl4")).add(button("push me"));
+		layout2.row().grid(label("lbl5")).add(checkbox("check5"));
 
 		Synchronizer.synchronize(layout1, layout2).alignRows();
 	}

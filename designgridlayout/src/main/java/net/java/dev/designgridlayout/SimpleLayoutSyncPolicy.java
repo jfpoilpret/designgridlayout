@@ -32,7 +32,7 @@ import java.util.List;
 // than any other -more beautiful but ore complex- policy.
 class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 {
-	public int preferredHeight(List<ILayoutEngine> engines)
+	@Override public int preferredHeight(List<ILayoutEngine> engines)
 	{
 		synchronize(engines, false);
 		int maxHeight = 0;
@@ -49,7 +49,7 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		return maxHeight;
 	}
 	
-	public int availableHeight(
+	@Override public int availableHeight(
 		int height, List<ILayoutEngine> engines, ILayoutEngine current)
 	{
 		// First calculate the max height
@@ -61,6 +61,7 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		synchronize(engines, true);
 	}
 	
+	// CSOFF: EmptyBlockCheck
 	static private void synchronize(List<ILayoutEngine> engines, boolean respectHeight)
 	{
 		List<SyncRowCounter> counters = initCounters(engines, respectHeight);
@@ -69,6 +70,7 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		{
 		}
 	}
+	// CSON: EmptyBlockCheck
 	
 	static private List<SyncRowCounter> initCounters(
 		List<ILayoutEngine> engines, boolean respectHeight)

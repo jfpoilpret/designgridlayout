@@ -15,9 +15,9 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Insets;
-import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
+
+import static net.java.dev.designgridlayout.RowIterator.each;
 
 abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 {
@@ -47,64 +47,5 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 		int height, List<ILayoutEngine> engines, ILayoutEngine current)
 	{
 		return height;
-	}
-	
-	static protected Iterable<AbstractRow> each(final List<AbstractRow> rows)
-	{
-		return new Iterable<AbstractRow>()
-		{
-			public Iterator<AbstractRow> iterator()
-			{
-				return new RowIterator(rows);
-			}
-		};
-	}
-	
-	static private class RowIterator implements Iterator<AbstractRow>
-	{
-		public RowIterator(List<AbstractRow> rows)
-		{
-			_rows = rows;
-		}
-		
-		public AbstractRow next()
-		{
-			int index = findNext();
-			if (index != -1)
-			{
-				_index++;
-				return _rows.get(index);
-			}
-			else
-			{
-				throw new NoSuchElementException();
-			}
-		}
-		
-		public boolean hasNext()
-		{
-			return findNext() != -1;
-		}
-		
-		public void remove()
-		{
-			// Empty operation
-		}
-		
-		private int findNext()
-		{
-			for (int i = _index; i < _rows.size(); i++)
-			{
-				AbstractRow row = _rows.get(i);
-				if (!row.isEmpty())
-				{
-					return i;
-				}
-			}
-			return -1;
-		}
-		
-		private final List<AbstractRow> _rows;
-		private int _index = 0;
 	}
 }
