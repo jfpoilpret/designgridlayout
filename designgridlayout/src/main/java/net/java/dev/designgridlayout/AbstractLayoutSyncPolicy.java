@@ -23,13 +23,24 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 {
 	public int preferredHeight(List<ILayoutEngine> engines)
 	{
-		synchronize(engines);
+		synchronize(engines, false);
 		int maxHeight = 0;
 		for (ILayoutEngine engine: engines)
 		{
 			maxHeight = Math.max(maxHeight, engineHeight(engine));
 		}
 		return maxHeight;
+	}
+
+	public int availableHeight(
+		int height, List<ILayoutEngine> engines, ILayoutEngine current)
+	{
+		return height;
+	}
+
+	public void synchronize(List<ILayoutEngine> engines)
+	{
+		synchronize(engines, true);
 	}
 
 	static protected int engineHeight(ILayoutEngine engine)
@@ -43,9 +54,6 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 		return layoutHeight;
 	}
 	
-	public int availableHeight(
-		int height, List<ILayoutEngine> engines, ILayoutEngine current)
-	{
-		return height;
-	}
+	abstract protected void synchronize(
+		List<ILayoutEngine> engines, boolean respectHeight);
 }

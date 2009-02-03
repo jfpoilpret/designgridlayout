@@ -14,9 +14,11 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import static net.java.dev.designgridlayout.RowIterator.each;
 
 // This very simple policy for synchronizing rows of various layouts works as 
 // follows:
@@ -32,41 +34,13 @@ import java.util.List;
 // than any other -more beautiful but ore complex- policy.
 class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 {
-	@Override public int preferredHeight(List<ILayoutEngine> engines)
-	{
-		synchronize(engines, false);
-		int maxHeight = 0;
-		for (ILayoutEngine engine: engines)
-		{
-			Insets margins = engine.getMargins();
-			int layoutHeight = margins.top + margins.bottom;
-			for (AbstractRow row: engine.rows())
-			{
-				layoutHeight += row.height() + row.extraHeight() + row.vgap();
-			}
-			maxHeight = Math.max(maxHeight, layoutHeight);
-		}
-		return maxHeight;
-	}
-	
-	@Override public int availableHeight(
-		int height, List<ILayoutEngine> engines, ILayoutEngine current)
-	{
-		// First calculate the max height
-		return height;
-	}
-	
-	public void synchronize(List<ILayoutEngine> engines)
-	{
-		synchronize(engines, true);
-	}
-	
 	// CSOFF: EmptyBlockCheck
-	static private void synchronize(List<ILayoutEngine> engines, boolean respectHeight)
+	@Override protected void synchronize(
+		List<ILayoutEngine> engines, boolean respectHeight)
 	{
 		List<SyncRowCounter> counters = initCounters(engines, respectHeight);
 		// Loop until all rows of all layouts have been processed
-		while (computeMaxHeightAndAlignBaselines(counters))
+		while (alignCurrentRowsBaselines(counters))
 		{
 		}
 	}
@@ -84,7 +58,7 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		return counters;
 	}
 	
-	static private boolean computeMaxHeightAndAlignBaselines(List<SyncRowCounter> counters)
+	static private boolean alignCurrentRowsBaselines(List<SyncRowCounter> counters)
 	{
 		// Find max height of current row across all layouts
 		int maxHeight = 0;
@@ -107,22 +81,22 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 	{
 		SyncRowCounter(List<AbstractRow> rows, boolean respectHeight)
 		{
-			_rows = rows;
+			_iterator = each(rows).iterator();
 			_respectHeight = respectHeight;
+			next();
 		}
 		
 		int baseline()
 		{
-			return (_index < _rows.size() ? _rows.get(_index).baseline() : 0);
+			return (_current != null ? _current.baseline() : 0);
 		}
 		
 		int height()
 		{
-			if (_index < _rows.size())
+			if (_current != null)
 			{
-				AbstractRow row = _rows.get(_index);
-				int rowHeight = _respectHeight ? row.actualHeight() : row.height();
-				return rowHeight + row.vgap();
+				int height = _respectHeight ? _current.actualHeight() : _current.height();
+				return height + _current.vgap();
 			}
 			else
 			{
@@ -132,29 +106,28 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		
 		void baseline(int baseline)
 		{
-			if (_index < _rows.size())
+			if (_current != null)
 			{
-				_rows.get(_index).baseline(baseline);
+				_current.baseline(baseline);
 			}
 		}
 		
 		void height(int height)
 		{
-			if (_index < _rows.size())
+			if (_current != null)
 			{
-				AbstractRow row = _rows.get(_index);
-				int rowHeight = _respectHeight ? row.actualHeight() : row.height();
-				row.extraHeight(height - rowHeight - row.vgap());
+				int rowHeight = _respectHeight ? _current.actualHeight() : _current.height();
+				_current.extraHeight(height - rowHeight - _current.vgap());
 			}
 		}
 
 		void next()
 		{
-			_index++;
+			_current = (_iterator.hasNext() ? _iterator.next() : null);
 		}
 		
-		private final List<AbstractRow> _rows;
+		private final Iterator<AbstractRow> _iterator;
 		private final boolean _respectHeight;
-		private int _index = 0;
+		private AbstractRow _current;
 	}
 }

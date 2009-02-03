@@ -157,7 +157,7 @@ class LayoutEngine implements ILayoutEngine
 				helper.setRowAvailableHeight(rowHeight);
 				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 					gridsWidth, _labelWidths);
-				row.actualHeight(rowHeight);
+//				row.actualHeight(rowHeight);
 				y += rowHeight + row.vgap() + row.extraHeight();
 			}
 			

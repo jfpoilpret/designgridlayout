@@ -131,12 +131,24 @@ class SyncLayoutEngine implements ILayoutEngine
 	{
 		initialize();
 		// Pass correct height to _current engine
-		int availableHeight = height;
 		if (_alignRows)
 		{
-			availableHeight = syncPolicy().availableHeight(height, _engines, _current);
+			int availableHeight = height;
+			for (ILayoutEngine engine: _engines)
+			{
+				int currentHeight = engine.computeRowsActualHeight(
+					syncPolicy().availableHeight(height, _engines, _current));
+				if (engine == _current)
+				{
+					availableHeight = currentHeight;
+				}
+			}
+			return availableHeight;
 		}
-		return _current.computeRowsActualHeight(availableHeight);
+		else
+		{
+			return _current.computeRowsActualHeight(height);
+		}
 	}
 	
 	public void layoutContainer(int width, int height)
@@ -144,7 +156,6 @@ class SyncLayoutEngine implements ILayoutEngine
 		int availableHeight = computeRowsActualHeight(height);
 		if (_alignRows)
 		{
-			System.out.println("layoutContainer");
 			syncPolicy().synchronize(_engines);
 		}
 		_current.layoutContainer(width, availableHeight);
@@ -330,7 +341,6 @@ class SyncLayoutEngine implements ILayoutEngine
 			// Check if all layouts have row weights mapping 1 to 1
 			if (checkOneToOneRowMapping())
 			{
-				System.out.println("use 1-1 row mapping (SimpleLayoutSyncPolicy)");
 				// Align all rows 1 to 1
 				_policy = new SimpleLayoutSyncPolicy();
 			}

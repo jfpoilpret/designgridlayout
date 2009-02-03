@@ -26,6 +26,18 @@ public class SyncLayoutTest extends AbstractGuiTest
 		stopGui();
 	}
 	
+	@Test public void checkHorizontalFixedHeightRows() throws Exception
+	{
+		checkExampleAndResizeHeight(
+			SyncHorizontalFixedHeightRowsConsistentVGaps.class, 3, 4);
+	}
+
+	@Test public void checkHorizontalFixedHeightRowsConsistentVGaps() throws Exception
+	{
+		checkExampleAndResizeHeight(
+			SyncLayoutHorizontal2LayoutsFixedHeightRows.class, 3, 4);
+	}
+
 	@Test public void checkVerticalConsistentGrids() throws Exception
 	{
 		checkExampleAndResizeWidth(

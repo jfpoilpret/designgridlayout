@@ -22,7 +22,8 @@ import static net.java.dev.designgridlayout.RowIterator.each;
 // algns the first row of all layouts.
 class DefaultLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 {
-	public void synchronize(List<ILayoutEngine> engines)
+	@Override protected void synchronize(
+		List<ILayoutEngine> engines, boolean respectHeight)
 	{
 		// Compute max baseline of first row for all layouts
 		int maxBaseline = 0;
