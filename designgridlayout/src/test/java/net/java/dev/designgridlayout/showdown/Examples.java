@@ -27,6 +27,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import net.java.dev.designgridlayout.AbstractBaseExample;
+import net.java.dev.designgridlayout.AbstractSyncLayoutExample;
 import net.java.dev.designgridlayout.AddressBookDemo;
 import net.java.dev.designgridlayout.Basics1SimpleGrid;
 import net.java.dev.designgridlayout.Basics2GridColumns;
@@ -37,6 +38,7 @@ import net.java.dev.designgridlayout.Basics6NonGridRowsWithFiller;
 import net.java.dev.designgridlayout.Basics7RealWorldExample1;
 import net.java.dev.designgridlayout.Basics8RealWorldExample2;
 import net.java.dev.designgridlayout.Basics9RealWorldExample3;
+import net.java.dev.designgridlayout.BetterAddressBookDemo;
 import net.java.dev.designgridlayout.Misc1CustomizedMargins;
 import net.java.dev.designgridlayout.MultiComponentExample;
 import net.java.dev.designgridlayout.MultiGrid1Simple;
@@ -181,6 +183,13 @@ public class Examples extends JFrame
 			new Node("Example 1 - Right to Left", RightToLeft2RTL.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("AddressBookDemo - Right to Left", RightToLeft3RealWorldExample.class)));
+		root.add(node);
+
+		node = new DefaultMutableTreeNode(
+			new Node("Layouts Synchronization", AbstractSyncLayoutExample.class, false));
+		node.add(new DefaultMutableTreeNode(new Node(
+			"Example 1 - Address Book Demo (revisited)", BetterAddressBookDemo.class)));
+		//TODO more examples and test cases here!
 		root.add(node);
 
 		node = new DefaultMutableTreeNode("Miscellaneous");

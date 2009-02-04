@@ -1,0 +1,8 @@
+This first example revisits the "Address Book Demo" example from the "Layout Showdown" initiated by John O'Conner on java.net (the original example is demonstrated in the above "Multiple Grids" section).
+
+Layout synchronization improved the original example code by:
+- removing all hard-coded values for insets (due to the fact that the original example embedded the JList in a JPanel with BorderLayout and an EmptyBorder for enforcing margins).
+- bringing baseline alignment between the first row of the list ("Bugs Bunny") and the first row of the detail panel (containing the "Last Name" label). 
+- adding "smart vertical resize" to the list on the left.
+
+Source code demonstrates that the glue between both panels is done in a top panel that uses a BorderLayout; this choice is due to the fact that we want the detail panel to take all available width when the dialog is resized (the list on the left is always shown at its preferred size, which means it shows all contained information and doesn't need more width). 

@@ -1,0 +1,15 @@
+This section shows one very powerful DesignGridLayout feature allowing to "synchronize" the alignments of components (rows, grids labels) among different panels each managed by its own instance of DesignGridLayout.
+
+This section demonstrates various concrete usage examples of this feature. It is particularly useful when using dialogs with tabs (JTabbedPanes) or wizard dialogs, where lack of synchronization exhibits a visual "hop" of components when passing from one panel to the next.
+
+For every example in this section, source code demonstrates 3 aspects:
+1- as usual the code for building panels layout with DesignGridLayout
+2- the use of the synchronization API (just one line of code)
+3- the way each "sub-panel" is put into a bigger panel (JTabbedPane, JPanel)
+The third aspect is particularly iteresting in examples where all panels are visible at the same time (they are embedded in one -bigger- "parent" panel. The parent panel may use other LayoutManagers according to the required behavior.
+
+The source code of all examples of layouts synchronization is based on a common super-class "AbstractSyncLayoutExample" which itself derives from "AbstractBaseExample" that is used by all examples of DesignGridLayout Showdown application.
+
+This class provides some helper functions to create sub-panels and it is responsible to "glue" all these sub-panels together in the "top" panel.
+
+A particularly interesting method is createTopPanel() which, by default, creates a main panel that uses a BoxLayout to layout its sub-panels. The direction of this BoxLayout is configurable in the constructor. Some examples override this method to use a different LayoutManager (e.g. a BorderLayout).

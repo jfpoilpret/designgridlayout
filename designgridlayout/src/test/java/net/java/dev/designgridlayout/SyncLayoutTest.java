@@ -26,6 +26,11 @@ public class SyncLayoutTest extends AbstractGuiTest
 		stopGui();
 	}
 	
+	@Test public void checkAddressBookDemoWithSync() throws Exception
+	{
+		checkExample(BetterAddressBookDemo.class);
+	}
+
 	@Test public void checkHorizontalFixedHeightRows() throws Exception
 	{
 		checkExampleAndResizeHeight(
