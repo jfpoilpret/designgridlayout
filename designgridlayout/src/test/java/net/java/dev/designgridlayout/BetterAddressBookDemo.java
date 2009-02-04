@@ -17,6 +17,7 @@ package net.java.dev.designgridlayout;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -37,7 +38,7 @@ public class BetterAddressBookDemo extends AbstractSyncLayoutExample
 		example.go(true);
 	}
 
-	@Override protected JPanel createTopPanel()
+	@Override protected JComponent createTopPanel()
 	{
     	JPanel top = new JPanel();
     	top.setLayout(new BorderLayout());
@@ -46,9 +47,11 @@ public class BetterAddressBookDemo extends AbstractSyncLayoutExample
 	
 	@Override protected void build()
 	{
+		// Use DGL for the list on the left (fixed width)
 		DesignGridLayout layout1 = createSubPanel(BorderLayout.LINE_START);
 		layout1.row().center().fill().add(scroller);
 		
+		// Use DGL for the details on the right (variable width)
 		DesignGridLayout layout2 = createSubPanel(BorderLayout.CENTER);
 		layout2.row().grid(label("Last Name"))	.add(lastNameField)	.grid(label("First Name"))	.add(firstNameField);
 		layout2.row().grid(label("Phone"))		.add(phoneField)	.grid(label("Email"))		.add(emailField);
