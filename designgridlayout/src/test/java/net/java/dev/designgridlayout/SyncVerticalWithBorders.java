@@ -14,27 +14,31 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncLayoutVerticalCheckHGaps extends AbstractSyncLayoutExample
+import javax.swing.border.TitledBorder;
+
+public class SyncVerticalWithBorders extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncLayoutVerticalCheckHGaps example = new SyncLayoutVerticalCheckHGaps();
+		SyncVerticalWithBorders example = 
+			new SyncVerticalWithBorders();
 		example.go(true);
 	}
 	
-	public SyncLayoutVerticalCheckHGaps()
+	public SyncVerticalWithBorders()
 	{
 		super(true);
 	}
 
 	@Override protected void build()
 	{
-		DesignGridLayout layout1 = createSubPanel();
-		layout1.row().grid(label("lbl1")).add(radio("radio1"), radio("radio2"), radio("radio3"));
-		layout1.row().grid(label("lbl2")).add(checkbox("check1"), checkbox("check2"), checkbox("check3"));
+		DesignGridLayout layout1 = createSubPanel(new TitledBorder("Border"));
+		layout1.row().grid(label("lbl1")).add(field("field1"));
+		layout1.row().grid(label("lbl2")).add(field("field2")).grid(label("lbl3")).add(field("field3"));
 
 		DesignGridLayout layout2 = createSubPanel();
-		layout2.row().grid(label("label1")).add(field("field1"), field("field2"), field("field3"));
+		layout2.row().grid(label("label1")).add(field("field1"));
+		layout2.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
 		Synchronizer.synchronize(layout1, layout2).alignGrids();
 	}

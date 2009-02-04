@@ -14,16 +14,16 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncLayoutVertical2LayoutsConsistentGrids extends AbstractSyncLayoutExample
+public class SyncVerticalConsistentGrids extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncLayoutVertical2LayoutsConsistentGrids example = 
-			new SyncLayoutVertical2LayoutsConsistentGrids();
+		SyncVerticalConsistentGrids example = 
+			new SyncVerticalConsistentGrids();
 		example.go(true);
 	}
 	
-	public SyncLayoutVertical2LayoutsConsistentGrids()
+	public SyncVerticalConsistentGrids()
 	{
 		super(true);
 	}

@@ -14,15 +14,15 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncLayoutVerticalCheckMargins extends AbstractSyncLayoutExample
+public class SyncVerticalCheckMargins extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncLayoutVerticalCheckMargins example = new SyncLayoutVerticalCheckMargins();
+		SyncVerticalCheckMargins example = new SyncVerticalCheckMargins();
 		example.go(true);
 	}
 	
-	public SyncLayoutVerticalCheckMargins()
+	public SyncVerticalCheckMargins()
 	{
 		super(true);
 	}

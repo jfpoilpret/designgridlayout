@@ -14,39 +14,46 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncHorizontalFixedHeightRowsConsistentVGaps 
-	extends SyncHorizontalFixedHeightRows
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+
+//TODO
+//- one test with setVisibleRowCount(3)
+//- one test with setVisibleRowCount(2)
+public class SyncHorizontalVariableHeightRows 
+	extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncHorizontalFixedHeightRowsConsistentVGaps example = 
-			new SyncHorizontalFixedHeightRowsConsistentVGaps();
+		SyncHorizontalVariableHeightRows example = 
+			new SyncHorizontalVariableHeightRows();
 		example.go(true);
 	}
 	
+	public SyncHorizontalVariableHeightRows()
+	{
+		super(false);
+	}
+
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
-		layout1.row().grid(label("lbl1")).add(field("field1"));
+		layout1.row().grid(label("lbl1")).add(list());
 		layout1.row().grid(label("lbl2")).add(field("field2"));
-		layout1.row().grid(label("lbl3")).add(field("field3"));
-		layout1.row().grid(label("lbl4")).add(field("field4"));
-		layout1.row().grid(label("lbl5")).add(field("field5"));
 
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("label1")).add(radio("radio1"));
 		layout2.row().grid(label("lbl2")).add(radio("radio2"));
-		layout2.row().grid(label("lbl3")).add(combobox());
-		layout2.row().grid(label("lbl4")).add(button("push me"));
-		layout2.row().grid(label("lbl5")).add(checkbox("check5"));
+		layout2.row().grid(label("lbl3")).add(radio("radio3"));
 
 		Synchronizer.synchronize(layout1, layout2).alignRows();
 	}
-
-	@Override protected DesignGridLayout createSubPanel()
-    {
-		DesignGridLayout layout = super.createSubPanel();
-		layout.forceConsistentVGaps();
-		return layout;
-    }
+	
+	@Override protected JScrollPane list()
+	{
+		JScrollPane scroller = super.list();
+		((JList) scroller.getViewport().getView()).setVisibleRowCount(3);
+		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		return scroller;
+	}
 }

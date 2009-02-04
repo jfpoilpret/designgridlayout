@@ -14,36 +14,33 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncLayoutHorizontal2LayoutsFixedHeightRows extends AbstractSyncLayoutExample
+public class SyncVertical3Layouts extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncLayoutHorizontal2LayoutsFixedHeightRows example = 
-			new SyncLayoutHorizontal2LayoutsFixedHeightRows();
+		SyncVertical3Layouts example = new SyncVertical3Layouts();
 		example.go(true);
 	}
 	
-	public SyncLayoutHorizontal2LayoutsFixedHeightRows()
+	public SyncVertical3Layouts()
 	{
-		super(false);
+		super(true);
 	}
 
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
 		layout1.row().grid(label("lbl1")).add(field("field1"));
-		layout1.row().grid(label("lbl2")).add(field("field2"));
-		layout1.row().grid(label("lbl3")).add(field("field3"));
-		layout1.row().grid(label("lbl4")).add(field("field4"));
-		layout1.row().grid(label("lbl5")).add(field("field5"));
+		layout1.row().grid(label("lbl2")).add(field("field2")).grid(label("lbl3")).add(field("field3"));
 
 		DesignGridLayout layout2 = createSubPanel();
-		layout2.row().grid(label("label1")).add(radio("radio1"));
-		layout2.row().grid(label("lbl2")).add(radio("radio2"));
-		layout2.row().grid(label("lbl3")).add(combobox());
-		layout2.row().grid(label("lbl4")).add(button("push me"));
-		layout2.row().grid(label("lbl5")).add(checkbox("check5"));
+		layout2.row().grid(label("label1")).add(field("field1"));
+		layout2.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
-		Synchronizer.synchronize(layout1, layout2).alignRows();
+		DesignGridLayout layout3 = createSubPanel();
+		layout3.row().grid(label("longlabel1")).add(field("field1"));
+		layout3.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
+
+		Synchronizer.synchronize(layout1, layout2).with(layout3).alignGrids();
 	}
 }

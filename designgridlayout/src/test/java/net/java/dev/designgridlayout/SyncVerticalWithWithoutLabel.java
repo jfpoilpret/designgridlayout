@@ -14,15 +14,16 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncLayoutVertical3Layouts extends AbstractSyncLayoutExample
+public class SyncVerticalWithWithoutLabel extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncLayoutVertical3Layouts example = new SyncLayoutVertical3Layouts();
+		SyncVerticalWithWithoutLabel example = 
+			new SyncVerticalWithWithoutLabel();
 		example.go(true);
 	}
 	
-	public SyncLayoutVertical3Layouts()
+	public SyncVerticalWithWithoutLabel()
 	{
 		super(true);
 	}
@@ -30,17 +31,11 @@ public class SyncLayoutVertical3Layouts extends AbstractSyncLayoutExample
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
-		layout1.row().grid(label("lbl1")).add(field("field1"));
-		layout1.row().grid(label("lbl2")).add(field("field2")).grid(label("lbl3")).add(field("field3"));
+		layout1.row().grid().add(field("field1"));
 
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("label1")).add(field("field1"));
-		layout2.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
-		DesignGridLayout layout3 = createSubPanel();
-		layout3.row().grid(label("longlabel1")).add(field("field1"));
-		layout3.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
-
-		Synchronizer.synchronize(layout1, layout2).with(layout3).alignGrids();
+		Synchronizer.synchronize(layout1, layout2).alignGrids();
 	}
 }

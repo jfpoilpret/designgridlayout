@@ -14,23 +14,16 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-
-//TODO
-//- one test with setVisibleRowCount(3)
-//- one test with setVisibleRowCount(2)
-public class SyncLayoutHorizontal2LayoutsVariableHeightRows 
-	extends AbstractSyncLayoutExample
+public class SyncHorizontalFixedHeightRows extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncLayoutHorizontal2LayoutsVariableHeightRows example = 
-			new SyncLayoutHorizontal2LayoutsVariableHeightRows();
+		SyncHorizontalFixedHeightRows example = 
+			new SyncHorizontalFixedHeightRows();
 		example.go(true);
 	}
 	
-	public SyncLayoutHorizontal2LayoutsVariableHeightRows()
+	public SyncHorizontalFixedHeightRows()
 	{
 		super(false);
 	}
@@ -38,22 +31,19 @@ public class SyncLayoutHorizontal2LayoutsVariableHeightRows
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
-		layout1.row().grid(label("lbl1")).add(list());
+		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2"));
+		layout1.row().grid(label("lbl3")).add(field("field3"));
+		layout1.row().grid(label("lbl4")).add(field("field4"));
+		layout1.row().grid(label("lbl5")).add(field("field5"));
 
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("label1")).add(radio("radio1"));
 		layout2.row().grid(label("lbl2")).add(radio("radio2"));
-		layout2.row().grid(label("lbl3")).add(radio("radio3"));
+		layout2.row().grid(label("lbl3")).add(combobox());
+		layout2.row().grid(label("lbl4")).add(button("push me"));
+		layout2.row().grid(label("lbl5")).add(checkbox("check5"));
 
 		Synchronizer.synchronize(layout1, layout2).alignRows();
-	}
-	
-	@Override protected JScrollPane list()
-	{
-		JScrollPane scroller = super.list();
-		((JList) scroller.getViewport().getView()).setVisibleRowCount(3);
-		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		return scroller;
 	}
 }
