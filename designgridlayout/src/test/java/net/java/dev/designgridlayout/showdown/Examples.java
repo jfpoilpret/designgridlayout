@@ -27,7 +27,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import net.java.dev.designgridlayout.AbstractBaseExample;
-import net.java.dev.designgridlayout.AbstractSyncLayoutExample;
 import net.java.dev.designgridlayout.AddressBookDemo;
 import net.java.dev.designgridlayout.Basics1SimpleGrid;
 import net.java.dev.designgridlayout.Basics2GridColumns;
@@ -38,14 +37,11 @@ import net.java.dev.designgridlayout.Basics6NonGridRowsWithFiller;
 import net.java.dev.designgridlayout.Basics7RealWorldExample1;
 import net.java.dev.designgridlayout.Basics8RealWorldExample2;
 import net.java.dev.designgridlayout.Basics9RealWorldExample3;
-import net.java.dev.designgridlayout.BetterAddressBookDemo;
 import net.java.dev.designgridlayout.Misc1CustomizedMargins;
 import net.java.dev.designgridlayout.MultiComponentExample;
 import net.java.dev.designgridlayout.MultiGrid1Simple;
 import net.java.dev.designgridlayout.MultiGrid2ThreeGridsWithGridSpan;
 import net.java.dev.designgridlayout.MultiGrid3ThreeComplexGrids;
-import net.java.dev.designgridlayout.Rfe29ConsistentVGaps;
-import net.java.dev.designgridlayout.Rfe29ExactVGaps;
 import net.java.dev.designgridlayout.RightToLeft1LTR;
 import net.java.dev.designgridlayout.RightToLeft2RTL;
 import net.java.dev.designgridlayout.RightToLeft3RealWorldExample;
@@ -185,22 +181,11 @@ public class Examples extends JFrame
 			new Node("AddressBookDemo - Right to Left", RightToLeft3RealWorldExample.class)));
 		root.add(node);
 
-		node = new DefaultMutableTreeNode(
-			new Node("Layouts Synchronization", AbstractSyncLayoutExample.class, false));
-		node.add(new DefaultMutableTreeNode(new Node(
-			"Example 1 - Address Book Demo (revisited)", BetterAddressBookDemo.class)));
-		//TODO more examples and test cases here!
-		root.add(node);
-
 		node = new DefaultMutableTreeNode("Miscellaneous");
 		node.add(new DefaultMutableTreeNode(
 			new Node("Custom Margins", Misc1CustomizedMargins.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Multi-Components", MultiComponentExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Exact Vertical Gaps", Rfe29ExactVGaps.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Consistent Vertical Gaps", Rfe29ConsistentVGaps.class)));
 		root.add(node);
 
 		DefaultTreeModel model = new DefaultTreeModel(root);

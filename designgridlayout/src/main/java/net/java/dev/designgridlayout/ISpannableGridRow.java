@@ -66,48 +66,42 @@ public interface ISpannableGridRow extends IGridRow
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract ISpannableGridRow spanRow() throws IllegalStateException;
+	public abstract ISpannableGridRow spanRow();
 
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent[])
 	 */
-	public abstract ISpannableGridRow add(JComponent... children) 
-		throws IllegalStateException;
+	public abstract ISpannableGridRow add(JComponent... children);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent, int)
 	 */
-	public abstract ISpannableGridRow add(JComponent child, int span) 
-		throws IllegalStateException;
+	public abstract ISpannableGridRow add(JComponent child, int span);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#empty()
 	 */
-	public abstract ISpannableGridRow empty() throws IllegalStateException;
+	public abstract ISpannableGridRow empty();
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#empty(int)
 	 */
-	public abstract ISpannableGridRow empty(int span) throws IllegalStateException;
+	public abstract ISpannableGridRow empty(int span);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(javax.swing.JComponent[])
 	 */
-	public abstract ISpannableGridRow addMulti(JComponent... children) 
-		throws IllegalStateException;
+	public abstract ISpannableGridRow addMulti(JComponent... children);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(int, javax.swing.JComponent[])
 	 */
-	public abstract ISpannableGridRow addMulti(int span, JComponent... children)
-		throws IllegalStateException;
+	public abstract ISpannableGridRow addMulti(int span, JComponent... children);
 }

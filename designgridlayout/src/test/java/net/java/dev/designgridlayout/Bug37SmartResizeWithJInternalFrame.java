@@ -17,122 +17,86 @@ package net.java.dev.designgridlayout;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSlider;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-public abstract class AbstractBaseExample
+public class Bug37SmartResizeWithJInternalFrame
 {
-	protected JFrame _frame = null;
-
-	public JFrame frame()
+	public static void main(String[] args) throws Exception
 	{
-		return _frame;
+		final Bug37SmartResizeWithJInternalFrame example = 
+			new Bug37SmartResizeWithJInternalFrame();
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				example.go(true);
+			}
+		});
 	}
-
+	
 	public void go(boolean exitOnClose)
 	{
-		_frame = new JFrame(name());
+		_frame = new JFrame();
 		_frame.setName(getClass().getSimpleName());
-
+		_frame.setBounds(30, 30, 800, 600);
 		_frame.setDefaultCloseOperation(exitOnClose
 			? JFrame.EXIT_ON_CLOSE
 			: WindowConstants.DISPOSE_ON_CLOSE);
+		JDesktopPane desktop = new JDesktopPane();
+		_frame.setContentPane(desktop);
+		_frame.setVisible(true);
+		
+		JInternalFrame frame = new JInternalFrame("", true, true, true, true);
+		frame.setName("INTERNAL");
+		frame.setLocation(30, 30);
+		
 		JPanel top = new JPanel();
 		DesignGridLayout layout = new DesignGridLayout(top);
 		top.setName("TOP");
-
 		build(layout);
+		frame.setContentPane(top);
 
-		_frame.add(top);
-		prePack();
-		_frame.pack();
-		_frame.setLocationRelativeTo(null);
-		_frame.setVisible(true);
+		// Order of calling desktop.add() is important wrt frame.pack() call!
+		desktop.add(frame);
+		frame.pack();
+		frame.setVisible(true);
+		try
+		{
+			frame.setSelected(true);
+		}
+		catch (java.beans.PropertyVetoException e)
+		{
+		}
 	}
 
-	protected void prePack()
+	protected void build(DesignGridLayout layout)
 	{
-	}
-
-	protected JButton button()
-	{
-		return button("Button");
+		layout.row().center().fill().add(table());
+		layout.row().center().add(new JButton("OK"));
 	}
 	
-	protected JButton button(String text)
-	{
-		return new JButton(text);
-	}
-	
-	protected JLabel label(int num)
-	{
-		return label("Row " + num);
-	}
-
-	protected JLabel label(String label)
-	{
-		return new JLabel(label);
-	}
-
-	protected JTextField field(String text)
-	{
-		JTextField field = new JTextField(text);
-		return field;
-	}
-	
-	protected JSlider slider(int orientation)
-	{
-		JSlider slider = new JSlider(orientation, 0, 100, 50);
-		slider.setMajorTickSpacing(20);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		return slider;
-	}
-	
-	protected JScrollPane textarea(String content)
-	{
-		JTextArea area = new JTextArea(3, 10);
-		area.setText(content);
-		return new JScrollPane(area);
-	}
-	
-	protected JScrollPane list()
-	{
-		JList list = new JList(GUITARS);
-		list.setVisibleRowCount(2);
-		return new JScrollPane(list);
-	}
-
 	protected JScrollPane table()
 	{
 		JTable table = new JTable(CONTENTS_PLAYERS, COLUMNS_PLAYERS);
-		setTableHeight(table, 4);
+		setTableHeight(table, 3);
 		return new JScrollPane(table);
 	}
 	
 	static protected void setTableHeight(JTable table, int rows)
 	{
-//		int width = table.getColumnModel().getTotalColumnWidth();
-		int width = 200;
+		int width = table.getColumnModel().getTotalColumnWidth();
+//		int width = 600;
 		int height = rows * table.getRowHeight();
 		table.setPreferredScrollableViewportSize(new Dimension(width, height));
 	}
 	
-	protected abstract void build(DesignGridLayout layout);
-
-	public String name()
-	{
-		return getClass().getSimpleName();
-	}
-
 	static private final Object[] COLUMNS_PLAYERS = {"First name", "Surname", "Band"};
 	static private final Object[][] CONTENTS_PLAYERS =
 	{
@@ -144,10 +108,5 @@ public abstract class AbstractBaseExample
 		{"Gary", "Moore", "Thin Lizzy"},
 	};
 	
-	static private final Object[] GUITARS =
-	{
-		"Fender Telecaster",
-		"Fender Stratocaster",
-		"Gibson Les Paul",
-	};
+	protected JFrame _frame = null;
 }

@@ -16,15 +16,22 @@ package net.java.dev.designgridlayout;
 
 import java.awt.Component;
 
-final class UnitHeightGrowPolicy extends HeightGrowPolicyProxy
+final class UnitHeightGrowPolicy implements HeightGrowPolicy
 {
 	public UnitHeightGrowPolicy(HeightGrowPolicy delegate)
 	{
-		setDelegate(delegate);
+		_delegate = delegate;
 	}
 
-	@Override public int computeExtraHeight(Component component, int extraHeight)
+	public boolean canGrowHeight(Component component)
+	{
+		return _delegate.canGrowHeight(component);
+	}
+
+	public int computeExtraHeight(Component component, int extraHeight)
 	{
 		return extraHeight;
 	}
+
+	private final HeightGrowPolicy _delegate;
 }

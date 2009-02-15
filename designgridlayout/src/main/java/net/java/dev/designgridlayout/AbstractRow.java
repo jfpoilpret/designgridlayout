@@ -22,15 +22,14 @@ import javax.swing.JComponent;
 abstract class AbstractRow
 {
 	// Called by DesignGridLayout immediately after instanciation
-	final void init(LayoutLocker locker, Container parent, 
-		HeightGrowPolicy heightTester, OrientationPolicy orientation)
+	final void init(
+		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
-		_locker = locker;
 		_parent = parent;
 		_heightTester = heightTester;
 		_orientation = orientation;
 	}
-	
+
 	// Used by children
 	final protected Container parent()
 	{
@@ -58,16 +57,6 @@ abstract class AbstractRow
 	{
 		return _unrelatedGap;
 	}
-	
-	final void extraHeight(int extraHeight)
-	{
-		_extraHeight = extraHeight;
-	}
-	
-	final int extraHeight()
-	{
-		return _extraHeight;
-	}
 
 	final void vgap(int vgap)
 	{
@@ -81,7 +70,6 @@ abstract class AbstractRow
 
 	final void init()
 	{
-		_extraHeight = 0;
 		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
 		_height = ComponentHelper.maxValues(allItems(), PrefHeightExtractor.INSTANCE);
 		_baseline = ComponentHelper.maxValues(allItems(), BaselineExtractor.INSTANCE);
@@ -91,20 +79,10 @@ abstract class AbstractRow
 			_growWeight = (fixedHeight ? 0.0 : 1.0);
 		}
 	}
-	
-	final protected void checkUnlocked() throws IllegalStateException
-	{
-		_locker.checkUnlocked();
-	}
 
 	final protected int baseline()
 	{
 		return _baseline;
-	}
-
-	final protected void baseline(int baseline)
-	{
-		_baseline = baseline;
 	}
 
 	final protected int maxWidth()
@@ -214,7 +192,6 @@ abstract class AbstractRow
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int rowWidth, int gridsWidth, List<Integer> labelsWidth);
 
-	private LayoutLocker _locker;
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
@@ -225,5 +202,4 @@ abstract class AbstractRow
 	private double _growWeight = -1.0;
 	private int _maxWidth;
 	private int _actualHeight;
-	private int _extraHeight;
 }
