@@ -14,29 +14,17 @@
 
 package net.java.dev.designgridlayout;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-
-@Test(groups = "utest")
-public class Rfe29ConsistentVGapsTest extends AbstractGuiTest
+public class Rfe29ConsistentBaselineSpace extends Rfe29ExactVGaps
 {
-	@AfterMethod public void closeGui()
+	public static void main(String[] args)
 	{
-		stopGui();
-	}
-	
-	@Test public void checkConsistentVGaps() throws Exception
-	{
-		checkExample(Rfe29ConsistentVGaps.class);
+		Rfe29ConsistentBaselineSpace example = new Rfe29ConsistentBaselineSpace();
+		example.go(true);
 	}
 
-	@Test public void checkConsistentBaselineSpace() throws Exception
+	@Override protected void build(DesignGridLayout layout)
 	{
-		checkExample(Rfe29ConsistentBaselineSpace.class);
-	}
-
-	@Test public void checkExactVGaps() throws Exception
-	{
-		checkExample(Rfe29ExactVGaps.class);
+		layout.forceConsistentBaselinesDistance();
+		super.build(layout);
 	}
 }

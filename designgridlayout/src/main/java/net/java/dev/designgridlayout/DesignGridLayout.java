@@ -180,6 +180,15 @@ public class DesignGridLayout implements LayoutManager
 		_engine.forceConsistentVGaps();
 		return this;
 	}
+	
+	//TODO javadoc
+	public DesignGridLayout forceConsistentBaselinesDistance()
+		throws IllegalStateException
+	{
+		_locker.checkUnlocked();
+		_engine.forceConsistentBaselinesDistance();
+		return this;
+	}
 
 	/**
 	 * Creates a new row. The type of the row is not determined yet, but will

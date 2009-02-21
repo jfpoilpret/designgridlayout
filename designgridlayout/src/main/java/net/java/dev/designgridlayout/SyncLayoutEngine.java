@@ -53,6 +53,16 @@ class SyncLayoutEngine implements ILayoutEngine
 		_current.forceConsistentVGaps();
 	}
 
+	public void forceConsistentBaselinesDistance()
+	{
+		_current.forceConsistentBaselinesDistance();
+	}
+	
+	public boolean mustForceConsistentVGaps()
+	{
+		return _current.mustForceConsistentVGaps();
+	}
+	
 	public void margins(double top, double left, double bottom, double right)
 	{
 		_current.margins(top, left, bottom, right);
@@ -133,6 +143,7 @@ class SyncLayoutEngine implements ILayoutEngine
 		// Pass correct height to _current engine
 		if (_alignRows)
 		{
+			//TODO Do we need to loop on every engine, can;t we just use _current?
 			int availableHeight = height;
 			for (ILayoutEngine engine: _engines)
 			{
@@ -191,7 +202,6 @@ class SyncLayoutEngine implements ILayoutEngine
 		}
 		if (_alignRows)
 		{
-//			computeRowsAlignment(false);
 			computeVerticalMargins();
 		}
 	}
