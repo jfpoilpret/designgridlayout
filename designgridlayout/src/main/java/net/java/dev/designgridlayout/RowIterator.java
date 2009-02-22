@@ -19,8 +19,27 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
+//TODO Rename to RowHelper and make Iterator impl private
 class RowIterator implements Iterator<AbstractRow>
 {
+	static public void forEachConsecutive(List<AbstractRow> rows, RowPairWorker worker)
+	{
+		AbstractRow current = null;
+		for (AbstractRow next: each(rows))
+		{
+			if (current != null)
+			{
+				worker.perform(current, next);
+			}
+			current = next;
+		}
+	}
+	
+	static public interface RowPairWorker
+	{
+		public void perform(AbstractRow current, AbstractRow next);
+	}
+	
 	static public Iterable<AbstractRow> each(final List<AbstractRow> rows)
 	{
 		return new Iterable<AbstractRow>()
@@ -43,7 +62,6 @@ class RowIterator implements Iterator<AbstractRow>
 		};
 	}
 
-	//TODO really public?
 	private RowIterator(List<AbstractRow> rows, boolean excludeLast)
 	{
 		if (excludeLast)

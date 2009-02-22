@@ -15,11 +15,10 @@
 package net.java.dev.designgridlayout;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import static net.java.dev.designgridlayout.RowIterator.each;
+import static net.java.dev.designgridlayout.RowIterator.forEachConsecutive;
 
 final class ConsistentBaselineSpacingHelper
 {
@@ -86,6 +85,61 @@ final class ConsistentBaselineSpacingHelper
 
 	static protected List<Integer> computeExtraHeight(List<AbstractRow> rows)
 	{
+		// Calculate max distances inter-rows (fixed height only)
+		ConsistentBaselineCalculator calculator = new ConsistentBaselineCalculator();
+		forEachConsecutive(rows, calculator);
+		final int relatedBaselineDistance = calculator._relatedBaselineDistance;
+		final int unrelatedBaselineDistance = calculator._unrelatedBaselineDistance;
+		
+		// Now calculate extra height needede to make  consistent baseline 
+		// spacing for the concerned engine
+		final List<Integer> extras = new ArrayList<Integer>();
+		forEachConsecutive(rows, new RowIterator.RowPairWorker()
+		{
+			public void perform(AbstractRow current, AbstractRow next)
+			{
+				int extra = 0;
+				if (current.growWeight() == 0.0)
+				{
+					extra = (current.hasUnrelatedGap() 
+						? unrelatedBaselineDistance : relatedBaselineDistance);
+					extra -= current.height() + current.extraHeight() + current.vgap();
+					extra += current.baseline() - next.baseline();
+				}
+				extras.add(extra);
+			}
+		});
+		return extras;
+	}
+	
+	static final private class ConsistentBaselineCalculator 
+		implements RowIterator.RowPairWorker
+	{
+		public void perform(AbstractRow current, AbstractRow next)
+		{
+			if (current.growWeight() == 0.0)
+			{
+				int distance = current.height() + current.extraHeight();
+				distance += current.vgap() - current.baseline() + next.baseline();
+				if (current.hasUnrelatedGap())
+				{
+					_unrelatedBaselineDistance = 
+						Math.max(_unrelatedBaselineDistance, distance);
+				}
+				else
+				{
+					_relatedBaselineDistance = 
+						Math.max(_relatedBaselineDistance, distance);
+				}
+			}
+		}
+		
+		private int _relatedBaselineDistance = 0;
+		private int _unrelatedBaselineDistance = 0;
+	}
+/*
+	static protected List<Integer> computeExtraHeight(List<AbstractRow> rows)
+	{
 		Iterator<AbstractRow> iter = each(rows).iterator();
 		if (!iter.hasNext())
 		{
@@ -130,56 +184,6 @@ final class ConsistentBaselineSpacingHelper
 			int extra = 0;
 			if (current.growWeight() == 0.0)
 			{
-				extra = (current.hasUnrelatedGap() ? 
-					unrelatedBaselineDistance : relatedBaselineDistance);
-				extra -= current.vgap();
-				extra += current.baseline();
-				extra -= current.height() + current.extraHeight();
-				extra -= next.baseline();
-			}
-			extras.add(extra);
-		}
-		return extras;
-	}
-/*
-	static protected List<Integer> computeExtraHeight(List<AbstractRow> rows)
-	{
-		// Calculate max distances inter-rows (fixed height only)
-		int relatedBaselineDistance = 0;
-		int unrelatedBaselineDistance = 0;
-		for (int i = 0; i < rows.size() - 1; i++)
-		{
-			//FIXME deal with empty rows!
-			AbstractRow current = rows.get(i);
-			if (current.growWeight() == 0.0)
-			{
-				AbstractRow next = rows.get(i + 1);
-				int distance = current.height() + current.extraHeight();
-				distance += current.vgap() - current.baseline() + next.baseline();
-				if (current.hasUnrelatedGap())
-				{
-					unrelatedBaselineDistance = 
-						Math.max(unrelatedBaselineDistance, distance);
-				}
-				else
-				{
-					relatedBaselineDistance = 
-						Math.max(relatedBaselineDistance, distance);
-				}
-			}
-		}
-		
-		// Now calculate extra height needede to make  consistent baseline 
-		// spacing for the concerned engine
-		List<Integer> extras = new ArrayList<Integer>();
-		for (int i = 0; i < rows.size() - 1; i++)
-		{
-			//FIXME deal with empty rows!
-			AbstractRow current = rows.get(i);
-			int extra = 0;
-			if (current.growWeight() == 0.0)
-			{
-				AbstractRow next = rows.get(i + 1);
 				extra = (current.hasUnrelatedGap() ? 
 					unrelatedBaselineDistance : relatedBaselineDistance);
 				extra -= current.vgap();
