@@ -24,6 +24,7 @@ public class RowSpan1OneList extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
+//		layout.disableSmartVerticalResize();
 		layout.row().grid(label("lbl11")).add(field("field11")).grid(label("lbl12")).add(list());
 		layout.row().grid(label("lbl21")).add(field("field21")).grid().spanRow();
 		layout.row().center().add(button());

@@ -1,0 +1,8 @@
+public class Rfe29ConsistentBaselineSpace extends Rfe29ExactVGaps
+{
+	@Override protected void build(DesignGridLayout layout)
+	{
+		layout.forceConsistentBaselinesDistance();
+		super.build(layout);
+	}
+}

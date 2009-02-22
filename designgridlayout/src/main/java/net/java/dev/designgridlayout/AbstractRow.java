@@ -85,6 +85,7 @@ abstract class AbstractRow
 		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
 		_height = ComponentHelper.maxValues(allItems(), PrefHeightExtractor.INSTANCE);
 		_baseline = ComponentHelper.maxValues(allItems(), BaselineExtractor.INSTANCE);
+		_naturalBaseline = _baseline;
 		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, items());
 		if (fixedHeight || _growWeight == -1.0)
 		{
@@ -100,6 +101,11 @@ abstract class AbstractRow
 	final protected int baseline()
 	{
 		return _baseline;
+	}
+
+	final protected int naturalBaseline()
+	{
+		return _naturalBaseline;
 	}
 
 	final protected void baseline(int baseline)
@@ -221,6 +227,7 @@ abstract class AbstractRow
 	private boolean _unrelatedGap = false;
 	private int _vgap = 0;
 	private int _baseline;
+	private int _naturalBaseline;
 	private int _height;
 	private double _growWeight = -1.0;
 	private int _maxWidth;

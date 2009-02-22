@@ -24,13 +24,12 @@ interface ILayoutEngine
 {
 	// Calls to DesignGridLayout, directly forwarded to ILayoutEngine
 	public void margins(double top, double left, double bottom, double right);
-	public void forceConsistentVGaps();
 	public void forceConsistentBaselinesDistance();
 
 	public void reset();
 
 	// Used for synchronization
-	public boolean mustForceConsistentVGaps();
+	public boolean mustForceConsistentBaselinesDistance();
 	public int getNumGrids();
 	public List<Integer> getLabelWidths();
 	public Insets getMargins();

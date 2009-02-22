@@ -26,57 +26,91 @@ public class SyncLayoutTest extends AbstractGuiTest
 		stopGui();
 	}
 	
+	// Real-life example of horizontal alignment
 	@Test public void checkAddressBookDemoWithSync() throws Exception
 	{
 		checkExample(BetterAddressBookDemo.class);
 	}
 
+	//----------------------------------
+	// All TC for horizontal alignments
+	//----------------------------------
+
 	@Test public void checkHorizontalFixedHeightRows() throws Exception
 	{
-		checkExampleAndResizeHeight(
-			SyncHorizontalFixedHeightRowsConsistentVGaps.class, 3, 4);
+		checkHorizontalExample(SyncHorizontalFixedHeightRows.class);
 	}
 
-	@Test public void checkHorizontalFixedHeightRowsConsistentVGaps() throws Exception
+	@Test public void checkHorizontalFixedHeightRowsConsistentBaselineSpacing() 
+		throws Exception
 	{
-		checkExampleAndResizeHeight(
-			SyncHorizontalFixedHeightRows.class, 3, 4);
+		checkHorizontalExample(SyncHorizontalFixedHeightRowsConsistentBaselineSpacing.class);
 	}
 
+	@Test public void checkHorizontalDifferentCountFixedHeightRows() throws Exception
+	{
+		checkHorizontalExample(SyncHorizontalDifferentCountOfFixedHeightRows.class);
+	}
+
+	@Test public void checkHorizontalDifferentCountFixedHeightRowsConsistentVGaps() 
+		throws Exception
+	{
+		checkHorizontalExample(SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing.class);
+	}
+
+	@Test public void checkHorizontalConsistentVariableHeightRows() throws Exception
+	{
+		checkHorizontalExample(SyncHorizontalConsistentVariableHeightRows.class);
+	}
+
+	//--------------------------------
+	// All TC for vertical alignments
+	//--------------------------------
+	
 	@Test public void checkVerticalConsistentGrids() throws Exception
 	{
-		checkExampleAndResizeWidth(
-			SyncVerticalConsistentGrids.class, 1.25, 1.25, 0.5);
+		checkVerticalExample(SyncVerticalConsistentGrids.class);
 	}
 
 	@Test public void checkVerticalInconsistentGrids() throws Exception
 	{
-		checkExampleAndResizeWidth(
-			SyncVerticalInconsistentGrids.class, 1.25, 1.25, 0.5);
+		checkVerticalExample(SyncVerticalInconsistentGrids.class);
 	}
 
 	@Test public void checkVerticalMargins() throws Exception
 	{
-		checkExample(SyncVerticalCheckMargins.class);
+		checkVerticalExample(SyncVerticalCheckMargins.class);
 	}
 
 	@Test public void checkVerticalGridsWithAndWithoutLabels() throws Exception
 	{
-		checkExample(SyncVerticalWithWithoutLabel.class);
+		checkVerticalExample(SyncVerticalWithWithoutLabel.class);
 	}
 
 	@Test public void checkVerticalHGaps() throws Exception
 	{
-		checkExample(SyncVerticalCheckHGaps.class);
+		checkVerticalExample(SyncVerticalCheckHGaps.class);
 	}
 
 	@Test public void checkVerticalWithBorders() throws Exception
 	{
-		checkExample(SyncVerticalWithBorders.class);
+		checkVerticalExample(SyncVerticalWithBorders.class);
 	}
 
 	@Test public void checkVerticalThreePanels() throws Exception
 	{
-		checkExampleAndResizeWidth(SyncVertical3Layouts.class, 1.25, 1.25, 0.5);
+		checkVerticalExample(SyncVertical3Layouts.class);
+	}
+	
+	protected void checkHorizontalExample(Class<? extends AbstractBaseExample> clazz)
+		throws Exception
+	{
+		checkExampleAndResizeHeight(clazz, 3, 4);
+	}
+	
+	protected void checkVerticalExample(Class<? extends AbstractBaseExample> clazz)
+		throws Exception
+	{
+		checkExampleAndResizeWidth(clazz, 1.25, 1.25, 0.5);
 	}
 }

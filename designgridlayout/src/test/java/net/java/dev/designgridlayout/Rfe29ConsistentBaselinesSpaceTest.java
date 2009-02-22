@@ -18,18 +18,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "utest")
-public class Rfe29ConsistentVGapsTest extends AbstractGuiTest
+public class Rfe29ConsistentBaselinesSpaceTest extends AbstractGuiTest
 {
 	@AfterMethod public void closeGui()
 	{
 		stopGui();
 	}
 	
-	@Test public void checkConsistentVGaps() throws Exception
-	{
-		checkExample(Rfe29ConsistentVGaps.class);
-	}
-
 	@Test public void checkConsistentBaselineSpace() throws Exception
 	{
 		checkExample(Rfe29ConsistentBaselineSpace.class);

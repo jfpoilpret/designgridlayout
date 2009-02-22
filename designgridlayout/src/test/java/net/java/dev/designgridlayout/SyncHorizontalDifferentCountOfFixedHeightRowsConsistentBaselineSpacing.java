@@ -14,39 +14,39 @@
 
 package net.java.dev.designgridlayout;
 
-public class SyncHorizontalFixedHeightRowsConsistentVGaps 
-	extends SyncHorizontalFixedHeightRows
+public class SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing 
+	extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncHorizontalFixedHeightRowsConsistentVGaps example = 
-			new SyncHorizontalFixedHeightRowsConsistentVGaps();
+		SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing example = 
+			new SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing();
 		example.go(true);
 	}
 	
+	public SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing()
+	{
+		super(false);
+	}
+
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
+		layout1.forceConsistentBaselinesDistance();
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2"));
+//TODO later		layout1.emptyRow();
 		layout1.row().grid(label("lbl3")).add(field("field3"));
 		layout1.row().grid(label("lbl4")).add(field("field4"));
 		layout1.row().grid(label("lbl5")).add(field("field5"));
 
 		DesignGridLayout layout2 = createSubPanel();
-		layout2.row().grid(label("label1")).add(radio("radio1"));
-		layout2.row().grid(label("lbl2")).add(radio("radio2"));
-		layout2.row().grid(label("lbl3")).add(combobox());
-		layout2.row().grid(label("lbl4")).add(button("push me"));
-		layout2.row().grid(label("lbl5")).add(checkbox("check5"));
+		layout2.forceConsistentBaselinesDistance();
+		layout2.row().grid().empty();
+		layout2.row().grid(label("lbl1")).add(combobox());
+		layout2.row().grid(label("lbl2")).add(button("push me"));
+		layout2.row().grid(label("lbl3")).add(checkbox("check3"));
 
 		Synchronizer.synchronize(layout1, layout2).alignRows();
 	}
-
-	@Override protected DesignGridLayout createSubPanel()
-    {
-		DesignGridLayout layout = super.createSubPanel();
-		layout.forceConsistentVGaps();
-		return layout;
-    }
 }

@@ -44,9 +44,9 @@ public class LayoutLockTest
 	}
 	
 	@Test(expectedExceptions = IllegalStateException.class)
-	public void checkLockedForceConsistentVGaps()
+	public void checkLockedForceConsistentBaselinesDistance()
 	{
-		_layout.forceConsistentVGaps();
+		_layout.forceConsistentBaselinesDistance();
 	}
 	
 	@Test(expectedExceptions = IllegalStateException.class)

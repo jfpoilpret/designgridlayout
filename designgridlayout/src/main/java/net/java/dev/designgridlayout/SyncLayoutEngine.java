@@ -48,19 +48,14 @@ class SyncLayoutEngine implements ILayoutEngine
 	// Implementation of ILayoutEngine
 	//---------------------------------
 	
-	public void forceConsistentVGaps()
-	{
-		_current.forceConsistentVGaps();
-	}
-
 	public void forceConsistentBaselinesDistance()
 	{
 		_current.forceConsistentBaselinesDistance();
 	}
 	
-	public boolean mustForceConsistentVGaps()
+	public boolean mustForceConsistentBaselinesDistance()
 	{
-		return _current.mustForceConsistentVGaps();
+		return _current.mustForceConsistentBaselinesDistance();
 	}
 	
 	public void margins(double top, double left, double bottom, double right)

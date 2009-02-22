@@ -43,6 +43,7 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		while (alignCurrentRowsBaselines(counters))
 		{
 		}
+		makeBaselinesDistanceConsistent(engines);
 	}
 	// CSON: EmptyBlockCheck
 	
@@ -68,10 +69,10 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 			maxHeight = Math.max(maxHeight, counter.height());
 			maxBaseline = Math.max(maxBaseline, counter.baseline());
 		}
+		// Now align all rows on their baselines
 		for (SyncRowCounter counter: counters)
 		{
-			counter.baseline(maxBaseline);
-			counter.height(maxHeight);
+			counter.align(maxBaseline, maxHeight);
 			counter.next();
 		}
 		return (maxHeight != 0);
@@ -104,19 +105,14 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 			}
 		}
 		
-		void baseline(int baseline)
+		void align(int baseline, int height)
 		{
 			if (_current != null)
 			{
 				_current.baseline(baseline);
-			}
-		}
-		
-		void height(int height)
-		{
-			if (_current != null)
-			{
 				int rowHeight = _respectHeight ? _current.actualHeight() : _current.height();
+				// Account for changes made to natural baseline of the row!
+//				rowHeight -= baseline - _current.naturalBaseline();
 				_current.extraHeight(height - rowHeight - _current.vgap());
 			}
 		}

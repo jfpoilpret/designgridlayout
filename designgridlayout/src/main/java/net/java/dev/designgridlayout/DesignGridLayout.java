@@ -159,29 +159,21 @@ public class DesignGridLayout implements LayoutManager
 	}
 
 	/**
-	 * Requires to use consistent vertical gaps between rows (ie the vertical gap
-	 * between rows will be same for every pair of 2 consecutive rows, provided
-	 * that there is no {@link #emptyRow()} call between this pair of rows.
+	 * Requires to use consistent baselines spacing of all pairs of two
+	 * consecutive rows which first row has a fixed height.
 	 * <p/>
-	 * Forcing consistent gaps changes the global balance of forms: on one hand,
-	 * it seems to make all consecutive labels equidistant, on the other hand,
-	 * it seems to introduce too much space between actual components (fields,
-	 * checkboxes...) Hence, this is only provided as an option. DesignGridLayout
-	 * defaults to using the actual vertical gap between each pair of rows.
+	 * Forcing consistent baselines spacing changes the global balance of forms: 
+	 * on one hand, it makes all consecutive labels equidistant, on the other 
+	 * hand, it seems to introduce too much space between actual components 
+	 * (fields, checkboxes...) Hence, this is only provided as an option. 
+	 * DesignGridLayout defaults to always use the actual vertical gap between 
+	 * each pair of rows.
 	 * 
 	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
 	 * calls to other methods (also known as "fluent API")
 	 * @throws IllegalStateException if this layout has been locked (which happens
 	 * automatically the first its container frame is packed or displayed)
 	 */
-	public DesignGridLayout forceConsistentVGaps() throws IllegalStateException
-	{
-		_locker.checkUnlocked();
-		_engine.forceConsistentVGaps();
-		return this;
-	}
-	
-	//TODO javadoc
 	public DesignGridLayout forceConsistentBaselinesDistance()
 		throws IllegalStateException
 	{

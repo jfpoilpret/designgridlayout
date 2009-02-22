@@ -48,19 +48,14 @@ class LayoutEngine implements ILayoutEngine
 		_rightWeight = (right < 0.0 ? 0.0 : right);
 	}
 	
-	public void forceConsistentVGaps()
-	{
-		_consistentVGaps = true;
-	}
-
 	public void forceConsistentBaselinesDistance()
 	{
 		_consistentBaselineDistance = true;
 	}
 	
-	public boolean mustForceConsistentVGaps()
+	public boolean mustForceConsistentBaselinesDistance()
 	{
-		return _consistentVGaps;
+		return _consistentBaselineDistance;
 	}
 	
 	public void reset()
@@ -158,12 +153,10 @@ class LayoutEngine implements ILayoutEngine
 			// Exclude inter-grid gaps
 			gridsWidth -= (_maxGrids - 1) * _gridgap;
 
-			System.out.printf("LayoutEngine.layoutContainer()\n");
 			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
 			for (AbstractRow row: each(_rows))
 			{
-				System.out.printf("y = %d\n", y);
 				helper.setY(y);
 				int rowHeight = row.actualHeight();
 				helper.setRowAvailableHeight(rowHeight);
@@ -248,10 +241,6 @@ class LayoutEngine implements ILayoutEngine
 	{
 		computeHorizontalGaps();
 		computeVerticalGaps();
-		if (_consistentVGaps)
-		{
-			computeConsistentVGaps();
-		}
 	}
 	
 	/*
@@ -340,70 +329,6 @@ class LayoutEngine implements ILayoutEngine
 		}
 	}
 
-	private void computeConsistentVGaps()
-	{
-		// Vertical gaps (per row)
-		int maxVGap = 0;
-		int maxUnrelatedVGap = 0;
-		for (AbstractRow row: _rows)
-		{
-			int rowGap = row.vgap();
-			if (row.hasUnrelatedGap())
-			{
-				maxUnrelatedVGap = Math.max(maxUnrelatedVGap, rowGap);
-			}
-			else
-			{
-				maxVGap = Math.max(maxVGap, rowGap);
-			}
-		}
-		for (AbstractRow row: _rows.subList(0, _rows.size() - 1))
-		{
-			row.vgap(row.hasUnrelatedGap() ? maxUnrelatedVGap : maxVGap);
-		}
-	}
-
-	private void computeConsistentBaselineDistance()
-	{
-		// Baseline distances
-		int relatedBaselineDistance = 0;
-		int unrelatedBaselineDistance = 0;
-		for (int i = 0; i < _rows.size() - 1; i++)
-		{
-			//FIXME deal with empty rows!
-			AbstractRow current = _rows.get(i);
-			if (current.growWeight() == 0.0)
-			{
-				AbstractRow next = _rows.get(i + 1);
-				int distance = current.height() + current.vgap() - current.baseline()
-					+ next.baseline();
-				if (current.hasUnrelatedGap())
-				{
-					unrelatedBaselineDistance = 
-						Math.max(unrelatedBaselineDistance, distance);
-				}
-				else
-				{
-					relatedBaselineDistance = 
-						Math.max(relatedBaselineDistance, distance);
-				}
-			}
-		}
-		for (int i = 0; i < _rows.size() - 1; i++)
-		{
-			//FIXME deal with empty rows!
-			AbstractRow current = _rows.get(i);
-			if (current.growWeight() == 0.0)
-			{
-				AbstractRow next = _rows.get(i + 1);
-				int vgap = (current.hasUnrelatedGap() ? 
-					unrelatedBaselineDistance : relatedBaselineDistance);
-				vgap += current.baseline() - current.height() - next.baseline();
-				current.vgap(vgap);
-			}
-		}
-	}
-
 	private void preInit()
 	{
 		if (_preferredSize != null || _preInitDone)
@@ -446,7 +371,7 @@ class LayoutEngine implements ILayoutEngine
 		// Compute consistent baselines
 		if (_consistentBaselineDistance)
 		{
-			computeConsistentBaselineDistance();
+			ConsistentBaselineSpacingHelper.fixRowsBaselinesDistance(_rows);
 		}
 
 		// Calculate total height growth factor of all variable height rows
@@ -562,8 +487,8 @@ class LayoutEngine implements ILayoutEngine
 		int totalHeight = 0;
 		for (AbstractRow row: _rows)
 		{
-			totalHeight += row.height() + row.vgap();
-//			totalHeight += row.height() + row.vgap() + row.extraHeight();
+//			totalHeight += row.height() + row.vgap();
+			totalHeight += row.height() + row.vgap() + row.extraHeight();
 		}
 		return totalHeight;
 	}
@@ -781,7 +706,6 @@ class LayoutEngine implements ILayoutEngine
 	private double _bottomWeight = 1.0;
 	private double _rightWeight = 1.0;
 	
-	private boolean _consistentVGaps = false;
 	private boolean _consistentBaselineDistance = false;
 
 	final private LayoutLocker _locker;

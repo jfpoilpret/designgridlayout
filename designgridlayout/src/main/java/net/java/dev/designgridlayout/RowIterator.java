@@ -16,6 +16,7 @@ package net.java.dev.designgridlayout;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 class RowIterator implements Iterator<AbstractRow>
@@ -26,13 +27,39 @@ class RowIterator implements Iterator<AbstractRow>
 		{
 			public Iterator<AbstractRow> iterator()
 			{
-				return new RowIterator(rows);
+				return new RowIterator(rows, false);
 			}
 		};
 	}
 
-	public RowIterator(List<AbstractRow> rows)
+	static public Iterable<AbstractRow> eachButLast(final List<AbstractRow> rows)
 	{
+		return new Iterable<AbstractRow>()
+		{
+			public Iterator<AbstractRow> iterator()
+			{
+				return new RowIterator(rows, true);
+			}
+		};
+	}
+
+	//TODO really public?
+	private RowIterator(List<AbstractRow> rows, boolean excludeLast)
+	{
+		if (excludeLast)
+		{
+			// Reduce the list by removing the last non-empty row
+			ListIterator<AbstractRow> iter = rows.listIterator(rows.size());
+			while (iter.hasPrevious())
+			{
+				AbstractRow last = iter.previous();
+				if (!last.isEmpty())
+				{
+					rows = rows.subList(0, iter.previousIndex());
+					break;
+				}
+			}
+		}
 		_rows = rows;
 	}
 	

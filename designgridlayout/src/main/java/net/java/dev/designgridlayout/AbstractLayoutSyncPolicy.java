@@ -43,7 +43,7 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 		synchronize(engines, true);
 	}
 
-	static protected int engineHeight(ILayoutEngine engine)
+	protected int engineHeight(ILayoutEngine engine)
 	{
 		Insets margins = engine.getMargins();
 		int layoutHeight = margins.top + margins.bottom;
@@ -52,6 +52,11 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 			layoutHeight += row.height() + row.extraHeight() + row.vgap();
 		}
 		return layoutHeight;
+	}
+	
+	protected void makeBaselinesDistanceConsistent(List<ILayoutEngine> engines)
+	{
+		ConsistentBaselineSpacingHelper.fixEnginesBaselinesDistance(engines);
 	}
 	
 	abstract protected void synchronize(
