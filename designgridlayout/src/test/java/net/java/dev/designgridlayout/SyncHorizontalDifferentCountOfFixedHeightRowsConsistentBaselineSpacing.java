@@ -35,7 +35,6 @@ public class SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpac
 		layout1.forceConsistentBaselinesDistance();
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2"));
-//TODO later		layout1.emptyRow();
 		layout1.row().grid(label("lbl3")).add(field("field3"));
 		layout1.row().grid(label("lbl4")).add(field("field4"));
 		layout1.row().grid(label("lbl5")).add(field("field5"));
