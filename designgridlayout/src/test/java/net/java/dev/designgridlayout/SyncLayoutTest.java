@@ -41,6 +41,11 @@ public class SyncLayoutTest extends AbstractGuiTest
 		checkHorizontalExample(SyncHorizontalFixedHeightRows.class);
 	}
 
+	@Test public void checkHorizontalFixedHeightComplexRows() throws Exception
+	{
+		checkHorizontalExample(SyncHorizontalFixedHeightRowsComplexRows.class);
+	}
+
 	@Test public void checkHorizontalFixedHeightRowsConsistentBaselineSpacing() 
 		throws Exception
 	{
@@ -61,6 +66,13 @@ public class SyncLayoutTest extends AbstractGuiTest
 	@Test public void checkHorizontalConsistentVariableHeightRows() throws Exception
 	{
 		checkHorizontalExample(SyncHorizontalConsistentVariableHeightRows.class);
+	}
+
+	//TODO re-enable when the amthcing sync-policy is ready!
+	@Test(enabled = false)
+	public void checkHorizontalInconsistentVariableHeightRows() throws Exception
+	{
+		checkHorizontalExample(SyncHorizontalVariableHeightRows.class);
 	}
 
 	//--------------------------------
@@ -105,7 +117,7 @@ public class SyncLayoutTest extends AbstractGuiTest
 	protected void checkHorizontalExample(Class<? extends AbstractBaseExample> clazz)
 		throws Exception
 	{
-		checkExampleAndResizeHeight(clazz, 3, 4);
+		checkExampleAndResizeHeight(clazz, 5, 3);
 	}
 	
 	protected void checkVerticalExample(Class<? extends AbstractBaseExample> clazz)
