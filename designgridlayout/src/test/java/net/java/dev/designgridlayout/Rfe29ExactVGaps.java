@@ -30,10 +30,12 @@ public class Rfe29ExactVGaps extends AbstractBaseExample
 	@Override protected void build(DesignGridLayout layout)
 	{
 		layout.row().grid(label("Label1")).add(field("field1"));
+		layout.row();
 		layout.row().grid(label("Label2")).add(textarea("something"));
 		layout.row().grid(label("Label3")).add(field("field3"));
 		layout.row().grid(label("Label4")).add(new JCheckBox("check"));
 		layout.row().grid(label("Label5")).add(field("field5"));
+		layout.row();
 		layout.row().grid(label("Label6")).add(new JRadioButton("radio"));
 		layout.row().grid(label("Label7")).add(field("field7"));
 		layout.row().grid(label("Label8")).add(new JComboBox(COMBO_CONTENT));
