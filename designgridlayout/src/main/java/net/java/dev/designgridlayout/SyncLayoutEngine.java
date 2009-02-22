@@ -164,7 +164,14 @@ class SyncLayoutEngine implements ILayoutEngine
 		{
 			syncPolicy().synchronize(_engines);
 		}
-		_current.layoutContainer(width, availableHeight);
+		int referenceWidth = width;
+		if (_alignGrids)
+		{
+			// Make sure that width is the same for all engines when it is
+			// smaller than the minimum width for all of them
+			referenceWidth = Math.max(width, _minimumSize.width);
+		}
+		_current.layoutContainer(referenceWidth, availableHeight);
 	}
 
 	// Package methods (used by SyncLayoutEngine)
