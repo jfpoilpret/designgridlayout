@@ -125,14 +125,14 @@ final class HorizontalLayout implements LayoutManager
 			_prefWidth = ComponentHelper.sumValues(_children, PrefWidthExtractor.INSTANCE);
 			_height = ComponentHelper.maxValues(_children, PrefHeightExtractor.INSTANCE);
 
-			LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 			_gaps = new int[_children.size()];
 			for (int nth = 0; nth < _children.size() - 1; nth++)
 			{
 				JComponent left = _children.get(nth).component();
 				JComponent right = _children.get(nth + 1).component();
-				int gap = layoutStyle.getPreferredGap(
-					left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
+				int gap = helper.getHorizontalGap(
+					left, right, LayoutStyle.RELATED, _parent);
 				_gaps[nth] = gap;
 				_gap += gap;
 			}

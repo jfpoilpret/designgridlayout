@@ -20,7 +20,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
@@ -225,7 +224,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	
 	@Override int gridgap()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int gridgap = 0;
 		for (int i = 0; i < _grids.size() - 1; i++)
 		{
@@ -235,8 +234,8 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 			{
 				JComponent left = leftGrid.get(leftGrid.size() - 1).component();
 				JComponent right = rightGrid.get(0).component();
-				int gap = layoutStyle.getPreferredGap(
-					left, right, LayoutStyle.UNRELATED, SwingConstants.EAST, parent());
+				int gap = helper.getHorizontalGap(
+					left, right, LayoutStyle.UNRELATED, parent());
 				gridgap = Math.max(gridgap, gap);
 			}
 		}

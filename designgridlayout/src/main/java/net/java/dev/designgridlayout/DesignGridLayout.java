@@ -24,7 +24,6 @@ import java.util.ListIterator;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
@@ -392,12 +391,6 @@ public class DesignGridLayout implements LayoutManager
 		return _parent.getInsets().right + (int) (_rightWeight * _right);
 	}
 
-	private int getContainerGap(JComponent component, int position)
-	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-		return layoutStyle.getContainerGap(component, position, _parent);
-	}
-	
 	/*
 	 * Horizontal gaps are easy.
 	 * Since canonical grids are "balanced", just use the biggest intra-component 
@@ -415,8 +408,6 @@ public class DesignGridLayout implements LayoutManager
 	// it's better not to try to improve vgaps
 	private void computeGutters()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-
 		// Handle horizontal gaps
 		_hgap = 0;
 		_gridgap = 0;
@@ -427,6 +418,7 @@ public class DesignGridLayout implements LayoutManager
 		}
 
 		// Vertical gaps (per row)
+		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int nthRow = 0;
 		for (AbstractRow row: _rows)
 		{
@@ -464,9 +456,7 @@ public class DesignGridLayout implements LayoutManager
 						{
 							JComponent lower = item2.component();
 							int belowHeight = lower.getPreferredSize().height;
-		
-							int gap = layoutStyle.getPreferredGap(
-								upper, lower, style, SwingConstants.SOUTH, _parent);
+							int gap = helper.getVerticalGap(upper, lower, style, _parent);
 							int comboHeight = aboveHeight + gap + belowHeight;
 							if (comboHeight > maxComboHeight)
 							{
@@ -709,9 +699,10 @@ public class DesignGridLayout implements LayoutManager
 		AbstractRow topRow = firstNonEmptyRow();
 		if (topRow != null)
 		{
+			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 			for (IRowItem item: topRow.allItems())
 			{
-				int gap = getContainerGap(item.component(), SwingConstants.NORTH);
+				int gap = helper.getNorthContainerGap(item.component(), _parent);
 				_top = Math.max(_top, gap);
 			}
 		}
@@ -726,10 +717,11 @@ public class DesignGridLayout implements LayoutManager
 		AbstractRow bottomRow = lastNonEmptyRow();
 		if (bottomRow != null)
 		{
+			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 			for (IRowItem item: bottomRow.allItems())
 			{
 				int height = item.preferredHeight();
-				int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
+				int gap = helper.getSouthContainerGap(item.component(), _parent);
 				int comboHeight = height + gap;
 				if (comboHeight > maxComboHeight)
 				{
@@ -784,18 +776,19 @@ public class DesignGridLayout implements LayoutManager
 	{
 		_left = 0;
 		_right = 0;
+		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		for (AbstractRow row: _rows)
 		{
 			JComponent left = row.leftComponent();
 			if (left != null)
 			{
-				_left = Math.max(_left, getContainerGap(left, SwingConstants.WEST));
+				_left = Math.max(_left, helper.getWestContainerGap(left, _parent));
 			}
 
 			JComponent right = row.rightComponent();
 			if (right != null)
 			{
-				_right = Math.max(_right, getContainerGap(right, SwingConstants.EAST));
+				_right = Math.max(_right, helper.getEastContainerGap(right, _parent));
 			}
 		}
 	}

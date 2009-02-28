@@ -117,6 +117,11 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		}
 	}
 
+	@Test public void checkBug38WrongVGapsWithAddMulti() throws Exception
+	{
+		checkExample(Bug38WrongVGapsWithAddMulti.class);
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);
