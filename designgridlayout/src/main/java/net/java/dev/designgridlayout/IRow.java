@@ -39,10 +39,8 @@ public interface IRow
 	 * @param children components to add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IRow add(JComponent... children) throws IllegalStateException;
+	public abstract IRow add(JComponent... children);
 
 	/**
 	 * Adds components to this row; all components are "assembled" as one
@@ -54,9 +52,6 @@ public interface IRow
 	 * @param children components to assemble and add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IRow addMulti(JComponent... children)
-		throws IllegalStateException;
+	public abstract IRow addMulti(JComponent... children);
 }

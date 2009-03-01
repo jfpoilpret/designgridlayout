@@ -14,17 +14,30 @@
 
 package net.java.dev.designgridlayout;
 
-public class Rfe29ConsistentBaselineSpace extends Rfe29ExactVGaps
+import javax.swing.JTextField;
+
+// Issue 38: too small vgap between multicomponents 
+// NB: does not happen on Metal/WinXP. Happens on Aqua (Macintosh).
+public class Bug38WrongVGapsWithAddMulti extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		Rfe29ConsistentBaselineSpace example = new Rfe29ConsistentBaselineSpace();
+		Bug38WrongVGapsWithAddMulti example = new Bug38WrongVGapsWithAddMulti();
 		example.go(true);
 	}
 
-	@Override protected void build(DesignGridLayout layout)
+	@Override public void build(DesignGridLayout layout)
 	{
-		layout.forceConsistentBaselinesDistance();
-		super.build(layout);
+		layout.row().grid(label("Label 1")).add(field("F1"));
+		layout.row().grid(label("Label 2")).add(field("F2"));
+		layout.row().grid(label("Label 3")).addMulti(field("F3"));
+		layout.row().grid(label("Label 4")).addMulti(field("F4"));
+	}
+
+	@Override protected JTextField field(String text)
+	{
+		JTextField field = new JTextField(text);
+		field.setColumns(10);
+		return field;
 	}
 }

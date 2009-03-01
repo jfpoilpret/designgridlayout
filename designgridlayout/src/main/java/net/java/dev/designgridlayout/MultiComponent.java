@@ -22,8 +22,14 @@ final class MultiComponent extends JComponent
 		JComponent... children)
 	{
 		_layout = new HorizontalLayout(this, heightTester, orientation);
+		_children = children;
 		setLayout(_layout);
 		_layout.add(children);
+	}
+	
+	public JComponent[] getChildren()
+	{
+		return _children;
 	}
 
 	public int getBaseline(int width, int height)
@@ -32,4 +38,5 @@ final class MultiComponent extends JComponent
 	}
 	
 	private final HorizontalLayout _layout;
+	private final JComponent[] _children;
 }

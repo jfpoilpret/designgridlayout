@@ -66,7 +66,6 @@ public class Bug37SmartResizeWithJInternalFrame
 		// Order of calling desktop.add() is important wrt frame.pack() call!
 		desktop.add(frame);
 		frame.pack();
-//		desktop.add(frame);
 		frame.setVisible(true);
 		try
 		{
