@@ -8,10 +8,10 @@
     <language>en-us</language>
     <copyright>&#169;2005 - 2009</copyright>
     <item>
-      <title>File: 39,
+      <title>File: 40,
              Errors: 0,
-             Warnings: 1,
-             Infos: 2
+             Warnings: 2,
+             Infos: 3
       </title>
             <link>http://designgridlayout.dev.java.net/nonav/site//checkstyle.html</link>
       <description>
@@ -35,7 +35,7 @@
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -155,10 +155,10 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.package.html">net/java/dev/designgridlayout/package.html</a>
+                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.JScrollPaneHeightGrowPolicy.java">net/java/dev/designgridlayout/JScrollPaneHeightGrowPolicy.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -169,10 +169,10 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.JScrollPaneHeightGrowPolicy.java">net/java/dev/designgridlayout/JScrollPaneHeightGrowPolicy.java</a>
+                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.package.html">net/java/dev/designgridlayout/package.html</a>
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -313,6 +313,20 @@
                 </td>
                 <td>
                   0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.ComponentGapsHelper.java">net/java/dev/designgridlayout/ComponentGapsHelper.java</a>
+                </td>
+                <td>
+                  1
                 </td>
                 <td>
                   0

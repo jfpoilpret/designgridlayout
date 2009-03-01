@@ -135,14 +135,14 @@
 <a name="125" href="#125">125</a> 			_prefWidth = ComponentHelper.sumValues(_children, PrefWidthExtractor.INSTANCE);
 <a name="126" href="#126">126</a> 			_height = ComponentHelper.maxValues(_children, PrefHeightExtractor.INSTANCE);
 <a name="127" href="#127">127</a> 
-<a name="128" href="#128">128</a> 			LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+<a name="128" href="#128">128</a> 			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 <a name="129" href="#129">129</a> 			_gaps = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">int</strong>[_children.size()];
 <a name="130" href="#130">130</a> 			<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> nth = 0; nth &lt; _children.size() - 1; nth++)
 <a name="131" href="#131">131</a> 			{
 <a name="132" href="#132">132</a> 				JComponent left = _children.get(nth).component();
 <a name="133" href="#133">133</a> 				JComponent right = _children.get(nth + 1).component();
-<a name="134" href="#134">134</a> 				<strong class="jxr_keyword">int</strong> gap = layoutStyle.getPreferredGap(
-<a name="135" href="#135">135</a> 					left, right, LayoutStyle.RELATED, SwingConstants.EAST, _parent);
+<a name="134" href="#134">134</a> 				<strong class="jxr_keyword">int</strong> gap = helper.getHorizontalGap(
+<a name="135" href="#135">135</a> 					left, right, LayoutStyle.RELATED, _parent);
 <a name="136" href="#136">136</a> 				_gaps[nth] = gap;
 <a name="137" href="#137">137</a> 				_gap += gap;
 <a name="138" href="#138">138</a> 			}
