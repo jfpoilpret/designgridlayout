@@ -57,10 +57,15 @@ public class SyncLayoutTest extends AbstractGuiTest
 		checkHorizontalExample(SyncHorizontalDifferentCountOfFixedHeightRows.class);
 	}
 
-	@Test public void checkHorizontalDifferentCountFixedHeightRowsConsistentVGaps() 
+	@Test public void checkHorizontalDifferentCountFixedHeightRowsConsistentBaselineSpacing() 
 		throws Exception
 	{
 		checkHorizontalExample(SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing.class);
+	}
+
+	@Test public void checkHorizontalDifferentCountVariableHeightRows() throws Exception
+	{
+		checkHorizontalExample(SyncHorizontalDifferentCountOfConsistentVariableHeightRows.class);
 	}
 
 	@Test public void checkHorizontalConsistentVariableHeightRows() throws Exception
@@ -68,7 +73,7 @@ public class SyncLayoutTest extends AbstractGuiTest
 		checkHorizontalExample(SyncHorizontalConsistentVariableHeightRows.class);
 	}
 
-	//TODO re-enable when the amthcing sync-policy is ready!
+	//TODO re-enable when the matching sync-policy is ready!
 	@Test(enabled = false)
 	public void checkHorizontalInconsistentVariableHeightRows() throws Exception
 	{

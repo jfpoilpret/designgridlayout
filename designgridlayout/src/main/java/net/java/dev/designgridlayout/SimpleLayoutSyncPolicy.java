@@ -43,10 +43,30 @@ class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		while (alignCurrentRowsBaselines(counters))
 		{
 		}
-		makeBaselinesDistanceConsistent(engines);
+		//FIXME problem with variable height layouts, maybe useless actually...
+//		if (!respectHeight)
+		{
+			makeBaselinesDistanceConsistent(engines, respectHeight);
+		}
 	}
 	// CSON: EmptyBlockCheck
 	
+	@Override public int availableHeight(
+		int height, List<ILayoutEngine> engines, ILayoutEngine current)
+	{
+		// Limit the height given to the engine according to its preferred size
+		//FIXME should normally NOT give the entire difference but should also
+		// account for all other engines!
+		int globalPreferredHeight = 0;
+		for (ILayoutEngine engine: engines)
+		{
+			globalPreferredHeight = Math.max(
+				globalPreferredHeight, engine.getPreferredSize().height);
+		}
+		int currentPreferredHeight = current.getPreferredSize().height;
+		return height + currentPreferredHeight - globalPreferredHeight;
+	}
+
 	static private List<SyncRowCounter> initCounters(
 		List<ILayoutEngine> engines, boolean respectHeight)
 	{

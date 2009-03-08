@@ -264,11 +264,11 @@ final class SubGrid implements ISubGrid
 		"spanRow() cannot work on a sub-grid where the number of columns is different " +
 		"from the above sub-grid";
 
-	static final private JComponent EMPTY = new JPanel();
-	static
-	{
-		EMPTY.setOpaque(false);
-	}
+	// CSOFF: WhitespaceAroundCheck
+	// CSOFF: WhitespaceAfterCheck
+	static final private JComponent EMPTY = new JPanel() {{setOpaque(false);}};
+	// CSON: WhitespaceAfterCheck
+	// CSON: WhitespaceAroundCheck
 
 	final private List<RowItem> _items;
 	final private SubGrid _previous;

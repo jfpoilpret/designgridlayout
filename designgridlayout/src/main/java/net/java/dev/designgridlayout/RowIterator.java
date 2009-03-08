@@ -20,7 +20,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 //TODO Rename to RowHelper and make Iterator impl private
-class RowIterator implements Iterator<AbstractRow>
+final class RowIterator implements Iterator<AbstractRow>
 {
 	static public void forEachConsecutive(List<AbstractRow> rows, RowPairWorker worker)
 	{

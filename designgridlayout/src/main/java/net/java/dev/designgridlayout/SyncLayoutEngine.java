@@ -138,17 +138,23 @@ class SyncLayoutEngine implements ILayoutEngine
 		// Pass correct height to _current engine
 		if (_alignRows)
 		{
-			//TODO Do we need to loop on every engine, can;t we just use _current?
+			//TODO Do we need to loop on every engine, can't we just use _current?
 			int availableHeight = height;
 			for (ILayoutEngine engine: _engines)
 			{
-				int currentHeight = engine.computeRowsActualHeight(
-					syncPolicy().availableHeight(height, _engines, _current));
+//				int currentHeight = 
+//					syncPolicy().availableHeight(height, _engines, _current);
+				int currentHeight = 
+					syncPolicy().availableHeight(height, _engines, engine);
+				currentHeight = engine.computeRowsActualHeight(currentHeight);
 				if (engine == _current)
 				{
 					availableHeight = currentHeight;
 				}
 			}
+//			int currentHeight = 
+//				syncPolicy().availableHeight(height, _engines, _current);
+//			availableHeight = _current.computeRowsActualHeight(currentHeight);
 			return availableHeight;
 		}
 		else
@@ -164,6 +170,7 @@ class SyncLayoutEngine implements ILayoutEngine
 		{
 			syncPolicy().synchronize(_engines);
 		}
+//		int availableHeight = computeRowsActualHeight(height);
 		int referenceWidth = width;
 		if (_alignGrids)
 		{
@@ -458,6 +465,7 @@ class SyncLayoutEngine implements ILayoutEngine
 	// Synchronization computed properties
 	private int _numGrids = 0;
 	private List<Integer> _labelWidths = new ArrayList<Integer>();
+	//TODO replace _margins with local variables!
 	private Insets _margins = null;
 	private Dimension _minimumSize = null;
 	private Dimension _preferredSize = null;

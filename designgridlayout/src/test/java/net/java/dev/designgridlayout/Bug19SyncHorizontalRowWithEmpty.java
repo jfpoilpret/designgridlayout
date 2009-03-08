@@ -14,29 +14,29 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JComponent;
-
-final class MultiComponent extends JComponent
+public class Bug19SyncHorizontalRowWithEmpty extends AbstractSyncLayoutExample
 {
-	MultiComponent(HeightGrowPolicy heightTester, OrientationPolicy orientation, 
-		JComponent... children)
+	public static void main(String[] args)
 	{
-		_layout = new HorizontalLayout(this, heightTester, orientation);
-		_children = children;
-		setLayout(_layout);
-		_layout.add(children);
+		Bug19SyncHorizontalRowWithEmpty example = new Bug19SyncHorizontalRowWithEmpty();
+		example.go(true);
 	}
 	
-	public JComponent[] getChildren()
+	public Bug19SyncHorizontalRowWithEmpty()
 	{
-		return _children;
+		super(false);
 	}
 
-	public int getBaseline(int width, int height)
+	@Override protected void build()
 	{
-		return _layout.getBaseline();
+		DesignGridLayout layout1 = createSubPanel();
+		layout1.row().grid(label("lbl1")).add(field("field1"));
+		layout1.row().grid(label("lbl3")).add(list());
+
+		DesignGridLayout layout2 = createSubPanel();
+		layout2.row().grid().empty();
+		layout2.row().grid(label("lbl2")).add(list());
+
+		Synchronizer.synchronize(layout1, layout2).alignRows();
 	}
-	
-	private final HorizontalLayout _layout;
-	private final JComponent[] _children;
 }

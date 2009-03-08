@@ -54,9 +54,11 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 		return layoutHeight;
 	}
 	
-	protected void makeBaselinesDistanceConsistent(List<ILayoutEngine> engines)
+	protected void makeBaselinesDistanceConsistent(
+		List<ILayoutEngine> engines, boolean respectHeight)
 	{
-		ConsistentBaselineSpacingHelper.fixEnginesBaselinesDistance(engines);
+		ConsistentBaselineSpacingHelper.fixEnginesBaselinesDistance(
+			engines, respectHeight);
 	}
 	
 	abstract protected void synchronize(

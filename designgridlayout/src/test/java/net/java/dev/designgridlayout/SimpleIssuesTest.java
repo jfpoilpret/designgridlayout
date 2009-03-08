@@ -45,6 +45,12 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExample(Bug03JScrollPaneResizeProblem.class);
 	}
 
+	@Test public void checkBug19SyncRowWithEmptyComponent() throws Exception
+	{
+		checkExampleAndResizeHeight(
+			Bug19SyncHorizontalRowWithEmpty.class, 4, 5);
+	}
+
 	@Test public void checkBug22WrongGapsIfNoGridRow() throws Exception
 	{
 		checkExample(Bug22WrongGapsIfNoGridRow.class);
@@ -116,6 +122,12 @@ public class SimpleIssuesTest extends AbstractGuiTest
 			checkSnapshot("bug36-reverse-" + (i * BUG36_INCREMENT));
 		}
 	}
+
+	@Test public void checkBug38WrongVGapsWithAddMulti() throws Exception
+	{
+		checkExample(Bug38WrongVGapsWithAddMulti.class);
+	}
+
 
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{

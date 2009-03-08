@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.JComponent;
-import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
@@ -153,6 +152,7 @@ class LayoutEngine implements ILayoutEngine
 			// Exclude inter-grid gaps
 			gridsWidth -= (_maxGrids - 1) * _gridgap;
 
+			System.out.printf("layoutContainer %d\n", this.hashCode());
 			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
 			for (AbstractRow row: each(_rows))
@@ -163,6 +163,8 @@ class LayoutEngine implements ILayoutEngine
 				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 					gridsWidth, _labelWidths);
 //				row.actualHeight(rowHeight);
+				System.out.printf("y = %d, actual = %d, extra = %d, vgap = %d\n", 
+					y, rowHeight, row.extraHeight(), row.vgap());
 				y += rowHeight + row.vgap() + row.extraHeight();
 			}
 			
@@ -197,6 +199,8 @@ class LayoutEngine implements ILayoutEngine
 		}
 		
 		// Start laying out every single row (all components but row-span ones)
+		System.out.printf("computeRowsActualHeight %d\n", this.hashCode());
+		System.out.printf("height = %d\n", height);
 		for (AbstractRow row: each(_rows))
 		{
 			int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
@@ -231,12 +235,6 @@ class LayoutEngine implements ILayoutEngine
 		return _margins.right;
 	}
 
-	private int getContainerGap(JComponent component, int position)
-	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
-		return layoutStyle.getContainerGap(component, position, _parent);
-	}
-	
 	private void computeGutters()
 	{
 		computeHorizontalGaps();
@@ -272,7 +270,7 @@ class LayoutEngine implements ILayoutEngine
 	// it's better not to try to improve vgaps
 	private void computeVerticalGaps()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 
 		// Vertical gaps (per row)
 		int nthRow = 0;
@@ -313,8 +311,8 @@ class LayoutEngine implements ILayoutEngine
 							JComponent lower = item2.component();
 							int belowHeight = lower.getPreferredSize().height;
 		
-							int gap = layoutStyle.getPreferredGap(
-								upper, lower, style, SwingConstants.SOUTH, _parent);
+							int gap = helper.getVerticalGap(
+								upper, lower, style, _parent);
 							int comboHeight = aboveHeight + gap + belowHeight;
 							if (comboHeight > maxComboHeight)
 							{
@@ -586,6 +584,8 @@ class LayoutEngine implements ILayoutEngine
 			_parent.getInsets().left + (int) (_leftWeight * _left),
 			_parent.getInsets().bottom + (int) (_bottomWeight * _bottom),
 			_parent.getInsets().right + (int) (_rightWeight * _right));
+		System.out.printf("LayoutEngine.computeMargins = %d, %d, %d, %d\n",
+			_margins.top, _margins.left, _margins.bottom, _margins.right);
 	}
 	
 	private void computeTopMargin()
@@ -595,9 +595,10 @@ class LayoutEngine implements ILayoutEngine
 		AbstractRow topRow = firstNonEmptyRow();
 		if (topRow != null)
 		{
+			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 			for (IRowItem item: topRow.allItems())
 			{
-				int gap = getContainerGap(item.component(), SwingConstants.NORTH);
+				int gap = helper.getNorthContainerGap(item.component(), _parent);
 				_top = Math.max(_top, gap);
 			}
 		}
@@ -612,10 +613,11 @@ class LayoutEngine implements ILayoutEngine
 		AbstractRow bottomRow = lastNonEmptyRow();
 		if (bottomRow != null)
 		{
+			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 			for (IRowItem item: bottomRow.allItems())
 			{
 				int height = item.preferredHeight();
-				int gap = getContainerGap(item.component(), SwingConstants.SOUTH);
+				int gap = helper.getSouthContainerGap(item.component(), _parent);
 				int comboHeight = height + gap;
 				if (comboHeight > maxComboHeight)
 				{
@@ -667,18 +669,19 @@ class LayoutEngine implements ILayoutEngine
 	{
 		_left = 0;
 		_right = 0;
+		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		for (AbstractRow row: _rows)
 		{
 			JComponent left = row.leftComponent();
 			if (left != null)
 			{
-				_left = Math.max(_left, getContainerGap(left, SwingConstants.WEST));
+				_left = Math.max(_left, helper.getWestContainerGap(left, _parent));
 			}
 
 			JComponent right = row.rightComponent();
 			if (right != null)
 			{
-				_right = Math.max(_right, getContainerGap(right, SwingConstants.EAST));
+				_right = Math.max(_right, helper.getEastContainerGap(right, _parent));
 			}
 		}
 	}

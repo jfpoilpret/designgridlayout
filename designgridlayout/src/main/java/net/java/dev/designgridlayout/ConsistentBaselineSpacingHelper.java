@@ -43,13 +43,14 @@ final class ConsistentBaselineSpacingHelper
 	{
 		// Calculate extra height needed to make  consistent baseline 
 		// spacing for the concerned engine
-		List<Integer> extras = computeExtraHeight(rows);
+		List<Integer> extras = computeExtraHeight(rows, false);
 
 		// Finally we can add this additional extra to the engine's rows
 		addExtraHeight(rows, extras);
 	}
 	
-	static public void fixEnginesBaselinesDistance(List<ILayoutEngine> engines)
+	static public void fixEnginesBaselinesDistance(
+		List<ILayoutEngine> engines, boolean respectHeight)
 	{
 		// First check if any engine requires consistent baselines spacing
 		ILayoutEngine consistentBaselinesEngine = findConsistentBaselinesEngine(engines);
@@ -60,7 +61,8 @@ final class ConsistentBaselineSpacingHelper
 		
 		// Calculate extra height needed to make  consistent baseline 
 		// spacing for the concerned engine
-		List<Integer> extras = computeExtraHeight(consistentBaselinesEngine.rows());
+		List<Integer> extras = computeExtraHeight(
+			consistentBaselinesEngine.rows(), respectHeight);
 		
 		// Finally we can add this additional extra to all engines
 		for (ILayoutEngine engine: engines)
@@ -83,10 +85,12 @@ final class ConsistentBaselineSpacingHelper
 		}
 	}
 
-	static protected List<Integer> computeExtraHeight(List<AbstractRow> rows)
+	static protected List<Integer> computeExtraHeight(
+		List<AbstractRow> rows, final boolean respectHeight)
 	{
 		// Calculate max distances inter-rows (fixed height only)
-		ConsistentBaselineCalculator calculator = new ConsistentBaselineCalculator();
+		ConsistentBaselineCalculator calculator = 
+			new ConsistentBaselineCalculator(respectHeight);
 		forEachConsecutive(rows, calculator);
 		final int relatedBaselineDistance = calculator._relatedBaselineDistance;
 		final int unrelatedBaselineDistance = calculator._unrelatedBaselineDistance;
@@ -101,9 +105,11 @@ final class ConsistentBaselineSpacingHelper
 				int extra = 0;
 				if (current.growWeight() == 0.0)
 				{
+					int height = (respectHeight ? current.actualHeight() : current.height());
+					height += current.extraHeight();
 					extra = (current.hasUnrelatedGap() 
 						? unrelatedBaselineDistance : relatedBaselineDistance);
-					extra -= current.height() + current.extraHeight() + current.vgap();
+					extra -= height + current.vgap();
 					extra += current.baseline() - next.baseline();
 				}
 				extras.add(extra);
@@ -115,11 +121,17 @@ final class ConsistentBaselineSpacingHelper
 	static final private class ConsistentBaselineCalculator 
 		implements RowIterator.RowPairWorker
 	{
+		public ConsistentBaselineCalculator(boolean respectHeight)
+		{
+			_respectHeight = respectHeight;
+		}
+		
 		public void perform(AbstractRow current, AbstractRow next)
 		{
 			if (current.growWeight() == 0.0)
 			{
-				int distance = current.height() + current.extraHeight();
+				int height = (_respectHeight ? current.actualHeight() : current.height());
+				int distance = height + current.extraHeight();
 				distance += current.vgap() - current.baseline() + next.baseline();
 				if (current.hasUnrelatedGap())
 				{
@@ -134,66 +146,8 @@ final class ConsistentBaselineSpacingHelper
 			}
 		}
 		
+		final private boolean _respectHeight;
 		private int _relatedBaselineDistance = 0;
 		private int _unrelatedBaselineDistance = 0;
 	}
-/*
-	static protected List<Integer> computeExtraHeight(List<AbstractRow> rows)
-	{
-		Iterator<AbstractRow> iter = each(rows).iterator();
-		if (!iter.hasNext())
-		{
-			return Collections.emptyList();
-		}
-
-		// Calculate max distances inter-rows (fixed height only)
-		int relatedBaselineDistance = 0;
-		int unrelatedBaselineDistance = 0;
-		AbstractRow current;
-		AbstractRow next = iter.next();
-		while (iter.hasNext())
-		{
-			current = next;
-			next = iter.next();
-			if (current.growWeight() == 0.0)
-			{
-				int distance = current.height() + current.extraHeight();
-				distance += current.vgap() - current.baseline() + next.baseline();
-				if (current.hasUnrelatedGap())
-				{
-					unrelatedBaselineDistance = 
-						Math.max(unrelatedBaselineDistance, distance);
-				}
-				else
-				{
-					relatedBaselineDistance = 
-						Math.max(relatedBaselineDistance, distance);
-				}
-			}
-		}
-		
-		// Now calculate extra height needede to make  consistent baseline 
-		// spacing for the concerned engine
-		List<Integer> extras = new ArrayList<Integer>();
-		iter = each(rows).iterator();
-		next = iter.next();
-		while (iter.hasNext())
-		{
-			current = next;
-			next = iter.next();
-			int extra = 0;
-			if (current.growWeight() == 0.0)
-			{
-				extra = (current.hasUnrelatedGap() ? 
-					unrelatedBaselineDistance : relatedBaselineDistance);
-				extra -= current.vgap();
-				extra += current.baseline();
-				extra -= current.height() + current.extraHeight();
-				extra -= next.baseline();
-			}
-			extras.add(extra);
-		}
-		return extras;
-	}
-*/
 }
