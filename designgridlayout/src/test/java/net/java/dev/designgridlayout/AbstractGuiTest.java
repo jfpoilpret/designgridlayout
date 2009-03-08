@@ -28,7 +28,7 @@ import org.fest.swing.image.ScreenshotTaker;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.swing.finder.WindowFinder.findFrame;
 
-abstract class AbstractGuiTest
+abstract public class AbstractGuiTest
 {
 	private AbstractBaseExample _example;
 	private Robot _robot;
