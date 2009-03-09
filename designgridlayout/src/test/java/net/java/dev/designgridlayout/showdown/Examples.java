@@ -54,7 +54,7 @@ import net.java.dev.designgridlayout.rtl.RightToLeft1LTR;
 import net.java.dev.designgridlayout.rtl.RightToLeft2RTL;
 import net.java.dev.designgridlayout.rtl.RightToLeft3RealWorldExample;
 import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
-import net.java.dev.designgridlayout.sync.BetterAddressBookDemo;
+import net.java.dev.designgridlayout.sync.horizontal.BetterAddressBookDemo;
 import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize1Sliders;
 import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize4RealWorldExample;

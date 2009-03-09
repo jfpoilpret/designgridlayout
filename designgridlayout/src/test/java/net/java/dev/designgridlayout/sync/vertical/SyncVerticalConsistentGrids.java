@@ -12,20 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.vertical;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Synchronizer;
+import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
 
-public class SyncVerticalCheckMargins extends AbstractSyncLayoutExample
+public class SyncVerticalConsistentGrids extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncVerticalCheckMargins example = new SyncVerticalCheckMargins();
+		SyncVerticalConsistentGrids example = 
+			new SyncVerticalConsistentGrids();
 		example.go(true);
 	}
 	
-	public SyncVerticalCheckMargins()
+	public SyncVerticalConsistentGrids()
 	{
 		super(true);
 	}
@@ -33,7 +35,6 @@ public class SyncVerticalCheckMargins extends AbstractSyncLayoutExample
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
-		layout1.margins(0.5);
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2")).grid(label("lbl3")).add(field("field3"));
 

@@ -12,21 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.horizontal;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Synchronizer;
+import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
 
-public class SyncHorizontalDifferentCountOfFixedHeightRows extends AbstractSyncLayoutExample
+public class SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing 
+	extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncHorizontalDifferentCountOfFixedHeightRows example = 
-			new SyncHorizontalDifferentCountOfFixedHeightRows();
+		SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing example = 
+			new SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing();
 		example.go(true);
 	}
 	
-	public SyncHorizontalDifferentCountOfFixedHeightRows()
+	public SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing()
 	{
 		super(false);
 	}
@@ -34,6 +36,7 @@ public class SyncHorizontalDifferentCountOfFixedHeightRows extends AbstractSyncL
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
+		layout1.forceConsistentBaselinesDistance();
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2"));
 		layout1.row().grid(label("lbl3")).add(field("field3"));
@@ -41,6 +44,7 @@ public class SyncHorizontalDifferentCountOfFixedHeightRows extends AbstractSyncL
 		layout1.row().grid(label("lbl5")).add(field("field5"));
 
 		DesignGridLayout layout2 = createSubPanel();
+		layout2.forceConsistentBaselinesDistance();
 		layout2.row().grid().empty();
 		layout2.row().grid(label("lbl1")).add(combobox());
 		layout2.row().grid(label("lbl2")).add(button("push me"));

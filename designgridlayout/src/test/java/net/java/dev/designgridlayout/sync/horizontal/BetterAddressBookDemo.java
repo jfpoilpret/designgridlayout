@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.horizontal;
 
 import java.awt.BorderLayout;
 
@@ -26,6 +26,7 @@ import javax.swing.ScrollPaneConstants;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Synchronizer;
+import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
 
 /**
  * Created in response to John O'Conner's "Layout Manager Showdown",

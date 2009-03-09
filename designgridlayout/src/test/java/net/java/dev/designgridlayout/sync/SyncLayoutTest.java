@@ -19,6 +19,22 @@ import org.testng.annotations.Test;
 
 import net.java.dev.designgridlayout.AbstractBaseExample;
 import net.java.dev.designgridlayout.AbstractGuiTest;
+import net.java.dev.designgridlayout.sync.horizontal.BetterAddressBookDemo;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalConsistentVariableHeightRows;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalDifferentCountOfConsistentVariableHeightRows;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalDifferentCountOfFixedHeightRows;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalFixedHeightRows;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalFixedHeightRowsComplexRows;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalFixedHeightRowsConsistentBaselineSpacing;
+import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalVariableHeightRows;
+import net.java.dev.designgridlayout.sync.vertical.SyncVertical3Layouts;
+import net.java.dev.designgridlayout.sync.vertical.SyncVerticalCheckHGaps;
+import net.java.dev.designgridlayout.sync.vertical.SyncVerticalCheckMargins;
+import net.java.dev.designgridlayout.sync.vertical.SyncVerticalConsistentGrids;
+import net.java.dev.designgridlayout.sync.vertical.SyncVerticalInconsistentGrids;
+import net.java.dev.designgridlayout.sync.vertical.SyncVerticalWithBorders;
+import net.java.dev.designgridlayout.sync.vertical.SyncVerticalWithWithoutLabel;
 
 @Test(groups = "utest")
 public class SyncLayoutTest extends AbstractGuiTest

@@ -12,22 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.horizontal;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Synchronizer;
+import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
 
-public class SyncHorizontalDifferentCountOfConsistentVariableHeightRows 
-	extends AbstractSyncLayoutExample
+public class SyncHorizontalFixedHeightRows extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncHorizontalDifferentCountOfConsistentVariableHeightRows example = 
-			new SyncHorizontalDifferentCountOfConsistentVariableHeightRows();
+		SyncHorizontalFixedHeightRows example = 
+			new SyncHorizontalFixedHeightRows();
 		example.go(true);
 	}
 	
-	public SyncHorizontalDifferentCountOfConsistentVariableHeightRows()
+	public SyncHorizontalFixedHeightRows()
 	{
 		super(false);
 	}
@@ -37,17 +37,16 @@ public class SyncHorizontalDifferentCountOfConsistentVariableHeightRows
 		DesignGridLayout layout1 = createSubPanel();
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2"));
-		layout1.row().grid(label("lbl3")).add(list());
+		layout1.row().grid(label("lbl3")).add(field("field3"));
 		layout1.row().grid(label("lbl4")).add(field("field4"));
 		layout1.row().grid(label("lbl5")).add(field("field5"));
-//TODO Write another similar TC with consistent baselines spacing!
-//		layout1.forceConsistentBaselinesDistance();
 
 		DesignGridLayout layout2 = createSubPanel();
-		layout2.row().grid().empty();
-		layout2.row().grid(label("lbl1")).add(combobox());
-		layout2.row().grid(label("lbl2")).add(list());
-		layout2.row().grid(label("lbl3")).add(checkbox("check3"));
+		layout2.row().grid(label("label1")).add(radio("radio1"));
+		layout2.row().grid(label("lbl2")).add(radio("radio2"));
+		layout2.row().grid(label("lbl3")).add(combobox());
+		layout2.row().grid(label("lbl4")).add(button("push me"));
+		layout2.row().grid(label("lbl5")).add(checkbox("check5"));
 
 		Synchronizer.synchronize(layout1, layout2).alignRows();
 	}

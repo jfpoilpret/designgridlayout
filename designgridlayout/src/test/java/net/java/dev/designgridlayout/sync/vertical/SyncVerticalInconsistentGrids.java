@@ -12,21 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.vertical;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Synchronizer;
+import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
 
-public class SyncVerticalWithWithoutLabel extends AbstractSyncLayoutExample
+public class SyncVerticalInconsistentGrids extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncVerticalWithWithoutLabel example = 
-			new SyncVerticalWithWithoutLabel();
+		SyncVerticalInconsistentGrids example = 
+			new SyncVerticalInconsistentGrids();
 		example.go(true);
 	}
 	
-	public SyncVerticalWithWithoutLabel()
+	public SyncVerticalInconsistentGrids()
 	{
 		super(true);
 	}
@@ -34,10 +35,12 @@ public class SyncVerticalWithWithoutLabel extends AbstractSyncLayoutExample
 	@Override protected void build()
 	{
 		DesignGridLayout layout1 = createSubPanel();
-		layout1.row().grid().add(field("field1"));
+		layout1.row().grid(label("lbl1")).add(field("field1"));
+		layout1.row().grid(label("lbl2")).add(field("field2"), field("field3"));
 
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("label1")).add(field("field1"));
+		layout2.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
 		Synchronizer.synchronize(layout1, layout2).alignGrids();
 	}

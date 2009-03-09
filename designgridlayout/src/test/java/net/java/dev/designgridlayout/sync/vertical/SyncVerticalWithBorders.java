@@ -12,27 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.vertical;
+
+import javax.swing.border.TitledBorder;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.Synchronizer;
+import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
 
-public class SyncVertical3Layouts extends AbstractSyncLayoutExample
+public class SyncVerticalWithBorders extends AbstractSyncLayoutExample
 {
 	public static void main(String[] args)
 	{
-		SyncVertical3Layouts example = new SyncVertical3Layouts();
+		SyncVerticalWithBorders example = 
+			new SyncVerticalWithBorders();
 		example.go(true);
 	}
 	
-	public SyncVertical3Layouts()
+	public SyncVerticalWithBorders()
 	{
 		super(true);
 	}
 
 	@Override protected void build()
 	{
-		DesignGridLayout layout1 = createSubPanel();
+		DesignGridLayout layout1 = createSubPanel(new TitledBorder("Border"));
 		layout1.row().grid(label("lbl1")).add(field("field1"));
 		layout1.row().grid(label("lbl2")).add(field("field2")).grid(label("lbl3")).add(field("field3"));
 
@@ -40,10 +44,6 @@ public class SyncVertical3Layouts extends AbstractSyncLayoutExample
 		layout2.row().grid(label("label1")).add(field("field1"));
 		layout2.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
-		DesignGridLayout layout3 = createSubPanel();
-		layout3.row().grid(label("longlabel1")).add(field("field1"));
-		layout3.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
-
-		Synchronizer.synchronize(layout1, layout2).with(layout3).alignGrids();
+		Synchronizer.synchronize(layout1, layout2).alignGrids();
 	}
 }
