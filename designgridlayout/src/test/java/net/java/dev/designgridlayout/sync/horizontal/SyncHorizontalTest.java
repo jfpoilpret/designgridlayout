@@ -20,9 +20,8 @@ import org.testng.annotations.Test;
 import net.java.dev.designgridlayout.AbstractBaseExample;
 import net.java.dev.designgridlayout.AbstractGuiTest;
 
-//TODO rename class SyncHorizontalTest
 @Test(groups = "utest")
-public class SyncLayoutTest extends AbstractGuiTest
+public class SyncHorizontalTest extends AbstractGuiTest
 {
 	@AfterMethod(groups = "utest")
 	public void cleanUp()
