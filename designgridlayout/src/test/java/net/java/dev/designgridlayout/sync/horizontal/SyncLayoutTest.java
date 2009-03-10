@@ -12,30 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.sync;
+package net.java.dev.designgridlayout.sync.horizontal;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import net.java.dev.designgridlayout.AbstractBaseExample;
 import net.java.dev.designgridlayout.AbstractGuiTest;
-import net.java.dev.designgridlayout.sync.horizontal.BetterAddressBookDemo;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalConsistentVariableHeightRows;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalDifferentCountOfConsistentVariableHeightRows;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalDifferentCountOfFixedHeightRows;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalDifferentCountOfFixedHeightRowsConsistentBaselineSpacing;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalFixedHeightRows;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalFixedHeightRowsComplexRows;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalFixedHeightRowsConsistentBaselineSpacing;
-import net.java.dev.designgridlayout.sync.horizontal.SyncHorizontalVariableHeightRows;
-import net.java.dev.designgridlayout.sync.vertical.SyncVertical3Layouts;
-import net.java.dev.designgridlayout.sync.vertical.SyncVerticalCheckHGaps;
-import net.java.dev.designgridlayout.sync.vertical.SyncVerticalCheckMargins;
-import net.java.dev.designgridlayout.sync.vertical.SyncVerticalConsistentGrids;
-import net.java.dev.designgridlayout.sync.vertical.SyncVerticalInconsistentGrids;
-import net.java.dev.designgridlayout.sync.vertical.SyncVerticalWithBorders;
-import net.java.dev.designgridlayout.sync.vertical.SyncVerticalWithWithoutLabel;
 
+//TODO rename class SyncHorizontalTest
 @Test(groups = "utest")
 public class SyncLayoutTest extends AbstractGuiTest
 {
@@ -99,54 +84,9 @@ public class SyncLayoutTest extends AbstractGuiTest
 		checkHorizontalExample(SyncHorizontalVariableHeightRows.class);
 	}
 
-	//--------------------------------
-	// All TC for vertical alignments
-	//--------------------------------
-	
-	@Test public void checkVerticalConsistentGrids() throws Exception
-	{
-		checkVerticalExample(SyncVerticalConsistentGrids.class);
-	}
-
-	@Test public void checkVerticalInconsistentGrids() throws Exception
-	{
-		checkVerticalExample(SyncVerticalInconsistentGrids.class);
-	}
-
-	@Test public void checkVerticalMargins() throws Exception
-	{
-		checkVerticalExample(SyncVerticalCheckMargins.class);
-	}
-
-	@Test public void checkVerticalGridsWithAndWithoutLabels() throws Exception
-	{
-		checkVerticalExample(SyncVerticalWithWithoutLabel.class);
-	}
-
-	@Test public void checkVerticalHGaps() throws Exception
-	{
-		checkVerticalExample(SyncVerticalCheckHGaps.class);
-	}
-
-	@Test public void checkVerticalWithBorders() throws Exception
-	{
-		checkVerticalExample(SyncVerticalWithBorders.class);
-	}
-
-	@Test public void checkVerticalThreePanels() throws Exception
-	{
-		checkVerticalExample(SyncVertical3Layouts.class);
-	}
-	
 	protected void checkHorizontalExample(Class<? extends AbstractBaseExample> clazz)
 		throws Exception
 	{
 		checkExampleAndResizeHeight(clazz, 5, 3);
-	}
-	
-	protected void checkVerticalExample(Class<? extends AbstractBaseExample> clazz)
-		throws Exception
-	{
-		checkExampleAndResizeWidth(clazz, 1.25, 1.25, 0.5);
 	}
 }
