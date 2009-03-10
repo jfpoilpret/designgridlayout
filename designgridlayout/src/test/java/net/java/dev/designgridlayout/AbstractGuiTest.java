@@ -144,7 +144,7 @@ abstract public class AbstractGuiTest
 			_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
 			
 			// Compare with previously recorded snapshots
-			String expected = REFERENCE_SCREENSHOT_PATH + name + ".png";
+			String expected = getReferenceSnapshotPath(suffix);
 			assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
 		}
 		else
@@ -171,6 +171,22 @@ abstract public class AbstractGuiTest
 		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
 			_example.getClass().getSimpleName() + suffix + ".png";
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
+	}
+	
+	final protected String getReferenceSnapshotPath(String suffix)
+	{
+		// Get the directory based on the class package
+		String mainPackage = AbstractGuiTest.class.getPackage().getName();
+		String examplePackage = getClass().getPackage().getName();
+//		String examplePackage = _example.getClass().getPackage().getName();
+		// Extract only the last part of the example package
+		String subpath = examplePackage.substring(mainPackage.length());
+		subpath = subpath.replace('.', '/');
+		
+		String path = REFERENCE_SCREENSHOT_PATH + subpath + "/" + 
+			_example.getClass().getSimpleName() + suffix + ".png";
+		System.out.printf("getReferenceSnapshotPath = %s\n", path);
+		return path;
 	}
 	
 	final protected Robot robot()
