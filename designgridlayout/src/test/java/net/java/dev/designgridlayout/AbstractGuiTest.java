@@ -178,7 +178,6 @@ abstract public class AbstractGuiTest
 		// Get the directory based on the class package
 		String mainPackage = AbstractGuiTest.class.getPackage().getName();
 		String examplePackage = getClass().getPackage().getName();
-//		String examplePackage = _example.getClass().getPackage().getName();
 		// Extract only the last part of the example package
 		String subpath = examplePackage.substring(mainPackage.length());
 		subpath = subpath.replace('.', '/');
