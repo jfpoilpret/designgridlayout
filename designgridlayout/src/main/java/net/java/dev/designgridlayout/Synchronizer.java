@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import net.java.dev.designgridlayout.internal.engine.SyncLayoutEngine;
+
 //TODO Javadoc
 // Primary API to synchronize DesignGridLayout instances
 final public class Synchronizer
@@ -26,7 +28,7 @@ final public class Synchronizer
 	
 	public Synchronizer with(DesignGridLayout layout)
 	{
-		_engine.add(layout);
+		_engine.add(layout.getLayoutEngine());
 		return this;
 	}
 	

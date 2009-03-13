@@ -23,6 +23,24 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
+import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
+import net.java.dev.designgridlayout.internal.engine.LayoutEngine;
+//TODO refactor to have a factory for special resize policies!
+import net.java.dev.designgridlayout.internal.heightpolicy.DefaultGrowPolicy;
+import net.java.dev.designgridlayout.internal.heightpolicy.HeightGrowPolicyProxy;
+import net.java.dev.designgridlayout.internal.row.AbstractRow;
+//TODO refactor to have a factory for special AbstractRow subclasses!
+import net.java.dev.designgridlayout.internal.row.CenterRow;
+import net.java.dev.designgridlayout.internal.row.GridRow;
+import net.java.dev.designgridlayout.internal.row.LeftRow;
+import net.java.dev.designgridlayout.internal.row.RightRow;
+//TODO refactor to the right place and have a factory for it!
+import net.java.dev.designgridlayout.internal.sync.UnitHeightGrowPolicy;
+import net.java.dev.designgridlayout.internal.util.LayoutEngineProxy;
+import net.java.dev.designgridlayout.internal.util.LayoutLocker;
+import net.java.dev.designgridlayout.internal.util.OrientationPolicy;
+import net.java.dev.designgridlayout.policy.HeightGrowPolicy;
+
 /**
  * Swing LayoutManager that implements "Canonical Grids" as used by graphic 
  * artists to design magazines, posters, forms...
@@ -75,8 +93,8 @@ public class DesignGridLayout implements LayoutManager
 		}
 		_parent = parent;
 		_orientation = new OrientationPolicy(parent);
-		_engine = new LayoutEngine(
-			_locker, _parent, _rows, _orientation, _heightTester);
+		LayoutEngineProxy.setDelegate(_engine, 
+			new LayoutEngine(_locker, _parent, _rows, _orientation, _heightTester));
 		_parent.setLayout(this);
 	}
 
@@ -400,11 +418,6 @@ public class DesignGridLayout implements LayoutManager
 		return _engine;
 	}
 
-	void setLayoutEngine(ILayoutEngine engine)
-	{
-		_engine = engine;
-	}
-	
 	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
 
 	private HeightGrowPolicyProxy _heightTester = 
@@ -413,7 +426,7 @@ public class DesignGridLayout implements LayoutManager
 	final private Container _parent;
 	final private OrientationPolicy _orientation;
 	final private LayoutLocker _locker = new LayoutLocker();
-	private ILayoutEngine _engine;
+	final private ILayoutEngine _engine = LayoutEngineProxy.createProxy();
 	private AbstractRow _current = null;
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 }
