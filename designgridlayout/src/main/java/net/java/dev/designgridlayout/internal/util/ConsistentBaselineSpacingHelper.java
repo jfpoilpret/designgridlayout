@@ -20,8 +20,8 @@ import java.util.List;
 import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
 
-import static net.java.dev.designgridlayout.internal.util.RowIterator.each;
-import static net.java.dev.designgridlayout.internal.util.RowIterator.forEachConsecutive;
+import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
+import static net.java.dev.designgridlayout.internal.util.RowHelper.forEachConsecutive;
 
 public final class ConsistentBaselineSpacingHelper
 {
@@ -101,7 +101,7 @@ public final class ConsistentBaselineSpacingHelper
 		// Now calculate extra height needede to make  consistent baseline 
 		// spacing for the concerned engine
 		final List<Integer> extras = new ArrayList<Integer>();
-		forEachConsecutive(rows, new RowIterator.RowPairWorker()
+		forEachConsecutive(rows, new RowHelper.RowPairWorker()
 		{
 			public void perform(AbstractRow current, AbstractRow next)
 			{
@@ -122,7 +122,7 @@ public final class ConsistentBaselineSpacingHelper
 	}
 	
 	static final private class ConsistentBaselineCalculator 
-		implements RowIterator.RowPairWorker
+		implements RowHelper.RowPairWorker
 	{
 		public ConsistentBaselineCalculator(boolean respectHeight)
 		{

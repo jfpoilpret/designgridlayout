@@ -25,9 +25,10 @@ import net.java.dev.designgridlayout.internal.row.AbstractRow;
 import net.java.dev.designgridlayout.internal.sync.DefaultLayoutSyncPolicy;
 import net.java.dev.designgridlayout.internal.sync.ILayoutRowSyncPolicy;
 import net.java.dev.designgridlayout.internal.sync.SimpleLayoutSyncPolicy;
+import net.java.dev.designgridlayout.internal.sync.SyncLayoutInvocationHandler;
 import net.java.dev.designgridlayout.internal.util.LayoutEngineProxy;
 
-import static net.java.dev.designgridlayout.internal.util.RowIterator.each;
+import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 
 public class SyncLayoutEngine implements ILayoutEngine
 {
@@ -190,7 +191,7 @@ public class SyncLayoutEngine implements ILayoutEngine
 
 	// Package methods (used by SyncLayoutEngine)
 	//--------------------------------------------
-	void setCurrentDelegate(ILayoutEngine engine)
+	public void setCurrentDelegate(ILayoutEngine engine)
 	{
 		// Note that all methods are supposed to be called in EDT, hence no
 		// threads contention is expected, so we have a very simple 

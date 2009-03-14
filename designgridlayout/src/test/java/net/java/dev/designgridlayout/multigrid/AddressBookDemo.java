@@ -74,7 +74,6 @@ public class AddressBookDemo extends AbstractBaseExample
 		listPanel.setLayout(new BorderLayout());
 		listPanel.add(scroller, BorderLayout.CENTER);
 		listPanel.setPreferredSize(new Dimension(150, 1));
-		//TODO: improve margins calculations for List
 		listPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
 		JPanel addressPanel = new JPanel();

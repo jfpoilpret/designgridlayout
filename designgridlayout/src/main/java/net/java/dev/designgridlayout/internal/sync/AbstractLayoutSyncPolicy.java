@@ -21,7 +21,7 @@ import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
 import net.java.dev.designgridlayout.internal.util.ConsistentBaselineSpacingHelper;
 
-import static net.java.dev.designgridlayout.internal.util.RowIterator.each;
+import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 
 abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 {

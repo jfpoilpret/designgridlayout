@@ -4,6 +4,8 @@
 	"http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
 
 <suppressions>
+  <!-- Remove javadoc checks from internal packages -->
+  <suppress checks="Javadoc.*" files="internal.*\.java$" />
   <!-- Remove checks for test files -->
   <suppress checks=".*" files=".*Test\.java$" />
   <suppress checks=".*" files="showdown.*\.java$" />

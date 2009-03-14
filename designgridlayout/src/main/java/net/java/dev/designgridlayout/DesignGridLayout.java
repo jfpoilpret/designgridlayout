@@ -25,17 +25,11 @@ import javax.swing.JLabel;
 
 import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 import net.java.dev.designgridlayout.internal.engine.LayoutEngine;
-//TODO refactor to have a factory for special resize policies!
 import net.java.dev.designgridlayout.internal.heightpolicy.DefaultGrowPolicy;
 import net.java.dev.designgridlayout.internal.heightpolicy.HeightGrowPolicyProxy;
+import net.java.dev.designgridlayout.internal.heightpolicy.UnitHeightGrowPolicy;
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
-//TODO refactor to have a factory for special AbstractRow subclasses!
-import net.java.dev.designgridlayout.internal.row.CenterRow;
-import net.java.dev.designgridlayout.internal.row.GridRow;
-import net.java.dev.designgridlayout.internal.row.LeftRow;
-import net.java.dev.designgridlayout.internal.row.RightRow;
-//TODO refactor to the right place and have a factory for it!
-import net.java.dev.designgridlayout.internal.sync.UnitHeightGrowPolicy;
+import net.java.dev.designgridlayout.internal.row.RowFactory;
 import net.java.dev.designgridlayout.internal.util.LayoutEngineProxy;
 import net.java.dev.designgridlayout.internal.util.LayoutLocker;
 import net.java.dev.designgridlayout.internal.util.OrientationPolicy;
@@ -364,52 +358,39 @@ public class DesignGridLayout implements LayoutManager
 		
 		public INonGridRow center()
 		{
-			return addRow(new CenterRow(), _weight);
+			return addRow(RowFactory.newCenterRow(), _weight);
 		}
 
 		public INonGridRow left()
 		{
-			return addRow(new LeftRow(), _weight);
+			return addRow(RowFactory.newLeftRow(), _weight);
 		}
 
 		public INonGridRow right()
 		{
-			return addRow(new RightRow(), _weight);
+			return addRow(RowFactory.newRightRow(), _weight);
 		}
 
 		public ISpannableGridRow grid(JLabel label)
 		{
-			return addRow(newGridRow(), _weight).grid(label);
+			return addRow(RowFactory.newGridRow(_rows), _weight).grid(label);
 		}
 
 		public IGridRow grid(JLabel label, int gridspan)
 		{
-			return addRow(newGridRow(), _weight).grid(label, gridspan);
+			return addRow(RowFactory.newGridRow(_rows), _weight).grid(label, gridspan);
 		}
 
 		public ISpannableGridRow grid()
 		{
-			return addRow(newGridRow(), _weight).grid();
+			return addRow(RowFactory.newGridRow(_rows), _weight).grid();
 		}
 
 		public IGridRow grid(int gridspan)
 		{
-			return addRow(newGridRow(), _weight).grid(gridspan);
+			return addRow(RowFactory.newGridRow(_rows), _weight).grid(gridspan);
 		}
 		
-		private GridRow newGridRow()
-		{
-			if (!_rows.isEmpty())
-			{
-				AbstractRow previous = _rows.get(_rows.size() - 1);
-				if (previous instanceof GridRow)
-				{
-					return new GridRow((GridRow) previous);
-				}
-			}
-			return new GridRow(null);
-		}
-
 		private final double _weight;
 	}
 	

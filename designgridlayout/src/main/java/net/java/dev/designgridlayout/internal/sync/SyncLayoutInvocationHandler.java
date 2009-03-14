@@ -12,15 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.internal.engine;
+package net.java.dev.designgridlayout.internal.sync;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-//TODO refactor to internal.sync
-class SyncLayoutInvocationHandler implements InvocationHandler
+import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
+import net.java.dev.designgridlayout.internal.engine.SyncLayoutEngine;
+
+public class SyncLayoutInvocationHandler implements InvocationHandler
 {
-	SyncLayoutInvocationHandler(SyncLayoutEngine sync, ILayoutEngine delegate)
+	public SyncLayoutInvocationHandler(SyncLayoutEngine sync, ILayoutEngine delegate)
 	{
 		_delegate = delegate;
 		_sync = sync;

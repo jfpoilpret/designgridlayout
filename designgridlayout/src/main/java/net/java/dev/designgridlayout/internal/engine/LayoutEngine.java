@@ -37,7 +37,7 @@ import net.java.dev.designgridlayout.internal.util.OrientationPolicy;
 import net.java.dev.designgridlayout.internal.util.PrefWidthExtractor;
 import net.java.dev.designgridlayout.policy.HeightGrowPolicy;
 
-import static net.java.dev.designgridlayout.internal.util.RowIterator.each;
+import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 
 public class LayoutEngine implements ILayoutEngine
 {

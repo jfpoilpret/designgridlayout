@@ -12,22 +12,41 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.internal.sync;
+package net.java.dev.designgridlayout.internal.row;
 
-import java.awt.Component;
+import java.util.List;
 
-import net.java.dev.designgridlayout.internal.heightpolicy.HeightGrowPolicyProxy;
-import net.java.dev.designgridlayout.policy.HeightGrowPolicy;
-
-public final class UnitHeightGrowPolicy extends HeightGrowPolicyProxy
+public final class RowFactory
 {
-	public UnitHeightGrowPolicy(HeightGrowPolicy delegate)
+	private RowFactory()
 	{
-		setDelegate(delegate);
 	}
-
-	@Override public int computeExtraHeight(Component component, int extraHeight)
+	
+	static public LeftRow newLeftRow()
 	{
-		return extraHeight;
+		return new LeftRow();
+	}
+	
+	static public CenterRow newCenterRow()
+	{
+		return new CenterRow();
+	}
+	
+	static public RightRow newRightRow()
+	{
+		return new RightRow();
+	}
+	
+	static public GridRow newGridRow(List<AbstractRow> rows)
+	{
+		AbstractRow previous = (rows.isEmpty() ? null : rows.get(rows.size() - 1));
+		if (previous instanceof GridRow)
+		{
+			return new GridRow((GridRow) previous);
+		}
+		else
+		{
+			return new GridRow(null);
+		}
 	}
 }

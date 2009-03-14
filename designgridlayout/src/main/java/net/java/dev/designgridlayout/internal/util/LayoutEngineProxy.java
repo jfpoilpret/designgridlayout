@@ -22,6 +22,10 @@ import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 
 public final class LayoutEngineProxy
 {
+	private LayoutEngineProxy()
+	{
+	}
+	
 	static public ILayoutEngine createProxy()
 	{
 		// Build a proxy

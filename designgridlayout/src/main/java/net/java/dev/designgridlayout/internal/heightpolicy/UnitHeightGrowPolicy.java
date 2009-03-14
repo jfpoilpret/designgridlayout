@@ -12,22 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package net.java.dev.designgridlayout.internal.row;
+package net.java.dev.designgridlayout.internal.heightpolicy;
 
-final class LeftRow extends AbstractNonGridRow
+import java.awt.Component;
+
+import net.java.dev.designgridlayout.policy.HeightGrowPolicy;
+
+public final class UnitHeightGrowPolicy extends HeightGrowPolicyProxy
 {
-	@Override protected int xOffset(int rowWidth, int usedWidth)
+	public UnitHeightGrowPolicy(HeightGrowPolicy delegate)
 	{
-		return 0;
+		setDelegate(delegate);
 	}
 
-	@Override protected int leftFiller(int count, int width, int availableWidth)
+	@Override public int computeExtraHeight(Component component, int extraHeight)
 	{
-		return (count > 1 ? width : rightFiller(count, width, availableWidth));
-	}
-
-	@Override protected int rightFiller(int count, int width, int availableWidth)
-	{
-		return (availableWidth - (count - 1) * width);
+		return extraHeight;
 	}
 }

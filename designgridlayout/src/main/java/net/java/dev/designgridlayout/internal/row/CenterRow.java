@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout.internal.row;
 
-public final class CenterRow extends AbstractNonGridRow
+final class CenterRow extends AbstractNonGridRow
 {
 	@Override protected int xOffset(int rowWidth, int usedWidth)
 	{

@@ -21,7 +21,7 @@ import java.util.List;
 import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
 
-import static net.java.dev.designgridlayout.internal.util.RowIterator.each;
+import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 
 // This very simple policy for synchronizing rows of various layouts works as 
 // follows:

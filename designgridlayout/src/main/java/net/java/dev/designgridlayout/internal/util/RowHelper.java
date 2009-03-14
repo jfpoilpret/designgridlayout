@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout.internal.util;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -21,9 +22,12 @@ import java.util.NoSuchElementException;
 
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
 
-//TODO Rename to RowHelper and make Iterator impl private
-public final class RowIterator implements Iterator<AbstractRow>
+public final class RowHelper
 {
+	private RowHelper()
+	{
+	}
+	
 	static public void forEachConsecutive(List<AbstractRow> rows, RowPairWorker worker)
 	{
 		AbstractRow current = null;
@@ -63,10 +67,15 @@ public final class RowIterator implements Iterator<AbstractRow>
 			}
 		};
 	}
-
-	private RowIterator(List<AbstractRow> rows, boolean excludeLast)
+	
+	static final private class RowIterator implements Iterator<AbstractRow>
 	{
-		if (excludeLast)
+		private RowIterator(List<AbstractRow> rows, boolean excludeLast)
+		{
+			_rows = (excludeLast ? allButLast(rows) : rows);
+		}
+		
+		static private List<AbstractRow> allButLast(List<AbstractRow> rows)
 		{
 			// Reduce the list by removing the last non-empty row
 			ListIterator<AbstractRow> iter = rows.listIterator(rows.size());
@@ -75,51 +84,50 @@ public final class RowIterator implements Iterator<AbstractRow>
 				AbstractRow last = iter.previous();
 				if (!last.isEmpty())
 				{
-					rows = rows.subList(0, iter.previousIndex());
-					break;
+					return rows.subList(0, iter.previousIndex());
 				}
 			}
+			return Collections.emptyList();
 		}
-		_rows = rows;
-	}
 	
-	public AbstractRow next()
-	{
-		int index = findNext();
-		if (index != -1)
+		public AbstractRow next()
 		{
-			_index = index + 1;
-			return _rows.get(index);
-		}
-		else
-		{
-			throw new NoSuchElementException();
-		}
-	}
-	
-	public boolean hasNext()
-	{
-		return findNext() != -1;
-	}
-	
-	public void remove()
-	{
-		throw new UnsupportedOperationException();
-	}
-	
-	private int findNext()
-	{
-		for (int i = _index; i < _rows.size(); i++)
-		{
-			AbstractRow row = _rows.get(i);
-			if (!row.isEmpty())
+			int index = findNext();
+			if (index != -1)
 			{
-				return i;
+				_index = index + 1;
+				return _rows.get(index);
+			}
+			else
+			{
+				throw new NoSuchElementException();
 			}
 		}
-		return -1;
-	}
 	
-	private final List<AbstractRow> _rows;
-	private int _index = 0;
+		public boolean hasNext()
+		{
+			return findNext() != -1;
+		}
+	
+		public void remove()
+		{
+			throw new UnsupportedOperationException();
+		}
+	
+		private int findNext()
+		{
+			for (int i = _index; i < _rows.size(); i++)
+			{
+				AbstractRow row = _rows.get(i);
+				if (!row.isEmpty())
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+	
+		private final List<AbstractRow> _rows;
+		private int _index = 0;
+	}
 }
