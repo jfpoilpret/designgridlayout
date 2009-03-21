@@ -16,10 +16,48 @@ package net.java.dev.designgridlayout;
 
 import net.java.dev.designgridlayout.internal.engine.SyncLayoutEngine;
 
-//TODO Javadoc
-// Primary API to synchronize DesignGridLayout instances
+/**
+ * Utility class providing synchronization of alignments (vertical and/or
+ * horizontal) between several {@link DesignGridLayout} instances.
+ * <p/>
+ * {@code Synchronizer} is particularly useful for layouts that are used in
+ * wizard dialogs or in {@link javax.swing.JTabbedPane}s.
+ * <p/>
+ * {@code Synchronizer} uses a fluent API for setting up synchronization of
+ * several {@link DesignGridLayout}s:
+ * <pre>
+ * Synchronizer.synchronize(layout1, layout2).alignGrids().alignRows();
+ * </pre>
+ * It is possible to align more than 2 layouts through the same
+ * {@code Synchronizer} instance (useful for wizards and tabs):
+ * <pre>
+ * Synchronizer.synchronize(layout1, layout2).with(layout3).alignGrids().alignRows();
+ * </pre>
+ * It is also possible to synchronize the same layout horizontally with a
+ * second layout, and vertically with a thrid layout, but in this case, 2
+ * {@code Synchronizer}s must be used:
+ * <pre>
+ * Synchronizer.synchronize(layout1, layout2).alignRows();
+ * Synchronizer.synchronize(layout1, layout3).alignGrids();
+ * </pre>
+ * {@code Synchronizer is supports:
+ * <ul>
+ * <li>alignment of grids x origin</li>
+ * <li>alignment of rows baselines</li>
+ * </ul>
+ * TODO more details about policies for both kinds of alignements!
+ * 
+ * @author Jean-Francois Poilpret
+ */
 final public class Synchronizer
 {
+	/**
+	 * TODO
+	 * 
+	 * @param source
+	 * @param destination
+	 * @return
+	 */
 	static public Synchronizer synchronize(
 		DesignGridLayout source, DesignGridLayout destination)
 	{

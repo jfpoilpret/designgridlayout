@@ -18,7 +18,8 @@ import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-
+//TODO Javadoc
+//TODO refactor to public interface and private internal implementation?
 public class HeightGrowPolicyMapper implements HeightGrowPolicy
 {
 	public HeightGrowPolicyMapper addPolicy(ClassBasedHeightGrowPolicy policy)

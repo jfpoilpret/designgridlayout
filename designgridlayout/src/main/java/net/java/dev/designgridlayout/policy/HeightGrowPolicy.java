@@ -16,6 +16,31 @@ package net.java.dev.designgridlayout.policy;
 
 import java.awt.Component;
 
+/**
+ * Defines policies applied by {@link DesignGridLayout} regarding the
+ * behavior of components in a layout during vertical resize.
+ * <p/>
+ * This tells {@link DesignGridLayout} whether a given {@link Component} can
+ * accept vertical space beyond its preferred height or not, thus defining
+ * which rows in a layout can grow in height or not.
+ * <p/>
+ * This is also used by {@link DesignGridLayout} "Smart Vertical Resize" feature
+ * to determine, for components that can grow vertically, how much of the extra
+ * available height (during user vertical resize) is really useful to them,
+ * thus enabling the possibility to have a smart behavior of e.g. 
+ * {@link javax.swing.JList} (embedded in a {@link javax.swing.JScrollPane})
+ * during resize, i.e. showing only rows in their full height, never partially.
+ * <p/>
+ * {@link DesignGridLayout} already defines default behaviors for all components
+ * inside a {@link javax.swing.JScrollPane} and for vertical 
+ * {@link javax.swing.JSlider}s. But you can add your own additional polcies
+ * for specific custom components.
+ * TODO show sample code how to create / add new policy to DGL!
+ * 
+ * @author Jean-Francois Poilpret
+ * @since 1.2
+ * @see TODO
+ */
 public interface HeightGrowPolicy
 {
 	/**
