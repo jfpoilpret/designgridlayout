@@ -35,8 +35,17 @@
 	
 	<properties>
 		<javaVersion>1.5</javaVersion>
-		<screenshots>false</screenshots>
+		<genscreenshots>false</genscreenshots>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>screenshots</id>
+			<properties>
+				<genscreenshots>true</genscreenshots>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<testResources>
@@ -63,6 +72,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<groups>utest,itest</groups>
+					<systemProperties>
+						<property>
+							<name>screenshots</name>
+							<value>${genscreenshots}</value>
+						</property>
+					</systemProperties>
 				</configuration>
 			</plugin>
 			<plugin>
