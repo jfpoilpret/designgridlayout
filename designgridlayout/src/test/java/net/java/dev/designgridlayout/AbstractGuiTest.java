@@ -120,10 +120,12 @@ abstract public class AbstractGuiTest
 		launchGui(clazz);
 		checkSnapshot("pref-size");
 		frame().moveTo(new Point(0, frame().target.getY()));
-		int extraWidth = frame().target.getWidth() - frame().panel("TOP").target.getWidth();
+		int width = frame().panel("TOP").target.getWidth();
+		int extraWidth = frame().target.getWidth() - width;
 		for (int i = 0; i < ratios.length; i++)
 		{
-			frame().resizeWidthTo((int) (frame().panel("TOP").target.getWidth() * ratios[i] + extraWidth));
+			width *= ratios[i];
+			frame().resizeWidthTo(width + extraWidth);
 			checkSnapshot("resize-" + (i + 1));
 		}
 	}
