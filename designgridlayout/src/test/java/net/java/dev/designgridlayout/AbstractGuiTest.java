@@ -16,16 +16,21 @@ package net.java.dev.designgridlayout;
 
 import java.awt.Frame;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
+import junit.framework.Assert;
+
+import org.fest.assertions.Assertions;
+import org.fest.assertions.ImageAssert;
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.image.ScreenshotTaker;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.swing.finder.WindowFinder.findFrame;
 
 abstract public class AbstractGuiTest
@@ -115,9 +120,10 @@ abstract public class AbstractGuiTest
 		launchGui(clazz);
 		checkSnapshot("pref-size");
 		frame().moveTo(new Point(0, frame().target.getY()));
+		int extraWidth = frame().target.getWidth() - frame().panel("TOP").target.getWidth();
 		for (int i = 0; i < ratios.length; i++)
 		{
-			frame().resizeWidthTo((int) (frame().target.getWidth() * ratios[i]));
+			frame().resizeWidthTo((int) (frame().panel("TOP").target.getWidth() * ratios[i] + extraWidth));
 			checkSnapshot("resize-" + (i + 1));
 		}
 	}
@@ -141,11 +147,20 @@ abstract public class AbstractGuiTest
 			}
 			String name = _example.getClass().getSimpleName() + suffix;
 			String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + name + "-org.png";
-			_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
+			BufferedImage screenshot = _screenshot.takeScreenshotOf(_frame.panel("TOP").component());
+			_screenshot.saveImage(screenshot, snapshot);
 			
 			// Compare with previously recorded snapshots
 			String expected = getReferenceSnapshotPath(suffix);
-			assertThat(new File(snapshot)).hasSameContentAs(new File(expected));
+			try
+			{
+				Assertions.assertThat(screenshot).as(expected).isEqualTo(ImageAssert.read(expected));
+			}
+			catch (IOException e)
+			{
+				String message = String.format("Can't read reference screenshot \"%s\", exception = \"%s\"", expected, e);
+				Assert.fail(message);
+			}
 		}
 		else
 		{
@@ -168,12 +183,19 @@ abstract public class AbstractGuiTest
 		{
 			suffix = "-" + suffix;
 		}
-		String snapshot = TestConfiguration.SCREENSHOT_PATH + "/" + 
-			_example.getClass().getSimpleName() + suffix + ".png";
+		String snapshot = getSnapshotSubPath(TestConfiguration.SCREENSHOT_PATH, suffix);
+		System.out.printf("takeSnapshot = %s\n", snapshot);
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
 	}
 	
 	final protected String getReferenceSnapshotPath(String suffix)
+	{
+		String path = getSnapshotSubPath(REFERENCE_SCREENSHOT_PATH, suffix);
+		System.out.printf("getReferenceSnapshotPath = %s\n", path);
+		return path;
+	}
+	
+	final protected String getSnapshotSubPath(String root, String suffix)
 	{
 		// Get the directory based on the class package
 		String mainPackage = AbstractGuiTest.class.getPackage().getName();
@@ -181,10 +203,13 @@ abstract public class AbstractGuiTest
 		// Extract only the last part of the example package
 		String subpath = examplePackage.substring(mainPackage.length());
 		subpath = subpath.replace('.', '/');
-		
-		String path = REFERENCE_SCREENSHOT_PATH + subpath + "/" + 
-			_example.getClass().getSimpleName() + suffix + ".png";
-		System.out.printf("getReferenceSnapshotPath = %s\n", path);
+
+		// Make sure path exists, create it if needed
+		String path = root + subpath;
+		new File(path).mkdirs();
+		// Build the complete screenshot file path
+		path = path + "/" + _example.getClass().getSimpleName() + suffix + ".png";
+		System.out.printf("getSnapshotSubPath = %s\n", path);
 		return path;
 	}
 	
@@ -237,5 +262,5 @@ abstract public class AbstractGuiTest
 	static final private boolean _isJava5 = 
 		System.getProperty("java.version").startsWith("1.5");
 	static final public String REFERENCE_SCREENSHOT_PATH = 
-		"src/test/resources/screenshots/" + (_isJava5 ? "java5/" : "java6/");
+		"src/test/resources/screenshots/" + (_isJava5 ? "java5" : "java6");
 }
