@@ -14,12 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.ActiveEvent;
+import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.PaintEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import junit.framework.Assert;
@@ -54,6 +60,7 @@ abstract public class AbstractGuiTest
 		_robot = BasicRobot.robotWithCurrentAwtHierarchy();
 		_frame = findFrame(clazz.getSimpleName()).withTimeout(2000).using(_robot);
 		_screenshot = new ScreenshotTaker();
+		waitForEmptyEventQ();
 	}
 	
 	final protected <T extends AbstractBaseExample> void launchGui(Class<T> clazz) 
@@ -89,6 +96,7 @@ abstract public class AbstractGuiTest
 		{
 			throw holder.getException();
 		}
+		waitForEmptyEventQ();
 		checkSnapshot();
 	}
 
@@ -231,7 +239,33 @@ abstract public class AbstractGuiTest
 		_frame.cleanUp();
 	}
 	
-	final private void hideMouse()
+	private void waitForEmptyEventQ()
+	{
+		boolean qEmpty = false;
+		JPanel placeHolder  = new JPanel();
+		EventQueue q = Toolkit.getDefaultToolkit().getSystemEventQueue();
+		while (!qEmpty)
+		{
+			NotifyingEvent e = new NotifyingEvent(placeHolder);
+			q.postEvent(e);
+			synchronized(e)
+			{
+				while (!e.isDispatched())
+				{
+					try
+					{
+						e.wait();
+					} 
+					catch (InterruptedException ie)
+					{
+					}
+				}
+				qEmpty = e.isEventQEmpty();
+			}
+		}
+	}
+
+    final private void hideMouse()
 	{
 		Frame frame = _frame.component();
 		_robot.moveMouse(frame, frame.getWidth() + 2, 0);
@@ -260,7 +294,39 @@ abstract public class AbstractGuiTest
 		private Exception _exception = null;
 	}
 
-	static final private boolean _checkSnapshots = !Boolean.getBoolean("screenshots");
+	static private class NotifyingEvent extends PaintEvent implements ActiveEvent
+	{
+		private boolean dispatched = false;
+		private boolean qEmpty = false;
+
+		NotifyingEvent(Component c)
+		{
+			super(c, PaintEvent.UPDATE, null);
+		}
+		
+		synchronized boolean isDispatched()
+		{
+			return dispatched;
+		}
+		
+		synchronized boolean isEventQEmpty()
+		{
+			return qEmpty;
+		}
+
+		public void dispatch()
+		{
+			EventQueue q = Toolkit.getDefaultToolkit().getSystemEventQueue();
+			synchronized(this)
+			{
+				qEmpty = (q.peekEvent() == null);
+				dispatched = true;
+				notifyAll();
+			}
+		}
+	}
+
+    static final private boolean _checkSnapshots = !Boolean.getBoolean("screenshots");
 	static final private boolean _isJava5 = 
 		System.getProperty("java.version").startsWith("1.5");
 	static final public String REFERENCE_SCREENSHOT_PATH = 
