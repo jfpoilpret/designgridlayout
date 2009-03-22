@@ -28,7 +28,7 @@ public class Bug31GridRowWithLabelButNoComponent extends AbstractBaseExample
 	@Override public void build(DesignGridLayout layout)
 	{
 		layout.row().grid(label("label1")).add(field("field1"));
-		layout.row().grid(label("label2"));
-		layout.row().grid(label("label3")).add(field("field3"));
+		layout.row().grid(label("longlabel2"));
+		layout.row().grid(label("label3")).add(field("longfield3"));
 	}
 }
