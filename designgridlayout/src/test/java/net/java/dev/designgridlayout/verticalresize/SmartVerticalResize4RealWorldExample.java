@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout.verticalresize;
 
-import java.awt.GraphicsEnvironment;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -31,7 +29,8 @@ public class SmartVerticalResize4RealWorldExample extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		SmartVerticalResize4RealWorldExample example = new SmartVerticalResize4RealWorldExample();
+		SmartVerticalResize4RealWorldExample example = 
+			new SmartVerticalResize4RealWorldExample();
 		example.go(true);
 	}
 
@@ -61,6 +60,12 @@ public class SmartVerticalResize4RealWorldExample extends AbstractBaseExample
 		"Book", "Regular", "Oblique", "Bold", "Bold-Oblique", "Black", "Apple", "Banana"
 	};
 
+	static final private String[] FAMILY_NAMES =
+	{
+		"Agency FB", "Aharoni", "Algerian", "Andalus", "Angsana New", "AngsaneUPC", 
+		"Arabic Transparent", "Arial", "Arial Black", "Arial Narrow"
+	};
+
 	// CSOFF: MemberName
 	final private JLabel usageLabel = new JLabel("Usage:");
 	final private JRadioButton anyButton = new JRadioButton("Any");
@@ -83,9 +88,7 @@ public class SmartVerticalResize4RealWorldExample extends AbstractBaseExample
 	final private JButton setFontButton = new JButton("Set Font");
 	final private JButton encodingButton = new JButton("Encoding...");
 	final private JButton previewButton = new JButton("Preview...");
-	final private JList familyList =
-		new JList(GraphicsEnvironment.getLocalGraphicsEnvironment()
-			.getAvailableFontFamilyNames());
+	final private JList familyList = new JList(FAMILY_NAMES);
 	final private JScrollPane familyListScroller = new JScrollPane(familyList);
 	final private JList facesList = new JList(FACE_NAMES);
 	final private JScrollPane facesListScroller = new JScrollPane(facesList);
