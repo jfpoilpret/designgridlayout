@@ -79,6 +79,10 @@
 							<name>screenshots</name>
 							<value>${genscreenshots}</value>
 						</property>
+						<property>
+							<name>awt.useSystemAAFontSettings</name>
+							<value>false</value>
+						</property>
 					</systemProperties>
 				</configuration>
 			</plugin>
