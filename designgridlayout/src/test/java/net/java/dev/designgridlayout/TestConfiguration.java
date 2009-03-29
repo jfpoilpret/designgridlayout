@@ -20,12 +20,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
-@Test(groups = "utest")
+@Test(groups = {"utest","special"})
 public class TestConfiguration
 {
 	static final public String SCREENSHOT_PATH = "target/site/images";
 	
-	@BeforeGroups(groups = "utest")
+	@BeforeGroups(groups = {"utest","special"})
 	public void prepareSnapshotDirectory()
 	{
 		// Make sure that screenshots target directory exists
