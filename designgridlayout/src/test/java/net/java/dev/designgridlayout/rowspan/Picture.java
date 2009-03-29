@@ -16,7 +16,9 @@ package net.java.dev.designgridlayout.rowspan;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -41,6 +43,21 @@ public class Picture extends JComponent implements Scrollable
 	@Override protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+
+		// FIXME display rendering hints for comparison XP-VISTA
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
+			RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+			RenderingHints.VALUE_ANTIALIAS_OFF);
+		g2.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, 
+			RenderingHints.VALUE_COLOR_RENDER_SPEED);
+		g2.setRenderingHint(RenderingHints.KEY_DITHERING, 
+			RenderingHints.VALUE_DITHER_DISABLE);
+		g2.setRenderingHint(RenderingHints.KEY_RENDERING, 
+			RenderingHints.VALUE_RENDER_SPEED);
+		System.out.println(g2.getRenderingHints());
+
 		int x = 0;
 		int y = 0;
 		int width = getWidth();

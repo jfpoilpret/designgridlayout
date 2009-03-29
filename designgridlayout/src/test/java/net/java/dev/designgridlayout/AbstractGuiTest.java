@@ -37,6 +37,7 @@ import org.fest.swing.core.Robot;
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.image.ScreenshotTaker;
 
+import static org.fest.assertions.Threshold.threshold;
 import static org.fest.swing.finder.WindowFinder.findFrame;
 
 abstract public class AbstractGuiTest
@@ -60,7 +61,8 @@ abstract public class AbstractGuiTest
 		_robot = BasicRobot.robotWithCurrentAwtHierarchy();
 		_frame = findFrame(clazz.getSimpleName()).withTimeout(2000).using(_robot);
 		_screenshot = new ScreenshotTaker();
-		waitForEmptyEventQ();
+		//FIXME completely remove if OK on VISTA
+		//waitForEmptyEventQ();
 	}
 	
 	final protected <T extends AbstractBaseExample> void launchGui(Class<T> clazz) 
@@ -96,7 +98,8 @@ abstract public class AbstractGuiTest
 		{
 			throw holder.getException();
 		}
-		waitForEmptyEventQ();
+		//FIXME completely remove if OK on VISTA
+		//waitForEmptyEventQ();
 		checkSnapshot();
 	}
 
@@ -164,7 +167,10 @@ abstract public class AbstractGuiTest
 			String expected = getReferenceSnapshotPath(suffix);
 			try
 			{
-				Assertions.assertThat(screenshot).as(expected).isEqualTo(ImageAssert.read(expected));
+//				Assertions.assertThat(screenshot).as(expected).isEqualTo(
+//					ImageAssert.read(expected), threshold(10));
+				Assertions.assertThat(screenshot).as(expected).isEqualTo(
+					ImageAssert.read(expected), threshold(1));
 			}
 			catch (IOException e)
 			{

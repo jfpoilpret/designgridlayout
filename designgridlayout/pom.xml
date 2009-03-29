@@ -73,7 +73,7 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<groups>utest,itest</groups>
+					<groups>utest,itest,special</groups>
 					<systemProperties>
 						<property>
 							<name>screenshots</name>
@@ -255,14 +255,17 @@
 		<repository>
 			<id>fest</id>
 			<name>FEST repository</name>
-			<url>http://fest.googlecode.com/svn/trunk/fest/m2/repository</url>
-			<!-- START: Only for FEST debugging -->
 <!--
+			<url>http://fest.googlecode.com/svn/trunk/fest/m2/repository</url>
+-->
+			<url>http://svn.codehaus.org/fest/m2/repo</url>
+			<!-- START: Only for FEST debugging -->
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
 				<checksumPolicy>ignore</checksumPolicy>
 			</snapshots>
+<!--
 -->
 		</repository>
 		<repository>
@@ -315,9 +318,14 @@
 			<version>1.0.2</version>
 		</dependency>
 		<dependency>
+<!--
 			<groupId>fest</groupId>
 			<artifactId>fest-swing-testng</artifactId>
 			<version>1.0</version>
+-->
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-swing-testng</artifactId>
+			<version>1.2a1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
