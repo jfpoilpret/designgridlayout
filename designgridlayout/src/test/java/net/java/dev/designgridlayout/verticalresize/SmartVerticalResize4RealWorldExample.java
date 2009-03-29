@@ -14,18 +14,10 @@
 
 package net.java.dev.designgridlayout.verticalresize;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-
-import net.java.dev.designgridlayout.AbstractBaseExample;
+import net.java.dev.designgridlayout.AbstractFigure179Example;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
-public class SmartVerticalResize4RealWorldExample extends AbstractBaseExample
+public class SmartVerticalResize4RealWorldExample extends AbstractFigure179Example
 {
 	public static void main(String[] args)
 	{
@@ -54,46 +46,4 @@ public class SmartVerticalResize4RealWorldExample extends AbstractBaseExample
 		layout.row().center().add(setFontButton).add(encodingButton).add(previewButton);
 	}
 	// CSON: MagicNumber
-
-	static final private String[] FACE_NAMES =
-	{
-		"Book", "Regular", "Oblique", "Bold", "Bold-Oblique", "Black", "Apple", "Banana"
-	};
-
-	static final private String[] FAMILY_NAMES =
-	{
-		"Agency FB", "Aharoni", "Algerian", "Andalus", "Angsana New", "AngsaneUPC", 
-		"Arabic Transparent", "Arial", "Arial Black", "Arial Narrow"
-	};
-
-	// CSOFF: MemberName
-	final private JLabel usageLabel = new JLabel("Usage:");
-	final private JRadioButton anyButton = new JRadioButton("Any");
-	final private JRadioButton textButton = new JRadioButton("Text");
-	final private JRadioButton displayButton = new JRadioButton("Display");
-	final private JRadioButton humorButton = new JRadioButton("Humor");
-	final private JLabel fontLabel = new JLabel("Font:");
-	final private JLabel sizeLabel = new JLabel("Size:");
-	final private JLabel sizePointsLabel = new JLabel("Pts");
-	final private JLabel leadingLabel = new JLabel("Leading:");
-	final private JLabel leadingPointsLabel = new JLabel("Pts");
-	final private JLabel kernLabel = new JLabel("Kern:");
-	final private JLabel kernPointsLabel = new JLabel("Pts");
-	final private JButton allCapsButton = new JButton("All Caps");
-	final private JButton superscriptButton = new JButton("Superscript");
-	final private JButton smallCapsButton = new JButton("Small Caps");
-	final private JButton subscriptButton = new JButton("Subscript");
-	final private JButton hightlightButton = new JButton("Hilight");
-	final private JButton redlineButton = new JButton("Redline");
-	final private JButton setFontButton = new JButton("Set Font");
-	final private JButton encodingButton = new JButton("Encoding...");
-	final private JButton previewButton = new JButton("Preview...");
-	final private JList familyList = new JList(FAMILY_NAMES);
-	final private JScrollPane familyListScroller = new JScrollPane(familyList);
-	final private JList facesList = new JList(FACE_NAMES);
-	final private JScrollPane facesListScroller = new JScrollPane(facesList);
-	final private JSpinner sizeSpinner = new JSpinner(new SpinnerNumberModel(24, 1, 96, 1));
-	final private JSpinner leaderSpinner = new JSpinner(new SpinnerNumberModel(27, 1, 96, 1));
-	final private JSpinner kernSpinner = new JSpinner(new SpinnerNumberModel(-12, -72, 72, 1));
-	// CSON: MemberName
 }
