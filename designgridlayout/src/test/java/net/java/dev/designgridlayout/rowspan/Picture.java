@@ -47,15 +47,15 @@ public class Picture extends JComponent implements Scrollable
 		// FIXME display rendering hints for comparison XP-VISTA
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
-			RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+			RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-			RenderingHints.VALUE_ANTIALIAS_OFF);
+			RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, 
-			RenderingHints.VALUE_COLOR_RENDER_SPEED);
+			RenderingHints.VALUE_COLOR_RENDER_QUALITY);
 		g2.setRenderingHint(RenderingHints.KEY_DITHERING, 
-			RenderingHints.VALUE_DITHER_DISABLE);
+			RenderingHints.VALUE_DITHER_ENABLE);
 		g2.setRenderingHint(RenderingHints.KEY_RENDERING, 
-			RenderingHints.VALUE_RENDER_SPEED);
+			RenderingHints.VALUE_RENDER_QUALITY);
 		System.out.println(g2.getRenderingHints());
 
 		int x = 0;
