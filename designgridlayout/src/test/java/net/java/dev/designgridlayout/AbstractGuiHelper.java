@@ -14,17 +14,10 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.ActiveEvent;
-import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.event.PaintEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.JPanel;
 
 import org.fest.assertions.Assertions;
 import org.fest.assertions.ImageAssert;
@@ -47,8 +40,8 @@ abstract public class AbstractGuiHelper
 		_frame = findFrame(example.getClass().getSimpleName())
 			.withTimeout(2000).using(_robot);
 		_screenshot = new ScreenshotTaker();
-		// FIXME completely remove if OK on VISTA
-		// waitForEmptyEventQ();
+		
+		hideMouse();
 	}
 
 	final protected Robot robot()
@@ -73,7 +66,7 @@ abstract public class AbstractGuiHelper
 			// To make sure the mouse is not over a component in the frame,
 			// which
 			// would change its appearance, hence modify the snapshot.
-			hideMouse();
+//			hideMouse();
 			// Take snapshot of current layout
 			if (suffix.length() > 0)
 			{
@@ -118,7 +111,7 @@ abstract public class AbstractGuiHelper
 	{
 		// To make sure the mouse is not over a component in the frame, which
 		// would change its appearance, hence modify the snapshot.
-		hideMouse();
+//		hideMouse();
 		// Take snapshot
 		if (suffix.length() > 0)
 		{
@@ -167,64 +160,6 @@ abstract public class AbstractGuiHelper
 		_robot.waitForIdle();
 		_robot.moveMouse(frame, frame.getWidth() + 2, frame.getHeight() + 2);
 		_robot.waitForIdle();
-	}
-
-	private void waitForEmptyEventQ()
-	{
-		boolean qEmpty = false;
-		JPanel placeHolder  = new JPanel();
-		EventQueue q = Toolkit.getDefaultToolkit().getSystemEventQueue();
-		while (!qEmpty)
-		{
-			NotifyingEvent e = new NotifyingEvent(placeHolder);
-			q.postEvent(e);
-			synchronized(e)
-			{
-				while (!e.isDispatched())
-				{
-					try
-					{
-						e.wait();
-					} 
-					catch (InterruptedException ie)
-					{
-					}
-				}
-				qEmpty = e.isEventQEmpty();
-			}
-		}
-	}
-
-	static private class NotifyingEvent extends PaintEvent implements ActiveEvent
-	{
-		private boolean dispatched = false;
-		private boolean qEmpty = false;
-
-		NotifyingEvent(Component c)
-		{
-			super(c, PaintEvent.UPDATE, null);
-		}
-		
-		synchronized boolean isDispatched()
-		{
-			return dispatched;
-		}
-		
-		synchronized boolean isEventQEmpty()
-		{
-			return qEmpty;
-		}
-
-		public void dispatch()
-		{
-			EventQueue q = Toolkit.getDefaultToolkit().getSystemEventQueue();
-			synchronized(this)
-			{
-				qEmpty = (q.peekEvent() == null);
-				dispatched = true;
-				notifyAll();
-			}
-		}
 	}
 
 	private Object _example;
