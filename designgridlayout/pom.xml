@@ -87,9 +87,20 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<!-- TODO: add mainClass for test jar. -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+						</manifestEntries>
+					</archive>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -135,6 +146,30 @@
 					</execution>
 				</executions>
  			</plugin>
+ 			<!-- 
+ 				Used to have a build number (date + increment) used by
+ 				DesignGridLayout Examples application (showdown).
+ 				The created number is accessible by ${buildNumber}
+ 			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>b{0,date,yyyy-MM-dd-HHmm}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+				</configuration>
+			</plugin>
 			<!--
 				Download source and javadoc from all dependencies and make them 
 				available within eclipse.

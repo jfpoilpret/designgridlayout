@@ -88,7 +88,7 @@ public class Examples extends JFrame
 	
 	private Examples()
 	{
-		super("DesignGridLayout Usage Examples");
+		super("DesignGridLayout Usage Examples (" + VersionHelper.getVersion() + ")");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// Initialize tree
