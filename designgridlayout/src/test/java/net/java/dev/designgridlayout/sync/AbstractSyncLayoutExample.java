@@ -15,7 +15,6 @@
 package net.java.dev.designgridlayout.sync;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -60,7 +59,7 @@ public abstract class AbstractSyncLayoutExample extends AbstractBaseExample
     	_frame.setVisible(true);
     }
 	
-	protected JComponent createTopPanel()
+	protected JPanel createTopPanel()
 	{
     	JPanel top = new JPanel();
     	BoxLayout box = new BoxLayout(
@@ -107,6 +106,6 @@ public abstract class AbstractSyncLayoutExample extends AbstractBaseExample
 
 	abstract protected void build();
 
-	private JComponent _top;
+	private JPanel _top;
 	private final boolean _vertical;
 }
