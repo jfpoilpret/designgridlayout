@@ -1,0 +1,16 @@
+This section illustrates "Layouts Synchronization", a unique feature of DesignGridLayout.
+
+This feature enables to force consistent alignments (horizontal or vertical) of several DesignGridLayout instances (used in different panels). This is useful in several situations:
+- to align components of panels in a JTabbedPane in order to avoid visual "hops" of components when navigating from one tab to another
+- to align components of panels in a Wizard dialog in order (same reason when navigating from one step to another)
+- to align different panels positioned in a bigger panel (e.g. this happens when you need to group several components with a Swing Border: those components must be in their own panel and the Border set for that panel)
+- to overcome some limitations of DesignGridLayout that make it unusable individually for some complex panels (e.g. the Address Book example above requires the JList to be put in its own panel); using synchronization you make sure that components are still correctly aligned across the whole panel)
+
+Synchronization feature is accessible through a simple fluent API, and it provides some options for you to define what kinds of alignment you want synchronized.
+
+Basically, synchronization can be done:
+- horizontally: at the level of component baselines across 2 or more panels
+- vertically: for all grid rows of all synchronized panels, you can have their subgrids aligned, i.e. the 1st component (after the optional label) at the same X origin
+- in both directions
+
+For each direction, you have a couple of options to fine-tune what exactly must be aligned (further examples are given in samples in this section).

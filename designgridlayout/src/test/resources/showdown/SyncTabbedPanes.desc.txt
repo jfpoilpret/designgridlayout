@@ -1,0 +1,9 @@
+This real-life example will show how DesignGridLayout Synhcronization feature makes sure that transtion from one tab to another, in a JTabbedPane, is always smooth without visual hops that are often disturbing for the end-users.
+
+This second part of the example shows the same JTabbedPane as above (with 2 tabs and various components in each), but this time WITH synchronization.
+
+If you launch the example and alternate from one tab to another, you will see that there are no more hops: all rows of each tab are baseline-aligned now; similarly the first text field of the first tab is now at the same X origin as the combo box in the second tab.
+
+Source code is the same as the previous example (no synchronization) except for one additional line of code. Concretely this example was made by overriding the class of previous example, but the postBuild() method was overridden to add synchronization to the layouts of both tabs. The Synchronizer fluent API is straightforward; in the example, you can see that alignment synchronization is required in both directions:
+- horizontally: alignRow()
+- vertically: alignGrids()

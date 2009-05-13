@@ -1,0 +1,4 @@
+@Override protected void postBuild(DesignGridLayout layout1, DesignGridLayout layout2)
+{
+	Synchronizer.synchronize(layout1, layout2).alignGrids().alignRows();
+}

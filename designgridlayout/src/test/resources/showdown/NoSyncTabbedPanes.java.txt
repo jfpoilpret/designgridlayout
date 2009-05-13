@@ -1,0 +1,38 @@
+@Override protected void build()
+{
+	// Create first tab with general information
+	DesignGridLayout layout1 = createSubPanel("Contact");
+	layout1.row().grid(label("First name:")).add(field("Jean-Francois")).grid(label("Surname:")).add(field("Poilpret"));
+	layout1.row().grid(label("Display:")).add(field("Mr Jean-Francois Poilpret"));
+	layout1.row().grid(label("Email 1:")).add(field("jfpoilpret@yahoo.fr"));
+	layout1.row().grid(label("Email 2:")).add(field(""));
+	layout1.row().grid(label("Mobile:"), 1).add(field(""));
+	layout1.forceConsistentBaselinesDistance();
+	
+	// Create second tab with other information
+	DesignGridLayout layout2 = createSubPanel("Address");
+	layout2.row().grid(label("Type:"), 1).add(_cboAddressType);
+	layout2.row().grid(label("Street 1:")).add(field(""));
+	layout2.row().grid(label("Street 2:")).add(field(""));
+	layout2.row().grid(label("ZIP:")).add(field("")).grid(label("City:")).add(field("Ho Chi Minh city"));
+	layout2.row().grid(label("Country:")).add(_cboCountries);
+	layout2.forceConsistentBaselinesDistance();
+	
+	postBuild(layout1, layout2);
+}
+
+protected void postBuild(DesignGridLayout layout1, DesignGridLayout layout2)
+{
+}
+
+@Override protected DesignGridLayout createSubPanel(String title)
+{
+	JPanel panel = new JPanel();
+	DesignGridLayout layout = new DesignGridLayout(panel);
+	_tabs.addTab(title, panel);
+	return layout;
+}
+
+final private JTabbedPane _tabs = new JTabbedPane(); 
+final private JComboBox _cboAddressType = new JComboBox();
+final private JComboBox _cboCountries = new JComboBox();
