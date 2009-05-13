@@ -44,7 +44,7 @@ public class Picture extends JComponent implements Scrollable
 	{
 		super.paintComponent(g);
 
-		// FIXME display rendering hints for comparison XP-VISTA
+		// Fix rendering hints for comparison XP-VISTA
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, 
 			RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
@@ -56,7 +56,6 @@ public class Picture extends JComponent implements Scrollable
 			RenderingHints.VALUE_DITHER_ENABLE);
 		g2.setRenderingHint(RenderingHints.KEY_RENDERING, 
 			RenderingHints.VALUE_RENDER_QUALITY);
-		System.out.println(g2.getRenderingHints());
 
 		int x = 0;
 		int y = 0;

@@ -164,7 +164,6 @@ public class LayoutEngine implements ILayoutEngine
 			// Exclude inter-grid gaps
 			gridsWidth -= (_maxGrids - 1) * _gridgap;
 
-			System.out.printf("layoutContainer %d\n", this.hashCode());
 			// Start laying out every single row (all components but row-span ones)
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl, _rows);
 			for (AbstractRow row: each(_rows))
@@ -174,9 +173,7 @@ public class LayoutEngine implements ILayoutEngine
 				helper.setRowAvailableHeight(rowHeight);
 				row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
 					gridsWidth, _labelWidths);
-//				row.actualHeight(rowHeight);
-				System.out.printf("y = %d, actual = %d, extra = %d, vgap = %d\n", 
-					y, rowHeight, row.extraHeight(), row.vgap());
+//TODO remove?				row.actualHeight(rowHeight);
 				y += rowHeight + row.vgap() + row.extraHeight();
 			}
 			
@@ -211,8 +208,6 @@ public class LayoutEngine implements ILayoutEngine
 		}
 		
 		// Start laying out every single row (all components but row-span ones)
-		System.out.printf("computeRowsActualHeight %d\n", this.hashCode());
-		System.out.printf("height = %d\n", height);
 		for (AbstractRow row: each(_rows))
 		{
 			int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
@@ -596,8 +591,6 @@ public class LayoutEngine implements ILayoutEngine
 			_parent.getInsets().left + (int) (_leftWeight * _left),
 			_parent.getInsets().bottom + (int) (_bottomWeight * _bottom),
 			_parent.getInsets().right + (int) (_rightWeight * _right));
-		System.out.printf("LayoutEngine.computeMargins = %d, %d, %d, %d\n",
-			_margins.top, _margins.left, _margins.bottom, _margins.right);
 	}
 	
 	private void computeTopMargin()
