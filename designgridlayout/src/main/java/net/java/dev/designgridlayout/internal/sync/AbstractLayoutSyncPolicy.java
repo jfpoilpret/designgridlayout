@@ -50,7 +50,7 @@ abstract class AbstractLayoutSyncPolicy implements ILayoutRowSyncPolicy
 	protected int engineHeight(ILayoutEngine engine)
 	{
 		Insets margins = engine.getMargins();
-		int layoutHeight = margins.top + margins.bottom;
+		int layoutHeight = margins.top + margins.bottom + 1;
 		for (AbstractRow row: each(engine.rows()))
 		{
 			layoutHeight += row.height() + row.extraHeight() + row.vgap();

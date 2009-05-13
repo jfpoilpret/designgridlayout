@@ -20,6 +20,7 @@ import java.util.List;
 
 import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
+import net.java.dev.designgridlayout.internal.util.LayoutEngineProxy;
 
 import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 
@@ -46,6 +47,7 @@ public class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 		while (alignCurrentRowsBaselines(counters))
 		{
 		}
+
 		//FIXME problem with variable height layouts, maybe useless actually...
 //		if (!respectHeight)
 		{
