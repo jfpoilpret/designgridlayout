@@ -17,7 +17,6 @@ package net.java.dev.designgridlayout.sync.horizontal;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,7 +41,7 @@ public class BetterAddressBookDemo extends AbstractSyncLayoutExample
 		example.go(true);
 	}
 
-	@Override protected JComponent createTopPanel()
+	@Override protected JPanel createTopPanel()
 	{
     	JPanel top = new JPanel();
     	top.setLayout(new BorderLayout());
