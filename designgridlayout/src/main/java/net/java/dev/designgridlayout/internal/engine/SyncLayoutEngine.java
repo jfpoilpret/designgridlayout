@@ -150,8 +150,6 @@ public class SyncLayoutEngine implements ILayoutEngine
 			int availableHeight = height;
 			for (ILayoutEngine engine: _engines)
 			{
-//				int currentHeight = 
-//					syncPolicy().availableHeight(height, _engines, _current);
 				int currentHeight = 
 					syncPolicy().availableHeight(height, _engines, engine);
 				currentHeight = engine.computeRowsActualHeight(currentHeight);

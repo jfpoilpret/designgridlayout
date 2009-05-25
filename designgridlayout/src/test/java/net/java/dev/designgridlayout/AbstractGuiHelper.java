@@ -118,14 +118,12 @@ abstract public class AbstractGuiHelper
 			suffix = "-" + suffix;
 		}
 		String snapshot = getSnapshotSubPath(TestConfiguration.SCREENSHOT_PATH, suffix);
-		System.out.printf("takeSnapshot = %s\n", snapshot);
 		_screenshot.saveComponentAsPng(_frame.panel("TOP").component(), snapshot);
 	}
 
 	protected final String getReferenceSnapshotPath(String suffix)
 	{
 		String path = getSnapshotSubPath(REFERENCE_SCREENSHOT_PATH, suffix);
-		System.out.printf("getReferenceSnapshotPath = %s\n", path);
 		return path;
 	}
 
@@ -143,7 +141,6 @@ abstract public class AbstractGuiHelper
 		new File(path).mkdirs();
 		// Build the complete screenshot file path
 		path = path + "/" + _example.getClass().getSimpleName() + suffix + ".png";
-		System.out.printf("getSnapshotSubPath = %s\n", path);
 		return path;
 	}
 
