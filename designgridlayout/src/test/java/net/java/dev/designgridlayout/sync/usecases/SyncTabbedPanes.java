@@ -27,6 +27,6 @@ public class SyncTabbedPanes extends NoSyncTabbedPanes
 	
 	@Override protected void postBuild(DesignGridLayout layout1, DesignGridLayout layout2)
 	{
-		Synchronizer.synchronize(layout1, layout2).alignGrids().alignRows();
+		Synchronizer.synchronize(layout1, layout2).alignAllGrids().alignRows();
 	}
 }

@@ -40,6 +40,6 @@ public class SyncVerticalWithWithoutLabel extends AbstractSyncLayoutExample
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("longlabel1")).add(field("field1"));
 
-		Synchronizer.synchronize(layout1, layout2).alignGrids();
+		Synchronizer.synchronize(layout1, layout2).alignAllGrids();
 	}
 }

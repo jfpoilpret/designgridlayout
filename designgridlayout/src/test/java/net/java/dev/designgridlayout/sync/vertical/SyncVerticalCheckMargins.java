@@ -42,6 +42,6 @@ public class SyncVerticalCheckMargins extends AbstractSyncLayoutExample
 		layout2.row().grid(label("label1")).add(field("field1"));
 		layout2.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
-		Synchronizer.synchronize(layout1, layout2).alignGrids();
+		Synchronizer.synchronize(layout1, layout2).alignAllGrids();
 	}
 }

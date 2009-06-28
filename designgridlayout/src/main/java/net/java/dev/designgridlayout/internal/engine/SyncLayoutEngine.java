@@ -43,14 +43,16 @@ public class SyncLayoutEngine implements ILayoutEngine
 		LayoutEngineProxy.setDelegate(proxy, engine);
 	}
 
-	public void alignGrids()
+	public void alignGrids(boolean all)
 	{
 		_alignGrids = true;
+		_alignAllGrids = all;
 	}
 	
-	public void alignRows()
+	public void alignRows(ILayoutRowSyncPolicy policy)
 	{
 		_alignRows = true;
+		_policy = policy;
 	}
 	
 	// Implementation of ILayoutEngine
@@ -223,19 +225,26 @@ public class SyncLayoutEngine implements ILayoutEngine
 	
 	private void countGrids()
 	{
-		// Calculate common number of grids
-		for (ILayoutEngine engine: _engines)
+		if (_alignAllGrids)
 		{
-			int grids = engine.getNumGrids();
-			if (_numGrids == 0)
+			// Calculate common number of grids
+			for (ILayoutEngine engine: _engines)
 			{
-				_numGrids = grids;
+				int grids = engine.getNumGrids();
+				if (_numGrids == 0)
+				{
+					_numGrids = grids;
+				}
+				else if (grids != _numGrids)
+				{
+					_numGrids = 1;
+					break;
+				}
 			}
-			else if (grids != _numGrids)
-			{
-				_numGrids = 1;
-				break;
-			}
+		}
+		else
+		{
+			_numGrids = 1;
 		}
 	}
 
@@ -466,6 +475,7 @@ public class SyncLayoutEngine implements ILayoutEngine
 
 	// Synchronization settings
 	private boolean _alignGrids = false;
+	private boolean _alignAllGrids = false;
 	private boolean _alignRows = false;
 
 	// Synchronization computed properties

@@ -70,15 +70,27 @@ final public class Synchronizer
 		return this;
 	}
 	
-	public Synchronizer alignGrids()
+	public Synchronizer alignAllGrids()
 	{
-		_engine.alignGrids();
+		_engine.alignGrids(true);
 		return this;
 	}
 	
+	public Synchronizer alignFirstGrid()
+	{
+		_engine.alignGrids(false);
+		return this;
+	}
+	
+	//TODO several align methods
+	// alignFirstRowOnly()
+	// alignFirstFixedHeightRows()
+	// alignAllRowsOneToOne()
+	// alignBestEffort()?
+	// ...?
 	public Synchronizer alignRows()
 	{
-		_engine.alignRows();
+		_engine.alignRows(null);
 		return this;
 	}
 	

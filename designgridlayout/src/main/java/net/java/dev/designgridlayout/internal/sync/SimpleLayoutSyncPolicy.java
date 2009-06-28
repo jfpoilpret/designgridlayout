@@ -20,7 +20,6 @@ import java.util.List;
 
 import net.java.dev.designgridlayout.internal.engine.ILayoutEngine;
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
-import net.java.dev.designgridlayout.internal.util.LayoutEngineProxy;
 
 import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 
@@ -35,7 +34,7 @@ import static net.java.dev.designgridlayout.internal.util.RowHelper.each;
 // One result of applying this policy is to have a largely increased preferred
 // height of all synchronized layouts.
 // One advantage of this policy is that it is simple and thus more performant
-// than any other -more beautiful but ore complex- policy.
+// than any other -more beautiful but more complex- policy.
 public class SimpleLayoutSyncPolicy extends AbstractLayoutSyncPolicy
 {
 	// CSOFF: EmptyBlockCheck

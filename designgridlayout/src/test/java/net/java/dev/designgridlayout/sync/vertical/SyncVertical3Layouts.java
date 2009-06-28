@@ -45,6 +45,6 @@ public class SyncVertical3Layouts extends AbstractSyncLayoutExample
 		layout3.row().grid(label("longlabel1")).add(field("field1"));
 		layout3.row().grid(label("lbl2")).add(field("field2")).grid(label("label3")).add(field("field3"));
 
-		Synchronizer.synchronize(layout1, layout2).with(layout3).alignGrids();
+		Synchronizer.synchronize(layout1, layout2).with(layout3).alignAllGrids();
 	}
 }

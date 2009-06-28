@@ -40,6 +40,6 @@ public class SyncVerticalCheckHGaps extends AbstractSyncLayoutExample
 		DesignGridLayout layout2 = createSubPanel();
 		layout2.row().grid(label("label1")).add(field("field1"), field("field2"), field("field3"));
 
-		Synchronizer.synchronize(layout1, layout2).alignGrids();
+		Synchronizer.synchronize(layout1, layout2).alignAllGrids();
 	}
 }
