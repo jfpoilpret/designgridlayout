@@ -19,6 +19,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -54,13 +55,18 @@ public abstract class AbstractBaseExample
 
 		build(layout);
 
-		_frame.add(top);
+		_frame.add(wrapPanel(top));
 		prePack();
 		_frame.pack();
 		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
 	}
 
+	protected JComponent wrapPanel(JPanel top)
+	{
+		return top;
+	}
+	
 	protected void prePack()
 	{
 	}

@@ -165,8 +165,6 @@ abstract public class AbstractGuiHelper
 	private ScreenshotTaker _screenshot;
 
 	private static final boolean _checkSnapshots = !Boolean.getBoolean("screenshots");
-	private static final boolean _isJava5 =
-	    System.getProperty("java.version").startsWith("1.5");
 	private static final String REFERENCE_SCREENSHOT_PATH =
-	    "src/test/resources/screenshots/" + (_isJava5 ? "java5" : "java6");
+	    "src/test/resources/screenshots/java6";
 }

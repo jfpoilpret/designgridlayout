@@ -17,9 +17,9 @@ package net.java.dev.designgridlayout.internal.util;
 import java.awt.Container;
 
 import javax.swing.JComponent;
+import javax.swing.LayoutStyle;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-
-import org.jdesktop.layout.LayoutStyle;
 
 import net.java.dev.designgridlayout.internal.row.MultiComponent;
 
@@ -30,8 +30,8 @@ public final class ComponentGapsHelper
 		return new ComponentGapsHelper();
 	}
 	
-	public int getVerticalGap(
-		JComponent component1, JComponent component2, int type, Container parent)
+	public int getVerticalGap(JComponent component1, JComponent component2, 
+		ComponentPlacement type, Container parent)
 	{
 		if (component1 instanceof MultiComponent)
 		{
@@ -62,8 +62,8 @@ public final class ComponentGapsHelper
 		}
 	}
 	
-	public int getHorizontalGap(
-		JComponent component1, JComponent component2, int type, Container parent)
+	public int getHorizontalGap(JComponent component1, JComponent component2, 
+		ComponentPlacement type, Container parent)
 	{
 		if (component1 instanceof MultiComponent)
 		{
@@ -183,5 +183,5 @@ public final class ComponentGapsHelper
 		}
 	}
 
-	private final LayoutStyle _style = LayoutStyle.getSharedInstance(); 
+	private final LayoutStyle _style = LayoutStyle.getInstance(); 
 }

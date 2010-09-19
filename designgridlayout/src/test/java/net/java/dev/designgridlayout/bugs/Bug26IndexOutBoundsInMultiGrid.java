@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout.bugs;
 
-import javax.swing.JTextField;
-
 import net.java.dev.designgridlayout.AbstractBaseExample;
 import net.java.dev.designgridlayout.DesignGridLayout;
 

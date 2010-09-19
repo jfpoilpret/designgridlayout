@@ -35,7 +35,7 @@ public final class MultiComponent extends JComponent
 		return _children;
 	}
 
-	public int getBaseline(int width, int height)
+	@Override public int getBaseline(int width, int height)
 	{
 		return _layout.getBaseline();
 	}

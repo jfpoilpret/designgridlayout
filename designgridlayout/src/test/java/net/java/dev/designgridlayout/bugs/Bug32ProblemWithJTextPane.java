@@ -14,7 +14,6 @@
 
 package net.java.dev.designgridlayout.bugs;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

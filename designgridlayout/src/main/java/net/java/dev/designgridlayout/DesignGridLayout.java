@@ -70,7 +70,7 @@ public class DesignGridLayout implements LayoutManager
 	 * This instance should be then used to add rows and components to the parent
 	 * container.
 	 * <p/>
-	 * Note that this constructor auomatically calls {@code parent.setLayout(this)}
+	 * Note that this constructor automatically calls {@code parent.setLayout(this)}
 	 * so you don't need to call it yourself.
 	 * <p/>
 	 * In no way should the {@link Container#add} and {@link Container#remove}

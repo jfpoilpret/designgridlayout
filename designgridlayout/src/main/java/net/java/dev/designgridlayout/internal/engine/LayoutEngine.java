@@ -22,8 +22,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.JComponent;
-
-import org.jdesktop.layout.LayoutStyle;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import net.java.dev.designgridlayout.internal.row.AbstractRow;
 import net.java.dev.designgridlayout.internal.row.IRowItem;
@@ -302,7 +301,8 @@ public class LayoutEngine implements ILayoutEngine
 
 			List<? extends IRowItem> items1 = row.allItems();
 			List<? extends IRowItem> items2 = next.allItems();
-			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
+			ComponentPlacement style = (row.hasUnrelatedGap() ? 
+				ComponentPlacement.UNRELATED : ComponentPlacement.RELATED);
 
 			for (IRowItem item1: items1)
 			{

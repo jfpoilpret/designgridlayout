@@ -40,7 +40,7 @@ import net.java.dev.designgridlayout.internal.engine.SyncLayoutEngine;
  * Synchronizer.synchronize(layout1, layout2).alignRows();
  * Synchronizer.synchronize(layout1, layout3).alignGrids();
  * </pre>
- * {@code Synchronizer is supports:
+ * {@code Synchronizer} supports:
  * <ul>
  * <li>alignment of grids x origin</li>
  * <li>alignment of rows baselines</li>
@@ -51,13 +51,6 @@ import net.java.dev.designgridlayout.internal.engine.SyncLayoutEngine;
  */
 final public class Synchronizer
 {
-	/**
-	 * TODO
-	 * 
-	 * @param source
-	 * @param destination
-	 * @return
-	 */
 	static public Synchronizer synchronize(
 		DesignGridLayout source, DesignGridLayout destination)
 	{
