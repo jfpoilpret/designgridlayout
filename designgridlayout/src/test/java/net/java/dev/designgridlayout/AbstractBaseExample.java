@@ -17,14 +17,10 @@ package net.java.dev.designgridlayout;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTable;
@@ -55,18 +51,13 @@ public abstract class AbstractBaseExample
 
 		build(layout);
 
-		_frame.add(wrapPanel(top));
+		_frame.add(top);
 		prePack();
 		_frame.pack();
 		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
 	}
 
-	protected JComponent wrapPanel(JPanel top)
-	{
-		return top;
-	}
-	
 	protected void prePack()
 	{
 	}
@@ -126,22 +117,7 @@ public abstract class AbstractBaseExample
 		setTableHeight(table, 4);
 		return new JScrollPane(table);
 	}
-
-	protected JRadioButton radio(String text)
-	{
-		return new JRadioButton(text);
-	}
-
-	protected JCheckBox checkbox(String text)
-	{
-		return new JCheckBox(text);
-	}
 	
-	protected JComboBox combobox()
-	{
-		return new JComboBox(GUITARS);
-	}
-
 	static protected void setTableHeight(JTable table, int rows)
 	{
 //		int width = table.getColumnModel().getTotalColumnWidth();

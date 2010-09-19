@@ -1,8 +1,0 @@
-final public class Synchronizer
-{
-	static public Synchronizer synchronize(
-		DesignGridLayout source, DesignGridLayout destination);
-	public Synchronizer with(DesignGridLayout layout);
-	public Synchronizer alignGrids();
-	public Synchronizer alignRows();
-}

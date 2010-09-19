@@ -48,11 +48,9 @@ public interface ISubGridStarter
 	 * @param label the label to add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 * @see ISpannableGridRow#spanRow()
 	 */
-	public abstract ISpannableGridRow grid(JLabel label) throws IllegalStateException;
+	public abstract ISpannableGridRow grid(JLabel label);
 	
 	/**
 	 * Starts a new sub-grid in the row, starting with a label.
@@ -69,11 +67,8 @@ public interface ISubGridStarter
 	 * if {@code <= 0}, then the behavior is the same as {@link #grid(JLabel)}.
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IGridRow grid(JLabel label, int gridspan) 
-		throws IllegalStateException;
+	public abstract IGridRow grid(JLabel label, int gridspan);
 
 	/**
 	 * Starts a new sub-grid in the row, starting with an empty label.
@@ -90,11 +85,9 @@ public interface ISubGridStarter
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 * @see ISpannableGridRow#spanRow()
 	 */
-	public abstract ISpannableGridRow grid() throws IllegalStateException;
+	public abstract ISpannableGridRow grid();
 
 	/**
 	 * Starts a new sub-grid in the row, starting with an empty label.
@@ -110,8 +103,6 @@ public interface ISubGridStarter
 	 * if {@code <= 0}, then the behavior is the same as {@link #grid()}.
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
-	 * @throws IllegalStateException if this row's layout has been locked (which 
-	 * happens automatically the first its container frame is packed or displayed)
 	 */
-	public abstract IGridRow grid(int gridspan) throws IllegalStateException;
+	public abstract IGridRow grid(int gridspan);
 }

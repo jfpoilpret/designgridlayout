@@ -18,7 +18,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
@@ -28,40 +27,34 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import net.java.dev.designgridlayout.AbstractBaseExample;
-import net.java.dev.designgridlayout.basics.Basics1SimpleGrid;
-import net.java.dev.designgridlayout.basics.Basics2GridColumns;
-import net.java.dev.designgridlayout.basics.Basics3GridLabels;
-import net.java.dev.designgridlayout.basics.Basics4RightRow;
-import net.java.dev.designgridlayout.basics.Basics5NonGridRows;
-import net.java.dev.designgridlayout.basics.Basics6NonGridRowsWithFiller;
-import net.java.dev.designgridlayout.basics.Basics7RealWorldExample1;
-import net.java.dev.designgridlayout.basics.Basics8RealWorldExample2;
-import net.java.dev.designgridlayout.basics.Basics9RealWorldExample3;
-import net.java.dev.designgridlayout.basics.Misc1CustomizedMargins;
-import net.java.dev.designgridlayout.misc.Rfe29ConsistentBaselineSpace;
-import net.java.dev.designgridlayout.misc.Rfe29ExactVGaps;
-import net.java.dev.designgridlayout.multicomponent.MultiComponentExample;
-import net.java.dev.designgridlayout.multigrid.AddressBookDemo;
-import net.java.dev.designgridlayout.multigrid.MultiGrid1Simple;
-import net.java.dev.designgridlayout.multigrid.MultiGrid2ThreeGridsWithGridSpan;
-import net.java.dev.designgridlayout.multigrid.MultiGrid3ThreeComplexGrids;
-import net.java.dev.designgridlayout.rowspan.RowSpan2TwoLists;
-import net.java.dev.designgridlayout.rowspan.RowSpan3TwoListsCustomWeights;
-import net.java.dev.designgridlayout.rowspan.RowSpan4ErrorMarkers;
-import net.java.dev.designgridlayout.rowspan.RowSpan5SimplestExample;
-import net.java.dev.designgridlayout.rowspan.RowSpan6SimpleExampleOnTwoGrids;
-import net.java.dev.designgridlayout.rowspan.RowSpan7SpecialComponent;
-import net.java.dev.designgridlayout.rtl.RightToLeft1LTR;
-import net.java.dev.designgridlayout.rtl.RightToLeft2RTL;
-import net.java.dev.designgridlayout.rtl.RightToLeft3RealWorldExample;
-import net.java.dev.designgridlayout.sync.AbstractSyncLayoutExample;
-import net.java.dev.designgridlayout.sync.horizontal.BetterAddressBookDemo;
-import net.java.dev.designgridlayout.sync.usecases.NoSyncTabbedPanes;
-import net.java.dev.designgridlayout.sync.usecases.SyncTabbedPanes;
-import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize1Sliders;
-import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize3CustomWeights;
-import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize4RealWorldExample;
-import net.java.dev.designgridlayout.verticalresize.SmartVerticalResize5SameWeight;
+import net.java.dev.designgridlayout.AddressBookDemo;
+import net.java.dev.designgridlayout.Basics1SimpleGrid;
+import net.java.dev.designgridlayout.Basics2GridColumns;
+import net.java.dev.designgridlayout.Basics3GridLabels;
+import net.java.dev.designgridlayout.Basics4RightRow;
+import net.java.dev.designgridlayout.Basics5NonGridRows;
+import net.java.dev.designgridlayout.Basics6NonGridRowsWithFiller;
+import net.java.dev.designgridlayout.Basics7RealWorldExample1;
+import net.java.dev.designgridlayout.Basics8RealWorldExample2;
+import net.java.dev.designgridlayout.Basics9RealWorldExample3;
+import net.java.dev.designgridlayout.Misc1CustomizedMargins;
+import net.java.dev.designgridlayout.MultiComponentExample;
+import net.java.dev.designgridlayout.MultiGrid1Simple;
+import net.java.dev.designgridlayout.MultiGrid2ThreeGridsWithGridSpan;
+import net.java.dev.designgridlayout.MultiGrid3ThreeComplexGrids;
+import net.java.dev.designgridlayout.RightToLeft1LTR;
+import net.java.dev.designgridlayout.RightToLeft2RTL;
+import net.java.dev.designgridlayout.RightToLeft3RealWorldExample;
+import net.java.dev.designgridlayout.RowSpan2TwoLists;
+import net.java.dev.designgridlayout.RowSpan3TwoListsCustomWeights;
+import net.java.dev.designgridlayout.RowSpan4ErrorMarkers;
+import net.java.dev.designgridlayout.RowSpan5SimplestExample;
+import net.java.dev.designgridlayout.RowSpan6SimpleExampleOnTwoGrids;
+import net.java.dev.designgridlayout.RowSpan7SpecialComponent;
+import net.java.dev.designgridlayout.SmartVerticalResize1Sliders;
+import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
+import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
+import net.java.dev.designgridlayout.SmartVerticalResize5SameWeight;
 
 public class Examples extends JFrame
 {
@@ -91,7 +84,7 @@ public class Examples extends JFrame
 	
 	private Examples()
 	{
-		super("DesignGridLayout Usage Examples (" + VersionHelper.getVersion() + ")");
+		super("DesignGridLayout Usage Examples");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// Initialize tree
@@ -106,10 +99,9 @@ public class Examples extends JFrame
 		_tree.setCellRenderer(new NodeRenderer());
 		
 		// Layout frame
-		JScrollPane scroller = new JScrollPane(_tree);
-		_split.setLeftComponent(scroller);
+		_split.setLeftComponent(_tree);
 		_split.setRightComponent(_detail);
-		_split.setDividerLocation(scroller.getPreferredSize().width + 1);
+		_split.setDividerLocation(_tree.getPreferredSize().width);
 		
 		setContentPane(_split);
 	}
@@ -189,27 +181,11 @@ public class Examples extends JFrame
 			new Node("AddressBookDemo - Right to Left", RightToLeft3RealWorldExample.class)));
 		root.add(node);
 
-		//TODO first show simple uses of the API: horizontal/vertical
-		node = new DefaultMutableTreeNode(
-			new Node("Layouts Synchronization", AbstractSyncLayoutExample.class, false));
-		node.add(new DefaultMutableTreeNode(new Node(
-			"Example 1 - Address Book Demo (revisited)", BetterAddressBookDemo.class)));
-		node.add(new DefaultMutableTreeNode(new Node(
-			"Example 2a - JTabbedPane (without synchronization)", NoSyncTabbedPanes.class)));
-		node.add(new DefaultMutableTreeNode(new Node(
-			"Example 2b - JTabbedPane (with synchronization)", SyncTabbedPanes.class)));
-		//TODO more examples and use cases here!
-		root.add(node);
-
 		node = new DefaultMutableTreeNode("Miscellaneous");
 		node.add(new DefaultMutableTreeNode(
 			new Node("Custom Margins", Misc1CustomizedMargins.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Multi-Components", MultiComponentExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Exact Vertical Gaps", Rfe29ExactVGaps.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Consistent Baselines Spacing", Rfe29ConsistentBaselineSpace.class)));
 		root.add(node);
 
 		DefaultTreeModel model = new DefaultTreeModel(root);
