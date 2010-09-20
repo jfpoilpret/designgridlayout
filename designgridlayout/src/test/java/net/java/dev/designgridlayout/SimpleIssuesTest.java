@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Point;
+
 import javax.swing.SwingUtilities;
 
 import org.testng.annotations.AfterMethod;
@@ -78,6 +80,48 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExampleFromEDT(Bug28bBadHeightWhenStartedFromEDT.class);
 	}
 
+	@Test public void checkBug30ExceptionRowsWithoutComponents() throws Exception
+	{
+		checkExample(Bug30ExceptionRowsWithoutComponents.class);
+	}
+
+	@Test public void checkBug31GridRowWithLabelButNoComponent() throws Exception
+	{
+		checkExample(Bug31GridRowWithLabelButNoComponent.class);
+	}
+
+	@Test public void checkBug32ProblemWithJTextPane() throws Exception
+	{
+		// First problem: bad initial baseline
+		checkExample(Bug32ProblemWithJTextPane.class);
+		// Second problem: very bad baseline after appending a lot of text
+		frame().button("append").click();
+		frame().resizeWidthTo(frame().component().getWidth() + 1);
+		checkSnapshot("after-append");
+	}
+
+	@Test public void checkBug36SmartVerticalResize() throws Exception
+	{
+		launchGui(SmartVerticalResize4RealWorldExample.class);
+		checkSnapshot("bug36-pref-size");
+		frame().moveTo(new Point(frame().target.getX(), 0));
+		for (int i = 1; i <= BUG36_STEPS; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() + BUG36_INCREMENT);
+			checkSnapshot("bug36-resize-" + (i * BUG36_INCREMENT));
+		}
+		for (int i = 1; i <= BUG36_STEPS; i++)
+		{
+			frame().resizeHeightTo(frame().target.getHeight() - BUG36_INCREMENT);
+			checkSnapshot("bug36-reverse-" + (i * BUG36_INCREMENT));
+		}
+	}
+
+	@Test public void checkBug38WrongVGapsWithAddMulti() throws Exception
+	{
+		checkExample(Bug38WrongVGapsWithAddMulti.class);
+	}
+
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{
 		checkExample(Bug20PanelWithBorder2.class);
@@ -87,4 +131,7 @@ public class SimpleIssuesTest extends AbstractGuiTest
 	{
 		checkExample(Bug20PanelWithBorder1.class);
 	}
+	
+	static final private int BUG36_INCREMENT = 3;
+	static final private int BUG36_STEPS = 6;
 }

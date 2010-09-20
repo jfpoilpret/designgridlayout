@@ -20,7 +20,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import org.jdesktop.layout.LayoutStyle;
 
@@ -225,7 +224,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	
 	@Override int gridgap()
 	{
-		LayoutStyle layoutStyle = LayoutStyle.getSharedInstance();
+		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int gridgap = 0;
 		for (int i = 0; i < _grids.size() - 1; i++)
 		{
@@ -235,14 +234,26 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 			{
 				JComponent left = leftGrid.get(leftGrid.size() - 1).component();
 				JComponent right = rightGrid.get(0).component();
-				int gap = layoutStyle.getPreferredGap(
-					left, right, LayoutStyle.UNRELATED, SwingConstants.EAST, parent());
+				int gap = helper.getHorizontalGap(
+					left, right, LayoutStyle.UNRELATED, parent());
 				gridgap = Math.max(gridgap, gap);
 			}
 		}
 		return gridgap;
 	}
 
+	@Override boolean isEmpty()
+	{
+		for (SubGrid grid: _grids)
+		{
+			if (grid.leftComponent() != null)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	@Override JComponent leftComponent()
 	{
 		return (_grids.isEmpty() ? null : _grids.get(0).leftComponent());
@@ -251,6 +262,24 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	@Override List<RowItem> items()
 	{
 		return _items;
+	}
+	
+	@Override List<RowItem> allItems()
+	{
+		if (_allItems == null)
+		{
+			_allItems = new ArrayList<RowItem>(_items.size() + _grids.size());
+			for (SubGrid grid: _grids)
+			{
+				// Add label if any
+				if (grid.label() != null)
+				{
+					_allItems.add(new RowItem(1, grid.label()));
+				}
+				_allItems.addAll(grid.items());
+			}
+		}
+		return _allItems;
 	}
 	
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
@@ -322,6 +351,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	final private GridRow _previous;
 	final private List<SubGrid> _grids = new ArrayList<SubGrid>();
 	final private List<RowItem> _items = new ArrayList<RowItem>();
+	private List<RowItem> _allItems = null;
 
 	static final private ISubGrid NULL_GRID = new EmptySubGrid();
 }

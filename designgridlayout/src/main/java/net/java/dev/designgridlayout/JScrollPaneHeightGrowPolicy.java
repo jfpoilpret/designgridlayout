@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Component;
+
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
@@ -31,9 +33,10 @@ class JScrollPaneHeightGrowPolicy
 		// Fix for issue #28
 		// TODO prepare a more extensible fix that can deal with any specific
 		// component
-		if (unit == 0 && component.getViewport().getView() instanceof JList)
+		Component view = component.getViewport().getView();
+		if (unit == 0 && view instanceof JList)
 		{
-			JList list = (JList) component.getViewport().getView();
+			JList list = (JList) view;
 			int visibleRows = list.getVisibleRowCount();
 			if (visibleRows > 0)
 			{

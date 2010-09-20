@@ -17,9 +17,13 @@ package net.java.dev.designgridlayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JComponent;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JViewport;
 import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
@@ -39,7 +43,25 @@ final class BaselineHelper
 	static public int getBaseline(Component comp)
 	{
 		Dimension size = comp.getPreferredSize();
-		return getBaseline(comp, size.width, size.height);
+		int baseline = getBaseline(comp, size.width, size.height);
+		if (baseline < 0)
+		{
+			boolean isCenter = false;
+			// Special fix for some components with -1 baselines
+			for (Class<? extends JComponent> clazz: _centerAlignedComponents)
+			{
+				if (clazz.isInstance(comp))
+				{
+					isCenter = true;
+					break;
+				}
+			}
+			if (!isCenter)
+			{
+				baseline = 0;
+			}
+		}
+		return baseline;
 	}
 
 	// CSOFF: ReturnCountCheck
@@ -186,4 +208,13 @@ final class BaselineHelper
 		_isJava6 = isJava6;
 	}
 	// CSON: IllegalCatchCheck
+	
+	static private final Set<Class<? extends JComponent>> _centerAlignedComponents =
+		new HashSet<Class<? extends JComponent>>();
+	
+	static
+	{
+		_centerAlignedComponents.add(JSeparator.class);
+		_centerAlignedComponents.add(JProgressBar.class);
+	}
 }

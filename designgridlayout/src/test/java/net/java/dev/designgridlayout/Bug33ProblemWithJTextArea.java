@@ -14,16 +14,32 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Component;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
-// Class used to show an image that is always scaled to fill all the
-// available space
-// This implementation is over-simplistic and should not be used outside that
-// test. It is absolutely not coded with performance in mind.
-public class PictureJava6 extends Picture
+public class Bug33ProblemWithJTextArea extends AbstractBaseExample
 {
-	public java.awt.Component.BaselineResizeBehavior getBaselineResizeBehavior()
+	public static void main(String[] args)
 	{
-		return java.awt.Component.BaselineResizeBehavior.CONSTANT_ASCENT;
+		Bug33ProblemWithJTextArea example = new Bug33ProblemWithJTextArea();
+		example.go(true);
+	}
+
+	@Override public void build(DesignGridLayout layout)
+	{
+		layout.row().grid().add(textarea(true));
+		layout.row().grid().add(textarea(false));
+	}
+	
+	protected JScrollPane textarea(boolean initRows)
+	{
+		JTextArea area = new JTextArea();
+		if (initRows)
+		{
+//			area.setRows(3);
+			area.setColumns(10);
+		}
+		area.setText("");
+		return new JScrollPane(area);
 	}
 }

@@ -25,8 +25,6 @@ public class SmartVerticalResizeTest extends AbstractGuiTest
 		stopGui();
 	}
 	
-	//TODO Homogeneize resize count and steps!
-	
 	@Test public void checkFigure179() throws Exception
 	{
 		checkExampleAndResize(SmartVerticalResize4RealWorldExample.class);
@@ -55,6 +53,11 @@ public class SmartVerticalResizeTest extends AbstractGuiTest
 	@Test public void checkMultiVarAndFixHeight() throws Exception
 	{
 		checkExampleAndResize(Rfe05SmartVerticalResizeMultiComponent2.class);
+	}
+
+	@Test public void checkFigure179WithoutSmartResize() throws Exception
+	{
+		checkExampleAndResize(SmartVerticalResizeDisabled4RealWorldExample.class);
 	}
 
 	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz) throws Exception

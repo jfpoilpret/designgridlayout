@@ -1,10 +1,8 @@
 This is a more realistic example of a dialog showing a picture spanning 3 rows.
 
 What is particularly interesting in that example is how the "Picture" class has been implemented so that DesignGridLayout "smart vertical resize" can work on it.
-The idea is to have Picture implement Scrollable and put its instance into a JScrollPane. However, the 3 following points are worth noticing:
+The idea is to have Picture implement Scrollable and put its instance into a JScrollPane. However, the 2 following points are worth noticing:
 
 1. In Picture, the implementation of Scrollable methods getScrollableTracksViewportHeight() and getScrollableTracksViewportWidth() return true so that the dimension of the Picture component will always be adjusted to the dimension of the JScrollPane.
 
-2. Picture implements method getBaseline(int width, int height) so that the Picture is not centered on the row (default behavior of JComponent) but rather aligned well with JLabel.
-
-3. The JScrollPane instance is setup so that it never shows any scrollbar (because of point 1. above).
+2. The JScrollPane instance is setup so that it never shows any scrollbar (because of point 1. above).

@@ -22,11 +22,6 @@ public class RowSpan7SpecialComponent extends AbstractBaseExample
 public class Picture extends JComponent implements Scrollable
 {
 	...
-	public int getBaseline(int width, int height)
-	{
-		return BaselineHelper.getBaseline(_label);
-	}
-	
 	public boolean getScrollableTracksViewportHeight()
 	{
 		return true;
@@ -37,5 +32,4 @@ public class Picture extends JComponent implements Scrollable
 		return true;
 	}
 	...
-	final private JLabel _label = new JLabel("Dummy");
 }
