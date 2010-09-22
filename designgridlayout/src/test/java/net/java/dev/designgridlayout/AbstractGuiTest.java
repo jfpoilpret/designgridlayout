@@ -219,8 +219,6 @@ abstract class AbstractGuiTest
 	}
 
 	static final private boolean _checkSnapshots = !Boolean.getBoolean("screenshots");
-	static final private boolean _isJava5 = 
-		System.getProperty("java.version").startsWith("1.5");
 	static final public String REFERENCE_SCREENSHOT_PATH = 
-		"src/test/resources/screenshots/" + (_isJava5 ? "java5/" : "java6/");
+		"src/test/resources/screenshots/java6/";
 }

@@ -24,8 +24,7 @@ import java.util.ListIterator;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-
-import org.jdesktop.layout.LayoutStyle;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * Swing LayoutManager that implements "Canonical Grids" as used by graphic 
@@ -441,7 +440,15 @@ public class DesignGridLayout implements LayoutManager
 
 			List<? extends IRowItem> items1 = row.allItems();
 			List<? extends IRowItem> items2 = next.allItems();
-			int style = (row.hasUnrelatedGap() ? LayoutStyle.UNRELATED : LayoutStyle.RELATED);
+			ComponentPlacement style;
+			if (row.hasUnrelatedGap())
+			{
+				style = ComponentPlacement.UNRELATED;
+			}
+			else
+			{
+				style = ComponentPlacement.RELATED;
+			}
 
 			for (IRowItem item1: items1)
 			{

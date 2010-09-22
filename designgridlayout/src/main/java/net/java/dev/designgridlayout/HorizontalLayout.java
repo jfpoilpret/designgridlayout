@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.SwingConstants;
-
-import org.jdesktop.layout.LayoutStyle;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 final class HorizontalLayout implements LayoutManager
 {
@@ -132,7 +130,7 @@ final class HorizontalLayout implements LayoutManager
 				JComponent left = _children.get(nth).component();
 				JComponent right = _children.get(nth + 1).component();
 				int gap = helper.getHorizontalGap(
-					left, right, LayoutStyle.RELATED, _parent);
+					left, right, ComponentPlacement.RELATED, _parent);
 				_gaps[nth] = gap;
 				_gap += gap;
 			}

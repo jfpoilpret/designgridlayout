@@ -18,8 +18,7 @@ import java.awt.Container;
 import java.util.List;
 
 import javax.swing.JComponent;
-
-import org.jdesktop.layout.LayoutStyle;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 final class ComponentHelper
 {
@@ -94,6 +93,6 @@ final class ComponentHelper
 	static private int hgap(
 		ComponentGapsHelper helper, JComponent left, JComponent right, Container parent)
 	{
-		return helper.getHorizontalGap(left, right, LayoutStyle.RELATED, parent);
+		return helper.getHorizontalGap(left, right, ComponentPlacement.RELATED, parent);
 	}
 }
