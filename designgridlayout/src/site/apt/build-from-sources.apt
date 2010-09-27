@@ -10,7 +10,7 @@ Building DesignGridLayout from source
 	must first check out the current version from 
 	{{{https://designgridlayout.dev.java.net/source/browse/designgridlayout/}Subversion repository}}.
 	
-	Then, make sure you have JDK 5 and maven (2.0.8 or more recent) installed on
+	Then, make sure you have JDK 6 and maven (2.2.1 or more recent) installed on
 	your machine.
 	
 	Running <<<mvn\ install>>> from the command line will compile and test 
@@ -26,7 +26,4 @@ Building DesignGridLayout from source
 	same directory. Once you have done that, you can generate the project site
 	with <<<mvn\ site>>> (note that tests will be executed again for collecting
 	code coverage data).
-	
-	Finally, you may use ant rather than maven to build DesignGridLayout but in
-	this case the build is "minimalistic" and does not include tests.
 	

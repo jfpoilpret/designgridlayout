@@ -77,13 +77,13 @@ DesignGridLayout "philosophy"
 	
 	To implement these principles, DesignGridLayout has decided to follow a
 	different way of using LayoutManagers than the usual way (please note that
-	this approach is now also used by Java 6 <<<GroupLayout>>>): instead of 
+	this approach is also used by Java 6 <<<GroupLayout>>>): instead of 
 	adding <<<Component>>>s directly to a <<<Container>>> and specify a 
 	<<<String>>> or <<<Object>>> to describe location, size... of that 
 	<<<Component>>>, DesignGridLayout uses a fluent API which starts from the 
 	<<<DesignGridLayout>>> instance itself.
 
-DesignGridLayout Features (version 1.1)
+DesignGridLayout Features (version 1.2)
 
 	*	<<Fluent and simple API>> to create grid-based layouts (from the layout, 
 		you create rows, from a row you add components)
@@ -118,11 +118,3 @@ DesignGridLayout Features (version 1.1)
 	*	Total <<resolution independence>>: no need for any hard-coded position 
 		or spacing
 		
-Roadmap
-
-	[1.2]	Planned during 1st Quarter 2009
-	
-		*	Support for layouts synchronization: allows consistent alignment 
-			among different layouts (useful for tabbed panes or wizard dialogs)
-	
-		[]
