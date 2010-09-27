@@ -19,7 +19,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- TODO for tests only, keep if OK -->
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
@@ -57,6 +56,15 @@
 	</profiles>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
@@ -155,6 +163,24 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
+			<!-- The following ensures that plugin V2.6 is used (instead of 2.2) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<!-- 
+					Change the following once newer checkstyle versions get available 
+					on maven repo (latest = 5.2, repo = 5.0)
+				-->
+				<!--
+				<dependencies>
+					<dependency>
+						<groupId>checkstyle</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>5.0</version>
+					</dependency>
+				</dependencies>
+				-->
+			</plugin>
 		</plugins>
 	</build>
 	
@@ -215,12 +241,22 @@
 				</reportSets>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.6</version>
 				<configuration>
 					<configLocation>config/checkstyle/checkstyle_checks.xml</configLocation>
 					<headerLocation>config/checkstyle/java_header.txt</headerLocation>
+					<!-- TODO check if the following can be definitly removed -->
+<!--
 					<suppressionsLocation>config/checkstyle/checkstyle_suppressions.xml</suppressionsLocation>
 					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+-->
+<!--
+					<suppressionsLocation>config/checkstyle/checkstyle_suppressions.xml</suppressionsLocation>
+					<suppressionsFileExpression>checkstyle.suppressions.file.donothing</suppressionsFileExpression>
+					<propertyExpansion>checkstyle.suppressions.file=${project.build.directory}/checkstyle/checkstyle-suppressions.xml</propertyExpansion>
+-->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -270,7 +306,7 @@
 
 	<licenses>
 		<license>
-			<name>Apache 2</name>
+			<name>Apache License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
 			<comments>A business-friendly Open Source Software license</comments>
