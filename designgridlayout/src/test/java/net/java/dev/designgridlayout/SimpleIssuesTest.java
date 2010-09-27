@@ -16,8 +16,6 @@ package net.java.dev.designgridlayout;
 
 import java.awt.Point;
 
-import javax.swing.SwingUtilities;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 

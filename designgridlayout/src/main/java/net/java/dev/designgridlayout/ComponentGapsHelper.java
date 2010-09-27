@@ -67,31 +67,17 @@ final class ComponentGapsHelper
 		{
 			MultiComponent multi = (MultiComponent) component1;
 			int size = multi.getChildren().length;
-			if (size > 0)
-			{
-				// Take the gap for the last child (east-side) in component1
-				return getHorizontalGap(
-					multi.getChildren()[size - 1], component2, type, parent);
-			}
-			else
-			{
-				return 0;
-			}
+			// Take the gap for the last child (east-side) in component1
+			return (size == 0 ? 0 : getHorizontalGap(
+				multi.getChildren()[size - 1], component2, type, parent));
 		}
 		else if (component2 instanceof MultiComponent)
 		{
 			MultiComponent multi = (MultiComponent) component2;
 			int size = multi.getChildren().length;
-			if (size > 0)
-			{
-				// Take the gap for the first child (west-side) in component2
-				return getHorizontalGap(
-					component1, multi.getChildren()[0], type, parent);
-			}
-			else
-			{
-				return 0;
-			}
+			// Take the gap for the first child (west-side) in component2
+			return (size == 0 ? 0 : getHorizontalGap(
+				component1, multi.getChildren()[0], type, parent));
 		}
 		else
 		{

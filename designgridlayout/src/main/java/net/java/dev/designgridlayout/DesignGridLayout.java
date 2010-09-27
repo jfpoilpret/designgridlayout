@@ -399,15 +399,17 @@ public class DesignGridLayout implements LayoutManager
 	 * component of the lower row are compared. The heights of each component is 
 	 * factored in, which seems to work well. 
 	 */
-	//FIXME vgaps calculation
-	// To be absolutely correct, each component's actual layout position should
-	// be determined by factoring component heights, component baselines, and 
-	// each row's maximum height.
-	// Problem is that this would have to be re-calculated every time... Maybe
-	// it's better not to try to improve vgaps
 	private void computeGutters()
 	{
 		// Handle horizontal gaps
+		computeHorizontalGutters();
+
+		// Vertical gaps (per row)
+		computeVerticalGutters();
+	}
+	
+	private void computeHorizontalGutters()
+	{
 		_hgap = 0;
 		_gridgap = 0;
 		for (AbstractRow row: _rows)
@@ -415,8 +417,16 @@ public class DesignGridLayout implements LayoutManager
 			_hgap = Math.max(_hgap, row.hgap());
 			_gridgap = Math.max(_gridgap, row.gridgap());
 		}
+	}
 
-		// Vertical gaps (per row)
+	//FIXME vgaps calculation
+	// To be absolutely correct, each component's actual layout position should
+	// be determined by factoring component heights, component baselines, and 
+	// each row's maximum height.
+	// Problem is that this would have to be re-calculated every time... Maybe
+	// it's better not to try to improve vgaps
+	private void computeVerticalGutters()
+	{
 		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int nthRow = 0;
 		for (AbstractRow row: _rows)
@@ -477,7 +487,7 @@ public class DesignGridLayout implements LayoutManager
 			row.vgap(rowGap);
 		}
 	}
-
+	
 	private void initialize()
 	{
 		if (_preferredSize != null)

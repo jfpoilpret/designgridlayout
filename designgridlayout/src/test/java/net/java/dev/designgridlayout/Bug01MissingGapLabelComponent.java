@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JTextField;
-
 public class Bug01MissingGapLabelComponent extends AbstractBaseExample
 {
 	public static void main(String[] args)

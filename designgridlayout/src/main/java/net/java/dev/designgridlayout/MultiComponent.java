@@ -18,6 +18,8 @@ import javax.swing.JComponent;
 
 final class MultiComponent extends JComponent
 {
+	private static final long serialVersionUID = -3834173625311111370L;
+	
 	MultiComponent(HeightGrowPolicy heightTester, OrientationPolicy orientation, 
 		JComponent... children)
 	{
@@ -32,7 +34,7 @@ final class MultiComponent extends JComponent
 		return _children;
 	}
 
-	public int getBaseline(int width, int height)
+	@Override public int getBaseline(int width, int height)
 	{
 		return _layout.getBaseline();
 	}

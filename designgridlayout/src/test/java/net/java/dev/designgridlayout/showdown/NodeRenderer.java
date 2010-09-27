@@ -31,9 +31,9 @@ class NodeRenderer extends DefaultTreeCellRenderer
 
 	@Override public Component getTreeCellRendererComponent(
 		JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row,
-		boolean hasFocus)
+		boolean isFocused)
 	{
-		super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+		super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, isFocused);
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
 		int style = Font.BOLD;
 		if (node.getUserObject() instanceof Node)
