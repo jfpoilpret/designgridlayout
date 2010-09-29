@@ -105,5 +105,5 @@ DesignGridLayout Grids and "Sub-grids"
 	second sub-grid. Finally, the last row has only one sub-grid that spans
 	both sub-grids defined in other rows.
 
-	You will find more concrete examples {{{usage.html}here}}.
+	You will find more concrete examples {{{./usage.html}here}}.
 	

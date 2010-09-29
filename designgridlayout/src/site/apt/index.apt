@@ -37,7 +37,7 @@ Swing LayoutManagers hell or the Genesis of DesignGridLayout
 * The genesis of DesignGridLayout
 
 	DesignGridLayout was born based on the work from Mullet & Sanno on 
-	{{{grids.html}canonical grids}} (a tool used in publishing) to produce always 
+	{{{./grids.html}canonical grids}} (a tool used in publishing) to produce always 
 	balanced and good-looking UI.
 	
 	From the beginning, one major plus of DesignGridLayout was its API that really

@@ -87,7 +87,7 @@ DesignGridLayout API by example
 	{{{https://designgridlayout.dev.java.net/files/documents/4350/122556/designgridlayout-1.1p1-test-sources.jar}test sources archive}}.
 	
 	Although not mandatory, it is advised to first read the DesignGridLayout
-	{{{index.html}Introduction}}.
+	{{{./index.html}Introduction}}.
 	
 	First, we demonstrate 3 equivalent ways to add components to a row. Please 
 	note the first way is not recommended (it is shown for the sake of 
@@ -135,7 +135,7 @@ public class Basics1SimpleGrid
 
 [images/Basics1SimpleGrid-org.png] Example 1: Simple grid
 
-	{{{xref-test/net/java/dev/designgridlayout/Basics1SimpleGrid.html}(Example 1 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/Basics1SimpleGrid.html}(Example 1 source)}}
 
 	Then, we'll build a simple form based on the 4 column canonical grid shown 
 	below: 
@@ -153,7 +153,7 @@ layout.row().grid().add(button()).add(button()).add(button()).empty();
 
 [images/Basics2GridColumns-org.png] Example 2: Grid columns
 
-	{{{xref-test/net/java/dev/designgridlayout/Basics2GridColumns.html}(Example 2 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/Basics2GridColumns.html}(Example 2 source)}}
 
 	Some cool things to note:
 
@@ -182,7 +182,7 @@ layout.row().grid(new JLabel("Row 4")).add(button()).add(button()).add(button())
 
 [images/Basics3GridLabels-org.png] Example 3: Grid with labels
 
-	{{{xref-test/net/java/dev/designgridlayout/Basics3GridLabels.html}(Example 3 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/Basics3GridLabels.html}(Example 3 source)}}
 
 	In Example 3 above, labels do not get resized if the window is resized, only
 	components from grid columns get resized on such event.
@@ -200,7 +200,7 @@ layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 
 [images/Basics4RightRow-org.png] Example 4: Grid and right-aligned row
 
-	{{{xref-test/net/java/dev/designgridlayout/Basics4RightRow.html}(Example 4 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/Basics4RightRow.html}(Example 4 source)}}
 
 Forms with several label columns
 
@@ -208,7 +208,7 @@ Forms with several label columns
 	groups of components, each with its own dedicated label column.
 	
 	Here is a snippet that implements the example of sub-grids found in 
-	{{{grids.html}this page on canonical grids}}:
+	{{{./grids.html}this page on canonical grids}}:
 	
 +------------------------------------------------------------------------------+
 layout.row().grid(label("Label 1:")).add(button(), button())
@@ -360,7 +360,7 @@ Where to go next?
 
 	This section has covered the main features of DesignGridLayout. A few other
 	features exist but are not yet presented here. You may want to consult the 
-	{{{apidocs/index.html}API javadoc}} which contains the official reference 
+	{{{./apidocs/index.html}API javadoc}} which contains the official reference 
 	for DesignGridLayout.
 
 	Now you are ready to use DesignGridLayout in your own programs!

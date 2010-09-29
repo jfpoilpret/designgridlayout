@@ -12,24 +12,22 @@ Real life examples
 
 [images/AddressBookDemo-org.png] Address Book Demo
 
-	{{{xref-test/net/java/dev/designgridlayout/AddressBookDemo.html}(AddressBookDemo source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/AddressBookDemo.html}(AddressBookDemo source)}}
 
 	While creating DesignGridLayout, the original author used figures 177, 178 
 	and 179 from "Designing Visual Interfaces" to help validate and work through 
-	his ideas. He found scans of the original figures 
-	{{{http://www.evl.uic.edu/aej/422/week11.html}in this online syllabus}}
-	(scroll down to the bottom).  Here are the screenshots from matching those 
-	figures while using DesignGridLayout.
+	his ideas. Here are the screenshots from matching those figures while using 
+	DesignGridLayout.
 	
 [images/Basics7RealWorldExample1-org.png] Figure 177
 
-	{{{xref-test/net/java/dev/designgridlayout/Basics7RealWorldExample1.html}(Figure177 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/Basics7RealWorldExample1.html}(Figure177 source)}}
 
 [images/Basics8RealWorldExample2-org.png] Figure 178
 
-	{{{xref-test/net/java/dev/designgridlayout/Basics8RealWorldExample2.html}(Figure178 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/Basics8RealWorldExample2.html}(Figure178 source)}}
 
 [images/SmartVerticalResize4RealWorldExample-pref-size-org.png] Figure 179
 
-	{{{xref-test/net/java/dev/designgridlayout/SmartVerticalResize4RealWorldExample.html}(Figure179 source)}}
+	{{{./xref-test/net/java/dev/designgridlayout/SmartVerticalResize4RealWorldExample.html}(Figure179 source)}}
 	
