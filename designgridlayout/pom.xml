@@ -40,7 +40,7 @@
 	<inceptionYear>2005</inceptionYear>
 	
 	<organization>
-		<name>Project DesigngridLayout</name>
+		<name>Project DesignGridLayout</name>
 		<url>http://designgridlayout.dev.java.net/</url>
 	</organization>
 
@@ -161,23 +161,11 @@
 					<version>2.6</version>
 					<configuration>
 						<groups>utest,itest</groups>
-						<systemProperties>
-							<property>
-								<name>screenshots</name>
-								<value>${genscreenshots}</value>
-							</property>
-							<property>
-								<name>awt.useSystemAAFontSettings</name>
-								<value>false</value>
-							</property>
-						</systemProperties>
+						<systemPropertyVariables>
+							<screenshots>${genscreenshots}</screenshots>
+							<awt.useSystemAAFontSettings>false</awt.useSystemAAFontSettings>
+						</systemPropertyVariables>
 					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-checkstyle-plugin</artifactId>
-					<version>2.5</version>
 				</plugin>
 
 				<plugin>
@@ -197,6 +185,12 @@
 					<artifactId>wagon</artifactId>
 					<version>1.0-beta-6</version>
 				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -213,7 +207,6 @@
 			</testResource>
 		</testResources>
 
-		<!-- simplify??? remove redundancies with pluginmanagement section?? -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -226,6 +219,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<!-- Also generate a source jar to be installed into the repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -241,8 +235,10 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<!-- Also generate a javadoc jar to be installed into the repository -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
 					<quiet>true</quiet>
@@ -262,20 +258,7 @@
 					</execution>
 				</executions>
  			</plugin>
-			<!--
-				Download source and javadoc from all dependencies and make them 
-				available within eclipse.
-				Requires explicit call to: mvn eclipse:eclipse
-			 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<addVersionToProjectName>true</addVersionToProjectName>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-				</configuration>
-			</plugin>
+
 			<!-- The following ensures that plugin V2.6 is used (instead of 2.2) -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -302,14 +285,16 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.4</version>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.2</version>
 				<reportSets>
 					<reportSet>
 						<reports>
-							<report>index</report>
 							<report>summary</report>
 							<report>dependencies</report>
 							<report>project-team</report>
@@ -321,12 +306,18 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
+
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.2</version>
 			</plugin>
+
 			<!-- Generate javadoc only for source, not for test -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
 				<configuration>
 					<quiet>true</quiet>
 					<verbose>false</verbose>
@@ -343,8 +334,11 @@
 					</reportSet>
 				</reportSets>
  			</plugin>
+
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.6</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -353,6 +347,7 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -362,11 +357,13 @@
 					<headerLocation>config/checkstyle/java_header.txt</headerLocation>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>1.2</version>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -387,14 +384,20 @@
 		</plugins>
 	</reporting>
 
-	<!-- TODO use a less recent TestNG that still has special jdk5 support 
-	otherwise it won't get used by FEST... -->
+	<!-- 
+		NB: we use a less recent TestNG that still has special jdk5 support 
+		otherwise it won't get used by FEST, which still has a dependency on 
+		TestNG with jdk5 classifier.
+		When FEST depends on more recent TestNG (without jdk5 classifier), we
+		can set the latest TestNG version here.
+	-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.testng</groupId>
 				<artifactId>testng</artifactId>
-				<version>5.14</version>
+				<version>5.11</version>
+				<classifier>jdk15</classifier>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
