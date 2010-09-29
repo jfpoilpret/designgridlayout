@@ -7,7 +7,7 @@
 How to use in a Maven project
 
 	DesignGridLayout is directly usable by Maven-based projects and is present
-	in Maven central repository TODO LINK.
+	in Maven central repository.
 	
 	You just have to declare DesignGridLayout dependency in your pom.xml, as 
 	for any other artifact used by your project:
