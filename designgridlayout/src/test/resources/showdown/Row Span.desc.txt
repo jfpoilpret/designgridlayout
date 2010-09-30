@@ -1,4 +1,4 @@
-This section shows an important new feature of DesignGridLayout 1.1: defining components that can span several rows.
+This section shows an important feature of DesignGridLayout (since verssion 1.1): defining components that can span several rows.
 
 This feature is all based on a simple API: the spanRow() method.
 Every time spanRow() is called in a grid row, DesignGridLayout will search for a component in the row above, at the same position (grid and column) as in the current row, the found component will then span the current row.
