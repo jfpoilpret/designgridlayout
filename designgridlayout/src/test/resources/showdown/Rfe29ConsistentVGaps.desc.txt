@@ -1,0 +1,9 @@
+This example shows how DesignGridLayout can compute consistent vertical gaps between consecutive rows. This is to be comapred with the previous example.
+
+When required to, DesignGridLayout will calculate the exact vertical gap between every pair of consecutive rows in the layout, and then take the maximum of all those gaps as the standard gap between every pair of rows.
+
+When using this feature, you'll see that rows labels seem equally spaced (as compared with default behavior). However, the UI seems not as well balanced in terms of real estate occupation.
+
+Note that, when using empty rows, the vertical gap is, of course, still bigger than the "standard" vertical gap.
+
+The source code for this example derives from the previous example. The only difference is the explicit call to "layout.forceConsistentVGaps()".

@@ -128,6 +128,26 @@ public class DesignGridLayout implements LayoutManager
 	}
 	
 	/**
+	 * Requires to use consistent vertical gaps between rows (ie the vertical gap
+	 * between rows will be same for every pair of 2 consecutive rows, provided
+	 * that there is no {@link #emptyRow()} call between this pair of rows.
+	 * <p/>
+	 * Forcing consistent gaps changes the global balance of forms: on one hand,
+	 * it seems to make all consecutive labels equidistant, on the other hand,
+	 * it seems to introduce too much space between actual components (fields,
+	 * checkboxes...) Hence, this is only provided as an option. DesignGridLayout
+	 * defaults to using the actual vertical gap between each pair of rows.
+	 * 
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout forceConsistentVGaps()
+	{
+		_consistentVGaps = true;
+		return this;
+	}
+
+	/**
 	 * Disable DesignGridLayout "smart vertical resize" feature. This means that
 	 * all variable height components in {@code this} layout will have their
 	 * height take every single available pixel, possibly showing partial
@@ -429,6 +449,8 @@ public class DesignGridLayout implements LayoutManager
 	{
 		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int nthRow = 0;
+		int maxVGap = 0;
+		int maxUnrelatedVGap = 0;
 		for (AbstractRow row: _rows)
 		{
 			nthRow++;
@@ -484,7 +506,22 @@ public class DesignGridLayout implements LayoutManager
 					}
 				}
 			}
+			if (row.hasUnrelatedGap())
+			{
+				maxUnrelatedVGap = Math.max(maxUnrelatedVGap, rowGap);
+			}
+			else
+			{
+				maxVGap = Math.max(maxVGap, rowGap);
+			}
 			row.vgap(rowGap);
+		}
+		if (_consistentVGaps)
+		{
+			for (AbstractRow row: _rows.subList(0, _rows.size() - 1))
+			{
+				row.vgap(row.hasUnrelatedGap() ? maxUnrelatedVGap : maxVGap);
+			}
 		}
 	}
 	
@@ -899,6 +936,8 @@ public class DesignGridLayout implements LayoutManager
 	private double _bottomWeight = 1.0;
 	private double _rightWeight = 1.0;
 	
+	private boolean _consistentVGaps = false;
+
 	private AbstractRow _current = null;
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
