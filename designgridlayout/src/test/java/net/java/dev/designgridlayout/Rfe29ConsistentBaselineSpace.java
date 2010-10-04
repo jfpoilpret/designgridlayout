@@ -14,17 +14,17 @@
 
 package net.java.dev.designgridlayout;
 
-public class Rfe29ConsistentVGaps extends Rfe29ExactVGaps
+public class Rfe29ConsistentBaselineSpace extends Rfe29ExactVGaps
 {
 	public static void main(String[] args)
 	{
-		Rfe29ConsistentVGaps example = new Rfe29ConsistentVGaps();
+		Rfe29ConsistentBaselineSpace example = new Rfe29ConsistentBaselineSpace();
 		example.go(true);
 	}
 
 	@Override protected void build(DesignGridLayout layout)
 	{
-		layout.forceConsistentVGaps();
+		layout.forceConsistentBaselinesDistance();
 		super.build(layout);
 	}
 }

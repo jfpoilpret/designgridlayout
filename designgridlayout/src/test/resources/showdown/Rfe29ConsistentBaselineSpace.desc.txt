@@ -1,0 +1,11 @@
+This example shows how DesignGridLayout can compute consistent vertical distance between baselines of consecutive rows. This is to be compared with the previous example.
+
+When required to, DesignGridLayout will calculate the exact vertical baseline distance between every pair of consecutive rows in the layout, and then take the maximum of all those distances as the standard distance between all consecutive rows by introducing additional gap on the bottom of rows.
+
+Distance is made consistent only between pairs of rows where the first rows has a fixed height; DesignGridLayout doesn't change gaps for variable-height rows.
+
+When using this feature, you'll see that rows labels are equally spaced (as compared with default behavior). However, the UI may sometimes seem not as well balanced in terms of real estate occupation.
+
+Note that, when using empty rows (ie calling layout.emptyRow()), the distance between baselines is of course bigger than for other rows.
+
+The source code for this example derives from the previous example. The only difference is the explicit call to "layout.forceConsistentBaselinesDistance()".

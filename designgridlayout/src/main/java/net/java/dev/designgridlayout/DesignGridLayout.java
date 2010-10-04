@@ -128,22 +128,22 @@ public class DesignGridLayout implements LayoutManager
 	}
 	
 	/**
-	 * Requires to use consistent vertical gaps between rows (ie the vertical gap
-	 * between rows will be same for every pair of 2 consecutive rows, provided
-	 * that there is no {@link #emptyRow()} call between this pair of rows.
+	 * Requires to use consistent baselines spacing of all pairs of two
+	 * consecutive rows which first row has a fixed height.
 	 * <p/>
-	 * Forcing consistent gaps changes the global balance of forms: on one hand,
-	 * it seems to make all consecutive labels equidistant, on the other hand,
-	 * it seems to introduce too much space between actual components (fields,
-	 * checkboxes...) Hence, this is only provided as an option. DesignGridLayout
-	 * defaults to using the actual vertical gap between each pair of rows.
+	 * Forcing consistent baselines spacing changes the global balance of forms: 
+	 * on one hand, it makes all consecutive labels equidistant, on the other 
+	 * hand, it seems to introduce too much space between actual components 
+	 * (fields, checkboxes...) Hence, this is only provided as an option. 
+	 * DesignGridLayout defaults to always use the actual vertical gap between 
+	 * each pair of rows.
 	 * 
 	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
 	 * calls to other methods (also known as "fluent API")
 	 */
-	public DesignGridLayout forceConsistentVGaps()
+	public DesignGridLayout forceConsistentBaselinesDistance()
 	{
-		_consistentVGaps = true;
+		_consistentBaselineDistance = true;
 		return this;
 	}
 
@@ -449,8 +449,6 @@ public class DesignGridLayout implements LayoutManager
 	{
 		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int nthRow = 0;
-		int maxVGap = 0;
-		int maxUnrelatedVGap = 0;
 		for (AbstractRow row: _rows)
 		{
 			nthRow++;
@@ -506,25 +504,51 @@ public class DesignGridLayout implements LayoutManager
 					}
 				}
 			}
-			if (row.hasUnrelatedGap())
-			{
-				maxUnrelatedVGap = Math.max(maxUnrelatedVGap, rowGap);
-			}
-			else
-			{
-				maxVGap = Math.max(maxVGap, rowGap);
-			}
 			row.vgap(rowGap);
-		}
-		if (_consistentVGaps)
-		{
-			for (AbstractRow row: _rows.subList(0, _rows.size() - 1))
-			{
-				row.vgap(row.hasUnrelatedGap() ? maxUnrelatedVGap : maxVGap);
-			}
 		}
 	}
 	
+	private void computeConsistentBaselineDistance()
+	{
+		// Baseline distances
+		int relatedBaselineDistance = 0;
+		int unrelatedBaselineDistance = 0;
+		for (int i = 0; i < _rows.size() - 1; i++)
+		{
+			//FIXME deal with empty rows!
+			AbstractRow current = _rows.get(i);
+			if (current.growWeight() == 0.0)
+			{
+				AbstractRow next = _rows.get(i + 1);
+				int distance = current.height() + current.vgap() - current.baseline()
+					+ next.baseline();
+				if (current.hasUnrelatedGap())
+				{
+					unrelatedBaselineDistance = 
+						Math.max(unrelatedBaselineDistance, distance);
+				}
+				else
+				{
+					relatedBaselineDistance = 
+						Math.max(relatedBaselineDistance, distance);
+				}
+			}
+		}
+		for (int i = 0; i < _rows.size() - 1; i++)
+		{
+			//FIXME deal with empty rows!
+			AbstractRow current = _rows.get(i);
+			if (current.growWeight() == 0.0)
+			{
+				AbstractRow next = _rows.get(i + 1);
+				int vgap = (current.hasUnrelatedGap() ? 
+					unrelatedBaselineDistance : relatedBaselineDistance);
+				vgap += current.baseline() - current.height() - next.baseline();
+				current.vgap(vgap);
+			}
+		}
+	}
+
 	private void initialize()
 	{
 		if (_preferredSize != null)
@@ -561,6 +585,12 @@ public class DesignGridLayout implements LayoutManager
 		for (AbstractRow row: _rows)
 		{
 			row.init();
+		}
+
+		// Compute consistent baselines
+		if (_consistentBaselineDistance)
+		{
+			computeConsistentBaselineDistance();
 		}
 
 		// Calculate labels width for all grids
@@ -936,7 +966,7 @@ public class DesignGridLayout implements LayoutManager
 	private double _bottomWeight = 1.0;
 	private double _rightWeight = 1.0;
 	
-	private boolean _consistentVGaps = false;
+	private boolean _consistentBaselineDistance = false;
 
 	private AbstractRow _current = null;
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
