@@ -19,12 +19,15 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import static net.java.dev.designgridlayout.RowIterator.each;
 
 /**
  * Swing LayoutManager that implements "Canonical Grids" as used by graphic 
@@ -510,18 +513,24 @@ public class DesignGridLayout implements LayoutManager
 	
 	private void computeConsistentBaselineDistance()
 	{
+		Iterator<AbstractRow> iter = each(_rows).iterator();
+		if (!iter.hasNext())
+		{
+			return;
+		}
 		// Baseline distances
 		int relatedBaselineDistance = 0;
 		int unrelatedBaselineDistance = 0;
-		for (int i = 0; i < _rows.size() - 1; i++)
+		AbstractRow current;
+		AbstractRow next = iter.next();
+		while (iter.hasNext())
 		{
-			//FIXME deal with empty rows!
-			AbstractRow current = _rows.get(i);
+			current = next;
+			next = iter.next();
 			if (current.growWeight() == 0.0)
 			{
-				AbstractRow next = _rows.get(i + 1);
-				int distance = current.height() + current.vgap() - current.baseline()
-					+ next.baseline();
+				int distance = current.height() + current.vgap() - current.baseline() +
+					next.baseline();
 				if (current.hasUnrelatedGap())
 				{
 					unrelatedBaselineDistance = 
@@ -534,15 +543,16 @@ public class DesignGridLayout implements LayoutManager
 				}
 			}
 		}
-		for (int i = 0; i < _rows.size() - 1; i++)
+		iter = each(_rows).iterator();
+		next = iter.next();
+		while (iter.hasNext())
 		{
-			//FIXME deal with empty rows!
-			AbstractRow current = _rows.get(i);
+			current = next;
+			next = iter.next();
 			if (current.growWeight() == 0.0)
 			{
-				AbstractRow next = _rows.get(i + 1);
-				int vgap = (current.hasUnrelatedGap() ? 
-					unrelatedBaselineDistance : relatedBaselineDistance);
+				int vgap = (current.hasUnrelatedGap()
+					? unrelatedBaselineDistance : relatedBaselineDistance);
 				vgap += current.baseline() - current.height() - next.baseline();
 				current.vgap(vgap);
 			}
