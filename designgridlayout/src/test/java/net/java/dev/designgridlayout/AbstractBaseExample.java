@@ -17,6 +17,7 @@ package net.java.dev.designgridlayout;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -51,13 +52,18 @@ public abstract class AbstractBaseExample
 
 		build(layout);
 
-		_frame.add(top);
+		addTopPanel(top);
 		prePack();
 		_frame.pack();
 		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
 	}
 
+	protected void addTopPanel(JComponent top)
+	{
+		_frame.add(top);
+	}
+	
 	protected void prePack()
 	{
 	}
