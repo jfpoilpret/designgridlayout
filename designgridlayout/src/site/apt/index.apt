@@ -6,7 +6,7 @@
 							
 Swing LayoutManagers hell or the Genesis of DesignGridLayout
 
-* Why Swing LayoutManagers are bad
+* Why standard Swing LayoutManagers are bad
 
 	*	they are too simple (<<<FlowLayout>>>, <<<GridLayout>>>) to really get 
 		your forms as you want them
