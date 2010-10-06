@@ -97,6 +97,15 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		frame().resizeWidthTo(frame().component().getWidth() + 1);
 		checkSnapshot("after-append");
 	}
+	
+	@Test public void checkBug35PanelWithVariableHeightChild() throws Exception
+	{
+		// Show in default size
+		checkExample(Bug35PanelWithVariableHeightChild.class);
+		// Problem: resize vertically
+		frame().resizeHeightTo(frame().component().getHeight() + 50);
+		checkSnapshot("after-resize");
+	}
 
 	@Test public void checkBug36SmartVerticalResize() throws Exception
 	{

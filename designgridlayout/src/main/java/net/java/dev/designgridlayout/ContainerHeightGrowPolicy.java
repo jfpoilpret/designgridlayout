@@ -15,19 +15,19 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Component;
+import java.awt.Container;
 
-class MultiComponentHeightGrowPolicy 
-	extends AbstractClassBasedHeightGrowPolicy<MultiComponent>
+class ContainerHeightGrowPolicy extends AbstractClassBasedHeightGrowPolicy<Container>
 {
-	public MultiComponentHeightGrowPolicy(HeightGrowPolicy defaultPolicy)
+	public ContainerHeightGrowPolicy(HeightGrowPolicy defaultPolicy)
 	{
-		super(MultiComponent.class);
+		super(Container.class);
 		_defaultPolicy = defaultPolicy;
 	}
 
-	@Override protected boolean componentCanGrowHeight(MultiComponent component)
+	@Override protected boolean componentCanGrowHeight(Container panel)
 	{
-		for (Component child: component.getComponents())
+		for (Component child: panel.getComponents())
 		{
 			if (_defaultPolicy.canGrowHeight(child))
 			{
@@ -37,11 +37,10 @@ class MultiComponentHeightGrowPolicy
 		return false;
 	}
 	
-	@Override protected int componentComputeExtraHeight(
-		MultiComponent component, int extraHeight)
+	@Override protected int componentComputeExtraHeight(Container panel, int extraHeight)
 	{
 		int actualHeight = 0;
-		for (Component child: component.getComponents())
+		for (Component child: panel.getComponents())
 		{
 			if (_defaultPolicy.canGrowHeight(child))
 			{

@@ -20,6 +20,6 @@ class DefaultGrowPolicy extends HeightGrowPolicyMapper
 	{
 		addPolicy(new JScrollPaneHeightGrowPolicy());
 		addPolicy(new JSliderHeightGrowPolicy());
-		addPolicy(new MultiComponentHeightGrowPolicy(this));
+		addPolicy(new ContainerHeightGrowPolicy(this));
 	}
 }
