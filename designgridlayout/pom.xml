@@ -141,19 +141,15 @@
 				</plugin>
 
 				<!-- DECLARED BY SONATYPE PARENT -->
-<!--
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.0</version>
 					<configuration>
-						<releaseProfiles>release</releaseProfiles>
-						<resume>false</resume>
-						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<preparationGoals>clean verify install</preparationGoals>
+						<workingDirectory>${project.build.directory}/checkout/designgridlayout</workingDirectory>
 					</configuration>
 				</plugin>
--->
+
 				<plugin>
 					<!-- Surefire default configuration -->
 					<groupId>org.apache.maven.plugins</groupId>
