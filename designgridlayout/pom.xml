@@ -146,7 +146,12 @@
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.0</version>
 					<configuration>
-						<workingDirectory>${project.build.directory}/checkout/designgridlayout</workingDirectory>
+						<!-- 
+							Set the right svn URL, including designgridlayout subdir,
+							otherwise, checkout root dir will have 2 dirs (www & designgridlayout)
+							and no pom.xml, hence release:perform will fail.
+						-->
+						<connectionUrl>https://designgridlayout.dev.java.net/svn/designgridlayout/trunk/designgridlayout</connectionUrl>
 					</configuration>
 				</plugin>
 
