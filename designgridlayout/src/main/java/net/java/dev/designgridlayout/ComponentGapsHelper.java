@@ -85,7 +85,7 @@ final class ComponentGapsHelper
 				component1, component2, type, SwingConstants.EAST, parent);
 		}
 	}
-    
+
 	public int getNorthContainerGap(JComponent component, Container parent)
 	{
 		if (component instanceof MultiComponent)
