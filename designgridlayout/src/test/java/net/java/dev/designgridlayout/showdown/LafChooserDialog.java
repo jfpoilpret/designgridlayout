@@ -30,6 +30,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import net.java.dev.designgridlayout.DesignGridLayout;
 import net.java.dev.designgridlayout.IRow;
 
+@SuppressWarnings("serial")
 public class LafChooserDialog extends JDialog
 {
 	static private final int BUTTONS_PER_ROW = 3;

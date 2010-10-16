@@ -44,6 +44,8 @@ import net.java.dev.designgridlayout.MultiGrid2ThreeGridsWithGridSpan;
 import net.java.dev.designgridlayout.MultiGrid3ThreeComplexGrids;
 import net.java.dev.designgridlayout.Rfe29ConsistentBaselineSpace;
 import net.java.dev.designgridlayout.Rfe29ExactVGaps;
+import net.java.dev.designgridlayout.Rfe40LeftLabelAlignmentExample;
+import net.java.dev.designgridlayout.Rfe40PlatformLabelAlignmentExample;
 import net.java.dev.designgridlayout.RightToLeft1LTR;
 import net.java.dev.designgridlayout.RightToLeft2RTL;
 import net.java.dev.designgridlayout.RightToLeft3RealWorldExample;
@@ -58,6 +60,7 @@ import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
 import net.java.dev.designgridlayout.SmartVerticalResize5SameWeight;
 
+@SuppressWarnings("serial")
 public class Examples extends JFrame
 {
 	public static void main(String[] args) throws Exception
@@ -172,6 +175,15 @@ public class Examples extends JFrame
 			new Node("Markers on bad API usage", RowSpan4ErrorMarkers.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example - Contact entry", RowSpan7SpecialComponent.class)));
+		root.add(node);
+
+		node = new DefaultMutableTreeNode("Label Alignment in Grids");
+		node.add(new DefaultMutableTreeNode(
+			new Node("AddressBookDemo - Platform Alignment", Rfe40PlatformLabelAlignmentExample.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("AddressBookDemo - Left Alignment", Rfe40LeftLabelAlignmentExample.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("AddressBookDemo - Right Alignment", AddressBookDemo.class)));
 		root.add(node);
 
 		node = new DefaultMutableTreeNode("Right to Left Support");

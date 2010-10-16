@@ -79,6 +79,10 @@ abstract class AbstractRow
 			_growWeight = (fixedHeight ? 0.0 : 1.0);
 		}
 	}
+	
+	void setLabelAlignment(LabelAlignment align)
+	{
+	}
 
 	final protected int baseline()
 	{

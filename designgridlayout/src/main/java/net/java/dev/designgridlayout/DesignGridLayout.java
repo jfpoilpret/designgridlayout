@@ -169,6 +169,31 @@ public class DesignGridLayout
 	}
 
 	/**
+	 * Define the alignment to use for labels in DesignGridLayout grids. This applies
+	 * only to the first column ("label column") of each grid. Labels in other locations
+	 * are not impacted by this method and are aligned according to their own settings.
+	 * <p/>
+	 * By default, DesignGridLayout will use platform alignment for labels. But you can
+	 * set any alignment you want by calling {@code labelAlignment()}.
+	 * <p/>
+	 * Note that if you call this method several times, only the last call is effective;
+	 * this means that you can't have different label alignments in the same layout, all
+	 * alignments are always consistent within one layout.
+	 * 
+	 * @param align the alignment to apply to labels in grids
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
+	 */
+	public DesignGridLayout labelAlignment(LabelAlignment align)
+	{
+		if (align != null)
+		{
+			_layout.labelAlignment(align);
+		}
+		return this;
+	}
+
+	/**
 	 * Creates a new row. The type of the row is not determined yet, but will
 	 * be determined by the chained call performed on the returned 
 	 * {@link IRowCreator}.

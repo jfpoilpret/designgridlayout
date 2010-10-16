@@ -50,6 +50,7 @@ public abstract class AbstractBaseExample
 		DesignGridLayout layout = new DesignGridLayout(top);
 		top.setName("TOP");
 
+		layout.labelAlignment(LabelAlignment.RIGHT);
 		build(layout);
 
 		addTopPanel(top);

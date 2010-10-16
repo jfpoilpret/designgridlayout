@@ -56,6 +56,11 @@ class DesignGridLayoutManager implements LayoutManager
 		_heightTester = heightTester;
 	}
 
+	void labelAlignment(LabelAlignment align)
+	{
+		_labelAlignment = align;
+	}
+
 	/*
 	 * Do not add components via the parent container's {@link Container#add(Component)}
 	 * method, use directly DesignGridLayout API instead.
@@ -238,7 +243,6 @@ class DesignGridLayoutManager implements LayoutManager
 		}
 	}
 
-	//FIXME vgaps calculation
 	// To be absolutely correct, each component's actual layout position should
 	// be determined by factoring component heights, component baselines, and 
 	// each row's maximum height.
@@ -387,10 +391,11 @@ class DesignGridLayoutManager implements LayoutManager
 		// Initialize the list of all rowspan items across the layout
 		initRowSpanItems();
 
-		// Initialize each row (compute width, height, baseline)
+		// Initialize each row (compute width, height, baseline) and label alignment
 		for (AbstractRow row: _rows)
 		{
 			row.init();
+			row.setLabelAlignment(_labelAlignment);
 		}
 
 		// Compute consistent baselines
@@ -712,6 +717,7 @@ class DesignGridLayoutManager implements LayoutManager
 	private double _rightWeight = 1.0;
 	
 	private boolean _consistentBaselineDistance = false;
+	private LabelAlignment _labelAlignment = LabelAlignment.PLATFORM;
 
 	final private List<AbstractRow> _rows;
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();

@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 // available space
 // This implementation is over-simplistic and should not be used outside that
 // test. It is absolutely not coded with performance in mind.
+@SuppressWarnings("serial")
 public class Picture extends JComponent implements Scrollable
 {
 	public Picture()

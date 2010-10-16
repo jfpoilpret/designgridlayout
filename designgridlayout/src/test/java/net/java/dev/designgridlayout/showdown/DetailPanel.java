@@ -26,6 +26,7 @@ import javax.swing.JTextArea;
 
 import net.java.dev.designgridlayout.DesignGridLayout;
 
+@SuppressWarnings("serial")
 class DetailPanel extends JPanel
 {
 	public DetailPanel()

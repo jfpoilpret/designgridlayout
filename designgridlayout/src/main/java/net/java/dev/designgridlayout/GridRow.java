@@ -165,6 +165,18 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return findNonNulGrid(grid).gridspan();
 	}
 
+	@Override void setLabelAlignment(LabelAlignment align)
+	{
+		for (SubGrid grid: _grids)
+		{
+			JLabel label = grid.label();
+			if (label != null)
+			{
+				label.setHorizontalAlignment(align.alignment());
+			}
+		}
+	}
+
 	@Override int labelWidth(int grid)
 	{
 		return findNonNulGrid(grid).labelWidth();

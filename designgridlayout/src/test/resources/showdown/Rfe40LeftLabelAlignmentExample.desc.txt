@@ -1,0 +1,3 @@
+In this example, we force a left alignment for labels (which is the standard alignment on Windows).
+
+The source code is identical to the "Example - Address Book Demo" except for the first line of code where label alignment is explicitly set to left.

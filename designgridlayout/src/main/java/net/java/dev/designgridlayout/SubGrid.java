@@ -34,7 +34,6 @@ final class SubGrid implements ISubGrid
 		_gridspan = (gridspan <= 0 ? 0 : gridspan);
 		if (_label != null)
 		{
-			_label.setHorizontalAlignment(JLabel.TRAILING);
 			_parent.add(_label);
 		}
 	}

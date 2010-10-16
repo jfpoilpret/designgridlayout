@@ -1,0 +1,3 @@
+In this example, we use the default platform alignment for labels. This means that if you are running this example on Windows, you will see the labels left-aligned, if you are on Macintosh, they will be right-aligned.
+
+Using platform alignment is the default behavior with DesignGridLayout; however, you may want to make it clear that you are using the platform defaults by explicitly calling labelAlignment(LabelAlignment.PLATFORM) as in this example.

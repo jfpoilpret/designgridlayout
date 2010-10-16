@@ -32,7 +32,7 @@ class JScrollPaneHeightGrowPolicy
 		int unit = component.getVerticalScrollBar().getUnitIncrement(+1);
 		// Fix for issue #28
 		// TODO prepare a more extensible fix that can deal with any specific
-		// component
+		// component (only if needed: wait until other components require a fix)
 		Component view = component.getViewport().getView();
 		if (unit == 0 && view instanceof JList)
 		{

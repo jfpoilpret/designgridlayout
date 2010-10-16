@@ -63,9 +63,7 @@ class HeightGrowPolicyMapper implements HeightGrowPolicy
 			}
 			clazz = clazz.getSuperclass().asSubclass(Component.class);
 		}
-		//TODO Not sure this is necessary (not until this API is made open, if ever)
-		// If no policy was found for concrete classed in this component 
-		// class hierarchy, then search for a policy for implemented interfaces 
+		// No policy was found for concrete classed in this component class hierarchy
 		return null;
 	}
 

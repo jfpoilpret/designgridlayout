@@ -14,33 +14,18 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-
-// Issue 39: when DGL form has JTextArea and this form is within a JScrollPane
-public class Bug39HystericalJTextAreaWithScrollPane extends AbstractBaseExample
+// Same as AddressBookDemo but with forced left label alignment
+public class Rfe40LeftLabelAlignmentExample extends AddressBookDemo
 {
 	public static void main(String[] args)
 	{
-		Bug39HystericalJTextAreaWithScrollPane example = 
-			new Bug39HystericalJTextAreaWithScrollPane();
+		Rfe40LeftLabelAlignmentExample example = new Rfe40LeftLabelAlignmentExample();
 		example.go(true);
-	}
-
-	@Override protected void addTopPanel(JComponent top)
-	{
-		JScrollPane scroller = new JScrollPane(
-			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroller.setViewportView(top);
-		super.addTopPanel(scroller);
 	}
 
 	@Override public void build(DesignGridLayout layout)
 	{
-//		layout.row().grid().add(new JCheckBox("Abc")).add(new JCheckBox("123"));
-		JTextArea area = new JTextArea(2, 10);
-		area.setLineWrap(true);
-		layout.row().grid().add(area);
+		layout.labelAlignment(LabelAlignment.LEFT);
+		super.build(layout);
 	}
 }

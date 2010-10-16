@@ -21,6 +21,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+@SuppressWarnings("serial")
 class NodeRenderer extends DefaultTreeCellRenderer
 {
 	public NodeRenderer()

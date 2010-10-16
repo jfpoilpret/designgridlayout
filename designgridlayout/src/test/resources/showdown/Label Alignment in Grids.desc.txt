@@ -1,0 +1,7 @@
+This section shows how you can change alignment of labels used in DesignGridLayout grids.
+
+By default, DesignGridLayout forces label alignment according to UI guidelines for the current platform, e.g. right-alignment on Macintosh, left-alignment on Windows...
+
+You can, if you want, fix the label alignment to something else than the platform default, as shown in the following examples, all derived from the previous "Example - Address Book Demo", which label-alignment is forced to right whatever the platform.
+
+Note that if you called labelAlignment(...) several times on a given layout, only the last setting is effective and used for the whole layout content.
