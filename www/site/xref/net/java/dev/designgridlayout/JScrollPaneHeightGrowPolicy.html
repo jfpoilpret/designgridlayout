@@ -42,7 +42,7 @@
 <a class="jxr_linenumber" name="32" href="#32">32</a>  		<strong class="jxr_keyword">int</strong> unit = component.getVerticalScrollBar().getUnitIncrement(+1);
 <a class="jxr_linenumber" name="33" href="#33">33</a>  		<em class="jxr_comment">// Fix for issue #28</em>
 <a class="jxr_linenumber" name="34" href="#34">34</a>  		<em class="jxr_comment">// TODO prepare a more extensible fix that can deal with any specific</em>
-<a class="jxr_linenumber" name="35" href="#35">35</a>  		<em class="jxr_comment">// component</em>
+<a class="jxr_linenumber" name="35" href="#35">35</a>  		<em class="jxr_comment">// component (only if needed: wait until other components require a fix)</em>
 <a class="jxr_linenumber" name="36" href="#36">36</a>  		Component view = component.getViewport().getView();
 <a class="jxr_linenumber" name="37" href="#37">37</a>  		<strong class="jxr_keyword">if</strong> (unit == 0 &amp;&amp; view instanceof JList)
 <a class="jxr_linenumber" name="38" href="#38">38</a>  		{

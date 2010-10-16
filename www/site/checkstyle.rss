@@ -8,10 +8,10 @@
     <language>en-us</language>
     <copyright>&#169;2005 - 2010 Project DesignGridLayout</copyright>
     <item>
-      <title>File: 40,
+      <title>File: 43,
              Errors: 0,
-             Warnings: 1,
-             Infos: 2
+             Warnings: 0,
+             Infos: 1
       </title>
             <link>http://designgridlayout.dev.java.net/nonav/site//checkstyle.html</link>
       <description>
@@ -127,6 +127,20 @@
               </tr>
                           <tr>
                 <td>
+                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.DesignGridLayoutManager.java">net/java/dev/designgridlayout/DesignGridLayoutManager.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.LayoutHelper.java">net/java/dev/designgridlayout/LayoutHelper.java</a>
                 </td>
                 <td>
@@ -189,7 +203,21 @@
                   0
                 </td>
                 <td>
-                  1
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.PlatformHelper.java">net/java/dev/designgridlayout/PlatformHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
                 <td>
                   0
@@ -270,7 +298,7 @@
                   <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.HeightGrowPolicyMapper.java">net/java/dev/designgridlayout/HeightGrowPolicyMapper.java</a>
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -436,6 +464,20 @@
                           <tr>
                 <td>
                   <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.NonGridRowItem.java">net/java/dev/designgridlayout/NonGridRowItem.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://designgridlayout.dev.java.net/nonav/site//checkstyle.html#net.java.dev.designgridlayout.LabelAlignment.java">net/java/dev/designgridlayout/LabelAlignment.java</a>
                 </td>
                 <td>
                   0
