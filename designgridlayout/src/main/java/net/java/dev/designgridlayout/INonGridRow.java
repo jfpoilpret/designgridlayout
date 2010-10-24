@@ -58,4 +58,7 @@ public interface INonGridRow extends IRow
 	 * row)
 	 */
 	public abstract INonGridRow fill();
+	
+	//TODO javadoc
+	public abstract INonGridRow withOwnRowWidth();
 }

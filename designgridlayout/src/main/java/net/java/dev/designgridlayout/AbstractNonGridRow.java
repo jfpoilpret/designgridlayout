@@ -57,6 +57,12 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
+	public INonGridRow withOwnRowWidth()
+	{
+		_ownRowWidth = true;
+		return this;
+	}
+
 	@Override void checkSpanRows()
 	{
 	}
@@ -75,12 +81,17 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	@Override int componentNonGridWidth()
 	{
+		return (_ownRowWidth ? 0 : actualComponentNonGridWidth());
+	}
+	
+	private int actualComponentNonGridWidth()
+	{
 		return ComponentHelper.maxValues(_items, PrefWidthExtractor.INSTANCE);
 	}
 
 	@Override void forceComponentNonGridWidth(int width)
 	{
-		_compWidth = (width > 0 ? width : componentNonGridWidth());
+		_compWidth = (width > 0 && !_ownRowWidth ? width : actualComponentNonGridWidth());
 	}
 
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
@@ -146,5 +157,6 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	private final List<NonGridRowItem> _items = new ArrayList<NonGridRowItem>();
 	private boolean _fill = false;
+	private boolean _ownRowWidth = false;
 	private int _compWidth = 0;
 }

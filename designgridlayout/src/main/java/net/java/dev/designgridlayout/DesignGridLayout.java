@@ -98,7 +98,7 @@ public class DesignGridLayout
 	 */
 	public DesignGridLayout margins(double top, double left, double bottom, double right)
 	{
-		_layout.margins(top, left, bottom, right);
+		_layout.setMargins(top, left, bottom, right);
 		return this;
 	}
 	
@@ -136,7 +136,7 @@ public class DesignGridLayout
 	 */
 	public DesignGridLayout forceConsistentBaselinesDistance()
 	{
-		_layout.forceConsistentBaselinesDistance();
+		_layout.setForceConsistentBaselinesDistance(true);
 		return this;
 	}
 
@@ -190,6 +190,13 @@ public class DesignGridLayout
 		{
 			_layout.labelAlignment(align);
 		}
+		return this;
+	}
+
+	//TODO javadoc
+	public DesignGridLayout withoutConsistentWidthAcrossNonGridRows()
+	{
+		_layout.setConsistentWidthInNonGridRows(false);
 		return this;
 	}
 

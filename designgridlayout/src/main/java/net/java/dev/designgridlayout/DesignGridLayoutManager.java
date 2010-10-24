@@ -38,7 +38,7 @@ class DesignGridLayoutManager implements LayoutManager
 		_orientation = orientation;
 	}
 
-	void margins(double top, double left, double bottom, double right)
+	void setMargins(double top, double left, double bottom, double right)
 	{
 		_topWeight = (top < 0.0 ? 0.0 : top);
 		_leftWeight = (left < 0.0 ? 0.0 : left);
@@ -46,9 +46,9 @@ class DesignGridLayoutManager implements LayoutManager
 		_rightWeight = (right < 0.0 ? 0.0 : right);
 	}
 	
-	void forceConsistentBaselinesDistance()
+	void setForceConsistentBaselinesDistance(boolean consistentBaselineDistance)
 	{
-		_consistentBaselineDistance = true;
+		_consistentBaselineDistance = consistentBaselineDistance;
 	}
 
 	void setHeightTester(HeightGrowPolicy heightTester)
@@ -59,6 +59,11 @@ class DesignGridLayoutManager implements LayoutManager
 	void labelAlignment(LabelAlignment align)
 	{
 		_labelAlignment = align;
+	}
+	
+	void setConsistentWidthInNonGridRows(boolean consistentComponentWidthInNonGridRows)
+	{
+		_consistentComponentWidthInNonGridRows = consistentComponentWidthInNonGridRows;
 	}
 
 	/*
@@ -733,8 +738,7 @@ class DesignGridLayoutManager implements LayoutManager
 	
 	private boolean _consistentBaselineDistance = false;
 	private LabelAlignment _labelAlignment = LabelAlignment.PLATFORM;
-	//TODO false by default? plus API to change it!
-	private boolean _consistentComponentWidthInNonGridRows = false;
+	private boolean _consistentComponentWidthInNonGridRows = true;
 
 	final private List<AbstractRow> _rows;
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();

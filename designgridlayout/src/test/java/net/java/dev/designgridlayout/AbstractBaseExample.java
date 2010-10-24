@@ -50,7 +50,7 @@ public abstract class AbstractBaseExample
 		DesignGridLayout layout = new DesignGridLayout(top);
 		top.setName("TOP");
 
-		layout.labelAlignment(LabelAlignment.RIGHT);
+		init(layout);
 		build(layout);
 
 		addTopPanel(top);
@@ -58,6 +58,12 @@ public abstract class AbstractBaseExample
 		_frame.pack();
 		_frame.setLocationRelativeTo(null);
 		_frame.setVisible(true);
+	}
+	
+	protected void init(DesignGridLayout layout)
+	{
+		layout.labelAlignment(LabelAlignment.RIGHT);
+		layout.withoutConsistentWidthAcrossNonGridRows();
 	}
 
 	protected void addTopPanel(JComponent top)

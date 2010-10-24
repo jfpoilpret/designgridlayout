@@ -31,11 +31,13 @@ public class Rfe41NonGridRowsIndependentWidthsExample extends AbstractBaseExampl
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().left().add(label("1234567")).add(new JSeparator()).fill();
+		layout.row().left().add(label("1234567890")).add(new JSeparator()).fill().withOwnRowWidth();
 		layout.row().right().add(button("1"), button("2"), button("3"));
 		layout.row().right().add(button("1"), button("2"));
 		layout.row().right().add(button("ABCDE"), button("FGHIJ"));
-		layout.row().left().add(label("123")).add(new JSeparator()).fill();
+		layout.row().left().add(button("ABC"), button("F"));
+		layout.row().center().add(button("OK"), button("Cancel"));
+		layout.row().left().add(label("123")).add(new JSeparator()).fill().withOwnRowWidth();
 	}
 
 	@Override
