@@ -407,10 +407,15 @@ class DesignGridLayoutManager implements LayoutManager
 		// Calculate labels width for all grids
 		computeLabelWidths();
 
+		// Compute preferred width for non-grid rows
+		int nonGridWidth = totalNonGridWidth();
+
 		// Compute preferred & minimum widths for each sub-grid (without labels), 
 		// use largest width for all grids
 		int preferredWidth = computeGridWidth(PrefWidthExtractor.INSTANCE);
+		preferredWidth = Math.max(nonGridWidth, preferredWidth);
 		int minimumWidth = computeGridWidth(MinWidthExtractor.INSTANCE);
+		minimumWidth = Math.max(nonGridWidth, minimumWidth);
 
 		// Total height
 		int preferredHeight = totalHeight() + top() + bottom() + 1;
@@ -531,9 +536,6 @@ class DesignGridLayoutManager implements LayoutManager
 		// Add left and right margins
 		width += left() + right();
 
-		// Don't forget to account for the minimum width of non grid rows
-		width = Math.max(width, totalNonGridWidth(extractor));
-		
 		return width;
 	}
 	
@@ -565,12 +567,25 @@ class DesignGridLayoutManager implements LayoutManager
 		return maxWidth;
 	}
 
-	private int totalNonGridWidth(IExtractor extractor)
+	private int totalNonGridWidth()
 	{
+		// Issue #41 - compute consistent width across all non-grid rows
+		int componentWidth = 0;
+		if (_consistentComponentWidthInNonGridRows)
+		{
+			// Calculate maximum of all preferred widths in non-frid rows
+			for (AbstractRow row: _rows)
+			{
+				int width = row.componentNonGridWidth();
+				componentWidth = Math.max(componentWidth, width);
+			}
+		}
 		int maxWidth = 0;
 		for (AbstractRow row: _rows)
 		{
-			maxWidth = Math.max(maxWidth, row.totalNonGridWidth(_hgap, extractor));
+			row.forceComponentNonGridWidth(componentWidth);
+			int width = row.totalNonGridWidth(_hgap);
+			maxWidth = Math.max(maxWidth, width);
 		}
 		return maxWidth + left() + right() + 1;
 	}
@@ -718,6 +733,8 @@ class DesignGridLayoutManager implements LayoutManager
 	
 	private boolean _consistentBaselineDistance = false;
 	private LabelAlignment _labelAlignment = LabelAlignment.PLATFORM;
+	//TODO false by default? plus API to change it!
+	private boolean _consistentComponentWidthInNonGridRows = false;
 
 	final private List<AbstractRow> _rows;
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();

@@ -151,12 +151,21 @@ abstract class AbstractRow
 		return 0;
 	}
 
-	int totalNonGridWidth(int hgap, IExtractor extractor)
+	int totalNonGridWidth(int hgap)
 	{
 		return 0;
 	}
 
-	int hgap()
+	int componentNonGridWidth()
+	{
+		return 0;
+	}
+
+    void forceComponentNonGridWidth(int width)
+    {
+    }
+
+    int hgap()
 	{
 		return ComponentHelper.hgap(allItems(), parent());
 	}

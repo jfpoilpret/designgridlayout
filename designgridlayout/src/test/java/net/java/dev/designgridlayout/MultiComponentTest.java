@@ -24,7 +24,7 @@ public class MultiComponentTest extends AbstractGuiTest
 		throws Exception
 	{
 		checkExampleAndResizeWidth(
-			MultiComponentExample.class, 0.666667, 0.666667, 2.5);
+			MultiComponentExample.class, 0.666667, 2.0);
 	}
 	
 	@Test public void checkMultiComponentRealExample() throws Exception

@@ -66,12 +66,21 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return _items;
 	}
 
-	@Override int totalNonGridWidth(int hgap, IExtractor extractor)
+	@Override int totalNonGridWidth(int hgap)
 	{
-		int compWidth = ComponentHelper.maxValues(_items, extractor);
 		int count = _items.size();
-		int width = compWidth * count + (hgap * (count - 1));
-		return width;
+		int totalWidth = _compWidth * count + (hgap * (count - 1));
+		return totalWidth;
+	}
+
+	@Override int componentNonGridWidth()
+	{
+		return ComponentHelper.maxValues(_items, PrefWidthExtractor.INSTANCE);
+	}
+
+	@Override void forceComponentNonGridWidth(int width)
+	{
+		_compWidth = (width > 0 ? width : componentNonGridWidth());
 	}
 
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
@@ -80,23 +89,20 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		// Calculate various needed widths & origin
 		int x = left;
 		int count = _items.size();
-		int width = maxWidth();
-		int availableWidth = (rowWidth - ((count - 1) * hgap));
-		width = Math.min(width, availableWidth / count);
+		int width = _compWidth;
 
-		int usedWidth;
 		int leftFiller = width;
 		int rightFiller = width;
 		if (!_fill)
 		{
-			usedWidth = width * count + ((count - 1) * hgap);
+			int usedWidth = width * count + ((count - 1) * hgap);
 			x += xOffset(rowWidth, usedWidth);
 		}
 		else
 		{
-			usedWidth = availableWidth;
-			leftFiller = leftFiller(count, width, usedWidth);
-			rightFiller = rightFiller(count, width, usedWidth);
+			int availableWidth = (rowWidth - ((count - 1) * hgap));
+			leftFiller = leftFiller(count, width, availableWidth);
+			rightFiller = rightFiller(count, width, availableWidth);
 		}
 
 		return layoutRow(helper, x, hgap, width, leftFiller, rightFiller);
@@ -140,4 +146,5 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	private final List<NonGridRowItem> _items = new ArrayList<NonGridRowItem>();
 	private boolean _fill = false;
+	private int _compWidth = 0;
 }
