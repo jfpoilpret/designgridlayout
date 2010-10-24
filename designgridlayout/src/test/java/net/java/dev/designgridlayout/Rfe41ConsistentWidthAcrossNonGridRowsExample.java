@@ -19,13 +19,12 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 
-// Same as AddressBookDemo but with forced left label alignment
-public class Rfe41NonGridRowsIndependentWidthsExample extends AbstractBaseExample
+public class Rfe41ConsistentWidthAcrossNonGridRowsExample extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		Rfe41NonGridRowsIndependentWidthsExample example = 
-			new Rfe41NonGridRowsIndependentWidthsExample();
+		Rfe41ConsistentWidthAcrossNonGridRowsExample example = 
+			new Rfe41ConsistentWidthAcrossNonGridRowsExample();
 		example.go(true);
 	}
 
@@ -40,13 +39,16 @@ public class Rfe41NonGridRowsIndependentWidthsExample extends AbstractBaseExampl
 		layout.row().left().add(label("123")).add(new JSeparator()).fill().withOwnRowWidth();
 	}
 
-	@Override
-    protected JButton button(String text)
-    {
-	    JButton button = super.button(text);
-	    Dimension dim = button.getPreferredSize();
-	    dim = new Dimension(dim.width / 2, dim.height);
-	    button.setMinimumSize(dim);
-	    return button;
-    }
+	@Override protected void init(DesignGridLayout layout)
+	{
+	}
+
+	@Override protected JButton button(String text)
+	{
+		JButton button = super.button(text);
+		Dimension dim = button.getPreferredSize();
+		dim = new Dimension(dim.width / 2, dim.height);
+		button.setMinimumSize(dim);
+		return button;
+	}
 }
