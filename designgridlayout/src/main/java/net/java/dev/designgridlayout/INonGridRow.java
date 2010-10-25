@@ -59,6 +59,26 @@ public interface INonGridRow extends IRow
 	 */
 	public abstract INonGridRow fill();
 	
-	//TODO javadoc
+	/**
+	 * Makes this row independent of other non-grid rows in terms of component 
+	 * width. By default, DesignGridLayout ensures that all non-grid rows in a 
+	 * layout use the same width for all components of all these rows. In general,
+	 * this is the behavior expected by end-users; however, there are some 
+	 * situations where this behavior is not desirable, e.g. when using 
+	 * {@link #fill()} to create a "group separator" where we want the group 
+	 * JLabel to be exactly at its preferred width.
+	 * <pre>
+	 * DesignGridLayout layout = new DesignGridLayout(this);
+	 * //...
+	 * layout.row().left().add(addressLabel, new JSeparator()).fill().withOwnRowWidth();
+	 * //...
+	 * </pre>
+	 * <p/>
+	 * Note that you can disable DesignGridLayout feature of consistent widths across 
+	 * non-grid rows with {@link DesignGridLayout#withoutConsistentWidthAcrossNonGridRows()}.
+	 * 
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
 	public abstract INonGridRow withOwnRowWidth();
 }

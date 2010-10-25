@@ -193,7 +193,26 @@ public class DesignGridLayout
 		return this;
 	}
 
-	//TODO javadoc
+	/**
+	 * Disable DesignGridLayout feature that ensures all components located in 
+	 * non-grid rows all have consistent width. This feature is enabled by default
+	 * because this is the behavior expected by end-users, e.g. non-grid rows are 
+	 * mostly used for showing JButtons and most UI guidelines recommend having
+	 * consistent buttons sizes in a form; that feature doesn't affect "filler 
+	 * components" (as defined by {@link INonGridRow#fill()}).
+	 * <p/>
+	 * However, you may face a situation when you don't want all component widths
+	 * identical across all non-grid rows of a given layout, in this case you can
+	 * use this method.
+	 * <p/>
+	 * Note that you can also disable this feature for individual non-grid 
+	 * rows in a layout, by calling {@link INonGridRow#withOwnRowWidth()}; that way,
+	 * only these rows escape the consistent component width while other non-grid
+	 * rows in the layout still share the same width for all their components.
+	 * 
+	 * @return {@code this} instance of DesignGridLayout, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
+	 */
 	public DesignGridLayout withoutConsistentWidthAcrossNonGridRows()
 	{
 		_layout.setConsistentWidthInNonGridRows(false);
