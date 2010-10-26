@@ -1,4 +1,4 @@
-This example shows how DesignGridLayout can compute consistent vertical gaps between consecutive rows. This is to be comapred with the previous example.
+This example shows how DesignGridLayout can compute consistent vertical gaps between consecutive rows. This is to be compared with the previous example.
 
 When required to, DesignGridLayout will calculate the exact vertical gap between every pair of consecutive rows in the layout, and then take the maximum of all those gaps as the standard gap between every pair of rows.
 

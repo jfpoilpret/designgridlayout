@@ -1,0 +1,9 @@
+This example (and the next one) shows how DesignGridLayout computes widths of components in non-grid rows (i.e. left-aligned, centered and right-aligned rows).
+
+By default, DesignGridLayout first calculates, for each non-grid row, the maximum of preferred widths of all components in that row.
+
+Then it takes the maximum of these computed widths across all non-grid rows.
+
+Finally it forces the width of all components of all non-grid rows to the latter computed width. Note that "filler" components don't see their width forced this way.
+
+For some non-grid rows, you may not want this uniform width assigned to its components; for instance, in the example below, the rows with a label and a filler separator want the label width unchanged (otherwise it may add an extra white space between the label and the separator). For this, you can call withOwnRowWidth() on each such row, as shown in the source code below.

@@ -1,6 +1,6 @@
 @Override public void build(DesignGridLayout layout)
 {
-	layout.row().left().fill().add(label("Special Group")).add(new JSeparator());
+	layout.row().left().fill().add(label("Special Group"), new JSeparator()).withOwnRowWidth();
 	layout.row().grid(label(1)).add(button(), button(), button());
 	layout.row().left().fill().add(button(), button(), button());
 	layout.row().center().fill().add(button(), button(), button());

@@ -1,0 +1,11 @@
+This second example shows what happens if you disable DesignGridLayout default computation of components widths in non-grid rows.
+
+Like in the default behavior, DesignGridLayout calculates, for each non-grid row, the maximum of preferred widths of all components in that row.
+
+But it stops here: for each non-grid row, it forces each component width to that maximum preferred size, and doesn't ensure this size is consistent with other non-grid rows.
+
+With this setting, the API withOwnRowWidth() has no effect since all non-grid rows are already independent of one another.
+
+Please do note that, in most situations, you won't need to disable DesignGridLayout default behavior.
+
+In the source code below, you can see the only difference with previous example is the call to layout.withoutConsistentWidthAcrossNonGridRows().

@@ -46,6 +46,8 @@ import net.java.dev.designgridlayout.Rfe29ConsistentBaselineSpace;
 import net.java.dev.designgridlayout.Rfe29ExactVGaps;
 import net.java.dev.designgridlayout.Rfe40LeftLabelAlignmentExample;
 import net.java.dev.designgridlayout.Rfe40PlatformLabelAlignmentExample;
+import net.java.dev.designgridlayout.Rfe41ConsistentWidthAcrossNonGridRowsExample;
+import net.java.dev.designgridlayout.Rfe41IndependentWidthAcrossNonGridRowsExample;
 import net.java.dev.designgridlayout.RightToLeft1LTR;
 import net.java.dev.designgridlayout.RightToLeft2RTL;
 import net.java.dev.designgridlayout.RightToLeft3RealWorldExample;
@@ -204,6 +206,10 @@ public class Examples extends JFrame
 			new Node("Exact Vertical Gaps", Rfe29ExactVGaps.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Consistent Baselines Spacing", Rfe29ConsistentBaselineSpace.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("Consistent Widths across Non-Grid Rows", Rfe41ConsistentWidthAcrossNonGridRowsExample.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("Independent Widths across Non-Grid Rows", Rfe41IndependentWidthAcrossNonGridRowsExample.class)));
 		root.add(node);
 
 		DefaultTreeModel model = new DefaultTreeModel(root);

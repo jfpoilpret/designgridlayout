@@ -14,12 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import javax.swing.JSeparator;
-
-public class Rfe41ConsistentWidthAcrossNonGridRowsExample extends AbstractBaseExample
+public class Rfe41ConsistentWidthAcrossNonGridRowsExample 
+extends Rfe41IndependentWidthAcrossNonGridRowsExample
 {
 	public static void main(String[] args)
 	{
@@ -28,27 +24,7 @@ public class Rfe41ConsistentWidthAcrossNonGridRowsExample extends AbstractBaseEx
 		example.go(true);
 	}
 
-	@Override public void build(DesignGridLayout layout)
-	{
-		layout.row().left().add(label("1234567890")).add(new JSeparator()).fill().withOwnRowWidth();
-		layout.row().right().add(button("1"), button("2"), button("3"));
-		layout.row().right().add(button("1"), button("2"));
-		layout.row().right().add(button("ABCDE"), button("FGHIJ"));
-		layout.row().left().add(button("ABC"), button("F"));
-		layout.row().center().add(button("OK"), button("Cancel"));
-		layout.row().left().add(label("123")).add(new JSeparator()).fill().withOwnRowWidth();
-	}
-
 	@Override protected void init(DesignGridLayout layout)
 	{
-	}
-
-	@Override protected JButton button(String text)
-	{
-		JButton button = super.button(text);
-		Dimension dim = button.getPreferredSize();
-		dim = new Dimension(dim.width / 2, dim.height);
-		button.setMinimumSize(dim);
-		return button;
 	}
 }

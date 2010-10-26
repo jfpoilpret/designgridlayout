@@ -16,21 +16,23 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JSeparator;
 
-public class Basics5NonGridRows extends AbstractBaseExample
+public class Rfe41IndependentWidthAcrossNonGridRowsExample extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		Basics5NonGridRows example = new Basics5NonGridRows();
+		Rfe41IndependentWidthAcrossNonGridRowsExample example = 
+			new Rfe41IndependentWidthAcrossNonGridRowsExample();
 		example.go(true);
 	}
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().left().fill().add(label("Special Group"), new JSeparator()).withOwnRowWidth();
-		layout.row().grid(label(1)).add(button(), button(), button());
-		layout.row().left().fill().add(button(), button(), button());
-		layout.row().center().fill().add(button(), button(), button());
-		layout.row().right().fill().add(button(), button(), button());
-		layout.row().center().fill().add(button());
+		layout.row().left().add(label("1234567890")).add(new JSeparator()).fill().withOwnRowWidth();
+		layout.row().right().add(button("1"), button("2"), button("3"));
+		layout.row().right().add(button("1"), button("2"));
+		layout.row().right().add(button("ABCDE"), button("FGHIJ"));
+		layout.row().left().add(button("ABC"), button("F"));
+		layout.row().center().add(button("OK"), button("Cancel"));
+		layout.row().left().add(label("123")).add(new JSeparator()).fill().withOwnRowWidth();
 	}
 }

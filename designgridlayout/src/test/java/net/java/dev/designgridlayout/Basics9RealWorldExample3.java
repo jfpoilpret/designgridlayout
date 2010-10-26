@@ -59,7 +59,7 @@ public class Basics9RealWorldExample3 extends AbstractBaseExample
 	static private void addGroup(DesignGridLayout layout, JLabel group)
 	{
 		group.setForeground(Color.BLUE);
-		layout.row().left().add(group).add(new JSeparator()).fill();
+		layout.row().left().add(group).add(new JSeparator()).fill().withOwnRowWidth();
 	}
 	
 	@Override public String name()
