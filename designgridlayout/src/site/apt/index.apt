@@ -83,7 +83,7 @@ DesignGridLayout "philosophy"
 	<<<Component>>>, DesignGridLayout uses a fluent API which starts from the 
 	<<<DesignGridLayout>>> instance itself.
 
-DesignGridLayout Features (version 1.3)
+DesignGridLayout Features (version 1.4)
 
 	*	<<Fluent and simple API>> to create grid-based layouts (from the layout, 
 		you create rows, from a row you add components)
@@ -94,7 +94,9 @@ DesignGridLayout Features (version 1.3)
 	*	<<Automatic baseline alignment>> for all components in a row
 	
 	*	Support for <<canonical grid>> rows, <<left-aligned>> rows, <<centered>>
-		rows and <<right-aligned>> rows (useful for command buttons)
+		rows and <<right-aligned>> rows (useful for command buttons, these rows
+		ensure a uniform width of all their components, even across several such
+		rows)
 		
 	*	Special <<"label" columns>> (in canonical grid rows) that have constant 
 		width during horizontal resize (no waste of space after resize);
