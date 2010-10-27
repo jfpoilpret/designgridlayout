@@ -75,14 +75,14 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">static</span> <span class="keyword">int</span> maxValues(Iterable&lt;? <span class="keyword">extends</span> IRowItem&gt; items, IExtractor extractor)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;30</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;31</td>  <td class="nbHitsCovered">&nbsp;3333</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> max = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;32</td>  <td class="nbHitsCovered"><a title="Line 32: Conditional coverage 100% (2/2).">&nbsp;3333</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 32: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (IRowItem item: items)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;31</td>  <td class="nbHitsCovered">&nbsp;1069</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> max = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;32</td>  <td class="nbHitsCovered"><a title="Line 32: Conditional coverage 100% (2/2).">&nbsp;1069</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 32: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (IRowItem item: items)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;33</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;34</td>  <td class="nbHitsCovered">&nbsp;8280</td>  <td class="src"><pre class="src">&nbsp;                        max = Math.max(max, extractor.value(item));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;34</td>  <td class="nbHitsCovered">&nbsp;2668</td>  <td class="src"><pre class="src">&nbsp;                        max = Math.max(max, extractor.value(item));</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;35</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;36</td>  <td class="nbHitsCovered">&nbsp;3333</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> max;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;36</td>  <td class="nbHitsCovered">&nbsp;1069</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> max;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;37</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;38</td>  <td class="nbHits">&nbsp;</td>
@@ -91,14 +91,14 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">static</span> <span class="keyword">int</span> sumValues(Iterable&lt;? <span class="keyword">extends</span> IRowItem&gt; items, IExtractor extractor)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;40</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;41</td>  <td class="nbHitsCovered">&nbsp;60</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> sum = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;42</td>  <td class="nbHitsCovered"><a title="Line 42: Conditional coverage 100% (2/2).">&nbsp;60</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 42: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (IRowItem item: items)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;41</td>  <td class="nbHitsCovered">&nbsp;20</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> sum = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;42</td>  <td class="nbHitsCovered"><a title="Line 42: Conditional coverage 100% (2/2).">&nbsp;20</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 42: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (IRowItem item: items)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;43</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;44</td>  <td class="nbHitsCovered">&nbsp;114</td>  <td class="src"><pre class="src">&nbsp;                        sum += extractor.value(item);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;44</td>  <td class="nbHitsCovered">&nbsp;38</td>  <td class="src"><pre class="src">&nbsp;                        sum += extractor.value(item);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;45</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;46</td>  <td class="nbHitsCovered">&nbsp;60</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> sum;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;46</td>  <td class="nbHitsCovered">&nbsp;20</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> sum;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;47</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;48</td>  <td class="nbHits">&nbsp;</td>
@@ -107,7 +107,7 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">static</span> <span class="keyword">int</span> hgap(List&lt;? <span class="keyword">extends</span> IRowItem&gt; items, Container parent)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;50</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;210</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> hgap(ComponentGapsHelper.instance(), items, parent);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;77</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> hgap(ComponentGapsHelper.instance(), items, parent);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;52</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;53</td>  <td class="nbHits">&nbsp;</td>
@@ -116,15 +116,15 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">static</span> <span class="keyword">int</span> hgap(JComponent first, List&lt;? <span class="keyword">extends</span> IRowItem&gt; items, Container parent)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;55</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;56</td>  <td class="nbHitsCovered">&nbsp;867</td>  <td class="src"><pre class="src">&nbsp;                ComponentGapsHelper helper = ComponentGapsHelper.instance();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;57</td>  <td class="nbHitsCovered">&nbsp;867</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> hgap = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;58</td>  <td class="nbHitsCovered"><a title="Line 58: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">&nbsp;867</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 58: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">                <span class="keyword">if</span> (first != <span class="keyword">null</span> &amp;&amp; !items.isEmpty())</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;56</td>  <td class="nbHitsCovered">&nbsp;289</td>  <td class="src"><pre class="src">&nbsp;                ComponentGapsHelper helper = ComponentGapsHelper.instance();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;57</td>  <td class="nbHitsCovered">&nbsp;289</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> hgap = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;58</td>  <td class="nbHitsCovered"><a title="Line 58: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">&nbsp;289</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 58: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">                <span class="keyword">if</span> (first != <span class="keyword">null</span> &amp;&amp; !items.isEmpty())</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;59</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;60</td>  <td class="nbHitsCovered">&nbsp;753</td>  <td class="src"><pre class="src">&nbsp;                        hgap = hgap(helper, first, items.get(0).component(), parent);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;60</td>  <td class="nbHitsCovered">&nbsp;251</td>  <td class="src"><pre class="src">&nbsp;                        hgap = hgap(helper, first, items.get(0).component(), parent);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;61</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;62</td>  <td class="nbHitsCovered">&nbsp;867</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> Math.max(hgap, hgap(helper, items, parent));</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;62</td>  <td class="nbHitsCovered">&nbsp;289</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> Math.max(hgap, hgap(helper, items, parent));</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;63</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;64</td>  <td class="nbHits">&nbsp;</td>
@@ -135,18 +135,18 @@
   <td class="src"><pre class="src">&nbsp;                HeightGrowPolicy policy, Iterable&lt;? <span class="keyword">extends</span> IRowItem&gt; items)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;67</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;68</td>  <td class="nbHitsCovered"><a title="Line 68: Conditional coverage 100% (2/2).">&nbsp;951</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 68: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (IRowItem item: items)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;68</td>  <td class="nbHitsCovered"><a title="Line 68: Conditional coverage 100% (2/2).">&nbsp;324</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 68: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (IRowItem item: items)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;69</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;70</td>  <td class="nbHitsCovered"><a title="Line 70: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">&nbsp;1872</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 70: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">                        <span class="keyword">if</span> (policy.canGrowHeight(item.component()) &amp;&amp; item.isLastSpanRow())</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;70</td>  <td class="nbHitsCovered"><a title="Line 70: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">&nbsp;639</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 70: Conditional coverage 100% (4/4) [each condition: 100%, 100%].">                        <span class="keyword">if</span> (policy.canGrowHeight(item.component()) &amp;&amp; item.isLastSpanRow())</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;71</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;72</td>  <td class="nbHitsCovered">&nbsp;96</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;72</td>  <td class="nbHitsCovered">&nbsp;32</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;73</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;74</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;75</td>  <td class="nbHitsCovered">&nbsp;855</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;75</td>  <td class="nbHitsCovered">&nbsp;292</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">true</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;76</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;77</td>  <td class="nbHits">&nbsp;</td>
@@ -157,18 +157,18 @@
   <td class="src"><pre class="src">&nbsp;                ComponentGapsHelper helper, List&lt;? <span class="keyword">extends</span> IRowItem&gt; items, Container parent)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;80</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;81</td>  <td class="nbHitsCovered">&nbsp;1077</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> hgap = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;82</td>  <td class="nbHitsCovered">&nbsp;1077</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> size = items.size() - 1;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;83</td>  <td class="nbHitsCovered"><a title="Line 83: Conditional coverage 100% (2/2).">&nbsp;1938</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 83: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (<span class="keyword">int</span> nth = 0; nth &lt; size; nth++)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;81</td>  <td class="nbHitsCovered">&nbsp;366</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> hgap = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;82</td>  <td class="nbHitsCovered">&nbsp;366</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> size = items.size() - 1;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;83</td>  <td class="nbHitsCovered"><a title="Line 83: Conditional coverage 100% (2/2).">&nbsp;661</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 83: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (<span class="keyword">int</span> nth = 0; nth &lt; size; nth++)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;84</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;85</td>  <td class="nbHitsCovered">&nbsp;861</td>  <td class="src"><pre class="src">&nbsp;                        JComponent left = items.get(nth).component();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;86</td>  <td class="nbHitsCovered">&nbsp;861</td>  <td class="src"><pre class="src">&nbsp;                        JComponent right = items.get(nth + 1).component();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;87</td>  <td class="nbHitsCovered">&nbsp;861</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> gap = hgap(helper, left, right, parent);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;88</td>  <td class="nbHitsCovered">&nbsp;861</td>  <td class="src"><pre class="src">&nbsp;                        hgap = Math.max(hgap, gap);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;85</td>  <td class="nbHitsCovered">&nbsp;295</td>  <td class="src"><pre class="src">&nbsp;                        JComponent left = items.get(nth).component();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;86</td>  <td class="nbHitsCovered">&nbsp;295</td>  <td class="src"><pre class="src">&nbsp;                        JComponent right = items.get(nth + 1).component();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;87</td>  <td class="nbHitsCovered">&nbsp;295</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> gap = hgap(helper, left, right, parent);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;88</td>  <td class="nbHitsCovered">&nbsp;295</td>  <td class="src"><pre class="src">&nbsp;                        hgap = Math.max(hgap, gap);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;89</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;90</td>  <td class="nbHitsCovered">&nbsp;1077</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> hgap;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;90</td>  <td class="nbHitsCovered">&nbsp;366</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> hgap;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;91</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;92</td>  <td class="nbHits">&nbsp;</td>
@@ -179,13 +179,13 @@
   <td class="src"><pre class="src">&nbsp;                ComponentGapsHelper helper, JComponent left, JComponent right, Container parent)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;95</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;96</td>  <td class="nbHitsCovered">&nbsp;1614</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> helper.getHorizontalGap(left, right, ComponentPlacement.RELATED, parent);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;96</td>  <td class="nbHitsCovered">&nbsp;546</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> helper.getHorizontalGap(left, right, ComponentPlacement.RELATED, parent);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;97</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;98</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 10/16/10 6:40 PM.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 10/27/10 5:06 PM.</div>
 </body>
 </html>

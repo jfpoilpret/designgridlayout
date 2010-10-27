@@ -108,7 +108,7 @@
 <a class="jxr_linenumber" name="98" href="#98">98</a>  <em class="jxr_javadoccomment">	 */</em>
 <a class="jxr_linenumber" name="99" href="#99">99</a>  	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">DesignGridLayout</a> margins(<strong class="jxr_keyword">double</strong> top, <strong class="jxr_keyword">double</strong> left, <strong class="jxr_keyword">double</strong> bottom, <strong class="jxr_keyword">double</strong> right)
 <a class="jxr_linenumber" name="100" href="#100">100</a> 	{
-<a class="jxr_linenumber" name="101" href="#101">101</a> 		_layout.margins(top, left, bottom, right);
+<a class="jxr_linenumber" name="101" href="#101">101</a> 		_layout.setMargins(top, left, bottom, right);
 <a class="jxr_linenumber" name="102" href="#102">102</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>;
 <a class="jxr_linenumber" name="103" href="#103">103</a> 	}
 <a class="jxr_linenumber" name="104" href="#104">104</a> 	
@@ -146,7 +146,7 @@
 <a class="jxr_linenumber" name="136" href="#136">136</a> <em class="jxr_javadoccomment">	 */</em>
 <a class="jxr_linenumber" name="137" href="#137">137</a> 	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">DesignGridLayout</a> forceConsistentBaselinesDistance()
 <a class="jxr_linenumber" name="138" href="#138">138</a> 	{
-<a class="jxr_linenumber" name="139" href="#139">139</a> 		_layout.forceConsistentBaselinesDistance();
+<a class="jxr_linenumber" name="139" href="#139">139</a> 		_layout.setForceConsistentBaselinesDistance(<strong class="jxr_keyword">true</strong>);
 <a class="jxr_linenumber" name="140" href="#140">140</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>;
 <a class="jxr_linenumber" name="141" href="#141">141</a> 	}
 <a class="jxr_linenumber" name="142" href="#142">142</a> 
@@ -204,157 +204,183 @@
 <a class="jxr_linenumber" name="194" href="#194">194</a> 	}
 <a class="jxr_linenumber" name="195" href="#195">195</a> 
 <a class="jxr_linenumber" name="196" href="#196">196</a> 	<em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="197" href="#197">197</a> <em class="jxr_javadoccomment">	 * Creates a new row. The type of the row is not determined yet, but will</em>
-<a class="jxr_linenumber" name="198" href="#198">198</a> <em class="jxr_javadoccomment">	 * be determined by the chained call performed on the returned </em>
-<a class="jxr_linenumber" name="199" href="#199">199</a> <em class="jxr_javadoccomment">	 * {@link IRowCreator}.</em>
-<a class="jxr_linenumber" name="200" href="#200">200</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
-<a class="jxr_linenumber" name="201" href="#201">201</a> <em class="jxr_javadoccomment">	 * The new row is located under the previously created row, which means that</em>
-<a class="jxr_linenumber" name="202" href="#202">202</a> <em class="jxr_javadoccomment">	 * each line of code using this method creates a new row and all lines can </em>
-<a class="jxr_linenumber" name="203" href="#203">203</a> <em class="jxr_javadoccomment">	 * be read as defining the visual UI of the container.</em>
-<a class="jxr_linenumber" name="204" href="#204">204</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
-<a class="jxr_linenumber" name="205" href="#205">205</a> <em class="jxr_javadoccomment">	 * Note that this method has no effect on the layout if there's no chained</em>
-<a class="jxr_linenumber" name="206" href="#206">206</a> <em class="jxr_javadoccomment">	 * call on the returned {@link IRowCreator} (ie when you have code like</em>
-<a class="jxr_linenumber" name="207" href="#207">207</a> <em class="jxr_javadoccomment">	 * {@code layout.row();}).</em>
-<a class="jxr_linenumber" name="208" href="#208">208</a> <em class="jxr_javadoccomment">	 * </em>
-<a class="jxr_linenumber" name="209" href="#209">209</a> <em class="jxr_javadoccomment">	 * @return a new {@code IRowCreator} that must be used to set the actual </em>
-<a class="jxr_linenumber" name="210" href="#210">210</a> <em class="jxr_javadoccomment">	 * type of the created row.</em>
-<a class="jxr_linenumber" name="211" href="#211">211</a> <em class="jxr_javadoccomment">	 */</em>
-<a class="jxr_linenumber" name="212" href="#212">212</a> 	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IRowCreator.html">IRowCreator</a> row()
-<a class="jxr_linenumber" name="213" href="#213">213</a> 	{
-<a class="jxr_linenumber" name="214" href="#214">214</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">RowCreator</a>(-1.0);
-<a class="jxr_linenumber" name="215" href="#215">215</a> 	}
-<a class="jxr_linenumber" name="216" href="#216">216</a> 	
-<a class="jxr_linenumber" name="217" href="#217">217</a> 	<em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="218" href="#218">218</a> <em class="jxr_javadoccomment">	 * Creates a new row. The type of the row is not determined yet, but will</em>
-<a class="jxr_linenumber" name="219" href="#219">219</a> <em class="jxr_javadoccomment">	 * be determined by the chained call performed on the returned </em>
-<a class="jxr_linenumber" name="220" href="#220">220</a> <em class="jxr_javadoccomment">	 * {@link IRowCreator}.</em>
-<a class="jxr_linenumber" name="221" href="#221">221</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
-<a class="jxr_linenumber" name="222" href="#222">222</a> <em class="jxr_javadoccomment">	 * The new row is located under the previously created row, which means that</em>
-<a class="jxr_linenumber" name="223" href="#223">223</a> <em class="jxr_javadoccomment">	 * each line of code using this method creates a new row and all lines can </em>
-<a class="jxr_linenumber" name="224" href="#224">224</a> <em class="jxr_javadoccomment">	 * be read as defining the visual UI of the container.</em>
-<a class="jxr_linenumber" name="225" href="#225">225</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
-<a class="jxr_linenumber" name="226" href="#226">226</a> <em class="jxr_javadoccomment">	 * This method explicitly sets the vertical growth weight for this row; this </em>
-<a class="jxr_linenumber" name="227" href="#227">227</a> <em class="jxr_javadoccomment">	 * is applicable only if this row contains at least one component that can </em>
-<a class="jxr_linenumber" name="228" href="#228">228</a> <em class="jxr_javadoccomment">	 * vary in height (eg JScrollPane, vertical JSlider); if this row has no such</em>
-<a class="jxr_linenumber" name="229" href="#229">229</a> <em class="jxr_javadoccomment">	 * component, then calling this method will have no impact, ie this row will</em>
-<a class="jxr_linenumber" name="230" href="#230">230</a> <em class="jxr_javadoccomment">	 * always have a fixed height.</em>
-<a class="jxr_linenumber" name="231" href="#231">231</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
-<a class="jxr_linenumber" name="232" href="#232">232</a> <em class="jxr_javadoccomment">	 * Note that this method has no effect on the layout if there's no chained</em>
-<a class="jxr_linenumber" name="233" href="#233">233</a> <em class="jxr_javadoccomment">	 * call on the returned {@link IRowCreator} (ie when you have code like</em>
-<a class="jxr_linenumber" name="234" href="#234">234</a> <em class="jxr_javadoccomment">	 * {@code layout.row();}).</em>
-<a class="jxr_linenumber" name="235" href="#235">235</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
-<a class="jxr_linenumber" name="236" href="#236">236</a> <em class="jxr_javadoccomment">	 * &lt;b&gt;Important!&lt;/b&gt; Note that it is generally useless to use this method:</em>
-<a class="jxr_linenumber" name="237" href="#237">237</a> <em class="jxr_javadoccomment">	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that </em>
-<a class="jxr_linenumber" name="238" href="#238">238</a> <em class="jxr_javadoccomment">	 * should have a variable height, hence during resize, extra height will be</em>
-<a class="jxr_linenumber" name="239" href="#239">239</a> <em class="jxr_javadoccomment">	 * equally split to all such rows. Use this method only if you want a row to</em>
-<a class="jxr_linenumber" name="240" href="#240">240</a> <em class="jxr_javadoccomment">	 * get more ({@code verticalWeight &gt; 1.0}) or less </em>
-<a class="jxr_linenumber" name="241" href="#241">241</a> <em class="jxr_javadoccomment">	 * ({@code verticalWeight &lt; 1.0}) extra height than other rows.</em>
-<a class="jxr_linenumber" name="242" href="#242">242</a> <em class="jxr_javadoccomment">	 * </em>
-<a class="jxr_linenumber" name="243" href="#243">243</a> <em class="jxr_javadoccomment">	 * @param verticalWeight the weight given to this row when DesignGridLayout</em>
-<a class="jxr_linenumber" name="244" href="#244">244</a> <em class="jxr_javadoccomment">	 * distributes extra height during resize actions; must be {@code &gt;= 0.0} or</em>
-<a class="jxr_linenumber" name="245" href="#245">245</a> <em class="jxr_javadoccomment">	 * the value will be ignored.</em>
-<a class="jxr_linenumber" name="246" href="#246">246</a> <em class="jxr_javadoccomment">	 * @return a new {@code IRowCreator} that must be used to set the actual </em>
-<a class="jxr_linenumber" name="247" href="#247">247</a> <em class="jxr_javadoccomment">	 * type of the created row.</em>
-<a class="jxr_linenumber" name="248" href="#248">248</a> <em class="jxr_javadoccomment">	 * @see #row()</em>
-<a class="jxr_linenumber" name="249" href="#249">249</a> <em class="jxr_javadoccomment">	 */</em>
-<a class="jxr_linenumber" name="250" href="#250">250</a> 	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IRowCreator.html">IRowCreator</a> row(<strong class="jxr_keyword">double</strong> verticalWeight)
-<a class="jxr_linenumber" name="251" href="#251">251</a> 	{
-<a class="jxr_linenumber" name="252" href="#252">252</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">RowCreator</a>(verticalWeight);
-<a class="jxr_linenumber" name="253" href="#253">253</a> 	}
-<a class="jxr_linenumber" name="254" href="#254">254</a> 	
-<a class="jxr_linenumber" name="255" href="#255">255</a> 	<em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="256" href="#256">256</a> <em class="jxr_javadoccomment">	 * Adds a new empty row to the container. This row will never contain any </em>
-<a class="jxr_linenumber" name="257" href="#257">257</a> <em class="jxr_javadoccomment">	 * component and is used only for introducing vertical space between rows or </em>
-<a class="jxr_linenumber" name="258" href="#258">258</a> <em class="jxr_javadoccomment">	 * groups of rows. The height of that row is automatically calculated based</em>
-<a class="jxr_linenumber" name="259" href="#259">259</a> <em class="jxr_javadoccomment">	 * on the fact that the previously-added row and the next-added row contain</em>
-<a class="jxr_linenumber" name="260" href="#260">260</a> <em class="jxr_javadoccomment">	 * unrelated components.</em>
-<a class="jxr_linenumber" name="261" href="#261">261</a> <em class="jxr_javadoccomment">	 */</em>
-<a class="jxr_linenumber" name="262" href="#262">262</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> emptyRow()
-<a class="jxr_linenumber" name="263" href="#263">263</a> 	{
-<a class="jxr_linenumber" name="264" href="#264">264</a> 		<strong class="jxr_keyword">if</strong> (_current != <strong class="jxr_keyword">null</strong>)
-<a class="jxr_linenumber" name="265" href="#265">265</a> 		{
-<a class="jxr_linenumber" name="266" href="#266">266</a> 			_current.setUnrelatedGap();
-<a class="jxr_linenumber" name="267" href="#267">267</a> 		}
-<a class="jxr_linenumber" name="268" href="#268">268</a> 	}
-<a class="jxr_linenumber" name="269" href="#269">269</a> 	
-<a class="jxr_linenumber" name="270" href="#270">270</a> 	<strong class="jxr_keyword">private</strong> &lt;T <strong class="jxr_keyword">extends</strong> AbstractRow&gt; T addRow(T row, <strong class="jxr_keyword">double</strong> verticalWeight)
-<a class="jxr_linenumber" name="271" href="#271">271</a> 	{
-<a class="jxr_linenumber" name="272" href="#272">272</a> 		_current = row;
-<a class="jxr_linenumber" name="273" href="#273">273</a> 		_rows.add(row);
-<a class="jxr_linenumber" name="274" href="#274">274</a> 		row.init(_parent, _heightTester, _orientation);
-<a class="jxr_linenumber" name="275" href="#275">275</a> 		row.growWeight(verticalWeight);
-<a class="jxr_linenumber" name="276" href="#276">276</a> 		<strong class="jxr_keyword">return</strong> row;
-<a class="jxr_linenumber" name="277" href="#277">277</a> 	}
-<a class="jxr_linenumber" name="278" href="#278">278</a> 
-<a class="jxr_linenumber" name="279" href="#279">279</a> 	<em class="jxr_comment">// Returned by row()</em>
-<a class="jxr_linenumber" name="280" href="#280">280</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">RowCreator</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../net/java/dev/designgridlayout/IRowCreator.html">IRowCreator</a>
-<a class="jxr_linenumber" name="281" href="#281">281</a> 	{
-<a class="jxr_linenumber" name="282" href="#282">282</a> 		RowCreator(<strong class="jxr_keyword">double</strong> weight)
-<a class="jxr_linenumber" name="283" href="#283">283</a> 		{
-<a class="jxr_linenumber" name="284" href="#284">284</a> 			_weight = weight;
-<a class="jxr_linenumber" name="285" href="#285">285</a> 		}
-<a class="jxr_linenumber" name="286" href="#286">286</a> 		
-<a class="jxr_linenumber" name="287" href="#287">287</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/INonGridRow.html">INonGridRow</a> center()
-<a class="jxr_linenumber" name="288" href="#288">288</a> 		{
-<a class="jxr_linenumber" name="289" href="#289">289</a> 			<strong class="jxr_keyword">return</strong> addRow(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/CenterRow.html">CenterRow</a>(), _weight);
-<a class="jxr_linenumber" name="290" href="#290">290</a> 		}
-<a class="jxr_linenumber" name="291" href="#291">291</a> 
-<a class="jxr_linenumber" name="292" href="#292">292</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/INonGridRow.html">INonGridRow</a> left()
-<a class="jxr_linenumber" name="293" href="#293">293</a> 		{
-<a class="jxr_linenumber" name="294" href="#294">294</a> 			<strong class="jxr_keyword">return</strong> addRow(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/LeftRow.html">LeftRow</a>(), _weight);
-<a class="jxr_linenumber" name="295" href="#295">295</a> 		}
-<a class="jxr_linenumber" name="296" href="#296">296</a> 
-<a class="jxr_linenumber" name="297" href="#297">297</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/INonGridRow.html">INonGridRow</a> right()
-<a class="jxr_linenumber" name="298" href="#298">298</a> 		{
-<a class="jxr_linenumber" name="299" href="#299">299</a> 			<strong class="jxr_keyword">return</strong> addRow(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/RightRow.html">RightRow</a>(), _weight);
-<a class="jxr_linenumber" name="300" href="#300">300</a> 		}
-<a class="jxr_linenumber" name="301" href="#301">301</a> 
-<a class="jxr_linenumber" name="302" href="#302">302</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/ISpannableGridRow.html">ISpannableGridRow</a> grid(JLabel label)
-<a class="jxr_linenumber" name="303" href="#303">303</a> 		{
-<a class="jxr_linenumber" name="304" href="#304">304</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid(label);
-<a class="jxr_linenumber" name="305" href="#305">305</a> 		}
-<a class="jxr_linenumber" name="306" href="#306">306</a> 
-<a class="jxr_linenumber" name="307" href="#307">307</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IGridRow.html">IGridRow</a> grid(JLabel label, <strong class="jxr_keyword">int</strong> gridspan)
-<a class="jxr_linenumber" name="308" href="#308">308</a> 		{
-<a class="jxr_linenumber" name="309" href="#309">309</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid(label, gridspan);
-<a class="jxr_linenumber" name="310" href="#310">310</a> 		}
-<a class="jxr_linenumber" name="311" href="#311">311</a> 
-<a class="jxr_linenumber" name="312" href="#312">312</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/ISpannableGridRow.html">ISpannableGridRow</a> grid()
-<a class="jxr_linenumber" name="313" href="#313">313</a> 		{
-<a class="jxr_linenumber" name="314" href="#314">314</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid();
-<a class="jxr_linenumber" name="315" href="#315">315</a> 		}
-<a class="jxr_linenumber" name="316" href="#316">316</a> 
-<a class="jxr_linenumber" name="317" href="#317">317</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IGridRow.html">IGridRow</a> grid(<strong class="jxr_keyword">int</strong> gridspan)
-<a class="jxr_linenumber" name="318" href="#318">318</a> 		{
-<a class="jxr_linenumber" name="319" href="#319">319</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid(gridspan);
-<a class="jxr_linenumber" name="320" href="#320">320</a> 		}
-<a class="jxr_linenumber" name="321" href="#321">321</a> 		
-<a class="jxr_linenumber" name="322" href="#322">322</a> 		<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a> newGridRow()
-<a class="jxr_linenumber" name="323" href="#323">323</a> 		{
-<a class="jxr_linenumber" name="324" href="#324">324</a> 			<strong class="jxr_keyword">if</strong> (!_rows.isEmpty())
-<a class="jxr_linenumber" name="325" href="#325">325</a> 			{
-<a class="jxr_linenumber" name="326" href="#326">326</a> 				AbstractRow previous = _rows.get(_rows.size() - 1);
-<a class="jxr_linenumber" name="327" href="#327">327</a> 				<strong class="jxr_keyword">if</strong> (previous instanceof GridRow)
-<a class="jxr_linenumber" name="328" href="#328">328</a> 				{
-<a class="jxr_linenumber" name="329" href="#329">329</a> 					<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a>((GridRow) previous);
-<a class="jxr_linenumber" name="330" href="#330">330</a> 				}
-<a class="jxr_linenumber" name="331" href="#331">331</a> 			}
-<a class="jxr_linenumber" name="332" href="#332">332</a> 			<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a>(<strong class="jxr_keyword">null</strong>);
-<a class="jxr_linenumber" name="333" href="#333">333</a> 		}
-<a class="jxr_linenumber" name="334" href="#334">334</a> 
-<a class="jxr_linenumber" name="335" href="#335">335</a> 		<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">double</strong> _weight;
-<a class="jxr_linenumber" name="336" href="#336">336</a> 	}
+<a class="jxr_linenumber" name="197" href="#197">197</a> <em class="jxr_javadoccomment">	 * Disable DesignGridLayout feature that ensures all components located in </em>
+<a class="jxr_linenumber" name="198" href="#198">198</a> <em class="jxr_javadoccomment">	 * non-grid rows all have consistent width. This feature is enabled by default</em>
+<a class="jxr_linenumber" name="199" href="#199">199</a> <em class="jxr_javadoccomment">	 * because this is the behavior expected by end-users, e.g. non-grid rows are </em>
+<a class="jxr_linenumber" name="200" href="#200">200</a> <em class="jxr_javadoccomment">	 * mostly used for showing JButtons and most UI guidelines recommend having</em>
+<a class="jxr_linenumber" name="201" href="#201">201</a> <em class="jxr_javadoccomment">	 * consistent buttons sizes in a form; that feature doesn't affect "filler </em>
+<a class="jxr_linenumber" name="202" href="#202">202</a> <em class="jxr_javadoccomment">	 * components" (as defined by {@link INonGridRow#fill()}).</em>
+<a class="jxr_linenumber" name="203" href="#203">203</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="204" href="#204">204</a> <em class="jxr_javadoccomment">	 * However, you may face a situation when you don't want all component widths</em>
+<a class="jxr_linenumber" name="205" href="#205">205</a> <em class="jxr_javadoccomment">	 * identical across all non-grid rows of a given layout, in this case you can</em>
+<a class="jxr_linenumber" name="206" href="#206">206</a> <em class="jxr_javadoccomment">	 * use this method.</em>
+<a class="jxr_linenumber" name="207" href="#207">207</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="208" href="#208">208</a> <em class="jxr_javadoccomment">	 * Note that you can also disable this feature for individual non-grid </em>
+<a class="jxr_linenumber" name="209" href="#209">209</a> <em class="jxr_javadoccomment">	 * rows in a layout, by calling {@link INonGridRow#withOwnRowWidth()}; that way,</em>
+<a class="jxr_linenumber" name="210" href="#210">210</a> <em class="jxr_javadoccomment">	 * only these rows escape the consistent component width while other non-grid</em>
+<a class="jxr_linenumber" name="211" href="#211">211</a> <em class="jxr_javadoccomment">	 * rows in the layout still share the same width for all their components.</em>
+<a class="jxr_linenumber" name="212" href="#212">212</a> <em class="jxr_javadoccomment">	 * </em>
+<a class="jxr_linenumber" name="213" href="#213">213</a> <em class="jxr_javadoccomment">	 * @return {@code this} instance of DesignGridLayout, allowing for chained </em>
+<a class="jxr_linenumber" name="214" href="#214">214</a> <em class="jxr_javadoccomment">	 * calls to other methods (also known as "fluent API")</em>
+<a class="jxr_linenumber" name="215" href="#215">215</a> <em class="jxr_javadoccomment">	 */</em>
+<a class="jxr_linenumber" name="216" href="#216">216</a> 	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">DesignGridLayout</a> withoutConsistentWidthAcrossNonGridRows()
+<a class="jxr_linenumber" name="217" href="#217">217</a> 	{
+<a class="jxr_linenumber" name="218" href="#218">218</a> 		_layout.setConsistentWidthInNonGridRows(false);
+<a class="jxr_linenumber" name="219" href="#219">219</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>;
+<a class="jxr_linenumber" name="220" href="#220">220</a> 	}
+<a class="jxr_linenumber" name="221" href="#221">221</a> 
+<a class="jxr_linenumber" name="222" href="#222">222</a> 	<em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="223" href="#223">223</a> <em class="jxr_javadoccomment">	 * Creates a new row. The type of the row is not determined yet, but will</em>
+<a class="jxr_linenumber" name="224" href="#224">224</a> <em class="jxr_javadoccomment">	 * be determined by the chained call performed on the returned </em>
+<a class="jxr_linenumber" name="225" href="#225">225</a> <em class="jxr_javadoccomment">	 * {@link IRowCreator}.</em>
+<a class="jxr_linenumber" name="226" href="#226">226</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="227" href="#227">227</a> <em class="jxr_javadoccomment">	 * The new row is located under the previously created row, which means that</em>
+<a class="jxr_linenumber" name="228" href="#228">228</a> <em class="jxr_javadoccomment">	 * each line of code using this method creates a new row and all lines can </em>
+<a class="jxr_linenumber" name="229" href="#229">229</a> <em class="jxr_javadoccomment">	 * be read as defining the visual UI of the container.</em>
+<a class="jxr_linenumber" name="230" href="#230">230</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="231" href="#231">231</a> <em class="jxr_javadoccomment">	 * Note that this method has no effect on the layout if there's no chained</em>
+<a class="jxr_linenumber" name="232" href="#232">232</a> <em class="jxr_javadoccomment">	 * call on the returned {@link IRowCreator} (ie when you have code like</em>
+<a class="jxr_linenumber" name="233" href="#233">233</a> <em class="jxr_javadoccomment">	 * {@code layout.row();}).</em>
+<a class="jxr_linenumber" name="234" href="#234">234</a> <em class="jxr_javadoccomment">	 * </em>
+<a class="jxr_linenumber" name="235" href="#235">235</a> <em class="jxr_javadoccomment">	 * @return a new {@code IRowCreator} that must be used to set the actual </em>
+<a class="jxr_linenumber" name="236" href="#236">236</a> <em class="jxr_javadoccomment">	 * type of the created row.</em>
+<a class="jxr_linenumber" name="237" href="#237">237</a> <em class="jxr_javadoccomment">	 */</em>
+<a class="jxr_linenumber" name="238" href="#238">238</a> 	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IRowCreator.html">IRowCreator</a> row()
+<a class="jxr_linenumber" name="239" href="#239">239</a> 	{
+<a class="jxr_linenumber" name="240" href="#240">240</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">RowCreator</a>(-1.0);
+<a class="jxr_linenumber" name="241" href="#241">241</a> 	}
+<a class="jxr_linenumber" name="242" href="#242">242</a> 	
+<a class="jxr_linenumber" name="243" href="#243">243</a> 	<em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="244" href="#244">244</a> <em class="jxr_javadoccomment">	 * Creates a new row. The type of the row is not determined yet, but will</em>
+<a class="jxr_linenumber" name="245" href="#245">245</a> <em class="jxr_javadoccomment">	 * be determined by the chained call performed on the returned </em>
+<a class="jxr_linenumber" name="246" href="#246">246</a> <em class="jxr_javadoccomment">	 * {@link IRowCreator}.</em>
+<a class="jxr_linenumber" name="247" href="#247">247</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="248" href="#248">248</a> <em class="jxr_javadoccomment">	 * The new row is located under the previously created row, which means that</em>
+<a class="jxr_linenumber" name="249" href="#249">249</a> <em class="jxr_javadoccomment">	 * each line of code using this method creates a new row and all lines can </em>
+<a class="jxr_linenumber" name="250" href="#250">250</a> <em class="jxr_javadoccomment">	 * be read as defining the visual UI of the container.</em>
+<a class="jxr_linenumber" name="251" href="#251">251</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="252" href="#252">252</a> <em class="jxr_javadoccomment">	 * This method explicitly sets the vertical growth weight for this row; this </em>
+<a class="jxr_linenumber" name="253" href="#253">253</a> <em class="jxr_javadoccomment">	 * is applicable only if this row contains at least one component that can </em>
+<a class="jxr_linenumber" name="254" href="#254">254</a> <em class="jxr_javadoccomment">	 * vary in height (eg JScrollPane, vertical JSlider); if this row has no such</em>
+<a class="jxr_linenumber" name="255" href="#255">255</a> <em class="jxr_javadoccomment">	 * component, then calling this method will have no impact, ie this row will</em>
+<a class="jxr_linenumber" name="256" href="#256">256</a> <em class="jxr_javadoccomment">	 * always have a fixed height.</em>
+<a class="jxr_linenumber" name="257" href="#257">257</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="258" href="#258">258</a> <em class="jxr_javadoccomment">	 * Note that this method has no effect on the layout if there's no chained</em>
+<a class="jxr_linenumber" name="259" href="#259">259</a> <em class="jxr_javadoccomment">	 * call on the returned {@link IRowCreator} (ie when you have code like</em>
+<a class="jxr_linenumber" name="260" href="#260">260</a> <em class="jxr_javadoccomment">	 * {@code layout.row();}).</em>
+<a class="jxr_linenumber" name="261" href="#261">261</a> <em class="jxr_javadoccomment">	 * &lt;p/&gt;</em>
+<a class="jxr_linenumber" name="262" href="#262">262</a> <em class="jxr_javadoccomment">	 * &lt;b&gt;Important!&lt;/b&gt; Note that it is generally useless to use this method:</em>
+<a class="jxr_linenumber" name="263" href="#263">263</a> <em class="jxr_javadoccomment">	 * DesignGridLayout will by default assign a weight of 1.0 to all rows that </em>
+<a class="jxr_linenumber" name="264" href="#264">264</a> <em class="jxr_javadoccomment">	 * should have a variable height, hence during resize, extra height will be</em>
+<a class="jxr_linenumber" name="265" href="#265">265</a> <em class="jxr_javadoccomment">	 * equally split to all such rows. Use this method only if you want a row to</em>
+<a class="jxr_linenumber" name="266" href="#266">266</a> <em class="jxr_javadoccomment">	 * get more ({@code verticalWeight &gt; 1.0}) or less </em>
+<a class="jxr_linenumber" name="267" href="#267">267</a> <em class="jxr_javadoccomment">	 * ({@code verticalWeight &lt; 1.0}) extra height than other rows.</em>
+<a class="jxr_linenumber" name="268" href="#268">268</a> <em class="jxr_javadoccomment">	 * </em>
+<a class="jxr_linenumber" name="269" href="#269">269</a> <em class="jxr_javadoccomment">	 * @param verticalWeight the weight given to this row when DesignGridLayout</em>
+<a class="jxr_linenumber" name="270" href="#270">270</a> <em class="jxr_javadoccomment">	 * distributes extra height during resize actions; must be {@code &gt;= 0.0} or</em>
+<a class="jxr_linenumber" name="271" href="#271">271</a> <em class="jxr_javadoccomment">	 * the value will be ignored.</em>
+<a class="jxr_linenumber" name="272" href="#272">272</a> <em class="jxr_javadoccomment">	 * @return a new {@code IRowCreator} that must be used to set the actual </em>
+<a class="jxr_linenumber" name="273" href="#273">273</a> <em class="jxr_javadoccomment">	 * type of the created row.</em>
+<a class="jxr_linenumber" name="274" href="#274">274</a> <em class="jxr_javadoccomment">	 * @see #row()</em>
+<a class="jxr_linenumber" name="275" href="#275">275</a> <em class="jxr_javadoccomment">	 */</em>
+<a class="jxr_linenumber" name="276" href="#276">276</a> 	<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IRowCreator.html">IRowCreator</a> row(<strong class="jxr_keyword">double</strong> verticalWeight)
+<a class="jxr_linenumber" name="277" href="#277">277</a> 	{
+<a class="jxr_linenumber" name="278" href="#278">278</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">RowCreator</a>(verticalWeight);
+<a class="jxr_linenumber" name="279" href="#279">279</a> 	}
+<a class="jxr_linenumber" name="280" href="#280">280</a> 	
+<a class="jxr_linenumber" name="281" href="#281">281</a> 	<em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="282" href="#282">282</a> <em class="jxr_javadoccomment">	 * Adds a new empty row to the container. This row will never contain any </em>
+<a class="jxr_linenumber" name="283" href="#283">283</a> <em class="jxr_javadoccomment">	 * component and is used only for introducing vertical space between rows or </em>
+<a class="jxr_linenumber" name="284" href="#284">284</a> <em class="jxr_javadoccomment">	 * groups of rows. The height of that row is automatically calculated based</em>
+<a class="jxr_linenumber" name="285" href="#285">285</a> <em class="jxr_javadoccomment">	 * on the fact that the previously-added row and the next-added row contain</em>
+<a class="jxr_linenumber" name="286" href="#286">286</a> <em class="jxr_javadoccomment">	 * unrelated components.</em>
+<a class="jxr_linenumber" name="287" href="#287">287</a> <em class="jxr_javadoccomment">	 */</em>
+<a class="jxr_linenumber" name="288" href="#288">288</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> emptyRow()
+<a class="jxr_linenumber" name="289" href="#289">289</a> 	{
+<a class="jxr_linenumber" name="290" href="#290">290</a> 		<strong class="jxr_keyword">if</strong> (_current != <strong class="jxr_keyword">null</strong>)
+<a class="jxr_linenumber" name="291" href="#291">291</a> 		{
+<a class="jxr_linenumber" name="292" href="#292">292</a> 			_current.setUnrelatedGap();
+<a class="jxr_linenumber" name="293" href="#293">293</a> 		}
+<a class="jxr_linenumber" name="294" href="#294">294</a> 	}
+<a class="jxr_linenumber" name="295" href="#295">295</a> 	
+<a class="jxr_linenumber" name="296" href="#296">296</a> 	<strong class="jxr_keyword">private</strong> &lt;T <strong class="jxr_keyword">extends</strong> AbstractRow&gt; T addRow(T row, <strong class="jxr_keyword">double</strong> verticalWeight)
+<a class="jxr_linenumber" name="297" href="#297">297</a> 	{
+<a class="jxr_linenumber" name="298" href="#298">298</a> 		_current = row;
+<a class="jxr_linenumber" name="299" href="#299">299</a> 		_rows.add(row);
+<a class="jxr_linenumber" name="300" href="#300">300</a> 		row.init(_parent, _heightTester, _orientation);
+<a class="jxr_linenumber" name="301" href="#301">301</a> 		row.growWeight(verticalWeight);
+<a class="jxr_linenumber" name="302" href="#302">302</a> 		<strong class="jxr_keyword">return</strong> row;
+<a class="jxr_linenumber" name="303" href="#303">303</a> 	}
+<a class="jxr_linenumber" name="304" href="#304">304</a> 
+<a class="jxr_linenumber" name="305" href="#305">305</a> 	<em class="jxr_comment">// Returned by row()</em>
+<a class="jxr_linenumber" name="306" href="#306">306</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayout.html">RowCreator</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../net/java/dev/designgridlayout/IRowCreator.html">IRowCreator</a>
+<a class="jxr_linenumber" name="307" href="#307">307</a> 	{
+<a class="jxr_linenumber" name="308" href="#308">308</a> 		RowCreator(<strong class="jxr_keyword">double</strong> weight)
+<a class="jxr_linenumber" name="309" href="#309">309</a> 		{
+<a class="jxr_linenumber" name="310" href="#310">310</a> 			_weight = weight;
+<a class="jxr_linenumber" name="311" href="#311">311</a> 		}
+<a class="jxr_linenumber" name="312" href="#312">312</a> 		
+<a class="jxr_linenumber" name="313" href="#313">313</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/INonGridRow.html">INonGridRow</a> center()
+<a class="jxr_linenumber" name="314" href="#314">314</a> 		{
+<a class="jxr_linenumber" name="315" href="#315">315</a> 			<strong class="jxr_keyword">return</strong> addRow(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/CenterRow.html">CenterRow</a>(), _weight);
+<a class="jxr_linenumber" name="316" href="#316">316</a> 		}
+<a class="jxr_linenumber" name="317" href="#317">317</a> 
+<a class="jxr_linenumber" name="318" href="#318">318</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/INonGridRow.html">INonGridRow</a> left()
+<a class="jxr_linenumber" name="319" href="#319">319</a> 		{
+<a class="jxr_linenumber" name="320" href="#320">320</a> 			<strong class="jxr_keyword">return</strong> addRow(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/LeftRow.html">LeftRow</a>(), _weight);
+<a class="jxr_linenumber" name="321" href="#321">321</a> 		}
+<a class="jxr_linenumber" name="322" href="#322">322</a> 
+<a class="jxr_linenumber" name="323" href="#323">323</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/INonGridRow.html">INonGridRow</a> right()
+<a class="jxr_linenumber" name="324" href="#324">324</a> 		{
+<a class="jxr_linenumber" name="325" href="#325">325</a> 			<strong class="jxr_keyword">return</strong> addRow(<strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/RightRow.html">RightRow</a>(), _weight);
+<a class="jxr_linenumber" name="326" href="#326">326</a> 		}
+<a class="jxr_linenumber" name="327" href="#327">327</a> 
+<a class="jxr_linenumber" name="328" href="#328">328</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/ISpannableGridRow.html">ISpannableGridRow</a> grid(JLabel label)
+<a class="jxr_linenumber" name="329" href="#329">329</a> 		{
+<a class="jxr_linenumber" name="330" href="#330">330</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid(label);
+<a class="jxr_linenumber" name="331" href="#331">331</a> 		}
+<a class="jxr_linenumber" name="332" href="#332">332</a> 
+<a class="jxr_linenumber" name="333" href="#333">333</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IGridRow.html">IGridRow</a> grid(JLabel label, <strong class="jxr_keyword">int</strong> gridspan)
+<a class="jxr_linenumber" name="334" href="#334">334</a> 		{
+<a class="jxr_linenumber" name="335" href="#335">335</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid(label, gridspan);
+<a class="jxr_linenumber" name="336" href="#336">336</a> 		}
 <a class="jxr_linenumber" name="337" href="#337">337</a> 
-<a class="jxr_linenumber" name="338" href="#338">338</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _defaultHeightTester = <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/DefaultGrowPolicy.html">DefaultGrowPolicy</a>();
-<a class="jxr_linenumber" name="339" href="#339">339</a> 
-<a class="jxr_linenumber" name="340" href="#340">340</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayoutManager.html">DesignGridLayoutManager</a> _layout;
-<a class="jxr_linenumber" name="341" href="#341">341</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> Container _parent;
-<a class="jxr_linenumber" name="342" href="#342">342</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/OrientationPolicy.html">OrientationPolicy</a> _orientation;
-<a class="jxr_linenumber" name="343" href="#343">343</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;AbstractRow&gt; _rows = <strong class="jxr_keyword">new</strong> ArrayList&lt;AbstractRow&gt;();
-<a class="jxr_linenumber" name="344" href="#344">344</a> 
-<a class="jxr_linenumber" name="345" href="#345">345</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/AbstractRow.html">AbstractRow</a> _current = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="346" href="#346">346</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _heightTester = _defaultHeightTester;
-<a class="jxr_linenumber" name="347" href="#347">347</a> }
+<a class="jxr_linenumber" name="338" href="#338">338</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/ISpannableGridRow.html">ISpannableGridRow</a> grid()
+<a class="jxr_linenumber" name="339" href="#339">339</a> 		{
+<a class="jxr_linenumber" name="340" href="#340">340</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid();
+<a class="jxr_linenumber" name="341" href="#341">341</a> 		}
+<a class="jxr_linenumber" name="342" href="#342">342</a> 
+<a class="jxr_linenumber" name="343" href="#343">343</a> 		<strong class="jxr_keyword">public</strong> <a href="../../../../net/java/dev/designgridlayout/IGridRow.html">IGridRow</a> grid(<strong class="jxr_keyword">int</strong> gridspan)
+<a class="jxr_linenumber" name="344" href="#344">344</a> 		{
+<a class="jxr_linenumber" name="345" href="#345">345</a> 			<strong class="jxr_keyword">return</strong> addRow(newGridRow(), _weight).grid(gridspan);
+<a class="jxr_linenumber" name="346" href="#346">346</a> 		}
+<a class="jxr_linenumber" name="347" href="#347">347</a> 		
+<a class="jxr_linenumber" name="348" href="#348">348</a> 		<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a> newGridRow()
+<a class="jxr_linenumber" name="349" href="#349">349</a> 		{
+<a class="jxr_linenumber" name="350" href="#350">350</a> 			<strong class="jxr_keyword">if</strong> (!_rows.isEmpty())
+<a class="jxr_linenumber" name="351" href="#351">351</a> 			{
+<a class="jxr_linenumber" name="352" href="#352">352</a> 				AbstractRow previous = _rows.get(_rows.size() - 1);
+<a class="jxr_linenumber" name="353" href="#353">353</a> 				<strong class="jxr_keyword">if</strong> (previous instanceof GridRow)
+<a class="jxr_linenumber" name="354" href="#354">354</a> 				{
+<a class="jxr_linenumber" name="355" href="#355">355</a> 					<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a>((GridRow) previous);
+<a class="jxr_linenumber" name="356" href="#356">356</a> 				}
+<a class="jxr_linenumber" name="357" href="#357">357</a> 			}
+<a class="jxr_linenumber" name="358" href="#358">358</a> 			<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/GridRow.html">GridRow</a>(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="359" href="#359">359</a> 		}
+<a class="jxr_linenumber" name="360" href="#360">360</a> 
+<a class="jxr_linenumber" name="361" href="#361">361</a> 		<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">double</strong> _weight;
+<a class="jxr_linenumber" name="362" href="#362">362</a> 	}
+<a class="jxr_linenumber" name="363" href="#363">363</a> 
+<a class="jxr_linenumber" name="364" href="#364">364</a> 	<strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _defaultHeightTester = <strong class="jxr_keyword">new</strong> <a href="../../../../net/java/dev/designgridlayout/DefaultGrowPolicy.html">DefaultGrowPolicy</a>();
+<a class="jxr_linenumber" name="365" href="#365">365</a> 
+<a class="jxr_linenumber" name="366" href="#366">366</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/DesignGridLayoutManager.html">DesignGridLayoutManager</a> _layout;
+<a class="jxr_linenumber" name="367" href="#367">367</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> Container _parent;
+<a class="jxr_linenumber" name="368" href="#368">368</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/OrientationPolicy.html">OrientationPolicy</a> _orientation;
+<a class="jxr_linenumber" name="369" href="#369">369</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">private</strong> List&lt;AbstractRow&gt; _rows = <strong class="jxr_keyword">new</strong> ArrayList&lt;AbstractRow&gt;();
+<a class="jxr_linenumber" name="370" href="#370">370</a> 
+<a class="jxr_linenumber" name="371" href="#371">371</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/AbstractRow.html">AbstractRow</a> _current = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="372" href="#372">372</a> 	<strong class="jxr_keyword">private</strong> <a href="../../../../net/java/dev/designgridlayout/HeightGrowPolicy.html">HeightGrowPolicy</a> _heightTester = _defaultHeightTester;
+<a class="jxr_linenumber" name="373" href="#373">373</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
