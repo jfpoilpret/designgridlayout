@@ -293,6 +293,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return _allItems;
 	}
 	
+	//CSOFF: ParameterNumber
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
@@ -331,6 +332,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		}
 		return actualHeight;
 	}
+	//CSON: ParameterNumber
 
 	SubGrid findGrid(int index)
 	{

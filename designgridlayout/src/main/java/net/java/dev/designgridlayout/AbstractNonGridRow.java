@@ -90,6 +90,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		_compWidth = (width > 0 && !_ownRowWidth ? width : actualComponentNonGridWidth());
 	}
 
+	//CSOFF: ParameterNumber
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
@@ -114,6 +115,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 		return layoutRow(helper, x, hgap, width, leftFiller, rightFiller);
 	}
+	//CSON: ParameterNumber
 
 	protected int layoutRow(LayoutHelper helper, int left, int hgap, int width, 
 		int leftFiller, int rightFiller)
