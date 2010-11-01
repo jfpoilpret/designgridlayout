@@ -15,6 +15,7 @@
 package net.java.dev.designgridlayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -76,12 +77,13 @@ final class BarRow extends AbstractRow implements IBarRow
 			_leftItems = PlatformHelper.extractLeftItems(_items);
 			_centerItems = PlatformHelper.extractCenterItems(_items);
 			_rightItems = PlatformHelper.extractRightItems(_items);
+
 			// Then rebuild _items to only include all but non-null items
 			_items.clear();
 			_items.addAll(_leftItems);
 			_items.addAll(_centerItems);
 			_items.addAll(_rightItems);
-			// Calculate number of extra gaps
+			// Calculate total number of extra gaps
 			_numUnrelatedGaps =	(_leftItems.isEmpty() ? 0 : 1) +
 								(_centerItems.isEmpty() ? 0 : 1) +
 								(_rightItems.isEmpty() ? 0 : 1);
@@ -94,8 +96,8 @@ final class BarRow extends AbstractRow implements IBarRow
 			{
 				if (i.next() == null)
 				{
-					_numUnrelatedGaps++;
 					i.remove();
+					_numUnrelatedGaps++;
 				}
 			}
 		}
@@ -127,41 +129,36 @@ final class BarRow extends AbstractRow implements IBarRow
 		_compWidth = ((width > 0 && !_ownRowWidth) ? width : actualComponentNonGridWidth());
 	}
 
+	//CSOFF: ParameterNumber
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
-		// Calculate various needed widths & origin
+		// Layout each part of the row individually
 		int x = left;
-		int count = _items.size();
-		int counthgap = count - 1 - _numUnrelatedGaps;
+		int actualHeight = layoutOnePart(helper, x, hgap, unrelhgap, _leftItems);
 
-		//FIXME X should not be calculated this way, but that way instead:
-		// - for left part, x = left OK
-		// - for center part, x = left + (rowWidth + centerWidth)/2
-		// - for right part, x = left + (rowWidth - rightWidth)
-		int usedWidth = 
-			_compWidth * count + (hgap * counthgap) + (unrelhgap * _numUnrelatedGaps);
-		int extraWidth = rowWidth - usedWidth;
-		int interGap = extraWidth / 2;
-		int fudge = extraWidth % 2;
-		
-		// Now layout each part of the row
-		int actualHeight = 0;
-		LayoutResult result = layoutOnePart(helper, x, hgap, unrelhgap, _leftItems);
-		actualHeight = Math.max(actualHeight, result.height());
+		x = left + (rowWidth - computePartWidth(_centerItems, hgap, unrelhgap)) / 2;
+		actualHeight = Math.max(
+			actualHeight, layoutOnePart(helper, x, hgap, unrelhgap, _centerItems));
 
-		x = result.x() + interGap;
-		result = layoutOnePart(helper, x, hgap, unrelhgap, _centerItems);
-		actualHeight = Math.max(actualHeight, result.height());
-
-		x = result.x() + interGap + fudge;
-		result = layoutOnePart(helper, x, hgap, unrelhgap, _rightItems);
-		actualHeight = Math.max(actualHeight, result.height());
+		x = left + rowWidth - computePartWidth(_rightItems, hgap, unrelhgap);
+		actualHeight = Math.max(
+			actualHeight, layoutOnePart(helper, x, hgap, unrelhgap, _rightItems));
 
 		return actualHeight;
 	}
+	//CSON: ParameterNumber
+	
+	private int computePartWidth(List<BarRowItem> items, int hgap, int unrelhgap)
+	{
+		int numUnrelGaps = Collections.frequency(items, null);
+		int numComponents = items.size() - numUnrelGaps;
+		int numGaps = numComponents - numUnrelGaps - 1;
+		int width = numComponents * _compWidth + numGaps * hgap + numUnrelGaps * unrelhgap;
+		return width;
+	}
 
-	private LayoutResult layoutOnePart(
+	private int layoutOnePart(
 		LayoutHelper helper, int xOrigin, int hgap, int unrelhgap, List<BarRowItem> items)
 	{
 		int x = xOrigin;
@@ -179,34 +176,7 @@ final class BarRow extends AbstractRow implements IBarRow
 				x += unrelhgap - hgap;
 			}
 		}
-		if (!items.isEmpty())
-		{
-			// If this part does have items, then add the necessary gap after it
-			x += unrelhgap - hgap;
-		}
-		return new LayoutResult(x, actualHeight);
-	}
-	
-	static private class LayoutResult
-	{
-		LayoutResult(int x, int height)
-		{
-			_x = x;
-			_height = height;
-		}
-		
-		int x()
-		{
-			return _x;
-		}
-		
-		int height()
-		{
-			return _height;
-		}
-		
-		final private int _x;
-		final private int _height;
+		return actualHeight;
 	}
 	
 	private final List<BarRowItem> _items = new ArrayList<BarRowItem>();
