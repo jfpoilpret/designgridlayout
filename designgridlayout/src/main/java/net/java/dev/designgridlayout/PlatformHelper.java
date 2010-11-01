@@ -160,8 +160,12 @@ final class PlatformHelper
 	{
 		Pattern parser = Pattern.compile(PARSER);
 		Matcher matcher = parser.matcher(order);
-		//TODO what if no match?
-		matcher.matches();
+		if (!matcher.matches())
+		{
+			// This should normally never happen
+			throw new IllegalArgumentException(
+				"Order `" + order + "` doesn't follow required pattern");
+		}
 		_leftTags = group(matcher, 1);
 		_centerTags = group(matcher, 2);
 		_rightTags = group(matcher, 3);
