@@ -14,11 +14,11 @@
 
 package net.java.dev.designgridlayout;
 
-public class Rfe42BarRowsExample extends AbstractBaseExample
+public class Rfe42BarRowsTestExample extends AbstractBaseExample
 {
 	public static void main(String[] args)
 	{
-		Rfe42BarRowsExample example = new Rfe42BarRowsExample();
+		Rfe42BarRowsTestExample example = new Rfe42BarRowsTestExample();
 		example.go(true);
 	}
 
@@ -30,7 +30,8 @@ public class Rfe42BarRowsExample extends AbstractBaseExample
 		layout.row().bar().addLeft(button("Left")).addCenter(button("Center"));
 		layout.row().bar().addLeft(button("Left")).addRight(button("Right"));
 		layout.row().bar().addCenter(button("Center")).addRight(button("Right"));
-		layout.row().bar().addLeft(button("Left")).addCenter(button("Center")).addRight(button("Right"));
+		layout.row().bar().addLeft(button("Left")).addCenter(button("Center"))
+			.addRight(button("Right")).addRight(button("Right 2"));
 	}
 
 	@Override protected void init(DesignGridLayout layout)

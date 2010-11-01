@@ -84,13 +84,7 @@ final class BarRow extends AbstractRow implements IBarRow
 			_items.addAll(_centerItems);
 			_items.addAll(_rightItems);
 			// Calculate total number of extra gaps
-			_numUnrelatedGaps =	(_leftItems.isEmpty() ? 0 : 1) +
-								(_centerItems.isEmpty() ? 0 : 1) +
-								(_rightItems.isEmpty() ? 0 : 1);
-			if (_numUnrelatedGaps > 0)
-			{
-				_numUnrelatedGaps--;
-			}
+			_numUnrelatedGaps = numGapsBetweenParts();
 			Iterator<BarRowItem> i = _items.iterator();
 			while (i.hasNext())
 			{
@@ -106,11 +100,15 @@ final class BarRow extends AbstractRow implements IBarRow
 
 	@Override int totalNonGridWidth(int hgap, int unrelhgap)
 	{
-		int count = _items.size();
-		int counthgap = count - 1 - _numUnrelatedGaps;
-		assert counthgap >= 0;
-		int totalWidth = 
-			_compWidth * count + (hgap * counthgap) + (unrelhgap * _numUnrelatedGaps);
+		int leftWidth = computePartWidth(_leftItems, hgap, unrelhgap);
+		int rightWidth = computePartWidth(_rightItems, hgap, unrelhgap);
+		int centerWidth = computePartWidth(_centerItems, hgap, unrelhgap);
+		int sidesWidth = Math.max(leftWidth, rightWidth);
+		if (centerWidth != 0 && (leftWidth != 0 || rightWidth != 0))
+		{
+			sidesWidth *= 2;
+		}
+		int totalWidth = centerWidth + sidesWidth + unrelhgap * numGapsBetweenParts();
 		return totalWidth;
 	}
 
@@ -151,11 +149,27 @@ final class BarRow extends AbstractRow implements IBarRow
 	
 	private int computePartWidth(List<BarRowItem> items, int hgap, int unrelhgap)
 	{
-		int numUnrelGaps = Collections.frequency(items, null);
-		int numComponents = items.size() - numUnrelGaps;
-		int numGaps = numComponents - numUnrelGaps - 1;
-		int width = numComponents * _compWidth + numGaps * hgap + numUnrelGaps * unrelhgap;
-		return width;
+		if (!items.isEmpty())
+		{
+			int numUnrelGaps = Collections.frequency(items, null);
+			int numComponents = items.size() - numUnrelGaps;
+			int numGaps = numComponents - numUnrelGaps - 1;
+			int width = numComponents * _compWidth + numGaps * hgap + numUnrelGaps * unrelhgap;
+			return width;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	private int numGapsBetweenParts()
+	{
+		// Calculate total number of extra gaps
+		int numParts =	(_leftItems.isEmpty() ? 0 : 1) +
+						(_centerItems.isEmpty() ? 0 : 1) +
+						(_rightItems.isEmpty() ? 0 : 1);
+		return (numParts > 0 ? numParts - 1 : 0);
 	}
 
 	private int layoutOnePart(

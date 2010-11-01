@@ -115,11 +115,25 @@ final class PlatformHelper
 	
 	static private void addItems(List<BarRowItem> target, List<BarRowItem> source, Tag tag)
 	{
+		boolean previousItemWasAdded = false;
 		for (BarRowItem item: source)
 		{
-			if (item.tag() == tag)
+			if (item == null)
+			{
+				if (previousItemWasAdded)
+				{
+					target.add(null);
+				}
+				previousItemWasAdded = false;
+			}
+			else if (item.tag() == tag)
 			{
 				target.add(item);
+				previousItemWasAdded = true;
+			}
+			else
+			{
+				previousItemWasAdded = false;
 			}
 		}
 	}
