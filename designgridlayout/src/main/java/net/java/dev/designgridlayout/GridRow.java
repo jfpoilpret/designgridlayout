@@ -294,7 +294,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 	}
 	
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
-		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
+		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
 		int x = left;
 		int actualHeight = 0;

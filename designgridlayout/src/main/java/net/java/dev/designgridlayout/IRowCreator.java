@@ -64,4 +64,6 @@ public interface IRowCreator extends ISubGridStarter
 	 * API) to add components to the row.
 	 */
 	public abstract INonGridRow right();
+	
+	public abstract IBarRow bar();
 }

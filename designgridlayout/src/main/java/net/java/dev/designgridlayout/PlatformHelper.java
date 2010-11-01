@@ -14,6 +14,12 @@
 
 package net.java.dev.designgridlayout;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JLabel;
 
 final class PlatformHelper
@@ -35,6 +41,137 @@ final class PlatformHelper
 			default:
 			return JLabel.LEADING;
 		}
+	}
+
+	static List<BarRowItem> extractLeftItems(List<BarRowItem> items)
+	{
+		// Make sure tags order is correctly initialized
+		initButtonsTagOrder();
+		return extractItems(items, _leftTags);
+	}
+	
+	static List<BarRowItem> extractCenterItems(List<BarRowItem> items)
+	{
+		// Make sure tags order is correctly initialized
+		initButtonsTagOrder();
+		return extractItems(items, _centerTags);
+	}
+	
+	static List<BarRowItem> extractRightItems(List<BarRowItem> items)
+	{
+		// Make sure tags order is correctly initialized
+		initButtonsTagOrder();
+		return extractItems(items, _rightTags);
+	}
+	
+	static private List<BarRowItem> extractItems(List<BarRowItem> items, String tags)
+	{
+		// Get the left part of the tags order for the current platform
+		List<BarRowItem> extractedItems = new ArrayList<BarRowItem>(items.size());
+		for (int i = 0; i < tags.length(); i++)
+		{
+			char code = tags.charAt(i);
+			if (code == '_')
+			{
+				extractedItems.add(null);
+			}
+			else
+			{
+				addItems(extractedItems, items, Tag.fromCode(code));
+			}
+		}
+		// Remove initial, last and duplicate consecutive gaps
+		removeExtraGaps(extractedItems);
+		return extractedItems;
+	}
+
+	static private void removeExtraGaps(List<BarRowItem> items)
+	{
+		// First remove duplicates
+		Iterator<BarRowItem> iterator = items.iterator();
+		BarRowItem previous = null;
+		boolean first = true;
+		while (iterator.hasNext())
+		{
+			BarRowItem current = iterator.next();
+			if (current == null && previous == null && !first)
+			{
+				// Remove duplicate
+				iterator.remove();
+			}
+			previous = current;
+			first = false;
+		}
+		// Then remove heading and trailing gaps if any
+		if (!items.isEmpty() && items.get(0) == null)
+		{
+			items.remove(0);
+		}
+		if (!items.isEmpty() && items.get(items.size() - 1) == null)
+		{
+			items.remove(items.size() - 1);
+		}
+	}
+	
+	static private void addItems(List<BarRowItem> target, List<BarRowItem> source, Tag tag)
+	{
+		for (BarRowItem item: source)
+		{
+			if (item.tag() == tag)
+			{
+				target.add(item);
+			}
+		}
+	}
+
+	static private void initButtonsTagOrder()
+	{
+		if (_leftTags == null)
+		{
+			String tagsOrder;
+			switch (platform())
+			{
+				case MACINTOSH:
+				tagsOrder = "L_H/X/NY<>COA_R";
+				break;
+				
+				case LINUX:
+				tagsOrder = "L_H//XNYAC<>FO_R";
+				break;
+
+				case WINDOWS:
+				case OTHER:
+				default:
+				tagsOrder = "L_/X/YN<>OCAH_R";
+				break;
+			}
+			// Now parse into 3 strings of tags: left, center and right
+			initButtonsTagOrder(tagsOrder);
+		}
+	}
+
+	//CSOFF: MagicNumber
+	// Used as SPI for adding new platforms, not part of "official" API
+	// NB: order must be well-formed, otherwise results are unpredictable:
+	// - only authorized characters
+	// - no consecutive '-' duplicates
+	// - exactly 2 '/' in the list
+	static void initButtonsTagOrder(String order)
+	{
+		Pattern parser = Pattern.compile(PARSER);
+		Matcher matcher = parser.matcher(order);
+		//TODO what if no match?
+		matcher.matches();
+		_leftTags = group(matcher, 1);
+		_centerTags = group(matcher, 2);
+		_rightTags = group(matcher, 3);
+	}
+	//CSON: MagicNumber
+	
+	static private String group(Matcher matcher, int group)
+	{
+		String result = matcher.group(group);
+		return (result == null ? "" : result);
 	}
 	
 	static private Platform platform()
@@ -65,4 +202,13 @@ final class PlatformHelper
 		LINUX,
 		OTHER
 	}
+
+	static final private String BUTTON_TAGS = "LRHYN<>FACOX_";
+	static final private String TAGS_GROUP = "([" + BUTTON_TAGS + "]*)";
+	static final private String PARSER = 
+		"^" + TAGS_GROUP + "/" + TAGS_GROUP + "/" + TAGS_GROUP + "$";
+
+	static private String _leftTags = null;
+	static private String _centerTags = null;
+	static private String _rightTags = null;
 }

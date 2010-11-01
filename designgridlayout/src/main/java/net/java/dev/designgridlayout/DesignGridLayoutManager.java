@@ -141,7 +141,7 @@ class DesignGridLayoutManager implements LayoutManager
 					helper.setY(y);
 					int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
 					helper.setRowAvailableHeight(extraHeight + row.height());
-					row.layoutRow(helper, x, _hgap, _gridgap, rowWidth, 
+					row.layoutRow(helper, x, _hgap, _gridgap, _unrelhgap, rowWidth, 
 						gridsWidth, _labelWidths);
 					row.actualHeight(row.height() + extraHeight);
 					y += row.actualHeight() + row.vgap();
@@ -240,10 +240,12 @@ class DesignGridLayoutManager implements LayoutManager
 	private void computeHorizontalGutters()
 	{
 		_hgap = 0;
+		_unrelhgap = 0;
 		_gridgap = 0;
 		for (AbstractRow row: _rows)
 		{
 			_hgap = Math.max(_hgap, row.hgap());
+			_unrelhgap = Math.max(_unrelhgap, row.unrelhgap());
 			_gridgap = Math.max(_gridgap, row.gridgap());
 		}
 	}
@@ -589,7 +591,7 @@ class DesignGridLayoutManager implements LayoutManager
 		for (AbstractRow row: _rows)
 		{
 			row.forceComponentNonGridWidth(componentWidth);
-			int width = row.totalNonGridWidth(_hgap);
+			int width = row.totalNonGridWidth(_hgap, _unrelhgap);
 			maxWidth = Math.max(maxWidth, width);
 		}
 		return maxWidth + left() + right() + 1;
@@ -727,6 +729,7 @@ class DesignGridLayoutManager implements LayoutManager
 	private int _right;
 
 	private int _hgap;
+	private int _unrelhgap;
 	private int _gridgap;
 
 	private double _totalWeight;

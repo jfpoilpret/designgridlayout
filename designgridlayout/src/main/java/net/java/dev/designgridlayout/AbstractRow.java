@@ -151,7 +151,7 @@ abstract class AbstractRow
 		return 0;
 	}
 
-	int totalNonGridWidth(int hgap)
+	int totalNonGridWidth(int hgap, int unrelhgap)
 	{
 		return 0;
 	}
@@ -168,6 +168,11 @@ abstract class AbstractRow
     int hgap()
 	{
 		return ComponentHelper.hgap(allItems(), parent());
+	}
+
+    int unrelhgap()
+	{
+		return ComponentHelper.unrelhgap(allItems(), parent());
 	}
 
 	int gridgap()
@@ -191,7 +196,9 @@ abstract class AbstractRow
 			: allItems().get(allItems().size() - 1).component());
 	}
 	
-	abstract void checkSpanRows();
+	void checkSpanRows()
+	{
+	}
 
 	abstract List<? extends IRowItem> items();
 
@@ -202,8 +209,10 @@ abstract class AbstractRow
 	}
 	
 	// Returns the actual extra height allocated to the row
+	//CSOFF: ParameterNumber
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
-		int rowWidth, int gridsWidth, List<Integer> labelsWidth);
+		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth);
+	//CSON: ParameterNumber
 
 	private Container _parent;
 	private HeightGrowPolicy _heightTester;

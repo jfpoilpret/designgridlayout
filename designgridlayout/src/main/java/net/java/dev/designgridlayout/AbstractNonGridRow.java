@@ -63,16 +63,12 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
-	@Override void checkSpanRows()
-	{
-	}
-
 	@Override List<NonGridRowItem> items()
 	{
 		return _items;
 	}
 
-	@Override int totalNonGridWidth(int hgap)
+	@Override int totalNonGridWidth(int hgap, int unrelhgap)
 	{
 		int count = _items.size();
 		int totalWidth = _compWidth * count + (hgap * (count - 1));
@@ -95,7 +91,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	}
 
 	@Override int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
-		int rowWidth, int gridsWidth, List<Integer> labelsWidth)
+		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
 		// Calculate various needed widths & origin
 		int x = left;

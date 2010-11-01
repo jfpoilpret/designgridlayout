@@ -325,6 +325,11 @@ public class DesignGridLayout
 			return addRow(new RightRow(), _weight);
 		}
 
+		public IBarRow bar()
+		{
+			return addRow(new BarRow(), _weight);
+		}
+
 		public ISpannableGridRow grid(JLabel label)
 		{
 			return addRow(newGridRow(), _weight).grid(label);
