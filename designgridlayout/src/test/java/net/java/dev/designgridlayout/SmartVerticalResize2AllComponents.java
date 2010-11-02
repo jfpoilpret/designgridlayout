@@ -56,7 +56,7 @@ public class SmartVerticalResize2AllComponents extends AbstractBaseExample
 	}
 	
 	@SuppressWarnings("serial")
-    private JButton lafSetter()
+	private JButton lafSetter()
 	{
 		Action action = new AbstractAction("Combo-selected LAF")
 		{
@@ -75,7 +75,7 @@ public class SmartVerticalResize2AllComponents extends AbstractBaseExample
 	}
 	
 	@SuppressWarnings("serial")
-    private JButton systemLafSetter()
+	private JButton systemLafSetter()
 	{
 		Action action = new AbstractAction("System LAF")
 		{
@@ -90,7 +90,7 @@ public class SmartVerticalResize2AllComponents extends AbstractBaseExample
 	}
 	
 	@SuppressWarnings("serial")
-    private JButton javaLafSetter()
+	private JButton javaLafSetter()
 	{
 		Action action = new AbstractAction("Java LAF")
 		{

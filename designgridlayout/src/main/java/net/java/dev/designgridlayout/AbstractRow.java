@@ -161,16 +161,16 @@ abstract class AbstractRow
 		return 0;
 	}
 
-    void forceComponentNonGridWidth(int width)
-    {
-    }
+	void forceComponentNonGridWidth(int width)
+	{
+	}
 
-    int hgap()
+	int hgap()
 	{
 		return ComponentHelper.hgap(allItems(), parent());
 	}
 
-    int unrelhgap()
+	int unrelhgap()
 	{
 		return ComponentHelper.unrelhgap(allItems(), parent());
 	}

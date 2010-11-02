@@ -29,5 +29,5 @@ class BarRowItem extends NonGridRowItem
 		return _tag;
 	}
 	
-    final private Tag _tag;
+	final private Tag _tag;
 }
