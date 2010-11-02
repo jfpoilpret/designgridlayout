@@ -64,6 +64,26 @@ public interface IRowCreator extends ISubGridStarter
 	 * API) to add components to the row.
 	 */
 	public abstract INonGridRow right();
-	
+
+	/**
+	 * Creates a "command bar" row. This kind of row is NOT a canonical grid and is
+	 * specially dedicated to layout rows with command buttons such as "OK", "Cancel",
+	 * "Apply", "Help"...
+	 * <p/>
+	 * Command bar rows place standard components (marked with {@link Tag}) based on
+	 * platform preferences. This means that you don't have to care about where you 
+	 * must locate "OK" and "Cancel" if your application must run on both Windows and
+	 * Mac OS.
+	 * <p/>
+	 * These rows are split into 3 sub-rows: one on the left, one
+	 * in the center and one on the right.
+	 * <p/>
+	 * The new row is located under the previously created row, which means that
+	 * each line of code using this method creates a new row and all lines can 
+	 * be read as defining the visual UI of the container.
+	 * 
+	 * @return a new command-bar row which API is used in a chained-way (fluent 
+	 * API) to add components to the row.
+	 */
 	public abstract IBarRow bar();
 }
