@@ -30,7 +30,7 @@
  *         layout.row().grid(labelA).add(fieldA);
  *         layout.row().grid(labelB).add(fieldB);
  *         //...
- *         layout.row().center().add(okButton, cancelButton);
+ *         layout.row().bar().add(okButton, Tag.OK).add(cancelButton, Tag.CANCEL);
  *     }
  *     
  *     private JLabel labelA = new JLabel("aaa");
@@ -44,7 +44,7 @@
  * </pre>
  * As you can see in this example, each row of components in the panel can be 
  * set through one single line of source code. Each component is added from left 
- * to right.
+ * to right (except for the last rows which is special).
  * <p/>
  * Labels (when created with 
  * {@link net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel)})
@@ -69,6 +69,11 @@
  *  <li>Right Row: all components in this row are aligned on the right, they are
  *  	never sized bigger than their preferred size (except when {@code fill()}
  *  	is used (see below))</li>
+ *  <li>Command Bar Row: this row is used for command buttons such as "OK",
+ *  	"Cancel", "Help"... Each button is added with a special {@code Tag},
+ *  	which DesignGridLayout uses to determine the correct position of each
+ *  	button based on the current platform. In this row, thus, components are
+ *  	not located in the same order as they are added</li>
  *  <li>Empty Row: this row has no component but has a fixed height (automatically
  *  	calculated to "visually separate" two groups of components). This is 
  *  	useful when you want to add some space between groups of rows.</li>
@@ -85,11 +90,11 @@
  * DesignGridLayout allows you to add empty rows with a height that is 
  * automatically calculated (depending on the current installed Look &amp; Feel),
  * in order to introduce some space in your layout (e.g. to separate different 
- * groups of logically releated items:
+ * groups of logically related items):
  * <pre>
  *     layout.row().grid().add(...);
  *     layout.emptyRow();
- *     layout.row().right().add(new JButton("OK"), new JButton("Cancel"));
+ *     layout.row().bar().add(new JButton("OK"), Tag.OK).add(new JButton("Cancel"), Tag.CANCEL);
  * </pre>
  * In grid rows (added by calling {@code DesignGridLayout.row().grid()}), you 
  * may specify that a given component spans several columns, this way, you can 
@@ -200,4 +205,3 @@
  * @see net.java.dev.designgridlayout.DesignGridLayout
  */
 package net.java.dev.designgridlayout;
-

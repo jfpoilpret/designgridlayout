@@ -19,7 +19,7 @@ package net.java.dev.designgridlayout;
  * that DesignGridLayout know where to locate it in an {@link IBarRow}, based on the 
  * UI guidelines for the current platform.
  * 
- * @see {@link IBarRow#add(javax.swing.JComponent, Tag)}
+ * @see IBarRow#add(javax.swing.JComponent, Tag)
  * @author Jean-Francois Poilpret
  */
 public enum Tag
@@ -49,6 +49,10 @@ public enum Tag
 	 */
 	PREVIOUS('<'),
 
+	/**
+	 * Tag for the "Finish" button typically used in a wizard dialog in order 
+	 * to validate the wizard sequence and close the wizard dialog.
+	 */
 	FINISH('F'),
 	
 	/**
@@ -65,9 +69,7 @@ public enum Tag
 	
 	/**
 	 * Tag for the "OK" button typically used in a dialog to validate
-	 * user input and then close the dialog. This is also normally used in 
-	 * wizards in order to validate the wizard sequence and close the wizard
-	 * dialog.
+	 * user input and then close the dialog.
 	 */
 	OK('O'),
 	
