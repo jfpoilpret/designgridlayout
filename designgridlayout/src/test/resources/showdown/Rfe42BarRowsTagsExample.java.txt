@@ -1,0 +1,12 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid(label("Row 1")).add(field("abcdefghijklmnopqrstuvwxyz")).empty(3);
+	layout.row().grid(label("Row 2")).add(field(""));
+	layout.emptyRow();
+	layout.row().bar().add(button("Help"), Tag.HELP).add(button("< Previous"), Tag.PREVIOUS)
+		.add(button("Next >"), Tag.NEXT).add(button("Finish"), Tag.FINISH)
+		.add(button("Cancel"), Tag.CANCEL);
+	layout.emptyRow();
+	layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL)
+		.addLeft(button("Left")).addRight(button("Right"));
+}

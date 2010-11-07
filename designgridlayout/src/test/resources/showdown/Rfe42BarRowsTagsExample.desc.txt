@@ -1,0 +1,10 @@
+In addition to left, center and right non-grid rows, DesignGridLayout also has another kind of row that doesn't obey the "canonical grids" rules. The "command bar" row is specially used for a row with standard buttons (such as "OK", "Cancel", "Help", "Apply"...) which position on the row varies across platforms due to different UI guidelines.
+
+When using a command bar row, you have to tag each added button to determine its type, then DesignGridLayout will automatically determine the position for each added button, based on the current platform.
+
+In a command row, you can also add non standard components, either left-aligned, right-aligned or center-located inside the row, based on the method called to add these components.
+
+In "command bar" rows, all components have exactly the same width (the maximum of preferred widths of all components in the row).
+
+Source code shows how easy it is to add command rows to a layout, how you tag components (by using the Tag enum) and how you can also add non-standard components on the left and right sides of the row.
+In this example, the first command bar illustrates how you would use this feature for a wizard dialog; the second command bar shows a simple use (only "OK" and "Cancel" standard buttons) with additional specific buttons.

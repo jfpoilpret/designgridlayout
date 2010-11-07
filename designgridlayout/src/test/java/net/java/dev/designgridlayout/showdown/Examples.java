@@ -48,6 +48,7 @@ import net.java.dev.designgridlayout.Rfe40LeftLabelAlignmentExample;
 import net.java.dev.designgridlayout.Rfe40PlatformLabelAlignmentExample;
 import net.java.dev.designgridlayout.Rfe41ConsistentWidthAcrossNonGridRowsExample;
 import net.java.dev.designgridlayout.Rfe41IndependentWidthAcrossNonGridRowsExample;
+import net.java.dev.designgridlayout.Rfe42BarRowsTagsExample;
 import net.java.dev.designgridlayout.RightToLeft1LTR;
 import net.java.dev.designgridlayout.RightToLeft2RTL;
 import net.java.dev.designgridlayout.RightToLeft3RealWorldExample;
@@ -134,6 +135,8 @@ public class Examples extends JFrame
 			new Node("Non-Grids - left, center, right, filler", Basics5NonGridRows.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Non-Grids - fillers", Basics6NonGridRowsWithFiller.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("Non-Grids - command bars", Rfe42BarRowsTagsExample.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example - Figure 177", Basics7RealWorldExample1.class)));
 		node.add(new DefaultMutableTreeNode(
