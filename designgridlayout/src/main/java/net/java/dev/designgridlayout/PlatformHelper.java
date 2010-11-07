@@ -146,7 +146,7 @@ final class PlatformHelper
 			switch (platform())
 			{
 				case MACINTOSH:
-				tagsOrder = "L_H/X/NY<>COA_R";
+				tagsOrder = "L_H/X/NY<>F_COA_R";
 				break;
 				
 				case LINUX:
@@ -156,7 +156,7 @@ final class PlatformHelper
 				case WINDOWS:
 				case OTHER:
 				default:
-				tagsOrder = "L_/X/YN<>OCAH_R";
+				tagsOrder = "L_/X/YN<>F_OCAH_R";
 				break;
 			}
 			// Now parse into 3 strings of tags: left, center and right

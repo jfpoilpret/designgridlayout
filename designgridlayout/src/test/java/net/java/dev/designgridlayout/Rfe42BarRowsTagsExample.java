@@ -28,7 +28,7 @@ public class Rfe42BarRowsTagsExample extends AbstractBaseExample
 		layout.row().grid(label("Row 2")).add(field(""));
 		layout.emptyRow();
 		layout.row().bar().add(button("Help"), Tag.HELP).add(button("< Previous"), Tag.PREVIOUS)
-			.add(button("Next >"), Tag.NEXT).add(button("Finish"), Tag.APPLY)
+			.add(button("Next >"), Tag.NEXT).add(button("Finish"), Tag.FINISH)
 			.add(button("Cancel"), Tag.CANCEL);
 		layout.emptyRow();
 		layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL)
