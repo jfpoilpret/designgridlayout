@@ -130,7 +130,7 @@ public class Examples extends JFrame
 		node.add(new DefaultMutableTreeNode(
 			new Node("Grids - labels", Basics3GridLabels.class)));
 		node.add(new DefaultMutableTreeNode(
-			new Node("Grids - right-centered row", Basics4RightRow.class)));
+			new Node("Non-Grids - right-centered row", Basics4RightRow.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Non-Grids - left, center, right, filler", Basics5NonGridRows.class)));
 		node.add(new DefaultMutableTreeNode(
