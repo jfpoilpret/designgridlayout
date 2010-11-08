@@ -33,17 +33,17 @@ final class BarRow extends AbstractRow implements IBarRow
 		return this;
 	}
 
-	@Override public IBarRow addCenter(JComponent... children)
+	@Override public IBarRow center(JComponent... children)
 	{
 		return add(Tag.OTHER, children);
 	}
 
-	@Override public IBarRow addLeft(JComponent... children)
+	@Override public IBarRow left(JComponent... children)
 	{
 		return add(Tag.LEFT, children);
 	}
 
-	@Override public IBarRow addRight(JComponent... children)
+	@Override public IBarRow right(JComponent... children)
 	{
 		return add(Tag.RIGHT, children);
 	}

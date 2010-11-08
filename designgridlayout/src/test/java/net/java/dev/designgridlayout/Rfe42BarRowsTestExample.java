@@ -24,14 +24,14 @@ public class Rfe42BarRowsTestExample extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.row().bar().addLeft(button("Left"));
-		layout.row().bar().addCenter(button("Center"));
-		layout.row().bar().addRight(button("Right"));
-		layout.row().bar().addLeft(button("Left")).addCenter(button("Center"));
-		layout.row().bar().addLeft(button("Left")).addRight(button("Right"));
-		layout.row().bar().addCenter(button("Center")).addRight(button("Right"));
-		layout.row().bar().addLeft(button("Left")).addCenter(button("Center"))
-			.addRight(button("Right")).addRight(button("Right 2"));
+		layout.row().bar().left(button("Left"));
+		layout.row().bar().center(button("Center"));
+		layout.row().bar().right(button("Right"));
+		layout.row().bar().left(button("Left")).center(button("Center"));
+		layout.row().bar().left(button("Left")).right(button("Right"));
+		layout.row().bar().center(button("Center")).right(button("Right"));
+		layout.row().bar().left(button("Left")).center(button("Center"))
+			.right(button("Right")).right(button("Right 2"));
 	}
 
 	@Override protected void init(DesignGridLayout layout)

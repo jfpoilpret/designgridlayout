@@ -49,7 +49,7 @@ public interface IBarRow
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IBarRow addLeft(JComponent... children);
+	public abstract IBarRow left(JComponent... children);
 	
 	/**
 	 * Adds components to the center of this row. Components are added left to 
@@ -67,7 +67,7 @@ public interface IBarRow
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IBarRow addCenter(JComponent... children);
+	public abstract IBarRow center(JComponent... children);
 	
 	/**
 	 * Adds components to the right of this row. Components are added left to 
@@ -85,7 +85,7 @@ public interface IBarRow
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */
-	public abstract IBarRow addRight(JComponent... children);
+	public abstract IBarRow right(JComponent... children);
 	
 	/**
 	 * Adds a tagged component to this row. The component is placed in the row at a

@@ -32,7 +32,7 @@ public class Rfe42BarRowsTagsExample extends AbstractBaseExample
 			.add(button("Cancel"), Tag.CANCEL);
 		layout.emptyRow();
 		layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL)
-			.addLeft(button("Left")).addRight(button("Right"));
+			.left(button("Left")).right(button("Right"));
 	}
 
 	@Override protected void init(DesignGridLayout layout)
