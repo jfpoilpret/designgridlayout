@@ -42,13 +42,12 @@ public class MyPanel extends JPanel {
 	
 	In this very simple example, you can see that <<<layout>>> is the principal
 	object to be used for adding components to the container. Please also note
-	that with DesignGridLayout, you don't need to explicitly call <<<setLayout>>>
+	that with DesignGridLayout, you don't explicitly call <<<setLayout>>>
 	on the container, DesignGridLayout takes care of that for you.
 	
 	For every row of components you want created in a container, you need to call 
-	<<<layout.row()>>> (or one of the alternatives to <<<row()>>>, explained
-	later). This returns an object (a "row") which provides its own API to add
-	components to this row.
+	<<<layout.row()>>>. This returns an object (a "row") which provides its own 
+	API to add components to this row.
 	
 	Rows are created vertically from top to bottom, in the same order as lines
 	of code that call <<<layout.row()>>>. Inside one row, you add components 
@@ -84,8 +83,8 @@ DesignGridLayout API by example
 	After the first steps, this section gives more details and explanations on
 	DesignGridLayout API through simple examples. The source for all examples is
 	available in DesignGridLayout 
-	{{{https://designgridlayout.dev.java.net/files/documents/4350/122556/designgridlayout-1.1p1-test-sources.jar}test sources archive}}.
-	
+	{{{https://designgridlayout.dev.java.net/files/documents/153966/TODO/designgridlayout-1.5-test-sources.jar}test sources archive}}.
+
 	Although not mandatory, it is advised to first read the DesignGridLayout
 	{{{./index.html}Introduction}}.
 	
@@ -201,6 +200,21 @@ layout.row().right().add(new JButton("Cancel")).add(new JButton("OK"));
 [images/Basics4RightRow-org.png] Example 4: Grid and right-aligned row
 
 	{{{./xref-test/net/java/dev/designgridlayout/Basics4RightRow.html}(Example 4 source)}}
+
+	Since DesignGridLayout 1.5, you also have a better way to deal with rows 
+	containing command buttons, by using a "command bar" and adding buttons to
+	it with the right tag:
+	
++------------------------------------------------------------------------------+
+layout.emptyRow();
+layout.row().bar().add(new JButton("Cancel"), Tag.CANCEL).add(new JButton("OK"), Tag.OK);
++------------------------------------------------------------------------------+
+
+	In the snippet above, the order in which both "OK" and "Cancel" buttons are 
+	added is not relevant, what is important is the tag they've been assigned 
+	when added; this tag will determine where they should be positioned inside
+	the row, so as to be compliant with UI guidelines of the current platform
+	the application is running on.
 
 Forms with several label columns
 

@@ -83,7 +83,7 @@ DesignGridLayout "philosophy"
 	<<<Component>>>, DesignGridLayout uses a fluent API which starts from the 
 	<<<DesignGridLayout>>> instance itself.
 
-DesignGridLayout Features (version 1.4)
+DesignGridLayout Features (version 1.5)
 
 	*	<<Fluent and simple API>> to create grid-based layouts (from the layout, 
 		you create rows, from a row you add components)
@@ -97,13 +97,18 @@ DesignGridLayout Features (version 1.4)
 		rows and <<right-aligned>> rows (useful for command buttons, these rows
 		ensure a uniform width of all their components, even across several such
 		rows)
-		
+	
 	*	Special <<"label" columns>> (in canonical grid rows) that have constant 
 		width during horizontal resize (no waste of space after resize);
 		DesignGridLayout supports <<several groups of columns>>, each having 
 		their dedicated label column. Labels in these columns are aligned according
 		to platform guidelines or can be forced left or right
 		
+	*	Support for special <<command bar>> rows where command buttons are 
+		positioned by DesignGridLayout based on the UI guidelines of the current
+		platform, removing the need, in developer's code, to check the platform
+		and add buttons in the right order
+	
 	*	Support for high components (e.g. <<<JList>>>) <<spanning several grid
 		rows>>
 		
