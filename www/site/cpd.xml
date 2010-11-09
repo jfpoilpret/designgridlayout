@@ -1,3 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd-cpd>
+<duplication lines="17" tokens="52">
+<file line="74" path="C:\dev\dgl-deploy\src\main\java\net\java\dev\designgridlayout\AbstractNonGridRow.java"/>
+<file line="111" path="C:\dev\dgl-deploy\src\main\java\net\java\dev\designgridlayout\BarRow.java"/>
+<codefragment>
+<![CDATA[
+		int totalWidth = centerWidth + sidesWidth + unrelhgap * numGapsBetweenParts();
+		return totalWidth;
+	}
+
+	@Override int componentNonGridWidth()
+	{
+		return (_ownRowWidth ? 0 : actualComponentNonGridWidth());
+	}
+	
+	private int actualComponentNonGridWidth()
+	{
+		return ComponentHelper.maxValues(_items, PrefWidthExtractor.INSTANCE);
+	}
+
+	@Override void forceComponentNonGridWidth(int width)
+	{
+		_compWidth = ((width > 0 && !_ownRowWidth) ? width : actualComponentNonGridWidth());
+]]>
+</codefragment>
+</duplication>
 </pmd-cpd>
