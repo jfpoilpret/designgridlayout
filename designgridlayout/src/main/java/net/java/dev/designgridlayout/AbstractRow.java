@@ -70,7 +70,6 @@ abstract class AbstractRow
 
 	final void init()
 	{
-		_maxWidth = ComponentHelper.maxValues(items(), PrefWidthExtractor.INSTANCE);
 		_height = ComponentHelper.maxValues(allItems(), PrefHeightExtractor.INSTANCE);
 		_baseline = ComponentHelper.maxValues(allItems(), BaselineExtractor.INSTANCE);
 		boolean fixedHeight = ComponentHelper.isFixedHeight(_heightTester, items());
@@ -87,11 +86,6 @@ abstract class AbstractRow
 	final protected int baseline()
 	{
 		return _baseline;
-	}
-
-	final protected int maxWidth()
-	{
-		return _maxWidth;
 	}
 
 	int height()
@@ -222,6 +216,5 @@ abstract class AbstractRow
 	private int _baseline;
 	private int _height;
 	private double _growWeight = -1.0;
-	private int _maxWidth;
 	private int _actualHeight;
 }
