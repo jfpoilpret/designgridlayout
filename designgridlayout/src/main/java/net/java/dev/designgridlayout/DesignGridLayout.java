@@ -71,7 +71,7 @@ public class DesignGridLayout
 			throw new NullPointerException("parent cannot be null");
 		}
 		_orientation = new OrientationPolicy(parent);
-		_layout = new DesignGridLayoutManager(parent, _rows, _orientation);
+		_layout = new DesignGridLayoutManager(this, parent, _rows, _orientation);
 		_layout.setHeightTester(_heightTester);
 		_parent = parent;
 		_parent.setLayout(_layout);
