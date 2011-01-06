@@ -463,13 +463,13 @@
   <td class="src"><pre class="src">&nbsp;        @Override <span class="keyword">boolean</span> isEmpty()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;257</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;258</td>  <td class="nbHitsCovered"><a title="Line 258: Conditional coverage 100% (2/2).">&nbsp;1586</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 258: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;258</td>  <td class="nbHitsCovered"><a title="Line 258: Conditional coverage 100% (2/2).">&nbsp;1580</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 258: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;259</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;260</td>  <td class="nbHitsCovered"><a title="Line 260: Conditional coverage 100% (2/2).">&nbsp;1590</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 260: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (grid.leftComponent() != <span class="keyword">null</span>)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;260</td>  <td class="nbHitsCovered"><a title="Line 260: Conditional coverage 100% (2/2).">&nbsp;1584</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 260: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (grid.leftComponent() != <span class="keyword">null</span>)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;261</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;262</td>  <td class="nbHitsCovered">&nbsp;1580</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;262</td>  <td class="nbHitsCovered">&nbsp;1574</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">return</span> <span class="keyword">false</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;263</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;264</td>  <td class="nbHits">&nbsp;</td>
@@ -492,7 +492,7 @@
   <td class="src"><pre class="src">&nbsp;        @Override List&lt;RowItem&gt; items()</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;274</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;275</td>  <td class="nbHitsCovered">&nbsp;1773</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> _items;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;275</td>  <td class="nbHitsCovered">&nbsp;1518</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> _items;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;276</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;277</td>  <td class="nbHits">&nbsp;</td>
@@ -534,55 +534,55 @@
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> unrelhgap, <span class="keyword">int</span> rowWidth, <span class="keyword">int</span> gridsWidth, List&lt;Integer&gt; labelsWidth)</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;299</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;300</td>  <td class="nbHitsCovered">&nbsp;1024</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> x = left;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;301</td>  <td class="nbHitsCovered">&nbsp;1024</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> actualHeight = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;302</td>  <td class="nbHitsCovered">&nbsp;1024</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridWidth = gridsWidth / _totalGrids;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;303</td>  <td class="nbHitsCovered">&nbsp;1024</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridIndex = 0;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;304</td>  <td class="nbHitsCovered">&nbsp;1024</td>  <td class="src"><pre class="src">&nbsp;                Iterator&lt;Integer&gt; label = labelsWidth.iterator();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;305</td>  <td class="nbHitsCovered"><a title="Line 305: Conditional coverage 100% (2/2).">&nbsp;1024</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 305: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;300</td>  <td class="nbHitsCovered">&nbsp;1018</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> x = left;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;301</td>  <td class="nbHitsCovered">&nbsp;1018</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> actualHeight = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;302</td>  <td class="nbHitsCovered">&nbsp;1018</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridWidth = gridsWidth / _totalGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;303</td>  <td class="nbHitsCovered">&nbsp;1018</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> gridIndex = 0;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;304</td>  <td class="nbHitsCovered">&nbsp;1018</td>  <td class="src"><pre class="src">&nbsp;                Iterator&lt;Integer&gt; label = labelsWidth.iterator();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;305</td>  <td class="nbHitsCovered"><a title="Line 305: Conditional coverage 100% (2/2).">&nbsp;1018</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 305: Conditional coverage 100% (2/2).">                <span class="keyword">for</span> (SubGrid grid: _grids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;306</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;307</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Find the label for the current sub-grid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;308</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> labelWidth = label.next();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;308</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> labelWidth = label.next();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;309</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;310</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Calculate the actual width for this sub-grid (depends on spans)</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;311</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> width = gridWidth;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;312</td>  <td class="nbHitsCovered"><a title="Line 312: Conditional coverage 100% (2/2).">&nbsp;1209</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 312: Conditional coverage 100% (2/2).">                        <span class="keyword">for</span> (<span class="keyword">int</span> i = 1; i &lt; grid.gridspan(); i++)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;311</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> width = gridWidth;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;312</td>  <td class="nbHitsCovered"><a title="Line 312: Conditional coverage 100% (2/2).">&nbsp;1216</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 312: Conditional coverage 100% (2/2).">                        <span class="keyword">for</span> (<span class="keyword">int</span> i = 1; i &lt; grid.gridspan(); i++)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;313</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;314</td>  <td class="nbHitsCovered">&nbsp;83</td>  <td class="src"><pre class="src">&nbsp;                                width += gridgap + label.next() + hgap + gridWidth;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;314</td>  <td class="nbHitsCovered">&nbsp;88</td>  <td class="src"><pre class="src">&nbsp;                                width += gridgap + label.next() + hgap + gridWidth;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;315</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;316</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                        gridIndex += grid.gridspan();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;317</td>  <td class="nbHitsCovered"><a title="Line 317: Conditional coverage 100% (2/2).">&nbsp;1126</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 317: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (gridIndex == _totalGrids)</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;316</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                        gridIndex += grid.gridspan();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;317</td>  <td class="nbHitsCovered"><a title="Line 317: Conditional coverage 100% (2/2).">&nbsp;1128</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 317: Conditional coverage 100% (2/2).">                        <span class="keyword">if</span> (gridIndex == _totalGrids)</a></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;318</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;319</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                <span class="comment">// Add fudge to the true last grid </span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;320</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                <span class="comment">// Note that this is not necessarily the last grid of _grids!</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;321</td>  <td class="nbHitsCovered">&nbsp;1009</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">int</span> fudge = gridsWidth % _totalGrids;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;322</td>  <td class="nbHitsCovered">&nbsp;1009</td>  <td class="src"><pre class="src">&nbsp;                                width += fudge;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;321</td>  <td class="nbHitsCovered">&nbsp;1001</td>  <td class="src"><pre class="src">&nbsp;                                <span class="keyword">int</span> fudge = gridsWidth % _totalGrids;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;322</td>  <td class="nbHitsCovered">&nbsp;1001</td>  <td class="src"><pre class="src">&nbsp;                                width += fudge;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;323</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;324</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        </pre></td></tr>
 <tr>  <td class="numLine">&nbsp;325</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Layout the sub-grid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;326</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> height = grid.layoutRow(</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;326</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">int</span> height = grid.layoutRow(</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;327</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                                helper, x, height(), baseline(), hgap, width, labelWidth);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;328</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                        actualHeight = Math.max(actualHeight, height);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;328</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                        actualHeight = Math.max(actualHeight, height);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;329</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;330</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="comment">// Position origin to the next grid</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;331</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                        x += labelWidth + hgap + width + gridgap;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;332</td>  <td class="nbHitsCovered">&nbsp;1126</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;333</td>  <td class="nbHitsCovered">&nbsp;1024</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> actualHeight;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;331</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                        x += labelWidth + hgap + width + gridgap;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;332</td>  <td class="nbHitsCovered">&nbsp;1128</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;333</td>  <td class="nbHitsCovered">&nbsp;1018</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> actualHeight;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;334</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;335</td>  <td class="nbHits">&nbsp;</td>
@@ -642,6 +642,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 11/9/10 7:06 PM.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 1/5/11 10:43 PM.</div>
 </body>
 </html>
