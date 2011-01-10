@@ -14,23 +14,24 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.List;
-
-import javax.swing.JComponent;
-
-interface IRowItem
+abstract class AbstractRowItem implements IRowItem
 {
-	public void hide();
-	public void show();
-	
-	public JComponent component();
-	public int preferredHeight();
-	public int minimumWidth();
-	public int preferredWidth();
-	public int baseline();
+	@Override public void hide()
+	{
+		if (isFirstSpanRow())
+		{
+			_isVisible =  component().isVisible();
+			component().setVisible(false);
+		}
+	}
 
-	public void setSpannedRows(List<AbstractRow> rows);
-	public int rowSpan();
-	public boolean isFirstSpanRow();
-	public boolean isLastSpanRow();
+	@Override public void show()
+	{
+		if (isFirstSpanRow())
+		{
+			component().setVisible(_isVisible);
+		}
+	}
+
+	private boolean _isVisible = true;
 }

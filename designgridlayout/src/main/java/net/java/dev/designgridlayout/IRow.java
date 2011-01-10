@@ -54,4 +54,8 @@ public interface IRow
 	 * row)
 	 */
 	public abstract IRow addMulti(JComponent... children);
+	
+	//TODO javadoc
+	public abstract void show();
+	public abstract void hide();
 }

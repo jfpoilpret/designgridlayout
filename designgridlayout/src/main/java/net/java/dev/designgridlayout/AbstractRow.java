@@ -21,6 +21,35 @@ import javax.swing.JComponent;
 
 abstract class AbstractRow
 {
+	final public void show()
+	{
+		if (_hidden > 0)
+		{
+			_hidden--;
+			if (_hidden == 0)
+			{
+				// Restore visibility of all items
+				for (IRowItem item: allItems())
+				{
+					item.show();
+				}
+			}
+		}
+	}
+	
+	final public void hide()
+	{
+		if (_hidden == 0)
+		{
+			// Hide all items
+			for (IRowItem item: allItems())
+			{
+				item.hide();
+			}
+		}
+		_hidden++;
+	}
+	
 	// Called by DesignGridLayout immediately after instanciation
 	final void init(
 		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
@@ -65,7 +94,7 @@ abstract class AbstractRow
 
 	final int vgap()
 	{
-		return _vgap;
+		return (_hidden == 0 ? _vgap : 0);
 	}
 
 	final void init()
@@ -85,22 +114,22 @@ abstract class AbstractRow
 
 	final protected int baseline()
 	{
-		return _baseline;
+		return (_hidden == 0 ? _baseline : 0);
 	}
 
-	int height()
+	final int height()
 	{
-		return _height;
+		return (_hidden == 0 ? _height : 0);
 	}
 	
-	void actualHeight(int height)
+	final void actualHeight(int height)
 	{
 		_actualHeight = height;
 	}
 
-	int actualHeight()
+	final int actualHeight()
 	{
-		return _actualHeight;
+		return (_hidden == 0 ? _actualHeight : 0);
 	}
 
 	final void growWeight(double weight)
@@ -113,7 +142,7 @@ abstract class AbstractRow
 
 	final double growWeight()
 	{
-		return _growWeight;
+		return (_hidden == 0 ? _growWeight : 0.0);
 	}
 
 	int numGrids()
@@ -204,6 +233,20 @@ abstract class AbstractRow
 	
 	// Returns the actual extra height allocated to the row
 	//CSOFF: ParameterNumber
+	final int layout(LayoutHelper helper, int left, int hgap, int gridgap, 
+		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
+	{
+		if (_hidden == 0)
+		{
+			return layoutRow(
+				helper, left, hgap, gridgap, unrelhgap, rowWidth, gridsWidth, labelsWidth);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
 	abstract int layoutRow(LayoutHelper helper, int left, int hgap, int gridgap, 
 		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth);
 	//CSON: ParameterNumber
@@ -217,4 +260,5 @@ abstract class AbstractRow
 	private int _height;
 	private double _growWeight = -1.0;
 	private int _actualHeight;
+	private int _hidden = 0;
 }

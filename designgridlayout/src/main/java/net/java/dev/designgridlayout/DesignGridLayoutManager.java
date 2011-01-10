@@ -167,7 +167,7 @@ public class DesignGridLayoutManager implements LayoutManager
 					helper.setY(y);
 					int extraHeight = (int) (row.growWeight() * totalExtraHeight); 
 					helper.setRowAvailableHeight(extraHeight + row.height());
-					row.layoutRow(helper, x, _hgap, _gridgap, _unrelhgap, rowWidth, 
+					row.layout(helper, x, _hgap, _gridgap, _unrelhgap, rowWidth, 
 						gridsWidth, _labelWidths);
 					row.actualHeight(row.height() + extraHeight);
 					y += row.actualHeight() + row.vgap();
