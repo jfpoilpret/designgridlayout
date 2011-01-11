@@ -37,15 +37,20 @@ public class Rfe47ShowHideRowsTestExample extends AbstractBaseExample
 		JButton hideR5 = new JButton("Hide R5");
 		JButton showR6 = new JButton("Show R6");
 		JButton hideR6 = new JButton("Hide R6");
+		JButton showR8 = new JButton("Show R8");
+		JButton hideR8 = new JButton("Hide R8");
 
-		layout.row().center().add(showR2, hideR2, showR4, hideR4, showR5, hideR5, showR6, hideR6);
+		layout.row().center().add(showR2, hideR2, showR4, hideR4, showR5, hideR5, showR6, hideR6, showR8, hideR8);
 		layout.row().grid(label("Row 1")).add(field("Field 11"), field("Field 12"));
 		final IRow row2 = layout.row().grid(label("Row 2")).add(field("Field 21: a long field"));
+		layout.emptyRow();
 		layout.row().grid(label("Row 3")).add(field("Field 31"), field("Field 32"), field("Field 33"));
 		final IRow row4 = layout.row().grid(label("Row 4")).add(field("Field 41"), list());
 		final IRow row5 = layout.row().grid(label("Row 5")).add(field("Field 51")).spanRow();
-		final IRow row6 = layout.row().grid(label("Row 6")).add(field("Field 51")).spanRow();
+		final IRow row6 = layout.row().grid(label("Row 6")).add(field("Field 61")).spanRow();
 		layout.row().grid(label("Row 7")).add(field("Field 71"), field("Field 72"));
+		final IRow row8 = layout.row().grid(label("Row 8")).add(list());
+		layout.row().grid(label("Row 9")).add(field("Field 91")).empty(3);
 
 		showR2.addActionListener(new ShowHideAction(row2, true));
 		hideR2.addActionListener(new ShowHideAction(row2, false));
@@ -55,6 +60,8 @@ public class Rfe47ShowHideRowsTestExample extends AbstractBaseExample
 		hideR5.addActionListener(new ShowHideAction(row5, false));
 		showR6.addActionListener(new ShowHideAction(row6, true));
 		hideR6.addActionListener(new ShowHideAction(row6, false));
+		showR8.addActionListener(new ShowHideAction(row8, true));
+		hideR8.addActionListener(new ShowHideAction(row8, false));
 	}
 	
 	private class ShowHideAction implements ActionListener
