@@ -21,11 +21,12 @@ import javax.swing.JComponent;
 
 abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 {
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.java.dev.designgridlayout.INonGridRow#add(javax.swing.JComponent[])
-	 */
+	public INonGridRow group(RowGroup group)
+	{
+		group.add(this);
+		return this;
+	}
+	
 	public INonGridRow add(JComponent... children)
 	{
 		for (JComponent component: children)
@@ -36,21 +37,11 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.java.dev.designgridlayout.INonGridRow#addMulti(javax.swing.JComponent[])
-	 */
 	public INonGridRow addMulti(JComponent... children)
 	{
 		return add(new MultiComponent(growPolicy(), orientation(), children));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.java.dev.designgridlayout.INonGridRow#fill()
-	 */
 	public INonGridRow fill()
 	{
 		_fill = true;

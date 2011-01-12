@@ -81,4 +81,10 @@ public interface INonGridRow extends IRow
 	 * row)
 	 */
 	public abstract INonGridRow withOwnRowWidth();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IHideable#group(net.java.dev.designgridlayout.RowGroup)
+	 */
+	public abstract INonGridRow group(RowGroup group);
 }

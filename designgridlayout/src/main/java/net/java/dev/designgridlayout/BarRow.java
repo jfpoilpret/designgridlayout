@@ -23,6 +23,12 @@ import javax.swing.JComponent;
 
 final class BarRow extends AbstractRow implements IBarRow
 {
+	@Override public IBarRow group(RowGroup group)
+	{
+		group.add(this);
+		return this;
+	}
+
 	@Override public IBarRow add(JComponent child, Tag tag)
 	{
 		if (child != null)

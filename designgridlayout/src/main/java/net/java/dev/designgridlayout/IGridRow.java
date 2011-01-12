@@ -85,4 +85,10 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * row)
 	 */
 	public abstract IGridRow addMulti(int span, JComponent... children);
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IHideable#group(net.java.dev.designgridlayout.RowGroup)
+	 */
+	public abstract IGridRow group(RowGroup group);
 }

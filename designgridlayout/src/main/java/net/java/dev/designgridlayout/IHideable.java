@@ -48,4 +48,6 @@ public interface IHideable
 	 * have to be called the same number of times for the row to become visible again.
 	 */
 	public abstract void show();
+	
+	public abstract IHideable group(RowGroup group);
 }

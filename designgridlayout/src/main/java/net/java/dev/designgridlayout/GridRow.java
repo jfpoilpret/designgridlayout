@@ -29,31 +29,24 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		_previous = previous;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISpannableGridRow#spanRow()
-	 */
+	public ISpannableGridRow group(RowGroup group)
+	{
+		group.add(this);
+		return this;
+	}
+
 	public ISpannableGridRow spanRow()
 	{
 		_current.spanRow();
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent,
-	 * int)
-	 */
 	public ISpannableGridRow add(JComponent child, int span)
 	{
 		_current.add(child, span);
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent[])
-	 */
 	public ISpannableGridRow add(JComponent... children)
 	{
 		for (JComponent component: children)
@@ -63,74 +56,41 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(int,
-	 * javax.swing.JComponent[])
-	 */
 	public ISpannableGridRow addMulti(int span, JComponent... children)
 	{
 		return add(new MultiComponent(growPolicy(), orientation(), children), span);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(javax.swing.JComponent[])
-	 */
 	public ISpannableGridRow addMulti(JComponent... children)
 	{
 		return addMulti(1, children);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#empty()
-	 */
 	public ISpannableGridRow empty()
 	{
 		return empty(1);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IGridRow#empty(int)
-	 */
 	public ISpannableGridRow empty(int span)
 	{
 		return add(null, span);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel)
-	 */
 	public ISpannableGridRow grid(JLabel label)
 	{
 		return newGrid(label, 0);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid()
-	 */
 	public ISpannableGridRow grid()
 	{
 		return newGrid(null, 0);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(int)
-	 */
 	public IGridRow grid(int gridspan)
 	{
 		return newGrid(null, gridspan);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.ISubGridStarter#grid(javax.swing.JLabel, int)
-	 */
 	public IGridRow grid(JLabel label, int gridspan)
 	{
 		return newGrid(label, gridspan);
