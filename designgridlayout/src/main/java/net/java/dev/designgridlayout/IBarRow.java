@@ -31,7 +31,7 @@ import javax.swing.JComponent;
  *
  * @author Jean-Francois Poilpret
  */
-public interface IBarRow
+public interface IBarRow extends IHideable
 {
 	/**
 	 * Adds components to the left of this row. Components are added left to 

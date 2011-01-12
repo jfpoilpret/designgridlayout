@@ -39,7 +39,7 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 		layout.row().grid(label("Surname:")).add(field("Poilpret")).empty();
 		layout.row().grid(label("Sex")).add(check("Male"), check("Female")).empty(2);
 
-		List<IRow> groupRows = new ArrayList<IRow>();
+		List<IHideable> groupRows = new ArrayList<IHideable>();
 		IRow row;
 		addGroup(layout, "Address", groupRows);
 		row = layout.row().grid(label("Address 1")).add(field(""));
@@ -51,7 +51,7 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 		row = layout.row().grid(label("City")).add(field(""));
 		groupRows.add(row);
 		
-		groupRows = new ArrayList<IRow>();
+		groupRows = new ArrayList<IHideable>();
 		addGroup(layout, "Preferences", groupRows);
 		row = layout.row().grid(label("Guitars")).add(list());
 		groupRows.add(row);
@@ -60,7 +60,7 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 		layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL);
 	}
 	
-	private void addGroup(DesignGridLayout layout, String name, List<IRow> groupRows)
+	private void addGroup(DesignGridLayout layout, String name, List<IHideable> groupRows)
 	{
 		JCheckBox group = new JCheckBox(name);
 		group.setForeground(Color.BLUE);
@@ -85,7 +85,7 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 	
 	private class ShowHideAction implements ItemListener
 	{
-		public ShowHideAction(List<IRow> rows)
+		public ShowHideAction(List<IHideable> rows)
 		{
 			_rows = rows;
 		}
@@ -94,14 +94,14 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 		{
 			if (event.getStateChange() == ItemEvent.SELECTED)
 			{
-				for (IRow row: _rows)
+				for (IHideable row: _rows)
 				{
 					row.show();
 				}
 			}
 			else
 			{
-				for (IRow row: _rows)
+				for (IHideable row: _rows)
 				{
 					row.hide();
 				}
@@ -109,6 +109,6 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 			frame().pack();
 		}
 		
-		final private List<IRow> _rows;
+		final private List<IHideable> _rows;
 	}
 }
