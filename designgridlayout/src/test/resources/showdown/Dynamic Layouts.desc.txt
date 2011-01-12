@@ -1,0 +1,8 @@
+This section shows some interesting DesignGridLayout features that can prove helpful to handle dynamic layouts, i.e. layouts were components can be dynamically hidden or shown.
+
+In the current versions, DesignGridLayout doesn't care whether a component is visible or not when it
+computes the location and sizes of a container's components: all components are considered visible and space is allocated for them even if they are not visible; hence hiding or showing individual components has no impact on the general layout which stays visually "stable".
+
+However, there are situations when we want to give the user the ability to collapse some rows of components in order to gain some space (when real estate is limited) or to focus only on relevant information at a given moment. In this case, the visual layout must change when information gets hidden or shown.
+
+DesignGridLayout, since version 1.7, has introduced a new API that allows rows to be hidden and their space to be reclaimed for remaining visible rows. This is demonstrated in the first example of this section.

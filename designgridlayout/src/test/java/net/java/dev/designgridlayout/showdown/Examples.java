@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
@@ -58,6 +59,7 @@ import net.java.dev.designgridlayout.RowSpan4ErrorMarkers;
 import net.java.dev.designgridlayout.RowSpan5SimplestExample;
 import net.java.dev.designgridlayout.RowSpan6SimpleExampleOnTwoGrids;
 import net.java.dev.designgridlayout.RowSpan7SpecialComponent;
+import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample1;
 import net.java.dev.designgridlayout.SmartVerticalResize1Sliders;
 import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
@@ -107,9 +109,12 @@ public class Examples extends JFrame
 		_tree.setCellRenderer(new NodeRenderer());
 		
 		// Layout frame
-		_split.setLeftComponent(_tree);
+		JScrollPane treeScroller = new JScrollPane(_tree);
+		treeScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		treeScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		_split.setLeftComponent(treeScroller);
 		_split.setRightComponent(_detail);
-		_split.setDividerLocation(_tree.getPreferredSize().width);
+		_split.setDividerLocation(treeScroller.getPreferredSize().width);
 		
 		setContentPane(_split);
 	}
@@ -199,6 +204,14 @@ public class Examples extends JFrame
 		node.add(new DefaultMutableTreeNode(
 			new Node("AddressBookDemo - Right to Left", RightToLeft3RealWorldExample.class)));
 		root.add(node);
+
+		node = new DefaultMutableTreeNode("Dynamic Layouts");
+		node.add(new DefaultMutableTreeNode(
+			new Node("Example 1 - Row-based Hiding", ShowHideRowsRealWorldExample1.class)));
+		root.add(node);
+//		node.add(new DefaultMutableTreeNode(
+//			new Node("Example 2 - RowGroup-based Hiding", ShowHideRowsRealWorldExample2.class)));
+//		root.add(node);
 
 		node = new DefaultMutableTreeNode("Miscellaneous");
 		node.add(new DefaultMutableTreeNode(
