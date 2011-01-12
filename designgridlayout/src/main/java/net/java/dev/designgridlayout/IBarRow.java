@@ -125,10 +125,4 @@ public interface IBarRow extends IHideable
 	 * row)
 	 */
 	public abstract IBarRow withOwnRowWidth();
-
-	/*
-	 * (non-Javadoc)
-	 * @see net.java.dev.designgridlayout.IHideable#group(net.java.dev.designgridlayout.RowGroup)
-	 */
-	public abstract IBarRow group(RowGroup group);
 }

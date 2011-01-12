@@ -293,12 +293,17 @@ public class DesignGridLayout
 		}
 	}
 	
-	private <T extends AbstractRow> T addRow(T row, double verticalWeight)
+	private <T extends AbstractRow> T addRow(
+		T row, double verticalWeight, List<RowGroup> groups)
 	{
 		_current = row;
 		_rows.add(row);
 		row.init(_parent, _heightTester, _orientation);
 		row.growWeight(verticalWeight);
+		for (RowGroup group: groups)
+		{
+			group.add(row);
+		}
 		return row;
 	}
 
@@ -309,45 +314,51 @@ public class DesignGridLayout
 		{
 			_weight = weight;
 		}
+
+		public IRowCreator group(RowGroup group)
+		{
+			_groups.add(group);
+			return this;
+		}
 		
 		public INonGridRow center()
 		{
-			return addRow(new CenterRow(), _weight);
+			return addRow(new CenterRow(), _weight, _groups);
 		}
 
 		public INonGridRow left()
 		{
-			return addRow(new LeftRow(), _weight);
+			return addRow(new LeftRow(), _weight, _groups);
 		}
 
 		public INonGridRow right()
 		{
-			return addRow(new RightRow(), _weight);
+			return addRow(new RightRow(), _weight, _groups);
 		}
 
 		public IBarRow bar()
 		{
-			return addRow(new BarRow(), _weight);
+			return addRow(new BarRow(), _weight, _groups);
 		}
 
 		public ISpannableGridRow grid(JLabel label)
 		{
-			return addRow(newGridRow(), _weight).grid(label);
+			return addRow(newGridRow(), _weight, _groups).grid(label);
 		}
 
 		public IGridRow grid(JLabel label, int gridspan)
 		{
-			return addRow(newGridRow(), _weight).grid(label, gridspan);
+			return addRow(newGridRow(), _weight, _groups).grid(label, gridspan);
 		}
 
 		public ISpannableGridRow grid()
 		{
-			return addRow(newGridRow(), _weight).grid();
+			return addRow(newGridRow(), _weight, _groups).grid();
 		}
 
 		public IGridRow grid(int gridspan)
 		{
-			return addRow(newGridRow(), _weight).grid(gridspan);
+			return addRow(newGridRow(), _weight, _groups).grid(gridspan);
 		}
 		
 		private GridRow newGridRow()
@@ -364,6 +375,7 @@ public class DesignGridLayout
 		}
 
 		private final double _weight;
+		private final List<RowGroup> _groups = new ArrayList<RowGroup>();
 	}
 
 	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();

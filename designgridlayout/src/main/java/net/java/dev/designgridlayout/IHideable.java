@@ -49,5 +49,4 @@ public interface IHideable
 	 */
 	public abstract void show();
 	
-	public abstract IHideable group(RowGroup group);
 }

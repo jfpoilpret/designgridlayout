@@ -60,6 +60,7 @@ import net.java.dev.designgridlayout.RowSpan5SimplestExample;
 import net.java.dev.designgridlayout.RowSpan6SimpleExampleOnTwoGrids;
 import net.java.dev.designgridlayout.RowSpan7SpecialComponent;
 import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample1;
+import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample2;
 import net.java.dev.designgridlayout.SmartVerticalResize1Sliders;
 import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
@@ -209,8 +210,11 @@ public class Examples extends JFrame
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example 1 - Row-based Hiding", ShowHideRowsRealWorldExample1.class)));
 		root.add(node);
+		node.add(new DefaultMutableTreeNode(
+			new Node("Example 2 - RowGroup-based Hiding", ShowHideRowsRealWorldExample2.class)));
+		root.add(node);
 //		node.add(new DefaultMutableTreeNode(
-//			new Node("Example 2 - RowGroup-based Hiding", ShowHideRowsRealWorldExample2.class)));
+//			new Node("Example 3 - Same with beautiful icons", ShowHideRowsRealWorldExample3.class)));
 //		root.add(node);
 
 		node = new DefaultMutableTreeNode("Miscellaneous");

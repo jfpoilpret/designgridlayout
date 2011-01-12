@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-abstract class AbstractRow
+abstract class AbstractRow implements IHideable
 {
 	final public void show()
 	{

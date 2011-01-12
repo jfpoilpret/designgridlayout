@@ -23,6 +23,9 @@ package net.java.dev.designgridlayout;
  */
 public interface IRowCreator extends ISubGridStarter
 {
+	//TODO javadoc
+	public abstract IRowCreator group(RowGroup group);
+
 	/**
 	 * Creates a center-aligned row. Center-aligned rows are NOT canonical grids 
 	 * but avoid the otherwise mandatory use of several {@code LayoutManager}s 

@@ -21,12 +21,6 @@ import javax.swing.JComponent;
 
 abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 {
-	public INonGridRow group(RowGroup group)
-	{
-		group.add(this);
-		return this;
-	}
-	
 	public INonGridRow add(JComponent... children)
 	{
 		for (JComponent component: children)

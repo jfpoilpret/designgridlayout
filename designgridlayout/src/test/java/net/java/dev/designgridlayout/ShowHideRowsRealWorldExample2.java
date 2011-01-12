@@ -39,14 +39,14 @@ public class ShowHideRowsRealWorldExample2 extends AbstractBaseExample
 
 		RowGroup group = new RowGroup();
 		addGroup(layout, "Address", group);
-		layout.row().grid(label("Address 1")).add(field("")).group(group);
-		layout.row().grid(label("Address 2")).add(field("")).group(group);
-		layout.row().grid(label("Zip")).add(field("")).empty(3).group(group);
-		layout.row().grid(label("City")).add(field("")).group(group);
+		layout.row().group(group).grid(label("Address 1")).add(field(""));
+		layout.row().group(group).grid(label("Address 2")).add(field(""));
+		layout.row().group(group).grid(label("Zip")).add(field("")).empty(3);
+		layout.row().group(group).grid(label("City")).add(field(""));
 		
 		group = new RowGroup();
 		addGroup(layout, "Preferences", group);
-		layout.row().grid(label("Guitars")).add(list()).group(group);
+		layout.row().group(group).grid(label("Guitars")).add(list());
 
 		layout.emptyRow();
 		layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL);

@@ -29,12 +29,6 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		_previous = previous;
 	}
 	
-	public ISpannableGridRow group(RowGroup group)
-	{
-		group.add(this);
-		return this;
-	}
-
 	public ISpannableGridRow spanRow()
 	{
 		_current.spanRow();
