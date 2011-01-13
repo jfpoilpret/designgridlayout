@@ -23,7 +23,16 @@ package net.java.dev.designgridlayout;
  */
 public interface IRowCreator extends ISubGridStarter
 {
-	//TODO javadoc
+	/**
+	 * Adds the current row to a given {@code group}. Grouping rows is useful
+	 * when you want to show or hide several rows at a time.
+	 * <p/>
+	 * It is also possible to add one row to several groups.
+	 * 
+	 * @param group the group to which the current row must be added
+	 * @return {@code this} instance of IRowCreator, allowing for chained 
+	 * calls to other methods (also known as "fluent API")
+	 */
 	public abstract IRowCreator group(RowGroup group);
 
 	/**
