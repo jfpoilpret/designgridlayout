@@ -11,6 +11,7 @@ All examples are grouped into 6 topics:
 4. Row Span: illustrate the use of DesignGridLayout 1.1 new feature allowing you to define components spanning several rows
 5. Label Alignment in Grids: shows how you can change the default alignment (according to platform guidelines) of labels in grids
 6. Right to Left Support: shows examples demonstrating DesignGridLayout automatic support for both LTR and RTL orientations
-7. Miscellaneous: gives some more examples about a few remaining DesignGridLayout features which, although less commonly used, may prove useful in some occasions
+7. Dynamic Layouts: shows an interesting DesignGridLayout feature that helps implement dynamic layouts by showing or hiding one or more complete rows of components
+8. Miscellaneous: gives some more examples about a few remaining DesignGridLayout features which, although less commonly used, may prove useful in some occasions
 
 The source code of all examples is based on a common super-class "AbstractBaseExample" that provides the skeleton and utility methods for all examples; particularly, it provides methods to create buttons, fields, lists... that are often directly embedded in the lines of code that create the layout of examples. It is shown here for the sake of completeness but you normally don't need it to understand the examples presented here.

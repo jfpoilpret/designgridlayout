@@ -1,0 +1,54 @@
+@Override public void build(DesignGridLayout layout)
+{
+	addGroup(layout, "Identity");
+	layout.row().grid(label("First name:")).add(field("Jean-François")).empty();
+	layout.row().grid(label("Surname:")).add(field("Poilpret")).empty();
+	layout.row().grid(label("Sex")).add(check("Male"), check("Female")).empty(2);
+
+	RowGroup group = new RowGroup();
+	addGroup(layout, "Address", group);
+	layout.row().group(group).grid(label("Address 1")).add(field(""));
+	layout.row().group(group).grid(label("Address 2")).add(field(""));
+	layout.row().group(group).grid(label("Zip")).add(field("")).empty(3);
+	layout.row().group(group).grid(label("City")).add(field(""));
+	
+	group = new RowGroup();
+	addGroup(layout, "Preferences", group);
+	layout.row().group(group).grid(label("Guitars")).add(list());
+
+	layout.emptyRow();
+	layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL);
+}
+
+private void addGroup(DesignGridLayout layout, String name, RowGroup group)
+{
+	JCheckBox groupBox = new JCheckBox(name);
+	groupBox.setForeground(Color.BLUE);
+	groupBox.setSelected(true);
+	groupBox.addItemListener(new ShowHideAction(group));
+	layout.emptyRow();
+	layout.row().left().add(groupBox, new JSeparator()).fill();
+}
+
+private class ShowHideAction implements ItemListener
+{
+	public ShowHideAction(RowGroup group)
+	{
+		_group = group;
+	}
+	
+	@Override public void itemStateChanged(ItemEvent event)
+	{
+		if (event.getStateChange() == ItemEvent.SELECTED)
+		{
+			_group.show();
+		}
+		else
+		{
+			_group.hide();
+		}
+		frame().pack();
+	}
+	
+	final private RowGroup _group;
+}

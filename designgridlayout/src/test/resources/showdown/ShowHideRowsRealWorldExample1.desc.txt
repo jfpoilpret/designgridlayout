@@ -1,10 +1,10 @@
-This example demonstrates usage of the new IRow show() and hide() methods in order to implement "collapsible" groups of components.
+This example demonstrates usage of the new IHideable interface, implemented by all rows created by DesignGridLayout, with its show() and hide() methods, on how to implement "collapsible" groups of components.
 
 For code simplicity, a checkbox is used as the group label (followed by a horizontal separator).
 
 There are several interesting points in the source code:
-- build() methods stores all rows for a same group in a List<IRow> and pass that list to addGroup()
+- build() method stores all rows for a same group in a List<IRow> and pass that list to addGroup()
 - addGroup() creates the first row of a group ("group separator"), adds a special ItemListener to the JCheckbox that is used to collapse/expand the group
-- ShowHideAction class is the ItemListener to be added to those JCheckBox: based on the checkbox state it just loops through all IRows in a group and shows or hides them; it then performs a pack() on the frame to use the right preferred size (ie extend or reclaim space)
+- ShowHideAction class is the ItemListener to be added to those JCheckBox: based on the checkbox state it just loops through all IHideables (rows) in a group and shows or hides them; it then performs a pack() on the frame to use the right preferred size (ie extend or reclaim space)
 
-Note that, although show() and hide() are interesting to have at the IRow level, this API is a bit cumbersome when you need to show or hide several rows at the same time. The next example presents another API that does just that and helps reduce the necessary code.
+Note that, although show() and hide() are interesting to have at row level, this API is a bit cumbersome when you need to show or hide several rows at the same time. The next example presents another API that does just that and helps reduce the necessary code.

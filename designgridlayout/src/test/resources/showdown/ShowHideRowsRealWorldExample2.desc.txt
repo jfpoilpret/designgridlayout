@@ -1,0 +1,10 @@
+This example is a simplification of the previous example, it demonstrates usage of the new RowGroup API, that allows showing or hiding several rows at a time with a single method call.
+
+There are several interesting points in the source code:
+- build() method create a new RowGroup for each group of row we need (there are 2 in the example), then each row is added to the right group by simply calling group() on it. This simplifies the build() method from the previous example a lot
+- addGroup() creates the first row of a group ("group separator"), adds a special ItemListener to the JCheckbox that is used to collapse/expand the group
+- ShowHideAction class is much simplified in this version because no loop is necessary, a single call to RowGroup.show() or RowGroup.hide() is enough.
+
+Note that it is possible to add one row to several groups if needed, e.g. if one row must be shown only to authorized users (group "security") who explicitely want to see this row by expanding it (group "information expansion").
+
+In most cases, you will just use RowGroup without needing to manipulate individual IHideable rows, except in cases where a checkbox, for example, will have to diplay one additional row of input when checked.
