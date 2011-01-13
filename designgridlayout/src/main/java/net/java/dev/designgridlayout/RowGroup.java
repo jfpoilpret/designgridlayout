@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +45,9 @@ import java.util.List;
  */
 public final class RowGroup
 {
-	//TODO should we only keep weak references to rows?
 	void add(IHideable row)
 	{
-		if (!_rows.contains(row))
-		{
-			_rows.add(row);
-		}
+		_rows.add(new WeakReference<IHideable>(row));
 	}
 
 	/**
@@ -59,9 +56,13 @@ public final class RowGroup
 	 */
 	public void hide()
 	{
-		for (IHideable row: _rows)
+		for (WeakReference<IHideable> rowRef: _rows)
 		{
-			row.hide();
+			IHideable row = rowRef.get();
+			if (row != null)
+			{
+				row.hide();
+			}
 		}
 	}
 
@@ -71,11 +72,16 @@ public final class RowGroup
 	 */
 	public void show()
 	{
-		for (IHideable row: _rows)
+		for (WeakReference<IHideable> rowRef: _rows)
 		{
-			row.show();
+			IHideable row = rowRef.get();
+			if (row != null)
+			{
+				row.show();
+			}
 		}
 	}
 
-	final private List<IHideable> _rows = new ArrayList<IHideable>();
+	final private List<WeakReference<IHideable>> _rows = 
+		new ArrayList<WeakReference<IHideable>>();
 }
