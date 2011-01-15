@@ -63,6 +63,7 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 	private void addGroup(DesignGridLayout layout, String name, List<IHideable> groupRows)
 	{
 		JCheckBox group = new JCheckBox(name);
+		group.setName(name);
 		group.setForeground(Color.BLUE);
 		group.setSelected(true);
 		group.addItemListener(new ShowHideAction(groupRows));

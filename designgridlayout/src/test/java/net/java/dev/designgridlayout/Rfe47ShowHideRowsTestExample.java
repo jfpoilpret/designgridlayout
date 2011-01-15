@@ -29,16 +29,16 @@ public class Rfe47ShowHideRowsTestExample extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		JButton showR2 = new JButton("Show R2");
-		JButton hideR2 = new JButton("Hide R2");
-		JButton showR4 = new JButton("Show R4");
-		JButton hideR4 = new JButton("Hide R4");
-		JButton showR5 = new JButton("Show R5");
-		JButton hideR5 = new JButton("Hide R5");
-		JButton showR6 = new JButton("Show R6");
-		JButton hideR6 = new JButton("Hide R6");
-		JButton showR8 = new JButton("Show R8");
-		JButton hideR8 = new JButton("Hide R8");
+		JButton showR2 = showButton(2);
+		JButton hideR2 = hideButton(2);
+		JButton showR4 = showButton(4);
+		JButton hideR4 = hideButton(4);
+		JButton showR5 = showButton(5);
+		JButton hideR5 = hideButton(5);
+		JButton showR6 = showButton(6);
+		JButton hideR6 = hideButton(6);
+		JButton showR8 = showButton(8);
+		JButton hideR8 = hideButton(8);
 
 		layout.row().center().add(showR2, hideR2, showR4, hideR4, showR5, hideR5, showR6, hideR6, showR8, hideR8);
 		layout.row().grid(label("Row 1")).add(field("Field 11"), field("Field 12"));
@@ -62,6 +62,20 @@ public class Rfe47ShowHideRowsTestExample extends AbstractBaseExample
 		hideR6.addActionListener(new ShowHideAction(row6, false));
 		showR8.addActionListener(new ShowHideAction(row8, true));
 		hideR8.addActionListener(new ShowHideAction(row8, false));
+	}
+
+	static private JButton hideButton(int row)
+	{
+		JButton button = new JButton("Hide R" + row);
+		button.setName("hide-r" + row);
+		return button;
+	}
+	
+	static private JButton showButton(int row)
+	{
+		JButton button = new JButton("Show R" + row);
+		button.setName("show-r" + row);
+		return button;
 	}
 	
 	private class ShowHideAction implements ActionListener
