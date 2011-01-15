@@ -83,7 +83,7 @@ DesignGridLayout API by example
 	After the first steps, this section gives more details and explanations on
 	DesignGridLayout API through simple examples. The source for all examples is
 	available in DesignGridLayout 
-	{{{https://designgridlayout.dev.java.net/files/documents/4350/154311/designgridlayout-1.6-test-sources.jar}test sources archive}}.
+	{{{https://designgridlayout.dev.java.net/files/documents/4350/XXXXXX/designgridlayout-1.7-test-sources.jar}test sources archive}}.
 
 	Although not mandatory, it is advised to first read the DesignGridLayout
 	{{{./index.html}Introduction}}.
@@ -325,6 +325,70 @@ layout.row().grid(label("lbl3")).add(field("field3")).spanRow();
 	This way, you can spot all mistakes made in any dialog, and fix them all at
 	once. Note that each marker above has a tooltip that describes further the
 	reason why <<<spanRow()>>> cannot work properly.
+
+Dynamic layouts
+
+	Since release 1.7, DesignGridLayout provides special support for implementing
+	dynamic layouts, ie layouts which content can change based on various criteria,
+	in particular previous user input in a dialog; for instance, unchecking a "DHCP"
+	checkbox in an Internet Connection dialog may unveil an extra row requiring to
+	input an fixed IP address.
+	
+	In DesignGridLayout, all rows implement IHideable which can be used at any time
+	to show or hide a row.
+	
+	DesignGridLayout also has a notion of group of rows that can be used to show or 
+	hide several rows altogether; for example, this is useful in layouts where the
+	user can collapse or expand entire zones. The following snippet illustrates
+	such an application:
+	
++------------------------------------------------------------------------------+
+...
+RowGroup group = new RowGroup();
+addGroup(layout, "Address", group);
+JCheckBox groupBox = new JCheckBox("Address");
+groupBox.setForeground(Color.BLUE);
+groupBox.setSelected(true);
+groupBox.addItemListener(new ShowHideAction(group));
+layout.emptyRow();
+layout.row().left().add(groupBox, new JSeparator()).fill();
+layout.row().group(group).grid(label("Address 1")).add(field(""));
+layout.row().group(group).grid(label("Address 2")).add(field(""));
+layout.row().group(group).grid(label("Zip")).add(field("")).empty(3);
+layout.row().group(group).grid(label("City")).add(field(""));
+...
++------------------------------------------------------------------------------+
+
+	And here is the code for ShowHideAction:
+
++------------------------------------------------------------------------------+
+private class ShowHideAction implements ItemListener
+{
+	public ShowHideAction(RowGroup group)
+	{
+		_group = group;
+	}
+	
+	@Override public void itemStateChanged(ItemEvent event)
+	{
+		if (event.getStateChange() == ItemEvent.SELECTED)
+		{
+			_group.show();
+		}
+		else
+		{
+			_group.hide();
+		}
+		frame().pack();
+	}
+	
+	final private RowGroup _group;
+}
++------------------------------------------------------------------------------+
+
+[images/ShowHideRowsRealWorldExample2-org.png]
+
+[images/ShowHideRowsRealWorldExample2-after-1-hide-address-org.png]
 
 Automatic support for right-to-left text orientation
 
