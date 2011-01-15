@@ -35,7 +35,7 @@ public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
 	@Override public void build(DesignGridLayout layout)
 	{
 		addGroup(layout, "Identity");
-		layout.row().grid(label("First name:")).add(field("Jean-François")).empty();
+		layout.row().grid(label("First name:")).add(field("Jean-Francois")).empty();
 		layout.row().grid(label("Surname:")).add(field("Poilpret")).empty();
 		layout.row().grid(label("Sex")).add(check("Male"), check("Female")).empty(2);
 
