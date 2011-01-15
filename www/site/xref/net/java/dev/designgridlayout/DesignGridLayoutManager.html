@@ -8,7 +8,7 @@
 <body>
 <div id="overview"><a href="../../../../../apidocs/net/java/dev/designgridlayout/DesignGridLayoutManager.html">View Javadoc</a></div><pre>
 
-<a class="jxr_linenumber" name="1" href="#1">1</a>   <em class="jxr_comment">//  Copyright 2005-2010 Jason Aaron Osgood, Jean-Francois Poilpret</em>
+<a class="jxr_linenumber" name="1" href="#1">1</a>   <em class="jxr_comment">//  Copyright 2005-2011 Jason Aaron Osgood, Jean-Francois Poilpret</em>
 <a class="jxr_linenumber" name="2" href="#2">2</a>   <em class="jxr_comment">//</em>
 <a class="jxr_linenumber" name="3" href="#3">3</a>   <em class="jxr_comment">// Licensed under the Apache License, Version 2.0 (the "License");</em>
 <a class="jxr_linenumber" name="4" href="#4">4</a>   <em class="jxr_comment">// you may not use this file except in compliance with the License.</em>
@@ -177,7 +177,7 @@
 <a class="jxr_linenumber" name="167" href="#167">167</a> 					helper.setY(y);
 <a class="jxr_linenumber" name="168" href="#168">168</a> 					<strong class="jxr_keyword">int</strong> extraHeight = (<strong class="jxr_keyword">int</strong>) (row.growWeight() * totalExtraHeight); 
 <a class="jxr_linenumber" name="169" href="#169">169</a> 					helper.setRowAvailableHeight(extraHeight + row.height());
-<a class="jxr_linenumber" name="170" href="#170">170</a> 					row.layoutRow(helper, x, _hgap, _gridgap, _unrelhgap, rowWidth, 
+<a class="jxr_linenumber" name="170" href="#170">170</a> 					row.layout(helper, x, _hgap, _gridgap, _unrelhgap, rowWidth, 
 <a class="jxr_linenumber" name="171" href="#171">171</a> 						gridsWidth, _labelWidths);
 <a class="jxr_linenumber" name="172" href="#172">172</a> 					row.actualHeight(row.height() + extraHeight);
 <a class="jxr_linenumber" name="173" href="#173">173</a> 					y += row.actualHeight() + row.vgap();

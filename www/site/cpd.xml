@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd-cpd>
 <duplication lines="17" tokens="52">
-<file line="74" path="C:\dev\dgl-deploy\src\main\java\net\java\dev\designgridlayout\AbstractNonGridRow.java"/>
-<file line="111" path="C:\dev\dgl-deploy\src\main\java\net\java\dev\designgridlayout\BarRow.java"/>
+<file line="59" path="C:\dev\dgl-deploy\designgridlayout\src\main\java\net\java\dev\designgridlayout\AbstractNonGridRow.java"/>
+<file line="111" path="C:\dev\dgl-deploy\designgridlayout\src\main\java\net\java\dev\designgridlayout\BarRow.java"/>
 <codefragment>
 <![CDATA[
 		int totalWidth = centerWidth + sidesWidth + unrelhgap * numGapsBetweenParts();
