@@ -75,10 +75,16 @@ public class ShowHideRowsRealWorldExample3 extends AbstractBaseExample
 		// - focus border clearly shows there is a space after the icon (the " " text)
 		groupBox.setBorder(BorderFactory.createEmptyBorder());
 		groupBox.setContentAreaFilled(false);
+		groupBox.setFocusPainted(false);
+		groupBox.setRolloverEnabled(true);
 		groupBox.setIcon(
 			new ImageIcon(ClassLoader.getSystemResource("expand-group.png")));
 		groupBox.setSelectedIcon(
 			new ImageIcon(ClassLoader.getSystemResource("collapse-group.png")));
+//		groupBox.setRolloverSelectedIcon(
+//			new ImageIcon(ClassLoader.getSystemResource("expand-group.png")));
+//		groupBox.setRolloverIcon(
+//			new ImageIcon(ClassLoader.getSystemResource("collapse-group.png")));
 		groupBox.setSelected(true);
 		groupBox.addItemListener(new ShowHideAction(group));
 		layout.emptyRow();

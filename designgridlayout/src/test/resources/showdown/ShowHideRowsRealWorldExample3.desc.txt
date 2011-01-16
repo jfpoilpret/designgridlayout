@@ -1,0 +1,7 @@
+This example is very similar to the previous one, but it just uses a better look for collapsing and expanding groups of rows: instead of using a checkbox, it uses a label followed by a toggle button containing only an icon.
+
+Most of the code is the same as in second example; the only difference is the addGroup() method, where all components for the group separator are set up.
+
+Please note that now, we use addMulti(), instead of add(), to add the label and the icon toggle, so that the toggle width is not enlarged to the label width, which we would have a bad visual effect.
+
+Also, some special settings are to be used in JToggleButton to make it visually correct; indeed, note the setText(" ") call, which only purpose is to ensure correct baseline alignment on the separator row. This is just a workaround, a better solution would be to subclass JToggleButton and override getBaseline().
