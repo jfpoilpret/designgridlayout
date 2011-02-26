@@ -8,7 +8,7 @@ Building DesignGridLayout from source
 
 	You can build DesignGridLayout directly from its source code. For this you
 	must first check out the current version from 
-	{{{https://designgridlayout.dev.java.net/source/browse/designgridlayout/}Subversion repository}}.
+	{{{http://java.net/projects/designgridlayout/sources/svn/show}Subversion repository}}.
 	
 	Then, make sure you have JDK 6 and maven (2.2.1 or more recent) installed on
 	your machine.

@@ -3,15 +3,15 @@
    <information> 
       <title>DesignGridLayout Examples</title> 
       <vendor>Jason Aaron Osgood, Jean-Francois Poilpret</vendor>
-      <homepage href="https://designgridlayout.dev.java.net/"/>
+      <homepage href="https://java.net/projects/designgridlayout"/>
       <description>DesignGridLayout</description>
       <offline-allowed/> 
    </information> 
    <resources>
       <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
       <j2se version="1.6+"/>
-      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/154381/designgridlayout-1.7-tests.jar" main="true" download="eager"/>
-      <jar href="https://designgridlayout.dev.java.net/files/documents/4350/154380/designgridlayout-1.7.jar" main="false" download="eager"/>
+      <jar href="http://java.net/projects/designgridlayout/downloads/download/designgridlayout-1.7-tests.jar" main="true" download="eager"/>
+      <jar href="http://java.net/projects/designgridlayout/downloads/download/designgridlayout-1.7.jar" main="false" download="eager"/>
    </resources>
    <application-desc main-class="net.java.dev.designgridlayout.showdown.Examples"/>
 </jnlp> 

@@ -33,12 +33,12 @@
 		always good looking dialogs through a very easy-to-use API, without
 		any need for a graphical GUI designer.
 	</description>
-	<url>http://designgridlayout.dev.java.net/nonav/site/</url>
+	<url>http://designgridlayout.java.net/site/</url>
 	<inceptionYear>2005</inceptionYear>
 	
 	<organization>
 		<name>Project DesignGridLayout</name>
-		<url>http://designgridlayout.dev.java.net/</url>
+		<url>http://designgridlayout.java.net/</url>
 	</organization>
 
 	<properties>
@@ -441,7 +441,7 @@
 		<developer>
 			<id>jfpoilpret</id>
 			<name>Jean-Francois Poilpret</name>
-			<email>jfpoilpret@dev.java.net</email>
+			<email>jfpoilpret@yahoo.fr</email>
 			<url>http://jfpoilpret.blogspot.com</url>
 			<roles>
 				<role>project owner</role>
@@ -461,48 +461,36 @@
 	</developers>
 
 	<issueManagement>
-		<system>java.net Issue Tracker</system>
-		<url>http://designgridlayout.dev.java.net/servlets/ProjectIssues</url>
+		<system>JIRA</system>
+		<url>http://java.net/jira/browse/DESIGNGRIDLAYOUT</url>
 	</issueManagement>
 
 	<mailingLists>
 		<mailingList>
 			<name>DesignGridLayout announces list</name>
-			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=announce</archive>
-			<subscribe>mailto:announce-subscribe@designgridlayout.dev.java.net</subscribe>
-			<unsubscribe>mailto:announce-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+			<archive>http://java.net/projects/designgridlayout/lists/announce/archive</archive>
 		</mailingList>
 		<mailingList>
 			<name>DesignGridLayout users list</name>
-			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=users</archive>
-			<post>mailto:users@designgridlayout.dev.java.net</post>
-			<subscribe>mailto:users-subscribe@designgridlayout.dev.java.net</subscribe>
-			<unsubscribe>mailto:users-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+			<archive>http://java.net/projects/designgridlayout/lists/users/archive</archive>
 		</mailingList>
 		<mailingList>
 			<name>DesignGridLayout developers list</name>
-			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=dev</archive>
-			<post>mailto:dev@designgridlayout.dev.java.net</post>
-			<subscribe>mailto:dev-subscribe@designgridlayout.dev.java.net</subscribe>
-			<unsubscribe>mailto:dev-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+			<archive>http://java.net/projects/designgridlayout/lists/dev/archive</archive>
 		</mailingList>
 		<mailingList>
 			<name>DesignGridLayout issues list</name>
-			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=issues</archive>
-			<subscribe>mailto:issues-subscribe@designgridlayout.dev.java.net</subscribe>
-			<unsubscribe>mailto:issues-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+			<archive>http://java.net/projects/designgridlayout/lists/issues/archive</archive>
 		</mailingList>
 		<mailingList>
 			<name>DesignGridLayout Subversion commits list</name>
-			<archive>http://designgridlayout.dev.java.net/servlets/SummarizeList?listName=commits</archive>
-			<subscribe>mailto:commits-subscribe@designgridlayout.dev.java.net</subscribe>
-			<unsubscribe>mailto:commits-unsubscribe@designgridlayout.dev.java.net</unsubscribe>
+			<archive>http://java.net/projects/designgridlayout/lists/commits/archive</archive>
 		</mailingList>
 	</mailingLists>
 
 	<scm>
-		<connection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout</connection>
-		<developerConnection>scm:svn:https://designgridlayout.dev.java.net/svn/designgridlayout/trunk</developerConnection>
-		<url>https://designgridlayout.dev.java.net/source/browse/designgridlayout/</url>
+		<connection>scm:svn:https://svn.java.net/svn/designgridlayout~svn</connection>
+		<developerConnection>scm:svn:https://svn.java.net/svn/designgridlayout~svn/trunk</developerConnection>
+		<url>http://java.net/projects/designgridlayout/sources/svn/show</url>
 	</scm>
 </project>
