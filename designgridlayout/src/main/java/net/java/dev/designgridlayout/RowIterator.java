@@ -24,7 +24,7 @@ final class RowIterator implements Iterator<AbstractRow>
 	{
 		return new Iterable<AbstractRow>()
 		{
-			public Iterator<AbstractRow> iterator()
+			@Override public Iterator<AbstractRow> iterator()
 			{
 				return new RowIterator(rows);
 			}
@@ -36,7 +36,7 @@ final class RowIterator implements Iterator<AbstractRow>
 		_rows = rows;
 	}
 	
-	public AbstractRow next()
+	@Override public AbstractRow next()
 	{
 		int index = findNext();
 		if (index != -1)
@@ -50,12 +50,12 @@ final class RowIterator implements Iterator<AbstractRow>
 		}
 	}
 	
-	public boolean hasNext()
+	@Override public boolean hasNext()
 	{
 		return findNext() != -1;
 	}
 	
-	public void remove()
+	@Override public void remove()
 	{
 		throw new UnsupportedOperationException();
 	}

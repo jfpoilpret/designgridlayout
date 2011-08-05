@@ -96,7 +96,7 @@ public class DesignGridLayoutManager implements LayoutManager
 	 * Do not add components via the parent container's {@link Container#add(Component)}
 	 * method, use directly DesignGridLayout API instead.
 	 */
-	public void addLayoutComponent(String constraint, Component component)
+	@Override public void addLayoutComponent(String constraint, Component component)
 	{
 		throw new IllegalArgumentException("Do not use this method");
 	}
@@ -106,7 +106,7 @@ public class DesignGridLayoutManager implements LayoutManager
 	 * {@link Container#remove(Component)} method; removing components from a 
 	 * DesignGridLayout-managed container is not supported.
 	 */
-	public void removeLayoutComponent(Component parent)
+	@Override public void removeLayoutComponent(Component parent)
 	{
 		throw new IllegalArgumentException("Do not use this method");
 	}
@@ -114,7 +114,7 @@ public class DesignGridLayoutManager implements LayoutManager
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#layoutContainer
 	 */
-	public void layoutContainer(Container parent)
+	@Override public void layoutContainer(Container parent)
 	{
 		checkParent(parent);
 
@@ -195,7 +195,7 @@ public class DesignGridLayoutManager implements LayoutManager
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#minimumLayoutSize
 	 */
-	public Dimension minimumLayoutSize(Container parent)
+	@Override public Dimension minimumLayoutSize(Container parent)
 	{
 		checkParent(parent);
 		reset();
@@ -207,7 +207,7 @@ public class DesignGridLayoutManager implements LayoutManager
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#preferredLayoutSize
 	 */
-	public Dimension preferredLayoutSize(Container parent)
+	@Override public Dimension preferredLayoutSize(Container parent)
 	{
 		checkParent(parent);
 		reset();

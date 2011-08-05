@@ -30,7 +30,7 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * (non-Javadoc)
 	 * @see IRow#add(javax.swing.JComponent[])
 	 */
-	public abstract IGridRow add(JComponent... children);
+	@Override public abstract IGridRow add(JComponent... children);
 	
 	/**
 	 * Adds one component to this row and allows it to span several columns of
@@ -70,7 +70,7 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * (non-Javadoc)
 	 * @see IRow#addMulti(javax.swing.JComponent[])
 	 */
-	public abstract IGridRow addMulti(JComponent... children);
+	@Override public abstract IGridRow addMulti(JComponent... children);
 	
 	/**
 	 * Adds components to this row; all components are "assembled" as one

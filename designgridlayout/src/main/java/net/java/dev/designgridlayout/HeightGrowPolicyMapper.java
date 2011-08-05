@@ -32,13 +32,13 @@ class HeightGrowPolicyMapper implements HeightGrowPolicy
 		return this;
 	}
 	
-	public boolean canGrowHeight(Component component)
+	@Override public boolean canGrowHeight(Component component)
 	{
 		HeightGrowPolicy policy = findPolicy(component);
 		return (policy != null ? policy.canGrowHeight(component) : false);
 	}
 
-	public int computeExtraHeight(Component component, int extraHeight)
+	@Override public int computeExtraHeight(Component component, int extraHeight)
 	{
 		HeightGrowPolicy policy = findPolicy(component);
 		return (policy != null

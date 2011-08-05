@@ -29,19 +29,19 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		_previous = previous;
 	}
 	
-	public ISpannableGridRow spanRow()
+	@Override public ISpannableGridRow spanRow()
 	{
 		_current.spanRow();
 		return this;
 	}
 
-	public ISpannableGridRow add(JComponent child, int span)
+	@Override public ISpannableGridRow add(JComponent child, int span)
 	{
 		_current.add(child, span);
 		return this;
 	}
 
-	public ISpannableGridRow add(JComponent... children)
+	@Override public ISpannableGridRow add(JComponent... children)
 	{
 		for (JComponent component: children)
 		{
@@ -50,42 +50,42 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return this;
 	}
 
-	public ISpannableGridRow addMulti(int span, JComponent... children)
+	@Override public ISpannableGridRow addMulti(int span, JComponent... children)
 	{
 		return add(new MultiComponent(growPolicy(), orientation(), children), span);
 	}
 
-	public ISpannableGridRow addMulti(JComponent... children)
+	@Override public ISpannableGridRow addMulti(JComponent... children)
 	{
 		return addMulti(1, children);
 	}
 
-	public ISpannableGridRow empty()
+	@Override public ISpannableGridRow empty()
 	{
 		return empty(1);
 	}
 
-	public ISpannableGridRow empty(int span)
+	@Override public ISpannableGridRow empty(int span)
 	{
 		return add(null, span);
 	}
 
-	public ISpannableGridRow grid(JLabel label)
+	@Override public ISpannableGridRow grid(JLabel label)
 	{
 		return newGrid(label, 0);
 	}
 
-	public ISpannableGridRow grid()
+	@Override public ISpannableGridRow grid()
 	{
 		return newGrid(null, 0);
 	}
 
-	public IGridRow grid(int gridspan)
+	@Override public IGridRow grid(int gridspan)
 	{
 		return newGrid(null, gridspan);
 	}
 
-	public IGridRow grid(JLabel label, int gridspan)
+	@Override public IGridRow grid(JLabel label, int gridspan)
 	{
 		return newGrid(label, gridspan);
 	}

@@ -17,22 +17,22 @@ package net.java.dev.designgridlayout;
 // Fake subgrid that is used whenever a real SubGrid spans several grids
 final class EmptySubGrid implements ISubGrid
 {
-	public int gridColumns()
+	@Override public int gridColumns()
 	{
 		return 0;
 	}
 
-	public int labelWidth()
+	@Override public int labelWidth()
 	{
 		return 0;
 	}
 
-	public int maxColumnWidth(int maxColumns, IExtractor extractor)
+	@Override public int maxColumnWidth(int maxColumns, IExtractor extractor)
 	{
 		return 0;
 	}
 
-	public int gridspan()
+	@Override public int gridspan()
 	{
 		return 1;
 	}

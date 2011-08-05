@@ -125,7 +125,7 @@ final class SubGrid implements ISubGrid
 		}
 	}
 	
-	public int gridspan()
+	@Override public int gridspan()
 	{
 		return _gridspan;
 	}
@@ -142,12 +142,12 @@ final class SubGrid implements ISubGrid
 		}
 	}
 
-	public int labelWidth()
+	@Override public int labelWidth()
 	{
 		return (_label != null ? _label.getPreferredSize().width : 0);
 	}
 
-	public int gridColumns()
+	@Override public int gridColumns()
 	{
 		int columns = 0;
 		for (RowItem item: _items)
@@ -157,7 +157,7 @@ final class SubGrid implements ISubGrid
 		return columns;
 	}
 
-	public int maxColumnWidth(int maxColumns, IExtractor extractor)
+	@Override public int maxColumnWidth(int maxColumns, IExtractor extractor)
 	{
 		int maxWidth = 0;
 		// Note columns (sum item spans), not the count of components

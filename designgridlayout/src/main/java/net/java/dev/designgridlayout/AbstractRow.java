@@ -21,7 +21,7 @@ import javax.swing.JComponent;
 
 abstract class AbstractRow implements IHideable
 {
-	final public void show()
+	@Override final public void show()
 	{
 		if (_hidden > 0)
 		{
@@ -37,7 +37,7 @@ abstract class AbstractRow implements IHideable
 		}
 	}
 	
-	final public void hide()
+	@Override final public void hide()
 	{
 		if (_hidden == 0)
 		{

@@ -21,7 +21,7 @@ import javax.swing.JComponent;
 
 abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 {
-	public INonGridRow add(JComponent... children)
+	@Override public INonGridRow add(JComponent... children)
 	{
 		for (JComponent component: children)
 		{
@@ -31,18 +31,18 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return this;
 	}
 
-	public INonGridRow addMulti(JComponent... children)
+	@Override public INonGridRow addMulti(JComponent... children)
 	{
 		return add(new MultiComponent(growPolicy(), orientation(), children));
 	}
 
-	public INonGridRow fill()
+	@Override public INonGridRow fill()
 	{
 		_fill = true;
 		return this;
 	}
 
-	public INonGridRow withOwnRowWidth()
+	@Override public INonGridRow withOwnRowWidth()
 	{
 		_ownRowWidth = true;
 		return this;

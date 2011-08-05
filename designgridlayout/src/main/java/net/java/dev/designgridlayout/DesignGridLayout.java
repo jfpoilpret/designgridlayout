@@ -315,48 +315,48 @@ public class DesignGridLayout
 			_weight = weight;
 		}
 
-		public IRowCreator group(RowGroup group)
+		@Override public IRowCreator group(RowGroup group)
 		{
 			_groups.add(group);
 			return this;
 		}
 		
-		public INonGridRow center()
+		@Override public INonGridRow center()
 		{
 			return addRow(new CenterRow(), _weight, _groups);
 		}
 
-		public INonGridRow left()
+		@Override public INonGridRow left()
 		{
 			return addRow(new LeftRow(), _weight, _groups);
 		}
 
-		public INonGridRow right()
+		@Override public INonGridRow right()
 		{
 			return addRow(new RightRow(), _weight, _groups);
 		}
 
-		public IBarRow bar()
+		@Override public IBarRow bar()
 		{
 			return addRow(new BarRow(), _weight, _groups);
 		}
 
-		public ISpannableGridRow grid(JLabel label)
+		@Override public ISpannableGridRow grid(JLabel label)
 		{
 			return addRow(newGridRow(), _weight, _groups).grid(label);
 		}
 
-		public IGridRow grid(JLabel label, int gridspan)
+		@Override public IGridRow grid(JLabel label, int gridspan)
 		{
 			return addRow(newGridRow(), _weight, _groups).grid(label, gridspan);
 		}
 
-		public ISpannableGridRow grid()
+		@Override public ISpannableGridRow grid()
 		{
 			return addRow(newGridRow(), _weight, _groups).grid();
 		}
 
-		public IGridRow grid(int gridspan)
+		@Override public IGridRow grid(int gridspan)
 		{
 			return addRow(newGridRow(), _weight, _groups).grid(gridspan);
 		}

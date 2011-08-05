@@ -15,8 +15,6 @@
 package net.java.dev.designgridlayout;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -26,7 +24,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
 
 public class ShowHideRowsRealWorldExample3 extends AbstractBaseExample
 {

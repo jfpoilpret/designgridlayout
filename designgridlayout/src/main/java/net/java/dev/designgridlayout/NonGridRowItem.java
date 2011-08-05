@@ -28,46 +28,46 @@ class NonGridRowItem extends AbstractRowItem
 		_component = component;
 	}
 
-	public JComponent component()
+	@Override public JComponent component()
 	{
 		return _component;
 	}
 	
-	public int preferredHeight()
+	@Override public int preferredHeight()
 	{
 		return _component.getPreferredSize().height;
 	}
 
-	public int minimumWidth()
+	@Override public int minimumWidth()
 	{
 		return _component.getMinimumSize().width;
 	}
 	
-	public int preferredWidth()
+	@Override public int preferredWidth()
 	{
 		return _component.getPreferredSize().width;
 	}
 	
-	public int baseline()
+	@Override public int baseline()
 	{
 		return BaselineHelper.getBaseline(_component);
 	}
 
-	public void setSpannedRows(List<AbstractRow> rows)
+	@Override public void setSpannedRows(List<AbstractRow> rows)
 	{
 	}
 	
-	public boolean isFirstSpanRow()
+	@Override public boolean isFirstSpanRow()
 	{
 		return true;
 	}
 
-	public boolean isLastSpanRow()
+	@Override public boolean isLastSpanRow()
 	{
 		return true;
 	}
 
-	public int rowSpan()
+	@Override public int rowSpan()
 	{
 		return 1;
 	}

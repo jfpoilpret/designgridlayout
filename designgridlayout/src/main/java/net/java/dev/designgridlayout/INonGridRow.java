@@ -35,13 +35,13 @@ public interface INonGridRow extends IRow
 	 * (non-Javadoc)
 	 * @see IRow#add(javax.swing.JComponent[])
 	 */
-	public abstract INonGridRow add(JComponent... children);
+	@Override public abstract INonGridRow add(JComponent... children);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see IRow#addMulti(javax.swing.JComponent[])
 	 */
-	public abstract INonGridRow addMulti(JComponent... children);
+	@Override public abstract INonGridRow addMulti(JComponent... children);
 	
 	/**
 	 * Sets the "extreme" component(s) of this row to fill the whole space

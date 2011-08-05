@@ -23,12 +23,12 @@ final class UnitHeightGrowPolicy implements HeightGrowPolicy
 		_delegate = delegate;
 	}
 
-	public boolean canGrowHeight(Component component)
+	@Override public boolean canGrowHeight(Component component)
 	{
 		return _delegate.canGrowHeight(component);
 	}
 
-	public int computeExtraHeight(Component component, int extraHeight)
+	@Override public int computeExtraHeight(Component component, int extraHeight)
 	{
 		return extraHeight;
 	}

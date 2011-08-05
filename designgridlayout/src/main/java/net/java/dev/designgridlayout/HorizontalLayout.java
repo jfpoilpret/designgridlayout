@@ -50,7 +50,7 @@ final class HorizontalLayout implements LayoutManager
 		return _baseline;
 	}
 	
-	public void layoutContainer(Container parent)
+	@Override public void layoutContainer(Container parent)
 	{
 		checkParent(parent);
 		
@@ -86,13 +86,13 @@ final class HorizontalLayout implements LayoutManager
 		}
 	}
 
-	public Dimension minimumLayoutSize(Container parent)
+	@Override public Dimension minimumLayoutSize(Container parent)
 	{
 		initSizeCalculation(parent);
 		return new Dimension(_minWidth, _height);
 	}
 
-	public Dimension preferredLayoutSize(Container parent)
+	@Override public Dimension preferredLayoutSize(Container parent)
 	{
 		initSizeCalculation(parent);
 		return new Dimension(_prefWidth, _height);
@@ -104,12 +104,12 @@ final class HorizontalLayout implements LayoutManager
 		computeAll();
 	}
 
-	public void addLayoutComponent(String name, Component comp)
+	@Override public void addLayoutComponent(String name, Component comp)
 	{
 		throw new IllegalArgumentException("do not use this method");
 	}
 
-	public void removeLayoutComponent(Component comp)
+	@Override public void removeLayoutComponent(Component comp)
 	{
 		throw new IllegalArgumentException("do not use this method");
 	}

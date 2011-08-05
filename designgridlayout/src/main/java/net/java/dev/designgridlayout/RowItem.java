@@ -38,14 +38,14 @@ class RowItem extends AbstractRowItem
 		original._spanNext = this;
 	}
 	
-	public JComponent component()
+	@Override public JComponent component()
 	{
 		return (_spanPrevious != null ? _spanPrevious.component() : _component);
 	}
 
 	// NB: Don't try to optimize this method by caching the calculated preferred
 	// height because it may change across calls, hence it would become wrong!
-	public int preferredHeight()
+	@Override public int preferredHeight()
 	{
 		if (_spanPrevious == null && _spanNext == null)
 		{
@@ -71,22 +71,22 @@ class RowItem extends AbstractRowItem
 		}
 	}
 	
-	public int minimumWidth()
+	@Override public int minimumWidth()
 	{
 		return component().getMinimumSize().width;
 	}
 	
-	public int preferredWidth()
+	@Override public int preferredWidth()
 	{
 		return component().getPreferredSize().width;
 	}
 	
-	public int baseline()
+	@Override public int baseline()
 	{
 		return BaselineHelper.getBaseline(component());
 	}
 
-	public void setSpannedRows(List<AbstractRow> rows)
+	@Override public void setSpannedRows(List<AbstractRow> rows)
 	{
 		_rows = rows;
 		if (_spanNext != null)
@@ -95,17 +95,17 @@ class RowItem extends AbstractRowItem
 		}
 	}
 	
-	public boolean isFirstSpanRow()
+	@Override public boolean isFirstSpanRow()
 	{
 		return _spanPrevious == null;
 	}
 
-	public boolean isLastSpanRow()
+	@Override public boolean isLastSpanRow()
 	{
 		return _spanNext == null;
 	}
 
-	public int rowSpan()
+	@Override public int rowSpan()
 	{
 		int rows = 1;
 		RowItem next = _spanNext;

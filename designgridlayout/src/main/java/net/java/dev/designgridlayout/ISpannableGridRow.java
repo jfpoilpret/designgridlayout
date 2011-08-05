@@ -73,35 +73,35 @@ public interface ISpannableGridRow extends IGridRow
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent[])
 	 */
-	public abstract ISpannableGridRow add(JComponent... children);
+	@Override public abstract ISpannableGridRow add(JComponent... children);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#add(javax.swing.JComponent, int)
 	 */
-	public abstract ISpannableGridRow add(JComponent child, int span);
+	@Override public abstract ISpannableGridRow add(JComponent child, int span);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#empty()
 	 */
-	public abstract ISpannableGridRow empty();
+	@Override public abstract ISpannableGridRow empty();
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#empty(int)
 	 */
-	public abstract ISpannableGridRow empty(int span);
+	@Override public abstract ISpannableGridRow empty(int span);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(javax.swing.JComponent[])
 	 */
-	public abstract ISpannableGridRow addMulti(JComponent... children);
+	@Override public abstract ISpannableGridRow addMulti(JComponent... children);
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(int, javax.swing.JComponent[])
 	 */
-	public abstract ISpannableGridRow addMulti(int span, JComponent... children);
+	@Override public abstract ISpannableGridRow addMulti(int span, JComponent... children);
 }

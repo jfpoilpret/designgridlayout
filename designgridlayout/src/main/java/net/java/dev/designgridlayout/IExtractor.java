@@ -31,7 +31,7 @@ final class MinWidthExtractor extends AbstractExtractor
 {
 	static final IExtractor INSTANCE = new MinWidthExtractor();
 	
-	public int value(IRowItem item)
+	@Override public int value(IRowItem item)
 	{
 		return item.minimumWidth();
 	}
@@ -41,7 +41,7 @@ final class PrefWidthExtractor implements IExtractor
 {
 	static final IExtractor INSTANCE = new PrefWidthExtractor();
 	
-	public int value(IRowItem item)
+	@Override public int value(IRowItem item)
 	{
 		return item.preferredWidth();
 	}
@@ -51,7 +51,7 @@ final class PrefHeightExtractor implements IExtractor
 {
 	static final IExtractor INSTANCE = new PrefHeightExtractor();
 	
-	public int value(IRowItem item)
+	@Override public int value(IRowItem item)
 	{
 		return item.preferredHeight();
 	}
@@ -61,7 +61,7 @@ final class BaselineExtractor implements IExtractor
 {
 	static final IExtractor INSTANCE = new BaselineExtractor();
 	
-	public int value(IRowItem item)
+	@Override public int value(IRowItem item)
 	{
 		return item.baseline();
 	}
