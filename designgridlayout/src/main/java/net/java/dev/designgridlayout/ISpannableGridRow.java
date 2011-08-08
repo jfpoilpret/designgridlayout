@@ -104,4 +104,6 @@ public interface ISpannableGridRow extends IGridRow
 	 * @see net.java.dev.designgridlayout.IGridRow#addMulti(int, javax.swing.JComponent[])
 	 */
 	@Override public abstract ISpannableGridRow addMulti(int span, JComponent... children);
+
+	@Override public abstract ISpannableGridRow indent();
 }

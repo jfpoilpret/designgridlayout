@@ -65,6 +65,11 @@ final class SubGrid implements ISubGrid
 			}
 		}
 	}
+
+	void indent(int n)
+	{
+		_indent = ComponentGapsHelper.instance().getHorizontalIndent() * n;
+	}
 	
 	void add(JComponent child, int span)
 	{
@@ -144,7 +149,8 @@ final class SubGrid implements ISubGrid
 
 	@Override public int labelWidth()
 	{
-		return (_label != null ? _label.getPreferredSize().width : 0);
+//		return (_label != null ? _label.getPreferredSize().width : 0);
+		return (_label != null ? _label.getPreferredSize().width : 0) + _indent;
 	}
 
 	@Override public int gridColumns()
@@ -191,8 +197,10 @@ final class SubGrid implements ISubGrid
 		{
 			if (_label != null)
 			{
+//				actualHeight = Math.max(0, helper.setSizeLocation(
+//					_label, x, labelWidth, height, baseline));
 				actualHeight = Math.max(0, helper.setSizeLocation(
-					_label, x, labelWidth, height, baseline));
+					_label, x + _indent, labelWidth - _indent, height, baseline));
 			}
 			x += labelWidth + hgap;
 		}
@@ -277,4 +285,5 @@ final class SubGrid implements ISubGrid
 	private int _gridspan;
 	private boolean _spanRow;
 	private int _column = 0;
+	private int _indent = 0;
 }

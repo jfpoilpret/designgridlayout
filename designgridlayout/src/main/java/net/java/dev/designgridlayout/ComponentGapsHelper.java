@@ -17,6 +17,7 @@ package net.java.dev.designgridlayout;
 import java.awt.Container;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.LayoutStyle;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
@@ -26,6 +27,18 @@ final class ComponentGapsHelper
 	static public ComponentGapsHelper instance()
 	{
 		return new ComponentGapsHelper();
+	}
+	
+	public int getHorizontalIndent()
+	{
+		if (_indent == -1)
+		{
+			JLabel label1 = new JLabel("Top label");
+			JLabel label2 = new JLabel("Bottom label");
+			_indent = _style.getPreferredGap(
+				label1, label2, ComponentPlacement.INDENT, SwingConstants.SOUTH, null);
+		}
+		return _indent;
 	}
 	
 	public int getVerticalGap(JComponent component1, JComponent component2, 
@@ -168,4 +181,5 @@ final class ComponentGapsHelper
 	}
 
 	private final LayoutStyle _style = LayoutStyle.getInstance(); 
+	private int _indent = -1;
 }

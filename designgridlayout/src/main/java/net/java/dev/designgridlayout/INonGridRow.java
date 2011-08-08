@@ -42,7 +42,9 @@ public interface INonGridRow extends IRow
 	 * @see IRow#addMulti(javax.swing.JComponent[])
 	 */
 	@Override public abstract INonGridRow addMulti(JComponent... children);
-	
+
+	@Override public abstract INonGridRow indent();
+
 	/**
 	 * Sets the "extreme" component(s) of this row to fill the whole space
 	 * towards the container border. Extreme components are defined as follows:

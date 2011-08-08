@@ -36,6 +36,12 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		return add(new MultiComponent(growPolicy(), orientation(), children));
 	}
 
+	@Override public INonGridRow indent()
+	{
+		_indent = ComponentGapsHelper.instance().getHorizontalIndent() * 1;
+		return this;
+	}
+	
 	@Override public INonGridRow fill()
 	{
 		_fill = true;
@@ -56,7 +62,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	@Override int totalNonGridWidth(int hgap, int unrelhgap)
 	{
 		int count = _items.size();
-		int totalWidth = _compWidth * count + (hgap * (count - 1));
+		int totalWidth = _compWidth * count + (hgap * (count - 1)) + _indent;
 		return totalWidth;
 	}
 
@@ -80,7 +86,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth)
 	{
 		// Calculate various needed widths & origin
-		int x = left;
+		int x = left + _indent;
 		int count = _items.size();
 		int width = _compWidth;
 
@@ -88,12 +94,12 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		int rightFiller = width;
 		if (!_fill)
 		{
-			int usedWidth = width * count + ((count - 1) * hgap);
+			int usedWidth = width * count + ((count - 1) * hgap) + _indent;
 			x += xOffset(rowWidth, usedWidth);
 		}
 		else
 		{
-			int availableWidth = (rowWidth - ((count - 1) * hgap));
+			int availableWidth = rowWidth - _indent - (count - 1) * hgap;
 			leftFiller = leftFiller(count, width, availableWidth);
 			rightFiller = rightFiller(count, width, availableWidth);
 		}
@@ -142,4 +148,5 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	private boolean _fill = false;
 	private boolean _ownRowWidth = false;
 	private int _compWidth = 0;
+	private int _indent = 0;
 }

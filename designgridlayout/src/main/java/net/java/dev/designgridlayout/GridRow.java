@@ -60,6 +60,12 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		return addMulti(1, children);
 	}
 
+	@Override public ISpannableGridRow indent()
+	{
+		_current.indent(1);
+		return this;
+	}
+	
 	@Override public ISpannableGridRow empty()
 	{
 		return empty(1);

@@ -50,7 +50,7 @@ abstract class AbstractRow implements IHideable
 		_hidden++;
 	}
 	
-	// Called by DesignGridLayout immediately after instanciation
+	// Called by DesignGridLayout immediately after instantiation
 	final void init(
 		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
@@ -58,7 +58,7 @@ abstract class AbstractRow implements IHideable
 		_heightTester = heightTester;
 		_orientation = orientation;
 	}
-
+	
 	// Used by children
 	final protected Container parent()
 	{

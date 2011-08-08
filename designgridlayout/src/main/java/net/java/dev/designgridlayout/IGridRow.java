@@ -71,7 +71,9 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * @see IRow#addMulti(javax.swing.JComponent[])
 	 */
 	@Override public abstract IGridRow addMulti(JComponent... children);
-	
+
+	@Override public abstract IGridRow indent();
+
 	/**
 	 * Adds components to this row; all components are "assembled" as one
 	 * global component and span a given number of columns in the row.

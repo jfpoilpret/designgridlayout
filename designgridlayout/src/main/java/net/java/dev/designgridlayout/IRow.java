@@ -54,4 +54,7 @@ public interface IRow extends IHideable
 	 * row)
 	 */
 	public abstract IRow addMulti(JComponent... children);
+	
+	//TODO javadoc
+	public abstract IRow indent();
 }
