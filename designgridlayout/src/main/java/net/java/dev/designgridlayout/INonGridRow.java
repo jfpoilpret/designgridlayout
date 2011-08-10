@@ -43,7 +43,17 @@ public interface INonGridRow extends IRow
 	 */
 	@Override public abstract INonGridRow addMulti(JComponent... children);
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IRow#indent()
+	 */
 	@Override public abstract INonGridRow indent();
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IRow#indent(int)
+	 */
+	@Override public abstract INonGridRow indent(int n);
 
 	/**
 	 * Sets the "extreme" component(s) of this row to fill the whole space

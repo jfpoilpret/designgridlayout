@@ -38,7 +38,15 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	@Override public INonGridRow indent()
 	{
-		_indent = ComponentGapsHelper.instance().getHorizontalIndent() * 1;
+		return indent(1);
+	}
+	
+	@Override public INonGridRow indent(int n)
+	{
+		if (n >= 0)
+		{
+			_indent = ComponentGapsHelper.instance().getHorizontalIndent() * n;
+		}
 		return this;
 	}
 	

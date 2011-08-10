@@ -25,7 +25,6 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
 
-//TODO improve indent() API to allow anumber of indent as an argument?
 public class ShowHideRowsRealWorldExample4 extends AbstractBaseExample
 {
 	public static void main(String[] args)
@@ -36,23 +35,22 @@ public class ShowHideRowsRealWorldExample4 extends AbstractBaseExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-		layout.labelAlignment(LabelAlignment.PLATFORM);
+		layout.labelAlignment(LabelAlignment.LEFT);
 		addGroup(layout, "Identity");
 		layout.row().grid(label("First name:")).indent().add(field("Jean-Francois")).empty();
 		layout.row().grid(label("Surname:")).indent().add(field("Poilpret")).empty();
-		layout.row().grid(label("Sex")).indent().add(check("Male"), check("Female")).empty(2);
+		layout.row().grid(label("Sex:")).indent().add(check("Male"), check("Female")).empty(2);
 
 		RowGroup group = new RowGroup();
 		addGroup(layout, "Address", group);
-		layout.row().group(group).grid(label("Address 1")).indent().add(field(""));
-		layout.row().group(group).grid(label("Address 2")).indent().add(field(""));
-		layout.row().group(group).grid(label("Zip")).indent().add(field("")).empty(3);
-		layout.row().group(group).grid(label("City")).indent().add(field(""));
+		layout.row().group(group).grid(label("Address 1:")).indent().add(field(""));
+		layout.row().group(group).grid(label("Address 2:")).indent().add(field(""));
+		layout.row().group(group).grid(label("Zip:")).indent().add(field("")).empty(3);
+		layout.row().group(group).grid(label("City:")).indent().add(field(""));
 		
 		group = new RowGroup();
 		addGroup(layout, "Guitars Preferences", group);
 		layout.row().group(group).left().indent().add(table()).fill();
-		//TODO check that table is centered at the right position (accounting for the indent)
 		layout.row().group(group).center().indent().add(table());
 		layout.row().group(group).right().indent().add(table());
 

@@ -55,6 +55,27 @@ public interface IRow extends IHideable
 	 */
 	public abstract IRow addMulti(JComponent... children);
 	
-	//TODO javadoc
+	/**
+	 * Add one indentation space (size is platform-dependent) before the left-most
+	 * component of the row.
+	 * 
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
 	public abstract IRow indent();
+	
+	/**
+	 * Add some indentation space (size is platform-dependent) before the left-most
+	 * component of the row. To obtain visually correct layouts, you should ensure
+	 * that, if you use {@code n > 1} for the current row, there is another row,
+	 * above the current one, which is indented with a level of {@code n - 1}.
+	 * <p/>
+	 * If this method is called several times for the same row, only the last call
+	 * takes effect.
+	 * 
+	 * @param n the number of indentation levels required; has no effect if {@code n < 0).
+	 * @return {@code this} row (to allow chaining other methods for the current 
+	 * row)
+	 */
+	public abstract IRow indent(int n);
 }

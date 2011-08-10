@@ -72,7 +72,17 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 */
 	@Override public abstract IGridRow addMulti(JComponent... children);
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IRow#indent()
+	 */
 	@Override public abstract IGridRow indent();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see net.java.dev.designgridlayout.IRow#indent(int)
+	 */
+	@Override public abstract IGridRow indent(int n);
 
 	/**
 	 * Adds components to this row; all components are "assembled" as one
