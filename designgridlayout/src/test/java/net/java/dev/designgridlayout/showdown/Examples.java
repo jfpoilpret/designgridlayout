@@ -38,6 +38,7 @@ import net.java.dev.designgridlayout.Basics6NonGridRowsWithFiller;
 import net.java.dev.designgridlayout.Basics7RealWorldExample1;
 import net.java.dev.designgridlayout.Basics8RealWorldExample2;
 import net.java.dev.designgridlayout.Basics9RealWorldExample3;
+import net.java.dev.designgridlayout.IndentRowsExample;
 import net.java.dev.designgridlayout.Misc1CustomizedMargins;
 import net.java.dev.designgridlayout.MultiComponentExample;
 import net.java.dev.designgridlayout.MultiGrid1Simple;
@@ -62,6 +63,7 @@ import net.java.dev.designgridlayout.RowSpan7SpecialComponent;
 import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample1;
 import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample2;
 import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample3;
+import net.java.dev.designgridlayout.ShowHideRowsRealWorldExample4;
 import net.java.dev.designgridlayout.SmartVerticalResize1Sliders;
 import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
@@ -75,7 +77,7 @@ public class Examples extends JFrame
 		// First ask for the LAF to use (modal dialog)
 		SwingUtilities.invokeAndWait(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				LafChooserDialog dialog = new LafChooserDialog();
 				dialog.setVisible(true);
@@ -84,7 +86,7 @@ public class Examples extends JFrame
 		// Then show the Examples main frame
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				Examples examples = new Examples();
 				examples.pack();
@@ -217,8 +219,13 @@ public class Examples extends JFrame
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example 3 - Same with beautiful icons", ShowHideRowsRealWorldExample3.class)));
 		root.add(node);
+		node.add(new DefaultMutableTreeNode(
+			new Node("Example 4 - Same with indented rows", ShowHideRowsRealWorldExample4.class)));
+		root.add(node);
 
 		node = new DefaultMutableTreeNode("Miscellaneous");
+		node.add(new DefaultMutableTreeNode(
+			new Node("Row Indenting", IndentRowsExample.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Custom Margins", Misc1CustomizedMargins.class)));
 		node.add(new DefaultMutableTreeNode(

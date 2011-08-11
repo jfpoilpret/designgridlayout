@@ -51,8 +51,6 @@ public class ShowHideRowsRealWorldExample4 extends AbstractBaseExample
 		group = new RowGroup();
 		addGroup(layout, "Guitars Preferences", group);
 		layout.row().group(group).left().indent().add(table()).fill();
-		layout.row().group(group).center().indent().add(table());
-		layout.row().group(group).right().indent().add(table());
 
 		layout.emptyRow();
 		layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL);

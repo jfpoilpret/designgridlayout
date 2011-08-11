@@ -16,10 +16,13 @@ package net.java.dev.designgridlayout;
 
 //import java.awt.ComponentOrientation;
 
+//import javax.swing.UIManager;
+
 public class IndentRowsExample extends AbstractBaseExample
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
+//		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		IndentRowsExample example = new IndentRowsExample();
 		example.go(true);
 	}
@@ -39,21 +42,21 @@ public class IndentRowsExample extends AbstractBaseExample
 		layout.row().grid(label("Indent #3")).indent(3).add(field("Something much longer"));
 		layout.emptyRow();
 		
-		layout.row().left().indent(0).add(field("Left row no indent"));
-		layout.row().left().indent(1).add(field("Left row indent #1"));
-		layout.row().left().indent(2).add(field("Left row indent #2"));
-		layout.row().left().indent(3).add(field("Left row indent #3"));
+		layout.row().left().indent(0).add(field(" Left row indent #0"));
+		layout.row().left().indent(1).add(field(" Left row indent #1"));
+		layout.row().left().indent(2).add(field(" Left row indent #2"));
+		layout.row().left().indent(3).add(field(" Left row indent #3"));
 		layout.emptyRow();
 
-		layout.row().center().indent(0).add(field("Center row no indent"));
-		layout.row().center().indent(1).add(field("Center row indent #1"));
-		layout.row().center().indent(2).add(field("Center row indent #2"));
-		layout.row().center().indent(3).add(field("Center row indent #3"));
+		layout.row().center().indent(0).add(field(" Center row indent #0"));
+		layout.row().center().indent(1).add(field(" Center row indent #1"));
+		layout.row().center().indent(2).add(field(" Center row indent #2"));
+		layout.row().center().indent(3).add(field(" Center row indent #3"));
 		layout.emptyRow();
 
-		layout.row().right().indent(0).add(field("Right row no indent"));
-		layout.row().right().indent(1).add(field("Right row indent #1"));
-		layout.row().right().indent(2).add(field("Right row indent #2"));
-		layout.row().right().indent(3).add(field("Right row indent #3"));
+		layout.row().right().indent(0).add(field(" Right row indent #0"));
+		layout.row().right().indent(1).add(field(" Right row indent #1"));
+		layout.row().right().indent(2).add(field(" Right row indent #2"));
+		layout.row().right().indent(3).add(field(" Right row indent #3"));
 	}
 }
