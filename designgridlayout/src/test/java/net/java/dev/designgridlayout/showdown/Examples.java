@@ -255,7 +255,7 @@ public class Examples extends JFrame
 	{
 		_tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener()
 		{
-			public void valueChanged(TreeSelectionEvent e)
+			@Override public void valueChanged(TreeSelectionEvent e)
 			{
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) 
 					e.getNewLeadSelectionPath().getLastPathComponent();

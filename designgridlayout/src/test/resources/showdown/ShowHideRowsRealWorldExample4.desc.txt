@@ -1,0 +1,3 @@
+This example is similar to the previous one, but it looks better thanks to DesignGridLayout 1.8 new indent() API, which allows to show the link between a group separator and its dependent rows.
+
+Most of the code is the same as in second example; the only difference is the use of indent() for rows that must be indented; hence only the "build()" method is presented here.

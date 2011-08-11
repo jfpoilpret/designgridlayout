@@ -1,0 +1,22 @@
+@Override public void build(DesignGridLayout layout)
+{
+	layout.labelAlignment(LabelAlignment.LEFT);
+	addGroup(layout, "Identity");
+	layout.row().grid(label("First name:")).indent().add(field("Jean-Francois")).empty();
+	layout.row().grid(label("Surname:")).indent().add(field("Poilpret")).empty();
+	layout.row().grid(label("Sex:")).indent().add(check("Male"), check("Female")).empty(2);
+
+	RowGroup group = new RowGroup();
+	addGroup(layout, "Address", group);
+	layout.row().group(group).grid(label("Address 1:")).indent().add(field(""));
+	layout.row().group(group).grid(label("Address 2:")).indent().add(field(""));
+	layout.row().group(group).grid(label("Zip:")).indent().add(field("")).empty(3);
+	layout.row().group(group).grid(label("City:")).indent().add(field(""));
+	
+	group = new RowGroup();
+	addGroup(layout, "Guitars Preferences", group);
+	layout.row().group(group).left().indent().add(table()).fill();
+
+	layout.emptyRow();
+	layout.row().bar().add(button("OK"), Tag.OK).add(button("Cancel"), Tag.CANCEL);
+}

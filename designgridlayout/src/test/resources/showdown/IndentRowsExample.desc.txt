@@ -1,0 +1,7 @@
+This example demonstrates usage of DesignGridLayout 1.8 new indent() API. This API allows to indent rows so that they appear as "children" of the previous -non indented- row.
+
+This can be particularly useful when you want to show different "sections" in a panel, separated with a label and a horizontal ruler. Then you would indent all rows under a given section, i.e. below such a separator row.
+
+It is possible to indent a row of several levels if needed, although it such a layout would generally not look right.
+
+The source code shows the use of "indent()" with several indentation levels, on different kinds of rows. Note that, as expected, indent() has no effect on a right-aligned row; for centered rows, the indentation space looks half the size for other rows, because in this case, components are centered in a row which width has been substracted the full indent size.
