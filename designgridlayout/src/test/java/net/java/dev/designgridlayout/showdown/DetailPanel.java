@@ -63,7 +63,7 @@ class DetailPanel extends JPanel
 		// Actions on Buttons
 		_btnShow.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			@Override public void actionPerformed(ActionEvent e)
 			{
 				launch();
 			}

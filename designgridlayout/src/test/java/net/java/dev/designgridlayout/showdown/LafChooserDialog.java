@@ -74,7 +74,7 @@ public class LafChooserDialog extends JDialog
 			JButton button = new JButton(laf.getName());
 			button.addActionListener(new ActionListener()
 			{
-				public void actionPerformed(ActionEvent e)
+				@Override public void actionPerformed(ActionEvent e)
 				{
 					setLAF(laf);
 					setVisible(false);
@@ -89,7 +89,7 @@ public class LafChooserDialog extends JDialog
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				try
 				{
