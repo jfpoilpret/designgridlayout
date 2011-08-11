@@ -73,7 +73,7 @@ public interface IRow extends IHideable
 	 * If this method is called several times for the same row, only the last call
 	 * takes effect.
 	 * 
-	 * @param n the number of indentation levels required; has no effect if {@code n < 0).
+	 * @param n the number of indentation levels required; has no effect if {@code n < 0}.
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
 	 */

@@ -35,7 +35,7 @@ import static net.java.dev.designgridlayout.RowIterator.each;
  * {@link DesignGridLayout} for the layout of a given {@link Container}.
  * <p/>
  * In order to find out the instance of {@link DesignGridLayout} that created
- * a given {@code DesignGridLayoutManager}, you can use {@link}
+ * a given {@code DesignGridLayoutManager}, you can use {@link #designGridLayout()}.
  *
  * @author Jean-Francois Poilpret
  */
