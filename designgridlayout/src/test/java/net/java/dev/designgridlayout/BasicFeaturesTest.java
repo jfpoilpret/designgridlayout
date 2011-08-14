@@ -76,6 +76,26 @@ public class BasicFeaturesTest extends AbstractGuiTest
 		checkExample(Basics6NonGridRowsWithFiller.class);
 	}
 
+	@Test public void checkIndentRowGrid() throws Exception
+	{
+		checkExample(IndentRowsExample1.class);
+	}
+
+	@Test public void checkIndentRowSubGrid() throws Exception
+	{
+		checkExample(IndentRowsExample2.class);
+	}
+
+	@Test public void checkIndentRowLeftRow() throws Exception
+	{
+		checkExample(IndentRowsExample3.class);
+	}
+
+	@Test public void checkIndentRowManyLevels() throws Exception
+	{
+		checkExample(IndentRowsExample4.class);
+	}
+
 	@Test public void checkIndentRow() throws Exception
 	{
 		checkExample(IndentRowsExample.class);
