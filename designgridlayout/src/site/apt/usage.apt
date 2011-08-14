@@ -403,36 +403,44 @@ Indenting rows
 	a complex layout into different "sections".
 	
 	Grid rows can be indented.
+
 +------------------------------------------------------------------------------+
 layout.row().grid(label("Label 1:"));
 layout.row().grid(label("Label 2:")).indent().add(field2);
 layout.row().grid(label("Label 3:")).indent().add(field3);
 +------------------------------------------------------------------------------+
+
 [images/IndentRowsExample1-org.png]
 	
 	Actually, any subgrid in a grid row can be individually indented.
+
 +------------------------------------------------------------------------------+
 layout.row().grid(label("Label 11:")).grid(label("Label 21:"));
 layout.row().grid(label("Label 12:")).indent().add(field12).grid(label("Label 22:")).indent().add(field22);
 layout.row().grid(label("Label 13:")).indent().add(field13).grid(label("Label 23:")).indent().add(field23);
 +------------------------------------------------------------------------------+
+
 [images/IndentRowsExample2-org.png]
 	
 	Also, left rows can be indented as well.
+
 +------------------------------------------------------------------------------+
 layout.row().left().add(button("Button 1"), button("Button 2"));
 layout.row().left().indent().add(button("Button 3"), button("Button 4"));
 +------------------------------------------------------------------------------+
+
 [images/IndentRowsExample3-org.png]
 	
 	Indentation can have several levels, although this should be normally 
 	avoided, as this is a sign of an overloaded UI design.
+
 +------------------------------------------------------------------------------+
 layout.row().left().add(button("Button 1"));
 layout.row().left().indent().add(button("Button 2"));
 layout.row().left().indent(2).add(button("Button 3"));
 layout.row().left().indent(3).add(button("Button 4"));
 +------------------------------------------------------------------------------+
+
 [images/IndentRowsExample4-org.png]
 	
 Automatic support for right-to-left text orientation
