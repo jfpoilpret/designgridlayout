@@ -11,8 +11,8 @@
 	</information>
 	<resources>
 		<j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />
-		<jar href="designgridlayout-1.8-SNAPSHOT-tests.jar" main="true" download="eager" />
-		<jar href="designgridlayout-1.8-SNAPSHOT.jar" main="false" download="eager" />
+		<jar href="designgridlayout-1.8-tests.jar" main="true" download="eager" />
+		<jar href="designgridlayout-1.8.jar" main="false" download="eager" />
 	</resources>
 	<application-desc main-class="net.java.dev.designgridlayout.showdown.Examples" />
 </jnlp>
