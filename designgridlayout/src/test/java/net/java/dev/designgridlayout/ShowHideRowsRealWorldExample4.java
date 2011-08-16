@@ -75,10 +75,9 @@ public class ShowHideRowsRealWorldExample4 extends AbstractBaseExample
 		groupBox.setContentAreaFilled(false);
 		groupBox.setFocusPainted(false);
 		groupBox.setRolloverEnabled(true);
-		groupBox.setIcon(
-			new ImageIcon(ClassLoader.getSystemResource("expand-group.png")));
-		groupBox.setSelectedIcon(
-			new ImageIcon(ClassLoader.getSystemResource("collapse-group.png")));
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		groupBox.setIcon(new ImageIcon(loader.getResource("expand-group.png")));
+		groupBox.setSelectedIcon(new ImageIcon(loader.getResource("collapse-group.png")));
 		groupBox.setSelected(true);
 		groupBox.addItemListener(new ShowHideAction(group));
 		layout.emptyRow();
