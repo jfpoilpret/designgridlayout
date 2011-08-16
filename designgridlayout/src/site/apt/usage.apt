@@ -83,7 +83,7 @@ DesignGridLayout API by example
 	After the first steps, this section gives more details and explanations on
 	DesignGridLayout API through simple examples. The source for all examples is
 	available in DesignGridLayout 
-	{{{http://java.net/projects/designgridlayout/downloads/download/designgridlayout-1.7-test-sources.jar}test sources archive}}.
+	{{{http://java.net/projects/designgridlayout/downloads/download/designgridlayout-1.8-test-sources.jar}test sources archive}}.
 
 	Although not mandatory, it is advised to first read the DesignGridLayout
 	{{{./index.html}Introduction}}.
