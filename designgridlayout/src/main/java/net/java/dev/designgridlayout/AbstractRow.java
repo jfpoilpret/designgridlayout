@@ -66,6 +66,20 @@ abstract class AbstractRow implements IHideable
 	}
 
 	// Used by children
+	final protected void checkAddedComponent(JComponent component)
+	{
+		Container parent = component;
+		while (parent != null)
+		{
+			if (parent == _parent)
+			{
+				throw new IllegalArgumentException("Do not add the same component twice");
+			}
+			parent = parent.getParent();
+		}
+	}
+	
+	// Used by children
 	final protected HeightGrowPolicy growPolicy()
 	{
 		return _heightTester;

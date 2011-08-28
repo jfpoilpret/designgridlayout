@@ -25,6 +25,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 	{
 		for (JComponent component: children)
 		{
+			checkAddedComponent(component);
 			_items.add(new NonGridRowItem(component));
 			parent().add(component);
 		}
@@ -33,6 +34,10 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 
 	@Override public INonGridRow addMulti(JComponent... children)
 	{
+		for (JComponent component: children)
+		{
+			checkAddedComponent(component);
+		}
 		return add(new MultiComponent(growPolicy(), orientation(), children));
 	}
 

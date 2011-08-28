@@ -27,6 +27,7 @@ final class BarRow extends AbstractRow implements IBarRow
 	{
 		if (child != null)
 		{
+			checkAddedComponent(child);
 			_items.add(new BarRowItem(child, (tag == null ? Tag.OTHER : tag)));
 			parent().add(child);
 		}

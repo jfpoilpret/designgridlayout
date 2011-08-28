@@ -23,6 +23,7 @@ final class MultiComponent extends JComponent
 	MultiComponent(HeightGrowPolicy heightTester, OrientationPolicy orientation, 
 		JComponent... children)
 	{
+		checkNoDuplicateComponents(children);
 		_layout = new HorizontalLayout(this, heightTester, orientation);
 		_children = children;
 		setLayout(_layout);
@@ -37,6 +38,25 @@ final class MultiComponent extends JComponent
 	@Override public int getBaseline(int width, int height)
 	{
 		return _layout.getBaseline();
+	}
+	
+	static private void checkNoDuplicateComponents(JComponent[] components)
+	{
+		for (JComponent comp1: components)
+		{
+			int count = 0;
+			for (JComponent comp2: components)
+			{
+				if (comp1 == comp2)
+				{
+					count++;
+				}
+			}
+			if (count > 1)
+			{
+				throw new IllegalArgumentException("Do not add the same component twice");
+			}
+		}
 	}
 	
 	private final HorizontalLayout _layout;

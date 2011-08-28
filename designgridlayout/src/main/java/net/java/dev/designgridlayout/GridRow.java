@@ -37,6 +37,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 
 	@Override public ISpannableGridRow add(JComponent child, int span)
 	{
+		checkAddedComponent(child);
 		_current.add(child, span);
 		return this;
 	}
@@ -52,6 +53,10 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 
 	@Override public ISpannableGridRow addMulti(int span, JComponent... children)
 	{
+		for (JComponent component: children)
+		{
+			checkAddedComponent(component);
+		}
 		return add(new MultiComponent(growPolicy(), orientation(), children), span);
 	}
 
