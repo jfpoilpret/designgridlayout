@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -41,8 +42,10 @@ public abstract class AbstractComponentizerExample
 			? JFrame.EXIT_ON_CLOSE
 			: WindowConstants.DISPOSE_ON_CLOSE);
 
-		_frame.getContentPane().setName("TOP");
-		ComponentizerLayout layout = new ComponentizerLayout(_frame.getContentPane());
+		JPanel contentPane = new JPanel();
+		contentPane.setName("TOP");
+		_frame.setContentPane(contentPane);
+		ComponentizerLayout layout = new ComponentizerLayout(contentPane);
 		layout.withSmartVerticalResize();
 		build(layout);
 
