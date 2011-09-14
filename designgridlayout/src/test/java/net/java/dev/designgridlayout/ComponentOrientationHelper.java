@@ -17,6 +17,7 @@ package net.java.dev.designgridlayout;
 import java.awt.ComponentOrientation;
 import java.util.Locale;
 
+//TODO Remove since it seems unused in whole project
 final public class ComponentOrientationHelper
 {
 	private ComponentOrientationHelper()
