@@ -27,20 +27,21 @@ class RowItem extends AbstractRowItem
 	// rows below or not)
 	public RowItem(int span, JComponent component)
 	{
-		_component = component;
+		super(component);
 		_span = span;
 	}
 
 	// Used to create a placeholder for a component spanning a row
 	public RowItem(RowItem original)
 	{
+		super(null);
 		_spanPrevious = original;
 		original._spanNext = this;
 	}
 	
 	@Override public JComponent component()
 	{
-		return (_spanPrevious != null ? _spanPrevious.component() : _component);
+		return (_spanPrevious != null ? _spanPrevious.component() : super.component());
 	}
 
 	// NB: Don't try to optimize this method by caching the calculated preferred
@@ -50,7 +51,7 @@ class RowItem extends AbstractRowItem
 		if (_spanPrevious == null && _spanNext == null)
 		{
 			// Component spanning no rows at all
-			return _component.getPreferredSize().height;
+			return super.preferredHeight();
 		}
 		else if (_spanNext == null)
 		{
@@ -62,7 +63,7 @@ class RowItem extends AbstractRowItem
 				AbstractRow row = _rows.get(i);
 				height += row.height() + row.vgap();
 			}
-			return Math.max(0, component().getPreferredSize().height - height);
+			return Math.max(0, super.preferredHeight() - height);
 		}
 		else
 		{
@@ -71,21 +72,6 @@ class RowItem extends AbstractRowItem
 		}
 	}
 	
-	@Override public int minimumWidth()
-	{
-		return component().getMinimumSize().width;
-	}
-	
-	@Override public int preferredWidth()
-	{
-		return component().getPreferredSize().width;
-	}
-	
-	@Override public int baseline()
-	{
-		return BaselineHelper.getBaseline(component());
-	}
-
 	@Override public void setSpannedRows(List<AbstractRow> rows)
 	{
 		_rows = rows;
@@ -120,7 +106,7 @@ class RowItem extends AbstractRowItem
 	// Used to replace a rowspan placeholder with a real component (error marker)
 	public void replace(JComponent component)
 	{
-		_component = component;
+		setComponent(component);
 		_span = _spanPrevious.span();
 		_spanPrevious._spanNext = null;
 		_spanPrevious = null;
@@ -131,7 +117,6 @@ class RowItem extends AbstractRowItem
 		return (_spanPrevious != null ? _spanPrevious.span() : _span);
 	}
 	
-	private JComponent _component = null;
 	private int _span = 1;
 	private RowItem _spanPrevious = null;
 	private RowItem _spanNext = null;

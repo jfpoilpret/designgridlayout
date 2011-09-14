@@ -38,7 +38,7 @@ final class HorizontalLayout implements LayoutManager
 	{
 		for (JComponent child: children)
 		{
-			_children.add(new NonGridRowItem(child));
+			_children.add(new BasicItem(child));
 			_parent.add(child);
 		}
 		return this;
@@ -74,7 +74,7 @@ final class HorizontalLayout implements LayoutManager
 			int x = 0;
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			helper.setY(0);
-			for (IRowItem child: _children)
+			for (IItem child: _children)
 			{
 				helper.setRowAvailableHeight(_parent.getHeight());
 				// Apply reduction ratio to component width
@@ -154,7 +154,7 @@ final class HorizontalLayout implements LayoutManager
 	private final Container _parent;
 	private final HeightGrowPolicy _heightTester;
 	private final OrientationPolicy _orientation;
-	private final List<NonGridRowItem> _children = new ArrayList<NonGridRowItem>();
+	private final List<IItem> _children = new ArrayList<IItem>();
 	private boolean _inited = false;
 	private int _baseline = 0;
 	private int _height = 0;

@@ -26,39 +26,39 @@ final class ComponentHelper
 	{
 	}
 	
-	static int maxValues(Iterable<? extends IRowItem> items, IExtractor extractor)
+	static int maxValues(Iterable<? extends IItem> items, IExtractor extractor)
 	{
 		int max = 0;
-		for (IRowItem item: items)
+		for (IItem item: items)
 		{
 			max = Math.max(max, extractor.value(item));
 		}
 		return max;
 	}
 	
-	static int sumValues(Iterable<? extends IRowItem> items, IExtractor extractor)
+	static int sumValues(Iterable<? extends IItem> items, IExtractor extractor)
 	{
 		int sum = 0;
-		for (IRowItem item: items)
+		for (IItem item: items)
 		{
 			sum += extractor.value(item);
 		}
 		return sum;
 	}
 	
-	static int unrelhgap(List<? extends IRowItem> items, Container parent)
+	static int unrelhgap(List<? extends IItem> items, Container parent)
 	{
 		return hgap(
 			ComponentGapsHelper.instance(), items, parent, ComponentPlacement.UNRELATED);
 	}
 	
-	static int hgap(List<? extends IRowItem> items, Container parent)
+	static int hgap(List<? extends IItem> items, Container parent)
 	{
 		return hgap(
 			ComponentGapsHelper.instance(), items, parent, ComponentPlacement.RELATED);
 	}
 	
-	static int hgap(JComponent first, List<? extends IRowItem> items, Container parent)
+	static int hgap(JComponent first, List<? extends IItem> items, Container parent)
 	{
 		ComponentGapsHelper helper = ComponentGapsHelper.instance();
 		int hgap = 0;
@@ -83,7 +83,7 @@ final class ComponentHelper
 		return true;
 	}
 
-	static private int hgap(ComponentGapsHelper helper, List<? extends IRowItem> items, 
+	static private int hgap(ComponentGapsHelper helper, List<? extends IItem> items, 
 		Container parent, ComponentPlacement placement)
 	{
 		int hgap = 0;

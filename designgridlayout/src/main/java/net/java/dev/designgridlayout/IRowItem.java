@@ -16,19 +16,11 @@ package net.java.dev.designgridlayout;
 
 import java.util.List;
 
-import javax.swing.JComponent;
-
-interface IRowItem
+interface IRowItem extends IItem
 {
 	public void hide();
 	public void show();
 	
-	public JComponent component();
-	public int preferredHeight();
-	public int minimumWidth();
-	public int preferredWidth();
-	public int baseline();
-
 	public void setSpannedRows(List<AbstractRow> rows);
 	public int rowSpan();
 	public boolean isFirstSpanRow();

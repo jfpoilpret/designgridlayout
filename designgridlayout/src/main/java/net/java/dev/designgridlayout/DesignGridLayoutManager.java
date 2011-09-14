@@ -143,7 +143,7 @@ public class DesignGridLayoutManager implements LayoutManager
 			int x = left();
 			int y = top();
 			int parentWidth = parent.getWidth();
-			// Never layout components smaller than the minimu size
+			// Never layout components smaller than the minimum size
 			parentWidth = Math.max(parentWidth, _minimumSize.width);
 
 			int rowWidth = parentWidth - left() - right();
@@ -643,7 +643,7 @@ public class DesignGridLayoutManager implements LayoutManager
 		if (topRow != null)
 		{
 			ComponentGapsHelper helper = ComponentGapsHelper.instance();
-			for (IRowItem item: topRow.allItems())
+			for (IItem item: topRow.allItems())
 			{
 				int gap = helper.getNorthContainerGap(item.component(), _parent);
 				_top = Math.max(_top, gap);
@@ -661,7 +661,7 @@ public class DesignGridLayoutManager implements LayoutManager
 		if (bottomRow != null)
 		{
 			ComponentGapsHelper helper = ComponentGapsHelper.instance();
-			for (IRowItem item: bottomRow.allItems())
+			for (IItem item: bottomRow.allItems())
 			{
 				int height = item.preferredHeight();
 				int gap = helper.getSouthContainerGap(item.component(), _parent);

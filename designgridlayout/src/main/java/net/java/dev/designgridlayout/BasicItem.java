@@ -14,36 +14,44 @@
 
 package net.java.dev.designgridlayout;
 
-import java.util.List;
-
 import javax.swing.JComponent;
 
-// Used for all components added to a non-grid row
-class NonGridRowItem extends AbstractRowItem
+class BasicItem implements IItem
 {
-	// Used to create an item holding a real component (that may span several
-	// rows below or not)
-	public NonGridRowItem(JComponent component)
+	public BasicItem(JComponent component)
 	{
-		super(component);
-	}
-
-	@Override public void setSpannedRows(List<AbstractRow> rows)
-	{
+		_component = component;
 	}
 	
-	@Override public boolean isFirstSpanRow()
+	protected void setComponent(JComponent component)
 	{
-		return true;
+		_component = component;
 	}
 
-	@Override public boolean isLastSpanRow()
+	@Override public JComponent component()
 	{
-		return true;
+		return _component;
 	}
 
-	@Override public int rowSpan()
+	@Override public int preferredHeight()
 	{
-		return 1;
+		return component().getPreferredSize().height;
 	}
+
+	@Override public int minimumWidth()
+	{
+		return component().getMinimumSize().width;
+	}
+	
+	@Override public int preferredWidth()
+	{
+		return component().getPreferredSize().width;
+	}
+	
+	@Override public int baseline()
+	{
+		return BaselineHelper.getBaseline(component());
+	}
+
+	private JComponent _component;
 }

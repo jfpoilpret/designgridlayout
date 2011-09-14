@@ -14,8 +14,15 @@
 
 package net.java.dev.designgridlayout;
 
-abstract class AbstractRowItem implements IRowItem
+import javax.swing.JComponent;
+
+abstract class AbstractRowItem extends BasicItem implements IRowItem
 {
+	protected AbstractRowItem(JComponent component)
+	{
+		super(component);
+	}
+	
 	@Override public void hide()
 	{
 		if (isFirstSpanRow())
