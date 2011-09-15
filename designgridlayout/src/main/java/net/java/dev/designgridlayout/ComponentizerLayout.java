@@ -92,6 +92,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			boolean rtl = _orientation.isRightToLeft();
 
 			int parentWidth = parent.getSize().width;
+			//TODO should we use min width instead of pref width here?
 			// Never layout components smaller than the minimum size
 			parentWidth = Math.max(parentWidth, _prefWidth);
 			int availableWidth = parentWidth - _gap;
@@ -141,7 +142,8 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	@Override public Dimension minimumLayoutSize(Container parent)
 	{
 		initSizeCalculation(parent);
-		return new Dimension(_minWidth, _height);
+		return new Dimension(_prefWidth, _height);
+//		return new Dimension(_minWidth, _height);
 	}
 
 	@Override public Dimension preferredLayoutSize(Container parent)
@@ -168,7 +170,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	
 	private void computeAll()
 	{
-		if (!_inited )
+		if (!_inited)
 		{
 			_baseline = ComponentHelper.maxValues(_children, BaselineExtractor.INSTANCE);
 			_minWidth = ComponentHelper.sumValues(_children, MinWidthExtractor.INSTANCE);
@@ -188,6 +190,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			}
 			_minWidth += _gap;
 			_prefWidth += _gap;
+			//FIXME potential IndexOutOfBounds when no component at all (rare but could happen)
 			_gaps[_children.size() - 1] = 0;
 
 			_inited = true;

@@ -28,10 +28,14 @@ public class Componentizer6WithinDesignGrid extends AbstractBaseExample
 	// TODO: check that variable height multi component triggers a variable height row
 	@Override protected void build(DesignGridLayout layout)
 	{
-		JComponent multiComponent = Componentizer.create()
+		JComponent multiComponent1 = Componentizer.create()
 			.addVariable(field("Select a file for upload")).addFixed(button("Select..."))
 			.component();
+		JComponent multiComponent2 = Componentizer.create()
+			.addFixed(list())
+			.component();
 		layout.row().grid(label("Label 1")).add(field("ABCDEF"), field("GHIJKLMNOP"));
-		layout.row().grid(label("L2")).add(multiComponent, field("QRSTUVWXYZ"));
+		layout.row().grid(label("L2")).add(multiComponent1, field("QRSTUVWXYZ"));
+		layout.row().grid(label("L3")).add(multiComponent2, field("12345"));
 	}
 }
