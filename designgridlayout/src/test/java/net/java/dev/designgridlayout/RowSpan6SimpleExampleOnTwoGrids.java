@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class RowSpan6SimpleExampleOnTwoGrids extends AbstractBaseExample
+public class RowSpan6SimpleExampleOnTwoGrids extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

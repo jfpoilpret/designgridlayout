@@ -18,7 +18,7 @@ package net.java.dev.designgridlayout;
 
 //import javax.swing.UIManager;
 
-public class IndentRowsExample extends AbstractBaseExample
+public class IndentRowsExample extends AbstractDesignGridExample
 {
 	public static void main(String[] args) throws Exception
 	{

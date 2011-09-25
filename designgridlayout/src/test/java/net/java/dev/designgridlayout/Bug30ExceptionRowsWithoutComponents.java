@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug30ExceptionRowsWithoutComponents extends AbstractBaseExample
+public class Bug30ExceptionRowsWithoutComponents extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

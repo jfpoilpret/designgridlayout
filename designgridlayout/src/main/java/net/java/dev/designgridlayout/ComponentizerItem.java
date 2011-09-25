@@ -16,21 +16,35 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-// Used for all components added to a non-grid row
+import net.java.dev.designgridlayout.Componentizer.Width;
+
+// Used for all components added to a Componentizer
 class ComponentizerItem extends BasicItem
 {
-	// Used to create an item holding a real component (that may span several
-	// rows below or not)
-	public ComponentizerItem(JComponent component, boolean variableWidth)
+	public ComponentizerItem(JComponent component, Width widthSettings)
 	{
 		super(component);
-		_variableWidth = variableWidth;
+		_widthSettings = widthSettings;
 	}
 
-	public boolean isVariableWidth()
+	@Override public int minimumWidth()
 	{
-		return _variableWidth;
+		switch (_widthSettings)
+		{
+			case PREF_FIXED:
+			case PREF_AND_MORE:
+			return preferredWidth();
+
+			case MIN_TO_PREF:
+			default:
+			return super.minimumWidth();
+		}
 	}
 	
-	final private boolean _variableWidth;
+	public boolean isVariableWidth()
+	{
+		return _widthSettings != Width.PREF_FIXED;
+	}
+
+	final private Width _widthSettings;
 }

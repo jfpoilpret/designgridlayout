@@ -25,6 +25,7 @@ import javax.swing.JComponent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import net.java.dev.designgridlayout.Componentizer.Builder;
+import net.java.dev.designgridlayout.Componentizer.Width;
 
 final class ComponentizerLayout implements LayoutManager, Builder
 {
@@ -47,28 +48,29 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		return this;
 	}
 
+	@Override public Builder add(Width width, JComponent... children)
+	{
+		for (JComponent child: children)
+		{
+			_children.add(new ComponentizerItem(child, width));
+			_parent.add(child);
+		}
+		return this;
+	}
+	
 	@Override public Builder addFixed(JComponent... children)
 	{
-		add(false, children);
+		add(Width.PREF_FIXED, children);
 		return this;
 	}
 
 	@Override public Builder addVariable(JComponent... children)
 	{
-		add(true, children);
+		add(Width.PREF_AND_MORE, children);
 		_numVariableWidthComponents += children.length;
 		return this;
 	}
 	
-	protected void add(boolean variableWidth, JComponent[] children)
-	{
-		for (JComponent child: children)
-		{
-			_children.add(new ComponentizerItem(child, variableWidth));
-			_parent.add(child);
-		}
-	}
-
 	@Override public JComponent component()
 	{
 		return _parent;
@@ -93,6 +95,13 @@ final class ComponentizerLayout implements LayoutManager, Builder
 
 			int parentWidth = parent.getSize().width;
 			//TODO should we use min width instead of pref width here?
+			// If we use min, then:
+			// - should we use min also for FIXED components?
+			//		-> then they would not really be fixed anymore...
+			// Or should we have more options?
+			// - width between min and pref
+			// - fixed width (pref)
+			// - width from min upwards (no upper limit)
 			// Never layout components smaller than the minimum size
 			parentWidth = Math.max(parentWidth, _prefWidth);
 			int availableWidth = parentWidth - _gap;
@@ -190,8 +199,10 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			}
 			_minWidth += _gap;
 			_prefWidth += _gap;
-			//FIXME potential IndexOutOfBounds when no component at all (rare but could happen)
-			_gaps[_children.size() - 1] = 0;
+			if (!_children.isEmpty())
+			{
+				_gaps[_children.size() - 1] = 0;
+			}
 
 			_inited = true;
 		}

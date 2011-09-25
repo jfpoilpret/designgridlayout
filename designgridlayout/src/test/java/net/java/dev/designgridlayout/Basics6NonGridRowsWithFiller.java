@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JSeparator;
 
-public class Basics6NonGridRowsWithFiller extends AbstractBaseExample
+public class Basics6NonGridRowsWithFiller extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

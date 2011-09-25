@@ -24,7 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-public class Figure179bis extends AbstractBaseExample
+public class Figure179bis extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

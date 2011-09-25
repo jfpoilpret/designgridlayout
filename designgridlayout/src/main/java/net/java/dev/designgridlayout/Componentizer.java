@@ -27,9 +27,18 @@ public class Componentizer
 	{
 		public Builder withSmartVerticalResize();
 		public Builder withoutSmartVerticalResize();
+		public Builder add(Width width, JComponent... children);
 		public Builder addFixed(JComponent... children);
 		public Builder addVariable(JComponent... children);
 		public JComponent component();
+	}
+	
+	static public enum Width
+	{
+		PREF_FIXED,
+		MIN_TO_PREF,
+		PREF_AND_MORE,
+//		MIN_AND_MORE
 	}
 	
 	static private class MultiComponent extends JComponent

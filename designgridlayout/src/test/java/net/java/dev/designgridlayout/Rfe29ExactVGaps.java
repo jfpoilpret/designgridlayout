@@ -18,7 +18,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 
-public class Rfe29ExactVGaps extends AbstractBaseExample
+public class Rfe29ExactVGaps extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

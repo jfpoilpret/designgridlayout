@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug01MissingGapLabelComponent extends AbstractBaseExample
+public class Bug01MissingGapLabelComponent extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 // Issue 39: when DGL form has JTextArea and this form is within a JScrollPane
-public class Bug39HystericalJTextAreaWithScrollPane extends AbstractBaseExample
+public class Bug39HystericalJTextAreaWithScrollPane extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

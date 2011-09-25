@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-public class Bug28bBadHeightWhenStartedFromEDT extends AbstractBaseExample
+public class Bug28bBadHeightWhenStartedFromEDT extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

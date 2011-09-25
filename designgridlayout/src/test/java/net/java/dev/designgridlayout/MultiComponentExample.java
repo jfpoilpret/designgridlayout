@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class MultiComponentExample extends AbstractBaseExample
+public class MultiComponentExample extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

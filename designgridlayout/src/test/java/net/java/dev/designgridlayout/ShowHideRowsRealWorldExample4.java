@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
 
-public class ShowHideRowsRealWorldExample4 extends AbstractBaseExample
+public class ShowHideRowsRealWorldExample4 extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

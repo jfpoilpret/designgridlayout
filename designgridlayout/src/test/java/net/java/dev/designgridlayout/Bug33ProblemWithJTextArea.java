@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Bug33ProblemWithJTextArea extends AbstractBaseExample
+public class Bug33ProblemWithJTextArea extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

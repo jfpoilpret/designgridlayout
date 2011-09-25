@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JTextField;
 
-public class Misc1CustomizedMargins extends AbstractBaseExample
+public class Misc1CustomizedMargins extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

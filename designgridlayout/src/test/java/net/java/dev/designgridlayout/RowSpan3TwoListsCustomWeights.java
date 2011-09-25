@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class RowSpan3TwoListsCustomWeights extends AbstractBaseExample
+public class RowSpan3TwoListsCustomWeights extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

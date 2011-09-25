@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JTextField;
 
-public class IndentRowsExample1 extends AbstractBaseExample
+public class IndentRowsExample1 extends AbstractDesignGridExample
 {
 	public static void main(String[] args) throws Exception
 	{

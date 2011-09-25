@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class RowSpan1OneList extends AbstractBaseExample
+public class RowSpan1OneList extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

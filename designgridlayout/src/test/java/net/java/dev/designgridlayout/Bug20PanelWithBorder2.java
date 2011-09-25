@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug20PanelWithBorder2 extends AbstractBaseExample
+public class Bug20PanelWithBorder2 extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

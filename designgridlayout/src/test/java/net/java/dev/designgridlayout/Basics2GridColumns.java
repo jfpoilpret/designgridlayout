@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Basics2GridColumns extends AbstractBaseExample
+public class Basics2GridColumns extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

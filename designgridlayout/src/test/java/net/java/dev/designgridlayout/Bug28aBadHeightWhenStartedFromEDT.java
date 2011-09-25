@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.SwingUtilities;
 
-public class Bug28aBadHeightWhenStartedFromEDT extends AbstractBaseExample
+public class Bug28aBadHeightWhenStartedFromEDT extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

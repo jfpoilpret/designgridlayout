@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class RowSpan7SpecialComponent extends AbstractBaseExample
+public class RowSpan7SpecialComponent extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

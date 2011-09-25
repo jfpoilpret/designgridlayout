@@ -25,7 +25,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 // Shows issue 5 with lack of variable height rows
-public class SmartVerticalResize2AllComponents extends AbstractBaseExample
+public class SmartVerticalResize2AllComponents extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

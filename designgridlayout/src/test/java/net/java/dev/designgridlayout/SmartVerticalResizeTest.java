@@ -60,7 +60,7 @@ public class SmartVerticalResizeTest extends AbstractGuiTest
 		checkExampleAndResize(SmartVerticalResizeDisabled4RealWorldExample.class);
 	}
 
-	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz) throws Exception
+	protected void checkExampleAndResize(Class<? extends AbstractDesignGridExample> clazz) throws Exception
 	{
 		checkExampleAndResizeHeight(clazz, RESIZE_INCREMENT, RESIZE_STEPS);
 	}

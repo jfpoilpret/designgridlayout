@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import javax.swing.JSlider;
 
 // Shows issue 5 with lack of variable height rows
-public class SmartVerticalResize3CustomWeights extends AbstractBaseExample
+public class SmartVerticalResize3CustomWeights extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

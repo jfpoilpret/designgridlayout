@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class Rfe47ShowHideRowsTestExample extends AbstractBaseExample
+public class Rfe47ShowHideRowsTestExample extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

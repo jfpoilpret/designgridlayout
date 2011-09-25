@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 // Issue 35: when DGL form has a JPanel that contains variable-height children
-public class Bug35PanelWithVariableHeightChild extends AbstractBaseExample
+public class Bug35PanelWithVariableHeightChild extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

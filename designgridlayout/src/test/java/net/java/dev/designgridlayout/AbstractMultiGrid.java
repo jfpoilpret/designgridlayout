@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import javax.swing.JTextField;
 
 // Shows issue 13 example: multiple labels
-abstract public class AbstractMultiGrid extends AbstractBaseExample
+abstract public class AbstractMultiGrid extends AbstractDesignGridExample
 {
 	@Override protected JTextField field(String text)
 	{

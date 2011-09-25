@@ -27,7 +27,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import net.java.dev.designgridlayout.AbstractBaseExample;
+import net.java.dev.designgridlayout.AbstractDesignGridExample;
 import net.java.dev.designgridlayout.AddressBookDemo;
 import net.java.dev.designgridlayout.Basics1SimpleGrid;
 import net.java.dev.designgridlayout.Basics2GridColumns;
@@ -129,7 +129,7 @@ public class Examples extends JFrame
 		DefaultMutableTreeNode node;
 
 		root.add(new DefaultMutableTreeNode(
-			new Node("Introduction", AbstractBaseExample.class, false)));
+			new Node("Introduction", AbstractDesignGridExample.class, false)));
 
 		node = new DefaultMutableTreeNode("Basic Examples");
 		node.add(new DefaultMutableTreeNode(

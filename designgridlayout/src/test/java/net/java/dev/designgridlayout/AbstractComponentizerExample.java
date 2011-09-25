@@ -14,26 +14,13 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-public abstract class AbstractComponentizerExample
+public abstract class AbstractComponentizerExample extends AbstractExample
 {
-	protected JFrame _frame = null;
-
-	public JFrame frame()
-	{
-		return _frame;
-	}
-
-	public void go(boolean exitOnClose)
+	@Override public void go(boolean exitOnClose)
 	{
 		_frame = new JFrame(name());
 		_frame.setName(getClass().getSimpleName());
@@ -54,57 +41,5 @@ public abstract class AbstractComponentizerExample
 		_frame.setVisible(true);
 	}
 	
-	protected JButton button()
-	{
-		return button("Button");
-	}
-	
-	protected JButton button(String text)
-	{
-		return new JButton(text);
-	}
-	
-	protected JLabel label(int num)
-	{
-		return label("Row " + num);
-	}
-
-	protected JLabel label(String label)
-	{
-		return new JLabel(label);
-	}
-
-	protected JTextField field(String text)
-	{
-		JTextField field = new JTextField(text);
-		return field;
-	}
-	
-	protected JScrollPane textarea(String content)
-	{
-		JTextArea area = new JTextArea(3, 10);
-		area.setText(content);
-		return new JScrollPane(area);
-	}
-	
-	protected JScrollPane list()
-	{
-		JList list = new JList(GUITARS);
-		list.setVisibleRowCount(2);
-		return new JScrollPane(list);
-	}
-
 	protected abstract void build(ComponentizerLayout layout);
-
-	public String name()
-	{
-		return getClass().getSimpleName();
-	}
-
-	static private final Object[] GUITARS =
-	{
-		"Fender Telecaster",
-		"Fender Stratocaster",
-		"Gibson Les Paul",
-	};
 }

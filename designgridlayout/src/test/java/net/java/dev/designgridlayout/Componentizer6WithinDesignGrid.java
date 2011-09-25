@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-public class Componentizer6WithinDesignGrid extends AbstractBaseExample
+public class Componentizer6WithinDesignGrid extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{
@@ -24,7 +24,6 @@ public class Componentizer6WithinDesignGrid extends AbstractBaseExample
 		example.go(true);
 	}
 	
-	// FIXME: multi component can get resized under its minimum width!
 	// TODO: check that variable height multi component triggers a variable height row
 	@Override protected void build(DesignGridLayout layout)
 	{

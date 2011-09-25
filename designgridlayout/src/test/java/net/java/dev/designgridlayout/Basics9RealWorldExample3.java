@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-public class Basics9RealWorldExample3 extends AbstractBaseExample
+public class Basics9RealWorldExample3 extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Rfe42BarRowsTestExample extends AbstractBaseExample
+public class Rfe42BarRowsTestExample extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

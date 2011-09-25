@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JTextField;
 
-public class Bug02NonGridRowsUnusedInPrefSize extends AbstractBaseExample
+public class Bug02NonGridRowsUnusedInPrefSize extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

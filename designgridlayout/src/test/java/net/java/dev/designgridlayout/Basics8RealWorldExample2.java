@@ -19,7 +19,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class Basics8RealWorldExample2 extends AbstractBaseExample
+public class Basics8RealWorldExample2 extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

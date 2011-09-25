@@ -21,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-public class Bug32ProblemWithJTextPane extends AbstractBaseExample
+public class Bug32ProblemWithJTextPane extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

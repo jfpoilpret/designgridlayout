@@ -15,7 +15,7 @@
 package net.java.dev.designgridlayout;
 
 // Issue 22: no hgap between components when layout has no grid row at all
-public class Bug22WrongGapsIfNoGridRow extends AbstractBaseExample
+public class Bug22WrongGapsIfNoGridRow extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

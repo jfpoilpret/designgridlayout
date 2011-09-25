@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 // This example checks the preferred size calculated when having a large 
 // component spanning several grids
-public class MultiGrid1Simple extends AbstractBaseExample
+public class MultiGrid1Simple extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 // Issue 38: too small vgap between multicomponents 
 // NB: does not happen on Metal/WinXP. Happens on Aqua (Macintosh).
-public class Bug38WrongVGapsWithAddMulti extends AbstractBaseExample
+public class Bug38WrongVGapsWithAddMulti extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

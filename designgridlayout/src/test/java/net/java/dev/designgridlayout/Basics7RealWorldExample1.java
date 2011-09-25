@@ -21,7 +21,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class Basics7RealWorldExample1 extends AbstractBaseExample
+public class Basics7RealWorldExample1 extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

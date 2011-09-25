@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JSeparator;
 
-public class Rfe41IndependentWidthAcrossNonGridRowsExample extends AbstractBaseExample
+public class Rfe41IndependentWidthAcrossNonGridRowsExample extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

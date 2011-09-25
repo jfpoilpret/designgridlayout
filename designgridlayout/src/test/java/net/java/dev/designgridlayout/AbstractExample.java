@@ -17,74 +17,47 @@ package net.java.dev.designgridlayout;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
-public abstract class AbstractBaseExample
+abstract public class AbstractExample implements IExample
 {
 	protected JFrame _frame = null;
 
-	public JFrame frame()
+	@Override public JFrame frame()
 	{
 		return _frame;
 	}
 
-	public void go(boolean exitOnClose)
+	@Override public String name()
 	{
-		_frame = new JFrame(name());
-		_frame.setName(getClass().getSimpleName());
-
-		_frame.setDefaultCloseOperation(exitOnClose
-			? JFrame.EXIT_ON_CLOSE
-			: WindowConstants.DISPOSE_ON_CLOSE);
-		JPanel top = new JPanel();
-		DesignGridLayout layout = new DesignGridLayout(top);
-		top.setName("TOP");
-
-		init(layout);
-		build(layout);
-
-		addTopPanel(top);
-		prePack();
-		_frame.pack();
-		_frame.setLocationRelativeTo(null);
-		_frame.setVisible(true);
-	}
-	
-	protected void init(DesignGridLayout layout)
-	{
-		layout.labelAlignment(LabelAlignment.RIGHT);
-		layout.withoutConsistentWidthAcrossNonGridRows();
+		return getClass().getSimpleName();
 	}
 
-	protected void addTopPanel(JComponent top)
+	protected static void setTableHeight(JTable table, int rows)
 	{
-		_frame.add(top);
-	}
-	
-	protected void prePack()
-	{
-	}
+	//		int width = table.getColumnModel().getTotalColumnWidth();
+			int width = 200;
+			int height = rows * table.getRowHeight();
+			table.setPreferredScrollableViewportSize(new Dimension(width, height));
+		}
 
 	protected JButton button()
 	{
 		return button("Button");
 	}
-	
+
 	protected JButton button(String text)
 	{
 		return new JButton(text);
 	}
-	
+
 	protected JLabel label(int num)
 	{
 		return label("Row " + num);
@@ -100,7 +73,7 @@ public abstract class AbstractBaseExample
 		JTextField field = new JTextField(text);
 		return field;
 	}
-	
+
 	protected JSlider slider(int orientation)
 	{
 		JSlider slider = new JSlider(orientation, 0, 100, 50);
@@ -109,14 +82,14 @@ public abstract class AbstractBaseExample
 		slider.setPaintLabels(true);
 		return slider;
 	}
-	
+
 	protected JScrollPane textarea(String content)
 	{
 		JTextArea area = new JTextArea(3, 10);
 		area.setText(content);
 		return new JScrollPane(area);
 	}
-	
+
 	protected JScrollPane list()
 	{
 		JList list = new JList(GUITARS);
@@ -130,37 +103,20 @@ public abstract class AbstractBaseExample
 		setTableHeight(table, 4);
 		return new JScrollPane(table);
 	}
-	
-	static protected void setTableHeight(JTable table, int rows)
-	{
-//		int width = table.getColumnModel().getTotalColumnWidth();
-		int width = 200;
-		int height = rows * table.getRowHeight();
-		table.setPreferredScrollableViewportSize(new Dimension(width, height));
-	}
-	
-	protected abstract void build(DesignGridLayout layout);
 
-	public String name()
-	{
-		return getClass().getSimpleName();
-	}
+	private static final Object[] COLUMNS_PLAYERS = {"First name", "Surname", "Band"};
 
-	static private final Object[] COLUMNS_PLAYERS = {"First name", "Surname", "Band"};
-	static private final Object[][] CONTENTS_PLAYERS =
-	{
-		{"Eric", "Clapton", "The Yardbirds"},
-		{"Jimmy", "Page", "Led Zeppelin"},
-		{"Jimi", "Hendrix", "The Jimi Hendrix Experience"},
-		{"Mark", "Knopfler", "Dire Straits"},
-		{"", "The Edge", "U2"},
-		{"Gary", "Moore", "Thin Lizzy"},
-	};
-	
-	static private final Object[] GUITARS =
-	{
-		"Fender Telecaster",
-		"Fender Stratocaster",
-		"Gibson Les Paul",
-	};
+	private static final Object[][] CONTENTS_PLAYERS = {
+			{"Eric", "Clapton", "The Yardbirds"},
+			{"Jimmy", "Page", "Led Zeppelin"},
+			{"Jimi", "Hendrix", "The Jimi Hendrix Experience"},
+			{"Mark", "Knopfler", "Dire Straits"},
+			{"", "The Edge", "U2"},
+			{"Gary", "Moore", "Thin Lizzy"},
+		};
+	private static final Object[] GUITARS = {
+			"Fender Telecaster",
+			"Fender Stratocaster",
+			"Gibson Les Paul",
+		};
 }

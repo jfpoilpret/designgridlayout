@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class IndentRowsExample4 extends AbstractBaseExample
+public class IndentRowsExample4 extends AbstractDesignGridExample
 {
 	public static void main(String[] args) throws Exception
 	{

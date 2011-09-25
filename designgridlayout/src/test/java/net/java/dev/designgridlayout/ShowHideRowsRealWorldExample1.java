@@ -24,7 +24,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
-public class ShowHideRowsRealWorldExample1 extends AbstractBaseExample
+public class ShowHideRowsRealWorldExample1 extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

@@ -24,7 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-public class SmartVerticalResize4RealWorldExample extends AbstractBaseExample
+public class SmartVerticalResize4RealWorldExample extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

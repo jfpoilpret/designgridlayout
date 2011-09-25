@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JButton;
 
-public class Basics4RightRow extends AbstractBaseExample
+public class Basics4RightRow extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

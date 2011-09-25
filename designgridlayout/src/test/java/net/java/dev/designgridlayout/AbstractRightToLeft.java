@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import java.awt.ComponentOrientation;
 
-abstract public class AbstractRightToLeft extends AbstractBaseExample
+abstract public class AbstractRightToLeft extends AbstractDesignGridExample
 {
 	protected AbstractRightToLeft(ComponentOrientation orientation)
 	{

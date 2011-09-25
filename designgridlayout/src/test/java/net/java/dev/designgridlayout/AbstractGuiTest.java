@@ -30,12 +30,12 @@ import static org.fest.swing.finder.WindowFinder.findFrame;
 
 abstract class AbstractGuiTest
 {
-	private AbstractBaseExample _example;
+	private IExample _example;
 	private Robot _robot;
 	private FrameFixture _frame;
 	private ScreenshotTaker _screenshot;
 	
-	final protected <T extends AbstractBaseExample, U extends T> void launchGui(
+	final protected <T extends IExample, U extends T> void launchGui(
 		Class<U> clazz, Initializer<T> initializer) 
 		throws Exception
 	{
@@ -51,23 +51,23 @@ abstract class AbstractGuiTest
 		_screenshot = new ScreenshotTaker();
 	}
 	
-	final protected <T extends AbstractBaseExample> void launchGui(Class<T> clazz) 
+	final protected <T extends IExample> void launchGui(Class<T> clazz) 
 		throws Exception
 	{
 		launchGui(clazz, null);
 	}
 	
 	final protected void checkExampleFromEDT(
-		final Class<? extends AbstractBaseExample> clazz) throws Exception
+		final Class<? extends IExample> clazz) throws Exception
 	{
 		final ExceptionHolder holder = new ExceptionHolder();
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				try
 				{
-					AbstractBaseExample example = clazz.newInstance();
+					IExample example = clazz.newInstance();
 					_example = example;
 					_example.go(false);
 				}
@@ -89,7 +89,7 @@ abstract class AbstractGuiTest
 
 	// Note: don't use @DataProvider because all tests appear under the same name
 	// in maven surefire reports...
-	final protected void checkExample(Class<? extends AbstractBaseExample> clazz)
+	final protected void checkExample(Class<? extends IExample> clazz)
 		throws Exception
 	{
 		launchGui(clazz);
@@ -97,7 +97,7 @@ abstract class AbstractGuiTest
 	}
 	
 	final protected void checkExampleAndResizeHeight(
-		Class<? extends AbstractBaseExample> clazz, int increment, int steps) throws Exception
+		Class<? extends IExample> clazz, int increment, int steps) throws Exception
 	{
 		launchGui(clazz);
 		checkSnapshot("pref-size");
@@ -110,7 +110,7 @@ abstract class AbstractGuiTest
 	}
 
 	final protected void checkExampleAndResizeWidth(
-		Class<? extends AbstractBaseExample> clazz, double... ratios) throws Exception
+		Class<? extends IExample> clazz, double... ratios) throws Exception
 	{
 		launchGui(clazz);
 		checkSnapshot("pref-size");
@@ -198,7 +198,7 @@ abstract class AbstractGuiTest
 		_robot.waitForIdle();
 	}
 	
-	protected interface Initializer<T extends AbstractBaseExample>
+	protected interface Initializer<T extends IExample>
 	{
 		public void init(T instance);
 	}

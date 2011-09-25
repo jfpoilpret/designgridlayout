@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import javax.swing.JSeparator;
 
 // Demonstrate bad calls to spanRow()
-public class RowSpan4ErrorMarkers extends AbstractBaseExample
+public class RowSpan4ErrorMarkers extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

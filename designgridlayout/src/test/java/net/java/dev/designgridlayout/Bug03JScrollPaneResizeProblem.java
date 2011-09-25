@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class Bug03JScrollPaneResizeProblem extends AbstractBaseExample
+public class Bug03JScrollPaneResizeProblem extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

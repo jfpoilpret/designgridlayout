@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug24BadBottomMarginIfEmptyRowAtLast extends AbstractBaseExample
+public class Bug24BadBottomMarginIfEmptyRowAtLast extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

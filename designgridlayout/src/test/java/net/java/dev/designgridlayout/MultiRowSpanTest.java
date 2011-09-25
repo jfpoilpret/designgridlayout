@@ -79,7 +79,7 @@ public class MultiRowSpanTest extends AbstractGuiTest
 		}
 	}
 	
-	protected void checkExampleAndResize(Class<? extends AbstractBaseExample> clazz)
+	protected void checkExampleAndResize(Class<? extends AbstractDesignGridExample> clazz)
 		throws Exception
 	{
 		checkExampleAndResizeHeight(clazz, RESIZE_INCREMENT, RESIZE_STEPS);

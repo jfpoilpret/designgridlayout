@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
-public class Bug27Java5WinLAFBadBaselines extends AbstractBaseExample
+public class Bug27Java5WinLAFBadBaselines extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

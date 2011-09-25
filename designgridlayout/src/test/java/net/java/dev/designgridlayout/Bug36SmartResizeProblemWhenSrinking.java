@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
 
-public class Bug36SmartResizeProblemWhenSrinking extends AbstractBaseExample
+public class Bug36SmartResizeProblemWhenSrinking extends AbstractDesignGridExample
 {
 	public static void main(String[] args) throws Exception
 	{

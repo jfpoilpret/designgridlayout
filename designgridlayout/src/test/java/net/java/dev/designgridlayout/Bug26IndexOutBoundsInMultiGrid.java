@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug26IndexOutBoundsInMultiGrid extends AbstractBaseExample
+public class Bug26IndexOutBoundsInMultiGrid extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

@@ -33,7 +33,7 @@ import javax.swing.WindowConstants;
  * 
  * @author jasonosgood
  */
-public class AddressBookDemo extends AbstractBaseExample
+public class AddressBookDemo extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

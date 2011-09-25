@@ -15,7 +15,7 @@
 package net.java.dev.designgridlayout;
 
 // Issue 25: multiple calls to pack() clears the effect of emptyRow()
-public class Bug25InoperantEmptyRowIfPackTwice extends AbstractBaseExample
+public class Bug25InoperantEmptyRowIfPackTwice extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{

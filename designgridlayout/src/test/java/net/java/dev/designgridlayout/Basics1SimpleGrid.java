@@ -14,7 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
-public class Basics1SimpleGrid extends AbstractBaseExample
+public class Basics1SimpleGrid extends AbstractDesignGridExample
 {
 	public static void main(String[] args)
 	{
