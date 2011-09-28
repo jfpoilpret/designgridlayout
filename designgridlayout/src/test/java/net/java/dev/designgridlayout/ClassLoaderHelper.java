@@ -78,7 +78,7 @@ final class ClassLoaderHelper
 	
 	static final private FileFilter _jarsFilter = new FileFilter()
 	{
-		public boolean accept(File pathname)
+		@Override public boolean accept(File pathname)
 		{
 			return	pathname.isFile()
 				&&	pathname.getName().toUpperCase().endsWith(JAR_SUFFIX);
@@ -87,7 +87,7 @@ final class ClassLoaderHelper
 
 	static final private FileFilter _dirsFilter = new FileFilter()
 	{
-		public boolean accept(File pathname)
+		@Override public boolean accept(File pathname)
 		{
 			return	pathname.isDirectory();
 		}

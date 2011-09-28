@@ -34,7 +34,7 @@ public class Bug32ProblemWithJTextPane extends AbstractDesignGridExample
 		_append.setName("append");
 		_append.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			@Override public void actionPerformed(ActionEvent e)
 			{
 				append();
 			}

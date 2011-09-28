@@ -24,7 +24,7 @@ public class Bug28bBadHeightWhenStartedFromEDT extends AbstractDesignGridExample
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				Bug28bBadHeightWhenStartedFromEDT example = 
 					new Bug28bBadHeightWhenStartedFromEDT();

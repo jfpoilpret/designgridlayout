@@ -60,7 +60,7 @@ public class SmartVerticalResize2AllComponents extends AbstractDesignGridExample
 	{
 		Action action = new AbstractAction("Combo-selected LAF")
 		{
-			public void actionPerformed(ActionEvent e)
+			@Override public void actionPerformed(ActionEvent e)
 			{
 				String laf = (String) _plafs.getSelectedItem();
 				if (laf != null && !laf.equals(""))
@@ -79,7 +79,7 @@ public class SmartVerticalResize2AllComponents extends AbstractDesignGridExample
 	{
 		Action action = new AbstractAction("System LAF")
 		{
-			public void actionPerformed(ActionEvent e)
+			@Override public void actionPerformed(ActionEvent e)
 			{
 				setLaf(UIManager.getSystemLookAndFeelClassName());
 			}
@@ -94,7 +94,7 @@ public class SmartVerticalResize2AllComponents extends AbstractDesignGridExample
 	{
 		Action action = new AbstractAction("Java LAF")
 		{
-			public void actionPerformed(ActionEvent e)
+			@Override public void actionPerformed(ActionEvent e)
 			{
 				setLaf(UIManager.getCrossPlatformLookAndFeelClassName());
 			}

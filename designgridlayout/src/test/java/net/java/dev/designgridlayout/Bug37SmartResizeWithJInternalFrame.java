@@ -34,7 +34,7 @@ public class Bug37SmartResizeWithJInternalFrame
 			new Bug37SmartResizeWithJInternalFrame();
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				example.go(true);
 			}

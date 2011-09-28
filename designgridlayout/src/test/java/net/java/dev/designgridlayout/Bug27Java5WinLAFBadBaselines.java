@@ -24,7 +24,7 @@ public class Bug27Java5WinLAFBadBaselines extends AbstractDesignGridExample
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			public void run()
+			@Override public void run()
 			{
 				Bug27Java5WinLAFBadBaselines example = new Bug27Java5WinLAFBadBaselines();
 				example.go(true);

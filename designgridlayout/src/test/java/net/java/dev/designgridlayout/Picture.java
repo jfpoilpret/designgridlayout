@@ -66,12 +66,12 @@ public class Picture extends JComponent implements Scrollable
 		g.drawImage(_image.getImage(), x, y, width, height, null);
 	}
 	
-	public Dimension getPreferredScrollableViewportSize()
+	@Override public Dimension getPreferredScrollableViewportSize()
 	{
 		return new Dimension(PREF_SIZE, PREF_SIZE);
 	}
 	
-	public int getScrollableBlockIncrement(
+	@Override public int getScrollableBlockIncrement(
 		Rectangle visibleRect, int orientation, int direction)
 	{
 		if (orientation == SwingConstants.HORIZONTAL)
@@ -100,17 +100,17 @@ public class Picture extends JComponent implements Scrollable
 		}
 	}
 	
-	public boolean getScrollableTracksViewportHeight()
+	@Override public boolean getScrollableTracksViewportHeight()
 	{
 		return true;
 	}
 	
-	public boolean getScrollableTracksViewportWidth()
+	@Override public boolean getScrollableTracksViewportWidth()
 	{
 		return true;
 	}
 	
-	public int getScrollableUnitIncrement(
+	@Override public int getScrollableUnitIncrement(
 		Rectangle visibleRect, int orientation, int direction)
 	{
 		if (orientation == SwingConstants.HORIZONTAL)
