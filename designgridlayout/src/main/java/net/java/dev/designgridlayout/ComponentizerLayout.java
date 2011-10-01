@@ -112,89 +112,80 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			int minWidth = _minWidth - _gap;
 			int prefWidth = _prefWidth - _gap;
 
+			boolean minToPref;
+			int extra = 0;
+			int fudge = 0;
+
+			if (availableWidth < prefWidth)
+			{
+				// - if available width < pref width, use "min-pref" width of all components
+				minToPref = true;
+				if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
+				{
+					// Calculate extra width for each variable width component
+					extra = (availableWidth - minWidth) / _numComponentsWiderThanMin;
+					// Fudge is assigned to the first variable width components
+					// (1 pixel per component)
+					fudge = (availableWidth - minWidth) % _numComponentsWiderThanMin;
+				}
+			}
+			else
+			{
+				// - if available width > pref width, increase size only of variable components
+				minToPref = false;
+				if (_numComponentsWiderThanPref > 0)
+				{
+					// Calculate extra width for each variable width component
+					extra = (availableWidth - prefWidth) / _numComponentsWiderThanPref;
+					// Fudge is assigned to the first variable width components
+					// (1 pixel per component)
+					fudge = (availableWidth - prefWidth) % _numComponentsWiderThanPref;
+				}
+			}
+
 			// Prepare layout
 			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
 			helper.setRowAvailableHeight(_parent.getHeight());
 			helper.setY(0);
 			int nth = 0;
 			int x = 0;
-			//TODO factor out what can be
-			//TODO refactor further to have only one loop on components
-			// several situations:
-			// - if available width < pref width, use "min-pref" width of all components
-			// - if available width > pref width, increase size only of variable components
-			if (availableWidth < prefWidth)
+			
+			// Perform actual layout
+			for (ComponentizerItem child: _children)
 			{
-				int extra = 0;
-				int fudge = 0;
-				if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
+				int width = (minToPref ? child.minimumWidth() : child.preferredWidth());
+				if (extra > 0 && needExtraWidth(child, minToPref))
 				{
-					// Calculate extra width for each variable width component
-					extra = (availableWidth - minWidth) / _numComponentsWiderThanMin;
-					// Fudge is assigned to the first variable width components (1 pixel per component)
-					fudge = (availableWidth - minWidth) % _numComponentsWiderThanMin;
-				}
-				// Perform actual layout
-				for (ComponentizerItem child: _children)
-				{
-					int width = child.minimumWidth();
-					switch (child.widthPolicy())
+					width += extra;
+					if (fudge > 0)
 					{
-						case MIN_AND_MORE:
-						case MIN_TO_PREF:
-						width += extra;
-						if (fudge > 0)
-						{
-							width++;
-							fudge--;
-						}
-						break;
-						
-						case PREF_AND_MORE:
-						case PREF_FIXED:
-						break;
+						width++;
+						fudge--;
 					}
-					helper.setSizeLocation(child.component(), x, width, _height, _baseline);
-					x += width + _gaps[nth];
-					nth++;
 				}
+				helper.setSizeLocation(child.component(), x, width, _height, _baseline);
+				x += width + _gaps[nth];
+				nth++;
 			}
-			else
-			{
-				int extra = 0;
-				int fudge = 0;
-				if (_numComponentsWiderThanPref > 0)
-				{
-					// Calculate extra width for each variable width component
-					extra = (availableWidth - prefWidth) / _numComponentsWiderThanPref;
-					// Fudge is assigned to the first variable width components (1 pixel per component)
-					fudge = (availableWidth - prefWidth) % _numComponentsWiderThanPref;
-				}
-				// Perform actual layout
-				for (ComponentizerItem child: _children)
-				{
-					int width = child.preferredWidth();
-					switch (child.widthPolicy())
-					{
-						case MIN_AND_MORE:
-						case PREF_AND_MORE:
-						width += extra;
-						if (fudge > 0)
-						{
-							width++;
-							fudge--;
-						}
-						break;
-						
-						case MIN_TO_PREF:
-						case PREF_FIXED:
-						break;
-					}
-					helper.setSizeLocation(child.component(), x, width, _height, _baseline);
-					x += width + _gaps[nth];
-					nth++;
-				}
-			}
+		}
+	}
+	
+	static private boolean needExtraWidth(ComponentizerItem child, boolean minToPref)
+	{
+		switch (child.widthPolicy())
+		{
+			case MIN_AND_MORE:
+			return true;
+			
+			case MIN_TO_PREF:
+			return minToPref;
+			
+			case PREF_AND_MORE:
+			return !minToPref;
+			
+			case PREF_FIXED:
+			default:
+			return false;
 		}
 	}
 
