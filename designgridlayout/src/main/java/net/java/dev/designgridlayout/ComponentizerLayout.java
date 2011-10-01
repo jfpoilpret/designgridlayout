@@ -112,6 +112,12 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			int minWidth = _minWidth - _gap;
 			int prefWidth = _prefWidth - _gap;
 
+			// Prepare layout
+			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
+			helper.setRowAvailableHeight(_parent.getHeight());
+			helper.setY(0);
+			int nth = 0;
+			int x = 0;
 			//TODO factor out what can be
 			//TODO refactor further to have only one loop on components
 			// several situations:
@@ -121,11 +127,6 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			if (availableWidth < minWidth)
 			{
 				// Perform actual layout
-				LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
-				helper.setRowAvailableHeight(_parent.getHeight());
-				helper.setY(0);
-				int nth = 0;
-				int x = 0;
 				for (ComponentizerItem child: _children)
 				{
 					int width = child.minimumWidth();
@@ -146,11 +147,6 @@ final class ComponentizerLayout implements LayoutManager, Builder
 					fudge = (availableWidth - minWidth) % _numComponentsWiderThanMin;
 				}
 				// Perform actual layout
-				LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
-				helper.setRowAvailableHeight(_parent.getHeight());
-				helper.setY(0);
-				int nth = 0;
-				int x = 0;
 				for (ComponentizerItem child: _children)
 				{
 					int width = child.minimumWidth();
@@ -187,11 +183,6 @@ final class ComponentizerLayout implements LayoutManager, Builder
 					fudge = (availableWidth - prefWidth) % _numComponentsWiderThanPref;
 				}
 				// Perform actual layout
-				LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
-				helper.setRowAvailableHeight(_parent.getHeight());
-				helper.setY(0);
-				int nth = 0;
-				int x = 0;
 				for (ComponentizerItem child: _children)
 				{
 					int width = child.preferredWidth();
