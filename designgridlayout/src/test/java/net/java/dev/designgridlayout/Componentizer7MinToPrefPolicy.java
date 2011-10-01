@@ -14,29 +14,19 @@
 
 package net.java.dev.designgridlayout;
 
-import javax.swing.JComponent;
-
 import net.java.dev.designgridlayout.Componentizer.WidthPolicy;
 
-public class Componentizer7WithinDesignGrid extends AbstractDesignGridExample
+public class Componentizer7MinToPrefPolicy extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
 	{
-		Componentizer7WithinDesignGrid example = new Componentizer7WithinDesignGrid();
+		Componentizer7MinToPrefPolicy example = new Componentizer7MinToPrefPolicy();
 		example.go(true);
 	}
 	
-	@Override protected void build(DesignGridLayout layout)
+	@Override protected void build(ComponentizerLayout layout)
 	{
-		JComponent multiComponent1 = Componentizer.create()
-			.add(WidthPolicy.MIN_TO_PREF, field("Select a file for upload"))
-			.add(WidthPolicy.PREF_FIXED, button("Select..."))
-			.component();
-		JComponent multiComponent2 = Componentizer.create()
-			.addFixed(list())
-			.component();
-		layout.row().grid(label("Label 1")).add(field("ABCDEF"), field("GHIJKLMNOP"));
-		layout.row().grid(label("L2")).add(multiComponent1, field("QRSTUVWXYZ"));
-//		layout.row().grid(label("L3")).add(multiComponent2, field("12345"));
+		layout.add(WidthPolicy.MIN_TO_PREF, field("Select a file for upload"))
+			.add(WidthPolicy.PREF_FIXED, button("Select..."));
 	}
 }
