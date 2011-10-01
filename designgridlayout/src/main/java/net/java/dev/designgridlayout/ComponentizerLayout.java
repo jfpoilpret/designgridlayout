@@ -121,25 +121,13 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			//TODO factor out what can be
 			//TODO refactor further to have only one loop on components
 			// several situations:
-			// - if available width < min width, use "min" width of all components
 			// - if available width < pref width, use "min-pref" width of all components
 			// - if available width > pref width, increase size only of variable components
-			if (availableWidth < minWidth)
-			{
-				// Perform actual layout
-				for (ComponentizerItem child: _children)
-				{
-					int width = child.minimumWidth();
-					helper.setSizeLocation(child.component(), x, width, _height, _baseline);
-					x += width + _gaps[nth];
-					nth++;
-				}
-			}
-			else if (availableWidth < prefWidth)
+			if (availableWidth < prefWidth)
 			{
 				int extra = 0;
 				int fudge = 0;
-				if (_numComponentsWiderThanMin > 0)
+				if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
 				{
 					// Calculate extra width for each variable width component
 					extra = (availableWidth - minWidth) / _numComponentsWiderThanMin;
