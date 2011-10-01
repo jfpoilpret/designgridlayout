@@ -16,20 +16,20 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-import net.java.dev.designgridlayout.Componentizer.Width;
+import net.java.dev.designgridlayout.Componentizer.WidthPolicy;
 
 // Used for all components added to a Componentizer
 class ComponentizerItem extends BasicItem
 {
-	public ComponentizerItem(JComponent component, Width widthSettings)
+	public ComponentizerItem(JComponent component, WidthPolicy widthPolicy)
 	{
 		super(component);
-		_widthSettings = widthSettings;
+		_widthPolicy = widthPolicy;
 	}
 
 	@Override public int minimumWidth()
 	{
-		switch (_widthSettings)
+		switch (_widthPolicy)
 		{
 			case PREF_FIXED:
 			case PREF_AND_MORE:
@@ -47,10 +47,10 @@ class ComponentizerItem extends BasicItem
 		return 0;
 	}
 	
-	public boolean isVariableWidth()
+	public WidthPolicy widthPolicy()
 	{
-		return _widthSettings != Width.PREF_FIXED;
+		return _widthPolicy;
 	}
 
-	final private Width _widthSettings;
+	final private WidthPolicy _widthPolicy;
 }

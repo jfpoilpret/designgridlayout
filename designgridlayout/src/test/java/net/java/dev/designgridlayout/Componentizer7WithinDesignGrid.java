@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-import net.java.dev.designgridlayout.Componentizer.Width;
+import net.java.dev.designgridlayout.Componentizer.WidthPolicy;
 
 public class Componentizer7WithinDesignGrid extends AbstractDesignGridExample
 {
@@ -29,8 +29,8 @@ public class Componentizer7WithinDesignGrid extends AbstractDesignGridExample
 	@Override protected void build(DesignGridLayout layout)
 	{
 		JComponent multiComponent1 = Componentizer.create()
-			.add(Width.MIN_TO_PREF, field("Select a file for upload"))
-			.add(Width.PREF_FIXED, button("Select..."))
+			.add(WidthPolicy.MIN_TO_PREF, field("Select a file for upload"))
+			.add(WidthPolicy.PREF_FIXED, button("Select..."))
 			.component();
 		JComponent multiComponent2 = Componentizer.create()
 			.addFixed(list())
