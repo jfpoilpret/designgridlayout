@@ -18,39 +18,25 @@ import javax.swing.JComponent;
 
 import net.java.dev.designgridlayout.Componentizer.Width;
 
-// Used for all components added to a Componentizer
-class ComponentizerItem extends BasicItem
+public class Componentizer7WithinDesignGrid extends AbstractDesignGridExample
 {
-	public ComponentizerItem(JComponent component, Width widthSettings)
+	public static void main(String[] args)
 	{
-		super(component);
-		_widthSettings = widthSettings;
-	}
-
-	@Override public int minimumWidth()
-	{
-		switch (_widthSettings)
-		{
-			case PREF_FIXED:
-			case PREF_AND_MORE:
-			return preferredWidth();
-
-			case MIN_TO_PREF:
-			case MIN_AND_MORE:
-			default:
-			return super.minimumWidth();
-		}
+		Componentizer7WithinDesignGrid example = new Componentizer7WithinDesignGrid();
+		example.go(true);
 	}
 	
-	public int width(int available)
+	@Override protected void build(DesignGridLayout layout)
 	{
-		return 0;
+		JComponent multiComponent1 = Componentizer.create()
+			.add(Width.MIN_TO_PREF, field("Select a file for upload"))
+			.add(Width.PREF_FIXED, button("Select..."))
+			.component();
+		JComponent multiComponent2 = Componentizer.create()
+			.addFixed(list())
+			.component();
+		layout.row().grid(label("Label 1")).add(field("ABCDEF"), field("GHIJKLMNOP"));
+		layout.row().grid(label("L2")).add(multiComponent1, field("QRSTUVWXYZ"));
+//		layout.row().grid(label("L3")).add(multiComponent2, field("12345"));
 	}
-	
-	public boolean isVariableWidth()
-	{
-		return _widthSettings != Width.PREF_FIXED;
-	}
-
-	final private Width _widthSettings;
 }

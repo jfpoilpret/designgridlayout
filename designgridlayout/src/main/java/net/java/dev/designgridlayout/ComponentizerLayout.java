@@ -50,6 +50,21 @@ final class ComponentizerLayout implements LayoutManager, Builder
 
 	@Override public Builder add(Width width, JComponent... children)
 	{
+		switch (width)
+		{
+			case MIN_TO_PREF:
+			_numComponentsWiderThanMin += children.length;
+			break;
+			
+			case MIN_AND_MORE:
+			_numComponentsWiderThanMin += children.length;
+			_numComponentsWiderThanPref += children.length;
+			break;
+			
+			case PREF_AND_MORE:
+			_numComponentsWiderThanPref += children.length;
+			break;
+		}
 		for (JComponent child: children)
 		{
 			_children.add(new ComponentizerItem(child, width));
@@ -60,15 +75,12 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	
 	@Override public Builder addFixed(JComponent... children)
 	{
-		add(Width.PREF_FIXED, children);
-		return this;
+		return add(Width.PREF_FIXED, children);
 	}
 
 	@Override public Builder addVariable(JComponent... children)
 	{
-		add(Width.PREF_AND_MORE, children);
-		_numVariableWidthComponents += children.length;
-		return this;
+		return add(Width.PREF_AND_MORE, children);
 	}
 	
 	@Override public JComponent component()
@@ -103,21 +115,31 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			// - fixed width (pref)
 			// - width from min upwards (no upper limit)
 			// Never layout components smaller than the minimum size
-			parentWidth = Math.max(parentWidth, _prefWidth);
+			parentWidth = Math.max(parentWidth, _minWidth);
 			int availableWidth = parentWidth - _gap;
+			int minWidth = _minWidth - _gap;
 			int prefWidth = _prefWidth - _gap;
-			
-			// 2 situations:
-			// - if available width = pref width, use pref width of all components
+
+			// several situations:
+			// - if available width < min width, use "min" width of all components
+			// - if available width < pref width, use "min-pref" width of all components
 			// - if available width > pref width, increase size only of variable components
 			int extra = 0;
 			int fudge = 0;
-			if (availableWidth > prefWidth && _numVariableWidthComponents > 0)
+			//TODO
+			if (availableWidth > prefWidth && _numComponentsWiderThanPref > 0)
 			{
 				// Calculate extra width for each variable width component
-				extra = (availableWidth - prefWidth) / _numVariableWidthComponents;
+				extra = (availableWidth - prefWidth) / _numComponentsWiderThanPref;
 				// Fudge is assigned to the first variable width components (1 pixel per component)
-				fudge = (availableWidth - prefWidth) % _numVariableWidthComponents;
+				fudge = (availableWidth - prefWidth) % _numComponentsWiderThanPref;
+			}
+			else if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
+			{
+				// Calculate extra width for each variable width component
+				extra = (availableWidth - minWidth) / _numComponentsWiderThanMin;
+				// Fudge is assigned to the first variable width components (1 pixel per component)
+				fudge = (availableWidth - minWidth) % _numComponentsWiderThanMin;
 			}
 
 			// Perform actual layout
@@ -128,6 +150,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			int x = 0;
 			for (ComponentizerItem child: _children)
 			{
+				//TODO preferred or minimum?
 				int width = child.preferredWidth();
 				if (child.isVariableWidth())
 				{
@@ -151,8 +174,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	@Override public Dimension minimumLayoutSize(Container parent)
 	{
 		initSizeCalculation(parent);
-		return new Dimension(_prefWidth, _height);
-//		return new Dimension(_minWidth, _height);
+		return new Dimension(_minWidth, _height);
 	}
 
 	@Override public Dimension preferredLayoutSize(Container parent)
@@ -230,5 +252,6 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	private int _prefWidth = 0;
 	private int[] _gaps = null;
 	private int _gap = 0;
-	private int _numVariableWidthComponents = 0;
+	private int _numComponentsWiderThanPref = 0;
+	private int _numComponentsWiderThanMin = 0;
 }

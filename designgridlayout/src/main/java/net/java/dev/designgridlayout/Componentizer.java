@@ -38,7 +38,7 @@ public class Componentizer
 		PREF_FIXED,
 		MIN_TO_PREF,
 		PREF_AND_MORE,
-//		MIN_AND_MORE
+		MIN_AND_MORE
 	}
 	
 	static private class MultiComponent extends JComponent
