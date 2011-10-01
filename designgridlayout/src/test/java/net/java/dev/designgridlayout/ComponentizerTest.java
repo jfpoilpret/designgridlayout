@@ -65,4 +65,16 @@ public class ComponentizerTest extends AbstractGuiTest
 	{
 		checkExampleAndResizeHeight(Componentizer6WithinDesignGrid.class, 5, 8);
 	}
+
+	@Test public void checkComponentizerWithMinToPrefPolicy() throws Exception
+	{
+		checkExampleAndResizeWidth(Componentizer7MinToPrefPolicy.class,
+			1.5d, 0.5d);
+	}
+
+	@Test public void checkComponentizerWithMinAndMorePolicy() throws Exception
+	{
+		checkExampleAndResizeWidth(Componentizer8MinAndMorePolicy.class,
+			1.5d, 0.5d);
+	}
 }

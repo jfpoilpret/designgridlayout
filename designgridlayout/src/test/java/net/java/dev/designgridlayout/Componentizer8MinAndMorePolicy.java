@@ -16,11 +16,11 @@ package net.java.dev.designgridlayout;
 
 import net.java.dev.designgridlayout.Componentizer.WidthPolicy;
 
-public class Componentizer8MinToPrefPolicy extends AbstractComponentizerExample
+public class Componentizer8MinAndMorePolicy extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
 	{
-		Componentizer8MinToPrefPolicy example = new Componentizer8MinToPrefPolicy();
+		Componentizer8MinAndMorePolicy example = new Componentizer8MinAndMorePolicy();
 		example.go(true);
 	}
 	
