@@ -24,6 +24,6 @@ public class Componentizer1TwoFixedChildren extends AbstractComponentizerExample
 	
 	@Override protected void build(ComponentizerLayout layout)
 	{
-		layout.addFixed(label("Phone Number:"), field("999-99-99"));
+		layout.fixedPref(label("Phone Number:"), field("999-99-99"));
 	}
 }

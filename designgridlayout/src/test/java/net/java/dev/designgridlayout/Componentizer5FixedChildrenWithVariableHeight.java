@@ -24,6 +24,6 @@ public class Componentizer5FixedChildrenWithVariableHeight extends AbstractCompo
 	
 	@Override protected void build(ComponentizerLayout layout)
 	{
-		layout.addFixed(label("Description:"), textarea(""));
+		layout.fixedPref(label("Description:"), textarea(""));
 	}
 }

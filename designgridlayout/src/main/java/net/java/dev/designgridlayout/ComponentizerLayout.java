@@ -73,14 +73,24 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		return this;
 	}
 	
-	@Override public Builder addFixed(JComponent... children)
+	@Override public Builder fixedPref(JComponent... children)
 	{
 		return add(WidthPolicy.PREF_FIXED, children);
 	}
 
-	@Override public Builder addVariable(JComponent... children)
+	@Override public Builder prefAndMore(JComponent... children)
 	{
 		return add(WidthPolicy.PREF_AND_MORE, children);
+	}
+	
+	@Override public Builder minToPref(JComponent... children)
+	{
+		return add(WidthPolicy.MIN_TO_PREF, children);
+	}
+	
+	@Override public Builder minAndMore(JComponent... children)
+	{
+		return add(WidthPolicy.MIN_AND_MORE, children);
 	}
 	
 	@Override public JComponent component()

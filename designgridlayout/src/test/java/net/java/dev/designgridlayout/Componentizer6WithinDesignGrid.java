@@ -28,10 +28,10 @@ public class Componentizer6WithinDesignGrid extends AbstractDesignGridExample
 	@Override protected void build(DesignGridLayout layout)
 	{
 		JComponent multiComponent1 = Componentizer.create()
-			.addVariable(field("Select a file for upload")).addFixed(button("Select..."))
+			.prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."))
 			.component();
 		JComponent multiComponent2 = Componentizer.create()
-			.addFixed(list())
+			.fixedPref(list())
 			.component();
 		layout.row().grid(label("Label 1")).add(field("ABCDEF"), field("GHIJKLMNOP"));
 		layout.row().grid(label("L2")).add(multiComponent1, field("QRSTUVWXYZ"));

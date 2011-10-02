@@ -27,6 +27,6 @@ public class Componentizer3FixedVariableFixedRTL extends AbstractComponentizerEx
 	@Override protected void build(ComponentizerLayout layout)
 	{
 		frame().applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		layout.addFixed(label("Total:")).addVariable(field("999,999.99")).addFixed(label("USD"));
+		layout.fixedPref(label("Total:")).prefAndMore(field("999,999.99")).fixedPref(label("USD"));
 	}
 }

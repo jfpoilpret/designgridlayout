@@ -24,6 +24,6 @@ public class Componentizer4OneVariableOneFixedChildren extends AbstractComponent
 	
 	@Override protected void build(ComponentizerLayout layout)
 	{
-		layout.addVariable(field("Select a file for upload")).addFixed(button("Select..."));
+		layout.prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."));
 	}
 }

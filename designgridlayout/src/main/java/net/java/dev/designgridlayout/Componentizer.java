@@ -16,7 +16,7 @@ package net.java.dev.designgridlayout;
 
 import javax.swing.JComponent;
 
-public class Componentizer
+final public class Componentizer
 {
 	static public Builder create()
 	{
@@ -28,8 +28,10 @@ public class Componentizer
 		public Builder withSmartVerticalResize();
 		public Builder withoutSmartVerticalResize();
 		public Builder add(WidthPolicy width, JComponent... children);
-		public Builder addFixed(JComponent... children);
-		public Builder addVariable(JComponent... children);
+		public Builder fixedPref(JComponent... children);
+		public Builder prefAndMore(JComponent... children);
+		public Builder minToPref(JComponent... children);
+		public Builder minAndMore(JComponent... children);
 		public JComponent component();
 	}
 	
@@ -43,6 +45,8 @@ public class Componentizer
 	
 	static private class MultiComponent extends JComponent
 	{
+		private static final long serialVersionUID = 1L;
+
 		@Override public int getBaseline(int width, int height)
 		{
 			return ((ComponentizerLayout) getLayout()).getBaseline();

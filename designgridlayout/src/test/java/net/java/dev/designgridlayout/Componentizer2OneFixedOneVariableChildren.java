@@ -24,6 +24,6 @@ public class Componentizer2OneFixedOneVariableChildren extends AbstractComponent
 	
 	@Override protected void build(ComponentizerLayout layout)
 	{
-		layout.addFixed(label("Address:")).addVariable(field("999-99-99"));
+		layout.fixedPref(label("Address:")).prefAndMore(field("999-99-99"));
 	}
 }

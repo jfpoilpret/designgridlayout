@@ -24,6 +24,6 @@ public class Componentizer3FixedVariableFixedChildren extends AbstractComponenti
 	
 	@Override protected void build(ComponentizerLayout layout)
 	{
-		layout.addFixed(label("Total:")).addVariable(field("999,999.99")).addFixed(label("USD"));
+		layout.fixedPref(label("Total:")).prefAndMore(field("999,999.99")).fixedPref(label("USD"));
 	}
 }
