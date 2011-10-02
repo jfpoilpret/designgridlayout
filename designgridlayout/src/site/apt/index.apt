@@ -83,7 +83,7 @@ DesignGridLayout "philosophy"
 	<<<Component>>>, DesignGridLayout uses a fluent API which starts from the 
 	<<<DesignGridLayout>>> instance itself.
 
-DesignGridLayout Features (version 1.8)
+DesignGridLayout Features (version 1.9)
 
 	*	<<Fluent and simple API>> to create grid-based layouts (from the layout, 
 		you create rows, from a row you add components)
@@ -131,4 +131,7 @@ DesignGridLayout Features (version 1.8)
 	
 	*	Total <<resolution independence>>: no need for any hard-coded position 
 		or spacing
+		
+	*	New <<Componentizer>> API to create a new JComponent from horizontally
+		aligned children, each with various policies for width changes
 		
