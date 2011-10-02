@@ -21,6 +21,7 @@ import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
@@ -81,7 +82,9 @@ public class ShowHideRowsRealWorldExample4 extends AbstractDesignGridExample
 		groupBox.setSelected(true);
 		groupBox.addItemListener(new ShowHideAction(group));
 		layout.emptyRow();
-		layout.row().left().addMulti(groupName, groupBox).add(new JSeparator()).fill();
+		JComponent groupComponent = 
+			Componentizer.create().fixedPref(groupName, groupBox).component();
+		layout.row().left().add(groupComponent, new JSeparator()).fill();
 	}
 	
 	private void addGroup(DesignGridLayout layout, String name)

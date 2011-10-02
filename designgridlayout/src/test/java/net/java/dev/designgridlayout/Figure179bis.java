@@ -14,9 +14,11 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JRadioButton;
@@ -37,21 +39,46 @@ public class Figure179bis extends AbstractDesignGridExample
 	{
 		familyList.setVisibleRowCount(6);
 		facesList.setVisibleRowCount(6);
+		makeConsistentSize(sizeSpinner, leaderSpinner, kernSpinner);
 
 		layout.row().grid(usageLabel).add(anyButton).add(textButton)
 			.add(displayButton).add(humorButton);
 		layout.row().grid(fontLabel).add(familyListScroller).add(facesListScroller);
 		layout.emptyRow();
-		layout.row().grid(sizeLabel).addMulti(2, sizeSpinner, sizePointsLabel)
+		JComponent sizeComponent = Componentizer.create()
+			.fixedPref(sizeSpinner, sizePointsLabel).component();
+		layout.row().grid(sizeLabel).add(sizeComponent, 2)
 			.add(allCapsButton, 2).add(superscriptButton, 2).empty(2);
-		layout.row().grid(leadingLabel).addMulti(2, leaderSpinner, leadingPointsLabel)
+		JComponent leaderComponent = Componentizer.create()
+			.fixedPref(leaderSpinner, leadingPointsLabel).component();
+		layout.row().grid(leadingLabel).add(leaderComponent, 2)
 			.add(smallCapsButton, 2).add(subscriptButton, 2).empty(2);
-		layout.row().grid(kernLabel).addMulti(2, kernSpinner, kernPointsLabel)
+		JComponent kernComponent = Componentizer.create()
+			.fixedPref(kernSpinner, kernPointsLabel).component();
+		layout.row().grid(kernLabel).add(kernComponent, 2)
 			.add(hightlightButton, 2).add(redlineButton, 2).empty(2);
 		layout.emptyRow();
 		layout.row().center().add(setFontButton).add(encodingButton).add(previewButton);
 	}
 	// CSON: MagicNumber
+	
+	static private void makeConsistentSize(JComponent... components)
+	{
+		int width = 0;
+		int height = 0;
+		Dimension size = null;
+		for (JComponent component: components)
+		{
+			size = component.getPreferredSize();
+			width = Math.max(width, size.width);
+			height = Math.max(height, size.height);
+		}
+		size = new Dimension(width, height);
+		for (JComponent component: components)
+		{
+			component.setPreferredSize(size);
+		}
+	}
 
 	static final private String[] FACE_NAMES =
 	{
