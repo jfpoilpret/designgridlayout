@@ -50,6 +50,11 @@ final class ComponentizerLayout implements LayoutManager, Builder
 
 	@Override public Builder add(WidthPolicy width, JComponent... children)
 	{
+		checkNoDuplicateComponents(children);
+		for (JComponent component: children)
+		{
+			checkAddedComponent(component);
+		}
 		switch (width)
 		{
 			case MIN_TO_PREF:
@@ -71,6 +76,38 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			_parent.add(child);
 		}
 		return this;
+	}
+	
+	final private void checkAddedComponent(JComponent component)
+	{
+		Container parent = component;
+		while (parent != null)
+		{
+			if (parent == _parent)
+			{
+				throw new IllegalArgumentException("Do not add the same component twice");
+			}
+			parent = parent.getParent();
+		}
+	}
+	
+	static private void checkNoDuplicateComponents(JComponent[] components)
+	{
+		for (JComponent comp1: components)
+		{
+			int count = 0;
+			for (JComponent comp2: components)
+			{
+				if (comp1 == comp2)
+				{
+					count++;
+				}
+			}
+			if (count > 1)
+			{
+				throw new IllegalArgumentException("Do not add the same component twice");
+			}
+		}
 	}
 	
 	@Override public Builder fixedPref(JComponent... children)
@@ -98,7 +135,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		return _parent;
 	}
 
-	public int getBaseline()
+	int getBaseline()
 	{
 		computeAll();
 		return _baseline;

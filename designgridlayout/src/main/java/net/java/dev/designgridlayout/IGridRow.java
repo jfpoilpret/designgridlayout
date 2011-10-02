@@ -95,6 +95,9 @@ public interface IGridRow extends IRow, ISubGridStarter
 	 * @param children components to assemble and add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
+	 * 
+	 * @deprecated Use {@link #add(JComponent, int)} with {@link Componentizer} instead.
 	 */
+	@Deprecated
 	public abstract IGridRow addMulti(int span, JComponent... children);
 }

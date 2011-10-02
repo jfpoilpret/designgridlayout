@@ -38,7 +38,7 @@ abstract class AbstractNonGridRow extends AbstractRow implements INonGridRow
 		{
 			checkAddedComponent(component);
 		}
-		return add(new MultiComponent(growPolicy(), orientation(), children));
+		return add(Componentizer.create().fixedPref(children).component());
 	}
 
 	@Override public INonGridRow indent()

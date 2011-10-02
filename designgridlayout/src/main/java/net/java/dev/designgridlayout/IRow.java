@@ -52,7 +52,10 @@ public interface IRow extends IHideable
 	 * @param children components to assemble and add to this row
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
+	 * 
+	 * @deprecated Use {@link #add} with {@link Componentizer} instead.
 	 */
+	@Deprecated
 	public abstract IRow addMulti(JComponent... children);
 	
 	/**
