@@ -14,8 +14,6 @@
 
 package net.java.dev.designgridlayout;
 
-import java.awt.LayoutManager;
-
 import javax.swing.JComponent;
 
 /**

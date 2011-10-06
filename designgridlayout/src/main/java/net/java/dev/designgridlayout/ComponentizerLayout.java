@@ -69,6 +69,9 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			case PREF_AND_MORE:
 			_numComponentsWiderThanPref += children.length;
 			break;
+			
+			default:
+			break;
 		}
 		for (JComponent child: children)
 		{
@@ -149,14 +152,10 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		{
 			computeAll();
 
-			// Check layout orientation
-			boolean rtl = _orientation.isRightToLeft();
-
 			int parentWidth = parent.getSize().width;
 			// Never layout components smaller than the minimum size
 			parentWidth = Math.max(parentWidth, _minWidth);
 			int availableWidth = parentWidth - _gap;
-			int minWidth = _minWidth - _gap;
 			int prefWidth = _prefWidth - _gap;
 
 			boolean minToPref;
@@ -167,6 +166,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			{
 				// - if available width < pref width, use "min-pref" width of all components
 				minToPref = true;
+				int minWidth = _minWidth - _gap;
 				if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
 				{
 					// Calculate extra width for each variable width component
@@ -191,29 +191,36 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			}
 
 			// Prepare layout
-			LayoutHelper helper = new LayoutHelper(_heightTester, parentWidth, rtl);
+			LayoutHelper helper = new LayoutHelper(
+				_heightTester, parentWidth, _orientation.isRightToLeft());
 			helper.setRowAvailableHeight(_parent.getHeight());
-			helper.setY(0);
-			int nth = 0;
-			int x = 0;
-			
-			// Perform actual layout
-			for (ComponentizerItem child: _children)
+			layoutComponents(helper, minToPref, extra, fudge);
+		}
+	}
+	
+	private void layoutComponents(LayoutHelper helper, boolean minToPref, int extra, int fudge)
+	{
+		helper.setY(0);
+		int nth = 0;
+		int x = 0;
+		int remainingFudge = fudge;
+		
+		// Perform actual layout
+		for (ComponentizerItem child: _children)
+		{
+			int width = (minToPref ? child.minimumWidth() : child.preferredWidth());
+			if (extra > 0 && needExtraWidth(child, minToPref))
 			{
-				int width = (minToPref ? child.minimumWidth() : child.preferredWidth());
-				if (extra > 0 && needExtraWidth(child, minToPref))
+				width += extra;
+				if (remainingFudge > 0)
 				{
-					width += extra;
-					if (fudge > 0)
-					{
-						width++;
-						fudge--;
-					}
+					width++;
+					remainingFudge--;
 				}
-				helper.setSizeLocation(child.component(), x, width, _height, _baseline);
-				x += width + _gaps[nth];
-				nth++;
 			}
+			helper.setSizeLocation(child.component(), x, width, _height, _baseline);
+			x += width + _gaps[nth];
+			nth++;
 		}
 	}
 	
