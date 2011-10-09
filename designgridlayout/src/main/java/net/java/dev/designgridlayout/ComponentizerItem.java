@@ -42,11 +42,6 @@ class ComponentizerItem extends BasicItem
 		}
 	}
 	
-	public int width(int available)
-	{
-		return 0;
-	}
-	
 	public WidthPolicy widthPolicy()
 	{
 		return _widthPolicy;
