@@ -76,11 +76,11 @@ public class DesignGridLayout
 		{
 			target = ((RootPaneContainer) parent).getContentPane();
 		}
+		_wrapper = new ParentWrapper<Container>(target);
 		_orientation = new OrientationPolicy(target);
-		_layout = new DesignGridLayoutManager(this, target, _rows, _orientation);
+		_layout = new DesignGridLayoutManager(this, _wrapper, _rows, _orientation);
 		_layout.setHeightTester(_heightTester);
-		_parent = target;
-		_parent.setLayout(_layout);
+		target.setLayout(_layout);
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class DesignGridLayout
 	{
 		_current = row;
 		_rows.add(row);
-		row.init(_parent, _heightTester, _orientation);
+		row.init(_wrapper, _heightTester, _orientation);
 		row.growWeight(verticalWeight);
 		for (RowGroup group: groups)
 		{
@@ -387,7 +387,7 @@ public class DesignGridLayout
 	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
 
 	final private DesignGridLayoutManager _layout;
-	final private Container _parent;
+	final private ParentWrapper<Container> _wrapper;
 	final private OrientationPolicy _orientation;
 	final private List<AbstractRow> _rows = new ArrayList<AbstractRow>();
 

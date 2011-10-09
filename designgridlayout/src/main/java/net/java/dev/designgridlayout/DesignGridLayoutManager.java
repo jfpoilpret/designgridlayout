@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,13 +39,15 @@ import static net.java.dev.designgridlayout.RowIterator.each;
  *
  * @author Jean-Francois Poilpret
  */
-public class DesignGridLayoutManager implements LayoutManager
+public class DesignGridLayoutManager implements LayoutManager2
 {
-	DesignGridLayoutManager(DesignGridLayout designGridLayout,
-		Container parent, List<AbstractRow> rows, OrientationPolicy orientation)
+	DesignGridLayoutManager(DesignGridLayout designGridLayout, 
+		ParentWrapper<Container> wrapper, List<AbstractRow> rows, 
+		OrientationPolicy orientation)
 	{
 		_designGridLayout = designGridLayout;
-		_parent = parent;
+		_wrapper = wrapper;
+		_parent = _wrapper.parent();
 		_rows = rows;
 		_orientation = orientation;
 	}
@@ -92,16 +94,25 @@ public class DesignGridLayoutManager implements LayoutManager
 		_consistentComponentWidthInNonGridRows = consistentComponentWidthInNonGridRows;
 	}
 
-	/*
+	/**
 	 * Do not add components via the parent container's {@link Container#add(Component)}
 	 * method, use directly DesignGridLayout API instead.
 	 */
-	@Override public void addLayoutComponent(String constraint, Component component)
+	@Override public void addLayoutComponent(String name, Component comp)
 	{
-		throw new IllegalArgumentException("Do not use this method");
+		// This method is never called for LayoutManager2 in fact
 	}
 
-	/*
+	/**
+	 * Do not add components via the parent container's {@link Container#add(Component)}
+	 * method, use directly DesignGridLayout API instead.
+	 */
+	@Override public void addLayoutComponent(Component comp, Object constraints)
+	{
+		_wrapper.checkAdd();
+	}
+
+	/**
 	 * Do not remove components via the parent container's 
 	 * {@link Container#remove(Component)} method; removing components from a 
 	 * DesignGridLayout-managed container is not supported.
@@ -116,7 +127,7 @@ public class DesignGridLayoutManager implements LayoutManager
 	 */
 	@Override public void layoutContainer(Container parent)
 	{
-		checkParent(parent);
+		_wrapper.checkParent(parent);
 
 		// Make sure there's something to do
 		if (_rows.isEmpty())
@@ -188,7 +199,6 @@ public class DesignGridLayoutManager implements LayoutManager
 				}
 				rowIndex++;
 			}
-
 		}
 	}
 
@@ -197,7 +207,8 @@ public class DesignGridLayoutManager implements LayoutManager
 	 */
 	@Override public Dimension minimumLayoutSize(Container parent)
 	{
-		checkParent(parent);
+		_wrapper.checkParent(parent);
+		//FIXME reset() shouldn't be needed here
 		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
@@ -209,22 +220,55 @@ public class DesignGridLayoutManager implements LayoutManager
 	 */
 	@Override public Dimension preferredLayoutSize(Container parent)
 	{
-		checkParent(parent);
+		_wrapper.checkParent(parent);
+		//FIXME reset() shouldn't be needed here
 		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
 		return new Dimension(_preferredSize);
 	}
-	
-	private void checkParent(Container parent)
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.LayoutManager2#maximumLayoutSize(java.awt.Container)
+	 */
+	@Override public Dimension maximumLayoutSize(Container parent)
 	{
-		if (parent != _parent)
-		{
-			throw new IllegalArgumentException(
-				"must use DesignGridLayout instance with original parent container");
-		}
+		_wrapper.checkParent(parent);
+		//FIXME reset() shouldn't be needed here
+		reset();
+		initialize();
+		// Note: Dimension instances can be mutated by an outsider
+		return new Dimension(_maximumSize);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.LayoutManager2#getLayoutAlignmentX(java.awt.Container)
+	 */
+	@Override public float getLayoutAlignmentX(Container target)
+	{
+		return LAYOUT_ALIGNMENT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.LayoutManager2#getLayoutAlignmentY(java.awt.Container)
+	 */
+	@Override public float getLayoutAlignmentY(Container target)
+	{
+		return LAYOUT_ALIGNMENT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.LayoutManager2#invalidateLayout(java.awt.Container)
+	 */
+	@Override public void invalidateLayout(Container target)
+	{
+		reset();
+	}
+	
 	private int top()
 	{
 		return _parent.getInsets().top + (int) (_topWeight * _top);
@@ -462,6 +506,8 @@ public class DesignGridLayoutManager implements LayoutManager
 
 		_preferredSize = new Dimension(preferredWidth, preferredHeight);
 		_minimumSize = new Dimension(minimumWidth, preferredHeight);
+		int maxHeight = (_totalWeight > 0.0 ? Integer.MAX_VALUE : preferredHeight);
+		_maximumSize = new Dimension(Integer.MAX_VALUE, maxHeight);
 	}
 
 	private void initRowSpanItems()
@@ -741,14 +787,18 @@ public class DesignGridLayoutManager implements LayoutManager
 		_preferredSize = null;
 	}
 
+	static final private float LAYOUT_ALIGNMENT = 0.5f; 
+
 	final private DesignGridLayout _designGridLayout;
 	final private Container _parent;
+	final private ParentWrapper<Container> _wrapper;
 	final private OrientationPolicy _orientation;
 
 	private HeightGrowPolicy _heightTester;
 	
 	private Dimension _preferredSize = null;
 	private Dimension _minimumSize = null;
+	private Dimension _maximumSize = null;
 
 	private int _top;
 	private int _left;

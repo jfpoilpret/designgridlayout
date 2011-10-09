@@ -17,7 +17,7 @@ package net.java.dev.designgridlayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +27,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import net.java.dev.designgridlayout.Componentizer.Builder;
 import net.java.dev.designgridlayout.Componentizer.WidthPolicy;
 
-final class ComponentizerLayout implements LayoutManager, Builder
+final class ComponentizerLayout implements LayoutManager2, Builder
 {
 	ComponentizerLayout(JComponent parent)
 	{
-		_parent = parent;
-		_parent.setLayout(this);
-		_orientation = new OrientationPolicy(_parent);
+		_wrapper = new ParentWrapper<JComponent>(parent);
+		_orientation = new OrientationPolicy(parent);
+		parent.setLayout(this);
 	}
 	
 	@Override public Builder withSmartVerticalResize()
@@ -53,7 +53,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		checkNoDuplicateComponents(children);
 		for (JComponent component: children)
 		{
-			checkAddedComponent(component);
+			_wrapper.checkAddedComponent(component);
 		}
 		switch (width)
 		{
@@ -76,22 +76,9 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		for (JComponent child: children)
 		{
 			_children.add(new ComponentizerItem(child, width));
-			_parent.add(child);
+			_wrapper.add(child);
 		}
 		return this;
-	}
-	
-	final private void checkAddedComponent(JComponent component)
-	{
-		Container parent = component;
-		while (parent != null)
-		{
-			if (parent == _parent)
-			{
-				throw new IllegalArgumentException("Do not add the same component twice");
-			}
-			parent = parent.getParent();
-		}
 	}
 	
 	static private void checkNoDuplicateComponents(JComponent[] components)
@@ -135,7 +122,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	
 	@Override public JComponent component()
 	{
-		return _parent;
+		return _wrapper.parent();
 	}
 
 	int getBaseline()
@@ -146,7 +133,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	
 	@Override public void layoutContainer(Container parent)
 	{
-		checkParent(parent);
+		_wrapper.checkParent(parent);
 		
 		synchronized(parent.getTreeLock())
 		{
@@ -167,6 +154,8 @@ final class ComponentizerLayout implements LayoutManager, Builder
 				// - if available width < pref width, use "min-pref" width of all components
 				minToPref = true;
 				int minWidth = _minWidth - _gap;
+				//FIXME calculus is incorrect: extra should be different for each growable component!
+				// Must use a ratio of available size and use it for each component min width
 				if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
 				{
 					// Calculate extra width for each variable width component
@@ -189,11 +178,13 @@ final class ComponentizerLayout implements LayoutManager, Builder
 					fudge = (availableWidth - prefWidth) % _numComponentsWiderThanPref;
 				}
 			}
+			
+			System.out.printf("minToPref = %b, extra = %d, fudge = %d\n", minToPref, extra, fudge);
 
 			// Prepare layout
 			LayoutHelper helper = new LayoutHelper(
 				_heightTester, parentWidth, _orientation.isRightToLeft());
-			helper.setRowAvailableHeight(_parent.getHeight());
+			helper.setRowAvailableHeight(_wrapper.parent().getHeight());
 			layoutComponents(helper, minToPref, extra, fudge);
 		}
 	}
@@ -255,20 +246,47 @@ final class ComponentizerLayout implements LayoutManager, Builder
 		return new Dimension(_prefWidth, _height);
 	}
 	
+	@Override public Dimension maximumLayoutSize(Container parent)
+	{
+		initSizeCalculation(parent);
+		int maxHeight = (_variableHeight ? Integer.MAX_VALUE: _height);
+		return new Dimension(Integer.MAX_VALUE, maxHeight);
+	}
+
+	@Override public float getLayoutAlignmentX(Container target)
+	{
+		return LAYOUT_ALIGNMENT;
+	}
+
+	@Override public float getLayoutAlignmentY(Container target)
+	{
+		return LAYOUT_ALIGNMENT;
+	}
+
+	@Override public void invalidateLayout(Container target)
+	{
+		_inited = false;
+	}
+	
 	private void initSizeCalculation(Container parent)
 	{
-		checkParent(parent);
+		_wrapper.checkParent(parent);
 		computeAll();
 	}
 
 	@Override public void addLayoutComponent(String name, Component comp)
 	{
-		throw new IllegalArgumentException("do not use this method");
+		// This method is never called for LayoutManager2 in fact
+	}
+
+	@Override public void addLayoutComponent(Component comp, Object constraints)
+	{
+		_wrapper.checkAdd();
 	}
 
 	@Override public void removeLayoutComponent(Component comp)
 	{
-		throw new IllegalArgumentException("do not use this method");
+		throw new IllegalArgumentException("Do not use this method");
 	}
 	
 	private void computeAll()
@@ -282,12 +300,13 @@ final class ComponentizerLayout implements LayoutManager, Builder
 
 			ComponentGapsHelper helper = ComponentGapsHelper.instance();
 			_gaps = new int[_children.size()];
+			_gap = 0;
 			for (int nth = 0; nth < _children.size() - 1; nth++)
 			{
 				JComponent left = _children.get(nth).component();
 				JComponent right = _children.get(nth + 1).component();
 				int gap = helper.getHorizontalGap(
-					left, right, ComponentPlacement.RELATED, _parent);
+					left, right, ComponentPlacement.RELATED, _wrapper.parent());
 				_gaps[nth] = gap;
 				_gap += gap;
 			}
@@ -297,23 +316,25 @@ final class ComponentizerLayout implements LayoutManager, Builder
 			{
 				_gaps[_children.size() - 1] = 0;
 			}
+			_variableHeight = false;
+			for (ComponentizerItem child: _children)
+			{
+				if (_heightTester.canGrowHeight(child.component()))
+				{
+					_variableHeight = true;
+					break;
+				}
+			}
 
 			_inited = true;
 		}
 	}
-	
-	private void checkParent(Container parent)
-	{
-		if (parent != _parent)
-		{
-			throw new IllegalArgumentException(
-				"must use HorizontalLayout instance with original parent container");
-		}
-	}
 
+	static final private float LAYOUT_ALIGNMENT = 0.5f; 
+	
 	static private HeightGrowPolicy _defaultHeightTester = new DefaultGrowPolicy();
 
-	private final JComponent _parent;
+	private final ParentWrapper<JComponent> _wrapper;
 	private final List<ComponentizerItem> _children = new ArrayList<ComponentizerItem>();
 	private HeightGrowPolicy _heightTester = _defaultHeightTester;
 	private final OrientationPolicy _orientation;
@@ -322,6 +343,7 @@ final class ComponentizerLayout implements LayoutManager, Builder
 	private int _height = 0;
 	private int _minWidth = 0;
 	private int _prefWidth = 0;
+	private boolean _variableHeight = false;
 	private int[] _gaps = null;
 	private int _gap = 0;
 	private int _numComponentsWiderThanPref = 0;

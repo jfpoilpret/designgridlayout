@@ -51,32 +51,24 @@ abstract class AbstractRow implements IHideable
 	}
 	
 	// Called by DesignGridLayout immediately after instantiation
-	final void init(
-		Container parent, HeightGrowPolicy heightTester, OrientationPolicy orientation)
+	final void init(ParentWrapper<Container> wrapper, 
+		HeightGrowPolicy heightTester, OrientationPolicy orientation)
 	{
-		_parent = parent;
+		_wrapper = wrapper;
 		_heightTester = heightTester;
 		_orientation = orientation;
 	}
 	
 	// Used by children
-	final protected Container parent()
+	final protected ParentWrapper<Container> parent()
 	{
-		return _parent;
+		return _wrapper;
 	}
 
 	// Used by children
 	final protected void checkAddedComponent(JComponent component)
 	{
-		Container parent = component;
-		while (parent != null)
-		{
-			if (parent == _parent)
-			{
-				throw new IllegalArgumentException("Do not add the same component twice");
-			}
-			parent = parent.getParent();
-		}
+		_wrapper.checkAddedComponent(component);
 	}
 	
 	// Used by children
@@ -204,12 +196,12 @@ abstract class AbstractRow implements IHideable
 
 	int hgap()
 	{
-		return ComponentHelper.hgap(allItems(), parent());
+		return ComponentHelper.hgap(allItems(), _wrapper.parent());
 	}
 
 	int unrelhgap()
 	{
-		return ComponentHelper.unrelhgap(allItems(), parent());
+		return ComponentHelper.unrelhgap(allItems(), _wrapper.parent());
 	}
 
 	int gridgap()
@@ -265,7 +257,7 @@ abstract class AbstractRow implements IHideable
 		int unrelhgap, int rowWidth, int gridsWidth, List<Integer> labelsWidth);
 	//CSON: ParameterNumber
 
-	private Container _parent;
+	private ParentWrapper<Container> _wrapper;
 	private HeightGrowPolicy _heightTester;
 	private OrientationPolicy _orientation;
 	private boolean _unrelatedGap = false;

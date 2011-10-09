@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 
 final class SubGrid implements ISubGrid
 {
-	SubGrid(List<RowItem> items, SubGrid previous, Container parent, 
+	SubGrid(List<RowItem> items, SubGrid previous, ParentWrapper<Container> parent, 
 		JLabel label, int gridspan)
 	{
 		_items = items;
@@ -184,7 +184,7 @@ final class SubGrid implements ISubGrid
 
 	public int hgap()
 	{
-		return ComponentHelper.hgap(_label, _items, _parent);
+		return ComponentHelper.hgap(_label, _items, _parent.parent());
 	}
 
 	public int layoutRow(LayoutHelper helper, int left, int height, int baseline, 
@@ -279,7 +279,7 @@ final class SubGrid implements ISubGrid
 
 	final private List<RowItem> _items;
 	final private SubGrid _previous;
-	final private Container _parent;
+	final private ParentWrapper<Container> _parent;
 	final private JLabel _label;
 	// 0 means auto span until the right-most edge
 	private int _gridspan;
