@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,7 +41,10 @@ public class Bug32ProblemWithJTextPane extends AbstractDesignGridExample
 			}
 		});
 		append();
-		layout.row().grid(label("label1")).add(new JScrollPane(_text));
+		JScrollPane scroller = new JScrollPane(_text);
+		// Prevent JScrollPane size increase when adding more content to JTextPane
+		scroller.setPreferredSize(new Dimension(scroller.getPreferredSize()));
+		layout.row().grid(label("label1")).add(scroller);
 		layout.row().center().add(_append);
 	}
 	
