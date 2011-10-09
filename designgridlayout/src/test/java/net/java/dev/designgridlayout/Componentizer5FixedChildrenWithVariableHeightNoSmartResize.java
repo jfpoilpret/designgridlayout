@@ -14,17 +14,17 @@
 
 package net.java.dev.designgridlayout;
 
-public class Componentizer9ManyChildren extends AbstractComponentizerExample
+public class Componentizer5FixedChildrenWithVariableHeightNoSmartResize extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
 	{
-		Componentizer9ManyChildren example = new Componentizer9ManyChildren();
+		Componentizer5FixedChildrenWithVariableHeightNoSmartResize example = 
+			new Componentizer5FixedChildrenWithVariableHeightNoSmartResize();
 		example.go(true);
 	}
 	
 	@Override protected void build(ComponentizerLayout layout)
 	{
-		layout.fixedPref(label("Label")).minToPref(field("Bleh"))
-			.minAndMore(field("Blah blah blah")).prefAndMore(field("Bluh bluh bluh"));
+		layout.withoutSmartVerticalResize().fixedPref(label("Description:"), textarea(""));
 	}
 }

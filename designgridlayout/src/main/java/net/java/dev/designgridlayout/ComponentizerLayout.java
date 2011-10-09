@@ -145,30 +145,30 @@ final class ComponentizerLayout implements LayoutManager2, Builder
 			int availableWidth = parentWidth - _gap;
 			int prefWidth = _prefWidth - _gap;
 
-			boolean minToPref;
-			int extra = 0;
-			int fudge = 0;
+			// Prepare layout
+			LayoutHelper helper = new LayoutHelper(
+				_heightTester, parentWidth, _orientation.isRightToLeft());
+			helper.setRowAvailableHeight(_wrapper.parent().getHeight());
+			helper.setY(0);
 
 			if (availableWidth < prefWidth)
 			{
 				// - if available width < pref width, use "min-pref" width of all components
-				minToPref = true;
 				int minWidth = _minWidth - _gap;
-				//FIXME calculus is incorrect: extra should be different for each growable component!
-				// Must use a ratio of available size and use it for each component min width
-				if (availableWidth > minWidth && _numComponentsWiderThanMin > 0)
+				float ratio = 0.0f;
+				if (availableWidth > minWidth)
 				{
 					// Calculate extra width for each variable width component
-					extra = (availableWidth - minWidth) / _numComponentsWiderThanMin;
-					// Fudge is assigned to the first variable width components
-					// (1 pixel per component)
-					fudge = (availableWidth - minWidth) % _numComponentsWiderThanMin;
+					int extra = availableWidth - minWidth;
+					ratio = (float) extra / (prefWidth - minWidth);
 				}
+				layoutComponentsMinToPref(helper, ratio);
 			}
 			else
 			{
 				// - if available width > pref width, increase size only of variable components
-				minToPref = false;
+				int extra = 0;
+				int fudge = 0;
 				if (_numComponentsWiderThanPref > 0)
 				{
 					// Calculate extra width for each variable width component
@@ -177,21 +177,33 @@ final class ComponentizerLayout implements LayoutManager2, Builder
 					// (1 pixel per component)
 					fudge = (availableWidth - prefWidth) % _numComponentsWiderThanPref;
 				}
+				layoutComponentsPrefAndMore(helper, extra, fudge);
 			}
-			
-			System.out.printf("minToPref = %b, extra = %d, fudge = %d\n", minToPref, extra, fudge);
-
-			// Prepare layout
-			LayoutHelper helper = new LayoutHelper(
-				_heightTester, parentWidth, _orientation.isRightToLeft());
-			helper.setRowAvailableHeight(_wrapper.parent().getHeight());
-			layoutComponents(helper, minToPref, extra, fudge);
 		}
 	}
 	
-	private void layoutComponents(LayoutHelper helper, boolean minToPref, int extra, int fudge)
+	private void layoutComponentsMinToPref(LayoutHelper helper, float ratio)
 	{
-		helper.setY(0);
+		int nth = 0;
+		int x = 0;
+		
+		// Perform actual layout
+		for (ComponentizerItem child: _children)
+		{
+			int width = child.minimumWidth();
+			int extra = child.preferredWidth() - width;
+			if (extra > 0 && needExtraWidth(child, true))
+			{
+				width += extra * ratio;
+			}
+			helper.setSizeLocation(child.component(), x, width, _height, _baseline);
+			x += width + _gaps[nth];
+			nth++;
+		}
+	}
+	
+	private void layoutComponentsPrefAndMore(LayoutHelper helper, int extra, int fudge)
+	{
 		int nth = 0;
 		int x = 0;
 		int remainingFudge = fudge;
@@ -199,8 +211,8 @@ final class ComponentizerLayout implements LayoutManager2, Builder
 		// Perform actual layout
 		for (ComponentizerItem child: _children)
 		{
-			int width = (minToPref ? child.minimumWidth() : child.preferredWidth());
-			if (extra > 0 && needExtraWidth(child, minToPref))
+			int width = child.preferredWidth();
+			if (extra > 0 && needExtraWidth(child, false))
 			{
 				width += extra;
 				if (remainingFudge > 0)

@@ -61,6 +61,11 @@ public class ComponentizerTest extends AbstractGuiTest
 		checkExampleAndResizeHeight(Componentizer5FixedChildrenWithVariableHeight.class, 5, 8);
 	}
 
+	@Test public void checkComponentizerWithFixedChildrenWithVariableHeightButNoSmartResize() throws Exception
+	{
+		checkExampleAndResizeHeight(Componentizer5FixedChildrenWithVariableHeightNoSmartResize.class, 5, 8);
+	}
+
 	@Test public void checkComponentizerWithinDesignGrid() throws Exception
 	{
 		checkExampleAndResizeHeight(Componentizer6WithinDesignGrid.class, 5, 8);
@@ -76,5 +81,11 @@ public class ComponentizerTest extends AbstractGuiTest
 	{
 		checkExampleAndResizeWidth(Componentizer8MinAndMorePolicy.class,
 			1.5d, 0.5d);
+	}
+
+	@Test public void checkComponentizerWithAllPolicies() throws Exception
+	{
+		checkExampleAndResizeWidth(Componentizer9ManyChildren.class,
+			1.5d, 0.5d, 0.5d);
 	}
 }
