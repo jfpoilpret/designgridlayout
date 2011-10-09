@@ -208,8 +208,6 @@ public class DesignGridLayoutManager implements LayoutManager2
 	@Override public Dimension minimumLayoutSize(Container parent)
 	{
 		_wrapper.checkParent(parent);
-		//FIXME reset() shouldn't be needed here
-		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
 		return new Dimension(_minimumSize);
@@ -221,8 +219,6 @@ public class DesignGridLayoutManager implements LayoutManager2
 	@Override public Dimension preferredLayoutSize(Container parent)
 	{
 		_wrapper.checkParent(parent);
-		//FIXME reset() shouldn't be needed here
-		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
 		return new Dimension(_preferredSize);
@@ -235,8 +231,6 @@ public class DesignGridLayoutManager implements LayoutManager2
 	@Override public Dimension maximumLayoutSize(Container parent)
 	{
 		_wrapper.checkParent(parent);
-		//FIXME reset() shouldn't be needed here
-		reset();
 		initialize();
 		// Note: Dimension instances can be mutated by an outsider
 		return new Dimension(_maximumSize);
