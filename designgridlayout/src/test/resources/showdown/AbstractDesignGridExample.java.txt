@@ -1,0 +1,162 @@
+abstract public class AbstractExample implements IExample
+{
+	protected JFrame _frame = null;
+
+	@Override public JFrame frame()
+	{
+		return _frame;
+	}
+
+	@Override public String name()
+	{
+		return getClass().getSimpleName();
+	}
+
+	protected static void setTableHeight(JTable table, int rows)
+	{
+	//		int width = table.getColumnModel().getTotalColumnWidth();
+			int width = 200;
+			int height = rows * table.getRowHeight();
+			table.setPreferredScrollableViewportSize(new Dimension(width, height));
+		}
+
+	protected JButton button()
+	{
+		return button("Button");
+	}
+
+	protected JButton button(String text)
+	{
+		return new JButton(text);
+	}
+
+	protected JLabel label(int num)
+	{
+		return label("Row " + num);
+	}
+
+	protected JLabel label(String label)
+	{
+		return new JLabel(label);
+	}
+
+	protected JTextField field(String text)
+	{
+		JTextField field = new JTextField(text);
+		return field;
+	}
+
+	protected JSlider slider(int orientation)
+	{
+		JSlider slider = new JSlider(orientation, 0, 100, 50);
+		slider.setMajorTickSpacing(20);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		return slider;
+	}
+
+	protected JScrollPane textarea(String content)
+	{
+		JTextArea area = new JTextArea(3, 10);
+		area.setText(content);
+		return new JScrollPane(area);
+	}
+
+	protected JScrollPane list()
+	{
+		JList list = new JList(GUITARS);
+		list.setVisibleRowCount(2);
+		return new JScrollPane(list);
+	}
+
+	protected JScrollPane table()
+	{
+		JTable table = new JTable(CONTENTS_PLAYERS, COLUMNS_PLAYERS);
+		setTableHeight(table, 4);
+		return new JScrollPane(table);
+	}
+
+	private static final Object[] COLUMNS_PLAYERS = {"First name", "Surname", "Band"};
+
+	private static final Object[][] CONTENTS_PLAYERS = {
+			{"Eric", "Clapton", "The Yardbirds"},
+			{"Jimmy", "Page", "Led Zeppelin"},
+			{"Jimi", "Hendrix", "The Jimi Hendrix Experience"},
+			{"Mark", "Knopfler", "Dire Straits"},
+			{"", "The Edge", "U2"},
+			{"Gary", "Moore", "Thin Lizzy"},
+		};
+	private static final Object[] GUITARS = {
+			"Fender Telecaster",
+			"Fender Stratocaster",
+			"Gibson Les Paul",
+		};
+}
+
+public abstract class AbstractDesignGridExample extends AbstractExample
+{
+	@Override public void go(boolean exitOnClose)
+	{
+		_frame = new JFrame(name());
+		_frame.setName(getClass().getSimpleName());
+
+		_frame.setDefaultCloseOperation(exitOnClose
+			? JFrame.EXIT_ON_CLOSE
+			: WindowConstants.DISPOSE_ON_CLOSE);
+		JPanel top = new JPanel();
+		DesignGridLayout layout = new DesignGridLayout(top);
+		top.setName("TOP");
+
+		init(layout);
+		build(layout);
+
+		addTopPanel(top);
+		prePack();
+		_frame.pack();
+		_frame.setLocationRelativeTo(null);
+		_frame.setVisible(true);
+	}
+	
+	protected void init(DesignGridLayout layout)
+	{
+		layout.labelAlignment(LabelAlignment.RIGHT);
+		layout.withoutConsistentWidthAcrossNonGridRows();
+	}
+
+	protected void addTopPanel(JComponent top)
+	{
+		_frame.add(top);
+	}
+	
+	protected void prePack()
+	{
+	}
+
+	protected abstract void build(DesignGridLayout layout);
+}
+
+public abstract class AbstractComponentizerExample extends AbstractExample
+{
+	@Override public void go(boolean exitOnClose)
+	{
+		_frame = new JFrame(name());
+		_frame.setName(getClass().getSimpleName());
+
+		_frame.setDefaultCloseOperation(exitOnClose
+			? JFrame.EXIT_ON_CLOSE
+			: WindowConstants.DISPOSE_ON_CLOSE);
+
+		JPanel contentPane = new JPanel();
+		contentPane.setName("TOP");
+		_frame.setContentPane(contentPane);
+		ComponentizerLayout layout = new ComponentizerLayout(contentPane);
+		layout.withSmartVerticalResize();
+		build(layout);
+
+		_frame.pack();
+		_frame.setLocationRelativeTo(null);
+		_frame.setVisible(true);
+	}
+	
+	protected abstract void build(Componentizer.Builder builder);
+}

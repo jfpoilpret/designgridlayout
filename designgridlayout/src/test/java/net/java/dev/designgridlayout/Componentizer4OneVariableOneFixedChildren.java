@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
+
 public class Componentizer4OneVariableOneFixedChildren extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
@@ -22,8 +24,8 @@ public class Componentizer4OneVariableOneFixedChildren extends AbstractComponent
 		example.go(true);
 	}
 	
-	@Override protected void build(ComponentizerLayout layout)
+	@Override protected void build(Builder builder)
 	{
-		layout.prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."));
+		builder.prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."));
 	}
 }

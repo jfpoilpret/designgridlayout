@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
+
 public abstract class AbstractComponentizerExample extends AbstractExample
 {
 	@Override public void go(boolean exitOnClose)
@@ -41,5 +43,5 @@ public abstract class AbstractComponentizerExample extends AbstractExample
 		_frame.setVisible(true);
 	}
 	
-	protected abstract void build(ComponentizerLayout layout);
+	protected abstract void build(Builder builder);
 }

@@ -14,6 +14,7 @@
 
 package net.java.dev.designgridlayout;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
 import net.java.dev.designgridlayout.Componentizer.WidthPolicy;
 
 public class Componentizer8MinAndMorePolicy extends AbstractComponentizerExample
@@ -24,9 +25,9 @@ public class Componentizer8MinAndMorePolicy extends AbstractComponentizerExample
 		example.go(true);
 	}
 	
-	@Override protected void build(ComponentizerLayout layout)
+	@Override protected void build(Builder builder)
 	{
-		layout.add(WidthPolicy.MIN_AND_MORE, field("Select a file for upload"))
+		builder.add(WidthPolicy.MIN_AND_MORE, field("Select a file for upload"))
 			.add(WidthPolicy.PREF_FIXED, button("Select..."));
 	}
 }

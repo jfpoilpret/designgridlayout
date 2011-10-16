@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
+
 public class Componentizer5FixedChildrenWithVariableHeightNoSmartResize extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
@@ -23,8 +25,8 @@ public class Componentizer5FixedChildrenWithVariableHeightNoSmartResize extends 
 		example.go(true);
 	}
 	
-	@Override protected void build(ComponentizerLayout layout)
+	@Override protected void build(Builder builder)
 	{
-		layout.withoutSmartVerticalResize().fixedPref(label("Description:"), textarea(""));
+		builder.withoutSmartVerticalResize().fixedPref(label("Description:"), textarea(""));
 	}
 }

@@ -24,7 +24,6 @@ public class Componentizer6WithinDesignGrid extends AbstractDesignGridExample
 		example.go(true);
 	}
 	
-	// TODO: check that variable height multi component triggers a variable height row
 	@Override protected void build(DesignGridLayout layout)
 	{
 		JComponent multiComponent1 = Componentizer.create()

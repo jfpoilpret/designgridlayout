@@ -1,0 +1,7 @@
+This section demonstrates Componentizer, a special utility that horizontally assembles several components into one new component.
+
+You can define the horizontal resize behavior of individual components when the embedding component gets resized.
+
+This can be particularly useful with DesignGridLayout when, for instance, you don't want a component to be resized to use the full width of a column, or when you want 2 components in the same grid column.
+
+Componentizer can also be useful when used with other LayoutManager in various occasions.

@@ -212,15 +212,20 @@ public class Examples extends JFrame
 		node = new DefaultMutableTreeNode("Dynamic Layouts");
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example 1 - Row-based Hiding", ShowHideRowsRealWorldExample1.class)));
-		root.add(node);
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example 2 - RowGroup-based Hiding", ShowHideRowsRealWorldExample2.class)));
-		root.add(node);
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example 3 - Same with beautiful icons", ShowHideRowsRealWorldExample3.class)));
-		root.add(node);
 		node.add(new DefaultMutableTreeNode(
 			new Node("Example 4 - Same with indented rows", ShowHideRowsRealWorldExample4.class)));
+		root.add(node);
+
+		node = new DefaultMutableTreeNode("Componentizer");
+		//TODO
+		// Various examples of componentizer API: 1 fixed label + 1 non fixed field (3 examples)
+		// Example inside DGL
+//		node.add(new DefaultMutableTreeNode(
+//			new Node("Row Indenting", IndentRowsExample.class)));
 		root.add(node);
 
 		node = new DefaultMutableTreeNode("Miscellaneous");
@@ -228,6 +233,7 @@ public class Examples extends JFrame
 			new Node("Row Indenting", IndentRowsExample.class)));
 		node.add(new DefaultMutableTreeNode(
 			new Node("Custom Margins", Misc1CustomizedMargins.class)));
+		//TODO remove that example!
 		node.add(new DefaultMutableTreeNode(
 			new Node("Multi-Components", MultiComponentExample.class)));
 		node.add(new DefaultMutableTreeNode(

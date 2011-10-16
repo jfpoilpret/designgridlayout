@@ -16,6 +16,8 @@ package net.java.dev.designgridlayout;
 
 import java.awt.ComponentOrientation;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
+
 public class Componentizer3FixedVariableFixedRTL extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
@@ -24,9 +26,9 @@ public class Componentizer3FixedVariableFixedRTL extends AbstractComponentizerEx
 		example.go(true);
 	}
 	
-	@Override protected void build(ComponentizerLayout layout)
+	@Override protected void build(Builder builder)
 	{
 		frame().applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		layout.fixedPref(label("Total:")).prefAndMore(field("999,999.99")).fixedPref(label("USD"));
+		builder.fixedPref(label("Total:")).prefAndMore(field("999,999.99")).fixedPref(label("USD"));
 	}
 }

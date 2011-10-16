@@ -4,7 +4,7 @@ This application acts both as a tutorial for new DesignGridLayout users, and as 
 
 For each example, you can see its source code and run it in its own frame so that you can play with it and check the behavior when resizing the frame.
 
-All examples are grouped into 6 topics:
+All examples are grouped into 9 topics:
 1. Basic Examples: step by step tutorial of "basic" DesignGridLayout features
 2. Smart Vertical Resize: illustration of this advanced (but automatic) feature of DesignGridLayout
 3. Multiple Grids: shows how to define forms with several vertical grids, each with its own column of labels
@@ -12,6 +12,13 @@ All examples are grouped into 6 topics:
 5. Label Alignment in Grids: shows how you can change the default alignment (according to platform guidelines) of labels in grids
 6. Right to Left Support: shows examples demonstrating DesignGridLayout automatic support for both LTR and RTL orientations
 7. Dynamic Layouts: shows an interesting DesignGridLayout feature that helps implement dynamic layouts by showing or hiding one or more complete rows of components
-8. Miscellaneous: gives some more examples about a few remaining DesignGridLayout features which, although less commonly used, may prove useful in some occasions
+8. Componentizer: shows usage of Componentizer API that allows "assembling" several components into one, according to an horizontal axis, giving each component a "width policy" defining how it should be resized when the resulting component is resized
+9. Miscellaneous: gives some more examples about a few remaining DesignGridLayout features which, although less commonly used, may prove useful in some occasions
 
-The source code of all examples is based on a common super-class "AbstractBaseExample" that provides the skeleton and utility methods for all examples; particularly, it provides methods to create buttons, fields, lists... that are often directly embedded in the lines of code that create the layout of examples. It is shown here for the sake of completeness but you normally don't need it to understand the examples presented here.
+The source code of all examples is based on a common super-classes:
+
+- "AbstractExample" provides utility methods for all examples to create buttons, fields, lists... that are often directly embedded in the lines of code that create the layout of examples.
+- "AbstractDesignGridExample" provides the skeleton to launch all examples using DesignGridLayout.
+- "AbstractComponentizerExample" provides the skeleton to launch all examples using Conponentizer.
+
+These classes are shown here for the sake of completeness but you normally won't need them to understand the examples presented here.

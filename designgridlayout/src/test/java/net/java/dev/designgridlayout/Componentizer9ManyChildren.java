@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
+
 public class Componentizer9ManyChildren extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
@@ -22,9 +24,9 @@ public class Componentizer9ManyChildren extends AbstractComponentizerExample
 		example.go(true);
 	}
 	
-	@Override protected void build(ComponentizerLayout layout)
+	@Override protected void build(Builder builder)
 	{
-		layout.fixedPref(label("Label")).minToPref(field("Bleh"))
+		builder.fixedPref(label("Label")).minToPref(field("Bleh"))
 			.minAndMore(field("Blah blah blah")).prefAndMore(field("Bluh bluh bluh"));
 	}
 }

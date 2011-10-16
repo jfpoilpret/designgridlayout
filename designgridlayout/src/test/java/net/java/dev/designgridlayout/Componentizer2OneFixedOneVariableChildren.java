@@ -14,6 +14,8 @@
 
 package net.java.dev.designgridlayout;
 
+import net.java.dev.designgridlayout.Componentizer.Builder;
+
 public class Componentizer2OneFixedOneVariableChildren extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
@@ -22,8 +24,8 @@ public class Componentizer2OneFixedOneVariableChildren extends AbstractComponent
 		example.go(true);
 	}
 	
-	@Override protected void build(ComponentizerLayout layout)
+	@Override protected void build(Builder builder)
 	{
-		layout.fixedPref(label("Address:")).prefAndMore(field("999-99-99"));
+		builder.fixedPref(label("Address:")).prefAndMore(field("999-99-99"));
 	}
 }
