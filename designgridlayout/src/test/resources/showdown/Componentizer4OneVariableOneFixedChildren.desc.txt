@@ -1,0 +1,10 @@
+This second example shows a common use case of Componentizer, to create a component made of JTextField of variable width and a fixed-width JButton, used e.g. to select a file from the file system.
+
+The horizontal resize behavior of the new component is as follows:
+- its preferred width is based upon the sum of both components preferred widths
+- its minimum width is the same as its preferred width
+- when it's given a width bigger than its preferred width, then the JTextField gets all extra width, while the JButton keeps its preferred width
+
+Although, for the sake of code reuse, this example (as well as all other Componentizer examples) uses Componentizer.Builder, the more common way to use Componentizer to get the same result is:
+
+JComponent component = Componentizer.create().prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."));

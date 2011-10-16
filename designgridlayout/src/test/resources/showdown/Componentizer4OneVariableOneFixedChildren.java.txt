@@ -1,0 +1,4 @@
+@Override protected void build(Componentizer.Builder builder)
+{
+	builder.prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."));
+}

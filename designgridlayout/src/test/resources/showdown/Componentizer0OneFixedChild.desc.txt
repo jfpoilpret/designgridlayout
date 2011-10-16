@@ -1,0 +1,7 @@
+This example shows a simple use of Componentizer to create a new component from another one; the new component keeps a fixed width (the preferred width of the other component) whatever the size of its container.
+
+This is particularly useful with a LayoutManager like DesignGridLayout that normally use the whole available width for components inside a grid column. Although canonical grids are a powerful way to get beautifully balanced layouts, there may be some situations where you want a component in a grid, limited to its preferred width, a JSpinner for instance.
+
+Although, for the sake of code reuse, this example (as well as all other Componentizer examples) uses Componentizer.Builder, the more common way to use Componentizer to get the same result is:
+
+JComponent component = Componentizer.create().fixedPref(field("999-999-999-999-999-999")).component();

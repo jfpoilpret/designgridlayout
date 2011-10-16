@@ -38,6 +38,8 @@ import net.java.dev.designgridlayout.Basics6NonGridRowsWithFiller;
 import net.java.dev.designgridlayout.Basics7RealWorldExample1;
 import net.java.dev.designgridlayout.Basics8RealWorldExample2;
 import net.java.dev.designgridlayout.Basics9RealWorldExample3;
+import net.java.dev.designgridlayout.Componentizer0OneFixedChild;
+import net.java.dev.designgridlayout.Componentizer4OneVariableOneFixedChildren;
 import net.java.dev.designgridlayout.IndentRowsExample;
 import net.java.dev.designgridlayout.Misc1CustomizedMargins;
 import net.java.dev.designgridlayout.MultiComponentExample;
@@ -221,11 +223,15 @@ public class Examples extends JFrame
 		root.add(node);
 
 		node = new DefaultMutableTreeNode("Componentizer");
+		node.add(new DefaultMutableTreeNode(
+			new Node("One fixed-width component", Componentizer0OneFixedChild.class)));
+		node.add(new DefaultMutableTreeNode(
+			new Node("One variable width field and one button", Componentizer4OneVariableOneFixedChildren.class)));
 		//TODO
 		// Various examples of componentizer API: 1 fixed label + 1 non fixed field (3 examples)
 		// Example inside DGL
 //		node.add(new DefaultMutableTreeNode(
-//			new Node("Row Indenting", IndentRowsExample.class)));
+//			new Node("One component with fixed width", Componentizer0OneFixedChild.class)));
 		root.add(node);
 
 		node = new DefaultMutableTreeNode("Miscellaneous");

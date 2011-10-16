@@ -16,20 +16,19 @@ package net.java.dev.designgridlayout.showdown;
 
 import javax.swing.text.JTextComponent;
 
-import net.java.dev.designgridlayout.AbstractDesignGridExample;
 import net.java.dev.designgridlayout.IExample;
 
 final class Node
 {
 	public Node(
-		String name, Class<? extends AbstractDesignGridExample> clazz, boolean launchable)
+		String name, Class<? extends IExample> clazz, boolean launchable)
 	{
 		_name = name;
 		_clazz = clazz;
 		_launchable = launchable;
 	}
 	
-	public Node(String name, Class<? extends AbstractDesignGridExample> clazz)
+	public Node(String name, Class<? extends IExample> clazz)
 	{
 		this(name, clazz, true);
 	}
@@ -73,6 +72,6 @@ final class Node
 	}
 	
 	final private String _name;
-	final private Class<? extends AbstractDesignGridExample> _clazz;
+	final private Class<? extends IExample> _clazz;
 	final private boolean _launchable;
 }
