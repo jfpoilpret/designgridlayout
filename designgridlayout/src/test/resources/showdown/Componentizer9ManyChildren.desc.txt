@@ -1,0 +1,7 @@
+This example demonstrates a combination of all possible resize policies on a set for 4 components.
+
+Although, for the sake of code reuse, this example (as well as all other Componentizer examples) uses Componentizer.Builder, the more common way to use Componentizer to get the same result is:
+
+JComponent component = Componentizer.create().fixedPref(label("Label"))
+	.minToPref(field("Bleh")).minAndMore(field("Blah blah blah")).prefAndMore(field("Bluh bluh bluh"))
+	.component();

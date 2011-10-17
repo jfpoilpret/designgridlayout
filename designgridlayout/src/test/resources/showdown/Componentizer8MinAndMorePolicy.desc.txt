@@ -1,0 +1,14 @@
+This example is similar to the previous one, but it uses a different resize policy for the JTextField.
+
+In this example, the JTextField has a width that can vary from its minimum width (not its preferred width like in previous example) upwards.
+
+Also, this example uses the more general add(WidthPolicy, JComponent...) API.
+
+Although, for the sake of code reuse, this example (as well as all other Componentizer examples) uses Componentizer.Builder, the more common way to use Componentizer to get the same result is:
+
+JComponent component = Componentizer.create().add(WidthPolicy.MIN_AND_MORE, field("Select a file for upload")).add(WidthPolicy.PREF_FIXED, button("Select..."));
+
+This example could also be rewritten by using the more specific API:
+
+JComponent component = Componentizer.create().minAndMore(field("Select a file for upload"))
+	.fixedPref(button("Select...")).component();

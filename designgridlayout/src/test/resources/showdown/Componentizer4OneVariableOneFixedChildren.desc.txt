@@ -7,4 +7,5 @@ The horizontal resize behavior of the new component is as follows:
 
 Although, for the sake of code reuse, this example (as well as all other Componentizer examples) uses Componentizer.Builder, the more common way to use Componentizer to get the same result is:
 
-JComponent component = Componentizer.create().prefAndMore(field("Select a file for upload")).fixedPref(button("Select..."));
+JComponent component = Componentizer.create().prefAndMore(field("Select a file for upload"))
+    .fixedPref(button("Select...")).component();

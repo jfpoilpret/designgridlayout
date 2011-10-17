@@ -1,0 +1,5 @@
+@Override protected void build(Componentizer.Builder builder)
+{
+	builder.add(WidthPolicy.MIN_AND_MORE, field("Select a file for upload"))
+		.add(WidthPolicy.PREF_FIXED, button("Select..."));
+}

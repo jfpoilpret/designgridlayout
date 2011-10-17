@@ -6,3 +6,5 @@ In the example, the first row is a grid row with 2 columns, the first of which i
 Note the behavior when horizontally resizing the form.
 
 The source code shows the use of "addMulti()" method (instead of "add()").
+
+Important: note that, since release 1.9, this API is deprecated and should be replaced by the new Componentizer helper class, as demonstrated in the source code.

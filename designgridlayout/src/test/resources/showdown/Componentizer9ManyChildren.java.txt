@@ -1,0 +1,5 @@
+@Override protected void build(Componentizer.Builder builder)
+{
+	builder.fixedPref(label("Label")).minToPref(field("Bleh"))
+		.minAndMore(field("Blah blah blah")).prefAndMore(field("Bluh bluh bluh"));
+}

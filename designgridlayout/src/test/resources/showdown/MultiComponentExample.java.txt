@@ -1,5 +1,17 @@
+// The following code uses the deprecated "addMulti" API
 @Override public void build(DesignGridLayout layout)
 {
 	layout.row().grid().addMulti(field("1234567890"), field("1234567890")).add(button());
 	layout.row().center().addMulti(field("1234567890"), field("1234567890")).add(button());
+}
+
+// The following code uses the new Componentizer API instead
+@Override public void build(DesignGridLayout layout)
+{
+	layout.row().grid().add(
+		Componentizer.create().fixedPref(field("1234567890"), field("1234567890")).component(), 
+		button());
+	layout.row().center().add(
+		Componentizer.create().fixedPref(field("1234567890"), field("1234567890")).component(),
+		button());
 }
