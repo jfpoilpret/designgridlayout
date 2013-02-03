@@ -277,7 +277,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		Iterator<Integer> label = labelsWidth.iterator();
 		for (SubGrid grid: _grids)
 		{
-			//FIXME #53 if labelWidth == 0 then we shouldn't add hgap for it?
+			//JIRA DESIGNGRIDLAYOUT-53 if labelWidth == 0 then we shouldn't add hgap for it
 			// Find the label for the current sub-grid
 			int labelWidth = label.next();
 
