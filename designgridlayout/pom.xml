@@ -25,7 +25,7 @@
 	<groupId>net.java.dev.designgridlayout</groupId>
 	<artifactId>designgridlayout</artifactId>
 	<packaging>jar</packaging>
-	<version>2.0-SNAPSHOT</version>
+	<version>1.10-SNAPSHOT</version>
 
 	<name>DesignGridLayout</name>
 	<description>
@@ -250,7 +250,7 @@
 					<quiet>true</quiet>
 					<verbose>false</verbose>
 					<links>
-						<link>http://download.oracle.com/javase/6/docs/api</link>
+						<link>http://docs.oracle.com/javase/6/docs/api/</link>
 						<show>public</show>
 					</links>
 				</configuration>
@@ -328,7 +328,7 @@
 					<quiet>true</quiet>
 					<verbose>false</verbose>
 					<links>
-						<link>http://download.oracle.com/javase/6/docs/api</link>
+						<link>http://docs.oracle.com/javase/6/docs/api/</link>
 						<show>public</show>
 					</links>
 				</configuration>

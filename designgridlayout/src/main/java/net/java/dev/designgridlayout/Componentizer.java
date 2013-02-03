@@ -25,7 +25,7 @@ import javax.swing.JComponent;
  * {@link Componentizer} is particularly useful when used in conjunction with
  * {@link DesignGridLayout}, when you would like to add a set of components into
  * only one cell (one column), but it can also be used with other 
- * {@link LayoutManager}s.
+ * {@link java.awt.LayoutManager}s.
  * <p/>
  * The following snippet shows creation of a component made of a {@code JTextField}
  * followed by a {@code JLabel}, used to represent a quantity followed by its measure 
@@ -156,7 +156,7 @@ final public class Componentizer
 		
 		/**
 		 * Get the {@link JComponent} resulting from the aggregation of all components
-		 * added with {@link #add(WidthPolicy, JComponent...)}.
+		 * added with {@link #add}.
 		 * 
 		 * @return the aggregated {@link JComponent}
 		 */

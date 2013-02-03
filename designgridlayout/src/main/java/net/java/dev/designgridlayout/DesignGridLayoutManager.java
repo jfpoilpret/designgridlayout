@@ -29,7 +29,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import static net.java.dev.designgridlayout.RowIterator.each;
 
 /**
- * The actual {@link LayoutManager} created and installed by {@link DesignGridLayout}
+ * The actual {@link java.awt.LayoutManager} created and installed by {@link DesignGridLayout}
  * on a {@link Container}. This class cannot be instantiated directly, it is made
  * {@code public} so that tools or 3rd-party libraries can detect the use of
  * {@link DesignGridLayout} for the layout of a given {@link Container}.
@@ -54,7 +54,7 @@ public class DesignGridLayoutManager implements LayoutManager2
 	
 	/**
 	 * Get the instance of {@code DesignGridLayout} that built this 
-	 * {@link LayoutManager}. This enables you to add rows to a given 
+	 * {@link java.awt.LayoutManager}. This enables you to add rows to a given 
 	 * {@link Container} without having the initial {@link DesignGridLayout}
 	 * that managed layout of that {@code Container}.
 	 * 
