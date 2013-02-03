@@ -277,6 +277,7 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 		Iterator<Integer> label = labelsWidth.iterator();
 		for (SubGrid grid: _grids)
 		{
+			//FIXME #53 if labelWidth == 0 then we shouldn't add hgap for it?
 			// Find the label for the current sub-grid
 			int labelWidth = label.next();
 
@@ -284,7 +285,12 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 			int width = gridWidth;
 			for (int i = 1; i < grid.gridspan(); i++)
 			{
-				width += gridgap + label.next() + hgap + gridWidth;
+				width += gridgap + gridWidth;
+				int spanLabelWidth = label.next();
+				if (spanLabelWidth > 0)
+				{
+					width += spanLabelWidth + hgap;
+				}
 			}
 			gridIndex += grid.gridspan();
 			if (gridIndex == _totalGrids)
@@ -301,7 +307,11 @@ final class GridRow extends AbstractRow implements ISpannableGridRow
 			actualHeight = Math.max(actualHeight, height);
 
 			// Position origin to the next grid
-			x += labelWidth + hgap + width + gridgap;
+			x += width + gridgap;
+			if (labelWidth > 0)
+			{
+				x += labelWidth + hgap;
+			}
 		}
 		return actualHeight;
 	}

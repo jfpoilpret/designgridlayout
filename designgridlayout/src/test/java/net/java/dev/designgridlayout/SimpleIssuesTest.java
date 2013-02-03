@@ -129,27 +129,28 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		checkExample(Bug38WrongVGapsWithAddMulti.class);
 	}
 
-	@Test(enabled = true)
-	public void checkBug53BadLayoutWithLeftAndRightInBarRow() throws Exception
+	@Test public void checkBug53BadLayoutWithLeftAndRightInBarRow() throws Exception
 	{
-		//TODO perform resize
 		checkExample(Bug53BadLayoutWithLeftAndRightInBarRow.class);
 		frame().resizeWidthTo(frame().component().getWidth() + 100);
 		checkSnapshot("after-resize");
 	}
 
-	@Test(enabled = false)
-	public void checkBug53BadLayoutSample1() throws Exception
+	@Test public void checkBug53BadLayoutSample1() throws Exception
 	{
-		//TODO perform resize
 		checkExample(Bug53BadLayoutSample1.class);
+		frame().resizeWidthTo(frame().component().getWidth() + 100);
+		checkSnapshot("after-resize");
 	}
 
+	// Note: we don't run this test because the example used JButton 
+	// within JScrollPane which is not normal usage (and is not well supported by DGL)
 	@Test(enabled = false)
 	public void checkBug53BadLayoutSample2() throws Exception
 	{
-		//TODO perform resize
 		checkExample(Bug53BadLayoutSample2.class);
+		frame().resizeWidthTo(frame().component().getWidth() + 100);
+		checkSnapshot("after-resize");
 	}
 
 	@Test public void checkPanelWithoutBorder() throws Exception

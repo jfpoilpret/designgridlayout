@@ -26,9 +26,6 @@ public class Bug53BadLayoutSample1 extends AbstractDesignGridExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
-//		layout.row().grid(3).add(button()).grid().empty(1).grid(3).add(button());
-//		layout.row().grid().add(button()).grid().empty(1).grid().add(button());
-//		layout.row().grid(label(1)).add(button()).grid(label(2)).add(button());
 		layout.row().grid().add(button()).grid().add(button());
 		layout.row().bar().left(button()).right(button());
 	}

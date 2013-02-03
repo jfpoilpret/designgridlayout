@@ -35,6 +35,5 @@ public class Bug53BadLayoutSample2 extends AbstractDesignGridExample
 		layout.row(1).grid().add(new JScrollPane(button()));
 		// this causes the rows above to resize
 		layout.row().bar().left(button()).right(button());
-//		layout.row().bar().right( button() );
 	}
 }
