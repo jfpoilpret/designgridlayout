@@ -61,6 +61,10 @@ public interface IRow extends IHideable
 	/**
 	 * Add one indentation space (size is platform-dependent) before the left-most
 	 * component of the row.
+	 * <p/>
+	 * <b>IMPORTANT!</b> For grid rows, indentation is visible only when the
+	 * label column uses {@link LabelAlignment#LEFT left alignment} (see 
+	 * {@link DesignGridLayout#labelAlignment}).
 	 * 
 	 * @return {@code this} row (to allow chaining other methods for the current 
 	 * row)
@@ -75,6 +79,10 @@ public interface IRow extends IHideable
 	 * <p/>
 	 * If this method is called several times for the same row, only the last call
 	 * takes effect.
+	 * <p/>
+	 * <b>IMPORTANT!</b> For grid rows, indentation is visible only when the
+	 * label column uses {@link LabelAlignment#LEFT left alignment} (see 
+	 * {@link DesignGridLayout#labelAlignment}).
 	 * 
 	 * @param n the number of indentation levels required; has no effect if {@code n < 0}.
 	 * @return {@code this} row (to allow chaining other methods for the current 

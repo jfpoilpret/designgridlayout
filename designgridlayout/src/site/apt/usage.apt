@@ -412,6 +412,11 @@ layout.row().grid(label("Label 3:")).indent().add(field3);
 
 [images/IndentRowsExample1-org.png]
 	
+	<<Important:>> Indenting will work only with left-aligned label columns: 
+	with right-aligned labels, indent just add extra space to the whole label
+	column, but no-one can see a difference between indented and not indented 
+	labels.
+	
 	Actually, any subgrid in a grid row can be individually indented.
 
 +------------------------------------------------------------------------------+
