@@ -58,7 +58,8 @@ public class LafHelper
 		LookAndFeel laf = clazz.newInstance();
 		UIManager.setLookAndFeel(laf);
 	}
-	
+
+	//CSOFF: Regexp
 	private String[] readPlafsList()
 	{
 		List<String> plafs = new ArrayList<String>();
@@ -83,7 +84,9 @@ public class LafHelper
 			close(reader);
 		}
 	}
+	//CSON: Regexp
 	
+	//CSOFF: Regexp
 	static private void close(Closeable stream)
 	{
 		try
@@ -98,6 +101,7 @@ public class LafHelper
 			e.printStackTrace();
 		}
 	}
+	//CSON: Regexp
 	
 	private final ClassLoader _loader;
 	private final String[] _plafs;

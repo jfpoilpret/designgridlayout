@@ -116,9 +116,9 @@ public class SmartVerticalResize2AllComponents extends AbstractDesignGridExample
 		}
 		catch (Exception e1)
 		{
-			// CSOFF: GenericIllegalRegexp
+			// CSOFF: Regexp
 			e1.printStackTrace();
-			// CSON: GenericIllegalRegexp
+			// CSON: Regexp
 		}
 		// CSON: IllegalCatch
 	}

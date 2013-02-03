@@ -27,14 +27,15 @@ final class ReaderHelper
 	{
 	}
 	
+	//CSOFF: Regexp
 	static public void readText(String name, JTextComponent dest)
 	{
-		name = RESOURCE_PATH + name;
+		String fullName = RESOURCE_PATH + name;
 		InputStream in = Thread.currentThread().getContextClassLoader()
-			.getResourceAsStream(name);
+			.getResourceAsStream(fullName);
 		if (in == null)
 		{
-			dest.setText(String.format(ERROR_READ_CONTENT, name));
+			dest.setText(String.format(ERROR_READ_CONTENT, fullName));
 			dest.setCaretPosition(0);
 			return;
 		}
@@ -67,7 +68,7 @@ final class ReaderHelper
 		catch (IOException e)
 		{
 			e.printStackTrace();
-			dest.setText(String.format(ERROR_READ_CONTENT, name));
+			dest.setText(String.format(ERROR_READ_CONTENT, fullName));
 			dest.setCaretPosition(0);
 		}
 		finally
@@ -82,6 +83,7 @@ final class ReaderHelper
 			}
 		}
 	}
+	//CSON: Regexp
 	
 	static final private String RESOURCE_PATH = "showdown/";
 	static final private String ERROR_READ_CONTENT =

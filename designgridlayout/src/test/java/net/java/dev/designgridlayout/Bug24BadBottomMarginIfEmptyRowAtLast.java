@@ -18,7 +18,8 @@ public class Bug24BadBottomMarginIfEmptyRowAtLast extends AbstractDesignGridExam
 {
 	public static void main(String[] args)
 	{
-		Bug24BadBottomMarginIfEmptyRowAtLast example = new Bug24BadBottomMarginIfEmptyRowAtLast();
+		Bug24BadBottomMarginIfEmptyRowAtLast example = 
+			new Bug24BadBottomMarginIfEmptyRowAtLast();
 		example.go(true);
 	}
 

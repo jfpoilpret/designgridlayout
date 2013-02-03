@@ -16,7 +16,8 @@ package net.java.dev.designgridlayout;
 
 import net.java.dev.designgridlayout.Componentizer.Builder;
 
-public class Componentizer5FixedChildrenWithVariableHeightNoSmartResize extends AbstractComponentizerExample
+public class Componentizer5FixedChildrenWithVariableHeightNoSmartResize 
+	extends AbstractComponentizerExample
 {
 	public static void main(String[] args)
 	{

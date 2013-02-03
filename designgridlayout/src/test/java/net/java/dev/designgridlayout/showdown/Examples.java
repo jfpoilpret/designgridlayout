@@ -42,6 +42,7 @@ import net.java.dev.designgridlayout.Componentizer0OneFixedChild;
 import net.java.dev.designgridlayout.Componentizer4OneVariableOneFixedChildren;
 import net.java.dev.designgridlayout.Componentizer8MinAndMorePolicy;
 import net.java.dev.designgridlayout.Componentizer9ManyChildren;
+import net.java.dev.designgridlayout.IExample;
 import net.java.dev.designgridlayout.IndentRowsExample;
 import net.java.dev.designgridlayout.Misc1CustomizedMargins;
 import net.java.dev.designgridlayout.MultiComponentExample;
@@ -73,8 +74,9 @@ import net.java.dev.designgridlayout.SmartVerticalResize3CustomWeights;
 import net.java.dev.designgridlayout.SmartVerticalResize4RealWorldExample;
 import net.java.dev.designgridlayout.SmartVerticalResize5SameWeight;
 
+//CSOFF: ClassDataAbstractionCoupling
 @SuppressWarnings("serial")
-public class Examples extends JFrame
+final public class Examples extends JFrame
 {
 	public static void main(String[] args) throws Exception
 	{
@@ -130,139 +132,144 @@ public class Examples extends JFrame
 	private void initTree()
 	{
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		DefaultMutableTreeNode node;
-
 		root.add(new DefaultMutableTreeNode(
 			new Node("Introduction", AbstractDesignGridExample.class, false)));
 
-		node = new DefaultMutableTreeNode("Basic Examples");
-		node.add(new DefaultMutableTreeNode(
-			new Node("Grids - 3 simple rows", Basics1SimpleGrid.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Grids - column span, empty cells", Basics2GridColumns.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Grids - labels", Basics3GridLabels.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Non-Grids - right-centered row", Basics4RightRow.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Non-Grids - left, center, right, filler", Basics5NonGridRows.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Non-Grids - fillers", Basics6NonGridRowsWithFiller.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Non-Grids - command bars", Rfe42BarRowsTagsExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example - Figure 177", Basics7RealWorldExample1.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example - Figure 178", Basics8RealWorldExample2.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example - JGoodies sample", Basics9RealWorldExample3.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Smart Vertical Resize");
-		node.add(new DefaultMutableTreeNode(
-			new Node("Vertical Slider", SmartVerticalResize1Sliders.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("List, Tables, Text Areas, Sliders", SmartVerticalResize5SameWeight.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Same with custom weights", SmartVerticalResize3CustomWeights.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example - Figure 179", SmartVerticalResize4RealWorldExample.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Multiple Grids");
-		node.add(new DefaultMutableTreeNode(
-			new Node("2 grids on 2 rows", MultiGrid1Simple.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("3 grids with grid-span", MultiGrid2ThreeGridsWithGridSpan.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Complex layout with 3 grids", MultiGrid3ThreeComplexGrids.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example - Address Book Demo", AddressBookDemo.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Row Span");
-		node.add(new DefaultMutableTreeNode(
-			new Node("2-rows span list (1 grid)", RowSpan5SimplestExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("2-rows span list (2 grids)", RowSpan6SimpleExampleOnTwoGrids.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("2 lists with row-span", RowSpan2TwoLists.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Same with custom weights", RowSpan3TwoListsCustomWeights.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Markers on bad API usage", RowSpan4ErrorMarkers.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example - Contact entry", RowSpan7SpecialComponent.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Label Alignment in Grids");
-		node.add(new DefaultMutableTreeNode(
-			new Node("AddressBookDemo - Platform Alignment", Rfe40PlatformLabelAlignmentExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("AddressBookDemo - Left Alignment", Rfe40LeftLabelAlignmentExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("AddressBookDemo - Right Alignment", AddressBookDemo.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Right to Left Support");
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example 1 - Left to Right", RightToLeft1LTR.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example 1 - Right to Left", RightToLeft2RTL.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("AddressBookDemo - Right to Left", RightToLeft3RealWorldExample.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Dynamic Layouts");
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example 1 - Row-based Hiding", ShowHideRowsRealWorldExample1.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example 2 - RowGroup-based Hiding", ShowHideRowsRealWorldExample2.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example 3 - Same with beautiful icons", ShowHideRowsRealWorldExample3.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Example 4 - Same with indented rows", ShowHideRowsRealWorldExample4.class)));
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Componentizer");
-		node.add(new DefaultMutableTreeNode(
-			new Node("One fixed-width component", Componentizer0OneFixedChild.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("One variable width field and one button", Componentizer4OneVariableOneFixedChildren.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Same example with different width policy", Componentizer8MinAndMorePolicy.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Many components with various width policies", Componentizer9ManyChildren.class)));
-		//TODO Example inside DGL
-		root.add(node);
-
-		node = new DefaultMutableTreeNode("Miscellaneous");
-		node.add(new DefaultMutableTreeNode(
-			new Node("Row Indenting", IndentRowsExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Custom Margins", Misc1CustomizedMargins.class)));
-		//TODO remove that example!
-		node.add(new DefaultMutableTreeNode(
-			new Node("Multi-Components", MultiComponentExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Exact Vertical Gaps", Rfe29ExactVGaps.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Consistent Baselines Spacing", Rfe29ConsistentBaselineSpace.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Consistent Widths across Non-Grid Rows", Rfe41ConsistentWidthAcrossNonGridRowsExample.class)));
-		node.add(new DefaultMutableTreeNode(
-			new Node("Independent Widths across Non-Grid Rows", Rfe41IndependentWidthAcrossNonGridRowsExample.class)));
-		root.add(node);
+		addBasicExamples(root);
+		addSmartVerticalResizeExamples(root);
+		addMultipleGridsExamples(root);
+		addRowSpanExamples(root);
+		addLabelAlignmentExamples(root);
+		addRightToLeftExamples(root);
+		addDynamicLayoutExamples(root);
+		addComponentizerExamples(root);
+		addMiscellaneousExamples(root);
 
 		DefaultTreeModel model = new DefaultTreeModel(root);
 		_tree.setModel(model);
 		_tree.setRootVisible(false);
 		
 		// Expand the whole tree
-		for(int i = 0; i < _tree.getRowCount(); i++)
+		for (int i = 0; i < _tree.getRowCount(); i++)
 		{
 			_tree.expandRow(i);
 		}
+	}
+	
+	private void addBasicExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Basic Examples");
+		addLeaf(node, "Grids - 3 simple rows", Basics1SimpleGrid.class);
+		addLeaf(node, "Grids - column span, empty cells", Basics2GridColumns.class);
+		addLeaf(node, "Grids - labels", Basics3GridLabels.class);
+		addLeaf(node, "Non-Grids - right-centered row", Basics4RightRow.class);
+		addLeaf(node, "Non-Grids - left, center, right, filler", Basics5NonGridRows.class);
+		addLeaf(node, "Non-Grids - fillers", Basics6NonGridRowsWithFiller.class);
+		addLeaf(node, "Non-Grids - command bars", Rfe42BarRowsTagsExample.class);
+		addLeaf(node, "Example - Figure 177", Basics7RealWorldExample1.class);
+		addLeaf(node, "Example - Figure 178", Basics8RealWorldExample2.class);
+		addLeaf(node, "Example - JGoodies sample", Basics9RealWorldExample3.class);
+		root.add(node);
+	}
+	
+	private void addSmartVerticalResizeExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Smart Vertical Resize");
+		addLeaf(node, "Vertical Slider", SmartVerticalResize1Sliders.class);
+		addLeaf(node, "List, Tables, Text Areas, Sliders", 
+			SmartVerticalResize5SameWeight.class);
+		addLeaf(node, "Same with custom weights", SmartVerticalResize3CustomWeights.class);
+		addLeaf(node, "Example - Figure 179", SmartVerticalResize4RealWorldExample.class);
+		root.add(node);
+	}
+	
+	private void addMultipleGridsExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Multiple Grids");
+		addLeaf(node, "2 grids on 2 rows", MultiGrid1Simple.class);
+		addLeaf(node, "3 grids with grid-span", MultiGrid2ThreeGridsWithGridSpan.class);
+		addLeaf(node, "Complex layout with 3 grids", MultiGrid3ThreeComplexGrids.class);
+		addLeaf(node, "Example - Address Book Demo", AddressBookDemo.class);
+		root.add(node);
+	}
+	
+	private void addRowSpanExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Row Span");
+		addLeaf(node, "2-rows span list (1 grid)", RowSpan5SimplestExample.class);
+		addLeaf(node, "2-rows span list (2 grids)", RowSpan6SimpleExampleOnTwoGrids.class);
+		addLeaf(node, "2 lists with row-span", RowSpan2TwoLists.class);
+		addLeaf(node, "Same with custom weights", RowSpan3TwoListsCustomWeights.class);
+		addLeaf(node, "Markers on bad API usage", RowSpan4ErrorMarkers.class);
+		addLeaf(node, "Example - Contact entry", RowSpan7SpecialComponent.class);
+		root.add(node);
+	}
+	
+	private void addLabelAlignmentExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Label Alignment in Grids");
+		addLeaf(node, "AddressBookDemo - Platform Alignment", 
+			Rfe40PlatformLabelAlignmentExample.class);
+		addLeaf(node, "AddressBookDemo - Left Alignment", Rfe40LeftLabelAlignmentExample.class);
+		addLeaf(node, "AddressBookDemo - Right Alignment", AddressBookDemo.class);
+		root.add(node);
+	}
+	
+	private void addRightToLeftExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Right to Left Support");
+		addLeaf(node, "Example 1 - Left to Right", RightToLeft1LTR.class);
+		addLeaf(node, "Example 1 - Right to Left", RightToLeft2RTL.class);
+		addLeaf(node, "AddressBookDemo - Right to Left", RightToLeft3RealWorldExample.class);
+		root.add(node);
+	}
+	
+	private void addDynamicLayoutExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Dynamic Layouts");
+		addLeaf(node, "Example 1 - Row-based Hiding", ShowHideRowsRealWorldExample1.class);
+		addLeaf(node, "Example 2 - RowGroup-based Hiding", ShowHideRowsRealWorldExample2.class);
+		addLeaf(node, "Example 3 - Same with beautiful icons", 
+			ShowHideRowsRealWorldExample3.class);
+		addLeaf(node, "Example 4 - Same with indented rows", 
+			ShowHideRowsRealWorldExample4.class);
+		root.add(node);
+	}
+	
+	private void addComponentizerExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Componentizer");
+		addLeaf(node, "One fixed-width component", Componentizer0OneFixedChild.class);
+		addLeaf(node, "One variable width field and one button", 
+			Componentizer4OneVariableOneFixedChildren.class);
+		addLeaf(node, "Same example with different width policy", 
+			Componentizer8MinAndMorePolicy.class);
+		addLeaf(node, "Many components with various width policies", 
+			Componentizer9ManyChildren.class);
+		//TODO Example inside DGL
+		root.add(node);
+	}
+	
+	private void addMiscellaneousExamples(DefaultMutableTreeNode root)
+	{
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Miscellaneous");
+		addLeaf(node, "Row Indenting", IndentRowsExample.class);
+		addLeaf(node, "Custom Margins", Misc1CustomizedMargins.class);
+		//TODO remove that example!
+		addLeaf(node, "Multi-Components", MultiComponentExample.class);
+		addLeaf(node, "Exact Vertical Gaps", Rfe29ExactVGaps.class);
+		addLeaf(node, "Consistent Baselines Spacing", Rfe29ConsistentBaselineSpace.class);
+		addLeaf(node, "Consistent Widths across Non-Grid Rows", 
+			Rfe41ConsistentWidthAcrossNonGridRowsExample.class);
+		addLeaf(node, "Independent Widths across Non-Grid Rows", 
+			Rfe41IndependentWidthAcrossNonGridRowsExample.class);
+		root.add(node);
+	}
+	
+	private void addLeaf(
+		DefaultMutableTreeNode node, String name, Class<? extends IExample> clazz)
+	{
+		node.add(new DefaultMutableTreeNode(new Node(name, clazz)));
 	}
 	
 	private void initListeners()
@@ -305,3 +312,4 @@ public class Examples extends JFrame
 	final private JTree _tree = new JTree();
 	final private DetailPanel _detail = new DetailPanel();
 }
+//CSON: ClassDataAbstractionCoupling

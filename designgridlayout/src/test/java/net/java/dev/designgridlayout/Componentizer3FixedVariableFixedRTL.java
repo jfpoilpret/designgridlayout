@@ -29,6 +29,8 @@ public class Componentizer3FixedVariableFixedRTL extends AbstractComponentizerEx
 	@Override protected void build(Builder builder)
 	{
 		frame().applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		//CSOFF: LineLength
 		builder.fixedPref(label("Total:")).prefAndMore(field("999,999.99")).fixedPref(label("USD"));
+		//CSON: LineLength
 	}
 }

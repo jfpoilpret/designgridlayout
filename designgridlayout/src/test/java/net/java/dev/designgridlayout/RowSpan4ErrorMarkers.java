@@ -27,6 +27,7 @@ public class RowSpan4ErrorMarkers extends AbstractDesignGridExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		//CSOFF: LineLength
 		// spanrow() called in first row
 		layout.row().grid(label("lbl0")).spanRow();
 		layout.row().center().fill().add(new JSeparator());
@@ -66,5 +67,6 @@ public class RowSpan4ErrorMarkers extends AbstractDesignGridExample
 		layout.row().grid(label("lbl1")).add(field("field1"), field("field1"), field("field1"));
 		layout.row().grid(label("lbl2")).add(field("field2")).spanRow();
 		layout.row().grid(label("lbl3")).add(field("field3")).spanRow();
+		//CSON: LineLength
 	}
 }

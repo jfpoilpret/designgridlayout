@@ -29,6 +29,12 @@ import net.java.dev.designgridlayout.DesignGridLayout;
 @SuppressWarnings("serial")
 class DetailPanel extends JPanel
 {
+	static final private int DESCRIPTION_ROWS = 13;
+	static final private int SOURCE_FONT_SIZE = 12;
+	static final private int SOURCE_TAB_SIZE = 4;
+	static final private int SOURCE_ROWS = 20;
+	static final private int SOURCE_COLUMNS = 96;
+	
 	public DetailPanel()
 	{
 		// Setup components
@@ -36,17 +42,17 @@ class DetailPanel extends JPanel
 		_txpDescription.setEditable(false);
 		_txpDescription.setLineWrap(true);
 		_txpDescription.setWrapStyleWord(true);
-		_txpDescription.setRows(13);
+		_txpDescription.setRows(DESCRIPTION_ROWS);
 		
 		JScrollPane descScroller = new JScrollPane(_txpDescription);
 		descScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		_txpSource.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		_txpSource.setFont(new Font("Monospaced", Font.PLAIN, SOURCE_FONT_SIZE));
 		_txpSource.setEditable(false);
 		_txpSource.setLineWrap(false);
-		_txpSource.setTabSize(4);
-		_txpSource.setColumns(96);
-		_txpSource.setRows(20);
+		_txpSource.setTabSize(SOURCE_TAB_SIZE);
+		_txpSource.setColumns(SOURCE_COLUMNS);
+		_txpSource.setRows(SOURCE_ROWS);
 		
 		JScrollPane sourceScroller = new JScrollPane(_txpSource);
 		sourceScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

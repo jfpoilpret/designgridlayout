@@ -67,13 +67,16 @@ public class Bug37SmartResizeWithJInternalFrame
 		desktop.add(frame);
 		frame.pack();
 		frame.setVisible(true);
+		//CSOFF: EmptyBlock
 		try
 		{
 			frame.setSelected(true);
 		}
 		catch (java.beans.PropertyVetoException e)
 		{
+			// Can never happen
 		}
+		//CSON: EmptyBlock
 	}
 
 	protected void build(DesignGridLayout layout)

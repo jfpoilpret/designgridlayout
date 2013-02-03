@@ -20,7 +20,8 @@ public class Componentizer4OneVariableOneFixedChildren extends AbstractComponent
 {
 	public static void main(String[] args)
 	{
-		Componentizer4OneVariableOneFixedChildren example = new Componentizer4OneVariableOneFixedChildren();
+		Componentizer4OneVariableOneFixedChildren example = 
+			new Componentizer4OneVariableOneFixedChildren();
 		example.go(true);
 	}
 	

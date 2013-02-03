@@ -111,6 +111,8 @@ public class AddressBookDemo extends AbstractDesignGridExample
 		JButton saveButton = new JButton("Save");
 		JButton cancelButton = new JButton("Cancel");
 
+		//CSOFF: WhitespaceBefore
+		//CSOFF: LineLength
 		layout.row().grid(label("Last Name"))	.add(lastNameField)	.grid(label("First Name"))	.add(firstNameField);
 		layout.row().grid(label("Phone"))		.add(phoneField)	.grid(label("Email"))		.add(emailField);
 		layout.row().grid(label("Address 1"))	.add(address1Field);
@@ -120,6 +122,8 @@ public class AddressBookDemo extends AbstractDesignGridExample
 		layout.row().grid(label("Country"), 1)	.add(countryField);
 		layout.emptyRow();
 		layout.row().center().add(newButton).add(deleteButton).add(editButton).add(saveButton).add(cancelButton);
+		//CSON: LineLength
+		//CSON: WhitespaceBefore
 	}
 
 	@Override public String name()

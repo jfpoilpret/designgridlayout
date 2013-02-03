@@ -40,6 +40,7 @@ public class Rfe47ShowHideRowsTestExample extends AbstractDesignGridExample
 		JButton showR8 = showButton(8);
 		JButton hideR8 = hideButton(8);
 
+		//CSOFF: LineLength
 		layout.row().center().add(showR2, hideR2, showR4, hideR4, showR5, hideR5, showR6, hideR6, showR8, hideR8);
 		layout.row().grid(label("Row 1")).add(field("Field 11"), field("Field 12"));
 		final IRow row2 = layout.row().grid(label("Row 2")).add(field("Field 21: a long field"));
@@ -51,6 +52,7 @@ public class Rfe47ShowHideRowsTestExample extends AbstractDesignGridExample
 		layout.row().grid(label("Row 7")).add(field("Field 71"), field("Field 72"));
 		final IRow row8 = layout.row().grid(label("Row 8")).add(list());
 		layout.row().grid(label("Row 9")).add(field("Field 91")).empty(3);
+		//CSON: LineLength
 
 		showR2.addActionListener(new ShowHideAction(row2, true));
 		hideR2.addActionListener(new ShowHideAction(row2, false));

@@ -17,13 +17,19 @@ package net.java.dev.designgridlayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.testng.annotations.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
 @Test(groups = "utest")
 public class Bug44AddSameComponentTwiceTest
-{	
+{
+	static final private String FAIL_ADD_2_COMPONENTS_TO_ONE_ROW =
+		"Adding two components to the same row should throw IllegalArgumentException!";
+	static final private String FAIL_ADD_2_COMPONENTS_TO_ONE_LAYOUT =
+		"Adding two components to the same layout should throw IllegalArgumentException!";
+	
 	@Test public void checkAddSameComponentToOneGridRow() throws Exception
 	{
 		try
@@ -32,7 +38,7 @@ public class Bug44AddSameComponentTwiceTest
 			DesignGridLayout layout = new DesignGridLayout(parent);
 			JLabel label = new JLabel("Dummy");
 			layout.row().grid().add(label, label);
-			fail("Adding two components to the same row should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_ROW);
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -49,7 +55,7 @@ public class Bug44AddSameComponentTwiceTest
 			DesignGridLayout layout = new DesignGridLayout(parent);
 			JLabel label = new JLabel("Dummy");
 			layout.row().grid(label).add(label);
-			fail("Adding two components to the same row should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_ROW);
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -66,7 +72,7 @@ public class Bug44AddSameComponentTwiceTest
 			DesignGridLayout layout = new DesignGridLayout(parent);
 			JLabel label = new JLabel("Dummy");
 			layout.row().left().add(label, label);
-			fail("Adding two components to the same row should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_ROW);
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -83,7 +89,7 @@ public class Bug44AddSameComponentTwiceTest
 			DesignGridLayout layout = new DesignGridLayout(parent);
 			JLabel label = new JLabel("Dummy");
 			layout.row().bar().add(label, Tag.CANCEL).add(label, Tag.APPLY);
-			fail("Adding two components to the same row should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_ROW);
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -101,7 +107,7 @@ public class Bug44AddSameComponentTwiceTest
 			JLabel label = new JLabel("Dummy");
 			layout.row().grid().add(label);
 			layout.row().grid().add(label);
-			fail("Adding two components to the same layout should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_LAYOUT);
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -119,7 +125,7 @@ public class Bug44AddSameComponentTwiceTest
 			JLabel label = new JLabel("Dummy");
 			layout.row().grid().addMulti(label);
 			layout.row().grid().addMulti(label);
-			fail("Adding two components to the same layout should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_LAYOUT);
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -136,7 +142,7 @@ public class Bug44AddSameComponentTwiceTest
 			DesignGridLayout layout = new DesignGridLayout(parent);
 			JLabel label = new JLabel("Dummy");
 			layout.row().grid().addMulti(label, label);
-			fail("Adding two components to the same layout should throw IllegalArgumentException!");
+			fail(FAIL_ADD_2_COMPONENTS_TO_ONE_LAYOUT);
 		}
 		catch (IllegalArgumentException e)
 		{

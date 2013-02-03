@@ -47,7 +47,8 @@ final class ClassLoaderHelper
 		}
 		return new URLClassLoader(allJars.toArray(new URL[allJars.size()]), parent);
 	}
-	
+
+	//CSOFF: IllegalCatch
 	static private void fillJarsList(List<URL> jars, File dir, boolean includeSubDirs)
 	{
 		try
@@ -71,6 +72,7 @@ final class ClassLoaderHelper
 				Level.SEVERE, "fillJarsList() in directory " + dir.getName(), e);
 		}
 	}
+	//CSON: IllegalCatch
 
 	private ClassLoaderHelper()
 	{

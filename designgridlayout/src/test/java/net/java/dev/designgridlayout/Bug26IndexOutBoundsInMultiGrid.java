@@ -24,7 +24,9 @@ public class Bug26IndexOutBoundsInMultiGrid extends AbstractDesignGridExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		//CSOFF: LineLength
 		layout.row().grid(label("lbl12"), 2).add(field("field12")).grid(label("lbl3"), 1).add(field("field3"));
 		layout.row().grid(label("lbl1"), 1).add(field("field1")).grid(label("lbl23"), 2).add(field("field23"));
+		//CSON: LineLength
 	}
 }

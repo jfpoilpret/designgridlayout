@@ -18,8 +18,9 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.testng.annotations.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
 import static org.testng.Assert.fail;
 
 @Test(groups = "utest")
@@ -35,7 +36,8 @@ public class ExceptionalCasesTest
 		{
 			JLabel label2 = new JLabel("Dummy2");
 			parent.add(label2);
-			fail("Adding a component directly to a container using DesigngridLayout should throw IllegalArgumentException!");
+			fail("Adding a component directly to a container using DesigngridLayout " + 
+				"should throw IllegalArgumentException!");
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -53,7 +55,8 @@ public class ExceptionalCasesTest
 		try
 		{
 			parent.remove(label1);
-			fail("Removing a component directly to a container using DesignGridLayout should throw IllegalArgumentException!");
+			fail("Removing a component directly to a container using DesignGridLayout " + 
+				"should throw IllegalArgumentException!");
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -70,7 +73,8 @@ public class ExceptionalCasesTest
 		try
 		{
 			parent.add(label2);
-			fail("Adding a component directly to a container using Componentizer should throw IllegalArgumentException!");
+			fail("Adding a component directly to a container using Componentizer " + 
+				"should throw IllegalArgumentException!");
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -87,7 +91,8 @@ public class ExceptionalCasesTest
 		try
 		{
 			parent.add("", label2);
-			fail("Adding a component directly to a container using Componentizer should throw IllegalArgumentException!");
+			fail("Adding a component directly to a container using Componentizer " + 
+				"should throw IllegalArgumentException!");
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -104,7 +109,8 @@ public class ExceptionalCasesTest
 		try
 		{
 			parent.add(label2, new Object());
-			fail("Adding a component directly to a container using Componentizer should throw IllegalArgumentException!");
+			fail("Adding a component directly to a container using Componentizer " + 
+				"should throw IllegalArgumentException!");
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -120,7 +126,8 @@ public class ExceptionalCasesTest
 		try
 		{
 			parent.remove(label1);
-			fail("Removing a component directly to a container using Componentizer should throw IllegalArgumentException!");
+			fail("Removing a component directly to a container using Componentizer " + 
+				"should throw IllegalArgumentException!");
 		}
 		catch (IllegalArgumentException e)
 		{

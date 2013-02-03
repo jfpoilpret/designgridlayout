@@ -24,7 +24,9 @@ public class RowSpan6SimpleExampleOnTwoGrids extends AbstractDesignGridExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		//CSOFF: LineLength
 		layout.row().grid(label("Label 1:")).add(field("field1")).grid(label("List:")).add(list());
 		layout.row().grid(label("Label 2:")).add(field("field2")).grid().spanRow();
+		//CSON: LineLength
 	}
 }

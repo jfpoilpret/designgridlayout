@@ -20,7 +20,8 @@ public class Componentizer5FixedChildrenWithVariableHeight extends AbstractCompo
 {
 	public static void main(String[] args)
 	{
-		Componentizer5FixedChildrenWithVariableHeight example = new Componentizer5FixedChildrenWithVariableHeight();
+		Componentizer5FixedChildrenWithVariableHeight example = 
+			new Componentizer5FixedChildrenWithVariableHeight();
 		example.go(true);
 	}
 	

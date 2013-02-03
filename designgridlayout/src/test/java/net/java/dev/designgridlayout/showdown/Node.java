@@ -38,6 +38,8 @@ final class Node
 		return _launchable;
 	}
 	
+	//CSOFF: IllegalCatch
+	//CSOFF: Regexp
 	public void launch()
 	{
 		try
@@ -51,6 +53,8 @@ final class Node
 			e.printStackTrace();
 		}
 	}
+	//CSON: Regexp
+	//CSON: IllegalCatch
 	
 	public void showDescription(JTextComponent dest)
 	{

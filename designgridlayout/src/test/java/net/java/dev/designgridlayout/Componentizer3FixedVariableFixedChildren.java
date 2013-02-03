@@ -20,12 +20,15 @@ public class Componentizer3FixedVariableFixedChildren extends AbstractComponenti
 {
 	public static void main(String[] args)
 	{
-		Componentizer3FixedVariableFixedChildren example = new Componentizer3FixedVariableFixedChildren();
+		Componentizer3FixedVariableFixedChildren example = 
+			new Componentizer3FixedVariableFixedChildren();
 		example.go(true);
 	}
 	
 	@Override protected void build(Builder builder)
 	{
+		//CSOFF: LineLength
 		builder.fixedPref(label("Total:")).prefAndMore(field("999,999.99")).fixedPref(label("USD"));
+		//CSON: LineLength
 	}
 }

@@ -19,7 +19,8 @@ public class SmartVerticalResizeDisabled4RealWorldExample
 {
 	public static void main(String[] args)
 	{
-		SmartVerticalResizeDisabled4RealWorldExample example = new SmartVerticalResizeDisabled4RealWorldExample();
+		SmartVerticalResizeDisabled4RealWorldExample example = 
+			new SmartVerticalResizeDisabled4RealWorldExample();
 		example.go(true);
 	}
 

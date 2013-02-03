@@ -32,6 +32,7 @@ public class Bug36SmartResizeProblemWhenSrinking extends AbstractDesignGridExamp
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		//CSOFF: LineLength
 		layout.row().left().fill().add(label("Group1"), new JSeparator());
 		layout.row().grid(label("Label1")).add(field("field1")).grid(label("Label2")).add(field("field2"));
 		layout.row().grid(label("Label1")).add(field("field1")).grid(label("Label2")).add(field("field2"));
@@ -42,6 +43,7 @@ public class Bug36SmartResizeProblemWhenSrinking extends AbstractDesignGridExamp
 		layout.row().left().fill().add(label("Group2"), new JSeparator());
 		layout.row().center().fill().add(table());
 		layout.row().center().add(button("Button3"));
+		//CSON: LineLength
 //		Left/fill/ [group]
 //		Grid/grid
 //		Grid/grid

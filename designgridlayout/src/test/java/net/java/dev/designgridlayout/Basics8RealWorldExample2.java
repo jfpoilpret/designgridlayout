@@ -52,7 +52,7 @@ public class Basics8RealWorldExample2 extends AbstractDesignGridExample
 		JCheckBox teamwareCheckBox = new JCheckBox("Teamware");
 		JCheckBox networkingCheckBox = new JCheckBox("Networking");
 
-		applyButton = new JButton("Apply");
+		_applyButton = new JButton("Apply");
 		JButton resetButton = new JButton("Reset");
 
 		layout.row().grid(label("Name:")).add(nameField);
@@ -66,11 +66,12 @@ public class Basics8RealWorldExample2 extends AbstractDesignGridExample
 		layout.emptyRow();
 		layout.row().grid(label("Interests:"))
 			.add(compilerCheckBox).add(databaseCheckBox).add(productivityCheckBox);
-		layout.row().grid().add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
+		layout.row().grid()
+			.add(prototypingCheckBox).add(teamwareCheckBox).add(networkingCheckBox);
 		layout.emptyRow();
-		layout.row().center().add(applyButton).add(resetButton);
+		layout.row().center().add(_applyButton).add(resetButton);
 	}
 	// CSON: MagicNumber
 
-	private JButton applyButton;
+	private JButton _applyButton;
 }

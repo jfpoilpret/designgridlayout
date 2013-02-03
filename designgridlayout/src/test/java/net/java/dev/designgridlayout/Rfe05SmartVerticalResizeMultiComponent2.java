@@ -21,7 +21,8 @@ public class Rfe05SmartVerticalResizeMultiComponent2 extends AbstractDesignGridE
 {
 	public static void main(String[] args)
 	{
-		Rfe05SmartVerticalResizeMultiComponent2 example = new Rfe05SmartVerticalResizeMultiComponent2();
+		Rfe05SmartVerticalResizeMultiComponent2 example = 
+			new Rfe05SmartVerticalResizeMultiComponent2();
 		example.go(true);
 	}
 	

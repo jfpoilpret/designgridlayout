@@ -24,9 +24,13 @@ public class Bug20PanelWithBorder2 extends AbstractDesignGridExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		//CSOFF: WhitespaceBefore
+		//CSOFF: LineLength
 		layout.row().grid(label("First Label"))	.add(field("field1"), field("field2"), field("field3"));
 		layout.row().grid(label("Second Label")).add(field("field1"), field("field2"), field("field3"));
 		layout.row().grid(label("Third Label"))	.add(field("field1"), field("field2"), field("field3"));
 		layout.row().center().add(button());
+		//CSON: LineLength
+		//CSON: WhitespaceBefore
 	}
 }

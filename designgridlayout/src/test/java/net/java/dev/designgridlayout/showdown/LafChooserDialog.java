@@ -85,6 +85,8 @@ public class LafChooserDialog extends JDialog
 		return buttons;
 	}
 
+	//CSOFF: IllegalCatch
+	//CSOFF: Regexp
 	static private void setLAF(final LookAndFeelInfo info)
 	{
 		SwingUtilities.invokeLater(new Runnable()
@@ -95,11 +97,13 @@ public class LafChooserDialog extends JDialog
 				{
 					UIManager.setLookAndFeel(info.getClassName());
 				}
-				catch(Exception e)
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	//CSON: Regexp
+	//CSON: IllegalCatch
 }

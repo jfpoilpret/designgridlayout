@@ -28,7 +28,8 @@ public class SmartVerticalResize4RealWorldExample extends AbstractDesignGridExam
 {
 	public static void main(String[] args)
 	{
-		SmartVerticalResize4RealWorldExample example = new SmartVerticalResize4RealWorldExample();
+		SmartVerticalResize4RealWorldExample example = 
+			new SmartVerticalResize4RealWorldExample();
 		example.go(true);
 	}
 

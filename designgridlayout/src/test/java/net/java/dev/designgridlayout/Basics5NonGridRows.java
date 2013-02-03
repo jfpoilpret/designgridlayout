@@ -26,11 +26,13 @@ public class Basics5NonGridRows extends AbstractDesignGridExample
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		//CSOFF: LineLength
 		layout.row().left().fill().add(label("Special Group"), new JSeparator()).withOwnRowWidth();
 		layout.row().grid(label(1)).add(button(), button(), button());
 		layout.row().left().fill().add(button(), button(), button());
 		layout.row().center().fill().add(button(), button(), button());
 		layout.row().right().fill().add(button(), button(), button());
 		layout.row().center().fill().add(button());
+		//CSON: LineLength
 	}
 }

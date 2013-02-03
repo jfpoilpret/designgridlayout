@@ -34,9 +34,9 @@ public class Bug27Java5WinLAFBadBaselines extends AbstractDesignGridExample
 	
 	@Override protected void build(DesignGridLayout layout)
 	{
-		layout.row().grid(label).add(list);
+		layout.row().grid(_label).add(_list);
 	}
 	
-	final private JLabel label = label("Label:");
-	final private JScrollPane list = list();
+	final private JLabel _label = label("Label:");
+	final private JScrollPane _list = list();
 }

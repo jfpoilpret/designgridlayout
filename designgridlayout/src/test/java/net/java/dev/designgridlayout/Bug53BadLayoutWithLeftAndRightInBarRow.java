@@ -18,7 +18,8 @@ public class Bug53BadLayoutWithLeftAndRightInBarRow extends AbstractDesignGridEx
 {
 	public static void main(String[] args) throws Exception
 	{
-		Bug53BadLayoutWithLeftAndRightInBarRow example = new Bug53BadLayoutWithLeftAndRightInBarRow();
+		Bug53BadLayoutWithLeftAndRightInBarRow example = 
+			new Bug53BadLayoutWithLeftAndRightInBarRow();
 		example.go(true);
 	}
 

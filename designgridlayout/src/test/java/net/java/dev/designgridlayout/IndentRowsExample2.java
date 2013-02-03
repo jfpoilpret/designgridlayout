@@ -28,9 +28,11 @@ public class IndentRowsExample2 extends AbstractDesignGridExample
 	{
 		layout.labelAlignment(LabelAlignment.LEFT);
 
+		//CSOFF: LineLength
 		layout.row().grid(label("Label 11:")).grid(label("Label 21:"));
 		layout.row().grid(label("Label 12:")).indent().add(field("field12")).grid(label("Label 22:")).indent().add(field("field22"));
 		layout.row().grid(label("Label 13:")).indent().add(field("field13")).grid(label("Label 23:")).indent().add(field("field23"));
+		//CSON: LineLength
 	}
 
 	@Override protected JTextField field(String text)

@@ -57,6 +57,7 @@ abstract class AbstractGuiTest
 		launchGui(clazz, null);
 	}
 	
+	//CSOFF: IllegalCatch
 	final protected void checkExampleFromEDT(
 		final Class<? extends IExample> clazz) throws Exception
 	{
@@ -86,6 +87,7 @@ abstract class AbstractGuiTest
 		}
 		checkSnapshot();
 	}
+	//CSON: IllegalCatch
 
 	// Note: don't use @DataProvider because all tests appear under the same name
 	// in maven surefire reports...

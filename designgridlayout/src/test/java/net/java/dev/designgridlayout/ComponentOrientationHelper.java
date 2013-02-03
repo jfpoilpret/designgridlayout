@@ -56,6 +56,7 @@ final public class ComponentOrientationHelper
 		}
 	}
 	
+	//CSOFF: Regexp
 	static public void debugOrientation(ComponentOrientation orientation)
 	{
 		System.err.println("orientation is " + 
@@ -63,4 +64,5 @@ final public class ComponentOrientationHelper
 		System.err.println("orientation is " + 
 			(orientation.isLeftToRight() ? "left to right" : "right to left"));
 	}
+	//CSON: Regexp
 }
