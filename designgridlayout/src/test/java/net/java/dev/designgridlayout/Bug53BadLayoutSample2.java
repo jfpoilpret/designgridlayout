@@ -14,17 +14,27 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug53BadLayoutWithLeftAndRightInBarRow extends AbstractDesignGridExample
+import javax.swing.JScrollPane;
+
+public class Bug53BadLayoutSample2 extends AbstractDesignGridExample
 {
 	public static void main(String[] args) throws Exception
 	{
-		Bug53BadLayoutWithLeftAndRightInBarRow example = 
-			new Bug53BadLayoutWithLeftAndRightInBarRow();
+		Bug53BadLayoutSample2 example = 
+			new Bug53BadLayoutSample2();
 		example.go(true);
 	}
 
 	@Override public void build(DesignGridLayout layout)
 	{
+		layout.row(0)
+			.grid(3).add(new JScrollPane(button()))
+			.grid().empty(1)
+			.grid(3).add(new JScrollPane(button()));
+		layout.emptyRow();
+		layout.row(1).grid().add(new JScrollPane(button()));
+		// this causes the rows above to resize
 		layout.row().bar().left(button()).right(button());
+//		layout.row().bar().right( button() );
 	}
 }

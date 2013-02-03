@@ -14,17 +14,22 @@
 
 package net.java.dev.designgridlayout;
 
-public class Bug53BadLayoutWithLeftAndRightInBarRow extends AbstractDesignGridExample
+// This is the simplest sample to reproduce Bug53
+public class Bug53BadLayoutSample1 extends AbstractDesignGridExample
 {
 	public static void main(String[] args) throws Exception
 	{
-		Bug53BadLayoutWithLeftAndRightInBarRow example = 
-			new Bug53BadLayoutWithLeftAndRightInBarRow();
+		Bug53BadLayoutSample1 example = 
+			new Bug53BadLayoutSample1();
 		example.go(true);
 	}
 
 	@Override public void build(DesignGridLayout layout)
 	{
+//		layout.row().grid(3).add(button()).grid().empty(1).grid(3).add(button());
+//		layout.row().grid().add(button()).grid().empty(1).grid().add(button());
+//		layout.row().grid(label(1)).add(button()).grid(label(2)).add(button());
+		layout.row().grid().add(button()).grid().add(button());
 		layout.row().bar().left(button()).right(button());
 	}
 }

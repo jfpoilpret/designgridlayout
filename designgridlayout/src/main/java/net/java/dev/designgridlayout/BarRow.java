@@ -105,11 +105,17 @@ final class BarRow extends AbstractRow implements IBarRow
 		int rightWidth = computePartWidth(_rightItems, hgap, unrelhgap);
 		int centerWidth = computePartWidth(_centerItems, hgap, unrelhgap);
 		int sidesWidth = Math.max(leftWidth, rightWidth);
+		int totalWidth = centerWidth + unrelhgap * numGapsBetweenParts();
 		if (centerWidth != 0 && (leftWidth != 0 || rightWidth != 0))
 		{
-			sidesWidth *= 2;
+			// If we have center and left or right, then we must ensure left space = right space
+			totalWidth += 2 * sidesWidth;
 		}
-		int totalWidth = centerWidth + sidesWidth + unrelhgap * numGapsBetweenParts();
+		else
+		{
+			totalWidth += leftWidth + rightWidth;
+		}
+		
 		return totalWidth;
 	}
 
