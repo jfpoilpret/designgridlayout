@@ -25,7 +25,7 @@
 	<groupId>net.java.dev.designgridlayout</groupId>
 	<artifactId>designgridlayout</artifactId>
 	<packaging>jar</packaging>
-	<version>1.11-SNAPSHOT</version>
+	<version>1.11</version>
 
 	<name>DesignGridLayout</name>
 	<description>
@@ -489,8 +489,8 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:svn:https://svn.java.net/svn/designgridlayout~svn</connection>
-		<developerConnection>scm:svn:https://svn.java.net/svn/designgridlayout~svn/trunk</developerConnection>
-		<url>http://java.net/projects/designgridlayout/sources/svn/show</url>
+		<connection>scm:svn:https://svn.java.net/svn/designgridlayout~svn/tags/1.11</connection>
+		<developerConnection>scm:svn:https://svn.java.net/svn/designgridlayout~svn/tags/1.11</developerConnection>
+		<url>http://java.net/projects/designgridlayout/sources/svn/show/tags/1.11</url>
 	</scm>
 </project>
