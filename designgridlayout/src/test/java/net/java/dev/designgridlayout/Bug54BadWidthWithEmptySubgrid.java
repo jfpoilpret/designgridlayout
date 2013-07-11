@@ -22,13 +22,8 @@ public class Bug54BadWidthWithEmptySubgrid extends AbstractDesignGridExample
 		example.go(true);
 	}
 
-	// CSOFF: MagicNumber
 	@Override public void build(DesignGridLayout layout)
 	{
-//		layout.row().grid(label("Label"), 2).add(field("abcdef"));
-//		layout.row().grid(label("Label")).add(field("abcdef")).grid(label("Label")).add(field("abcdef"));
 		layout.row().grid(label("Label")).add(field("abcdef")).grid().add(field("abcdef"));
-//		layout.row().grid().add(field("abcdef")).grid().add(field("abcdef"));
 	}
-	// CSON: MagicNumber
 }

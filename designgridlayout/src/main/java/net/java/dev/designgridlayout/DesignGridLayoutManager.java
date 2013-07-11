@@ -163,7 +163,7 @@ public class DesignGridLayoutManager implements LayoutManager2
 			// Exclude labels (and their gaps) from available space
 			if (_totalLabelWidth > 0)
 			{
-				gridsWidth -= _totalLabelWidth + _maxGrids * _hgap;
+				gridsWidth -= _totalLabelWidth + _numNonZeroLabelWidths * _hgap;
 			}
 			// Exclude inter-grid gaps
 			gridsWidth -= (_maxGrids - 1) * _gridgap;
@@ -553,6 +553,7 @@ public class DesignGridLayoutManager implements LayoutManager2
 	{
 		_labelWidths.clear();
 		_totalLabelWidth = 0;
+		_numNonZeroLabelWidths = 0;
 		for (int i = 0; i < _maxGrids; i++)
 		{
 			int width = 0;
@@ -563,6 +564,9 @@ public class DesignGridLayoutManager implements LayoutManager2
 			}
 			_labelWidths.add(width);
 			_totalLabelWidth += width;
+			if (width > 0) {
+				_numNonZeroLabelWidths++;
+			}
 		}
 	}
 
@@ -599,7 +603,8 @@ public class DesignGridLayoutManager implements LayoutManager2
 		// Account for labels
 		if (_totalLabelWidth > 0)
 		{
-			width += _totalLabelWidth + (_maxGrids * _hgap);
+			// JIRA #54 row width is too large with subgrid that has no label
+			width += _totalLabelWidth + (_numNonZeroLabelWidths * _hgap);
 		}
 
 		// Add gaps between grids
@@ -817,5 +822,6 @@ public class DesignGridLayoutManager implements LayoutManager2
 	final private List<AbstractRow> _rows;
 	final private List<Integer> _labelWidths = new ArrayList<Integer>();
 	private int _totalLabelWidth;
+	private int _numNonZeroLabelWidths;
 	private int _maxGrids;
 }
