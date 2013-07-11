@@ -152,6 +152,11 @@ public class SimpleIssuesTest extends AbstractGuiTest
 		frame().resizeWidthTo(frame().component().getWidth() + 100);
 		checkSnapshot("after-resize");
 	}
+	
+	@Test public void checkBug54BadWidthWithEmptySubgrid() throws Exception
+	{
+		checkExample(Bug54BadWidthWithEmptySubgrid.class);
+	}
 
 	@Test public void checkPanelWithoutBorder() throws Exception
 	{

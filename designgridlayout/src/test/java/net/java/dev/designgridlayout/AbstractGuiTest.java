@@ -222,5 +222,5 @@ abstract class AbstractGuiTest
 
 	static final private boolean _checkSnapshots = !Boolean.getBoolean("screenshots");
 	static final public String REFERENCE_SCREENSHOT_PATH = 
-		"src/test/resources/screenshots/java6/";
+		"src/test/resources/screenshots/java7/";
 }
