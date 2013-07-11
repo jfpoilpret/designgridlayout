@@ -81,7 +81,23 @@ public final class RowGroup
 			}
 		}
 	}
-
+	
+	/**
+	 * Restores all rows to their initial visible state, by calling 
+	 * {@link IHideable#forceShow()} for each of them.
+	 */
+	public void forceShow()
+	{
+		for (WeakReference<IHideable> rowRef: _rows)
+		{
+			IHideable row = rowRef.get();
+			if (row != null)
+			{
+				row.forceShow();
+			}
+		}
+	}
+	
 	final private List<WeakReference<IHideable>> _rows = 
 		new ArrayList<WeakReference<IHideable>>();
 }

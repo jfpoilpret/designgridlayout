@@ -48,5 +48,16 @@ public interface IHideable
 	 * have to be called the same number of times for the row to become visible again.
 	 */
 	public abstract void show();
-	
+
+	/**
+	 * Forces the whole row to a visible state, ie all its components' visibilities
+	 * are restored to their original state prior to calling {@link #hide()}.
+	 * <p/>
+	 * Note that calling {@code show()} on an already visible row has no effect at all.
+	 * <p/>
+	 * Also, contrarily to {@link #show()}, even if {@link #hide()} has been called 
+	 * several times, then one single call to {@code forceShow()} will make the row
+	 * visible again.
+	 */
+	public abstract void forceShow();
 }

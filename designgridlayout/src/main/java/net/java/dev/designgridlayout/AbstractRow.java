@@ -50,6 +50,19 @@ abstract class AbstractRow implements IHideable
 		_hidden++;
 	}
 	
+	public final void forceShow()
+	{
+		if (_hidden > 0)
+		{
+			_hidden = 0;
+			// Restore visibility of all items
+			for (IRowItem item: allItems())
+			{
+				item.show();
+			}
+		}
+	}
+	
 	// Called by DesignGridLayout immediately after instantiation
 	final void init(ParentWrapper<Container> wrapper, 
 		HeightGrowPolicy heightTester, OrientationPolicy orientation)
