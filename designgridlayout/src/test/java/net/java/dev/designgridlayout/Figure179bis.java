@@ -47,16 +47,16 @@ public class Figure179bis extends AbstractDesignGridExample
 		layout.emptyRow();
 		JComponent sizeComponent = Componentizer.create()
 			.fixedPref(sizeSpinner, sizePointsLabel).component();
-		layout.row().grid(sizeLabel).add(sizeComponent, 2)
-			.add(allCapsButton, 2).add(superscriptButton, 2).empty(2);
+		layout.row().grid(sizeLabel).add(sizeComponent)
+			.add(allCapsButton).add(superscriptButton).empty();
 		JComponent leaderComponent = Componentizer.create()
 			.fixedPref(leaderSpinner, leadingPointsLabel).component();
-		layout.row().grid(leadingLabel).add(leaderComponent, 2)
-			.add(smallCapsButton, 2).add(subscriptButton, 2).empty(2);
+		layout.row().grid(leadingLabel).add(leaderComponent)
+			.add(smallCapsButton).add(subscriptButton).empty();
 		JComponent kernComponent = Componentizer.create()
 			.fixedPref(kernSpinner, kernPointsLabel).component();
-		layout.row().grid(kernLabel).add(kernComponent, 2)
-			.add(hightlightButton, 2).add(redlineButton, 2).empty(2);
+		layout.row().grid(kernLabel).add(kernComponent)
+			.add(hightlightButton).add(redlineButton).empty();
 		layout.emptyRow();
 		layout.row().center().add(setFontButton).add(encodingButton).add(previewButton);
 	}
